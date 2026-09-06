@@ -1,0 +1,121 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "POST /pet-types rejects payloads where the JSON object contains any key other than 'type' (enforces exact key set)",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification only says the POST request provides a JSON object payload containing the field named 'type'. It does not prohibit additional fields. The code checks `set(data.keys()) != {\"type\"}` and returns 400 if any extra fields are present."
+      },
+      {
+        "id": "A2",
+        "description": "fetch_pet_type_from_ninja builds 'attributes' from multiple Ninja API fields (slogan, group, color, skin_type, top_speed, diet, main_prey) beyond what the spec requires",
+        "category": "COMPUTED_VALUES",
+        "reasoning": "The specification states attributes should come from 'temperament' or 'group_behavior' fields only. The code also reads 'slogan', 'group', 'color', 'skin_type', 'top_speed', 'diet', 'main_prey' from the Ninja API characteristics to build attributes."
+      },
+      {
+        "id": "A3",
+        "description": "PUT /pet-types/{id}/pets/{name} accepts a 'picture' field directly in the payload to update the picture filename",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification for PUT on pets only mentions 'name', 'birthdate', and 'picture-url' as updatable fields. The code also accepts a raw 'picture' field to directly set the stored picture filename, which is not described in the specification."
+      },
+      {
+        "id": "A4",
+        "description": "lifespan defaults to 0 when not returned by Ninja API instead of null",
+        "category": "COMPUTED_VALUES",
+        "reasoning": "The specification states 'If the lifespan field is not returned by the Ninja API, then its value is the JSON keyword null.' The code defaults lifespan to 0 in fetch_pet_type_from_ninja and serialize_pet_type."
+      },
+      {
+        "id": "A5",
+        "description": "The MongoDB URI uses 'mongo' as the hostname instead of 'mongoPetSt'",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The specification states 'In the Docker-compose.yml file, this MongoDB is given the service name mongoPetSt'. The code connects to 'mongodb://mongo:27017/...' instead of 'mongodb://mongoPetSt:27017/...'."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "DELETE /pet-types/{id} does not check whether pets of that type exist before deleting; it should return 400 if any pets exist",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states 'A pet-type can only be deleted if there are no pets of that type. Otherwise, it returns 400.' The code deletes unconditionally without checking for existing pets."
+      },
+      {
+        "id": "O2",
+        "description": "DELETE /pet-types/{id} does not require owner authentication to return 403; it returns 401 for both missing credentials and non-owner users but the spec requires 403 for authenticated non-owners",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification states possible response codes for DELETE /pet-types/{id} include 401 (unauthenticated) and implicitly 403 (authenticated but not owner) per general guidelines. The verify_owner function does return 403 for non-privileged users, but the spec lists 401 and 404 only for DELETE /pet-types/{id} \u2014 however the general guidelines require 403 for forbidden. This is consistent. But the spec for DELETE /pet-types/{id} lists 'Possible response codes: 204, 401, 404' and omits 403, while the code can return 403."
+      },
+      {
+        "id": "O3",
+        "description": "fetch_pet_type_from_ninja reads 'group_behavior' from characteristics but the spec says it should be a top-level field or at least the code never correctly reads it from the Ninja API response structure used for 'temperament'",
+        "category": "COMPUTED_VALUES",
+        "reasoning": "The specification states attributes come from 'temperament' or 'group_behavior' fields returned by the Ninja API, with 'temperament' taking priority. The code iterates over a fixed list of keys that includes neither 'temperament' nor 'group_behavior' \u2014 it uses 'slogan', 'group', 'color', etc. Neither 'temperament' nor 'group_behavior' is ever read from the Ninja API response."
+      },
+      {
+        "id": "O4",
+        "description": "Attributes splitting does not follow the spec: spec requires splitting on whitespace and removing punctuation except hyphens; code splits on commas instead",
+        "category": "COMPUTED_VALUES",
+        "reasoning": "The specification states 'Each word in the temperament or group_behavior field returned by Ninja API becomes one string in the attributes field array. Split on whitespace but do not include punctuation except hyphens.' The code splits on commas (val.split(',')) rather than whitespace, and does not strip punctuation."
+      },
+      {
+        "id": "O5",
+        "description": "GET /pet-types/{id}/pets does not support 'birthdateGT' and 'birthdateLT' query string filtering",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification states GET /pet-types/{id}/pets supports query strings 'birthdateGT=<date>', 'birthdateLT=<date>', and their conjunction to filter pets by birthdate. The code returns all pets with no filtering."
+      },
+      {
+        "id": "O6",
+        "description": "PUT /pet-types/{id} is not explicitly handled to return 405",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification states 'PUT request on /pet-types/{id} is not allowed by anyone and returns 405.' The code has a global 405 error handler but no explicit route for PUT /pet-types/{id}, relying on Flask's default behavior. While Flask may return 405 naturally, the spec explicitly calls this out as a required behavior."
+      },
+      {
+        "id": "O7",
+        "description": "POST /pet-types/{id}/pets does not return 404 when the pet-type id does not exist before checking for duplicate pet names",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The code checks for the pet-type existence after fetching and saving the picture, meaning a 404 could be returned after a picture has already been saved. More critically, the spec implies 404 should be returned for unknown pet-type id, but the code checks for the pet-type only after processing the picture URL, which is a logic ordering issue. However the 404 is eventually returned."
+      },
+      {
+        "id": "O8",
+        "description": "GET /pet-types/{id}/pets does not return 404 when the pet-type id does not exist (returns empty array instead)",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification states possible response codes for GET /pet-types/{id}/pets are 200 and 404. The code uses find_one and checks if doc is falsy to return 404, which appears correct. However, the code checks `if not doc` which would be None for missing id \u2014 this appears to be implemented correctly. Re-examining: the code does return 404 if doc is not found. This is not an omission."
+      },
+      {
+        "id": "O9",
+        "description": "POST /pet-types/{id}/pets does not return 404 when the pet-type does not exist; it checks for the pet-type after processing picture-url",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The code fetches and saves the picture before checking if the pet-type exists. If the pet-type doesn't exist, it returns 404 after having already saved a picture file. While the 404 is returned, the ordering means side effects occur before the existence check. The spec implies the pet-type should be validated first."
+      },
+      {
+        "id": "O10",
+        "description": "The service does not handle the case where two pets of different pet-types could have the same name \u2014 but more importantly, duplicate pet name check uses case-sensitive comparison which is correct per spec, but the spec says 'No two pets of the same type in the same store can have the same name' \u2014 the code does implement this correctly for POST but PUT does not check if the new name conflicts with an existing pet name in the same type when the name is changed",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "PUT /pet-types/{id}/pets/{name} checks for name conflicts among other pets in the same type, which is correct. This is actually implemented. Withdrawing this."
+      },
+      {
+        "id": "O11",
+        "description": "The Ninja API lifespan extraction does not set null when lifespan is not returned; it defaults to 0",
+        "category": "COMPUTED_VALUES",
+        "reasoning": "The specification explicitly states 'If the lifespan field is not returned by the Ninja API, then its value is the JSON keyword null.' The code sets lifespan to 0 as default in fetch_pet_type_from_ninja when no numeric value is found, and serialize_pet_type also defaults to 0. The stored and returned value should be null/None."
+      },
+      {
+        "id": "O12",
+        "description": "POST /pet-types/{id}/pets does not check for duplicate pet names returning a specific error code; it returns 400 but the spec does not explicitly state the code \u2014 however the spec says no two pets of the same type can have the same name, implying 409 Conflict",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification states 'No two pets of the same type in the same store can have the same name' and the general guidelines say 409 is for resource already exists. The code returns 400 for duplicate pet names instead of 409."
+      },
+      {
+        "id": "O13",
+        "description": "The service connects to MongoDB using the wrong service name ('mongo' instead of 'mongoPetSt')",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The specification states 'In the Docker-compose.yml file, this MongoDB is given the service name mongoPetSt and listens at container port 27017.' The code uses MONGO_URI = 'mongodb://mongo:27017/...' which references a service named 'mongo', not 'mongoPetSt'."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 15410,
+    "prompt_tokens": 12741,
+    "completion_tokens": 2669
+  }
+}

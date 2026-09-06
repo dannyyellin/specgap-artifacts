@@ -1,0 +1,16 @@
+# MODIFIED SPEC: 2 elements removed for Logs experiment
+# R12: Removed date format ('DD-MM-YYYY') for loanDate in Logs
+#      - GPT-5.4: NOT INFERRED — loanDate accepted as any string; no DD-MM-YYYY
+#        format validation implemented
+#      - Prior label: Highly inferrable — other services specify DD-MM-YYYY, and it's
+#        a common format
+#      - Tests: 43, 44, 45
+# R13: Removed Borrows-to-Logs notification from BOTH Borrows and Logs descriptions
+#      - GPT-5.4: INFERRED — POST /logs endpoint exists and accepts log entries from
+#        Borrows; a logging service naturally has an ingestion endpoint
+#      - Prior label: Partially inferrable — Logs data model has borrowId/loanDate
+#        fields hinting at a relationship with Borrows, but the explicit notification
+#        is gone
+#      - Same removal as R3, now tested from the Logs perspective
+#      - Tests: 43, 44, 45
+

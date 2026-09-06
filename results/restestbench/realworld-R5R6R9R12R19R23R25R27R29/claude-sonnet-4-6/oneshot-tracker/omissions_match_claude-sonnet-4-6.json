@@ -1,0 +1,78 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R12",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the missing tag filtering behavior that R12 tests with GET /api/articles?tag=javascript and GET /api/articles?tag=testing."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O2 identifies the missing /api/articles/feed endpoint which is the core behavior tested in R6."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R27",
+        "label": "MATCH",
+        "reasoning": "O2 also covers the missing feed endpoint tested in R27 (empty feed when user follows nobody)."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R23",
+        "label": "MATCH",
+        "reasoning": "O2 also covers the missing feed endpoint with pagination tested in R23."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R29",
+        "label": "MATCH",
+        "reasoning": "O3 identifies the missing DELETE /api/users/{email} endpoint which is exactly what R29 tests."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R25",
+        "label": "MATCH",
+        "reasoning": "O4 directly describes the missing id, username, and email fields in the JWT payload that R25 verifies."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "O5 describes the wrong status code (422 vs 400) and missing error message for duplicate registration, which is exactly what R9 tests."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R23",
+        "label": "MATCH",
+        "reasoning": "O6 specifically describes the missing feed pagination (limit/offset) behavior that R23 tests."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "O6 also partially relates to R6 since the feed endpoint is missing entirely, though R6 focuses on follow-based filtering rather than pagination."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R12",
+        "label": "MATCH",
+        "reasoning": "O7 is a duplicate of O1 describing the same missing tag filtering behavior tested in R12."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O8 describes a comment response structure issue that does not correspond to any of the reference requirements listed."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 3123,
+    "prompt_tokens": 2357,
+    "completion_tokens": 766
+  }
+}

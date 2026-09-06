@@ -1,0 +1,18 @@
+{
+  "req_id": 44,
+  "requirement_vague": "Ensure a user can not delete another user.",
+  "requirement_precise": "Register a new normal user via the user signup endpoint. Authenticate that user to obtain an access token via the login access token endpoint. Register a second user via the user signup endpoint. Using the first user's access token, attempt to delete the second user by ID. Verify the response status is 403. Verify the response JSON contains a 'detail' field equal to \"The user doesn't have enough privileges\". Verify the second user still exists by logging in as that user.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": "get_current_active_superuser; DELETE /api/v1/users/{user_id} (delete_user_by_id)",
+    "code_reference": "def get_current_active_superuser(current_user: User = Depends(get_current_active_user)) -> User:\n    if not current_user.is_superuser:\n        raise HTTPException(status_code=403, detail=\"The user doesn't have enough privileges\")",
+    "reasoning": "Deleting a user by ID requires `current_user: User = Depends(get_current_active_superuser)`, so any normal user attempting to delete another user is rejected before deletion with HTTP 403 and the exact required `detail` message. Because the exception is raised before `session.delete(user)`, the second user remains in the database and can still log in."
+  },
+  "usage": {
+    "total_tokens": 4876,
+    "prompt_tokens": 4712,
+    "completion_tokens": 164
+  },
+  "parse_error": false
+}

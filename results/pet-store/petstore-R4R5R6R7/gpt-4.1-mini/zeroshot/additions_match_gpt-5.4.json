@@ -1,0 +1,72 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns picture-url support on pet update, which is unrelated to any removed requirement about attributes extraction, delete constraints, lifespan handling, or birthdate query filtering."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "R4 removes temperament/group_behavior-based attributes extraction rules, and A2 describes code behavior still using those rules plus extra Ninja API fields to build attributes."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "A3 is about lifespan fallback when missing, while R6 removes special lifespan parsing/range handling; both concern lifespan extraction logic but not the same specific rule."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about integer query parsing for id and lifespan filters, not the removed lifespan extraction rules or removed birthdate query filtering."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A5 concerns birthdate format validation on create/update payloads, whereas R7 is specifically about removing birthdateGT/birthdateLT query filtering."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns picture-url handling on pet creation/update and does not correspond to any of the listed removed requirements."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Duplicate pet-name handling is unrelated to removed attributes extraction, pet-type deletion constraints, lifespan parsing, or birthdate query filtering."
+      },
+      {
+        "detection_id": "A8",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "R5 removes the constraint preventing deletion of a pet-type when it has pets, and A8 describes code still enforcing exactly that constraint."
+      },
+      {
+        "detection_id": "A9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "PUT payload name validation and duplicate-name checks do not correspond to any of the removed requirements."
+      },
+      {
+        "detection_id": "A10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Malformed query-string handling is a general query behavior and does not specifically match removed birthdateGT/birthdateLT filtering or the other removed rules."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1882,
+    "prompt_tokens": 1243,
+    "completion_tokens": 639
+  }
+}

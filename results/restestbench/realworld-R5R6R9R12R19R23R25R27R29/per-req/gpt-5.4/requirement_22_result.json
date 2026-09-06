@@ -1,0 +1,22 @@
+{
+  "req_id": 22,
+  "requirement_vague": "Verify profile returns correct bio and image fields",
+  "requirement_precise": "Create user1 (username: 'profilebiouser1', email: 'profilebiouser1@test.com', password: 'pass123'). Update user1's profile with bio 'This is my bio text' and image 'https://example.com/avatar.jpg' via PUT /api/user. GET /api/profiles/profilebiouser1. Verify the profile contains username 'profilebiouser1', bio 'This is my bio text', and image 'https://example.com/avatar.jpg'. This tests profile data retrieval.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": [
+      "update_user",
+      "get_profile",
+      "profile_response"
+    ],
+    "code_reference": "if \"bio\" in user_data:\n    current_user.bio = user_data[\"bio\"]\nif \"image\" in user_data:\n    current_user.image = user_data[\"image\"]\n...\nreturn {\n    \"profile\": {\n        \"username\": target.username,\n        \"bio\": target.bio,\n        \"image\": target.image,",
+    "reasoning": "PUT /api/user updates the authenticated user's bio and image fields and persists them. GET /api/profiles/{username} loads that user and returns a profile object containing username, bio, and image, so the specified profile retrieval behavior is implemented."
+  },
+  "usage": {
+    "total_tokens": 5350,
+    "prompt_tokens": 5192,
+    "completion_tokens": 158
+  },
+  "parse_error": false
+}

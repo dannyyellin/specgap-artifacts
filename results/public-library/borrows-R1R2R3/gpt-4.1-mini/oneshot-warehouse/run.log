@@ -1,0 +1,16 @@
+Timestamp: 2026-06-01 20:53:01
+Detector:  gpt-4.1-mini
+App/Variant/Service: public-library/borrows-R1R2R3/borrows
+Method:    oneshot-warehouse
+
+Tokens: prompt=6510, completion=627, total=7137
+Additions: 3
+Omissions: 3
+
+  A A1: Supports filtering GET /borrows by fields 'cardholderId', 'ISBN', 'loanDate', 'returnDate', and 'id'
+  A A2: Validates that 'returnDate' is not earlier than 'loanDate' in POST and PUT requests
+  A A3: Supports filtering GET /borrows by date range with 'startDate' and 'endDate' query parameters
+
+  O O1: POST /borrows does not compute 'returnDate' as loanDate + 30 days (LOAN_PERIOD)
+  O O2: POST /borrows does not reject borrow requests if the cardholder has 2 or more overdue books
+  O O3: POST /borrows does not inform the Logs service to create a new log record after a successful borrow

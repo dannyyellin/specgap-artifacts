@@ -1,0 +1,18 @@
+{
+  "req_id": 13,
+  "requirement_vague": "Verify article filtering by author works correctly",
+  "requirement_precise": "Create user1 (username: 'author1', email: 'author1@test.com', password: 'pass123') and user2 (username: 'author2', email: 'author2@test.com', password: 'pass123'). User1 creates article 'Article By Author1'. User2 creates article 'Article By Author2'. GET /api/articles?author=author1. Verify articlesCount is 1 and articles array contains only 'Article By Author1'. GET /api/articles?author=author2. Verify articlesCount is 1 and articles array contains only 'Article By Author2'. GET /api/articles (no filter). Verify articlesCount is 2.",
+  "removed": true,
+  "omissions": [],
+  "implementation": {
+    "location": "GET /api/articles -> list_articles",
+    "code_reference": "if author:\n    author_user = session.exec(select(User).where(User.username == author)).first()\n    if author_user:\n        articles = [a for a in articles if a.author_id == author_user.id]",
+    "reasoning": "The articles listing endpoint accepts an author query parameter, resolves it to a user by username, and filters articles to only those whose author_id matches that user. Without the author filter, it returns all articles and sets articlesCount to the total number after filtering, which satisfies the described scenario."
+  },
+  "usage": {
+    "total_tokens": 5461,
+    "prompt_tokens": 5329,
+    "completion_tokens": 132
+  },
+  "parse_error": false
+}

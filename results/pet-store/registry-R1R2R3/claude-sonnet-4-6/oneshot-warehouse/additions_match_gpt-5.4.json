@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns bcrypt cost factor configuration, which is unrelated to removed password complexity rules, /verify error-message behavior, or owner pre-registration."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R3",
+        "label": "MATCH",
+        "reasoning": "It describes replacing owner pre-registration with runtime privilege assignment during POST /users, which directly corresponds to the removal of owner pre-registration on initialization."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R3",
+        "label": "PARTIAL",
+        "reasoning": "It also reflects owner status being derived dynamically rather than from initialization, but it concerns password-update privilege toggling rather than the initialization-time pre-registration behavior itself."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R3",
+        "label": "MATCH",
+        "reasoning": "It explicitly discusses init_db() handling of the owner account on initialization, which is the same area affected by removing owner pre-registration on initialization."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about DELETE response status/body and does not correspond to any of the listed removed requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1163,
+    "prompt_tokens": 835,
+    "completion_tokens": 328
+  }
+}

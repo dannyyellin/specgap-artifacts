@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "A1 identifies extra filtering fields (id, name) not in the spec, which partially relates to R6's removal of specific query string filtering semantics, but R6 focuses on lte and contains semantics rather than extra fields."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "A2 directly describes that nutritional field filtering uses exact equality instead of less-than-or-equal comparison, which corresponds to R6's removal of the lte filtering semantic for nutrients."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "A3 directly describes that ingredient filtering uses exact match instead of a membership/contains check, which corresponds to R6's removal of the 'contains' filtering semantic for ingredients."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "A4 describes authentication being required for all endpoints including GET, which partially relates to R5's removal of owner-only restriction for POST/PUT/DELETE, but A4 is about GET requests requiring auth rather than about ownership restrictions on write operations."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1133,
+    "prompt_tokens": 762,
+    "completion_tokens": 371
+  }
+}

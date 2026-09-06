@@ -1,0 +1,16 @@
+{
+  "app": "nutrition",
+  "variant": "ratings-R10R11R12",
+  "service": "ratings",
+  "method": "twoshot",
+  "detector_model": "claude-sonnet-4-6",
+  "gen_model": "gpt-5.4",
+  "gen_usage": null,
+  "n_additions": 3,
+  "n_omissions": 4,
+  "usage": {
+    "total_tokens": 10079,
+    "prompt_tokens": 9235,
+    "completion_tokens": 844
+  }
+}

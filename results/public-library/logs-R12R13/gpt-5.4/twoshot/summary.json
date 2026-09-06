@@ -1,0 +1,19 @@
+{
+  "app": "public-library",
+  "variant": "logs-R12R13",
+  "service": "logs",
+  "method": "twoshot",
+  "model": "gpt-5.4",
+  "gen_usage": {
+    "total_tokens": 2969,
+    "prompt_tokens": 2190,
+    "completion_tokens": 779
+  },
+  "n_additions": 2,
+  "n_omissions": 0,
+  "usage": {
+    "total_tokens": 6134,
+    "prompt_tokens": 5934,
+    "completion_tokens": 200
+  }
+}

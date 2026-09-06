@@ -1,0 +1,24 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "A1 relates to the Google Books API integration for publisher/publishedDate fields, but focuses on PUT update behavior rather than the removal of the API integration itself described in R10."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "A2 directly describes the absence of Google Books API integration to fetch 'publisher' and 'publishedDate' based on ISBN, which is exactly what R10 states was removed."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 807,
+    "prompt_tokens": 623,
+    "completion_tokens": 184
+  }
+}

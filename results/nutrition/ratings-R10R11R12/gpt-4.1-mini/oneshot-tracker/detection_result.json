@@ -1,0 +1,61 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "Accepts and stores 'rating' as a floating point number with two decimal places",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The specification states 'rating' is an integer between 1 and 5, but the code converts and stores it as a float with two decimal places."
+      },
+      {
+        "id": "A2",
+        "description": "Supports token in 'Authorization' header with 'Bearer' scheme or as a raw token string",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification does not specify the format or header name for the token; the code accepts tokens in multiple header formats, which is an addition."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "POST /ratings does not enforce that a user cannot rate the same dish twice",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification requires that a user can only POST one rating per dish, but the code inserts a new rating without checking for existing ratings by the same user for that dish."
+      },
+      {
+        "id": "O2",
+        "description": "PUT /ratings/{id} does not verify that the rating value is an integer between 1 and 5",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification requires 'rating' to be an integer between 1 and 5, but the code accepts any float value and does not validate the range or type."
+      },
+      {
+        "id": "O3",
+        "description": "POST /ratings does not validate that 'rating' is an integer between 1 and 5",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification requires 'rating' to be an integer between 1 and 5, but the code accepts any float value and does not validate the range or type."
+      },
+      {
+        "id": "O4",
+        "description": "POST /ratings does not return 400 when a user tries to rate the same dish twice",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification requires that a user cannot rate the same dish twice and implies an error response, but the code does not check for this condition and thus does not return 400."
+      },
+      {
+        "id": "O5",
+        "description": "DELETE /ratings/{id} does not verify that the rating to delete belongs to the user issuing the request",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states that PUT and DELETE requests update or delete the rating given by that user for the dish of the given id, but the code deletes by dish_id and user_id from token without verifying the rating id matches the URL id."
+      },
+      {
+        "id": "O6",
+        "description": "GET /ratings returns average ratings for all dishes, but does not support filtering or query parameters as per specification",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification does not explicitly require filtering on GET /ratings, so this is not an omission."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 7351,
+    "prompt_tokens": 6655,
+    "completion_tokens": 696
+  }
+}

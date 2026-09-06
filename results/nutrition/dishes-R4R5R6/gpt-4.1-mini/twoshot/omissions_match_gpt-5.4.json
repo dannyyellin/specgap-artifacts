@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "It describes that POST/PUT/DELETE are not restricted to the owner, which is the same behavior as removing the owner-only restriction."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "It concerns GET query filtering semantics, but it focuses on an ingredient parameter mismatch rather than the specific removed lte/contains semantics mentioned in the reference."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about error handling for invalid nutritional query values, which is not described by any reference requirement."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns Content-Type validation for POST/PUT requests, which does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about handling special string values from the Ninja API response, not about removed field name mapping details."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1026,
+    "prompt_tokens": 715,
+    "completion_tokens": 311
+  }
+}

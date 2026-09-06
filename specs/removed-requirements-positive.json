@@ -1,0 +1,170 @@
+{
+  "_comment": "Positive-phrased statements of the 36 removed microservice requirements, for the v2 ground-truth recheck (avoids the polarity-inversion artifact of feeding 'Removed X' notes). Each entry keeps the original removal headline for traceability. REQUIRES AUTHOR REVIEW: statements were derived from the removal headlines in specs/*/*-removals.txt and must faithfully state the original spec requirement without adding or dropping detail.",
+  "borrows-R1R2R3": {
+    "R1": {
+      "requirement": "When a book is checked out, the borrow's returnDate is computed as loanDate + 30 days.",
+      "source_headline": "Removed return date computation (returnDate = loanDate + 30 days) from Borrows"
+    },
+    "R2": {
+      "requirement": "A cardholder with 2 or more overdue books is blocked from checking out another book; such a checkout attempt returns status 400.",
+      "source_headline": "Removed overdue borrow constraint (2+ overdue books blocks checkout, returns 400) from Borrows"
+    },
+    "R3": {
+      "requirement": "On each checkout, the Borrows service notifies the Logs service so that a log entry is created for the borrow.",
+      "source_headline": "Removed \"Borrows notifies Logs on checkout\" from BOTH Borrows and Logs specs"
+    }
+  },
+  "cardholders-R4R5R6R7": {
+    "R4": {
+      "requirement": "Cardholder fields have declared types: name, email, and id are strings; fineAmount is a float.",
+      "source_headline": "Removed field type declarations (string types for name/email/id, float for fineAmount)"
+    },
+    "R5": {
+      "requirement": "Requests with an unsupported media type receive status code 415 (Unsupported Media Type).",
+      "source_headline": "Removed 415 (Unsupported media type) error code from general error codes"
+    },
+    "R6": {
+      "requirement": "A cardholder's fine is computed as $0.50 per day multiplied by the number of days each book is overdue.",
+      "source_headline": "Removed fine computation formula ($0.50/day * days overdue)"
+    },
+    "R7": {
+      "requirement": "To compute a cardholder's fine, the Cardholders service calls the Borrows service to obtain that cardholder's borrows.",
+      "source_headline": "Removed cross-service call to Borrows for fine computation"
+    }
+  },
+  "books-R8R9R10R11": {
+    "R8": {
+      "requirement": "POST /books requires the fields title, authors, ISBN, and genre; requests missing any of them are rejected.",
+      "source_headline": "Removed which fields POST requires (title, authors, ISBN, genre)"
+    },
+    "R9": {
+      "requirement": "The ISBN field must be a 13-digit ISBN-13; other formats are rejected.",
+      "source_headline": "Removed ISBN format (13-digit ISBN_13)"
+    },
+    "R10": {
+      "requirement": "The service obtains a book's publisher and publishedDate by calling the Google Books API.",
+      "source_headline": "Removed Google Books API integration for publisher/publishedDate"
+    },
+    "R11": {
+      "requirement": "The genre field must be one of a fixed enumerated list of valid genres; other values are rejected.",
+      "source_headline": "Removed genre enumeration (valid genre list)"
+    }
+  },
+  "logs-R12R13": {
+    "R12": {
+      "requirement": "The loanDate field of a log entry is in the date format 'DD-MM-YYYY'.",
+      "source_headline": "Removed date format ('DD-MM-YYYY') for loanDate in Logs"
+    },
+    "R13": {
+      "requirement": "The Logs service receives checkout notifications from the Borrows service: each checkout results in a log entry being created via the Logs service's ingestion endpoint.",
+      "source_headline": "Removed Borrows-to-Logs notification from BOTH Borrows and Logs descriptions"
+    }
+  },
+  "auth-R1R2R3": {
+    "R1": {
+      "requirement": "User passwords are encrypted with bcrypt before being stored; passwords are never stored in plaintext.",
+      "source_headline": "Removed password encryption (bcrypt)"
+    },
+    "R2": {
+      "requirement": "A special Owner user exists with name 'Owner', password 'owner#pw', and privileged=True.",
+      "source_headline": "Removed Owner special case (name='Owner', pw='owner#pw', privileged=True)"
+    },
+    "R3": {
+      "requirement": "Usernames are unique: attempting to register a name that already exists is rejected.",
+      "source_headline": "Removed username uniqueness constraint (cannot register same name twice)"
+    }
+  },
+  "dishes-R4R5R6": {
+    "R4": {
+      "requirement": "Nutrition values from the API Ninjas response are mapped to the service's field names according to the specified mapping (e.g. 'carbohydrates_total_g' -> 'total_carbohydrates').",
+      "source_headline": "Removed Ninja API field name mapping details"
+    },
+    "R4b": {
+      "requirement": "Nutrition fields missing from the API Ninjas response default to 0.0.",
+      "source_headline": "Removed default to 0.0 for missing Ninja API fields"
+    },
+    "R5": {
+      "requirement": "POST, PUT, and DELETE operations on a dish are restricted to the dish's owner; other authenticated users are denied (any user may GET).",
+      "source_headline": "Removed owner-only restriction for POST/PUT/DELETE"
+    },
+    "R6": {
+      "requirement": "GET on dishes supports query-string filtering in which nutrient parameters filter by less-than-or-equal (lte) semantics and ingredient parameters filter by substring containment.",
+      "source_headline": "Removed specific query string filtering semantics (lte for nutrients, contains for ingredients)"
+    }
+  },
+  "profiles-R7R8R9": {
+    "R7": {
+      "requirement": "The profileDishes calculation excludes protein from the computed nutrient totals.",
+      "source_headline": "Removed protein exclusion from profileDishes calculation"
+    },
+    "R8": {
+      "requirement": "GET /profiles may only be accessed by the Owner (privileged) user; requests by other users are denied.",
+      "source_headline": "Removed owner-only restriction on GET /profiles"
+    },
+    "R9": {
+      "requirement": "The user_id used by the service is taken from token validation, not from the request body.",
+      "source_headline": "Removed that user_id comes from token validation (not request body)"
+    }
+  },
+  "ratings-R10R11R12": {
+    "R10": {
+      "requirement": "A rating must be an integer between 1 and 5; values outside this range or non-integer values are rejected.",
+      "source_headline": "Removed rating range constraint (integer between 1 and 5)"
+    },
+    "R11": {
+      "requirement": "A user may have at most one rating per dish; a duplicate rating by the same user for the same dish is prevented.",
+      "source_headline": "Removed one-rating-per-user-per-dish constraint"
+    },
+    "R12": {
+      "requirement": "The user_id associated with a rating is taken from token validation, not from the request body.",
+      "source_headline": "Removed that user_id comes from token validation"
+    }
+  },
+  "registry-R1R2R3": {
+    "R1": {
+      "requirement": "Passwords must be at least 8 characters long and contain an uppercase letter, a lowercase letter, and a digit; passwords violating these rules are rejected.",
+      "source_headline": "Removed password validation rules (8+ chars, uppercase, lowercase, digit)"
+    },
+    "R2": {
+      "requirement": "The /verify endpoint returns an identical error response for an unknown username and for a wrong password, so that responses do not reveal whether a username exists.",
+      "source_headline": "Removed \"same error message\" anti-enumeration security requirement for /verify"
+    },
+    "R3": {
+      "requirement": "The owner account is pre-registered when the service initializes.",
+      "source_headline": "Removed owner pre-registration on initialization"
+    }
+  },
+  "petstore-R4R5R6R7": {
+    "R4": {
+      "requirement": "The temperament and group_behavior values from the external animals API are extracted into the pet-type's attributes according to the specified extraction rules.",
+      "source_headline": "Removed temperament/group_behavior to attributes extraction rules"
+    },
+    "R5": {
+      "requirement": "A pet-type cannot be deleted while it still has pets; such a DELETE request is rejected.",
+      "source_headline": "Removed \"cannot delete pet-type if it has pets\" constraint"
+    },
+    "R6": {
+      "requirement": "When the animals API returns a lifespan range, the minimum value (the first integer appearing in the range string) is used as the lifespan. If the 'lifespan' field is not returned by the Ninja API, then its value is the JSON keyword null.",
+      "source_headline": "Removed lifespan range handling (\"choose minimum\", \"extract first integer\")",
+      "note": "CORRECTED 2026-07-17: the original statement omitted the absent-field->null clause (present in the full spec and also removed in the reduced spec; the removals-file headline underdescribes the removal). The v2 recheck ran with the incomplete one-clause statement, so its INFERRED x4 verdict for R6 adjudicates only the range-handling half and is NOT evidence about the full requirement. Consensus PARTIAL stands (range half implemented; null half not - code returns 0)."
+    },
+    "R7": {
+      "requirement": "GET on pets supports filtering by birthdate via the query parameters birthdateGT and birthdateLT.",
+      "source_headline": "Removed birthdate query filtering (birthdateGT/birthdateLT)"
+    }
+  },
+  "petorder-R8R9R10": {
+    "R8": {
+      "requirement": "When multiple pets match a purchase request, the pet to purchase is selected at random among them.",
+      "source_headline": "Removed pet selection algorithm (random when multiple available)"
+    },
+    "R9": {
+      "requirement": "After a successful purchase, the purchased pet is deleted from the pet store.",
+      "source_headline": "Removed the DELETE pet from store after purchase step"
+    },
+    "R10": {
+      "requirement": "Each purchase-id is unique and is never reused for another purchase.",
+      "source_headline": "Removed that purchase-id must be unique and cannot be reused"
+    }
+  }
+}

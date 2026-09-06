@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Filtering by user_id query parameter is not related to any of the three spec requirements listed."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rejecting unknown query parameters with 400 is not related to any of the three spec requirements listed."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Preventing duplicate profile creation is not related to any of the three spec requirements listed."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "R9 states user_id should come from token validation rather than the request body, and A4 describes a counter-based ID generation function that is defined but not used, which is related but only partially captures the requirement since the function is unused and the actual behavior may still comply with R9."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "R7 states protein exclusion was removed from profileDishes calculation, and A5 directly describes that the code includes protein as a query parameter sent to the dishes service, which is the opposite of excluding it."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1201,
+    "prompt_tokens": 807,
+    "completion_tokens": 394
+  }
+}

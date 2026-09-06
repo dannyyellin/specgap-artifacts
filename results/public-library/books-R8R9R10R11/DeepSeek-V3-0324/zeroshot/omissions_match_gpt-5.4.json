@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "Both describe the Google Books API integration for obtaining publisher and publishedDate, which the reference says was removed."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "This concerns detailed handling of Google Books API responses, which falls under the removed Google Books integration but is more specific than the reference requirement."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R11",
+        "label": "MATCH",
+        "reasoning": "Both refer to enforcing a fixed set of valid genre values, which the reference says was removed."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "Both concern validation of ISBN as a 13-digit ISBN_13 format, which the reference says was removed."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The reference requirements do not mention publishedDate format validation."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1014,
+    "prompt_tokens": 717,
+    "completion_tokens": 297
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "variant": "realworld-R5R6R9R12R19R23R25R27R29",
+  "req_id": 19,
+  "model": "claude-sonnet-4-6",
+  "pass": 1,
+  "verdict": "IMPLEMENTED",
+  "requirement_vague": "Verify article updated timestamp changes on update but created timestamp remains unchanged",
+  "omissions": [],
+  "implementation": {
+    "location": "update_article (PUT /api/articles/{slug})",
+    "code_reference": "article.updated_at = now_utc()\nsession.add(article)\nsession.commit()",
+    "reasoning": "The update_article function explicitly sets article.updated_at to the current UTC time on every update while leaving article.created_at unchanged, ensuring the updated timestamp changes and the created timestamp remains the same. Both timestamps are returned via article_response as 'createdAt' and 'updatedAt'."
+  },
+  "usage": {
+    "total_tokens": 6837,
+    "prompt_tokens": 6687,
+    "completion_tokens": 150
+  },
+  "timestamp": "2026-07-12 10:40:38"
+}

@@ -1,0 +1,60 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R12",
+        "label": "PARTIAL",
+        "reasoning": "It refers to GET /api/articles filtering behavior, but it contradicts the spec by saying tag filtering is not supported while R12 specifically requires tag filtering."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R23",
+        "label": "PARTIAL",
+        "reasoning": "It captures offset-based pagination behavior relevant to feed pagination, but only mentions offset and not the feed endpoint's required limit-plus-offset behavior and total count checks."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "It clearly addresses duplicate username/email registration handling from R9, but the status code and error message differ from the spec."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements concern incomplete registration payload validation or missing fields behavior."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements describe login failure behavior or its error response format."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "It overlaps with article deletion behavior in R5, but R5 tests deleting one's own article while A6 describes a broader unauthorized deletion/update vulnerability."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "It exactly matches R5's requirement that fetching a deleted article by slug returns 200 with an empty object instead of 404."
+      },
+      {
+        "detection_id": "A8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements involve deleting comments or the response body for comment deletion."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2466,
+    "prompt_tokens": 1972,
+    "completion_tokens": 494
+  }
+}

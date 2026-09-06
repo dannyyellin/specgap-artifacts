@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O1 describes the absence of validation that rating is an integer between 1 and 5, which is the same behavior as removing the rating range constraint."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R11",
+        "label": "PARTIAL",
+        "reasoning": "O2 still describes preventing duplicate user-dish ratings via a unique index, whereas R11 says the one-rating-per-user-per-dish constraint was removed entirely."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 concerns returning avg_rating in a PUT response, which does not correspond to any of the listed reference requirements."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concerns GET /ratings behavior for unrated dishes, which is unrelated to the listed reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 891,
+    "prompt_tokens": 626,
+    "completion_tokens": 265
+  }
+}

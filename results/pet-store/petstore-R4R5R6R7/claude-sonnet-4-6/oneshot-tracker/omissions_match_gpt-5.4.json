@@ -1,0 +1,84 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O1 describes the pet-type deletion constraint based on existing pets, which is exactly the behavior removed in R5."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 is about owner authentication and 403 handling, which is unrelated to any of R4\u2013R7."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "O3 explicitly identifies missing birthdateGT/birthdateLT filtering on the pets listing endpoint, matching R7."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "O4 describes incorrect extraction of attributes from temperament/group_behavior text, which is the same area removed in R4."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "O5 concerns the rule for using temperament versus group_behavior when building attributes, directly matching R4."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 is about the MongoDB hostname in configuration, not any behavior covered by R4\u2013R7."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O7 discusses ordering of duplicate-name and existence checks for POST /pet-types/{id}/pets, which does not correspond to R4\u2013R7."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O8 is about 404 handling for GET /pet-types/{id}/pets/{name}, unrelated to the listed reference removals."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O9 concerns duplicate pet-name error handling, which is not covered by R4\u2013R7."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O10 is about propagating 503 from an external verification service, unrelated to the reference requirements."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O11 concerns explicit versus default 405 handling for PUT /pet-types/{id}, which does not match R4\u2013R7."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "O12 is about lifespan handling, but only null defaulting rather than the removed lifespan range extraction rules in R6."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2300,
+    "prompt_tokens": 1573,
+    "completion_tokens": 727
+  }
+}

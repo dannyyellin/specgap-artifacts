@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O1 describes the removed behavior of computing returnDate as loanDate plus 30 days in Borrows, which is exactly R1."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R1",
+        "label": "PARTIAL",
+        "reasoning": "O2 is related to the same returnDate specification area, but it focuses on accepting client-supplied returnDate rather than the removed computation itself."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O3 directly describes the removed constraint that borrowers with 2 or more overdue books cannot check out another book."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O4 captures the 400 response aspect of the overdue-borrow blocking rule, which is part of R2, but not the full constraint behavior."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R3",
+        "label": "PARTIAL",
+        "reasoning": "O5 concerns Borrows notifying Logs on checkout, but it discusses unreliable enforcement rather than the removal of that notification requirement from both specs."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1158,
+    "prompt_tokens": 821,
+    "completion_tokens": 337
+  }
+}

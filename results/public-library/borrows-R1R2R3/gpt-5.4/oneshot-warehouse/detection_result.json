@@ -1,0 +1,85 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "POST /borrows validates that cardholderId refers to an existing cardholder by calling the Cardholders microservice",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The Borrows specification does not require validating cardholderId against the Cardholders microservice before creating a borrow record. It only states that the POST request provides the cardholder id and that the service computes returnDate, enforces the overdue-books rule, and informs the Logs service."
+      },
+      {
+        "id": "A2",
+        "description": "POST /borrows validates that the ISBN exists in the Books microservice by issuing a GET /books?ISBN=... request",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The specification does not require the Borrows service to verify that the borrowed book exists in the Books microservice before creating a borrow record. This outbound lookup is implemented by the code but not positively required by the specification."
+      },
+      {
+        "id": "A3",
+        "description": "PUT /borrows/{id} validates updated cardholderId and ISBN against external Cardholders and Books services",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The specification for PUT /borrows/{id} only says the request provides a JSON payload of the resource's fields and returns the id of the updated resource. It does not require external existence checks during updates."
+      },
+      {
+        "id": "A4",
+        "description": "GET /borrows rejects query parameters other than cardholderId, ISBN, loanDate, returnDate, id, startDate, and endDate with 400 Bad Request",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification says GET /borrows may specify a query string of the form field=value, implying filtering by resource fields, but it does not explicitly require rejecting other query parameter names with 400. The code adds this stricter validation behavior."
+      },
+      {
+        "id": "A5",
+        "description": "PUT /borrows allows partial updates instead of requiring a full resource representation",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification says the PUT request provides a JSON payload of the resource's fields, but does not positively require partial-update semantics. The code merges only supplied fields into the existing record, which is additional behavior beyond the explicit specification."
+      },
+      {
+        "id": "A6",
+        "description": "The service rejects payloads containing unknown JSON fields",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification defines the borrow resource fields but does not explicitly require rejecting extra fields in POST or PUT payloads. The code enforces an allowed-fields list and returns 400 for unknown fields."
+      },
+      {
+        "id": "A7",
+        "description": "The service enforces that returnDate cannot be earlier than loanDate on POST and PUT",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification defines loanDate and returnDate formats and states that returnDate is computed as loanDate + 30 days on POST, but it does not explicitly require validating chronological ordering on arbitrary client-supplied updates. The code adds this guard."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "POST /borrows does not compute returnDate as loanDate plus 30 days",
+        "category": "COMPUTED_VALUES",
+        "reasoning": "The specification explicitly states: 'The returnDate is not provided in the POST request but is computed by the service as follows: returnDate = loanDate + LOAN_PERIOD, where LOAN_PERIOD is 30 days.' The code instead accepts an optional returnDate from the request and otherwise stores an empty string."
+      },
+      {
+        "id": "O2",
+        "description": "POST /borrows permits a client-supplied returnDate even though the specification says returnDate is not provided in the POST request",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification says the POST request provides the cardholder id, ISBN_13 number, and loan date, and that returnDate is not provided in the POST request. The code allows returnDate in the POST payload because it is included in allowed_fields and copied into the stored document."
+      },
+      {
+        "id": "O3",
+        "description": "POST /borrows does not enforce the rule that a cardholder with 2 or more overdue books cannot borrow another book",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification explicitly requires: 'A book can only be borrowed by a cardholder who does not have 2 or more books overdue.' The code never checks the borrower's existing overdue borrow records before inserting a new one."
+      },
+      {
+        "id": "O4",
+        "description": "POST /borrows does not return 400 when checkout is blocked because the cardholder has 2 or more overdue books",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly states: 'If a book cannot be checked out because 2 or more books are overdue, the POST request returns the status code 400.' Since the code does not implement the overdue-books check at all, it also omits this required 400 response behavior."
+      },
+      {
+        "id": "O5",
+        "description": "POST /borrows does not ensure the Logs service creates a new log record when a book is checked out",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The specification states: 'Each time a book is checked out, the Borrows service informs the Logs service which creates a new log record.' Although the code sends a POST to the Logs service, it ignores failure and still returns success even if log creation does not occur, so the required interaction is not reliably implemented."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 7607,
+    "prompt_tokens": 6509,
+    "completion_tokens": 1098
+  }
+}

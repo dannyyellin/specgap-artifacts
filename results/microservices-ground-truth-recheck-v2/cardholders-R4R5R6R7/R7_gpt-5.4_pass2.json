@@ -1,0 +1,19 @@
+{
+  "app": "public-library",
+  "variant": "cardholders-R4R5R6R7",
+  "service": "cardholders",
+  "req_id": "R7",
+  "requirement": "To compute a cardholder's fine, the Cardholders service calls the Borrows service to obtain that cardholder's borrows.",
+  "source_headline": "Removed cross-service call to Borrows for fine computation",
+  "model": "gpt-5.4",
+  "pass": 2,
+  "label": "INFERRED",
+  "evidence": "The `/cardholders/fines/<cardholder_id>` GET route calls `requests.get(BORROWS_SERVICE_URL, params={\"cardholderId\": cardholder_id}, timeout=5)` to fetch borrows from the Borrows service, then iterates over the returned borrow list to compute `fine_amount` based on overdue `returnDate` values.",
+  "reasoning": "This requirement is directly addressed by the fine-computation endpoint. The code explicitly contacts the Borrows service to obtain borrows for the specified cardholder before calculating the fine, so a test of the stated behavior would pass. Per the decision guide, because the behavior is present and satisfies the requirement in substance, the label is INFERRED.",
+  "usage": {
+    "total_tokens": 2284,
+    "prompt_tokens": 2127,
+    "completion_tokens": 157
+  },
+  "timestamp": "2026-07-16 14:53:49"
+}

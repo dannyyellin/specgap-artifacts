@@ -1,0 +1,61 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "POST /todos accepts and persists an optional isComplete field on creation",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification's create-todo behavior only requires creating a todo with a title and verifies newly created todos have isComplete=false. It does not require clients to be able to supply isComplete during creation, but the code allows it via TodoCreate.isComplete and stores the provided value."
+      },
+      {
+        "id": "A2",
+        "description": "POST /users/register rejects duplicate email addresses with 400 Bad Request",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification requires user registration and login but does not explicitly require duplicate-email detection or a specific error behavior for already-registered emails. The code implements this additional rule."
+      },
+      {
+        "id": "A3",
+        "description": "JWT tokens include the user's email claim in addition to subject and expiration",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The specification requires JWT-based authentication using PyJWT, but does not require any particular token payload beyond enabling authentication. The code adds an email claim to the token."
+      },
+      {
+        "id": "A4",
+        "description": "DELETE /todos/{id} returns a JSON body with message 'Todo deleted'",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification requires DELETE of an existing todo to return 200 OK, but does not require any particular response body. The code returns a specific JSON message."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "POST /users/register returns 200 OK in the specification scenario, but the code uses FastAPI's default 200 only implicitly and does not explicitly guarantee the required status code contract",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly verifies that POST /users/register returns 200 OK. The route decorator does not declare a status code, relying on framework defaults rather than implementing the contract explicitly."
+      },
+      {
+        "id": "O2",
+        "description": "POST /todos with an empty title does not return the specified validation error indicating 'The Title field is required.'",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification requires that POST /todos with an empty or missing title return 400 Bad Request and a validation error indicating 'The Title field is required.' The code relies on Pydantic/FastAPI validation for missing fields and performs no explicit empty-string check, so it does not produce the specified validation message for empty title values."
+      },
+      {
+        "id": "O3",
+        "description": "POST /todos with a missing title does not return 400 Bad Request as required by the specification",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly requires 400 Bad Request for an empty or missing title. In FastAPI, a missing required body field results in 422 Unprocessable Entity by default, and the code does not override this behavior."
+      },
+      {
+        "id": "O4",
+        "description": "PUT /todos/{id} does not reject requests where the body id differs from the path id with 400 Bad Request",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification explicitly requires that when a todo is updated with body id=Y and path id=X where X!=Y, the response must be 400 Bad Request. The code ignores todo_in.id entirely and proceeds with the update if the path-owned todo exists."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 5222,
+    "prompt_tokens": 4556,
+    "completion_tokens": 666
+  }
+}

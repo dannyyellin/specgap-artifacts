@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "A1 directly describes storing passwords in plaintext without encryption, which corresponds to R1's removal of bcrypt password encryption."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "A2 relates to the Owner special case but focuses on the lowercase 'owner' name difference rather than the removal of the Owner special case entirely as specified in R2."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "A3 partially relates to R2 in that the privileged field logic still exists but uses a configurable OWNER_NAME instead of the fixed 'Owner', meaning the Owner special case is modified rather than fully removed."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "A4 describes a change to how the privileged user is defined (via environment variables instead of fixed values), which partially relates to R2's removal of the fixed Owner special case, but the privileged user concept still exists rather than being removed."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1087,
+    "prompt_tokens": 735,
+    "completion_tokens": 352
+  }
+}

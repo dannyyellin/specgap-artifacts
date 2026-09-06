@@ -1,0 +1,22 @@
+{
+  "result": {
+    "omissions": [
+      {
+        "id": "R2-O1",
+        "description": "POST /todos does not return the specified validation error message when title is empty or missing.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The request model `TodoCreate` declares `title: str`, so a missing title will trigger FastAPI/Pydantic validation with status 422 Unprocessable Entity, not 400 Bad Request. There is also no custom validation enforcing non-empty title text or producing the message 'The Title field is required.' for an empty string; an empty string would be accepted as a valid `str` and the todo would be created."
+      },
+      {
+        "id": "R10-O1",
+        "description": "PUT /todos/{id} does not reject a request body whose id differs from the path id with 400 Bad Request.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The update_todo route accepts TodoUpdate with an optional body field id, but it never compares todo_in.id to the path parameter id. It proceeds to update the todo after only checking existence/ownership, so a mismatched body id is ignored instead of causing a 400 response as required."
+      }
+    ],
+    "additions": []
+  },
+  "usage": {
+    "total_tokens": 35976
+  }
+}

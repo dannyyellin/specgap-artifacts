@@ -1,0 +1,23 @@
+{
+  "variant": "realworld-R5R6R9R12R19R23R25R27R29",
+  "req_id": 25,
+  "model": "gpt-5.4",
+  "pass": 1,
+  "verdict": "NOT_IMPLEMENTED",
+  "requirement_vague": "Verify JWT token contains correct user ID and username in payload",
+  "omissions": [
+    {
+      "id": "O1",
+      "description": "JWT payload does not include the user's id, username, and email fields as required.",
+      "category": "RESPONSE_FORMAT",
+      "reasoning": "The token is generated in create_token(user_id) with only 'sub' and 'exp' claims. There are no 'id', 'username', or 'email' fields in the JWT payload, so decoding the middle segment will not produce the required values."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 5290,
+    "prompt_tokens": 5190,
+    "completion_tokens": 100
+  },
+  "timestamp": "2026-07-12 10:41:10"
+}

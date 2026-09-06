@@ -1,0 +1,19 @@
+{
+  "app": "public-library",
+  "variant": "logs-R12R13",
+  "service": "logs",
+  "req_id": "R13",
+  "requirement": "The Logs service receives checkout notifications from the Borrows service: each checkout results in a log entry being created via the Logs service's ingestion endpoint.",
+  "source_headline": "Removed Borrows-to-Logs notification from BOTH Borrows and Logs descriptions",
+  "model": "claude-sonnet-4-6",
+  "pass": 2,
+  "label": "GAP",
+  "evidence": "none",
+  "reasoning": "The requirement states that the Logs service *receives* checkout notifications from the Borrows service \u2014 meaning the Borrows service actively calls the Logs service's ingestion endpoint upon each checkout. The code shown is only the Logs service itself, which does expose a POST /logs ingestion endpoint. However, the requirement is about the Borrows service sending notifications to this endpoint; there is no code in this file (logs.py) that implements or triggers that cross-service call. The Logs service passively accepts POST requests but nothing here demonstrates it is called by the Borrows service on checkout. Since the requirement describes an integration behavior (Borrows \u2192 Logs on checkout), and this code contains only the Logs service with no evidence of the Borrows service calling it, the behavior as stated cannot be confirmed from this code alone \u2014 the calling side is entirely absent.",
+  "usage": {
+    "total_tokens": 1812,
+    "prompt_tokens": 1600,
+    "completion_tokens": 212
+  },
+  "timestamp": "2026-07-16 14:55:37"
+}

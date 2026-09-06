@@ -1,0 +1,18 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This describes listing all items via GET /items/ for authenticated users, while none of the listed requirements concern item listing permissions or that endpoint behavior."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 930,
+    "prompt_tokens": 853,
+    "completion_tokens": 77
+  }
+}

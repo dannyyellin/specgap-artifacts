@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "O1 states the implementation does not delete the chosen pet after purchase, which is the same behavior described by removing the DELETE-after-purchase step."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 concerns validating the purchaser against the registry service, which is unrelated to any of R8, R9, or R10."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 is about error handling when a pet type does not exist, which does not correspond to the removed pet selection, delete-after-purchase, or purchase-id uniqueness requirements."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 addresses combining query parameters for /transactions and is unrelated to any of the listed reference requirements."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 concerns validation of store numbers, which does not match the removed selection algorithm, delete step, or purchase-id uniqueness requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 971,
+    "prompt_tokens": 644,
+    "completion_tokens": 327
+  }
+}

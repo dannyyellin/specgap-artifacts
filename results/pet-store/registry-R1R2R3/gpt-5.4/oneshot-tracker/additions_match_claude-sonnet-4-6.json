@@ -1,0 +1,18 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 describes the response format of DELETE /users/{username}, which does not correspond to any of the three spec requirements about password validation, anti-enumeration, or owner pre-registration."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 595,
+    "prompt_tokens": 494,
+    "completion_tokens": 101
+  }
+}

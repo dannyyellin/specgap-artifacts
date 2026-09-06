@@ -1,0 +1,18 @@
+Timestamp: 2026-06-01 20:53:29
+Detector:  gpt-4.1-mini
+App/Variant/Service: public-library/cardholders-R4R5R6R7/cardholders
+Method:    zeroshot
+
+Tokens: prompt=4455, completion=901, total=5356
+Additions: 3
+Omissions: 5
+
+  A A1: The code returns 400 Bad Request when the Borrows microservice returns a 4XX error during fines calculation, which is not specified in the specification.
+  A A2: The code validates that the 'id' field in the PUT request payload matches the URL parameter and returns 400 if it does not, which is not required by the specification.
+  A A3: The code allows filtering GET /cardholders by 'name' and 'email' query parameters only, ignoring other fields, which is not explicitly required by the specification.
+
+  O O1: The fine amount calculation does not multiply the number of overdue days by the FINE_PER_DAY rate of $0.50 as required.
+  O O2: The GET /cardholders/fines/{id} endpoint does not compute the sum of fines for all books borrowed by the cardholder but only counts overdue books without considering days overdue.
+  O O3: The code does not validate that the 'id' path parameter in /cardholders/{id} endpoints is a valid string id format as required; it only checks if it is a valid MongoDB ObjectId.
+  O O4: The code does not implement media type validation to ensure requests have 'application/json' content type as required.
+  O O5: The code does not implement the GET /cardholders endpoint query string filtering for arbitrary 'field=value' pairs beyond 'name' and 'email'.

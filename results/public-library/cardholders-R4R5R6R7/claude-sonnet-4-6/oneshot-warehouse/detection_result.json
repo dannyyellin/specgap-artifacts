@@ -1,0 +1,67 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "GET /cardholders restricts query filtering to only 'name' and 'email' fields, silently ignoring any other query parameters",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification says the GET request may specify a query string of the form 'field=value' with no restriction on which fields are allowed. The code explicitly limits filtering to an 'allowed_fields' set of {'name', 'email'}, which is a restriction not stated in the specification."
+      },
+      {
+        "id": "A2",
+        "description": "PUT /cardholders/{id} rejects the request if an 'id' field is provided in the payload that does not match the URL cardholder_id",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification does not describe any constraint about the 'id' field in the PUT payload conflicting with the URL parameter. This validation logic has no basis in the specification."
+      },
+      {
+        "id": "A3",
+        "description": "PUT /cardholders/{id} returns 400 if no updatable fields are provided in the payload",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification does not require rejecting a PUT request when no recognized fields are present. This guard condition is not mentioned in the specification."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "GET /cardholders does not support filtering by the 'id' field via query string",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states the GET request may specify a query string of the form 'field=value' for any field. Since 'id' is a field of a cardholder record, it should be filterable, but the code's allowed_fields set excludes 'id'."
+      },
+      {
+        "id": "O2",
+        "description": "POST /cardholders does not validate that 'name' and 'email' are non-empty strings",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states the POST request provides a JSON document containing the name and email as required fields. The code checks they are strings but does not check they are non-empty, so empty strings would be accepted."
+      },
+      {
+        "id": "O3",
+        "description": "The fines computation does not calculate the number of days overdue multiplied by FINE_PER_DAY ($0.50); instead it adds 1 per overdue book",
+        "category": "COMPUTED_VALUES",
+        "reasoning": "The specification states 'the fine per overdue book is equal to number-of-days-overdue * FINE_PER_DAY, where FINE_PER_DAY equals $.50'. The code adds 1 for each overdue book regardless of how many days overdue it is, completely ignoring the days-overdue calculation and the $0.50 per day rate."
+      },
+      {
+        "id": "O4",
+        "description": "The fines computation does not use the actual current date minus the returnDate to compute days overdue",
+        "category": "COMPUTED_VALUES",
+        "reasoning": "The specification requires computing 'number-of-days-overdue * FINE_PER_DAY'. The code only checks whether the returnDate is in the past (is_overdue) but never computes the actual number of days between today and the returnDate."
+      },
+      {
+        "id": "O5",
+        "description": "POST /cardholders does not return 415 when the Content-Type is not application/json",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification states that 415 (Unsupported media type) should be returned for unsupported media types. The code returns 400 when the request is not JSON instead of 415."
+      },
+      {
+        "id": "O6",
+        "description": "PUT /cardholders/{id} does not return 415 when the Content-Type is not application/json",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification states that 415 (Unsupported media type) should be returned for unsupported media types. The code returns 400 when the request is not JSON instead of 415."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 7898,
+    "prompt_tokens": 6828,
+    "completion_tokens": 1070
+  }
+}

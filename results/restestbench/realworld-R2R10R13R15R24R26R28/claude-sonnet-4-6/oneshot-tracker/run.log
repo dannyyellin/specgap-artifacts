@@ -1,0 +1,25 @@
+Timestamp: 2026-06-02 09:15:57
+Detector:  claude-sonnet-4-6
+Service:   nestjs-realworld  Round: 2  Removals: [2, 10, 13, 15, 24, 26, 28]
+Method:    oneshot-tracker
+
+Tokens: prompt=12182, completion=1623, total=13805
+Additions: 7
+Omissions: 8
+
+  A A1: The article response includes both 'created'/'updated' aliases alongside 'createdAt'/'updatedAt' fields
+  A A2: The user response includes an 'id' field
+  A A3: DELETE /api/users/{email} endpoint is implemented
+  A A4: GET /api/tags endpoint is implemented
+  A A5: DELETE /api/articles/{slug} returns 403 Forbidden when the requester is not the article owner
+  A A6: PUT /api/articles/{slug} returns 403 Forbidden when the requester is not the article owner
+  A A7: DELETE /api/articles/{slug}/comments/{id} returns 403 when neither the comment author nor the article owner
+
+  O O1: POST /api/profiles/{username}/follow returns 201 but does not return 400 when a user tries to follow themselves
+  O O2: DELETE /api/profiles/{username}/follow does not return 400 when a user tries to unfollow themselves
+  O O3: POST /api/profiles/{username}/follow returns 200 instead of 201
+  O O4: POST /api/articles/{slug}/comments returns 200 instead of the expected status and returns the full article with comments rather than just the comment
+  O O5: GET /api/articles does not sort by created_at timestamp but by id, which may differ from creation order in edge cases
+  O O6: GET /api/articles/feed does not sort by created_at timestamp but by id
+  O O7: The /api/articles/feed route is registered after /api/articles/{slug}, causing the feed path to be matched as a slug lookup
+  O O8: The specification requires using PyJWT for JWT but the implementation requirement also mentions bcrypt via passlib — the code uses bcrypt correctly, but the spec says 'Uses bcrypt for password hashing (passlib library)' while the code uses argon2-compatible CryptContext with bcrypt scheme, which is correct. No gap here.

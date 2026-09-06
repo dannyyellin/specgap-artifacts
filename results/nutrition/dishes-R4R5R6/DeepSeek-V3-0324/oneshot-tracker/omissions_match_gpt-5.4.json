@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O1 describes the owner-only restriction for POST/PUT/DELETE, which is exactly the behavior removed in R5."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 concerns handling string-valued nutritional elements from the Ninja API, which is not covered by R4, R5, or R6."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 is about validating request body id against the URL path, which does not correspond to any listed reference requirement."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concerns 404 handling for PUT/DELETE when a dish is not found, which is unrelated to the removed requirements R4, R5, and R6."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 addresses missing or invalid Ninja API key handling, which does not match the field mapping, owner restriction, or query filtering semantics in the references."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 991,
+    "prompt_tokens": 661,
+    "completion_tokens": 330
+  }
+}

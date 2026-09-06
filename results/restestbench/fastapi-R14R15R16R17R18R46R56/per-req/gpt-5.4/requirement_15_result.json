@@ -1,0 +1,39 @@
+{
+  "req_id": 15,
+  "requirement_vague": "Ensure requesting password recovery works and an email is actually sent to the correct recipient (verify via mailcatcher at localhost:1080).",
+  "requirement_precise": "Register a normal user with email test15@example.com via POST /api/v1/users/signup. Then request a password recovery email via POST /api/v1/password-recovery/{email}. Verify that the API responds with HTTP status code 200, a JSON message 'Password recovery email sent', and that an email was actually sent to the correct recipient via the mailcatcher service (verify via GET http://localhost:1080/messages).",
+  "removed": true,
+  "omissions": [
+    {
+      "id": "R15-O1",
+      "description": "Missing password recovery endpoint POST /api/v1/password-recovery/{email}.",
+      "category": "ENDPOINTS",
+      "reasoning": "The code defines routes for signup, login, users, and items, but there is no route matching POST /api/v1/password-recovery/{email} or any password recovery endpoint at all."
+    },
+    {
+      "id": "R15-O2",
+      "description": "No implementation returning HTTP 200 with JSON message 'Password recovery email sent' for password recovery requests.",
+      "category": "RESPONSE_FORMAT",
+      "reasoning": "Because the password recovery endpoint is absent, the required success response format and status code are not implemented anywhere in the code."
+    },
+    {
+      "id": "R15-O3",
+      "description": "No email is sent for password recovery, including no verification-targeted delivery to the requested recipient.",
+      "category": "EXTERNAL_INTERACTIONS",
+      "reasoning": "The service contains no SMTP, mailer, HTTP call, or any outbound interaction to send a password recovery email. There is no logic that would send an email to test15@example.com or any other recipient."
+    },
+    {
+      "id": "R15-O4",
+      "description": "No interaction with mailcatcher at localhost:1080 to support verification that the recovery email was sent.",
+      "category": "EXTERNAL_INTERACTIONS",
+      "reasoning": "The code has no outbound calls or mail configuration referencing localhost:1080 or mailcatcher, so the required verifiable email delivery path is absent."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 5021,
+    "prompt_tokens": 4724,
+    "completion_tokens": 297
+  },
+  "parse_error": false
+}

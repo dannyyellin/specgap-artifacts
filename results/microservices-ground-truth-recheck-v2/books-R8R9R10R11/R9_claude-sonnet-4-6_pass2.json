@@ -1,0 +1,19 @@
+{
+  "app": "public-library",
+  "variant": "books-R8R9R10R11",
+  "service": "books",
+  "req_id": "R9",
+  "requirement": "The ISBN field must be a 13-digit ISBN-13; other formats are rejected.",
+  "source_headline": "Removed ISBN format (13-digit ISBN_13)",
+  "model": "claude-sonnet-4-6",
+  "pass": 2,
+  "label": "GAP",
+  "evidence": "none",
+  "reasoning": "The code accepts any string value for the ISBN field without any validation of its format or length. There is no regex check, no length check for 13 digits, and no ISBN-13 specific validation anywhere in the create_book or update_book routes. A test submitting a non-13-digit ISBN would pass successfully, violating the requirement.",
+  "usage": {
+    "total_tokens": 2281,
+    "prompt_tokens": 2178,
+    "completion_tokens": 103
+  },
+  "timestamp": "2026-07-16 14:54:30"
+}

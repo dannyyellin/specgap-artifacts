@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R8",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of the owner-only restriction on GET /profiles, matching R8 exactly."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 describes owner access to individual profile endpoints, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "O3 describes protein being incorrectly included in profileDishes diet filtering, which directly corresponds to R7's removal of protein exclusion from the profileDishes calculation."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 describes use of flask_pymongo outside the allowed package set, which does not correspond to any of the three reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1023,
+    "prompt_tokens": 724,
+    "completion_tokens": 299
+  }
+}

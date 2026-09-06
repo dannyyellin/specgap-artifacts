@@ -1,0 +1,19 @@
+Timestamp: 2026-06-02 05:57:18
+Detector:  DeepSeek-V3-0324
+Service:   nestjs-realworld  Round: 1  Removals: [5, 6, 9, 12, 19, 23, 25, 27, 29]
+Method:    oneshot-warehouse
+
+Tokens: prompt=10621, completion=635, total=11256
+Additions: 3
+Omissions: 6
+
+  A A1: Implements 'favorited' and 'favoritesCount' fields in article responses
+  A A2: Implements 'updatedAt' field for comments
+  A A3: Implements 'order_by' on comments using comment ID
+
+  O O1: Missing GET /api/articles/feed endpoint for retrieving articles from followed users
+  O O2: Missing tag filtering in GET /api/articles
+  O O3: Does not verify article ownership before allowing updates/deletes
+  O O4: Returns empty object {} for deleted articles instead of 404
+  O O5: Missing error message when attempting to delete a user with articles
+  O O6: Missing unique constraint validation when updating username/email

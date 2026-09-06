@@ -1,0 +1,33 @@
+{
+  "req_id": 17,
+  "requirement_vague": "Test the password recovery flow of a new user. Superuser credentials: (admin@example.com / password123)",
+  "requirement_precise": "Create a new user with a generated email and initial password. Authenticate as the superuser (admin@example.com / password123). Using the superuser access token, request the password-recovery HTML content for the created user's email. Then submit the password reset request using the extracted reset token and a new password. Verify the password reset response has HTTP 200 and the response JSON is exactly {\"message\": \"Password updated successfully\"}. Finally, verify that login with the new password succeeds (returns 200).",
+  "removed": true,
+  "omissions": [
+    {
+      "id": "R17-O1",
+      "description": "The password recovery flow endpoints and behavior are missing: there is no superuser-authenticated endpoint to request password-recovery HTML content for a user's email, no reset-token extraction flow, and no password reset endpoint that accepts a reset token and new password.",
+      "category": "ENDPOINTS",
+      "reasoning": "The code defines login, signup, user CRUD, and authenticated password change via PATCH /users/me/password, but it contains no route for requesting password recovery content or for resetting a password using a recovery token."
+    },
+    {
+      "id": "R17-O2",
+      "description": "The required password recovery success response cannot be produced because there is no password reset endpoint returning HTTP 200 with exactly {\"message\": \"Password updated successfully\"} for a token-based reset flow.",
+      "category": "RESPONSE_FORMAT",
+      "reasoning": "Although PATCH /users/me/password returns Message(message=\"Password updated successfully\"), that endpoint requires the current authenticated user and current_password/new_password, not a recovery token flow initiated by a superuser-requested recovery HTML."
+    },
+    {
+      "id": "R17-O3",
+      "description": "The business logic for superuser-driven password recovery of another user's account is not implemented.",
+      "category": "BUSINESS_LOGIC",
+      "reasoning": "The only password update logic is for the currently authenticated user changing their own password after providing the current password. There is no logic allowing a superuser to request recovery content for another user's email and then reset that user's password via a recovery token."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 5036,
+    "prompt_tokens": 4732,
+    "completion_tokens": 304
+  },
+  "parse_error": false
+}

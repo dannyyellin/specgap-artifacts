@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of the owner-only restriction for POST, PUT, and DELETE operations, which matches R5 exactly."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "O2 relates to Ninja API field handling (string values for nutritional elements), which partially overlaps with R4's removal of Ninja API field name mapping details, but O2 focuses on value type handling rather than field name mapping."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 describes validation of dish_id matching in PUT/DELETE requests, which does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 describes missing 404 status codes for PUT/DELETE operations, which does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 describes handling of missing or invalid Ninja API keys, which does not correspond to any of the reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1100,
+    "prompt_tokens": 717,
+    "completion_tokens": 383
+  }
+}

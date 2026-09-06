@@ -1,0 +1,60 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal/absence of the fine computation formula ($0.50/day * days overdue), which is exactly what R6 states."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O2 describes the missing days-overdue calculation, which is a core part of the fine computation formula removed per R6."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R7",
+        "label": "PARTIAL",
+        "reasoning": "O2 touches on the fine computation logic that depends on the Borrows service cross-call (R7), but focuses on the calculation rather than the cross-service call itself."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R7",
+        "label": "PARTIAL",
+        "reasoning": "O3 concerns error handling from the Borrows microservice call, which is related to R7's cross-service call to Borrows, but focuses on error handling rather than the removal of the call."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 describes missing validation for POST /cardholders fields, which does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 describes missing validation for PUT /cardholders/{id}, which does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "O6 mentions the 'id' field type as string, which relates to R4's removal of field type declarations, but concludes no omission exists, making it only a partial and inconclusive match."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O7 describes missing filtering support by 'id' query parameter, which does not correspond to any of the reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1616,
+    "prompt_tokens": 993,
+    "completion_tokens": 623
+  }
+}

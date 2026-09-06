@@ -1,0 +1,14 @@
+{
+  "req_id": 10,
+  "requirement_vague": "Updating a todo with mismatched ID returns bad request",
+  "requirement_precise": "Register a user and login. Create a todo (returns ID=X). Call PUT /todos/X with a request body where id=Y (different from X). Verify the response status is 400 Bad Request.",
+  "verdict": "NOT_LEAKED",
+  "spec_evidence": "- Register a user and login. Create a todo with title 'Original Todo'. The todo should have isComplete=false. Call PUT /todos/{id} with isComplete=true and title 'Updated Todo'. Verify response is 200 OK.\n- Register a user and login. Call PUT /todos/99999 with a valid todo body (id=99999, title='Test', isComplete=false). Verify the response status is 404 Not Found.",
+  "reasoning": "The spec shows successful updates when using the same todo identifier and a 404 when the targeted todo does not exist, but it never states any rule about the path ID needing to match a body ID or what should happen if they differ. Concluding a 400 Bad Request for mismatched IDs would require outside assumptions not explicitly given in the text.",
+  "parse_error": false,
+  "usage": {
+    "total_tokens": 1076,
+    "prompt_tokens": 894,
+    "completion_tokens": 182
+  }
+}

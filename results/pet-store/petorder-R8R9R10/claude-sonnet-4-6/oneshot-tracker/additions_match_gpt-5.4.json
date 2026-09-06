@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Persisting purchase documents in MongoDB does not correspond to removing pet selection randomness, removing pet deletion after purchase, or removing purchase-id uniqueness/reuse constraints."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Checking that the purchaser field matches the authenticated username is unrelated to the removed pet selection, pet deletion, or purchase-id uniqueness requirements."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Validating purchaser and pet-type as non-empty strings does not describe any of the listed removed requirements."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "Generating sequential transaction IDs is related to ID generation/uniqueness, but it does not specifically capture the removed requirement that purchase-id be unique and non-reusable."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Handling unknown GET /transactions query fields by returning an empty array is unrelated to the removed purchase flow requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1046,
+    "prompt_tokens": 724,
+    "completion_tokens": 322
+  }
+}

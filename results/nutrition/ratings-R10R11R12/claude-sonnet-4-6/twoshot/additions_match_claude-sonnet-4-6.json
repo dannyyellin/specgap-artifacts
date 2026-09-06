@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the three spec requirements (R10, R11, R12) relate to cross-service dish existence validation."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the three spec requirements address the response body format of POST /ratings."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "R10 removes the integer-between-1-and-5 constraint, and A3 describes storing the rating as a float rather than an integer, which is related to the removal of the integer type constraint but only partially captures R10 (which also removed the 1\u20135 range constraint)."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 905,
+    "prompt_tokens": 654,
+    "completion_tokens": 251
+  }
+}

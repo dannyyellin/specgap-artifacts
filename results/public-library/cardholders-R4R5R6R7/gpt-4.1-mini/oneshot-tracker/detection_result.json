@@ -1,0 +1,55 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "Returns 400 Bad Request when the borrows microservice returns a 4XX error code in /cardholders/fines/{id}",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification does not specify how to handle errors from the borrows microservice; the code returns 400 for any 4XX response from borrows, which is an addition."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "The fine amount calculation sums 1 per overdue book instead of number-of-days-overdue * 0.50",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states the fine per overdue book is number-of-days-overdue multiplied by 0.50, but the code adds 1 per overdue book regardless of days overdue."
+      },
+      {
+        "id": "O2",
+        "description": "POST /cardholders does not validate presence of required fields 'name' and 'email'",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification requires POST /cardholders to provide 'name' and 'email' fields; the code checks type if present but does not check that these fields are present."
+      },
+      {
+        "id": "O3",
+        "description": "GET /cardholders supports filtering only by 'name' and 'email' but the specification allows filtering by any field",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states GET /cardholders may specify a query string 'field=value' to filter records; the code only filters on 'name' and 'email', ignoring other fields."
+      },
+      {
+        "id": "O4",
+        "description": "PUT /cardholders does not allow updating the 'id' field as per specification",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states PUT /cardholders/{id} provides updated resource fields; the code rejects updates if 'id' in payload differs from URL but does not allow updating 'id' at all, which is consistent but not explicitly stated; no omission here."
+      },
+      {
+        "id": "O5",
+        "description": "GET /cardholders/fines/{id} does not compute fine amount by summing fines for all borrowed books correctly",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification requires summing fines for all books borrowed by the cardholder, computed as days overdue times 0.50; the code sums 1 per overdue book without calculating days overdue or multiplying by 0.50."
+      },
+      {
+        "id": "O6",
+        "description": "GET /cardholders/fines/{id} does not handle the case where the borrows microservice returns an empty list or no borrows gracefully",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification implies the fine amount is zero if no borrows exist; the code handles empty list but does not explicitly check or document this; this is not a clear omission."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 6072,
+    "prompt_tokens": 5391,
+    "completion_tokens": 681
+  }
+}

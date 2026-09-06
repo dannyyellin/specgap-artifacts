@@ -1,0 +1,18 @@
+{
+  "req_id": 58,
+  "requirement_vague": "User profile update should reject invalid email format. Test with 'invalid@' string.",
+  "requirement_precise": "Register a new user via POST /api/v1/users/signup with email 'test58@example.com' and password 'validpass123'. Login to get token. Attempt to update profile via PATCH /api/v1/users/me with email 'invalid@' (invalid format). Verify the response status is 422 (validation error).",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": "UserUpdateMe model and PATCH /api/v1/users/me route (update_user_me)",
+    "code_reference": "class UserUpdateMe(BaseModel):\n    email: Optional[EmailStr] = None\n\n@api_router.patch(\"/users/me\", response_model=UserRead)\ndef update_user_me(user_in: UserUpdateMe, ...):",
+    "reasoning": "The profile update request body uses Pydantic's EmailStr for the optional email field, so an invalid value like 'invalid@' is rejected during request validation before the handler logic runs. In FastAPI, such body validation errors return HTTP 422, matching the requirement."
+  },
+  "usage": {
+    "total_tokens": 5911,
+    "prompt_tokens": 5767,
+    "completion_tokens": 144
+  },
+  "parse_error": false
+}

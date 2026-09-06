@@ -1,0 +1,48 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "O1 states the delete-after-purchase step is missing, which is the same behavior described by R9 as having removed that step."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 concerns validating pet-type existence before purchase, which is not described by R8, R9, or R10."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R8",
+        "label": "MATCH",
+        "reasoning": "O3 directly describes the missing random pet selection behavior when multiple pets are available, matching R8."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 is about handling store number and pet-name combinations, which does not correspond to any listed reference requirement."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 concerns exact error message formatting for unavailable pet types, not any behavior in R8, R9, or R10."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 is about enforcing purchaser identity against authentication, which is unrelated to the three reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1024,
+    "prompt_tokens": 658,
+    "completion_tokens": 366
+  }
+}

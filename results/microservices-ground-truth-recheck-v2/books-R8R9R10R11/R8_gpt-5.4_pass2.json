@@ -1,0 +1,19 @@
+{
+  "app": "public-library",
+  "variant": "books-R8R9R10R11",
+  "service": "books",
+  "req_id": "R8",
+  "requirement": "POST /books requires the fields title, authors, ISBN, and genre; requests missing any of them are rejected.",
+  "source_headline": "Removed which fields POST requires (title, authors, ISBN, genre)",
+  "model": "gpt-5.4",
+  "pass": 2,
+  "label": "INFERRED",
+  "evidence": "POST_REQUIRED_FIELDS = [\"title\", \"authors\", \"ISBN\", \"genre\"]`; in create_book(), `for field in POST_REQUIRED_FIELDS: if not validate_string_field(data, field, required=True): return jsonify({\"error\": \"Bad Request\"}), 400`",
+  "reasoning": "The POST /books handler explicitly defines the required fields as title, authors, ISBN, and genre, then rejects the request with 400 if any required field is missing. This directly addresses the requirement, and a test sending POST requests missing any one of those fields would fail validation and be rejected.",
+  "usage": {
+    "total_tokens": 1920,
+    "prompt_tokens": 1777,
+    "completion_tokens": 143
+  },
+  "timestamp": "2026-07-16 14:54:06"
+}

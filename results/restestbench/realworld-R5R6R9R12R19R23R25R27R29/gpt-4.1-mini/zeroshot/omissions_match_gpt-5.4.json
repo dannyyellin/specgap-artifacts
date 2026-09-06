@@ -1,0 +1,126 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns unauthorized article update/delete access control, which is not described in any reference requirement."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Self-follow/unfollow validation is not covered by any of the listed reference requirements."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R29",
+        "label": "MATCH",
+        "reasoning": "Both describe deleting a user who has articles and expecting a 500 error due to foreign key constraints."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "This directly matches the requirement for GET /api/articles/feed to return followed users' articles with correct articlesCount."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R23",
+        "label": "MATCH",
+        "reasoning": "This directly matches the requirement for feed pagination using limit and offset with correct total articlesCount."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "Both specify duplicate user creation must return 400 with the exact message 'Username and email must be unique'."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R27",
+        "label": "MATCH",
+        "reasoning": "Both describe GET /api/articles/feed returning articlesCount 0 and an empty articles array when the user follows nobody."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Ordering by created timestamp descending is not stated in any of the provided reference requirements."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Slug uniqueness and slug format are not part of the listed reference requirements."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": "R19",
+        "label": "MATCH",
+        "reasoning": "Both concern updating an article and verifying that the updated timestamp changes while the created timestamp remains unchanged."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": "R12",
+        "label": "MATCH",
+        "reasoning": "Both describe GET /api/articles filtering by the tag query parameter and verifying matching article counts/results."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Filtering articles by favorited is not included in any reference requirement."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": "R12",
+        "label": "PARTIAL",
+        "reasoning": "It overlaps with tag filtering on GET /api/articles, but adds combined-parameter behavior not required by the reference."
+      },
+      {
+        "detection_id": "O13",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "It refers to GET /api/articles/{slug} behavior for missing articles, but states 404 whereas the reference specifically requires 200 with {} after deletion."
+      },
+      {
+        "detection_id": "O14",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Comments retrieval is not covered by any of the listed reference requirements."
+      },
+      {
+        "detection_id": "O15",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Posting comments is not covered by any of the listed reference requirements."
+      },
+      {
+        "detection_id": "O16",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Deleting comments is not covered by any of the listed reference requirements."
+      },
+      {
+        "detection_id": "O17",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Profile retrieval with following status is not described in the provided reference requirements."
+      },
+      {
+        "detection_id": "O18",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Follow/unfollow profile endpoints are not directly specified in the listed reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 3680,
+    "prompt_tokens": 2640,
+    "completion_tokens": 1040
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "req_id": 61,
+  "requirement_vague": "User registration should reject null email. Test with email set to null.",
+  "requirement_precise": "Attempt to register a new user via POST /api/v1/users/signup with email set to null, password 'validpass123', and full_name 'Test User'. Verify the response status is 422 (validation error).",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": "UserRegister/UserCreate model validation used by POST /api/v1/users/signup",
+    "code_reference": "class UserCreate(BaseModel):\n    email: EmailStr\n\n@api_router.post(\"/users/signup\", response_model=UserRead)\ndef signup(user_in: UserRegister, session: Session = Depends(get_session)):",
+    "reasoning": "The signup endpoint accepts a UserRegister body, which inherits from UserCreate where email is declared as a required non-optional EmailStr. In FastAPI/Pydantic, sending email as null fails request validation before entering the handler and returns HTTP 422."
+  },
+  "usage": {
+    "total_tokens": 5877,
+    "prompt_tokens": 5743,
+    "completion_tokens": 134
+  },
+  "parse_error": false
+}

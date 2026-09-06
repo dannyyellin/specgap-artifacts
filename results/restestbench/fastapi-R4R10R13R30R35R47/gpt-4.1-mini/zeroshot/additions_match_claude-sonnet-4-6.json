@@ -1,0 +1,24 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements mention a GET endpoint returning HTML content for password recovery."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed spec requirements mention password recovery email sending or mailcatcher interactions."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1161,
+    "prompt_tokens": 1026,
+    "completion_tokens": 135
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "req_id": 56,
+  "requirement_vague": "Password reset should reject new_password with 7 characters with a 422 validation error.",
+  "requirement_precise": "Attempt to reset password via POST /api/v1/reset-password/ with token 'fake-token' and new_password of exactly 7 characters ('1234567'). Verify the response status is 422 (validation error). Note: The token validation happens after field validation, so 422 should be returned for invalid password length.",
+  "removed": true,
+  "omissions": [
+    {
+      "id": "R56-O1",
+      "description": "The password reset endpoint POST /api/v1/reset-password/ is missing, so the service cannot reject a 7-character new_password with a 422 validation error on that route.",
+      "category": "ENDPOINTS",
+      "reasoning": "The code defines routes such as /login/access-token, /users/signup, and /users/me/password, but there is no POST /api/v1/reset-password/ route at all. Because the required endpoint does not exist, the specified validation behavior for new_password on password reset is not implemented."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 4817,
+    "prompt_tokens": 4691,
+    "completion_tokens": 126
+  },
+  "parse_error": false
+}

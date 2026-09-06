@@ -1,0 +1,73 @@
+(I) Description of Public library microservices:
+{“Name”: “Cardholders microservice”,
+“Description”: “Responsible for creating, retrieving, updating, and deleting cardholder accounts.  This service also provides the ability to retrieve how much money in fines is owed by a specific cardholder.”
+
+“Resources”: “/cardholders, /cardholders/{id}, /cardholders/fines/{id}.
+An id is of type string.  Each cardholder (/cardholders/{id}) consists of a JSON document containing the field names ‘name’, ‘email’, and ‘id’.  The values of each of these is a JSON string.  The resource /cardholders/fines/{id} consists of a JSON document with a field ‘fineAmount’, whose value is of type float, and a field ‘id’, of type string.”,
+
+“REST requests”: “GET and POST request on /cardholders.  GET returns a JSON array of all records in the resource.   The GET request may specify a query string of the form ‘field=value’.  In this case, only those cardholder records satisfying that constraint should be returned. The POST request provides a JSON document containing the name and email and returns the id for the newly created string record.
+GET, PUT and DELETE requests on /cardholders/{id}.   The GET request returns a JSON record of the requested resource.  The PUT request provides a JSON payload of the updated resource’s fields and returns the id of the updated resource.  The DELETE request returns the status of the request with no content.
+GET request on cardholders/fines/{id}.  The request returns the JSON document representing this resource.”,
+
+“Additional details”: “The fine amount owed is computed as follows: the fine per overdue book is equal to number-of-days-overdue * FINE_PER_DAY, where FINE_PER_DAY equals $.50.   The cardholder owes the sum of all fines for all books he borrowed.   To compute this amount, this service needs to invoke the Borrows microservice to retrieve information on books borrowed by this cardholder.”,
+
+“Deployment”: “The Cardholders microservice runs in a Docker container and listens on external port 5001. Another microservice can send it requests using the URL http://cardholders:5001/cardholders.”
+}
+
+
+{“Name”: “Books microservice”,
+“Description”: “Responsible for creating, retrieving, updating, and deleting books in the library’s inventory.”,
+
+“Resources”: “/books, /books/{id}.
+An id is of type string.  Each book (/books/{id}) consists of a JSON document containing the fields ‘title’ (a string), ‘authors’ (a string), ‘ISBN’ (a string representing the 13 digit ISBN_13 number of the book),  ‘publisher’ (a string), ‘publishedDate’ (a string of the form ‘DD-MM-YYYY’),  ‘genre’ (a string that is one of ‘Fiction’, ‘Children’, ‘Biography’, ‘Science’, ‘Science Fiction’, ‘Fantasy’, or ‘Other), and ‘id’ (a string)”,
+
+“REST requests”: “GET and POST request on /books.  GET returns a JSON array of all records in the resource.   The GET request may specify a query string of the form ‘field=value’.  In this case, only those book records satisfying that constraint should be returned.  The POST request provides a JSON document containing the title, authors, ISBN, and genre and returns the string id for the newly created book record.
+GET, PUT and DELETE requests on /books/{id}.  The GET request returns a JSON record of the requested resource.  The PUT request provides a JSON payload of the resource’s fields and returns the id of the updated resource.  The DELETE request returns the status of the request with no content.”,
+
+“Additional details”: “The‘publisher’and ‘publishedDate’ are not provided in the POST request but is obtained by the service using the 3rd party Google Books API service (see https://developers.google.com/books/docs/v1/using) by supplying the ISBN number of the book.  If Google Books returns more than one entry, the first entry is used. If Google Books does not contain an entry for one of the fields, then that field has the value ‘’ (the empty string).”,
+
+“Deployment”: “The Books microservice runs in a Docker container and listens on external port 5002.  Another microservice can send it requests using the URL http://books:5002/books.”
+}
+
+
+{“Name”: “Borrows microservice”,
+“Description”: “Responsible for creating, retrieving, updating, and deleting borrow records. A borrow record provides information on a specific book loaned to a cardholder”,
+
+“Resources”: “/borrows, /borrows/{id}.
+An id is of type string.  Each borrow record (/borrows/{id}) consists of a JSON document containing the fields ‘cardholderId’ (the id of the cardholder borrowing the book of type string), ‘ISBN’ (a string representing the ISBN_13 number of the borrowed book),  ‘loanDate’, ‘returnDate’ (where loanDate and returnDate are strings of the form ‘DD-MM-YYYY’), and ‘id’, a string.”,
+
+“REST requests”: “GET and POST requests on /borrows.  GET returns a JSON array of all records in the resource.   The GET request may specify a query string of the form ‘field=value’.  In this case, only those borrow records satisfying that constraint should be returned.  Alternatively, a GET request on the /borrows resource may specify a query string of the form ‘startDate=date1&endDate=date2’.  In this case, only borrow records that have a ‘loanDate’ between the specified startDate and endDate should be returned.  An example is the query string ‘startDate=10-12-2023&endDate=01-01-2024’. The POST request provides a JSON document containing the id of the cardholder borrowing the book, the ISBN_13 number of the book being borrowed, and the loan date.  It returns the id for the newly created borrow record.
+GET, PUT and DELETE requests on /borrows/{id}. The GET request returns a JSON record of the requested resource.  The PUT request provides a JSON payload of the resource’s fields and returns the id of the updated resource.  The DELETE request returns the status of the request with no content.”,
+
+“Additional details”: “The ‘returnDate’ is not provided in the POST request but is computed by the service as follows: returnDate = loanDate + LOAN_PERIOD, where LOAN_PERIOD is 30 days.     A book can only be borrowed by a cardholder who does not have 2 or more books overdue.  If a book cannot be checked out because 2 or more books are overdue, the POST request returns the status code 400.  Each time a book is checked out, the Borrows service informs the Logs service which creates a new log record”,
+
+“Deployment”: “The Borrows microservice runs in a Docker container and listens on external port 5003.  Another microservice can send it requests using the URL http://borrows:5003/borrows.”
+}
+
+
+{“Name”: “Logs microservice”,
+“Description”: “Responsible for log records of borrowed books.  Each time a book is checked out, the Borrows service informs the Logs service which creates a new log record.”,
+
+“Resources”: “/logs, /logs/{id}.
+An id is of type string.  Each log record (/logs/{id}) consists of a JSON document containing the fields ‘cardholderId’ (the id of a cardholder of type string), ‘borrowId’ (the id of a borrow record of type string), ‘ISBN’ (a string representing an ISBN_13 number), ‘loanDate’ (a string of the form ‘DD-MM-YYYY’), and ‘id’, a string.”,
+
+“REST requests”: “GET and POST request on /logs.  GET returns a JSON array of all records in the resource.   A GET request may specify a query string of the form ‘field=value’.  In this case, only those log records satisfying that constraint should be returned. The POST request provides a JSON document containing the cardholderId, the borrowId, the ISBN and the loanDate.  It returns the id for the newly created log record.
+GET request on /logs/{id}, returning a JSON record of the requested resource.”,
+
+“Deployment”: “The Logs microservice runs in a Docker container and listens on external port 5004.   Another microservice can send it requests using the URL http://logs:5004/logs.”
+}
+
+For all services, each REST request should return a status code in addition to the JSON payload if there is one.
+For successful requests, the appropriate 2XX code is returned:  201 (successful POST), 204 (successful DELETE) and 200 (success on other requests).
+For unsuccessful requests, the appropriate 4XX or 5XX code is returned: 400 (Bad request), 404 (Not Found), 405 (Method Not Allowed), 415 (Unsupported media type), and 500 (Internal Server Error).
+
+(II) Code Generation Guidelines:
+Code Generation Guidelines
+•	Each microservice should be written in Python.
+•	Besides generating the code, the Python packages that need to be installed must be listed in a comment at the beginning of the code
+•	The code must be executable.  Besides comments in the code, no other text in the response.
+•	Each microservice should store its persistent data in a Mongo database.   Assume that Mongo is available at 'mongodb://mongo:27017/'.
+•	If a microservice requires data that another microservice is responsible for, it invokes a GET request on that microservice to retrieve that data when it needs it.  It does not replicate and store the data locally.
+•	The generated code should handle REST API exceptions and return the appropriate REST (HTTP) status code as described above.
+•	Assume that each microservice will run in its own Docker container.
+

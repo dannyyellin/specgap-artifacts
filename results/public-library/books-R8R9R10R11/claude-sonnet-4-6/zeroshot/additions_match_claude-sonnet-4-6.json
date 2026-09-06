@@ -1,0 +1,24 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "A1 describes that publisher and publishedDate are accepted from the request body instead of being fetched from the Google Books API, which directly corresponds to R10's removal of Google Books API integration for those fields."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Creating a unique index on the 'id' field in MongoDB is an implementation detail not mentioned or required by any of the listed spec requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 762,
+    "prompt_tokens": 585,
+    "completion_tokens": 177
+  }
+}

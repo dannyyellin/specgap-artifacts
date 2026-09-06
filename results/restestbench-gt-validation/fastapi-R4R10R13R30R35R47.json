@@ -1,0 +1,66 @@
+{
+  "variant": "fastapi-R4R10R13R30R35R47",
+  "service": "fastapi",
+  "results": [
+    {
+      "req_id": 4,
+      "test_status": "FAIL",
+      "test_verdict": "NOT_IMPLEMENTED",
+      "llm_verdict": "NOT_IMPLEMENTED",
+      "agree": true,
+      "detail": "test_read_item_not_enough_permissions: ",
+      "adaptations": [],
+      "setup_blocked_reason": null
+    },
+    {
+      "req_id": 10,
+      "test_status": "PASS",
+      "test_verdict": "IMPLEMENTED",
+      "llm_verdict": "IMPLEMENTED",
+      "agree": true,
+      "detail": "",
+      "adaptations": [],
+      "setup_blocked_reason": null
+    },
+    {
+      "req_id": 13,
+      "test_status": "PASS",
+      "test_verdict": "IMPLEMENTED",
+      "llm_verdict": "IMPLEMENTED",
+      "agree": true,
+      "detail": "",
+      "adaptations": [],
+      "setup_blocked_reason": null
+    },
+    {
+      "req_id": 30,
+      "test_status": "PASS",
+      "test_verdict": "IMPLEMENTED",
+      "llm_verdict": "IMPLEMENTED",
+      "agree": true,
+      "detail": "",
+      "adaptations": [],
+      "setup_blocked_reason": null
+    },
+    {
+      "req_id": 35,
+      "test_status": "FAIL",
+      "test_verdict": "NOT_IMPLEMENTED",
+      "llm_verdict": "NOT_IMPLEMENTED",
+      "agree": true,
+      "detail": "test_register_user_already_exists_error: ",
+      "adaptations": [],
+      "setup_blocked_reason": null
+    },
+    {
+      "req_id": 47,
+      "test_status": "PASS",
+      "test_verdict": "IMPLEMENTED",
+      "llm_verdict": "IMPLEMENTED",
+      "agree": true,
+      "detail": "",
+      "adaptations": [],
+      "setup_blocked_reason": null
+    }
+  ]
+}

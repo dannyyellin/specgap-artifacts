@@ -1,0 +1,19 @@
+{
+  "app": "pet-store",
+  "variant": "petorder-R8R9R10",
+  "service": "pet-order",
+  "req_id": "R9",
+  "requirement": "After a successful purchase, the purchased pet is deleted from the pet store.",
+  "source_headline": "Removed the DELETE pet from store after purchase step",
+  "model": "gpt-5.4",
+  "pass": 1,
+  "label": "GAP",
+  "evidence": "create_purchase() chooses a pet via GET requests (choose_pet -> fetch_pet_types/fetch_pets), then only inserts into purchases_collection and transactions_collection before returning 201. There is no DELETE request or any call to the pet-store service that removes the purchased pet.",
+  "reasoning": "Per the decision guide, the first question is whether any code addresses deleting the purchased pet after purchase. It does not: the service only reads pet availability from pet-store and records the purchase/transaction locally. Therefore a test expecting the purchased pet to be deleted from the pet store after a successful purchase would fail because that behavior is absent entirely.",
+  "usage": {
+    "total_tokens": 3116,
+    "prompt_tokens": 2968,
+    "completion_tokens": 148
+  },
+  "timestamp": "2026-07-16 15:02:26"
+}

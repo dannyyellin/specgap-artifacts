@@ -1,0 +1,24 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "Both concern reading items, but R4 specifically requires denying a second non-owner user with 400 'Not enough permissions', while A1 says GET /items/ returns all items unconditionally."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements concern listing all users via GET /users/."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1051,
+    "prompt_tokens": 912,
+    "completion_tokens": 139
+  }
+}

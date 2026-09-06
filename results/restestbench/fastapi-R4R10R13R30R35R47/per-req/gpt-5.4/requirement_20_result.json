@@ -1,0 +1,22 @@
+{
+  "req_id": 20,
+  "requirement_vague": "A superuser ('admin@example.com' / 'password123') retrieves its own profile. confirm the returned profile is the active superuser with the configured email.",
+  "requirement_precise": "Authenticate as a superuser with username 'admin@example.com' and password 'password123' to obtain an access token, then retrieve the currently authenticated user's profile (the \"me\" resource). Verify the response body is present (non-empty). Verify the response JSON 'is_active' is True. Verify the response JSON 'is_superuser' is True. Verify the response JSON 'email' equals the configured first superuser.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": [
+      "POST /api/v1/login/access-token",
+      "GET /api/v1/users/me",
+      "init_superuser"
+    ],
+    "code_reference": "FIRST_SUPERUSER = \"admin@example.com\"\nFIRST_SUPERUSER_PASSWORD = \"password123\"\n...\n@api_router.get(\"/users/me\", response_model=UserRead)\ndef read_user_me(current_user: User = Depends(get_current_active_user)):\n    return current_user",
+    "reasoning": "The startup initialization creates the configured first superuser with email admin@example.com, password password123, is_active=True, and is_superuser=True. The login endpoint authenticates that user and returns an access token, and the /users/me endpoint returns the authenticated active user's profile as a non-empty UserRead JSON containing email, is_active, and is_superuser."
+  },
+  "usage": {
+    "total_tokens": 5977,
+    "prompt_tokens": 5802,
+    "completion_tokens": 175
+  },
+  "parse_error": false
+}

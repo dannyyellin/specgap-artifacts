@@ -1,0 +1,16 @@
+{
+  "app": "public-library",
+  "variant": "borrows-R1R2R3",
+  "service": "borrows",
+  "method": "zeroshot",
+  "detector_model": "claude-sonnet-4-6",
+  "gen_model": "gpt-5.4",
+  "gen_usage": null,
+  "n_additions": 7,
+  "n_omissions": 3,
+  "usage": {
+    "total_tokens": 7161,
+    "prompt_tokens": 6104,
+    "completion_tokens": 1057
+  }
+}

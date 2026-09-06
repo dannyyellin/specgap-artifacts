@@ -1,0 +1,65 @@
+[
+  {
+    "id": 5,
+    "requirement": "Create a user (username: 'deleteuser1', email: 'deleteuser1@test.com', password: 'pass123'). Create an article with title 'Article To Delete'. Extract the slug. Verify the article can be retrieved via GET /api/articles/{slug}. Delete the article via DELETE /api/articles/{slug}. Verify response status is 200. Attempt to GET the article by slug again. Verify the response status is 200 with an empty object {} (implementation returns empty object for deleted articles rather than 404).",
+    "mutant_files": [
+      "src/article/article.service.ts"
+    ]
+  },
+  {
+    "id": 6,
+    "requirement": "Create user1 (username: 'feeduser1', email: 'feeduser1@test.com', password: 'pass123'), user2 (username: 'feedauthor1', email: 'feedauthor1@test.com', password: 'pass123'), and user3 (username: 'feedauthor2', email: 'feedauthor2@test.com', password: 'pass123'). User2 creates article 'Article By Followed'. User3 creates article 'Article By Not Followed'. Using user1's token, GET /api/articles/feed. Verify articlesCount is 0 (no follows yet). User1 follows user2. GET /api/articles/feed again. Verify articlesCount is 1. Verify the articles array contains 'Article By Followed' and does NOT contain 'Article By Not Followed'.",
+    "mutant_files": [
+      "src/article/article.service.ts"
+    ]
+  },
+  {
+    "id": 9,
+    "requirement": "Create a user (username: 'uniqueuser1', email: 'unique1@test.com', password: 'pass123'). Verify status 201. Attempt to create another user with the same username but different email (username: 'uniqueuser1', email: 'different@test.com'). Verify the response status is 400. Verify the response contains 'Username and email must be unique'. Attempt to create another user with different username but same email (username: 'differentuser', email: 'unique1@test.com'). Verify the response status is 400. Verify the response contains 'Username and email must be unique'.",
+    "mutant_files": [
+      "src/user/user.service.ts"
+    ]
+  },
+  {
+    "id": 12,
+    "requirement": "Create a user. Create article1 with title 'First Tagged Article' and tagList ['javascript', 'testing']. Create article2 with title 'Second Tagged Article' and tagList ['python', 'testing']. Create article3 with title 'No Match Article' and tagList ['ruby']. GET /api/articles?tag=javascript. Verify articlesCount is 1 and articles array contains only 'First Tagged Article'. GET /api/articles?tag=testing. Verify articlesCount is 2 and articles array contains both 'First Tagged Article' and 'Second Tagged Article'. GET /api/articles?tag=nonexistent. Verify articlesCount is 0.",
+    "mutant_files": [
+      "src/article/article.service.ts"
+    ]
+  },
+  {
+    "id": 19,
+    "requirement": "Create a user (username: 'timestampuser1', email: 'timestampuser1@test.com', password: 'pass123'). Create an article with title 'Timestamp Test Article'. Extract slug, created, and updated timestamps from response. Wait briefly, then PUT /api/articles/{slug} with updated title 'Updated Timestamp Article'. GET /api/articles/{slug}. Verify the 'created' timestamp is unchanged from original. Verify the 'updated' timestamp is different (newer) than the original. This tests the @BeforeUpdate hook that updates the timestamp.",
+    "mutant_files": [
+      "src/article/article.entity.ts"
+    ]
+  },
+  {
+    "id": 23,
+    "requirement": "Create user1 (username: 'feedpageuser1', email: 'feedpageuser1@test.com', password: 'pass123'). Create user2 (username: 'feedpageauthor1', email: 'feedpageauthor1@test.com', password: 'pass123'). User1 follows user2. User2 creates 5 articles: 'Article 1', 'Article 2', 'Article 3', 'Article 4', 'Article 5'. User1 GETs /api/articles/feed?limit=2. Verify articlesCount is 5 (total) but only 2 articles returned. User1 GETs /api/articles/feed?limit=2&offset=2. Verify 2 different articles returned. This tests feed pagination.",
+    "mutant_files": [
+      "src/article/article.service.ts"
+    ]
+  },
+  {
+    "id": 25,
+    "requirement": "Create user1 (username: 'jwtuser1', email: 'jwtuser1@test.com', password: 'pass123'). Extract the JWT token from the response. Decode the JWT token payload (base64 decode the middle segment). Verify the payload contains: id matching the user's id, username equal to 'jwtuser1', email equal to 'jwtuser1@test.com'. Use the token to GET /api/user and verify the returned user matches. This tests the JWT payload generation in generateJWT method.",
+    "mutant_files": [
+      "src/user/user.service.ts"
+    ]
+  },
+  {
+    "id": 27,
+    "requirement": "Create user1 (username: 'emptyfeeduser1', email: 'emptyfeeduser1@test.com', password: 'pass123'). Create user2 (username: 'emptyfeedauthor1', email: 'emptyfeedauthor1@test.com', password: 'pass123'). User2 creates an article 'Article by User2'. User1 (who follows nobody) GETs /api/articles/feed. Verify articlesCount is 0 and articles array is empty. This tests the empty follows check that returns empty result when user has no follows.",
+    "mutant_files": [
+      "src/article/article.service.ts"
+    ]
+  },
+  {
+    "id": 29,
+    "requirement": "Create user1 (username: 'orphanauthor1', email: 'orphanauthor1@test.com', password: 'pass123'). User1 creates article with title 'Orphan Article Test'. GET /api/articles and verify article exists with author username 'orphanauthor1'. DELETE /api/users/orphanauthor1@test.com. Verify response is 500 (FK constraint error). GET /api/articles again and verify article still exists. This tests that articles block user deletion (no CASCADE DELETE configured).",
+    "mutant_files": [
+      "src/user/user.service.ts"
+    ]
+  }
+]

@@ -1,0 +1,24 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement specifies the response body format for a successful DELETE operation; the requirements only check status codes and existence of todos."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement addresses the ability to set 'isComplete' during todo creation via POST /todos."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1178,
+    "prompt_tokens": 1029,
+    "completion_tokens": 149
+  }
+}

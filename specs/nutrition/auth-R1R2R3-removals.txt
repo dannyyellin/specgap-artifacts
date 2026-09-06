@@ -1,0 +1,21 @@
+# MODIFIED SPEC: 3 elements removed for Authentication experiment
+# R1: Removed password encryption (bcrypt)
+#     - GPT-5.4: NOT INFERRED — passwords stored in plaintext; no bcrypt or any
+#       other hashing applied at registration or login
+#     - Prior label: Highly inferrable — plaintext passwords are a well-known security
+#       anti-pattern; any developer would encrypt them
+#     - Tests: 2
+# R2: Removed Owner special case (name='Owner', pw='owner#pw', privileged=True)
+#     - GPT-5.4: NOT INFERRED — Owner credentials set via environment variables
+#       defaulting to "owner"/"owner", not the specified "Owner"/"owner#pw";
+#       privilege logic present but with wrong hardcoded values
+#     - Prior label: Partially inferrable — 'privileged' field still exists in
+#       /validate response, hinting at a privilege system, but specific mechanism gone
+#     - Tests: 1, 3
+# R3: Removed username uniqueness constraint (cannot register same name twice)
+#     - GPT-5.4: INFERRED — code creates a unique index on the "name" field and
+#       checks for duplicate usernames before registration, returning 400 on conflict
+#     - Prior label: Highly inferrable — duplicate usernames break authentication
+#       systems; uniqueness is a fundamental requirement
+#     - Tests: 1
+

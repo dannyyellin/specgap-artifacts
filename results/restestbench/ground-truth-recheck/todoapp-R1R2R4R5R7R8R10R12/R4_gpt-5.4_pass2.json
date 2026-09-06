@@ -1,0 +1,20 @@
+{
+  "variant": "todoapp-R1R2R4R5R7R8R10R12",
+  "req_id": 4,
+  "model": "gpt-5.4",
+  "pass": 2,
+  "verdict": "IMPLEMENTED",
+  "requirement_vague": "Getting a non-existent todo returns 404 Not Found",
+  "omissions": [],
+  "implementation": {
+    "location": "GET /todos/{id} -> get_todo",
+    "code_reference": "todo = session.exec(\n    select(Todo).where(Todo.id == id, Todo.user_id == current_user.id)\n).first()\nif not todo:\n    raise HTTPException(\n        status_code=status.HTTP_404_NOT_FOUND,\n        detail=\"Todo not found\",\n    )",
+    "reasoning": "The GET /todos/{id} endpoint looks up the todo by the requested id scoped to the authenticated user, and if no matching record exists it raises an HTTPException with status 404 Not Found. This satisfies the requirement for requesting a non-existent todo such as /todos/99999."
+  },
+  "usage": {
+    "total_tokens": 2559,
+    "prompt_tokens": 2406,
+    "completion_tokens": 153
+  },
+  "timestamp": "2026-07-12 10:33:20"
+}

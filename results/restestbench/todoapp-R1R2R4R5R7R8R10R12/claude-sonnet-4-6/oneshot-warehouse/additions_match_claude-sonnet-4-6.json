@@ -1,0 +1,18 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 describes the response body of a successful DELETE, which is an implementation detail not required or tested by any of the spec requirements listed."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1060,
+    "prompt_tokens": 970,
+    "completion_tokens": 90
+  }
+}

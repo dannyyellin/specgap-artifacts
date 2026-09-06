@@ -1,0 +1,14 @@
+{
+  "req_id": 8,
+  "requirement_vague": "Users cannot delete another user's todo",
+  "requirement_precise": "Register two users (userA and userB) and login with each. UserA creates a todo and notes the returned ID. UserB calls DELETE /todos/{id} using userA's todo ID. Verify the response status is 404 Not Found. Then userA verifies their todo still exists by calling GET /todos/{id} and confirming 200 OK.",
+  "verdict": "NOT_LEAKED",
+  "spec_evidence": "- \"Each user manages their own set of todos via CRUD endpoints.\"\n- \"Call GET /todos without providing any Authorization header or token. Verify the response status is 401 Unauthorized.\"\n- \"Register a user and login. Create a todo with title 'Todo to Delete' and note the ID. Call DELETE /todos/{id}. Verify the response status is 200 OK. Then call GET /todos/{id} and verify the response is 404 Not Found (todo no longer exists).\"",
+  "reasoning": "The spec says users have their own todos and that authentication is required, but it never explicitly states what must happen if one authenticated user tries to access or delete another user's todo. Concluding cross-user deletion must return 404 and leave the todo intact would require outside knowledge about per-user authorization behavior.",
+  "parse_error": false,
+  "usage": {
+    "total_tokens": 1107,
+    "prompt_tokens": 922,
+    "completion_tokens": 185
+  }
+}

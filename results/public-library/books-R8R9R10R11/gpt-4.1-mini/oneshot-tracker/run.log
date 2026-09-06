@@ -1,0 +1,16 @@
+Timestamp: 2026-06-01 20:54:19
+Detector:  gpt-4.1-mini
+App/Variant/Service: public-library/books-R8R9R10R11/books
+Method:    oneshot-tracker
+
+Tokens: prompt=5043, completion=540, total=5583
+Additions: 1
+Omissions: 5
+
+  A A1: Allows updating the 'ISBN' field on PUT /books/{id}
+
+  O O1: Does not fetch 'publisher' and 'publishedDate' from the Google Books API when creating a book
+  O O2: POST /books does not ignore 'publisher' and 'publishedDate' fields from the client and does not set them from Google Books API
+  O O3: Does not validate that 'genre' field is one of the allowed values
+  O O4: GET /books does not support query string filtering by 'field=value' for all book fields as specified
+  O O5: Does not return 405 Method Not Allowed for unsupported HTTP methods

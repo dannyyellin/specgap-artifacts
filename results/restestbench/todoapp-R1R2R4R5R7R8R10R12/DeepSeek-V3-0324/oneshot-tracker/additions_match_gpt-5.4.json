@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Returning a specific UserResponse model from registration is not a behavior required by any listed spec item."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Returning a specific TokenResponse model from login does not correspond to any listed requirement, which only depends on obtaining an access token."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Using a TodoResponse model for todo endpoints is an implementation detail and does not match any specific required behavior in the spec."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1183,
+    "prompt_tokens": 997,
+    "completion_tokens": 186
+  }
+}

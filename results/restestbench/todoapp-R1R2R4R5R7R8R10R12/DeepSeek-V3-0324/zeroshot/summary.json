@@ -1,0 +1,22 @@
+{
+  "method": "zeroshot",
+  "removals": [
+    1,
+    2,
+    4,
+    5,
+    7,
+    8,
+    10,
+    12
+  ],
+  "detector_model": "DeepSeek-V3-0324",
+  "gen_usage": null,
+  "detect_usage": {
+    "total_tokens": 3933,
+    "prompt_tokens": 3395,
+    "completion_tokens": 538
+  },
+  "n_additions": 3,
+  "n_omissions": 3
+}

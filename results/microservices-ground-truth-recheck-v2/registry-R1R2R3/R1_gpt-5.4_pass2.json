@@ -1,0 +1,19 @@
+{
+  "app": "pet-store",
+  "variant": "registry-R1R2R3",
+  "service": "registry",
+  "req_id": "R1",
+  "requirement": "Passwords must be at least 8 characters long and contain an uppercase letter, a lowercase letter, and a digit; passwords violating these rules are rejected.",
+  "source_headline": "Removed password validation rules (8+ chars, uppercase, lowercase, digit)",
+  "model": "gpt-5.4",
+  "pass": 2,
+  "label": "GAP",
+  "evidence": "none",
+  "reasoning": "There is no code validating password complexity or length in either create_user() or change_password(). The service accepts any provided password and only hashes it via hash_password(), so a test expecting rejection of passwords shorter than 8 characters or missing uppercase/lowercase/digit would fail because the behavior is absent entirely.",
+  "usage": {
+    "total_tokens": 1980,
+    "prompt_tokens": 1891,
+    "completion_tokens": 89
+  },
+  "timestamp": "2026-07-16 15:00:01"
+}

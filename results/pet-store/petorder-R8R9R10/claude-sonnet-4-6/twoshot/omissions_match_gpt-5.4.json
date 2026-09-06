@@ -1,0 +1,66 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R8",
+        "label": "MATCH",
+        "reasoning": "It describes the removed random pet selection behavior when a store is specified but no pet-name is given."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R8",
+        "label": "MATCH",
+        "reasoning": "It describes the removed random pet selection behavior when no store is specified and a pet should be chosen from available matches."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "It directly states that the chosen pet is not deleted from the pet-store after purchase, which is the removed DELETE step."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns authorization status codes for transaction retrieval, unrelated to pet selection, deletion after purchase, or purchase-id uniqueness."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about incorrect 401 vs 403 behavior on a transaction endpoint and does not match any reference requirement."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns transaction document fields, which is unrelated to the referenced removed behaviors."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about POST /purchases authorization handling and does not correspond to any listed reference requirement."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns possible 400 responses on GET /transactions/{id}, unrelated to the reference requirements."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about pet-type existence checking logic, not random selection, deletion after purchase, or purchase-id uniqueness."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1716,
+    "prompt_tokens": 1195,
+    "completion_tokens": 521
+  }
+}

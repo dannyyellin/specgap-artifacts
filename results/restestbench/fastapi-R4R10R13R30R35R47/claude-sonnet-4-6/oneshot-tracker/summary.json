@@ -1,0 +1,21 @@
+{
+  "method": "oneshot-tracker",
+  "round": 1,
+  "removals": [
+    4,
+    10,
+    13,
+    30,
+    35,
+    47
+  ],
+  "detector_model": "claude-sonnet-4-6",
+  "gen_usage": null,
+  "detect_usage": {
+    "total_tokens": 15816,
+    "prompt_tokens": 14252,
+    "completion_tokens": 1564
+  },
+  "n_additions": 0,
+  "n_omissions": 3
+}

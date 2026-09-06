@@ -1,0 +1,32 @@
+Timestamp: 2026-06-01 21:41:29
+Detector:  gpt-4.1-mini
+Service:   nestjs-realworld  Round: 1  Removals: [5, 6, 9, 12, 19, 23, 25, 27, 29]
+Method:    oneshot-warehouse
+
+Tokens: prompt=10141, completion=1669, total=11810
+Additions: 8
+Omissions: 14
+
+  A A1: PUT /api/user allows updating username and email without uniqueness validation
+  A A2: PUT /api/user allows updating password, bio, and image fields
+  A A3: GET /api/articles/{slug} returns empty object {} when article not found
+  A A4: DELETE /api/articles/{slug} deletes all comments of the article before deleting the article
+  A A5: DELETE /api/articles/{slug}/comments/{comment_id} returns JSON {"status": "ok"}
+  A A6: GET /api/articles supports filtering by author username
+  A A7: GET /api/articles supports pagination with limit and offset query parameters
+  A A8: GET /api/articles/feed endpoint is not implemented
+
+  O O1: POST /api/users does not return 400 with message 'Username and email must be unique' on duplicate username or email
+  O O2: POST /api/users/login returns 201 on successful login, but specification expects 201; code matches spec
+  O O3: PUT /api/articles/{slug} does not prevent non-owners from updating articles
+  O O4: DELETE /api/articles/{slug} does not prevent non-owners from deleting articles
+  O O5: GET /api/articles supports filtering by tag query parameter
+  O O6: GET /api/articles/feed endpoint is missing
+  O O7: GET /api/articles/{slug} does not return 404 when article not found, returns empty object instead
+  O O8: DELETE /api/articles/{slug} returns 200 with empty object on success, but specification expects 200 with empty object; code matches spec
+  O O9: POST /api/articles/{slug}/comments does not validate presence of comment body
+  O O10: DELETE /api/articles/{slug}/comments/{id} does not verify comment ownership before deletion
+  O O11: DELETE /api/users/{email} endpoint is missing
+  O O12: GET /api/profiles/{username} does not return 400 when user tries to follow/unfollow themselves
+  O O13: GET /api/articles does not support filtering by multiple tags or combined filters
+  O O14: Article created and updated timestamps are set correctly, but no explicit test for @BeforeUpdate hook updating updated timestamp

@@ -1,0 +1,84 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "O1 states the code fails to delete the purchased pet from the store, which is the same behavior referenced by R9 as the removed DELETE-after-purchase step."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 concerns response fields in the purchase response, which is unrelated to pet selection, deletion after purchase, or purchase-id uniqueness."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 is about authorization on /transactions endpoints and does not correspond to any of R8, R9, or R10."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 is about validating that pet-name requires store, which is unrelated to the removed selection algorithm, deletion step, or purchase-id uniqueness."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 concerns the error returned when no pet is available, not any of the behaviors in R8, R9, or R10."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 is about authentication error handling and does not match any reference requirement."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O7 concerns Content-Type validation, which is unrelated to the referenced removed behaviors."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O8 is generic request validation behavior and does not correspond to R8, R9, or R10."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O9 is about validating the type of the store field and does not match any reference requirement."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O10 is about validating pet-name format and does not correspond to the removed behaviors in the references."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O11 concerns rejecting unknown fields or malformed data, which is unrelated to R8, R9, or R10."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O12 is about validation of a transaction id path parameter and does not match any reference requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1724,
+    "prompt_tokens": 1013,
+    "completion_tokens": 711
+  }
+}

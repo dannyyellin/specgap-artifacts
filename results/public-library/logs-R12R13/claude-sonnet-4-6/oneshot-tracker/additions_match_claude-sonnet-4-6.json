@@ -1,0 +1,18 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 describes type validation behavior on POST /logs fields, which does not correspond to R12 (removing date format) or R13 (removing Borrows-to-Logs notification)."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 606,
+    "prompt_tokens": 502,
+    "completion_tokens": 104
+  }
+}

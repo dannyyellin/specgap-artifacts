@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "O1 discusses the fine computation formula, but R6 says the formula was removed from the requirements rather than requiring a different implementation."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R7",
+        "label": "PARTIAL",
+        "reasoning": "O2 is about handling Borrows service responses, which relates to the Borrows cross-service interaction mentioned in R7, but R7 specifically says that cross-service fine computation was removed."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "O3 concerns fineAmount being a float, which overlaps with the removed type declaration in R4, but R4 states the type declaration was removed rather than required."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R7",
+        "label": "PARTIAL",
+        "reasoning": "O4 concerns Borrows service availability and errors, which is related to the removed Borrows cross-service call in R7, but it does not describe the same specific removal."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 916,
+    "prompt_tokens": 620,
+    "completion_tokens": 296
+  }
+}

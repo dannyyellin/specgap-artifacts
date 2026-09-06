@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R12",
+        "label": "PARTIAL",
+        "reasoning": "Both concern the loanDate 'DD-MM-YYYY' format, but O1 is about missing validation while R12 says the format requirement was removed from Logs."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about ISBN_13 validation and does not correspond to either the removed loanDate format or removed Borrows-to-Logs notification description."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about date range querying support and does not match either reference requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 727,
+    "prompt_tokens": 531,
+    "completion_tokens": 196
+  }
+}

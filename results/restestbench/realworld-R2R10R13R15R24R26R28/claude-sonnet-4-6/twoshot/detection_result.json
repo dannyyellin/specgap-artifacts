@@ -1,0 +1,97 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "article_dict includes both 'created'/'updated' AND 'createdAt'/'updatedAt' timestamp fields simultaneously",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification references 'created' and 'updated' timestamp fields. The code returns all four keys (createdAt, updatedAt, created, updated), doubling the timestamp fields beyond what is specified."
+      },
+      {
+        "id": "A2",
+        "description": "user_dict includes an 'id' field in the user response",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification defines the user response as containing username, email, and token. The 'id' field is not mentioned as part of the user response object."
+      },
+      {
+        "id": "A3",
+        "description": "PUT /api/articles/{slug} enforces ownership and returns 403 when a non-owner tries to update",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification explicitly demonstrates that any user can update any article ('User2 (NOT the owner) PUTs... Verify PUT response shows updated title'), indicating no ownership enforcement is required. The code blocks non-owners with 403."
+      },
+      {
+        "id": "A4",
+        "description": "DELETE /api/articles/{slug} enforces ownership and returns 403 when a non-owner tries to delete",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification explicitly states 'User2 (NOT the owner) DELETEs /api/articles/{slug}. Verify DELETE succeeds with status 200', meaning no ownership check should exist. The code blocks non-owners with 403."
+      },
+      {
+        "id": "A5",
+        "description": "DELETE /api/articles/{slug}/comments/{id} allows the article owner (not just comment author) to delete comments",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification only describes comment deletion by the comment creator. Allowing the article owner to also delete comments is not required by the specification."
+      },
+      {
+        "id": "A6",
+        "description": "GET /api/tags endpoint is implemented",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification does not mention a GET /api/tags endpoint anywhere in its requirements."
+      },
+      {
+        "id": "A7",
+        "description": "article_dict includes 'favorited' and 'favoritesCount' fields",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification does not mention favoriting functionality or these fields in any article response requirements."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "POST /api/profiles/{username}/follow does not return HTTP status 201",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification states 'Verify the response status is 201' for the follow endpoint. The code has no status_code=201 on the decorator, so FastAPI returns 200 by default."
+      },
+      {
+        "id": "O2",
+        "description": "POST /api/profiles/{username}/follow does not return 400 when a user tries to follow themselves",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification states 'attempt to follow themselves... Verify this returns status 400 with message containing cannot be equal'. The code silently skips the self-follow insert and returns 200 with the profile."
+      },
+      {
+        "id": "O3",
+        "description": "DELETE /api/profiles/{username}/follow does not return 400 when a user tries to unfollow themselves",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification states 'Verify user1 cannot unfollow themselves (should return 400)' but the unfollow endpoint has no self-unfollow guard."
+      },
+      {
+        "id": "O4",
+        "description": "GET /api/articles sorts by article id rather than by created_at timestamp descending",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states articles should be 'ordered by created timestamp in descending order (newest first)' and references 'ORDER BY article.created DESC'. The code sorts by id, which may not match creation time ordering."
+      },
+      {
+        "id": "O5",
+        "description": "GET /api/articles/feed sorts by article id rather than by created_at timestamp",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification describes feed results ordered by creation time (newest first). The code sorts feed articles by id rather than created_at."
+      },
+      {
+        "id": "O6",
+        "description": "GET /api/articles/feed route is registered after GET /api/articles/{slug}, causing 'feed' to be matched as a slug value",
+        "category": "ENDPOINTS",
+        "reasoning": "FastAPI matches routes in registration order. Since /api/articles/{slug} is registered before /api/articles/feed, requests to /api/articles/feed will be handled by the slug handler with slug='feed', returning an empty object instead of the feed response."
+      },
+      {
+        "id": "O7",
+        "description": "POST /api/articles/{slug}/comments returns the full article object with embedded comments instead of the created comment object",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification says the comment response should have a 'comments array' and each comment should have an 'id' field that is a number. The code returns {article: {..., comments: [...]}} wrapping the article, which is an unconventional structure that may not match the expected comment-centric response."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 17088,
+    "prompt_tokens": 13806,
+    "completion_tokens": 3282
+  }
+}

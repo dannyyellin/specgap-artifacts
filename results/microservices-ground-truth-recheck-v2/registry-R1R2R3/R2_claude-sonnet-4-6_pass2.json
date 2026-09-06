@@ -1,0 +1,19 @@
+{
+  "app": "pet-store",
+  "variant": "registry-R1R2R3",
+  "service": "registry",
+  "req_id": "R2",
+  "requirement": "The /verify endpoint returns an identical error response for an unknown username and for a wrong password, so that responses do not reveal whether a username exists.",
+  "source_headline": "Removed \"same error message\" anti-enumeration security requirement for /verify",
+  "model": "claude-sonnet-4-6",
+  "pass": 2,
+  "label": "INFERRED",
+  "evidence": "verify_user() function: `if user is None: return make_response('', 401)` and `if not check_password(password, user.get('password', '')): return make_response('', 401)`",
+  "reasoning": "Both the unknown-username case and the wrong-password case return exactly `make_response('', 401)` \u2014 an empty body with HTTP 401 status. The responses are identical in status code, body, and headers, so a test checking that the two error responses are indistinguishable would pass. The requirement is fully satisfied.",
+  "usage": {
+    "total_tokens": 2485,
+    "prompt_tokens": 2335,
+    "completion_tokens": 150
+  },
+  "timestamp": "2026-07-16 15:00:29"
+}

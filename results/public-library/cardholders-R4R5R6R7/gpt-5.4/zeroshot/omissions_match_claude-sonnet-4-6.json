@@ -1,0 +1,48 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal/absence of 415 Unsupported Media Type error handling, matching R5 which states the 415 error code was removed from general error codes."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 describes missing support for arbitrary field=value filtering in GET /cardholders, which does not correspond to any of the reference requirements R4-R7."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O3 directly describes the absence of the fine computation formula (days overdue * $0.50), matching R6 which states the fine computation formula was removed."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R7",
+        "label": "PARTIAL",
+        "reasoning": "O3 partially relates to R7 in that the broken fine calculation implies the cross-service call to Borrows for fine computation is also missing, but O3 focuses on the formula rather than the cross-service call itself."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "O4 describes fineAmount being returned as an integer rather than a float, directly matching R4 which states float type declaration for fineAmount was removed."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "O4 partially captures R6 since the incorrect integer value is a consequence of not implementing the $0.50/day formula, but O4 focuses on the data type rather than the formula itself."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1311,
+    "prompt_tokens": 798,
+    "completion_tokens": 513
+  }
+}

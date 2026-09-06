@@ -1,0 +1,72 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R13",
+        "label": "MATCH",
+        "reasoning": "R13 requires filtering articles by author query parameter, which A1 directly describes."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement mentions filtering articles by tag query parameter."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R15",
+        "label": "MATCH",
+        "reasoning": "R15 explicitly tests limit and offset query parameters for pagination on GET /api/articles, which A3 describes."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R24",
+        "label": "PARTIAL",
+        "reasoning": "R24 requires ordering by created timestamp descending, but A4 orders by article.id descending, which is a different (though often equivalent) ordering criterion."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": "R28",
+        "label": "MATCH",
+        "reasoning": "R28 explicitly states that GET after deletion returns 200 with empty object {}, which A5 directly describes."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement explicitly requires deleting comments when an article is deleted."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement mentions clearing article tags upon article deletion."
+      },
+      {
+        "detection_id": "A8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement mentions a /api/tags endpoint."
+      },
+      {
+        "detection_id": "A9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement describes a DELETE /api/users/{email} endpoint."
+      },
+      {
+        "detection_id": "A10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement specifies that user responses must include an 'id' field."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2703,
+    "prompt_tokens": 2083,
+    "completion_tokens": 620
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No listed requirement concerns article favoriting fields or favorites counts."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements mention a root '/' health/status endpoint."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The listed requirements do not specify checking duplicated timestamp fields in article responses."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1655,
+    "prompt_tokens": 1498,
+    "completion_tokens": 157
+  }
+}

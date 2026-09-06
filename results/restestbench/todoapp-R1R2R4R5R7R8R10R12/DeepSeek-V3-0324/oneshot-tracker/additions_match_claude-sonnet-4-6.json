@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The UserResponse model is an implementation detail not described in any of the spec requirements."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The TokenResponse model is an implementation detail not described in any of the spec requirements."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The TodoResponse model is an implementation detail not described in any of the spec requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1270,
+    "prompt_tokens": 1076,
+    "completion_tokens": 194
+  }
+}

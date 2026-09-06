@@ -1,0 +1,19 @@
+{
+  "app": "pet-store",
+  "variant": "petorder-R8R9R10",
+  "service": "pet-order",
+  "req_id": "R8",
+  "requirement": "When multiple pets match a purchase request, the pet to purchase is selected at random among them.",
+  "source_headline": "Removed pet selection algorithm (random when multiple available)",
+  "model": "claude-sonnet-4-6",
+  "pass": 1,
+  "label": "GAP",
+  "evidence": "choose_pet function, lines: `first_pet = pets[0]` \u2014 always selects the first pet from the list",
+  "reasoning": "The requirement states that when multiple pets match, one should be selected at random. In the `choose_pet` function, when a list of pets is returned, the code always picks `pets[0]` (the first element), with no use of `random.choice` or any other randomization mechanism. There is no code anywhere in the service that addresses random selection among multiple matching pets. A test verifying random selection would fail because the code deterministically picks the first pet.",
+  "usage": {
+    "total_tokens": 3848,
+    "prompt_tokens": 3694,
+    "completion_tokens": 154
+  },
+  "timestamp": "2026-07-16 15:02:18"
+}

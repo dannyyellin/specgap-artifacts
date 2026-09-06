@@ -1,0 +1,17 @@
+Timestamp: 2026-06-02 06:07:34
+Detector:  DeepSeek-V3-0324
+App/Variant/Service: nutrition/ratings-R10R11R12/ratings
+Method:    oneshot-warehouse
+
+Tokens: prompt=7311, completion=653, total=7964
+Additions: 3
+Omissions: 4
+
+  A A1: The code supports a 'token' header in addition to the 'Authorization' header for token validation
+  A A2: The code includes a 'privileged' field in the token validation response handling
+  A A3: The code implements a 'round2' function to round floating point numbers to two decimal places
+
+  O O1: The code does not validate that the 'rating' field is an integer between 1 and 5
+  O O2: The code does not enforce that a user cannot rate the same dish twice (only prevents duplicate ratings via unique index)
+  O O3: The code does not return the 'avg_rating' field in the response for PUT /ratings/{id} as specified
+  O O4: The code does not handle the case where a dish has not been rated in GET /ratings

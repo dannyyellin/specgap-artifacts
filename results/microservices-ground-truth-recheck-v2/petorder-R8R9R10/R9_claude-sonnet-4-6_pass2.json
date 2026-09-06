@@ -1,0 +1,19 @@
+{
+  "app": "pet-store",
+  "variant": "petorder-R8R9R10",
+  "service": "pet-order",
+  "req_id": "R9",
+  "requirement": "After a successful purchase, the purchased pet is deleted from the pet store.",
+  "source_headline": "Removed the DELETE pet from store after purchase step",
+  "model": "claude-sonnet-4-6",
+  "pass": 2,
+  "label": "GAP",
+  "evidence": "none",
+  "reasoning": "The `create_purchase` function in the code selects a pet, records the purchase in MongoDB, and returns a 201 response, but there is no HTTP DELETE call (or any other mechanism) to remove the purchased pet from the pet store after a successful purchase. The `PET_STORE_URL_TEMPLATE` is used only in `fetch_pet_types` and `fetch_pets` (both GET requests). No code addresses deletion of the pet from the store.",
+  "usage": {
+    "total_tokens": 3821,
+    "prompt_tokens": 3690,
+    "completion_tokens": 131
+  },
+  "timestamp": "2026-07-16 15:02:42"
+}

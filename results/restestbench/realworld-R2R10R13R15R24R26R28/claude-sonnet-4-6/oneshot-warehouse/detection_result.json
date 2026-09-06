@@ -1,0 +1,103 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "PUT /api/articles/{slug} returns 403 Forbidden when the requester is not the article owner",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification explicitly documents that any authenticated user can update any article (the 'owner1/attacker1' test demonstrates this is an intentional security vulnerability). The code enforces ownership with a 403 check, contradicting the spec."
+      },
+      {
+        "id": "A2",
+        "description": "DELETE /api/articles/{slug} returns 403 Forbidden when the requester is not the article owner",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification explicitly documents that any authenticated user can delete any article. The code enforces ownership with a 403 check, contradicting the spec."
+      },
+      {
+        "id": "A3",
+        "description": "article_dict includes both 'createdAt'/'updatedAt' AND 'created'/'updated' fields in the article response",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification references 'created' and 'updated' timestamp fields. The code returns both sets of fields ('createdAt', 'updatedAt', 'created', 'updated'), doubling the timestamp fields beyond what the spec requires."
+      },
+      {
+        "id": "A4",
+        "description": "user_dict includes an 'id' field in the user response",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification defines the user response as containing username, email, and token. The code additionally returns 'id', which is not listed as a required response field."
+      },
+      {
+        "id": "A5",
+        "description": "GET /api/tags endpoint is implemented",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification does not mention a GET /api/tags endpoint anywhere in the requirements."
+      },
+      {
+        "id": "A6",
+        "description": "DELETE /api/articles/{slug}/comments/{id} allows the article owner (not just the comment author) to delete comments",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification only describes comment deletion by the comment creator. The code also permits the article owner to delete any comment, which is not required by the spec."
+      },
+      {
+        "id": "A7",
+        "description": "Authorization header parsing accepts 'Bearer ' prefix in addition to 'Token '",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states authentication uses 'Token <jwt>' format only. Accepting 'Bearer' is an addition not required by the spec."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "POST /api/profiles/{username}/follow does not return 400 when a user attempts to follow themselves",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states 'attempt to follow themselves by POST to /api/profiles/follower1/follow. Verify this returns status 400 with message containing cannot be equal'. The code silently ignores self-follow without returning an error response."
+      },
+      {
+        "id": "O2",
+        "description": "DELETE /api/profiles/{username}/follow does not return 400 when a user attempts to unfollow themselves",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states 'Verify user1 cannot unfollow themselves (should return 400)'. The code performs no self-unfollow validation and returns a success response."
+      },
+      {
+        "id": "O3",
+        "description": "POST /api/profiles/{username}/follow returns HTTP 200 instead of 201",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification states 'Verify the response status is 201' for the follow endpoint. The code does not set status_code=201 on this POST route, so FastAPI defaults to 200."
+      },
+      {
+        "id": "O4",
+        "description": "GET /api/articles/feed route is registered after GET /api/articles/{slug}, causing requests to /api/articles/feed to be matched by the slug route",
+        "category": "ENDPOINTS",
+        "reasoning": "FastAPI matches routes in registration order. The code registers GET /api/articles/{slug} before GET /api/articles/feed, so 'feed' is treated as a slug value, returning an empty object {} instead of the feed response. The specification requires a working /api/articles/feed endpoint."
+      },
+      {
+        "id": "O5",
+        "description": "GET /api/articles does not sort articles by created_at timestamp descending; it sorts by id descending",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states 'Verify the articles array is ordered by created timestamp in descending order (newest first). This tests the ORDER BY article.created DESC clause.' The code sorts by article.id, which may diverge from created_at ordering."
+      },
+      {
+        "id": "O6",
+        "description": "GET /api/articles/feed does not sort articles by created_at timestamp descending; it sorts by id descending",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification requires feed articles ordered by creation timestamp. The code sorts by id, which may not match created_at ordering."
+      },
+      {
+        "id": "O7",
+        "description": "POST /api/articles/{slug}/comments returns the full article object with comments instead of the created comment object",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification says 'Verify response status is 200. Verify the response article has comments array with length >= 1' \u2014 while the spec's wording is unusual, the standard RealWorld API returns a single comment object on comment creation. The code returns an article wrapper, which may not match what the spec's comment id extraction step expects ('Extract the comment id from the response')."
+      },
+      {
+        "id": "O8",
+        "description": "POST /api/articles/{slug}/comments returns HTTP 200 instead of a more appropriate status; spec says 'Verify response status is 200' which the code satisfies, but the comment id extraction implies a comment-centric response structure that the code does not provide",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification says 'Create a comment... Extract the comment id from the response.' The code returns {'article': {..., 'comments': [...]}} making comment id extraction require navigating into the comments array, whereas a direct comment response would be {'comment': {'id': ...}}. The spec's delete comment test extracts the id directly from the create response, suggesting a comment-centric response is expected."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 16564,
+    "prompt_tokens": 12708,
+    "completion_tokens": 3856
+  }
+}

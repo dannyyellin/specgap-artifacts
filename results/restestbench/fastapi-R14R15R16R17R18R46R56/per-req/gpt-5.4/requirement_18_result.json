@@ -1,0 +1,27 @@
+{
+  "req_id": 18,
+  "requirement_vague": "Reset a password with an invalid reset token and confirm the reset is rejected.",
+  "requirement_precise": "Authenticate as the superuser (admin@example.com / password123) to obtain an access token, then attempt to reset a password using an invalid token. Using the superuser's access token in the Authorization header, call the reset-password operation with JSON body {\"new_password\": \"changethis\", \"token\": \"invalid\"}. Verify the response has HTTP status 400, the JSON body contains a \"detail\" field, and the value of \"detail\" is exactly \"Invalid token\".",
+  "removed": true,
+  "omissions": [
+    {
+      "id": "R18-O1",
+      "description": "The service does not implement a reset-password operation that accepts an authenticated request with JSON body containing \"new_password\" and \"token\".",
+      "category": "ENDPOINTS",
+      "reasoning": "The code defines login at POST /api/v1/login/access-token and password change for the current user at PATCH /api/v1/users/me/password, but there is no route for a reset-password operation anywhere in the API."
+    },
+    {
+      "id": "R18-O2",
+      "description": "The required behavior for rejecting an invalid reset token with HTTP 400 and JSON detail exactly \"Invalid token\" is not implemented.",
+      "category": "RESPONSE_FORMAT",
+      "reasoning": "Because no reset-password endpoint exists, there is no code path that validates a reset token and returns status 400 with a body containing detail: \"Invalid token\" for an invalid token."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 4905,
+    "prompt_tokens": 4723,
+    "completion_tokens": 182
+  },
+  "parse_error": false
+}

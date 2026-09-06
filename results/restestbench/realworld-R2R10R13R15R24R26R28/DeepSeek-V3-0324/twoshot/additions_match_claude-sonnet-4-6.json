@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements mention favoriting functionality or these fields in article responses."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements mention a user deletion endpoint."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R28",
+        "label": "MATCH",
+        "reasoning": "R28 explicitly states that any user can update/delete any article (a security vulnerability), while A3 describes the opposite behavior where the code enforces ownership checks returning 403, directly contradicting R28's expected behavior."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1896,
+    "prompt_tokens": 1677,
+    "completion_tokens": 219
+  }
+}

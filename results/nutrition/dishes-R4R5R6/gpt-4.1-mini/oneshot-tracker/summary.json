@@ -1,0 +1,16 @@
+{
+  "app": "nutrition",
+  "variant": "dishes-R4R5R6",
+  "service": "dishes",
+  "method": "oneshot-tracker",
+  "detector_model": "gpt-4.1-mini",
+  "gen_model": "gpt-5.4",
+  "gen_usage": null,
+  "n_additions": 4,
+  "n_omissions": 7,
+  "usage": {
+    "total_tokens": 7976,
+    "prompt_tokens": 6982,
+    "completion_tokens": 994
+  }
+}

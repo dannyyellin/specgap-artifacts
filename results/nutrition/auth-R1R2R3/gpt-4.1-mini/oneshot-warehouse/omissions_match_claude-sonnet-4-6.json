@@ -1,0 +1,54 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of password encryption/hashing, matching R1's removal of bcrypt encryption."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O2 captures part of the Owner special case (name and password constraints) but focuses on registration uniqueness rather than the full special case including privileged status."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 describes correct behavior (400 is returned) and does not correspond to any of the reference requirements about removed features."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 describes correct behavior (401 is returned) and does not correspond to any of the reference requirements about removed features."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O5 partially captures the Owner special case by noting the password 'owner#pw' is not enforced, but focuses only on startup validation rather than the full removal of the Owner special case."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R3",
+        "label": "NONE",
+        "reasoning": "O6 states the code correctly rejects duplicate usernames, which contradicts R3 (the reference requirement says uniqueness constraint was removed), so this is not a match."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O7 describes correct token generation behavior and does not correspond to any of the reference requirements about removed features."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1348,
+    "prompt_tokens": 824,
+    "completion_tokens": 524
+  }
+}

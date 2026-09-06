@@ -1,0 +1,22 @@
+{
+  "method": "twoshot",
+  "round": 2,
+  "removals": [
+    14,
+    15,
+    16,
+    17,
+    18,
+    46,
+    56
+  ],
+  "detector_model": "gpt-4.1-mini",
+  "gen_usage": null,
+  "detect_usage": {
+    "total_tokens": 13867,
+    "prompt_tokens": 11998,
+    "completion_tokens": 1869
+  },
+  "n_additions": 1,
+  "n_omissions": 22
+}

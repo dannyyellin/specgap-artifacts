@@ -1,0 +1,60 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "Both describe that the purchase flow should no longer delete the selected pet from the pet store after purchase."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R8",
+        "label": "MATCH",
+        "reasoning": "Both concern the removed requirement to randomly choose a pet when multiple pets are available."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about incorrect error status codes for external service failures, which is unrelated to any listed reference requirement."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "It relates to client-supplied purchase-id handling, but R10 specifically removes the uniqueness/non-reuse constraint rather than the prohibition on including purchase-id at all."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns GET /transactions error codes and does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about malformed transaction-id handling, unrelated to the removed pet-selection, deletion, or purchase-id uniqueness requirements."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns the MongoDB hostname configuration and does not match any reference requirement."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "It partly overlaps because it criticizes not deleting the pet from the pet-store, but it is framed more broadly as a cross-service consistency issue."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1516,
+    "prompt_tokens": 1038,
+    "completion_tokens": 478
+  }
+}

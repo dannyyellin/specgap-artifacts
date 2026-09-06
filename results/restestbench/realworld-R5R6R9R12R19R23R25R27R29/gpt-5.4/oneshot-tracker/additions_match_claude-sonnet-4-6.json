@@ -1,0 +1,66 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement describes returning 404 for a nonexistent profile."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement describes returning 404 when the target profile for follow/unfollow does not exist."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement describes returning 404 for comment operations on nonexistent articles."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement mandates that article responses include favorited and favoritesCount fields."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement describes HTTP 422 validation for missing registration fields."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement specifies error handling for malformed, missing, or invalid JWT tokens."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement covers updating username, email, or password via PUT /api/user."
+      },
+      {
+        "detection_id": "A8",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "R5 requires that deleting an article makes subsequent GET return an empty object, and A8 describes cascading comment deletion as part of the delete operation, which is related but only partially overlaps with the specified behavior."
+      },
+      {
+        "detection_id": "A9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement specifies an id-descending tie-breaker for article ordering."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2949,
+    "prompt_tokens": 2372,
+    "completion_tokens": 577
+  }
+}

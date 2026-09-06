@@ -1,0 +1,19 @@
+{
+  "app": "nutrition",
+  "variant": "auth-R1R2R3",
+  "service": "authentication",
+  "req_id": "R2",
+  "requirement": "A special Owner user exists with name 'Owner', password 'owner#pw', and privileged=True.",
+  "source_headline": "Removed Owner special case (name='Owner', pw='owner#pw', privileged=True)",
+  "model": "gpt-5.4",
+  "pass": 2,
+  "label": "PARTIAL",
+  "evidence": "OWNER_NAME = os.environ.get(\"OWNER_NAME\", \"owner\") and OWNER_PASSWORD = os.environ.get(\"OWNER_PASSWORD\", \"owner\"); ensure_owner_user() inserts a user with {\"name\": OWNER_NAME, \"password\": OWNER_PASSWORD, \"id\": owner_id}; generate_token() sets \"privileged\": bool(user_doc[\"name\"] == OWNER_NAME)",
+  "reasoning": "The code clearly addresses the requirement by creating a special owner account at startup and treating that account as privileged in generated tokens. However, the requirement as stated is for a user with exact name 'Owner', exact password 'owner#pw', and privileged=True; the implemented defaults are 'owner'/'owner', and no stored privileged=True field exists. Because the mechanism exists but the observable details do not match the stated constants, this is PARTIAL rather than GAP.",
+  "usage": {
+    "total_tokens": 2092,
+    "prompt_tokens": 1900,
+    "completion_tokens": 192
+  },
+  "timestamp": "2026-07-16 14:55:58"
+}

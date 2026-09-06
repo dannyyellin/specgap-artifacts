@@ -1,0 +1,16 @@
+{
+  "app": "pet-store",
+  "variant": "registry-R1R2R3",
+  "service": "registry",
+  "method": "zeroshot",
+  "detector_model": "gpt-4.1-mini",
+  "gen_model": "gpt-5.4",
+  "gen_usage": null,
+  "n_additions": 4,
+  "n_omissions": 5,
+  "usage": {
+    "total_tokens": 8335,
+    "prompt_tokens": 7427,
+    "completion_tokens": 908
+  }
+}

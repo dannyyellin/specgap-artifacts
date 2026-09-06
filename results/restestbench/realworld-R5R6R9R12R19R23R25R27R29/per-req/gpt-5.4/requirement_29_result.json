@@ -1,0 +1,21 @@
+{
+  "req_id": 29,
+  "requirement_vague": "Verify user deletion fails when user has articles (FK constraint, no cascade delete)",
+  "requirement_precise": "Create user1 (username: 'orphanauthor1', email: 'orphanauthor1@test.com', password: 'pass123'). User1 creates article with title 'Orphan Article Test'. GET /api/articles and verify article exists with author username 'orphanauthor1'. DELETE /api/users/orphanauthor1@test.com. Verify response is 500 (FK constraint error). GET /api/articles again and verify article still exists. This tests that articles block user deletion (no CASCADE DELETE configured).",
+  "removed": true,
+  "omissions": [
+    {
+      "id": "R29-O1",
+      "description": "The service does not implement a DELETE /api/users/{email} endpoint to attempt deleting a user by email.",
+      "category": "ENDPOINTS",
+      "reasoning": "The requirement explicitly tests DELETE /api/users/orphanauthor1@test.com. In the code, /api/users exists only for POST registration, and there is no DELETE route under /api/users/{email} or any other user-deletion endpoint."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 5299,
+    "prompt_tokens": 5196,
+    "completion_tokens": 103
+  },
+  "parse_error": false
+}

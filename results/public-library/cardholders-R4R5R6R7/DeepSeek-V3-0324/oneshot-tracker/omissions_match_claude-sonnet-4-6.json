@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the absence of the fine computation formula ($0.50/day * days overdue), which is exactly what R6 states was removed."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 concerns date format validation for borrow records, which does not correspond to any of the reference requirements about removed field types, error codes, fine formula, or cross-service calls."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "O3 identifies that fineAmount is not returned as a float, which partially overlaps with R4's removal of float type declaration for fineAmount, but O3 frames it as a validation issue rather than a removed type declaration."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 896,
+    "prompt_tokens": 626,
+    "completion_tokens": 270
+  }
+}

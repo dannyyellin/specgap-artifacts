@@ -1,0 +1,66 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of the overdue borrow constraint (2+ overdue books blocks checkout, returns 400) from Borrows, matching R2 exactly."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O2 directly describes the removal of the return date computation (returnDate = loanDate + 30 days) from Borrows, matching R1 exactly."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 describes generic error message behavior for missing POST fields, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 describes date format validation behavior, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 concludes there is no omission regarding GET /borrows date filtering, so it does not match any reference requirement."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 describes 405 Method Not Allowed handling, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O7 concludes there is no omission regarding 415 Unsupported Media Type handling, so it does not match any reference requirement."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O8 describes cardholderId and ISBN validation on PUT, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O9 concludes there is no omission regarding pagination, so it does not match any reference requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1849,
+    "prompt_tokens": 1205,
+    "completion_tokens": 644
+  }
+}

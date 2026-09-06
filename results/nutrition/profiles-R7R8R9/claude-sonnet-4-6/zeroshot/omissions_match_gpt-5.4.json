@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R8",
+        "label": "MATCH",
+        "reasoning": "O1 states that GET /profiles is not restricted to the restaurant Owner, which is the same behavior as removing the owner-only restriction on GET /profiles."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "O2 says protein is still being used as a filter in /profileDishes, directly corresponding to the requirement that protein exclusion was removed from profileDishes calculation."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 concerns forwarding authentication tokens to the dishes service, which is unrelated to any of R7, R8, or R9."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R8",
+        "label": "MATCH",
+        "reasoning": "O4 explicitly restates that GET /profiles does not restrict access to Owner only, matching the removal of the owner-only restriction."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 950,
+    "prompt_tokens": 674,
+    "completion_tokens": 276
+  }
+}

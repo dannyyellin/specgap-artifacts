@@ -1,0 +1,16 @@
+{
+  "app": "public-library",
+  "variant": "books-R8R9R10R11",
+  "service": "books",
+  "method": "oneshot-warehouse",
+  "detector_model": "claude-sonnet-4-6",
+  "gen_model": "gpt-5.4",
+  "gen_usage": null,
+  "n_additions": 2,
+  "n_omissions": 4,
+  "usage": {
+    "total_tokens": 7077,
+    "prompt_tokens": 6372,
+    "completion_tokens": 705
+  }
+}

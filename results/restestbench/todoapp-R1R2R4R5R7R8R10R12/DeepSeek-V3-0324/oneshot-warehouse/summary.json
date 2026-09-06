@@ -1,0 +1,22 @@
+{
+  "method": "oneshot-warehouse",
+  "removals": [
+    1,
+    2,
+    4,
+    5,
+    7,
+    8,
+    10,
+    12
+  ],
+  "detector_model": "DeepSeek-V3-0324",
+  "gen_usage": null,
+  "detect_usage": {
+    "total_tokens": 5166,
+    "prompt_tokens": 4797,
+    "completion_tokens": 369
+  },
+  "n_additions": 2,
+  "n_omissions": 2
+}

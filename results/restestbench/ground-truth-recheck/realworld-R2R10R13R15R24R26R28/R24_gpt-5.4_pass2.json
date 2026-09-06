@@ -1,0 +1,23 @@
+{
+  "variant": "realworld-R2R10R13R15R24R26R28",
+  "req_id": 24,
+  "model": "gpt-5.4",
+  "pass": 2,
+  "verdict": "NOT_IMPLEMENTED",
+  "requirement_vague": "Verify articles are returned in descending order by created date",
+  "omissions": [
+    {
+      "id": "O1",
+      "description": "GET /api/articles does not order articles by created timestamp descending; it sorts by article id descending instead of created_at/created date.",
+      "category": "BUSINESS_LOGIC",
+      "reasoning": "In list_articles, after filtering, the code uses `sorted(articles, key=lambda a: a.id or 0, reverse=True)`. The requirement specifically calls for ordering by created date descending (`ORDER BY article.created DESC`). While id order may often correlate with creation order, the implementation does not actually sort by the created timestamp field."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 5442,
+    "prompt_tokens": 5315,
+    "completion_tokens": 127
+  },
+  "timestamp": "2026-07-12 10:43:40"
+}

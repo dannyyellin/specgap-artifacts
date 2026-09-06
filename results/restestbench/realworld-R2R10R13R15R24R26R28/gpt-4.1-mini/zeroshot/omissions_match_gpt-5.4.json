@@ -1,0 +1,78 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R28",
+        "label": "MATCH",
+        "reasoning": "O1 directly refers to the behavior in R28 that non-owners can update or delete any article."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R28",
+        "label": "MATCH",
+        "reasoning": "O2 matches the specific R28 expectation that after deletion, GET on the article returns 200 with an empty object."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R24",
+        "label": "MATCH",
+        "reasoning": "O3 directly describes the R24 requirement that articles be ordered by created timestamp descending rather than by id."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement concerns deleting users who have articles or FK constraint handling."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed reference requirements are about validating required fields or types in article create/update payloads."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "R26 is about creating and retrieving multiple comments, not validation of empty or missing comment bodies."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "R2 explicitly requires a 400 error when a user attempts to follow themselves, which O7 describes."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "R10 explicitly requires a 400 error when a user attempts to unfollow themselves, which O7 also describes."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement here concerns slug uniqueness or duplicate-title slug generation."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the provided reference requirements are about article favoriting."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Although it mentions ordering by created timestamp, it is specifically about the feed endpoint, which is not covered by the listed reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2525,
+    "prompt_tokens": 1903,
+    "completion_tokens": 622
+  }
+}

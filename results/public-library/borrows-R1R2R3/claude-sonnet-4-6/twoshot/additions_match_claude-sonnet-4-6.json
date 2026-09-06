@@ -1,0 +1,48 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Cardholder existence validation is not related to any of the three removed requirements (return date computation, overdue constraint, or log notification)."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Book existence validation via ISBN is not related to any of the three removed requirements."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "PUT cardholder existence validation is not related to any of the three removed requirements."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "PUT book existence validation is not related to any of the three removed requirements."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A returnDate vs loanDate ordering constraint is not one of the three removed requirements (return date computation, overdue constraint, or log notification)."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "R1 removes the automatic computation of returnDate (loanDate + 30 days) from Borrows, and A6 describes the code accepting returnDate in the POST body instead of computing it, which directly contradicts the removed spec behavior."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1260,
+    "prompt_tokens": 830,
+    "completion_tokens": 430
+  }
+}

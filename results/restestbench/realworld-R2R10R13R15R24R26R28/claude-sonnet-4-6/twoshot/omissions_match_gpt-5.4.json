@@ -1,0 +1,54 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O1 directly corresponds to R2's requirement that POST /api/profiles/{username}/follow return status 201."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O2 exactly matches R2's self-follow negative case requiring a 400 response with an error when a user tries to follow themselves."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O3 directly matches R10's requirement that a user cannot unfollow themselves and should receive status 400."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R24",
+        "label": "MATCH",
+        "reasoning": "O4 describes the same ordering behavior tested by R24: GET /api/articles must be ordered by created timestamp descending rather than by id."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement concerns GET /api/articles/feed ordering."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement mentions the /api/articles/feed route or route registration conflicts with /api/articles/{slug}."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R26",
+        "label": "PARTIAL",
+        "reasoning": "O7 concerns the comments creation response shape on POST, while R26 is about creating multiple comments and verifying retrieval, ids, and bodies via GET, so it only overlaps the same feature area but not the same specified behavior."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2236,
+    "prompt_tokens": 1788,
+    "completion_tokens": 448
+  }
+}

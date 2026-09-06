@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This describes extra exact-match filters for id and name, which is not the same as removing Ninja API field-name mapping details, owner-only restrictions, or the specific lte/contains filtering semantics."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "It directly concerns the removed specific query-string filtering semantics by using exact equality instead of the specified nutrient lte behavior."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "It directly concerns the removed specific query-string filtering semantics by using exact array equality and the wrong parameter name instead of the specified ingredient contains behavior."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "It overlaps with access-control behavior, but it changes authentication requirements for all endpoints rather than specifically reflecting removal of the owner-only restriction for POST/PUT/DELETE."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 986,
+    "prompt_tokens": 704,
+    "completion_tokens": 282
+  }
+}

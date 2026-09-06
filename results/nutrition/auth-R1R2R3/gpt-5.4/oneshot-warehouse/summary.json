@@ -1,0 +1,19 @@
+{
+  "app": "nutrition",
+  "variant": "auth-R1R2R3",
+  "service": "authentication",
+  "method": "oneshot-warehouse",
+  "model": "gpt-5.4",
+  "gen_usage": {
+    "total_tokens": 4545,
+    "prompt_tokens": 3190,
+    "completion_tokens": 1355
+  },
+  "n_additions": 5,
+  "n_omissions": 4,
+  "usage": {
+    "total_tokens": 7298,
+    "prompt_tokens": 6598,
+    "completion_tokens": 700
+  }
+}

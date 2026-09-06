@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "It concerns the removed anti-enumeration behavior on /verify, but focuses on specific response format and status details rather than the core same-error-message requirement."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "It directly describes the /verify anti-enumeration requirement that non-existent usernames and wrong passwords should produce indistinguishable responses."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "It is about username regex validation, which does not correspond to any of the listed reference requirements."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "It refers to /verify invalid-credential response behavior tied to anti-enumeration, but emphasizes a specific status/body contract rather than the same-error-message requirement itself."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "It is related to the removed anti-enumeration requirement for /verify, but narrows it to a particular response message instead of the broader same-error-message behavior."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1074,
+    "prompt_tokens": 734,
+    "completion_tokens": 340
+  }
+}

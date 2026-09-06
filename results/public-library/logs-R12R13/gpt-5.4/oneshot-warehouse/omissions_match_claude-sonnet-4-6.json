@@ -1,0 +1,18 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R12",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of the DD-MM-YYYY format validation for loanDate in logs, which is exactly what R12 states."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 561,
+    "prompt_tokens": 465,
+    "completion_tokens": 96
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "req_id": 21,
+  "requirement_vague": "Test the read me endpoint. Confirm the returned profile matches the registered email, is active, and is not a superuser.",
+  "requirement_precise": "Register a new user via the user registration operation using a test email address and password. Obtain an access token for that user via the login access token operation. Using the obtained access token in the Authorization header, retrieve the authenticated user's profile via the read current user operation. Verify the response body is present (non-empty). Verify the response JSON field \"is_active\" is True. Verify the response JSON field \"is_superuser\" is False. Verify the response JSON field \"email\" equals the email used when registering the user.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": [
+      "POST /api/v1/users/signup",
+      "POST /api/v1/login/access-token",
+      "GET /api/v1/users/me"
+    ],
+    "code_reference": "@api_router.post(\"/users/signup\", response_model=UserRead)\n...\n    user = User(..., is_active=True, is_superuser=False)\n\n@api_router.get(\"/users/me\", response_model=UserRead)\ndef read_user_me(current_user: User = Depends(get_current_active_user)):\n    return current_user",
+    "reasoning": "The code supports the required flow: a user can be registered, authenticated to obtain an access token, and then call the current-user endpoint with that token. The signup logic creates users with is_active=True and is_superuser=False, and the /users/me response model includes email, is_active, and is_superuser, so the returned profile will match the registered email and required flags for a newly registered user."
+  },
+  "usage": {
+    "total_tokens": 6015,
+    "prompt_tokens": 5815,
+    "completion_tokens": 200
+  },
+  "parse_error": false
+}

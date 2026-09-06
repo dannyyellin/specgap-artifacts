@@ -1,0 +1,54 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Storing purchase documents in an extra MongoDB collection does not correspond to removing pet selection randomness, removing pet deletion after purchase, or removing purchase-id uniqueness."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Enforcing purchaser/authenticated-username equality is unrelated to the removed pet selection algorithm, removed pet deletion step, and removed purchase-id uniqueness requirement."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Returning 403 for purchaser mismatch does not describe any of the listed removed behaviors."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Using sequential transaction IDs in a counters collection is an implementation detail unrelated to the removed requirements about pet selection, pet deletion, or purchase-id reuse."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "GET /transactions query validation behavior does not correspond to any of the three removed purchase-related spec requirements."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": "R8",
+        "label": "MATCH",
+        "reasoning": "Selecting the first pet instead of a random pet directly matches the removed requirement about the pet selection algorithm being random when multiple pets are available."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The MongoDB connection URI and service name do not correspond to any of the removed requirements listed."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1300,
+    "prompt_tokens": 869,
+    "completion_tokens": 431
+  }
+}

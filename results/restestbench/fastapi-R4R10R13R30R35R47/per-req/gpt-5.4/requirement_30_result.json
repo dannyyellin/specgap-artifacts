@@ -1,0 +1,22 @@
+{
+  "req_id": 30,
+  "requirement_vague": "Verify the superuser (admin@example.com / password123) can change their own password and change it back.",
+  "requirement_precise": "Authenticate using the existing superuser credentials (admin@example.com / password123) to obtain an access token. Using that superuser access token, update the superuser's own password by supplying the current password and a newly generated password. Verify the response status is 200 and the response body contains a field 'message' equal to 'Password updated successfully'. Then verify that login with the NEW password succeeds. Finally, revert the password back to the original by supplying the new password as current and the original password as new. Verify the response status is 200 and verify that login with the ORIGINAL password succeeds again.",
+  "removed": true,
+  "omissions": [],
+  "implementation": {
+    "location": [
+      "@api_router.post(\"/login/access-token\") -> login_access_token",
+      "@api_router.patch(\"/users/me/password\") -> update_password_me",
+      "startup init_superuser()"
+    ],
+    "code_reference": "FIRST_SUPERUSER = \"admin@example.com\"\nFIRST_SUPERUSER_PASSWORD = \"password123\"\n...\n@api_router.patch(\"/users/me/password\", response_model=Message)\ndef update_password_me(password_in: UpdatePassword, session: Session = Depends(get_session), current_user: User = Depends(get_current_active_user)):\n    if not verify_password(password_in.current_password, current_user.hashed_password):\n        raise HTTPException(status_code=400, detail=\"Incorrect password\")\n    ...\n    current_user.hashed_password = get_password_hash(password_in.new_password)\n    ...\n    return Message(message=\"Password updated successfully\")",
+    "reasoning": "The startup logic creates the superuser with email admin@example.com and password password123 if it does not already exist. The login endpoint authenticates with email/password and returns an access token, and the authenticated self-service password endpoint allows the current user\u2014including the superuser\u2014to change their own password when the current password is correct, returning HTTP 200 with message 'Password updated successfully'; because authentication checks the stored hashed password, logging in with the new password and then reverting back to the original password will succeed."
+  },
+  "usage": {
+    "total_tokens": 6123,
+    "prompt_tokens": 5828,
+    "completion_tokens": 295
+  },
+  "parse_error": false
+}

@@ -1,0 +1,24 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O1 describes that Borrows no longer computes returnDate as loanDate plus 30 days, which is the same behavior removed in R1."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O2 states that checkout no longer checks for the 2-or-more overdue books constraint before allowing borrowing, matching R2."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 701,
+    "prompt_tokens": 560,
+    "completion_tokens": 141
+  }
+}

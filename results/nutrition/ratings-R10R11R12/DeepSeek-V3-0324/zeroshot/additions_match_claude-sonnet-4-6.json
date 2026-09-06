@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The spec requirements R10-R12 do not mention anything about privileged field checks in token validation."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements R10-R12 mention rounding of ratings to decimal places."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R12",
+        "label": "PARTIAL",
+        "reasoning": "R12 states that user_id comes from token validation, and A3 relates to how tokens are accepted/validated, but A3 focuses on the token header format rather than the user_id extraction behavior specified in R12."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 841,
+    "prompt_tokens": 605,
+    "completion_tokens": 236
+  }
+}

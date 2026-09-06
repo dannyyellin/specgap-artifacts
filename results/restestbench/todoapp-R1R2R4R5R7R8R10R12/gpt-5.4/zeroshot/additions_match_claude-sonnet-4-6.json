@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement specifies what the registration endpoint must return in its response body."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement addresses whether clients can supply an isComplete field when creating a todo."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement specifies the response body content for a successful DELETE operation."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement addresses duplicate email registration behavior."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement specifies JWT payload claims or token expiration duration."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1490,
+    "prompt_tokens": 1194,
+    "completion_tokens": 296
+  }
+}

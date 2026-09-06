@@ -1,0 +1,20 @@
+# MODIFIED SPEC: 3 elements removed for Pet-Order experiment
+# R8: Removed pet selection algorithm (random when multiple available)
+#     - GPT-5.4: NOT INFERRED — code selects pets[0] deterministically (first available);
+#       no random.choice() or shuffle implemented
+#     - Prior label: Partially inferrable — some selection strategy needed for multiple
+#       matches, but random is just one possibility (could be FIFO, cheapest, etc.)
+#     - Tests: 21
+# R9: Removed the DELETE pet from store after purchase step
+#     - GPT-5.4: NOT INFERRED — purchase flow creates the transaction record but never
+#       makes a cross-service HTTP DELETE call to remove the pet from inventory
+#     - Prior label: Partially inferrable — removing inventory after sale is a common
+#       pattern, but the specific cross-service DELETE call is an implementation detail
+#     - Tests: 21
+# R10: Removed that purchase-id must be unique and cannot be reused
+#      - GPT-5.4: PARTIAL — code generates a UUID for each purchase (unique by design)
+#        but does not explicitly check that a supplied purchase-id hasn't been used
+#        before; relies on UUID collision-resistance rather than an explicit guard
+#      - Prior label: Highly inferrable — unique IDs for transactions is a universal
+#        pattern; any developer would generate unique identifiers
+#      - Tests: 21

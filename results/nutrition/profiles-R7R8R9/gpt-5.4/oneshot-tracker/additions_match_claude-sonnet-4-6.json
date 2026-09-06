@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 describes token transport mechanisms which do not correspond to any of the three spec requirements listed (R7, R8, R9)."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A2 describes duplicate profile prevention which does not correspond to any of the three spec requirements listed (R7, R8, R9)."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A3 describes default nutritional field storage which does not correspond to any of the three spec requirements listed (R7, R8, R9)."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 863,
+    "prompt_tokens": 628,
+    "completion_tokens": 235
+  }
+}

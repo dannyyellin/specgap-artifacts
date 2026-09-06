@@ -1,0 +1,14 @@
+{
+  "req_id": 15,
+  "requirement_vague": "Verify article pagination with limit and offset works correctly",
+  "requirement_precise": "Create a user. Create 5 articles with titles 'Article 1', 'Article 2', 'Article 3', 'Article 4', 'Article 5' (in that order). GET /api/articles?limit=2. Verify articlesCount is 5 (total) but articles array has only 2 items. GET /api/articles?limit=2&offset=2. Verify articles array has 2 items and they are different from the first request (offset skipped first 2). GET /api/articles?limit=10. Verify articles array has all 5 items.",
+  "verdict": "SPEC_LEAKED",
+  "spec_evidence": "- \"Create user1 (username: 'feedpageuser1', email: 'feedpageuser1@test.com', password: 'pass123'). Create user2 (username: 'feedpageauthor1', email: 'feedpageauthor1@test.com', password: 'pass123'). User1 follows user2. User2 creates 5 articles: 'Article 1', 'Article 2', 'Article 3', 'Article 4', 'Article 5'. User1 GETs /api/articles/feed?limit=2. Verify articlesCount is 5 (total) but only 2 articles returned. User1 GETs /api/articles/feed?limit=2&offset=2. Verify 2 different articles returned. This tests feed pagination.\"",
+  "reasoning": "The spec explicitly requires limit/offset pagination behavior on the closely related article feed endpoint, including total count staying 5 while only 2 items are returned and offset yielding different items. A reader could directly infer the same pagination constraint for article listing from this retained pagination requirement over articles.",
+  "parse_error": false,
+  "usage": {
+    "total_tokens": 3554,
+    "prompt_tokens": 3322,
+    "completion_tokens": 232
+  }
+}

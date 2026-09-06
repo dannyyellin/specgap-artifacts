@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "Both describe reading an item with a second non-owner user's token and expecting a 400 response with detail 'Not enough permissions'."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R35",
+        "label": "MATCH",
+        "reasoning": "Both concern attempting signup with the existing superuser email and verifying the exact duplicate-email error detail message, which O2 says is different from the required one."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns password recovery email delivery via mailcatcher, which is not covered by any of the listed reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1306,
+    "prompt_tokens": 1104,
+    "completion_tokens": 202
+  }
+}

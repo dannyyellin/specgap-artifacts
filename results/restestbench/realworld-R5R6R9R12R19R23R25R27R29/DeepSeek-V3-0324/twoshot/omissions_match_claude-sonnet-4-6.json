@@ -1,0 +1,66 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "O1 identifies the missing feed endpoint which is tested in R6, but O1 only notes the endpoint is missing rather than describing the specific follow-based filtering behavior tested in R6."
+      },
+      {
+        "detection_id": "O1",
+        "requirement_id": "R23",
+        "label": "PARTIAL",
+        "reasoning": "O1 mentions the missing feed endpoint with pagination support, which is also tested in R23, but doesn't capture the specific pagination behavior."
+      },
+      {
+        "detection_id": "O1",
+        "requirement_id": "R27",
+        "label": "PARTIAL",
+        "reasoning": "O1 identifies the missing feed endpoint which is also tested in R27 for empty feed behavior."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R12",
+        "label": "MATCH",
+        "reasoning": "O2 directly describes the missing tag filtering functionality in GET /api/articles, which is exactly what R12 tests."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements test authorization/ownership validation for article updates or deletions."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements test self-follow error messages."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements test validation of required fields in article creation."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements test unique slug validation for articles."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "O7 directly describes the missing specific error message 'Username and email must be unique' for duplicate username/email, which is exactly what R9 verifies."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2640,
+    "prompt_tokens": 2035,
+    "completion_tokens": 605
+  }
+}

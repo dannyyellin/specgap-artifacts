@@ -1,0 +1,21 @@
+{
+  "req_id": 11,
+  "requirement_vague": "Verify user login with password verification works correctly",
+  "requirement_precise": "Create a user with username 'logintest1', email 'logintest1@test.com', password 'correctpass123'. Then POST /users/login with email 'logintest1@test.com' and password 'correctpass123'. Verify response status is 201 and response contains 'user' object with matching email and username, and a valid token. Then POST /users/login with same email but WRONG password 'wrongpass456'. Verify response is 401 (unauthorized). This tests the argon2 password verification logic.",
+  "removed": false,
+  "omissions": [
+    {
+      "id": "R11-O1",
+      "description": "The requirement specifically tests argon2 password verification logic, but the service uses bcrypt for hashing and verification instead of argon2.",
+      "category": "BUSINESS_LOGIC",
+      "reasoning": "Password hashing/verification is configured with `CryptContext(schemes=[\"bcrypt\"], deprecated=\"auto\")`, and both registration and login use that context via `hash_password` and `verify_password`. So login works with password verification, but not with the required argon2 verification logic."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 5309,
+    "prompt_tokens": 5192,
+    "completion_tokens": 117
+  },
+  "parse_error": false
+}

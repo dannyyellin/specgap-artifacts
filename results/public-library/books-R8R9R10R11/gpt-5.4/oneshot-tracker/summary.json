@@ -1,0 +1,19 @@
+{
+  "app": "public-library",
+  "variant": "books-R8R9R10R11",
+  "service": "books",
+  "method": "oneshot-tracker",
+  "model": "gpt-5.4",
+  "gen_usage": {
+    "total_tokens": 3345,
+    "prompt_tokens": 2116,
+    "completion_tokens": 1229
+  },
+  "n_additions": 2,
+  "n_omissions": 6,
+  "usage": {
+    "total_tokens": 5743,
+    "prompt_tokens": 5042,
+    "completion_tokens": 701
+  }
+}

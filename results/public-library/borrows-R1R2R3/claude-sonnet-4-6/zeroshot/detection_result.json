@@ -1,0 +1,73 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "The code validates that unknown/extra fields in the POST/PUT payload are rejected (returns 400 for fields not in the allowed list).",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification does not require rejecting payloads that contain extra fields beyond the required ones. It only specifies what fields must be present, not that additional fields must be forbidden."
+      },
+      {
+        "id": "A2",
+        "description": "The code validates that the cardholder exists by calling the Cardholders service before creating a borrow record.",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The specification does not require the Borrows service to verify that the cardholder exists in the Cardholders service before creating a borrow record. The only pre-condition mentioned is checking for 2 or more overdue books."
+      },
+      {
+        "id": "A3",
+        "description": "The code validates that the book exists (by ISBN) by calling the Books service before creating a borrow record.",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The specification does not require the Borrows service to verify that the book exists in the Books service before creating a borrow record."
+      },
+      {
+        "id": "A4",
+        "description": "The code validates that returnDate is not earlier than loanDate in both POST and PUT requests.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification does not state this validation rule. It only specifies that returnDate is computed as loanDate + 30 days."
+      },
+      {
+        "id": "A5",
+        "description": "The code validates that startDate is not later than endDate in the date-range GET query.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification does not require this validation; it only describes the date-range query format."
+      },
+      {
+        "id": "A6",
+        "description": "The code validates that both startDate and endDate must be present together (returns 400 if only one is provided).",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification does not explicitly require this paired validation, only describing the combined query string format."
+      },
+      {
+        "id": "A7",
+        "description": "On PUT, the code verifies the cardholder exists if cardholderId is being updated, and verifies the book exists if ISBN is being updated.",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The specification does not require these existence checks during a PUT update operation."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "The code does not check whether the cardholder has 2 or more overdue books before allowing a new borrow record to be created. If 2 or more books are overdue, the POST should return 400.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification explicitly states: 'A book can only be borrowed by a cardholder who does not have 2 or more books overdue. If a book cannot be checked out because 2 or more books are overdue, the POST request returns the status code 400.'"
+      },
+      {
+        "id": "O2",
+        "description": "The code accepts a user-supplied returnDate in the POST request body instead of always computing it as loanDate + 30 days.",
+        "category": "COMPUTED_VALUES",
+        "reasoning": "The specification states: 'The returnDate is not provided in the POST request but is computed by the service as follows: returnDate = loanDate + LOAN_PERIOD, where LOAN_PERIOD is 30 days.' The code uses data.get('returnDate', '') which allows the client to supply a returnDate."
+      },
+      {
+        "id": "O3",
+        "description": "The code does not define a LOAN_PERIOD constant of 30 days and does not compute returnDate = loanDate + 30 days on POST.",
+        "category": "COMPUTED_VALUES",
+        "reasoning": "The specification requires returnDate to be automatically computed as loanDate + 30 days. The code stores an empty string or client-supplied value instead."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 7161,
+    "prompt_tokens": 6104,
+    "completion_tokens": 1057
+  }
+}

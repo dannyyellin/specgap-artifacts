@@ -1,0 +1,24 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements mention favoriting functionality or the 'favorited'/'favoritesCount' fields in article responses."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements explicitly mention password hashing with bcrypt; they only reference passwords as input values for user creation and authentication."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1996,
+    "prompt_tokens": 1840,
+    "completion_tokens": 156
+  }
+}

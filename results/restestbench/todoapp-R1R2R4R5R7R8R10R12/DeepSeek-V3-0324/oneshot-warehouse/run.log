@@ -1,0 +1,14 @@
+Timestamp: 2026-06-02 05:54:43
+Detector:  DeepSeek-V3-0324
+Service:   todoapp  Removals: [1, 2, 4, 5, 7, 8, 10, 12]
+Method:    oneshot-warehouse
+
+Tokens: prompt=4797, completion=369, total=5166
+Additions: 2
+Omissions: 2
+
+  A A1: The TodoUpdate model includes an optional 'id' field
+  A A2: The TodoCreate and TodoUpdate models include an 'isComplete' field with a default value of false
+
+  O O1: POST /todos does not validate that the 'title' field is non-empty
+  O O2: PUT /todos/{id} does not reject requests where the body's 'id' field doesn't match the URL's 'id'

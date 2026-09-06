@@ -1,0 +1,24 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "A1 directly describes that publisher and publishedDate are accepted from the request body rather than fetched from Google Books API, which corresponds to R10's removal of Google Books API integration for those fields."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements R8-R11 describe any constraint about matching an 'id' field in the PUT payload with the URL path id."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 786,
+    "prompt_tokens": 608,
+    "completion_tokens": 178
+  }
+}

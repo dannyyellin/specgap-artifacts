@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No listed requirement concerns a private user-creation endpoint accepting an is_superuser field from the caller."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No listed requirement specifies that user creation must accept caller-controlled is_active input."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The listed requirements do not cover GET /api/v1/items/ list filtering for non-superusers; R46 is about item deletion visibility after user deletion, not list scoping."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements mention rejecting inactive users from authenticated endpoints with 400 'Inactive user'."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1414,
+    "prompt_tokens": 1170,
+    "completion_tokens": 244
+  }
+}

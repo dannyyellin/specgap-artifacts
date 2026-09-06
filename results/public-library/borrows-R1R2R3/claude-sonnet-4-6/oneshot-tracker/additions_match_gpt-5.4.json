@@ -1,0 +1,48 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This describes an added cardholder existence check, which is unrelated to removing return-date computation, removing the overdue-borrow constraint, or removing checkout log notification."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This describes an added book existence check, which does not correspond to any of the three removals in the spec requirements."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns PUT-time existence validation for cardholder and book, which is unrelated to the removed borrow behaviors in the spec."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R1",
+        "label": "PARTIAL",
+        "reasoning": "It is related to returnDate handling, but it describes validating returnDate ordering rather than the removed behavior of automatically computing returnDate as loanDate plus 30 days."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": "R1",
+        "label": "PARTIAL",
+        "reasoning": "Accepting a client-supplied returnDate conflicts with the old computed-returnDate behavior, but it does not directly state that automatic computation was removed."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rejecting unknown query parameters is unrelated to removing return-date computation, overdue-borrow blocking, or checkout log notification."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1176,
+    "prompt_tokens": 782,
+    "completion_tokens": 394
+  }
+}

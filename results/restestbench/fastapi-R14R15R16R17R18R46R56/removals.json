@@ -1,0 +1,52 @@
+[
+  {
+    "id": 14,
+    "requirement": "Authenticate as a superuser using existing credentials (admin@example.com / password123) to obtain an access token, then use this access token to call the test token endpoint. Verify the response status code is 200 and that the response JSON contains the field 'email' with value 'admin@example.com'.",
+    "mutant_files": [
+      "backend/app/api/routes/login.py"
+    ]
+  },
+  {
+    "id": 15,
+    "requirement": "Register a normal user with email test15@example.com via POST /api/v1/users/signup. Then request a password recovery email via POST /api/v1/password-recovery/{email}. Verify that the API responds with HTTP status code 200, a JSON message 'Password recovery email sent', and that an email was actually sent to the correct recipient via the mailcatcher service (verify via GET http://localhost:1080/messages).",
+    "mutant_files": [
+      "backend/app/api/routes/login.py"
+    ]
+  },
+  {
+    "id": 16,
+    "requirement": "Attempt to recover the password for a non-existent user with the email 'jVgQr@example.com'. Verify that the password recovery request returns an HTTP 404 status code indicating the user does not exist.",
+    "mutant_files": [
+      "backend/app/api/routes/login.py"
+    ]
+  },
+  {
+    "id": 17,
+    "requirement": "Create a new user with a generated email and initial password. Authenticate as the superuser (admin@example.com / password123). Using the superuser access token, request the password-recovery HTML content for the created user's email. Then submit the password reset request using the extracted reset token and a new password. Verify the password reset response has HTTP 200 and the response JSON is exactly {\"message\": \"Password updated successfully\"}. Finally, verify that login with the new password succeeds (returns 200).",
+    "mutant_files": [
+      "backend/app/api/routes/login.py"
+    ]
+  },
+  {
+    "id": 18,
+    "requirement": "Authenticate as the superuser (admin@example.com / password123) to obtain an access token, then attempt to reset a password using an invalid token. Using the superuser's access token in the Authorization header, call the reset-password operation with JSON body {\"new_password\": \"changethis\", \"token\": \"invalid\"}. Verify the response has HTTP status 400, the JSON body contains a \"detail\" field, and the value of \"detail\" is exactly \"Invalid token\".",
+    "mutant_files": [
+      "backend/app/api/routes/login.py"
+    ]
+  },
+  {
+    "id": 46,
+    "requirement": "Register a new user via signup and authenticate to get a token. Create an item using that token. Store the item ID from the response. Delete the user's own account via DELETE /api/v1/users/me. Verify 200 status with message 'User deleted successfully'. Login as superuser (admin@example.com / password123) and attempt to GET the item by ID. Verify it returns 404 with detail 'Item not found'.",
+    "mutant_files": [
+      "backend/app/api/routes/users.py",
+      "backend/app/models.py"
+    ]
+  },
+  {
+    "id": 56,
+    "requirement": "Attempt to reset password via POST /api/v1/reset-password/ with token 'fake-token' and new_password of exactly 7 characters ('1234567'). Verify the response status is 422 (validation error). Note: The token validation happens after field validation, so 422 should be returned for invalid password length.",
+    "mutant_files": [
+      "backend/app/models.py"
+    ]
+  }
+]

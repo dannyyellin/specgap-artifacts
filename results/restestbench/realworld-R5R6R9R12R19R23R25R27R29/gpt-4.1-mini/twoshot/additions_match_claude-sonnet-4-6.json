@@ -1,0 +1,60 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R12",
+        "label": "PARTIAL",
+        "reasoning": "R12 requires filtering by tag, but A1 states the code does NOT support tag filtering, meaning the code fails to implement R12's requirement."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R23",
+        "label": "PARTIAL",
+        "reasoning": "R23 tests feed pagination with limit and offset, and A2 confirms offset is supported, but A2 is about general articles endpoint while R23 is about the feed endpoint."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "R9 expects 400 status with 'Username and email must be unique' message, but A3 states the code returns 422 with different error messages, indicating a mismatch in status code and message format."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement addresses the status code for incomplete user registration payloads."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement specifies the exact error message format for login failure."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement explicitly tests or requires ownership-based access control for article updates/deletions."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "R5 explicitly states that GET /api/articles/{slug} for a deleted article returns 200 with empty object {}, which matches A7 exactly."
+      },
+      {
+        "detection_id": "A8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement specifies the response body format for comment deletion."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2861,
+    "prompt_tokens": 2291,
+    "completion_tokens": 570
+  }
+}

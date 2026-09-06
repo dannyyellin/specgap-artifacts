@@ -1,0 +1,23 @@
+{
+  "req_id": 12,
+  "requirement_vague": "Confirm login works and returns a valid access token for admin@example.com / password123",
+  "requirement_precise": "Authenticate using superuser credentials (admin@example.com / password123) to obtain an access token. Verify the response status code is 200 OK, the 'token_type' field equals 'bearer' and the 'access_token' field is not empty. Then call the protected GET /api/v1/users/me endpoint with the token to verify it works and returns the user's email.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": [
+      "init_db",
+      "login_access_token",
+      "read_user_me",
+      "get_current_user"
+    ],
+    "code_reference": "FIRST_SUPERUSER = \"admin@example.com\"\nFIRST_SUPERUSER_PASSWORD = \"password123\"\n...\nuser = authenticate(session, form_data.username, form_data.password)\n...\nreturn Token(access_token=access_token, token_type=\"bearer\")",
+    "reasoning": "The startup initialization creates the admin@example.com superuser with password123 if it does not already exist. The POST /api/v1/login/access-token endpoint authenticates those credentials and returns a Token response model containing a non-empty access_token and token_type set to bearer, which FastAPI returns with 200 OK on success. The protected GET /api/v1/users/me endpoint uses bearer-token authentication via get_current_user/get_current_active_user and returns the current user object, including the email field."
+  },
+  "usage": {
+    "total_tokens": 4892,
+    "prompt_tokens": 4703,
+    "completion_tokens": 189
+  },
+  "parse_error": false
+}

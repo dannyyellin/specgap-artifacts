@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "Both describe the removed requirement that POST integrate with Google Books API to populate publisher and publishedDate."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "This depends on the removed Google Books integration behavior, but it adds specific result-handling details not stated in the reference requirement."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R11",
+        "label": "MATCH",
+        "reasoning": "Both describe the removed requirement that POST validate genre against a fixed allowed list."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R11",
+        "label": "PARTIAL",
+        "reasoning": "It concerns the same removed genre enumeration constraint, but applies it to PUT rather than the reference's removed POST-related requirement context."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "Both describe the removed requirement that ISBN must conform to a 13-digit ISBN_13 format."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1053,
+    "prompt_tokens": 750,
+    "completion_tokens": 303
+  }
+}

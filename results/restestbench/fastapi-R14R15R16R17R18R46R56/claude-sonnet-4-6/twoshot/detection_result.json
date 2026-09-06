@@ -1,0 +1,54 @@
+{
+  "result": {
+    "additions": [],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "POST /api/v1/password-recovery/{email} endpoint is not implemented",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification requires a POST /api/v1/password-recovery/{email} endpoint that returns HTTP 200 with message 'Password recovery email sent' for existing users and HTTP 404 for non-existent users. No such route exists in the code."
+      },
+      {
+        "id": "O2",
+        "description": "POST /api/v1/reset-password/ endpoint is not implemented",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification requires a POST /api/v1/reset-password/ endpoint accepting a token and new_password, returning HTTP 200 with {\"message\": \"Password updated successfully\"} on success, HTTP 400 with detail 'Invalid token' for invalid tokens, and HTTP 422 for passwords shorter than 8 characters. No such route exists in the code."
+      },
+      {
+        "id": "O3",
+        "description": "GET /api/v1/login/test-token endpoint (test token endpoint) is not implemented",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification describes calling a 'test token endpoint' with a valid access token that returns HTTP 200 and a JSON body containing the field 'email'. No such route exists in the code."
+      },
+      {
+        "id": "O4",
+        "description": "Password recovery does not send an actual email to the user",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The specification requires that a password recovery email is actually sent to the correct recipient, verifiable via a mailcatcher service at GET http://localhost:1080/messages. The password recovery endpoint is entirely absent from the code."
+      },
+      {
+        "id": "O5",
+        "description": "Password recovery endpoint does not return HTTP 404 for non-existent users",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification states 'Attempt to recover the password for a non-existent user... Verify that the password recovery request returns an HTTP 404 status code'. The endpoint is not implemented."
+      },
+      {
+        "id": "O6",
+        "description": "Reset-password endpoint does not return HTTP 400 with detail 'Invalid token' when an invalid token is submitted",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification requires that submitting an invalid token to the reset-password operation returns HTTP 400 with a 'detail' field equal to 'Invalid token'. The endpoint is not implemented."
+      },
+      {
+        "id": "O7",
+        "description": "Reset-password endpoint does not validate new_password length (minimum 8 characters), returning 422 for passwords shorter than 8 characters",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification requires a 422 response when attempting to reset a password with a new_password of exactly 7 characters ('1234567'), noting that field validation occurs before token validation. The endpoint is not implemented."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 16549,
+    "prompt_tokens": 14577,
+    "completion_tokens": 1972
+  }
+}

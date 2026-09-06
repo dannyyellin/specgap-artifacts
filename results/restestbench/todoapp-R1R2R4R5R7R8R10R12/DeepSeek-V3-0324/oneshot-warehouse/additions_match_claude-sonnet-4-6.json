@@ -1,0 +1,24 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "R10 requires that a PUT request where the body id differs from the URL id returns 400 Bad Request, and the optional 'id' field in TodoUpdate is what enables this mismatch check, but A1 only describes the field's existence, not the validation behavior."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements explicitly address the 'isComplete' field being included in the create/update request body models."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1209,
+    "prompt_tokens": 1020,
+    "completion_tokens": 189
+  }
+}

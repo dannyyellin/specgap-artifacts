@@ -1,0 +1,15 @@
+Timestamp: 2026-06-02 09:38:52
+Detector:  claude-sonnet-4-6
+App/Variant/Service: public-library/books-R8R9R10R11/books
+Method:    twoshot
+
+Tokens: prompt=7470, completion=609, total=8079
+Additions: 1
+Omissions: 4
+
+  A A1: POST /books accepts 'publisher' and 'publishedDate' fields from the request body and uses them if provided
+
+  O O1: POST /books does not call the Google Books API to retrieve 'publisher' and 'publishedDate' using the ISBN
+  O O2: POST /books does not use the first entry from Google Books results when multiple entries are returned
+  O O3: POST /books does not set 'publisher' and 'publishedDate' to empty string when Google Books does not contain an entry for those fields
+  O O4: POST /books does not validate that 'genre' is one of the allowed values ('Fiction', 'Children', 'Biography', 'Science', 'Science Fiction', 'Fantasy', 'Other')

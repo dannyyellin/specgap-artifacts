@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O1 directly addresses the missing 201 status code for the follow endpoint, which R2 explicitly requires."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O2 describes the missing 400 error with 'cannot be equal' message when a user tries to follow themselves, which is exactly what R2 requires."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O3 describes the missing 400 error when a user attempts to unfollow themselves, which R10 explicitly requires."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R24",
+        "label": "MATCH",
+        "reasoning": "O4 describes sorting by id instead of created_at timestamp, which directly contradicts R24's requirement to order articles by created timestamp descending."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements specifically address the feed endpoint's ordering behavior."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2304,
+    "prompt_tokens": 1940,
+    "completion_tokens": 364
+  }
+}

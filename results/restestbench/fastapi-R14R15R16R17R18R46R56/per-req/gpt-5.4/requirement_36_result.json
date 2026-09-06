@@ -1,0 +1,25 @@
+{
+  "req_id": 36,
+  "requirement_vague": "Check that a superuser can change a registered user's full_name. Admin credentials: (admin@example.com / password123)",
+  "requirement_precise": "Register a new user with a random email and password. Authenticate as the superuser (admin@example.com / password123) to obtain an access token. Using the superuser access token, update the registered user by id to set full_name to \"Updated_full_name\". Verify the update response status is 200. Verify the response body contains full_name equal to \"Updated_full_name\". Then re-fetch the user by id to verify the update persisted.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": [
+      "POST /api/v1/users/signup",
+      "POST /api/v1/login/access-token",
+      "PATCH /api/v1/users/{user_id}",
+      "GET /api/v1/users/{user_id}",
+      "get_current_active_superuser",
+      "init_db"
+    ],
+    "code_reference": "FIRST_SUPERUSER = \"admin@example.com\"\nFIRST_SUPERUSER_PASSWORD = \"password123\"\n...\n@api_router.patch(\"/users/{user_id}\", response_model=UserPublic)\ndef update_user_by_id(..., current_user: User = Depends(get_current_active_superuser)):\n    ...\n    if user_in.full_name is not None:\n        user.full_name = user_in.full_name\n    session.commit()\n    session.refresh(user)\n    return user",
+    "reasoning": "The code creates the configured superuser on startup, allows authentication via /api/v1/login/access-token, and restricts PATCH /api/v1/users/{user_id} to active superusers. That endpoint updates full_name, commits and refreshes the user, returning a UserPublic response with the updated full_name; GET /api/v1/users/{user_id} can then be used by the superuser to verify the persisted change."
+  },
+  "usage": {
+    "total_tokens": 4982,
+    "prompt_tokens": 4723,
+    "completion_tokens": 259
+  },
+  "parse_error": false
+}

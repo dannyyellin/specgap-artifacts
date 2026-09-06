@@ -1,0 +1,19 @@
+{
+  "app": "public-library",
+  "variant": "books-R8R9R10R11",
+  "service": "books",
+  "req_id": "R11",
+  "requirement": "The genre field must be one of a fixed enumerated list of valid genres; other values are rejected.",
+  "source_headline": "Removed genre enumeration (valid genre list)",
+  "model": "claude-sonnet-4-6",
+  "pass": 1,
+  "label": "GAP",
+  "evidence": "none",
+  "reasoning": "The code accepts any string value for the 'genre' field without checking it against any enumerated list. There is no VALID_GENRES constant, no validation logic comparing the genre value to allowed values, and no rejection of invalid genres anywhere in the create_book or update_book routes. A test submitting an invalid genre value would succeed (201/200) rather than being rejected.",
+  "usage": {
+    "total_tokens": 2290,
+    "prompt_tokens": 2180,
+    "completion_tokens": 110
+  },
+  "timestamp": "2026-07-16 14:54:54"
+}

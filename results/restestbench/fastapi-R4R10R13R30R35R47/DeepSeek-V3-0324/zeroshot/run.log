@@ -1,0 +1,44 @@
+Timestamp: 2026-06-02 06:01:05
+Detector:  DeepSeek-V3-0324
+Service:   fastapi  Round: 1  Removals: [4, 10, 13, 30, 35, 47]
+Method:    zeroshot
+
+Tokens: prompt=11326, completion=3235, total=14561
+Additions: 4
+Omissions: 30
+
+  A A1: The code implements a password recovery HTML endpoint (/password-recovery-html/{email}) that is not mentioned in the specification.
+  A A2: The code includes a test token endpoint (/login/test-token) that is not required by the specification.
+  A A3: The code implements a UsersRead model with a 'count' field that is not mentioned in the specification.
+  A A4: The code implements an ItemsRead model with a 'count' field that is not mentioned in the specification.
+
+  O O1: The specification requires a 400 status code with 'Not enough permissions' when a normal user attempts to read another user's item, but the code returns 403 with a different message.
+  O O2: The specification requires a 400 status code with 'Not enough permissions' when a normal user attempts to update another user's item, but the code returns 400 with 'Not enough permissions'.
+  O O3: The specification requires a 400 status code with 'Not enough permissions' when a normal user attempts to delete another user's item, but the code returns 400 with 'Not enough permissions'.
+  O O4: The specification requires a 400 status code with 'Not enough permissions' when a normal user attempts to delete another user, but the code returns 403 with 'The user doesn't have enough privileges'.
+  O O5: The specification requires a 400 status code with 'Invalid token' when attempting to reset a password with an invalid token, but the code returns 400 with 'Invalid token'.
+  O O6: The specification requires a 404 status code with 'The user with this id does not exist in the system' when attempting to update a non-existent user, but the code returns 404 with 'The user with this id does not exist in the system'.
+  O O7: The specification requires a 404 status code with 'Item not found' when attempting to update a non-existent item, but the code returns 404 with 'Item not found'.
+  O O8: The specification requires a 404 status code with 'Item not found' when attempting to delete a non-existent item, but the code returns 404 with 'Item not found'.
+  O O9: The specification requires a 404 status code with 'User not found' when attempting to delete a non-existent user, but the code returns 404 with 'User not found'.
+  O O10: The specification requires a 409 status code with 'User with this email already exists' when attempting to update a user's email to an existing email, but the code returns 409 with 'User with this email already exists'.
+  O O11: The specification requires a 403 status code with 'Super users are not allowed to delete themselves' when a superuser attempts to delete their own account, but the code returns 403 with 'Super users are not allowed to delete themselves'.
+  O O12: The specification requires a 422 status code when attempting to register a user with an invalid email format, but the code returns 422 with a validation error.
+  O O13: The specification requires a 422 status code when attempting to register a user with a password of exactly 7 characters, but the code returns 422 with a validation error.
+  O O14: The specification requires a 422 status code when attempting to register a user with a password of exactly 129 characters, but the code returns 422 with a validation error.
+  O O15: The specification requires a 422 status code when attempting to register a user with a full_name of exactly 256 characters, but the code returns 422 with a validation error.
+  O O16: The specification requires a 422 status code when attempting to update a password with a new_password of exactly 7 characters, but the code returns 422 with a validation error.
+  O O17: The specification requires a 422 status code when attempting to update a password with a new_password of exactly 129 characters, but the code returns 422 with a validation error.
+  O O18: The specification requires a 422 status code when attempting to update a password with a current_password of exactly 7 characters, but the code returns 422 with a validation error.
+  O O19: The specification requires a 422 status code when attempting to create an item with a title as an empty string, but the code returns 422 with a validation error.
+  O O20: The specification requires a 422 status code when attempting to create an item with a title of exactly 256 characters, but the code returns 422 with a validation error.
+  O O21: The specification requires a 422 status code when attempting to create an item with a description of exactly 256 characters, but the code returns 422 with a validation error.
+  O O22: The specification requires a 422 status code when attempting to reset a password with a new_password of exactly 7 characters, but the code returns 422 with a validation error.
+  O O23: The specification requires a 422 status code when attempting to register a user with email set to null, but the code returns 422 with a validation error.
+  O O24: The specification requires a 422 status code when attempting to register a user with password set to null, but the code returns 422 with a validation error.
+  O O25: The specification requires a 422 status code when attempting to create an item with title set to null, but the code returns 422 with a validation error.
+  O O26: The specification requires a 422 status code when attempting to update a profile with an invalid email format, but the code returns 422 with a validation error.
+  O O27: The specification requires a 200 status code with 'Password recovery email sent' when requesting a password recovery email, but the code returns 200 with 'Password recovery email sent'.
+  O O28: The specification requires a 200 status code with 'Password updated successfully' when resetting a password, but the code returns 200 with 'Password updated successfully'.
+  O O29: The specification requires a 200 status code with 'User deleted successfully' when deleting a user, but the code returns 200 with 'User deleted successfully'.
+  O O30: The specification requires a 200 status code with 'Item deleted successfully' when deleting an item, but the code returns 200 with 'Item deleted successfully'.

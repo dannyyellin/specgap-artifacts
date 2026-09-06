@@ -1,0 +1,24 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "A counter for generating user IDs suggests user_id is not coming from token validation but from an internal counter, which partially relates to R9's removal of the requirement that user_id comes from token validation, though the mechanism differs."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Supporting token retrieval from multiple sources does not correspond to any of the three spec requirements about protein exclusion, owner-only restriction, or user_id source."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 719,
+    "prompt_tokens": 534,
+    "completion_tokens": 185
+  }
+}

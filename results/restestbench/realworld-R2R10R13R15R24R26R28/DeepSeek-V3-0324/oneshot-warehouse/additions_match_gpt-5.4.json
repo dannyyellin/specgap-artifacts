@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Favorited fields in article responses are not described by any of the listed requirements, which focus on follow/unfollow, article filtering/pagination/order, comments, and unauthorized article modification."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A user deletion endpoint by email does not correspond to any listed requirement."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A standalone tags endpoint is not mentioned in any of the provided requirements."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Additional created/updated duplicate fields in article responses are not part of any listed requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1726,
+    "prompt_tokens": 1492,
+    "completion_tokens": 234
+  }
+}

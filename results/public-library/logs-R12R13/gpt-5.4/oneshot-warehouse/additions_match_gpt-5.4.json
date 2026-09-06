@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 concerns POST /logs type validation for fields, which does not correspond to removing the loanDate format or removing Borrows-to-Logs notifications from descriptions."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A2 concerns GET /logs query-filter allowlisting, which is unrelated to the specified removals in log date formatting and resource descriptions."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A3 concerns UUID-based id generation for logs, which does not match either removal of the loanDate date format or removal of Borrows-to-Logs notifications."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 804,
+    "prompt_tokens": 595,
+    "completion_tokens": 209
+  }
+}

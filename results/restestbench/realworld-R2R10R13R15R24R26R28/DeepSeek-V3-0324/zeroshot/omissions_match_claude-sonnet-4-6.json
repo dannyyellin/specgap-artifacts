@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R28",
+        "label": "MATCH",
+        "reasoning": "R28 explicitly states that GET on a deleted article returns 200 with empty object {}, which directly corresponds to O1's observation about the specification requiring empty object {} for deleted articles."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "R2 explicitly requires that a self-follow attempt returns status 400 with a message containing 'cannot be equal', which matches O2's description of the specification requiring a 400 error for self-follow attempts."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements describe a test case where articles block user deletion via FK constraints."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R28",
+        "label": "MATCH",
+        "reasoning": "R28 explicitly describes the security vulnerability where any user can update/delete any article, which directly matches O4's description of the specification requiring any user to be able to update/delete any article."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2074,
+    "prompt_tokens": 1739,
+    "completion_tokens": 335
+  }
+}

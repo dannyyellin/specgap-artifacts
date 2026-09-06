@@ -1,0 +1,22 @@
+Timestamp: 2026-06-02 05:57:11
+Detector:  DeepSeek-V3-0324
+Service:   nestjs-realworld  Round: 1  Removals: [5, 6, 9, 12, 19, 23, 25, 27, 29]
+Method:    oneshot-tracker
+
+Tokens: prompt=10181, completion=823, total=11004
+Additions: 2
+Omissions: 10
+
+  A A1: Includes 'favorited' and 'favoritesCount' fields in article responses
+  A A2: Implements password hashing with bcrypt
+
+  O O1: Missing GET /api/articles/feed endpoint for retrieving articles from followed users
+  O O2: Missing tag filtering support in GET /api/articles
+  O O3: No validation that tagList contains only strings in article creation/update
+  O O4: No validation that title is non-empty in article creation
+  O O5: No user deletion endpoint
+  O O6: No validation preventing users from following themselves
+  O O7: No error message when trying to follow a non-existent user
+  O O8: No validation that comment body is non-empty
+  O O9: No pagination support for comments
+  O O10: No validation preventing users from updating/deleting others' articles

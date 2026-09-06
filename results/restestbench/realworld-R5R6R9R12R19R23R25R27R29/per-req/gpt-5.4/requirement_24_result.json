@@ -1,0 +1,18 @@
+{
+  "req_id": 24,
+  "requirement_vague": "Verify articles are returned in descending order by created date",
+  "requirement_precise": "Create user1 (username: 'orderuser1', email: 'orderuser1@test.com', password: 'pass123'). User1 creates article1 'First Article', wait at least 1 second, then creates article2 'Second Article', wait at least 1 second, then creates article3 'Third Article'. GET /api/articles. Verify the articles array is ordered by created timestamp in descending order (newest first). Articles with identical timestamps (to the second) may have undefined relative ordering due to database timestamp precision being in seconds. This tests the ORDER BY article.created DESC clause.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": "GET /api/articles in list_articles",
+    "code_reference": "all_articles = session.exec(query.order_by(Article.created_at.desc(), Article.id.desc())).all()\npaged = all_articles[offset:offset + limit]",
+    "reasoning": "The articles query explicitly orders results by created_at descending, which returns newest articles first as required. It also adds Article.id.desc() as a tie-breaker, which is acceptable for identical timestamps where relative ordering may otherwise be undefined."
+  },
+  "usage": {
+    "total_tokens": 5313,
+    "prompt_tokens": 5207,
+    "completion_tokens": 106
+  },
+  "parse_error": false
+}

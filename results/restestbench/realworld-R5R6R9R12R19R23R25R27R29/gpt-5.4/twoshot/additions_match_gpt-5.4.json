@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement concerns anonymous access to profile retrieval or default following=false behavior."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No listed requirement checks favorite-related fields in article or comment responses."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the provided requirements cover PUT /api/user updates for username, email, password, bio, or image."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No listed requirement is about deleting comments or the response body from DELETE /api/articles/{slug}/comments/{id}."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1912,
+    "prompt_tokens": 1684,
+    "completion_tokens": 228
+  }
+}

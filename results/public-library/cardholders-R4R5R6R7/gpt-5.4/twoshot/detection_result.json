@@ -1,0 +1,67 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "Uses MongoDB ObjectId values for cardholder IDs and rejects non-ObjectId strings as resource IDs",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The specification states that an id is of type string, but does not require Mongo ObjectId formatting or validation. The code stores records with Mongo's default _id/ObjectId and treats only ObjectId-compatible strings as valid IDs."
+      },
+      {
+        "id": "A2",
+        "description": "GET /cardholders only allows filtering by the specific fields 'name' and 'email' and ignores other query parameters",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification says GET /cardholders may specify a query string of the form 'field=value' and should return records satisfying that constraint. It does not restrict filtering to only name and email or require ignoring other fields."
+      },
+      {
+        "id": "A3",
+        "description": "PUT /cardholders/{id} rejects requests whose body contains an 'id' field different from the path parameter",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification says the PUT request provides a JSON payload of the updated resource's fields and returns the id of the updated resource, but it does not require validating a body 'id' against the path id."
+      },
+      {
+        "id": "A4",
+        "description": "PUT /cardholders/{id} rejects requests that do not include at least one updatable field",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification does not require rejecting an update payload that omits name and email; this is extra validation implemented by the code."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "POST /cardholders does not return 415 Unsupported Media Type for non-JSON requests",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The general specification requires unsuccessful requests to use appropriate status codes including 415 for unsupported media type. The code returns 400 when request.is_json is false instead of 415."
+      },
+      {
+        "id": "O2",
+        "description": "PUT /cardholders/{id} does not return 415 Unsupported Media Type for non-JSON requests",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The general specification includes 415 Unsupported Media Type as an appropriate error status. The code returns 400 for non-JSON PUT requests rather than 415."
+      },
+      {
+        "id": "O3",
+        "description": "GET /cardholders does not support filtering by arbitrary resource fields such as id",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification states that GET /cardholders may specify a query string of the form 'field=value' and only matching cardholder records should be returned. Since cardholder resources include fields name, email, and id, filtering is specified generically by field, but the code only applies filters for name and email."
+      },
+      {
+        "id": "O4",
+        "description": "Fine calculation does not compute overdue fines as number-of-days-overdue multiplied by $0.50 per day for each overdue book",
+        "category": "COMPUTED_VALUES",
+        "reasoning": "The specification explicitly defines fine per overdue book as number-of-days-overdue * FINE_PER_DAY, where FINE_PER_DAY is $0.50, and total fine is the sum across all borrowed books. The code merely adds 1 for each overdue borrow, ignoring days overdue and the $0.50 rate."
+      },
+      {
+        "id": "O5",
+        "description": "GET /cardholders/fines/{id} returns fineAmount as an integer count rather than a float monetary amount",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification defines /cardholders/fines/{id} as a JSON document with field 'fineAmount' whose value is of type float. The code initializes fine_amount to 0 and increments by whole numbers, producing an integer-valued count instead of the specified float fine amount."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 7496,
+    "prompt_tokens": 6732,
+    "completion_tokens": 764
+  }
+}

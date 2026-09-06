@@ -1,0 +1,35 @@
+{
+  "variant": "fastapi-R14R15R16R17R18R46R56",
+  "req_id": 17,
+  "model": "gpt-5.4",
+  "pass": 2,
+  "verdict": "NOT_IMPLEMENTED",
+  "requirement_vague": "Test the password recovery flow of a new user. Superuser credentials: (admin@example.com / password123)",
+  "omissions": [
+    {
+      "id": "O1",
+      "description": "No password recovery flow endpoints exist for requesting password-recovery HTML content by user email or for submitting a reset token with a new password.",
+      "category": "ENDPOINTS",
+      "reasoning": "The code defines login, signup, user CRUD, and authenticated password change at PATCH /api/v1/users/me/password, but there is no route for a superuser to request password-recovery HTML content and no route to reset a password using an extracted recovery token."
+    },
+    {
+      "id": "O2",
+      "description": "The required business flow allowing a superuser to initiate password recovery for another user is not implemented.",
+      "category": "BUSINESS_LOGIC",
+      "reasoning": "Authentication and superuser checks exist, but they are only used for user CRUD operations. There is no logic that, after authenticating as admin@example.com, generates or exposes password recovery content/token for a created user's email."
+    },
+    {
+      "id": "O3",
+      "description": "The required response for password reset via recovery flow cannot be produced because the recovery reset operation is absent.",
+      "category": "RESPONSE_FORMAT",
+      "reasoning": "Although PATCH /api/v1/users/me/password returns Message(message=\"Password updated successfully\"), that endpoint requires the current authenticated user and returns a model-based response for self-service password change, not a token-based recovery reset flow. There is no implemented recovery-reset endpoint to verify HTTP 200 with exactly {\"message\": \"Password updated successfully\"}."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 5031,
+    "prompt_tokens": 4732,
+    "completion_tokens": 299
+  },
+  "timestamp": "2026-07-12 10:38:09"
+}

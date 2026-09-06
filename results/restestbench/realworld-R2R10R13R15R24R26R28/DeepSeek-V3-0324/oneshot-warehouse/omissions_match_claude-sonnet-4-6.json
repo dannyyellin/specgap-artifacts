@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R28",
+        "label": "PARTIAL",
+        "reasoning": "O1 addresses the behavior of GET on deleted articles returning empty object vs 404, which is part of R28's specification, but O1 only covers this sub-behavior rather than the full security vulnerability scenario."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R28",
+        "label": "PARTIAL",
+        "reasoning": "O2 directly addresses the security vulnerability described in R28 where any user can update/delete any article, but frames it as a missing vulnerability rather than describing the full test scenario."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements describe behavior related to deleting a user with articles causing a FK constraint error or 500 response."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O4 describes the missing 400 error when attempting to follow oneself, which directly corresponds to the self-follow check in R2 that expects a 400 status with 'cannot be equal' message."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O5 describes the missing 400 error when attempting to unfollow oneself, which directly corresponds to the self-unfollow check specified in R10."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2164,
+    "prompt_tokens": 1741,
+    "completion_tokens": 423
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O1 states passwords are not encrypted or hashed before storing, which is the same behavior as removing bcrypt password encryption."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O2 describes the absence of the special enforced Owner username/password case, which corresponds to removal of the Owner special case."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 concerns 400 responses for missing credentials on register/login, which is unrelated to any reference requirement."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 is about token validation behavior on /validate and does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O5 captures only the Owner password aspect of the removed Owner special case and omits the name and privileged special handling."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R3",
+        "label": "MATCH",
+        "reasoning": "O6 is about rejecting duplicate usernames, which directly corresponds to the username uniqueness constraint."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O7 concerns validity of login tokens and is unrelated to the listed reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1166,
+    "prompt_tokens": 755,
+    "completion_tokens": 411
+  }
+}

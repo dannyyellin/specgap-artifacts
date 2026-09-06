@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements mention favoriting functionality or favoritesCount fields."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements mention a user deletion endpoint."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements mention a tags endpoint."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements mention 'created' and 'updated' fields as duplicates of createdAt/updatedAt in article responses."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1976,
+    "prompt_tokens": 1724,
+    "completion_tokens": 252
+  }
+}

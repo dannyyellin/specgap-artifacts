@@ -1,0 +1,24 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "It matches the same POST /todos title-validation behavior, but only mentions non-empty title acceptance and does not clearly cover the missing-title case or the exact required validation message."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "It describes the same requirement that PUT /todos/{id} must return 400 Bad Request when the body id differs from the URL id."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1074,
+    "prompt_tokens": 924,
+    "completion_tokens": 150
+  }
+}

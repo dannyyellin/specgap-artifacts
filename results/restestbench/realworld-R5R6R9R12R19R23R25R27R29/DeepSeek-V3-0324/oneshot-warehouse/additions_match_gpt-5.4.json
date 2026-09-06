@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Favorited metadata in article responses is not covered by any listed requirement, which focus on deletion, feed behavior, uniqueness, tag filtering, timestamps, JWT payloads, and FK deletion behavior."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Comment updatedAt timestamps are unrelated to the listed requirements, which do not mention comments."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Comment ordering by ID does not correspond to any requirement because none of the specs involve comment retrieval or ordering."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1776,
+    "prompt_tokens": 1582,
+    "completion_tokens": 194
+  }
+}

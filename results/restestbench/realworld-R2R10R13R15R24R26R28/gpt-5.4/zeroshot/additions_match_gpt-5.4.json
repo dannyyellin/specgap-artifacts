@@ -1,0 +1,48 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements concern accepting Bearer versus Token authorization header formats."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements are about registration/login/current-user response fields."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Although several requirements involve articles, none specifically require or discuss these extra article response fields."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No listed requirement mentions a tags endpoint."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No listed requirement mentions a root endpoint outside /api."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements cover comment deletion permissions for article owners deleting others' comments."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1987,
+    "prompt_tokens": 1682,
+    "completion_tokens": 305
+  }
+}

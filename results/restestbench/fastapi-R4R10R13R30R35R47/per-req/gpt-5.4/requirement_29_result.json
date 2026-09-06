@@ -1,0 +1,18 @@
+{
+  "req_id": 29,
+  "requirement_vague": "A user should be able to update himself with full name \"Updated Name\" and a new random email.",
+  "requirement_precise": "Register a new normal user and obtain an access token. Using that access token, update the authenticated user's profile to change the email to a random email and change the full name to \"Updated Name\". Verify the update operation returns status 200. Verify the response body has 'email' equal to the random email and 'full_name' equal to \"Updated Name\".",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": "POST /api/v1/users/signup, POST /api/v1/login/access-token, PATCH /api/v1/users/me",
+    "code_reference": "@api_router.patch(\"/users/me\", response_model=UserRead)\ndef update_user_me(user_in: UserUpdateMe, session: Session = Depends(get_session), current_user: User = Depends(get_current_active_user)):\n    if user_in.email and user_in.email != current_user.email:\n        ...\n        current_user.email = user_in.email\n    if user_in.full_name is not None:\n        current_user.full_name = user_in.full_name",
+    "reasoning": "The service supports registering a normal user, obtaining an access token via login, and updating the authenticated user's own profile through PATCH /api/v1/users/me. That endpoint returns the updated user as UserRead with fields including email and full_name, and FastAPI uses the default 200 status for a successful PATCH response."
+  },
+  "usage": {
+    "total_tokens": 5983,
+    "prompt_tokens": 5778,
+    "completion_tokens": 205
+  },
+  "parse_error": false
+}

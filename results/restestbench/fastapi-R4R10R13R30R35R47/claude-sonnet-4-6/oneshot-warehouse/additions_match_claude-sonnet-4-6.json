@@ -1,0 +1,18 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The code behavior property about GET /api/v1/password-recovery-html/{email} does not correspond to any of the listed spec requirements (R4, R10, R13, R30, R35, R47)."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1043,
+    "prompt_tokens": 932,
+    "completion_tokens": 111
+  }
+}

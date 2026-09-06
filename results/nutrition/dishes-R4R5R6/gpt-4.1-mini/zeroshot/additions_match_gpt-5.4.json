@@ -1,0 +1,54 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "It concerns authorization restrictions, but it describes requiring auth for GET as well rather than the spec change removing owner-only restriction specifically for POST/PUT/DELETE."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "It is about query filtering behavior on GET /dishes, but it discusses extra supported fields rather than the removed specific filtering semantics like lte/contains."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "It involves a field naming mismatch between spec and code, which is related to removed field name mapping details, though it is about query parameter naming rather than Ninja API field mapping details."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "It concerns query-string filtering behavior, but it addresses singular versus plural parameter naming instead of the removed lte/contains filtering semantics."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "It relates to authorization restrictions, but it describes enforcing auth on all requests rather than the spec change removing owner-only restriction for POST/PUT/DELETE."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Unique ID generation via a MongoDB counter is an implementation detail unrelated to the listed removed spec requirements."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "CORS support is not related to removed field mapping details, owner-only restrictions, or query filtering semantics."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1319,
+    "prompt_tokens": 851,
+    "completion_tokens": 468
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the absence of Google Books API integration for fetching 'publisher' and 'publishedDate', which matches R10."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "O2 describes handling of Google Books API response edge cases, which is part of the broader Google Books API integration removed in R10, but focuses on a more specific sub-behavior."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R11",
+        "label": "MATCH",
+        "reasoning": "O3 directly describes the absence of genre validation against the specified enumeration, which matches R11."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "O4 directly describes the absence of ISBN format validation for 13-digit ISBN_13, which matches R9."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 describes validation of 'publishedDate' format, which does not correspond to any of the reference requirements R8-R11."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1169,
+    "prompt_tokens": 791,
+    "completion_tokens": 378
+  }
+}

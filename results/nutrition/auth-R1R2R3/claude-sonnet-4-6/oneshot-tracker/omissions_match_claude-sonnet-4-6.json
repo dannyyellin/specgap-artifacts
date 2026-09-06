@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O1 partially captures R2 by noting the Owner special case is not enforced, but focuses on plaintext password and registration restriction rather than the complete removal of the Owner special case (name, password, and privileged flag)."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O2 directly describes the removal of bcrypt password encryption, matching R1 exactly."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O3 relates to the Owner privileged behavior at validation time, which is part of the Owner special case described in R2, but focuses on a different aspect (JWT validation logic) rather than the core removal of the Owner special case."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R3",
+        "label": "PARTIAL",
+        "reasoning": "O4 is about the error code returned for duplicate usernames rather than the removal of the uniqueness constraint itself, so it only partially relates to R3."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1127,
+    "prompt_tokens": 785,
+    "completion_tokens": 342
+  }
+}

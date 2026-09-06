@@ -1,0 +1,788 @@
+=== SYSTEM PROMPT ===
+
+You are an expert at analyzing microservice specifications and implementations.
+
+You will receive:
+1. A specification describing a multi-service application
+2. The name of one specific service to analyze
+3. The code for that service
+
+Your task: identify ALL gaps between the specification and the code.
+
+There are two types of gaps:
+- ADDITIONS: the code implements a property that the specification does not require.
+- OMISSIONS: the specification requires a property that the code does not implement.
+
+Categories (use exactly these names):
+
+1. ENDPOINTS: Route definitions, HTTP methods supported, URL patterns.
+   Example: Spec requires DELETE /items/{id} but no such route exists in the code.
+
+2. REQUEST_VALIDATION: Required fields, type checking, format validation,
+   media type validation, missing/invalid parameter handling.
+   Example: Spec requires "sku" as a required field on POST but the code does
+   not check for its presence.
+
+3. RESPONSE_FORMAT: Returned JSON fields, status codes for success and error cases,
+   response structure.
+   Example: Spec requires 404 when an item is not found but the code returns 500.
+
+4. BUSINESS_LOGIC: Domain rules, guards, constraints, conditional behavior,
+   access control decisions, state transitions.
+   Example: Spec requires dispatch to be rejected if quantity exceeds stock but
+   the code allows negative inventory.
+
+5. COMPUTED_VALUES: Derived or calculated fields, formulas, date arithmetic,
+   aggregations.
+   Example: Spec requires totalPrice = unitPrice * quantity but the code stores
+   totalPrice as a user-supplied value.
+
+6. EXTERNAL_INTERACTIONS: Outbound HTTP calls to other microservices or external
+   APIs, data fetched from or sent to other services, notifications.
+   Example: Spec requires notifying the purchasing service on low stock but the
+   code sends no such notification.
+
+7. DATA_PERSISTENCE: What is stored in the database, field mappings between
+   request/response and stored documents, ID generation.
+   Example: Spec requires storing last_restocked date on receipt but the code
+   never writes this field.
+
+
+For ADDITIONS: find code properties that have no basis in the specification.
+Be STRICT: the specification not contradicting a property is NOT enough — the
+specification must positively require it. For example, if the specification says
+"store user records" and the code encrypts passwords, encryption is an addition:
+the specification permits it but does not require it. Similarly, a vague statement
+like "return appropriate status codes" does NOT cover a specific property like
+"return 401 when the user is not found."
+Minor implementation details (variable naming, error message text) are NOT gaps.
+
+For OMISSIONS: find properties the specification requires but the code does not
+implement. Look for:
+- Explicit requirements stated in the specification that the code simply does
+  not implement — including requirements in other services' sections or in
+  general guidelines
+- Cross-service interactions described in other services' specifications
+- Data model fields that are never computed or populated
+- Requirements implied by combining multiple specification statements
+- Missing input validations, missing or incorrect error status codes
+Only flag omissions with clear basis in the specification text, not speculation.
+
+=== EXAMPLE ===
+
+Below is a partial specification for a "warehouse" microservice in a supply-chain
+application, followed by a code excerpt, and the expected gap analysis.
+
+SPECIFICATION EXCERPT:
+  The warehouse service manages inventory items. Each item has fields: id, sku,
+  name, quantity_on_hand, reorder_point, supplier_id, and last_restocked.
+
+  POST /items creates an inventory item. Required fields: sku, name,
+  quantity_on_hand, supplier_id, reorder_point. The last_restocked field is
+  initially set to null.
+
+  GET /items returns all items. Supports query parameter "supplier_id" to filter.
+
+  PUT /items/{id}/receive records a received shipment. The request body includes
+  "quantity". The quantity_on_hand is increased by the given amount and
+  last_restocked is set to today's date.
+
+  PUT /items/{id}/dispatch records outgoing stock. The request body includes
+  "quantity". The quantity_on_hand is decreased. The dispatch must be rejected
+  if the requested quantity exceeds quantity_on_hand.
+
+  The purchasing service should be notified whenever an item's quantity_on_hand
+  falls below its reorder_point, so it can initiate a restock order.
+
+  The supplier-directory service manages supplier records. Warehouse should
+  verify that supplier_id refers to an active supplier before creating an item.
+
+CODE EXCERPT:
+  @app.route('/items', methods=['POST'])
+  def create_item():
+      data = request.get_json()
+      item = {
+          'sku': data.get('sku'),
+          'name': data.get('name'),
+          'quantity_on_hand': data.get('quantity_on_hand'),
+          'reorder_point': data.get('reorder_point'),
+          'supplier_id': data.get('supplier_id'),
+          'last_restocked': None,
+          'unit_price': data.get('unit_price', 0)
+      }
+      result = db.items.insert_one(item)
+      item['id'] = str(result.inserted_id)
+      return jsonify(item), 201
+
+  @app.route('/items', methods=['GET'])
+  def list_items():
+      category = request.args.get('category')
+      query = {}
+      if category:
+          query['category'] = category
+      items = list(db.items.find(query))
+      for item in items:
+          item['id'] = str(item.pop('_id'))
+      return jsonify(items), 200
+
+  @app.route('/items/<id>/receive', methods=['PUT'])
+  def receive_shipment(id):
+      data = request.get_json()
+      quantity = data['quantity']
+      db.items.update_one({'_id': ObjectId(id)}, {'$inc': {'quantity_on_hand': quantity}})
+      item = db.items.find_one({'_id': ObjectId(id)})
+      return jsonify(item), 200
+
+  @app.route('/items/<id>/dispatch', methods=['PUT'])
+  def dispatch_stock(id):
+      data = request.get_json()
+      quantity = data['quantity']
+      db.items.update_one({'_id': ObjectId(id)}, {'$inc': {'quantity_on_hand': -quantity}})
+      item = db.items.find_one({'_id': ObjectId(id)})
+      return jsonify(item), 200
+
+EXPECTED ANALYSIS:
+{
+  "additions": [
+    {
+      "id": "A1",
+      "description": "Stores a 'unit_price' field with default 0 on item creation",
+      "category": "DATA_PERSISTENCE",
+      "reasoning": "The specification defines item fields as id, sku, name, quantity_on_hand, reorder_point, supplier_id, and last_restocked. The 'unit_price' field is not mentioned in the specification."
+    },
+    {
+      "id": "A2",
+      "description": "GET /items supports filtering by 'category' query parameter",
+      "category": "REQUEST_VALIDATION",
+      "reasoning": "The specification requires filtering by 'supplier_id', not 'category'. The code implements a filter parameter that is not in the specification."
+    }
+  ],
+  "omissions": [
+    {
+      "id": "O1",
+      "description": "POST /items does not validate that required fields (sku, name, quantity_on_hand, supplier_id, reorder_point) are present in the request body",
+      "category": "REQUEST_VALIDATION",
+      "reasoning": "The specification states these as required fields but the code uses data.get() with no presence check, silently storing None for missing fields."
+    },
+    {
+      "id": "O2",
+      "description": "GET /items does not support filtering by 'supplier_id' query parameter",
+      "category": "REQUEST_VALIDATION",
+      "reasoning": "The specification states GET /items 'supports query parameter supplier_id to filter' but the code only filters by 'category', which is not in the specification."
+    },
+    {
+      "id": "O3",
+      "description": "PUT /items/{id}/receive does not set last_restocked to today's date",
+      "category": "DATA_PERSISTENCE",
+      "reasoning": "The specification states 'last_restocked is set to today's date' when receiving a shipment, but the code only increments quantity_on_hand."
+    },
+    {
+      "id": "O4",
+      "description": "PUT /items/{id}/dispatch does not reject requests where quantity exceeds quantity_on_hand",
+      "category": "BUSINESS_LOGIC",
+      "reasoning": "The specification states 'The dispatch must be rejected if the requested quantity exceeds quantity_on_hand' but the code decrements unconditionally."
+    },
+    {
+      "id": "O5",
+      "description": "Does not notify the purchasing service when quantity_on_hand falls below reorder_point after a dispatch",
+      "category": "EXTERNAL_INTERACTIONS",
+      "reasoning": "The specification states 'The purchasing service should be notified whenever an item's quantity_on_hand falls below its reorder_point' but the code sends no notification."
+    },
+    {
+      "id": "O6",
+      "description": "Does not verify supplier_id against the supplier-directory service before creating an item",
+      "category": "EXTERNAL_INTERACTIONS",
+      "reasoning": "The specification states 'Warehouse should verify that supplier_id refers to an active supplier before creating an item' but the code makes no outbound call."
+    }
+  ]
+}
+
+
+=== END EXAMPLE ===
+
+Output a JSON object with:
+- "additions": array of {"id": "A1", "description": "...", "category": "...", "reasoning": "..."}
+- "omissions": array of {"id": "O1", "description": "...", "category": "...", "reasoning": "..."}
+
+Output ONLY valid JSON, no other text.
+
+
+=== USER PROMPT ===
+
+=== SPECIFICATION ===
+
+SPECIFICATION: Conduit (RealWorld) Blogging Platform API
+============================================================
+
+This application provides a REST API for a blogging platform.
+The API is served under /api/. Authentication uses JWT tokens
+passed via the Authorization header ('Token <jwt>').
+
+## Article Management
+
+- Create a user (username: 'author1', email: 'author1@test.com', password: 'pass123') and authenticate. Create an article with title 'My Test Article', description 'Test description', body 'Article body content', tagList ['testing', 'nestjs']. Verify response status is 201. Verify the returned article has 'title' equal to 'My Test Article', 'description' equal to 'Test description', 'tagList' containing 'testing' and 'nestjs', and 'slug' starting with 'my-test-article-' (lowercase with hyphen suffix). Extract the slug. Retrieve the article via GET /api/articles/{slug}. Verify status 200 and the returned article title is 'My Test Article'.
+
+- Create a user (username: 'updateuser1', email: 'updateuser1@test.com', password: 'pass123'). Create an article with title 'Original Title', description 'Original description', body 'Original body'. Extract the slug. Update the article via PUT /api/articles/{slug} with new title 'Updated Title' and description 'Updated description'. Verify response status is 200. Verify the response article has 'title' equal to 'Updated Title' and 'description' equal to 'Updated description'. Verify the slug in the response is unchanged. Retrieve the article by the original slug. Verify the article has the updated values.
+
+- Create a user (username: 'deleteuser1', email: 'deleteuser1@test.com', password: 'pass123'). Create an article with title 'Article To Delete'. Extract the slug. Verify the article can be retrieved via GET /api/articles/{slug}. Delete the article via DELETE /api/articles/{slug}. Verify response status is 200. Attempt to GET the article by slug again. Verify the response status is 200 with an empty object {} (implementation returns empty object for deleted articles rather than 404).
+
+- Create user1 (username: 'feeduser1', email: 'feeduser1@test.com', password: 'pass123'), user2 (username: 'feedauthor1', email: 'feedauthor1@test.com', password: 'pass123'), and user3 (username: 'feedauthor2', email: 'feedauthor2@test.com', password: 'pass123'). User2 creates article 'Article By Followed'. User3 creates article 'Article By Not Followed'. Using user1's token, GET /api/articles/feed. Verify articlesCount is 0 (no follows yet). User1 follows user2. GET /api/articles/feed again. Verify articlesCount is 1. Verify the articles array contains 'Article By Followed' and does NOT contain 'Article By Not Followed'.
+
+- Create a user (username: 'commentuser1', email: 'commentuser1@test.com', password: 'pass123'). Create an article with title 'Comment Test Article'. Extract the slug. Create a comment on the article via POST /api/articles/{slug}/comments with body 'This is my test comment'. Verify response status is 200. Verify the response article has comments array with length >= 1. GET the comments for the article via GET /api/articles/{slug}/comments. Verify status 200. Verify the comments array contains a comment with body 'This is my test comment'. Verify the comment has an 'id' field that is a number.
+
+- Create a user (username: 'delcommentuser1', email: 'delcommentuser1@test.com', password: 'pass123'). Create an article with title 'Delete Comment Test'. Extract the slug. Create a comment with body 'Comment to delete'. Extract the comment id from the response. Verify the article has 1 comment. Delete the comment via DELETE /api/articles/{slug}/comments/{id}. Verify response status is 200. GET the article's comments. Verify the comments array is empty or does not contain the deleted comment body.
+
+- Create a user. Create article1 with title 'First Tagged Article' and tagList ['javascript', 'testing']. Create article2 with title 'Second Tagged Article' and tagList ['python', 'testing']. Create article3 with title 'No Match Article' and tagList ['ruby']. GET /api/articles?tag=javascript. Verify articlesCount is 1 and articles array contains only 'First Tagged Article'. GET /api/articles?tag=testing. Verify articlesCount is 2 and articles array contains both 'First Tagged Article' and 'Second Tagged Article'. GET /api/articles?tag=nonexistent. Verify articlesCount is 0.
+
+- Create user1 (username: 'author1', email: 'author1@test.com', password: 'pass123') and user2 (username: 'author2', email: 'author2@test.com', password: 'pass123'). User1 creates article 'Article By Author1'. User2 creates article 'Article By Author2'. GET /api/articles?author=author1. Verify articlesCount is 1 and articles array contains only 'Article By Author1'. GET /api/articles?author=author2. Verify articlesCount is 1 and articles array contains only 'Article By Author2'. GET /api/articles (no filter). Verify articlesCount is 2.
+
+- Create a user. Create 5 articles with titles 'Article 1', 'Article 2', 'Article 3', 'Article 4', 'Article 5' (in that order). GET /api/articles?limit=2. Verify articlesCount is 5 (total) but articles array has only 2 items. GET /api/articles?limit=2&offset=2. Verify articles array has 2 items and they are different from the first request (offset skipped first 2). GET /api/articles?limit=10. Verify articles array has all 5 items.
+
+- Create user1 (username: 'articleauthor1', email: 'articleauthor1@test.com', password: 'pass123') and user2 (username: 'articleauthor2', email: 'articleauthor2@test.com', password: 'pass123'). User1 creates article 'User1 Article'. User2 creates article 'User2 Article'. GET /api/articles?author=articleauthor1. Verify articlesCount is 1 and contains only 'User1 Article'. GET /api/articles?author=articleauthor2. Verify articlesCount is 1 and contains only 'User2 Article'. This tests the author-article relationship established during article creation.
+
+- Create a user (username: 'taglistuser1', email: 'taglistuser1@test.com', password: 'pass123'). Create an article with title 'Multi Tag Article' and tagList ['tag1', 'tag2', 'tag3']. Extract the slug from response. GET /api/articles/{slug}. Verify the article's tagList contains exactly ['tag1', 'tag2', 'tag3'] in array format. Create another article with empty tagList []. GET that article. Verify tagList is an empty array []. This tests the simple-array column handling for tagList.
+
+- Create a user (username: 'timestampuser1', email: 'timestampuser1@test.com', password: 'pass123'). Create an article with title 'Timestamp Test Article'. Extract slug, created, and updated timestamps from response. Wait briefly, then PUT /api/articles/{slug} with updated title 'Updated Timestamp Article'. GET /api/articles/{slug}. Verify the 'created' timestamp is unchanged from original. Verify the 'updated' timestamp is different (newer) than the original. This tests the @BeforeUpdate hook that updates the timestamp.
+
+- Create user1 (username: 'sluguser1', email: 'sluguser1@test.com', password: 'pass123'). User1 creates two articles with the SAME title 'Duplicate Title Article'. Verify both articles are created successfully (both return 201). Extract both slugs. Verify the two slugs are DIFFERENT from each other (random suffix makes them unique). Both slugs should start with 'duplicate-title-article-' but have different suffixes. This tests the slugify function that appends random suffix.
+
+- Create user1 (username: 'fieldsuser1', email: 'fieldsuser1@test.com', password: 'pass123'). User1 creates an article with title 'Test Article Title', description 'Test article description content'. Extract the slug. GET /api/articles/{slug}. Verify the article's title is exactly 'Test Article Title' and description is exactly 'Test article description content'. This tests title and description field persistence.
+
+- Create user1 (username: 'feedpageuser1', email: 'feedpageuser1@test.com', password: 'pass123'). Create user2 (username: 'feedpageauthor1', email: 'feedpageauthor1@test.com', password: 'pass123'). User1 follows user2. User2 creates 5 articles: 'Article 1', 'Article 2', 'Article 3', 'Article 4', 'Article 5'. User1 GETs /api/articles/feed?limit=2. Verify articlesCount is 5 (total) but only 2 articles returned. User1 GETs /api/articles/feed?limit=2&offset=2. Verify 2 different articles returned. This tests feed pagination.
+
+- Create user1 (username: 'orderuser1', email: 'orderuser1@test.com', password: 'pass123'). User1 creates article1 'First Article', wait at least 1 second, then creates article2 'Second Article', wait at least 1 second, then creates article3 'Third Article'. GET /api/articles. Verify the articles array is ordered by created timestamp in descending order (newest first). Articles with identical timestamps (to the second) may have undefined relative ordering due to database timestamp precision being in seconds. This tests the ORDER BY article.created DESC clause.
+
+- Create user1 (username: 'multicommentuser1', email: 'multicommentuser1@test.com', password: 'pass123'). User1 creates an article 'Multi Comment Article'. User1 adds comment 'First comment'. User1 adds comment 'Second comment'. User1 adds comment 'Third comment'. GET /api/articles/{slug}/comments. Verify 3 comments are returned. Verify each comment has a unique id (no duplicates). Verify the comment bodies are preserved correctly. This tests comment creation and persistence with multiple comments.
+
+- Create user1 (username: 'emptyfeeduser1', email: 'emptyfeeduser1@test.com', password: 'pass123'). Create user2 (username: 'emptyfeedauthor1', email: 'emptyfeedauthor1@test.com', password: 'pass123'). User2 creates an article 'Article by User2'. User1 (who follows nobody) GETs /api/articles/feed. Verify articlesCount is 0 and articles array is empty. This tests the empty follows check that returns empty result when user has no follows.
+
+- Create user1 (username: 'owner1', email: 'owner1@test.com', password: 'pass123'). Create user2 (username: 'attacker1', email: 'attacker1@test.com', password: 'pass123'). User1 creates article with title 'Original Owner Article'. Verify article exists. User2 (NOT the owner) PUTs /api/articles/{slug} with title 'Hacked By User2'. Verify PUT response shows updated title. GET article and verify title changed. User1 creates second article 'Article To Delete'. User2 (NOT the owner) DELETEs /api/articles/{slug}. Verify DELETE succeeds with status 200. GET the deleted article and verify it returns 200 with empty object {} (implementation returns empty object for deleted articles). This demonstrates the security vulnerability that any user can update/delete any article.
+
+## User & Authentication
+
+- Create a new user using the user creation endpoint with payload {user: {username: 'testuser123', email: 'test@example.com', password: 'password123'}}. Verify the response status is 201. Parse the response JSON and verify that the returned user object contains 'username' equal to 'testuser123', 'email' equal to 'test@example.com', and 'token' field is not empty. Extract the token from the response. Use the token to retrieve the current user information via the GET /api/user endpoint with Authorization header 'Token {token}'. Verify the retrieval response status is 200. Verify the retrieved user's 'username' is 'testuser123' and 'email' is 'test@example.com'.
+
+- Create a user (username: 'uniqueuser1', email: 'unique1@test.com', password: 'pass123'). Verify status 201. Attempt to create another user with the same username but different email (username: 'uniqueuser1', email: 'different@test.com'). Verify the response status is 400. Verify the response contains 'Username and email must be unique'. Attempt to create another user with different username but same email (username: 'differentuser', email: 'unique1@test.com'). Verify the response status is 400. Verify the response contains 'Username and email must be unique'.
+
+- Create a user with username 'logintest1', email 'logintest1@test.com', password 'correctpass123'. Then POST /users/login with email 'logintest1@test.com' and password 'correctpass123'. Verify response status is 201 and response contains 'user' object with matching email and username, and a valid token. Then POST /users/login with same email but WRONG password 'wrongpass456'. Verify response is 401 (unauthorized). This tests the argon2 password verification logic.
+
+- Create a user with username 'updateuser1', email 'updateuser1@test.com', password 'pass123'. Extract the token. PUT /api/user with body {"user": {"bio": "Updated bio text", "image": "https://example.com/newimage.jpg"}}. Verify response status is 200. Verify response contains updated bio 'Updated bio text' and image 'https://example.com/newimage.jpg'. GET /api/user with the token. Verify the updated bio and image persisted.
+
+- Create user1 (username: 'jwtuser1', email: 'jwtuser1@test.com', password: 'pass123'). Extract the JWT token from the response. Decode the JWT token payload (base64 decode the middle segment). Verify the payload contains: id matching the user's id, username equal to 'jwtuser1', email equal to 'jwtuser1@test.com'. Use the token to GET /api/user and verify the returned user matches. This tests the JWT payload generation in generateJWT method.
+
+- Create user1 (username: 'orphanauthor1', email: 'orphanauthor1@test.com', password: 'pass123'). User1 creates article with title 'Orphan Article Test'. GET /api/articles and verify article exists with author username 'orphanauthor1'. DELETE /api/users/orphanauthor1@test.com. Verify response is 500 (FK constraint error). GET /api/articles again and verify article still exists. This tests that articles block user deletion (no CASCADE DELETE configured).
+
+## Profiles & Following
+
+- Create two users: user1 (username: 'follower1', email: 'follower1@test.com', password: 'pass123') and user2 (username: 'followee1', email: 'followee1@test.com', password: 'pass123'). Using user1's token, follow user2 by POST to /api/profiles/followee1/follow. Verify the response status is 201. Verify the response body profile has 'following' equal to true and 'username' equal to 'followee1'. Then GET the profile /api/profiles/followee1 with user1's token and verify 'following' is true. Next, using user1's token, attempt to follow themselves by POST to /api/profiles/follower1/follow. Verify this returns status 400 with message containing 'cannot be equal'.
+
+- Create user1 (username: 'unfollower1', email: 'unfollower1@test.com', password: 'pass123') and user2 (username: 'unfollowee1', email: 'unfollowee1@test.com', password: 'pass123'). User1 follows user2. Verify following is true. User1 unfollows user2 via DELETE /api/profiles/unfollowee1/follow. Verify response status is 200. Verify response profile has 'following' equal to false. GET profile of user2 using user1's token. Verify 'following' is false. Verify user1 cannot unfollow themselves (should return 400).
+
+- Create user1 (username: 'profileviewer1', email: 'profileviewer1@test.com', password: 'pass123') and user2 (username: 'profiletarget1', email: 'profiletarget1@test.com', password: 'pass123'). Using user1's token, GET /api/profiles/profiletarget1. Verify profile has 'following' equal to false (no relationship yet). User1 follows user2 via POST /api/profiles/profiletarget1/follow. GET /api/profiles/profiletarget1 again with user1's token. Verify profile has 'following' equal to true and username is 'profiletarget1'. User1 unfollows user2. GET /api/profiles/profiletarget1 again. Verify profile has 'following' equal to false again. This tests the follow status lookup in findProfile method.
+
+- Create user1 (username: 'profilebiouser1', email: 'profilebiouser1@test.com', password: 'pass123'). Update user1's profile with bio 'This is my bio text' and image 'https://example.com/avatar.jpg' via PUT /api/user. GET /api/profiles/profilebiouser1. Verify the profile contains username 'profilebiouser1', bio 'This is my bio text', and image 'https://example.com/avatar.jpg'. This tests profile data retrieval.
+
+
+## Implementation Requirements
+- Uses JWT tokens for authentication (PyJWT library)
+- Uses bcrypt for password hashing (passlib library)
+- Articles use slug-based URLs derived from the title
+
+
+=== CODE (conduit_app) ===
+
+from fastapi import FastAPI, Depends, HTTPException, Header, Query, Response, status
+from fastapi.middleware.cors import CORSMiddleware
+from sqlmodel import SQLModel, Field, Session, create_engine, select, Relationship
+from sqlalchemy import Column, Text, UniqueConstraint
+from typing import Optional, List
+from datetime import datetime, timedelta
+from passlib.context import CryptContext
+import jwt
+import secrets
+import re
+import json
+
+SECRET_KEY = "super-secret-jwt-key"
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_DAYS = 30
+
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+sqlite_url = "sqlite:///./conduit.db"
+engine = create_engine(sqlite_url, connect_args={"check_same_thread": False})
+
+
+def now_utc():
+    return datetime.utcnow()
+
+
+def slugify(title: str) -> str:
+    base = re.sub(r"[^a-z0-9]+", "-", title.lower()).strip("-")
+    suffix = secrets.token_hex(4)
+    return f"{base}-{suffix}"
+
+
+def hash_password(password: str) -> str:
+    return pwd_context.hash(password)
+
+
+def verify_password(password: str, hashed: str) -> bool:
+    return pwd_context.verify(password, hashed)
+
+
+def create_token(user_id: int) -> str:
+    payload = {
+        "sub": str(user_id),
+        "exp": datetime.utcnow() + timedelta(days=ACCESS_TOKEN_EXPIRE_DAYS),
+    }
+    return jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
+
+
+def decode_token(token: str) -> int:
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        return int(payload["sub"])
+    except Exception:
+        raise HTTPException(status_code=401, detail={"errors": {"body": ["Invalid token"]}})
+
+
+class FollowLink(SQLModel, table=True):
+    follower_id: Optional[int] = Field(default=None, foreign_key="user.id", primary_key=True)
+    following_id: Optional[int] = Field(default=None, foreign_key="user.id", primary_key=True)
+
+
+class ArticleTagLink(SQLModel, table=True):
+    article_id: Optional[int] = Field(default=None, foreign_key="article.id", primary_key=True)
+    tag_id: Optional[int] = Field(default=None, foreign_key="tag.id", primary_key=True)
+
+
+class User(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    username: str = Field(index=True, unique=True)
+    email: str = Field(index=True, unique=True)
+    password_hash: str
+    bio: Optional[str] = None
+    image: Optional[str] = None
+
+    articles: List["Article"] = Relationship(back_populates="author")
+    comments: List["Comment"] = Relationship(back_populates="author")
+
+
+class Tag(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    name: str = Field(index=True, unique=True)
+
+    articles: List["Article"] = Relationship(back_populates="tags", link_model=ArticleTagLink)
+
+
+class Article(SQLModel, table=True):
+    __table_args__ = (UniqueConstraint("slug"),)
+    id: Optional[int] = Field(default=None, primary_key=True)
+    slug: str = Field(index=True)
+    title: str
+    description: str = Field(default="", sa_column=Column(Text))
+    body: str = Field(default="", sa_column=Column(Text))
+    created_at: datetime = Field(default_factory=now_utc, index=True)
+    updated_at: datetime = Field(default_factory=now_utc)
+    author_id: int = Field(foreign_key="user.id")
+
+    author: Optional[User] = Relationship(back_populates="articles")
+    comments: List["Comment"] = Relationship(back_populates="article")
+    tags: List[Tag] = Relationship(back_populates="articles", link_model=ArticleTagLink)
+
+
+class Comment(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    body: str = Field(sa_column=Column(Text))
+    created_at: datetime = Field(default_factory=now_utc)
+    updated_at: datetime = Field(default_factory=now_utc)
+    author_id: int = Field(foreign_key="user.id")
+    article_id: int = Field(foreign_key="article.id")
+
+    author: Optional[User] = Relationship(back_populates="comments")
+    article: Optional[Article] = Relationship(back_populates="comments")
+
+
+def create_db_and_tables():
+    SQLModel.metadata.create_all(engine)
+
+
+@app.on_event("startup")
+def on_startup():
+    create_db_and_tables()
+
+
+def get_session():
+    with Session(engine) as session:
+        yield session
+
+
+def parse_token_header(authorization: Optional[str]) -> Optional[str]:
+    if not authorization:
+        return None
+    parts = authorization.split(" ", 1)
+    if len(parts) != 2 or parts[0] != "Token":
+        return None
+    return parts[1]
+
+
+def get_current_user_optional(
+    authorization: Optional[str] = Header(default=None),
+    session: Session = Depends(get_session),
+) -> Optional[User]:
+    token = parse_token_header(authorization)
+    if not token:
+        return None
+    user_id = decode_token(token)
+    user = session.get(User, user_id)
+    if not user:
+        return None
+    return user
+
+
+def get_current_user(
+    authorization: Optional[str] = Header(default=None),
+    session: Session = Depends(get_session),
+) -> User:
+    token = parse_token_header(authorization)
+    if not token:
+        raise HTTPException(status_code=401, detail={"errors": {"body": ["Authorization required"]}})
+    user_id = decode_token(token)
+    user = session.get(User, user_id)
+    if not user:
+        raise HTTPException(status_code=401, detail={"errors": {"body": ["User not found"]}})
+    return user
+
+
+def user_response(user: User):
+    return {
+        "user": {
+            "email": user.email,
+            "token": create_token(user.id),
+            "username": user.username,
+            "bio": user.bio,
+            "image": user.image,
+        }
+    }
+
+
+def is_following(session: Session, viewer: Optional[User], target: User) -> bool:
+    if not viewer:
+        return False
+    link = session.get(FollowLink, (viewer.id, target.id))
+    return link is not None
+
+
+def profile_response(session: Session, target: User, viewer: Optional[User]):
+    return {
+        "profile": {
+            "username": target.username,
+            "bio": target.bio,
+            "image": target.image,
+            "following": is_following(session, viewer, target),
+        }
+    }
+
+
+def article_response(session: Session, article: Article, viewer: Optional[User] = None, include_comments: bool = False):
+    session.refresh(article)
+    author = session.get(User, article.author_id)
+    tags = [tag.name for tag in article.tags]
+    comments_payload = []
+    if include_comments:
+        comments = session.exec(select(Comment).where(Comment.article_id == article.id).order_by(Comment.id)).all()
+        for c in comments:
+            c_author = session.get(User, c.author_id)
+            comments_payload.append({
+                "id": c.id,
+                "createdAt": c.created_at.isoformat() + "Z",
+                "updatedAt": c.updated_at.isoformat() + "Z",
+                "body": c.body,
+                "author": {
+                    "username": c_author.username if c_author else None,
+                    "bio": c_author.bio if c_author else None,
+                    "image": c_author.image if c_author else None,
+                    "following": is_following(session, viewer, c_author) if c_author else False,
+                },
+            })
+    return {
+        "article": {
+            "slug": article.slug,
+            "title": article.title,
+            "description": article.description,
+            "body": article.body,
+            "tagList": tags,
+            "createdAt": article.created_at.isoformat() + "Z",
+            "updatedAt": article.updated_at.isoformat() + "Z",
+            "favorited": False,
+            "favoritesCount": 0,
+            "author": {
+                "username": author.username if author else None,
+                "bio": author.bio if author else None,
+                "image": author.image if author else None,
+                "following": is_following(session, viewer, author) if author else False,
+            },
+            **({"comments": comments_payload} if include_comments else {}),
+        }
+    }
+
+
+def comment_response(session: Session, comment: Comment, viewer: Optional[User] = None):
+    author = session.get(User, comment.author_id)
+    return {
+        "id": comment.id,
+        "createdAt": comment.created_at.isoformat() + "Z",
+        "updatedAt": comment.updated_at.isoformat() + "Z",
+        "body": comment.body,
+        "author": {
+            "username": author.username if author else None,
+            "bio": author.bio if author else None,
+            "image": author.image if author else None,
+            "following": is_following(session, viewer, author) if author else False,
+        },
+    }
+
+
+def get_or_create_tags(session: Session, tag_names: List[str]) -> List[Tag]:
+    tags = []
+    for name in tag_names:
+        existing = session.exec(select(Tag).where(Tag.name == name)).first()
+        if existing:
+            tags.append(existing)
+        else:
+            tag = Tag(name=name)
+            session.add(tag)
+            session.commit()
+            session.refresh(tag)
+            tags.append(tag)
+    return tags
+
+
+@app.post("/api/users", status_code=201)
+def register(payload: dict, session: Session = Depends(get_session)):
+    user_data = payload.get("user", {})
+    username = user_data.get("username")
+    email = user_data.get("email")
+    password = user_data.get("password")
+    if not username or not email or not password:
+        raise HTTPException(status_code=422, detail={"errors": {"body": ["Missing fields"]}})
+    if session.exec(select(User).where(User.email == email)).first():
+        raise HTTPException(status_code=422, detail={"errors": {"email": ["has already been taken"]}})
+    if session.exec(select(User).where(User.username == username)).first():
+        raise HTTPException(status_code=422, detail={"errors": {"username": ["has already been taken"]}})
+    user = User(username=username, email=email, password_hash=hash_password(password))
+    session.add(user)
+    session.commit()
+    session.refresh(user)
+    return user_response(user)
+
+
+@app.post("/api/users/login", status_code=201)
+def login(payload: dict, session: Session = Depends(get_session)):
+    user_data = payload.get("user", {})
+    email = user_data.get("email")
+    password = user_data.get("password")
+    user = session.exec(select(User).where(User.email == email)).first()
+    if not user or not verify_password(password, user.password_hash):
+        raise HTTPException(status_code=401, detail={"errors": {"body": ["email or password is invalid"]}})
+    return user_response(user)
+
+
+@app.get("/api/user")
+def get_user(current_user: User = Depends(get_current_user)):
+    return user_response(current_user)
+
+
+@app.put("/api/user")
+def update_user(payload: dict, session: Session = Depends(get_session), current_user: User = Depends(get_current_user)):
+    user_data = payload.get("user", {})
+    if "email" in user_data and user_data["email"]:
+        current_user.email = user_data["email"]
+    if "username" in user_data and user_data["username"]:
+        current_user.username = user_data["username"]
+    if "password" in user_data and user_data["password"]:
+        current_user.password_hash = hash_password(user_data["password"])
+    if "bio" in user_data:
+        current_user.bio = user_data["bio"]
+    if "image" in user_data:
+        current_user.image = user_data["image"]
+    session.add(current_user)
+    session.commit()
+    session.refresh(current_user)
+    return user_response(current_user)
+
+
+@app.get("/api/profiles/{username}")
+def get_profile(username: str, session: Session = Depends(get_session), viewer: Optional[User] = Depends(get_current_user_optional)):
+    target = session.exec(select(User).where(User.username == username)).first()
+    if not target:
+        raise HTTPException(status_code=404, detail={"errors": {"body": ["Profile not found"]}})
+    return profile_response(session, target, viewer)
+
+
+@app.post("/api/profiles/{username}/follow", status_code=201)
+def follow_profile(username: str, session: Session = Depends(get_session), viewer: User = Depends(get_current_user)):
+    target = session.exec(select(User).where(User.username == username)).first()
+    if not target:
+        raise HTTPException(status_code=404, detail={"errors": {"body": ["Profile not found"]}})
+    if viewer.id == target.id:
+        raise HTTPException(status_code=400, detail={"errors": {"body": ["followerId and followingId cannot be equal"]}})
+    existing = session.get(FollowLink, (viewer.id, target.id))
+    if not existing:
+        session.add(FollowLink(follower_id=viewer.id, following_id=target.id))
+        session.commit()
+    return profile_response(session, target, viewer)
+
+
+@app.delete("/api/profiles/{username}/follow")
+def unfollow_profile(username: str, session: Session = Depends(get_session), viewer: User = Depends(get_current_user)):
+    target = session.exec(select(User).where(User.username == username)).first()
+    if not target:
+        raise HTTPException(status_code=404, detail={"errors": {"body": ["Profile not found"]}})
+    if viewer.id == target.id:
+        raise HTTPException(status_code=400, detail={"errors": {"body": ["followerId and followingId cannot be equal"]}})
+    existing = session.get(FollowLink, (viewer.id, target.id))
+    if existing:
+        session.delete(existing)
+        session.commit()
+    return profile_response(session, target, viewer)
+
+
+@app.post("/api/articles", status_code=201)
+def create_article(payload: dict, session: Session = Depends(get_session), current_user: User = Depends(get_current_user)):
+    article_data = payload.get("article", {})
+    title = article_data.get("title", "")
+    description = article_data.get("description", "") or ""
+    body = article_data.get("body", "") or ""
+    tag_list = article_data.get("tagList", [])
+    article = Article(
+        slug=slugify(title),
+        title=title,
+        description=description,
+        body=body,
+        author_id=current_user.id,
+        created_at=now_utc(),
+        updated_at=now_utc(),
+    )
+    session.add(article)
+    session.commit()
+    session.refresh(article)
+    tags = get_or_create_tags(session, tag_list)
+    article.tags = tags
+    session.add(article)
+    session.commit()
+    session.refresh(article)
+    return article_response(session, article, current_user)
+
+
+@app.get("/api/articles")
+def list_articles(
+    author: Optional[str] = Query(default=None),
+    limit: int = Query(default=20),
+    offset: int = Query(default=0),
+    session: Session = Depends(get_session),
+    viewer: Optional[User] = Depends(get_current_user_optional),
+):
+    query = select(Article)
+    if author:
+        author_user = session.exec(select(User).where(User.username == author)).first()
+        if author_user:
+            query = query.where(Article.author_id == author_user.id)
+        else:
+            return {"articles": [], "articlesCount": 0}
+    all_articles = session.exec(query.order_by(Article.created_at.desc(), Article.id.desc())).all()
+    total = len(all_articles)
+    paged = all_articles[offset:offset + limit]
+    return {
+        "articles": [article_response(session, a, viewer)["article"] for a in paged],
+        "articlesCount": total,
+    }
+
+
+@app.get("/api/articles/{slug}")
+def get_article(slug: str, session: Session = Depends(get_session), viewer: Optional[User] = Depends(get_current_user_optional)):
+    article = session.exec(select(Article).where(Article.slug == slug)).first()
+    if not article:
+        return {}
+    return article_response(session, article, viewer)
+
+
+@app.put("/api/articles/{slug}")
+def update_article(slug: str, payload: dict, session: Session = Depends(get_session), current_user: User = Depends(get_current_user)):
+    article = session.exec(select(Article).where(Article.slug == slug)).first()
+    if not article:
+        return {}
+    article_data = payload.get("article", {})
+    if "title" in article_data and article_data["title"] is not None:
+        article.title = article_data["title"]
+    if "description" in article_data and article_data["description"] is not None:
+        article.description = article_data["description"]
+    if "body" in article_data and article_data["body"] is not None:
+        article.body = article_data["body"]
+    if "tagList" in article_data and article_data["tagList"] is not None:
+        article.tags = get_or_create_tags(session, article_data["tagList"])
+    article.updated_at = now_utc()
+    session.add(article)
+    session.commit()
+    session.refresh(article)
+    return article_response(session, article, current_user)
+
+
+@app.delete("/api/articles/{slug}")
+def delete_article(slug: str, session: Session = Depends(get_session), current_user: User = Depends(get_current_user)):
+    article = session.exec(select(Article).where(Article.slug == slug)).first()
+    if not article:
+        return {}
+    comments = session.exec(select(Comment).where(Comment.article_id == article.id)).all()
+    for c in comments:
+        session.delete(c)
+    session.delete(article)
+    session.commit()
+    return {}
+
+
+@app.post("/api/articles/{slug}/comments")
+def add_comment(slug: str, payload: dict, session: Session = Depends(get_session), current_user: User = Depends(get_current_user)):
+    article = session.exec(select(Article).where(Article.slug == slug)).first()
+    if not article:
+        raise HTTPException(status_code=404, detail={"errors": {"body": ["Article not found"]}})
+    body = payload.get("comment", {}).get("body", "")
+    comment = Comment(body=body, author_id=current_user.id, article_id=article.id, created_at=now_utc(), updated_at=now_utc())
+    session.add(comment)
+    session.commit()
+    session.refresh(comment)
+    return article_response(session, article, current_user, include_comments=True)
+
+
+@app.get("/api/articles/{slug}/comments")
+def get_comments(slug: str, session: Session = Depends(get_session), viewer: Optional[User] = Depends(get_current_user_optional)):
+    article = session.exec(select(Article).where(Article.slug == slug)).first()
+    if not article:
+        raise HTTPException(status_code=404, detail={"errors": {"body": ["Article not found"]}})
+    comments = session.exec(select(Comment).where(Comment.article_id == article.id).order_by(Comment.id)).all()
+    return {"comments": [comment_response(session, c, viewer) for c in comments]}
+
+
+@app.delete("/api/articles/{slug}/comments/{comment_id}")
+def delete_comment(slug: str, comment_id: int, session: Session = Depends(get_session), current_user: User = Depends(get_current_user)):
+    article = session.exec(select(Article).where(Article.slug == slug)).first()
+    if not article:
+        raise HTTPException(status_code=404, detail={"errors": {"body": ["Article not found"]}})
+    comment = session.get(Comment, comment_id)
+    if comment and comment.article_id == article.id:
+        session.delete(comment)
+        session.commit()
+    return {"status": "ok"}
+
+=== SERVICE TO ANALYZE ===
+conduit_app

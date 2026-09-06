@@ -1,0 +1,54 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R8",
+        "label": "MATCH",
+        "reasoning": "O1 describes removing the owner-only restriction on GET /profiles by noting the code allows any authenticated user."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R8",
+        "label": "PARTIAL",
+        "reasoning": "O2 includes the same GET /profiles owner-restriction issue as R8, but mixes it with unrelated /profiles/{id} access-control behavior."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "O3 mentions that POST /profiles requires user_id from the validated token, which overlaps with R9, but its main issue discussed is different."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "O4 directly states that protein should not be considered in the /profileDishes calculation."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 discusses status codes and does not correspond to any of the listed reference requirements."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 is about 401 handling for invalid or missing tokens, which is unrelated to R7, R8, and R9."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O7 concerns floating point formatting and does not match any reference requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1253,
+    "prompt_tokens": 828,
+    "completion_tokens": 425
+  }
+}

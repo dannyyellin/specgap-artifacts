@@ -1,0 +1,48 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of the integer 1-5 range constraint on the rating field, matching R10."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R11",
+        "label": "MATCH",
+        "reasoning": "O2 directly describes the absence of the one-rating-per-user-per-dish constraint, matching R11."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 concludes there is no omission and does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concludes there is no omission and does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 concludes there is no omission and does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R12",
+        "label": "PARTIAL",
+        "reasoning": "O6 touches on token validation being absent for POST /ratings, which partially relates to R12 (user_id coming from token validation), but frames it as a general token presence check rather than specifically about deriving user_id from the token."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1261,
+    "prompt_tokens": 822,
+    "completion_tokens": 439
+  }
+}

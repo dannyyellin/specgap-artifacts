@@ -1,0 +1,48 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of the integer 1-5 range constraint on 'rating', which is exactly what R10 states."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 concerns the response body format of POST /ratings, which does not correspond to any of the three reference requirements about removed constraints."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R11",
+        "label": "MATCH",
+        "reasoning": "O3 describes the absence of explicit enforcement of the one-rating-per-user-per-dish rule, which matches R11's removal of that constraint."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concerns dish existence verification in GET /ratings/{id}, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 concerns dish existence verification in DELETE /ratings/{id}, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 concerns use of a disallowed package (flask_pymongo), which does not correspond to any of the three reference requirements about removed constraints."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1387,
+    "prompt_tokens": 940,
+    "completion_tokens": 447
+  }
+}

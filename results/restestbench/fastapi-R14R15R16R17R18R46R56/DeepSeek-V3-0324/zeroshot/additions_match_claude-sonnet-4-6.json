@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R56",
+        "label": "MATCH",
+        "reasoning": "R56 explicitly tests that a password of exactly 7 characters triggers a 422 validation error, which directly corresponds to the code's password length validation requiring at least 8 characters."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements mention title length validation for items."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements mention a 'full_name' field for users."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements mention restrictions on superusers deleting themselves."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1495,
+    "prompt_tokens": 1225,
+    "completion_tokens": 270
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "It refers to the same follow endpoint and status-code check in R2, but only captures the 201 response requirement rather than the full follow/self-follow behavior."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "It directly matches R2's requirement that attempting to follow oneself must return 400 with a message containing 'cannot be equal'."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "It directly matches R10's requirement that a user cannot unfollow themselves and should receive status 400."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R24",
+        "label": "MATCH",
+        "reasoning": "It describes the same behavior as R24: GET /api/articles must be ordered by created timestamp descending rather than by id."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement mentions ordering for the /api/articles/feed endpoint."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1991,
+    "prompt_tokens": 1677,
+    "completion_tokens": 314
+  }
+}

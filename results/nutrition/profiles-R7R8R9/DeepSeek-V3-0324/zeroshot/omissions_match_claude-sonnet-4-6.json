@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R8",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of the owner-only restriction on GET /profiles, matching R8 exactly."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "O2 relates to user_id validation in requests but focuses on PUT/DELETE matching authenticated user, while R9 specifically addresses that user_id comes from token validation rather than the request body."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "O3 directly describes the exclusion of the 'protein' field from the profileDishes calculation, matching R7 exactly."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 describes validation of at least one nutritional field in POST /profiles, which does not correspond to any of the reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1010,
+    "prompt_tokens": 699,
+    "completion_tokens": 311
+  }
+}

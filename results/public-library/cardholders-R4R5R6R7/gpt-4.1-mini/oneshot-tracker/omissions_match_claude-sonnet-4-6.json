@@ -1,0 +1,54 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "O1 describes a deviation from the $0.50/day * days overdue formula (R6), but frames it as a code behavior difference rather than a removal of the formula from the specification."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 describes missing validation for required fields in POST /cardholders, which does not correspond to any of the reference requirements R4-R7."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 describes a filtering limitation in GET /cardholders, which does not correspond to any of the reference requirements R4-R7."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 discusses PUT /cardholders id field update behavior, which does not correspond to any of the reference requirements R4-R7."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O5 directly describes the absence of the fine computation formula (days overdue * 0.50) in GET /cardholders/fines/{id}, matching R6's removal of the $0.50/day * days overdue formula."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R7",
+        "label": "PARTIAL",
+        "reasoning": "O5 touches on the fine computation in the fines endpoint which involves the cross-service call to Borrows (R7), but focuses on the formula rather than the removal of the cross-service call itself."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 discusses edge case handling for empty borrows list, which does not correspond to any of the reference requirements R4-R7."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1480,
+    "prompt_tokens": 906,
+    "completion_tokens": 574
+  }
+}

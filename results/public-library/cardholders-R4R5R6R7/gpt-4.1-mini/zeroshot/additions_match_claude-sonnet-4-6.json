@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 describes error handling behavior for cross-service calls, not the removal of the cross-service call itself or the removal of error codes from the spec."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A2 describes an added validation behavior not related to any of the four spec requirements about removed field types, error codes, fine formula, or cross-service calls."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A3 describes filtering behavior restrictions on GET /cardholders, which does not correspond to any of the four spec requirements about removed declarations, error codes, or fine computation."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 993,
+    "prompt_tokens": 747,
+    "completion_tokens": 246
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "O1 describes the missing delete-after-purchase behavior, which is exactly the behavior removed in R9."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 concerns validating the purchaser against a registered user, which is unrelated to any of R8, R9, or R10."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R8",
+        "label": "MATCH",
+        "reasoning": "O3 describes the multiple-available-pets selection behavior and specifically mentions random choice, matching R8."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 is about purchaser/authenticated username consistency, not pet selection, deletion after purchase, or purchase-id uniqueness."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 concerns error message formatting for unavailable pet types, which does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 is about query parameter type handling for store number and does not match any listed reference requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1042,
+    "prompt_tokens": 683,
+    "completion_tokens": 359
+  }
+}

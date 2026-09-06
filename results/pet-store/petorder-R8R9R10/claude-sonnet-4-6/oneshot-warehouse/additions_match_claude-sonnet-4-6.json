@@ -1,0 +1,66 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Storing purchase documents in a separate 'purchases' collection is not related to R8, R9, or R10."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Enforcing purchaser field matching authenticated username is not related to R8, R9, or R10."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Returning 401 instead of 403 for non-owner GET /transactions is not related to R8, R9, or R10."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Returning 401 instead of 403 for non-owner GET /transactions/{id} is not related to R8, R9, or R10."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Filtering unrecognized query parameters and returning empty arrays is not related to R8, R9, or R10."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": "R8",
+        "label": "MATCH",
+        "reasoning": "The code picks the first available pet sequentially instead of randomly, directly corresponding to R8 which states the random pet selection algorithm was removed."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": "R8",
+        "label": "MATCH",
+        "reasoning": "The code picks pets[0] instead of a random pet when a store is specified but no pet-name, directly corresponding to R8 which states the random pet selection algorithm was removed."
+      },
+      {
+        "detection_id": "A8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Using 'mongo' instead of 'mongoOrd' as the MongoDB hostname is not related to R8, R9, or R10."
+      },
+      {
+        "detection_id": "A9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Using a counter-based sequential integer ID for transactions is not related to R8, R9, or R10."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1807,
+    "prompt_tokens": 1151,
+    "completion_tokens": 656
+  }
+}

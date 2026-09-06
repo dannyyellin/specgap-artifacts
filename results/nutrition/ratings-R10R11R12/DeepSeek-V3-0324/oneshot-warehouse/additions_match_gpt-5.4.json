@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Supporting an additional token header format does not correspond to removing rating range, one-rating-per-user-per-dish, or token-derived user_id constraints."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Handling a privileged field in token validation response is unrelated to the removed constraints on rating range, duplicate ratings, or user_id source."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rounding floating point numbers to two decimals does not describe any of the specified removed constraints."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 744,
+    "prompt_tokens": 553,
+    "completion_tokens": 191
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the missing overdue borrow constraint (2+ overdue books blocks checkout, returns 400) which matches R2 exactly."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O2 describes the code accepting a user-supplied returnDate instead of computing it as loanDate + 30 days, which corresponds to R1's removal of the return date computation."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O3 describes the absence of the LOAN_PERIOD constant and the returnDate = loanDate + 30 days computation, which directly matches R1's removal of return date computation."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 993,
+    "prompt_tokens": 731,
+    "completion_tokens": 262
+  }
+}

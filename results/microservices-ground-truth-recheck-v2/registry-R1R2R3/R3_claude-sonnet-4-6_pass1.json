@@ -1,0 +1,19 @@
+{
+  "app": "pet-store",
+  "variant": "registry-R1R2R3",
+  "service": "registry",
+  "req_id": "R3",
+  "requirement": "The owner account is pre-registered when the service initializes.",
+  "source_headline": "Removed owner pre-registration on initialization",
+  "model": "claude-sonnet-4-6",
+  "pass": 1,
+  "label": "INFERRED",
+  "evidence": "The `init_db()` function decorated with `@app.before_first_request` checks if the owner account exists and inserts it if not: `if owner is None: users_collection().insert_one({\"username\": OWNER_USERNAME, \"password\": hash_password(OWNER_PASSWORD), \"privileged\": True})`. Also called explicitly in `if __name__ == \"__main__\": init_db()`.",
+  "reasoning": "The `init_db` function runs before the first request (or at startup) and pre-registers the owner account with the predefined credentials and privileged flag. This fully satisfies the requirement that the owner account is pre-registered when the service initializes. A test checking that the owner account exists immediately after service startup would pass.",
+  "usage": {
+    "total_tokens": 2514,
+    "prompt_tokens": 2318,
+    "completion_tokens": 196
+  },
+  "timestamp": "2026-07-16 15:00:40"
+}

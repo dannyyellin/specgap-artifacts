@@ -1,0 +1,19 @@
+Timestamp: 2026-06-02 09:37:33
+Detector:  claude-sonnet-4-6
+App/Variant/Service: public-library/cardholders-R4R5R6R7/cardholders
+Method:    oneshot-warehouse
+
+Tokens: prompt=6828, completion=1070, total=7898
+Additions: 3
+Omissions: 6
+
+  A A1: GET /cardholders restricts query filtering to only 'name' and 'email' fields, silently ignoring any other query parameters
+  A A2: PUT /cardholders/{id} rejects the request if an 'id' field is provided in the payload that does not match the URL cardholder_id
+  A A3: PUT /cardholders/{id} returns 400 if no updatable fields are provided in the payload
+
+  O O1: GET /cardholders does not support filtering by the 'id' field via query string
+  O O2: POST /cardholders does not validate that 'name' and 'email' are non-empty strings
+  O O3: The fines computation does not calculate the number of days overdue multiplied by FINE_PER_DAY ($0.50); instead it adds 1 per overdue book
+  O O4: The fines computation does not use the actual current date minus the returnDate to compute days overdue
+  O O5: POST /cardholders does not return 415 when the Content-Type is not application/json
+  O O6: PUT /cardholders/{id} does not return 415 when the Content-Type is not application/json

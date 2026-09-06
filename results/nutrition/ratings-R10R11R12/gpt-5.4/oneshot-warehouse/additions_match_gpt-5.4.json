@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "A1 describes accepting arbitrary floating-point ratings instead of enforcing the former integer 1-to-5 range, which directly matches removal of the rating range constraint."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A2 concerns internal rating record identifiers and sequence generation, which does not correspond to any of the listed removed constraints."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A3 is about token header parsing flexibility, not removal of the requirement that user_id comes from token validation."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 797,
+    "prompt_tokens": 601,
+    "completion_tokens": 196
+  }
+}

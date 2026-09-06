@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O1 describes the absence of password complexity validation for length, uppercase, lowercase, and digit requirements, which is the same behavior removed in R1."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 concerns DELETE /users response fields, which does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 concerns the successful password change response body, which does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O4 describes the same anti-enumeration requirement on /verify to return the same error message for invalid username and invalid password cases, which R2 says was removed."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 897,
+    "prompt_tokens": 635,
+    "completion_tokens": 262
+  }
+}

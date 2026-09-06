@@ -1,0 +1,54 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O1 directly addresses the requirement in R2 that POST /api/profiles/{username}/follow must return status 201, noting the implementation returns 200 instead."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O2 directly addresses the requirement in R2 that following yourself should return status 400 with a message containing 'cannot be equal', noting the implementation skips the link and returns a normal response instead."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O3 directly addresses the requirement in R10 that attempting to unfollow yourself should return 400, noting the implementation does not check for self-unfollow."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R28",
+        "label": "MATCH",
+        "reasoning": "O4 directly addresses the behavior documented in R28 that any authenticated user (non-owner) can update any article, noting the implementation incorrectly enforces ownership with a 403."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R28",
+        "label": "MATCH",
+        "reasoning": "O5 directly addresses the behavior documented in R28 that any authenticated user (non-owner) can delete any article, noting the implementation incorrectly enforces ownership with a 403."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R24",
+        "label": "MATCH",
+        "reasoning": "O6 directly addresses the requirement in R24 that GET /api/articles should be ordered by created timestamp descending, noting the implementation sorts by id descending instead."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements describe a DELETE /api/users/{email} endpoint or a requirement that deleting a user with articles should return a 500 FK constraint error."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2713,
+    "prompt_tokens": 2126,
+    "completion_tokens": 587
+  }
+}

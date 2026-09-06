@@ -1,0 +1,18 @@
+Timestamp: 2026-06-01 20:57:39
+Detector:  gpt-4.1-mini
+App/Variant/Service: nutrition/profiles-R7R8R9/profile
+Method:    twoshot
+
+Tokens: prompt=8011, completion=735, total=8746
+Additions: 1
+Omissions: 7
+
+  A A1: Supports filtering GET /profiles by 'user_id' query parameter
+
+  O O1: GET /profiles request is allowed by any authenticated user instead of only the restaurant Owner
+  O O2: POST /profiles does not reject requests missing all nutritional fields
+  O O3: POST /profiles does not check for duplicate profile creation for the same user_id properly if user_id is not integer
+  O O4: PUT /profiles/{id} and DELETE /profiles/{id} do not verify that the user is the owner of the profile before allowing the operation
+  O O5: GET /profileDishes request does not exclude 'protein' field in filtering dishes
+  O O6: GET /profileDishes does not handle 201 response code from dishes service
+  O O7: Does not validate that the token is provided for POST /profiles as required

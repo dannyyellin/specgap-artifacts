@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements mention a password recovery HTML endpoint."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements mention a test token endpoint."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements explicitly require cascade deletion of user items when a user is deleted."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1170,
+    "prompt_tokens": 986,
+    "completion_tokens": 184
+  }
+}

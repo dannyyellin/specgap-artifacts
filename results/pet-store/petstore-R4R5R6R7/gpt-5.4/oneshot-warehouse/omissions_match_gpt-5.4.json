@@ -1,0 +1,96 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns MongoDB service naming, which is unrelated to any reference requirement."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns docker-compose service naming, not any of the referenced removed behaviors."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "It describes the deleted constraint preventing pet-type deletion when pets of that type exist."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "It is the same removed behavior as R5, expressed in terms of the missing 400 response when pets still exist."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about POST /pet-types/{id}/pets returning 404, which does not correspond to any listed reference removal."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "It directly describes the removed support for birthdateGT and birthdateLT query filtering."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "It describes the missing birthdateGT/birthdateLT filtering behavior covered by R7."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": "R7",
+        "label": "PARTIAL",
+        "reasoning": "It is related to query-string handling on the same endpoint, but focuses on malformed-query behavior rather than the specific removed birthdate filtering requirement."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "It directly concerns extracting attributes from temperament/group_behavior and the required precedence between them."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "It concerns how attributes are split from temperament/group_behavior text, which is part of attributes extraction rules, but only one aspect of R4."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "It concerns lifespan handling, but R6 specifically refers to removing lifespan range parsing rules rather than null-versus-0 defaults."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about representation of missing lifespan as 0 versus null, not the removed lifespan range handling in R6."
+      },
+      {
+        "detection_id": "O13",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "It partially matches because it includes failure to extract temperament/group_behavior for attributes, though it also covers unrelated family/genus/lifespan extraction."
+      },
+      {
+        "detection_id": "O13",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "It partially matches because it includes incorrect lifespan extraction from the Ninja API response, but not specifically the removed range-handling rules."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2120,
+    "prompt_tokens": 1289,
+    "completion_tokens": 831
+  }
+}

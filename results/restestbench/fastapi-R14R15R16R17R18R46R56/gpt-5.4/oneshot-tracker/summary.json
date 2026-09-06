@@ -1,0 +1,26 @@
+{
+  "method": "oneshot-tracker",
+  "round": 2,
+  "removals": [
+    14,
+    15,
+    16,
+    17,
+    18,
+    46,
+    56
+  ],
+  "model": "gpt-5.4",
+  "gen_usage": {
+    "total_tokens": 8498,
+    "prompt_tokens": 4730,
+    "completion_tokens": 3768
+  },
+  "detect_usage": {
+    "total_tokens": 11491,
+    "prompt_tokens": 10655,
+    "completion_tokens": 836
+  },
+  "n_additions": 4,
+  "n_omissions": 7
+}

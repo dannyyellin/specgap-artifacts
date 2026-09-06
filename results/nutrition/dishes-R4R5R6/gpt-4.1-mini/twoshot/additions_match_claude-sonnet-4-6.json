@@ -1,0 +1,24 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "A1 relates to query string filtering semantics (filtering by 'id', 'name', 'ingredients'), which partially overlaps with R6's removal of specific query string filtering semantics, but A1 describes additional unsupported fields rather than the specific 'lte' or 'contains' semantics mentioned in R6."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "A2 describes filtering by 'ingredients' (plural) instead of 'ingredient' (singular), which relates to query string filtering semantics covered by R6, but R6 specifically addresses 'lte' and 'contains' semantics rather than the singular/plural field name discrepancy."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 788,
+    "prompt_tokens": 544,
+    "completion_tokens": 244
+  }
+}

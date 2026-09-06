@@ -1,0 +1,61 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "The code returns 400 Bad Request when the Borrows microservice returns a 4XX error during fines calculation, which is not specified in the specification.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification states that the Cardholders microservice calls the Borrows microservice to compute fines but does not specify how to handle error status codes from Borrows. The code returns 400 if Borrows returns a 4XX error, which is an addition."
+      },
+      {
+        "id": "A2",
+        "description": "The code validates that the 'id' field in the PUT request payload matches the URL parameter and returns 400 if it does not, which is not required by the specification.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification requires PUT on /cardholders/{id} with updated resource fields but does not require validation that the 'id' field in the payload matches the URL parameter. The code implements this validation, which is an addition."
+      },
+      {
+        "id": "A3",
+        "description": "The code allows filtering GET /cardholders by 'name' and 'email' query parameters only, ignoring other fields, which is not explicitly required by the specification.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states GET /cardholders may specify a query string 'field=value' to filter records but does not restrict which fields can be filtered. The code restricts filtering to 'name' and 'email' only, which is an addition."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "The fine amount calculation does not multiply the number of overdue days by the FINE_PER_DAY rate of $0.50 as required.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states the fine per overdue book is number-of-days-overdue * 0.50, and the total fine is the sum of all such fines. The code increments fine_amount by 1 per overdue book without calculating days overdue or multiplying by 0.50."
+      },
+      {
+        "id": "O2",
+        "description": "The GET /cardholders/fines/{id} endpoint does not compute the sum of fines for all books borrowed by the cardholder but only counts overdue books without considering days overdue.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification requires the fine amount to be the sum of all fines for all books borrowed, computed as days overdue times 0.50 per book. The code only counts the number of overdue books, ignoring days overdue."
+      },
+      {
+        "id": "O3",
+        "description": "The code does not validate that the 'id' path parameter in /cardholders/{id} endpoints is a valid string id format as required; it only checks if it is a valid MongoDB ObjectId.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states that 'id' is of type string but does not require it to be a MongoDB ObjectId. The code restricts 'id' to valid ObjectId format, which may omit valid string ids not conforming to ObjectId."
+      },
+      {
+        "id": "O4",
+        "description": "The code does not implement media type validation to ensure requests have 'application/json' content type as required.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification requires handling unsupported media types with 415 status code. The code checks if request.is_json but returns 400 Bad Request instead of 415 Unsupported Media Type."
+      },
+      {
+        "id": "O5",
+        "description": "The code does not implement the GET /cardholders endpoint query string filtering for arbitrary 'field=value' pairs beyond 'name' and 'email'.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states GET /cardholders may specify query string 'field=value' to filter records by any field. The code only filters by 'name' and 'email', omitting other possible fields."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 5356,
+    "prompt_tokens": 4455,
+    "completion_tokens": 901
+  }
+}

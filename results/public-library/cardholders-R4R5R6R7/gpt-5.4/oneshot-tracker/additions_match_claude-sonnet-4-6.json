@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "R4 removed the string type declaration for 'id', while A1 describes the code imposing a stricter MongoDB ObjectId format on IDs, which is related to the id field type but goes beyond simply removing a type declaration."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements R4-R7 describe or relate to validating that a request body 'id' field matches the URL path parameter."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements R4-R7 address restricting query filtering to specific fields like 'name' and 'email'."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 965,
+    "prompt_tokens": 708,
+    "completion_tokens": 257
+  }
+}

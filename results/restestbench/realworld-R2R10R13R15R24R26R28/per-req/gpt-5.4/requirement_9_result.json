@@ -1,0 +1,18 @@
+{
+  "req_id": 9,
+  "requirement_vague": "Verify user creation rejects duplicate username or email",
+  "requirement_precise": "Create a user (username: 'uniqueuser1', email: 'unique1@test.com', password: 'pass123'). Verify status 201. Attempt to create another user with the same username but different email (username: 'uniqueuser1', email: 'different@test.com'). Verify the response status is 400. Verify the response contains 'Username and email must be unique'. Attempt to create another user with different username but same email (username: 'differentuser', email: 'unique1@test.com'). Verify the response status is 400. Verify the response contains 'Username and email must be unique'.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": "POST /api/users -> register",
+    "code_reference": "existing = session.exec(select(User).where((User.username == username) | (User.email == email))).first()\nif existing:\n    raise HTTPException(status_code=400, detail=\"Username and email must be unique\")",
+    "reasoning": "The user creation route explicitly checks for an existing user with either the same username or the same email and returns HTTP 400 with the exact message required. It also has a database-level uniqueness constraint and catches IntegrityError to return the same 400 response if a duplicate slips through."
+  },
+  "usage": {
+    "total_tokens": 5445,
+    "prompt_tokens": 5316,
+    "completion_tokens": 129
+  },
+  "parse_error": false
+}

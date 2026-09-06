@@ -1,0 +1,18 @@
+Timestamp: 2026-06-02 06:04:26
+Detector:  DeepSeek-V3-0324
+App/Variant/Service: public-library/borrows-R1R2R3/borrows
+Method:    oneshot-warehouse
+
+Tokens: prompt=6769, completion=662, total=7431
+Additions: 3
+Omissions: 5
+
+  A A1: PUT /borrows/{id} allows updating 'cardholderId' and 'ISBN' fields
+  A A2: Code validates that returnDate cannot be before loanDate
+  A A3: Code implements detailed error messages in JSON responses
+
+  O O1: POST /borrows does not compute returnDate as loanDate + 30 days
+  O O2: POST /borrows does not check if cardholder has 2+ overdue books before allowing new borrow
+  O O3: POST /borrows does not return 400 when cardholder has 2+ overdue books
+  O O4: Code does not validate that ISBN is in ISBN-13 format
+  O O5: GET /borrows with date range filter doesn't properly handle the case where returnDate is empty

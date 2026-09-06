@@ -1,0 +1,36 @@
+{
+  "result": {
+    "additions": [],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "No POST /api/v1/password-recovery/{email} endpoint is implemented",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification requires a password recovery endpoint that sends a recovery email and returns HTTP 200 with message 'Password recovery email sent', and returns 404 for non-existent users. No such route exists in the code."
+      },
+      {
+        "id": "O2",
+        "description": "No POST /api/v1/reset-password/ endpoint is implemented",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification requires a reset-password endpoint accepting a token and new_password, returning 200 with {\"message\": \"Password updated successfully\"} on success, 400 with {\"detail\": \"Invalid token\"} for invalid tokens, and 422 for passwords shorter than 8 characters. No such route exists in the code."
+      },
+      {
+        "id": "O3",
+        "description": "No GET /api/v1/login/test-token (or equivalent test-token) endpoint is implemented",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification references a 'test token endpoint' that accepts a bearer token and returns the authenticated user's email field. No such route exists in the code."
+      },
+      {
+        "id": "O4",
+        "description": "Password recovery does not send an email to the user",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The specification states the password-recovery endpoint should send an actual email verifiable via a mailcatcher service. The code has no email-sending functionality whatsoever."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 14921,
+    "prompt_tokens": 12953,
+    "completion_tokens": 1968
+  }
+}

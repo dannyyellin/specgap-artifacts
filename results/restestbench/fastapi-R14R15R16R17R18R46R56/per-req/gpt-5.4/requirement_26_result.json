@@ -1,0 +1,18 @@
+{
+  "req_id": 26,
+  "requirement_vague": "Duplicate creation of a user as admin (admin@example.com / password123) should be rejected.",
+  "requirement_precise": "Authenticate as the superuser (username 'admin@example.com', password 'password123') to obtain an access token. Using the superuser access token, create a new user via the create-user API with a generated email and password. Then, using the same superuser access token, attempt to create another user with the same email and password via the create-user API. Assertions: Verify the response status for the duplicate-creation attempt is 400. Verify the response body of the duplicate-creation attempt does not contain the '_id' field.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": "POST /api/v1/users/ in create_user; superuser bootstrap in init_db; authentication in POST /api/v1/login/access-token",
+    "code_reference": "existing_user = get_user_by_email(session, user_in.email)\nif existing_user:\n    raise HTTPException(status_code=400, detail=\"User with this email already exists\")",
+    "reasoning": "The app bootstraps the admin user with email admin@example.com and password password123, allows obtaining a token via the login endpoint, and the admin-only create-user endpoint explicitly rejects duplicate emails with HTTP 400. Because the duplicate path raises an HTTPException before returning a UserPublic response, the response body will not include an '_id' field."
+  },
+  "usage": {
+    "total_tokens": 4894,
+    "prompt_tokens": 4737,
+    "completion_tokens": 157
+  },
+  "parse_error": false
+}

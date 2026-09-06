@@ -1,0 +1,25 @@
+Timestamp: 2026-06-02 09:16:56
+Detector:  claude-sonnet-4-6
+Service:   nestjs-realworld  Round: 2  Removals: [2, 10, 13, 15, 24, 26, 28]
+Method:    oneshot-warehouse
+
+Tokens: prompt=12708, completion=3856, total=16564
+Additions: 7
+Omissions: 8
+
+  A A1: PUT /api/articles/{slug} returns 403 Forbidden when the requester is not the article owner
+  A A2: DELETE /api/articles/{slug} returns 403 Forbidden when the requester is not the article owner
+  A A3: article_dict includes both 'createdAt'/'updatedAt' AND 'created'/'updated' fields in the article response
+  A A4: user_dict includes an 'id' field in the user response
+  A A5: GET /api/tags endpoint is implemented
+  A A6: DELETE /api/articles/{slug}/comments/{id} allows the article owner (not just the comment author) to delete comments
+  A A7: Authorization header parsing accepts 'Bearer ' prefix in addition to 'Token '
+
+  O O1: POST /api/profiles/{username}/follow does not return 400 when a user attempts to follow themselves
+  O O2: DELETE /api/profiles/{username}/follow does not return 400 when a user attempts to unfollow themselves
+  O O3: POST /api/profiles/{username}/follow returns HTTP 200 instead of 201
+  O O4: GET /api/articles/feed route is registered after GET /api/articles/{slug}, causing requests to /api/articles/feed to be matched by the slug route
+  O O5: GET /api/articles does not sort articles by created_at timestamp descending; it sorts by id descending
+  O O6: GET /api/articles/feed does not sort articles by created_at timestamp descending; it sorts by id descending
+  O O7: POST /api/articles/{slug}/comments returns the full article object with comments instead of the created comment object
+  O O8: POST /api/articles/{slug}/comments returns HTTP 200 instead of a more appropriate status; spec says 'Verify response status is 200' which the code satisfies, but the comment id extraction implies a comment-centric response structure that the code does not provide

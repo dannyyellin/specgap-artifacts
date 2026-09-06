@@ -1,0 +1,44 @@
+Timestamp: 2026-06-01 21:38:22
+Detector:  gpt-4.1-mini
+Service:   nestjs-realworld  Round: 2  Removals: [2, 10, 13, 15, 24, 26, 28]
+Method:    oneshot-warehouse
+
+Tokens: prompt=10249, completion=2516, total=12765
+Additions: 19
+Omissions: 15
+
+  A A1: GET /api/articles and /api/articles/feed endpoints support 'limit' and 'offset' query parameters for pagination
+  A A2: GET /api/articles and /api/articles/feed endpoints sort articles by article.id descending
+  A A3: GET /api/articles returns both 'createdAt' and 'created' fields (and similarly 'updatedAt' and 'updated') in article response
+  A A4: User object in responses includes 'id' field
+  A A5: Profile follow/unfollow endpoints allow following/unfollowing self without explicit 400 error
+  A A6: DELETE /api/articles/{slug} deletes all comments of the article before deleting the article
+  A A7: GET /api/articles/{slug} returns empty object {} when article not found instead of 404
+  A A8: PUT /api/articles/{slug} returns 403 Forbidden if current user is not the article author
+  A A9: DELETE /api/articles/{slug} returns 403 Forbidden if current user is not the article author
+  A A10: DELETE /api/articles/{slug}/comments/{comment_id} allows deletion by comment author or article author
+  A A11: GET /api/articles supports filtering by 'author' and 'tag' query parameters
+  A A12: GET /api/articles returns 'articlesCount' as total number of matching articles ignoring pagination
+  A A13: GET /api/articles/feed returns empty list and articlesCount 0 if user follows no one
+  A A14: User creation endpoint returns 400 with detail 'Username and email must be unique' on duplicate username or email
+  A A15: User login endpoint returns 401 Unauthorized on invalid credentials
+  A A16: User update endpoint allows updating username, email, password, bio, and image with uniqueness checks for username and email
+  A A17: Slug generation appends random hex suffix to base slug
+  A A18: GET /api/tags returns all tags as list of strings
+  A A19: DELETE /api/users/{email} attempts to delete user by email and returns 500 on FK constraint error
+
+  O O1: POST /api/articles does not validate presence of required fields title, description, body
+  O O2: GET /api/articles and /api/articles/feed do not order articles by created timestamp descending as required
+  O O3: PUT /api/articles/{slug} does not preserve original slug when title is updated
+  O O4: GET /api/articles/{slug} after article deletion returns 200 with empty object as required
+  O O5: PUT /api/articles/{slug} and DELETE /api/articles/{slug} do not allow any user to update or delete any article (security vulnerability)
+  O O6: POST /api/profiles/{username}/follow and DELETE /api/profiles/{username}/follow do not return 400 when user attempts to follow/unfollow themselves
+  O O7: DELETE /api/articles/{slug} does not return 200 with empty object {} after deletion when article is requested
+  O O8: POST /api/articles/{slug}/comments does not validate presence of comment body
+  O O9: DELETE /api/articles/{slug}/comments/{comment_id} does not allow deletion by article author only (also allows comment author)
+  O O10: GET /api/articles supports filtering by 'author' and 'tag' query parameters as required
+  O O11: User creation endpoint does not validate email format
+  O O12: User update endpoint does not validate new email format
+  O O13: User creation and update endpoints do not validate password strength
+  O O14: GET /api/articles/{slug} returns 200 with empty object {} when article not found instead of 404
+  O O15: DELETE /api/users/{email} returns 500 on FK constraint error as required

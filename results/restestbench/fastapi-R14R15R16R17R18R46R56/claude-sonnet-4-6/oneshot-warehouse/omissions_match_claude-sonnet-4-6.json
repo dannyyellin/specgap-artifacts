@@ -1,0 +1,72 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R15",
+        "label": "PARTIAL",
+        "reasoning": "O1 identifies the missing POST /api/v1/password-recovery/{email} endpoint, which is the core of R15, but R15 also requires email sending verification which O1 does not address."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R17",
+        "label": "PARTIAL",
+        "reasoning": "O2 identifies the missing POST /api/v1/reset-password/ endpoint, which is required by R17, but R17 covers a broader flow including token extraction and login verification."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R18",
+        "label": "PARTIAL",
+        "reasoning": "O2 identifies the missing reset-password endpoint, which is also required by R18 for invalid token handling, but does not specifically address the 400/Invalid token behavior."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R56",
+        "label": "PARTIAL",
+        "reasoning": "O2 identifies the missing POST /api/v1/reset-password/ endpoint, which is required by R56 for password length validation returning 422."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R14",
+        "label": "MATCH",
+        "reasoning": "O3 directly identifies the missing test-token endpoint that R14 requires, including the expected HTTP 200 response with the user's email field."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R15",
+        "label": "PARTIAL",
+        "reasoning": "O4 identifies the missing email-sending functionality required by R15 to verify via mailcatcher, but does not address the full endpoint behavior."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R16",
+        "label": "MATCH",
+        "reasoning": "O5 directly describes the missing 404 response for password recovery of a non-existent user, which is exactly what R16 requires."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R18",
+        "label": "MATCH",
+        "reasoning": "O6 directly describes the missing HTTP 400 with detail 'Invalid token' response for invalid token submission, which is exactly what R18 requires."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R56",
+        "label": "MATCH",
+        "reasoning": "O7 directly describes the missing new_password length validation returning 422 for passwords shorter than 8 characters, which is exactly what R56 requires."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": "R17",
+        "label": "PARTIAL",
+        "reasoning": "O8 identifies the missing mechanism for superuser to retrieve password-recovery HTML/token content, which is a step in R17's flow, but R17 covers the full reset and login verification flow."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2378,
+    "prompt_tokens": 1566,
+    "completion_tokens": 812
+  }
+}

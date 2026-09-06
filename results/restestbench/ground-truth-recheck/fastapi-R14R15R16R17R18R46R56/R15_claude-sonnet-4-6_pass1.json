@@ -1,0 +1,35 @@
+{
+  "variant": "fastapi-R14R15R16R17R18R46R56",
+  "req_id": 15,
+  "model": "claude-sonnet-4-6",
+  "pass": 1,
+  "verdict": "NOT_IMPLEMENTED",
+  "requirement_vague": "Ensure requesting password recovery works and an email is actually sent to the correct recipient (verify via mailcatcher at localhost:1080).",
+  "omissions": [
+    {
+      "id": "O1",
+      "description": "The POST /api/v1/password-recovery/{email} endpoint does not exist in the code.",
+      "category": "ENDPOINTS",
+      "reasoning": "There is no route defined for POST /api/v1/password-recovery/{email} anywhere in the api_router or app. The code has no password recovery endpoint at all."
+    },
+    {
+      "id": "O2",
+      "description": "No email is sent when password recovery is requested. There is no email-sending logic (e.g., SMTP, mailcatcher integration) anywhere in the codebase.",
+      "category": "EXTERNAL_INTERACTIONS",
+      "reasoning": "The code contains no imports or calls to any email library (e.g., smtplib, fastapi-mail, sendgrid), and no function that sends an email to the user's address. The requirement mandates that an actual email be delivered to the recipient, verifiable via mailcatcher at localhost:1080."
+    },
+    {
+      "id": "O3",
+      "description": "The API does not return HTTP 200 with JSON message 'Password recovery email sent' because the endpoint does not exist.",
+      "category": "RESPONSE_FORMAT",
+      "reasoning": "Since the password recovery endpoint is entirely absent, the required 200 response with the message 'Password recovery email sent' is never produced."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 6504,
+    "prompt_tokens": 6143,
+    "completion_tokens": 361
+  },
+  "timestamp": "2026-07-12 10:37:31"
+}

@@ -1,0 +1,127 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "The fetch_pet_type_from_ninja function extracts multiple fields such as 'characteristics' keys including 'slogan', 'group', 'color', 'skin_type', 'top_speed', 'diet', 'main_prey' to build the 'attributes' array, beyond the specification's requirement to use only 'temperament' or 'group_behavior'.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states that the 'attributes' field is obtained from either 'temperament' or 'group_behavior' fields from the Ninja API, preferring 'temperament' if both exist. The code also uses additional fields from 'characteristics' to build the 'attributes' array, which is not required by the specification."
+      },
+      {
+        "id": "A2",
+        "description": "The get_next_id function uses a separate 'counters' collection to generate unique incremental IDs for pet-types.",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The specification requires unique numeric IDs for pet-types but does not specify how IDs are generated. The code implements an ID counter in a separate collection, which is an implementation detail not required by the specification."
+      },
+      {
+        "id": "A3",
+        "description": "The code supports updating the pet's 'picture' field via a 'picture' field in the PUT /pet-types/{id}/pets/{name} request payload, which is not described in the specification.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states that the PUT request updates only fields provided in the payload, but only mentions the 'name' field explicitly. The code allows updating 'picture' directly, which is not described in the specification."
+      },
+      {
+        "id": "A4",
+        "description": "The code allows a 'picture-url' field in the PUT /pet-types/{id}/pets/{name} request to update the pet's picture by fetching and storing the image, which is not described in the specification for the PUT method.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification only mentions that the PUT request updates fields provided, but does not specify support for 'picture-url' in the PUT request, only in POST /pet-types/{id}/pets."
+      },
+      {
+        "id": "A5",
+        "description": "The code returns 401 Unauthorized when the registry service is unreachable or returns an error during owner verification, instead of 500 or 503.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification states that if an external service cannot handle the request, 503 should be returned. The code returns 401 Unauthorized on registry service request exceptions."
+      },
+      {
+        "id": "A6",
+        "description": "The code returns 400 Bad Request when attempting to create a pet with a duplicate name under the same pet-type, instead of 409 Conflict.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification states that no two pets of the same type in the same store can have the same name, but does not specify the status code for duplicate pet names. The code returns 400, which is an addition since the spec does not specify this."
+      },
+      {
+        "id": "A7",
+        "description": "The code returns 400 Bad Request when deleting a pet-type that has pets, instead of preventing deletion with a 400 but no explicit message or different status code.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification states that a pet-type can only be deleted if there are no pets of that type, otherwise 400 is returned. The code deletes the pet-type without checking for existing pets, so this is an omission, but the code returning 400 on other conditions is an addition if it occurs."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "POST /pet-types does not verify that the Authorization header contains valid owner credentials before allowing creation.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states only the store owner can issue POST /pet-types requests, requiring authentication and authorization. The code calls verify_owner() which returns 401 or 403 if unauthorized or not privileged, so this is implemented correctly. No omission here."
+      },
+      {
+        "id": "O2",
+        "description": "POST /pet-types does not return 400 if the Ninja API cannot find the pet with the given type, but returns empty or 503 in some cases.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The code returns 400 if no matching pet-type is found in Ninja API response, so this is implemented correctly."
+      },
+      {
+        "id": "O3",
+        "description": "DELETE /pet-types/{id} does not check if there are pets of that type before deletion and allows deletion regardless.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states that a pet-type can only be deleted if there are no pets of that type, otherwise 400 is returned. The code deletes the pet-type without checking for existing pets, violating this rule."
+      },
+      {
+        "id": "O4",
+        "description": "GET /pet-types/{id}/pets supports query parameters 'birthdateGT' and 'birthdateLT' to filter pets by birthdate, but the code ignores these query parameters and returns all pets.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states that GET /pet-types/{id}/pets supports query strings 'birthdateGT' and 'birthdateLT' to filter pets by birthdate, but the code does not implement any filtering and returns all pets."
+      },
+      {
+        "id": "O5",
+        "description": "POST /pet-types/{id}/pets does not check for duplicate pet names case-sensitively as required.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states pet names are case-sensitive and no two pets of the same type can have the same name. The code checks for exact match but does not explicitly handle case sensitivity; however, since it compares with ==, it is case-sensitive. No omission here."
+      },
+      {
+        "id": "O6",
+        "description": "GET /pictures/{picture-name} does not validate that the picture-name does not contain path traversal sequences beyond checking for '/' or '\\' characters.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification does not explicitly require path traversal protection, but the code checks for '/' and '\\' in picture_name and returns 400 if found, which is sufficient. No omission here."
+      },
+      {
+        "id": "O7",
+        "description": "POST /pet-types/{id}/pets does not validate that the 'picture-url' points to a .jpg or .png image before fetching.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states that if the 'picture-url' does not contain a .jpg or .png image, 400 is returned. The code checks the content type and image type after fetching, but does not check the URL extension before fetching. This is a minor omission."
+      },
+      {
+        "id": "O8",
+        "description": "GET /pet-types/{id}/pets/{name} does not return 404 if the pet-type does not exist or pet not found, which is implemented correctly.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The code returns 404 if pet-type or pet not found, so no omission."
+      },
+      {
+        "id": "O9",
+        "description": "PUT /pet-types/{id} returns 405 as required.",
+        "category": "ENDPOINTS",
+        "reasoning": "The code does not define a PUT /pet-types/{id} route, so Flask returns 405 by default. No omission."
+      },
+      {
+        "id": "O10",
+        "description": "POST /pet-types/{id}/pets does not return 401 or 403 if the user is not authenticated or not owner.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The code calls verify_owner() and returns 401 or 403 accordingly, so implemented correctly."
+      },
+      {
+        "id": "O11",
+        "description": "PUT /pet-types/{id}/pets/{name} does not reject updates that would cause duplicate pet names in the same pet-type.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The code checks if the new name conflicts with any other pet's name in the same pet-type and returns 400 if so, so implemented correctly."
+      },
+      {
+        "id": "O12",
+        "description": "POST /pet-types/{id}/pets does not return 404 if the pet-type does not exist.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The code returns 404 if pet-type not found, so implemented correctly."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 12871,
+    "prompt_tokens": 10910,
+    "completion_tokens": 1961
+  }
+}

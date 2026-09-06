@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O1 describes missing owner-only enforcement for POST/PUT/DELETE, which is the same behavior removed in R5."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 concerns handling Ninja API nutritional string values, which is unrelated to removing field name mapping details or owner/query filtering semantics."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 is about validating that ingredients is non-empty, which does not correspond to any listed removed requirement."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concerns 404 behavior for missing dishes in PUT/DELETE, which is not covered by R4, R5, or R6."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 is about defaulting nutritional fields when Ninja API returns no data, not about field mapping removal, owner restriction removal, or query filtering semantics removal."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1034,
+    "prompt_tokens": 714,
+    "completion_tokens": 320
+  }
+}

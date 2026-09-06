@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O1 describes that POST/PUT/DELETE are not limited to the owner, which is the same behavior as removing the owner-only restriction."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O2 specifically identifies missing less-than-or-equal filtering for nutrient query parameters, which is one of the removed query string filtering semantics in R6."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O3 describes the absence of ingredient containment filtering, matching the removed 'contains' query filtering semantics referenced in R6."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concerns duplicate dish names, which is unrelated to field name mapping, owner-only restrictions, or the specified query filtering semantics."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "O5 is about handling Ninja API field values during mapping, which overlaps with Ninja API field name mapping details but focuses on value conversion rather than field-name mapping itself."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1179,
+    "prompt_tokens": 841,
+    "completion_tokens": 338
+  }
+}

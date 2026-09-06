@@ -1,0 +1,48 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the missing constraint that prevents deletion of a pet-type if it has pets, which is exactly what R5 states was removed."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O2 describes the missing logic for handling lifespan ranges by choosing the minimum value, which corresponds to the removed 'choose minimum' handling in R6."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "O3 captures the same behavior as R5 (cannot delete pet-type if it has pets) but focuses specifically on the 400 status code response, which is a detail not explicitly mentioned in R5."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement mentions validation of the 'picture-url' field for .jpg or .png extensions."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "O5 relates to lifespan handling (setting to null when not returned) which is part of the lifespan range handling removed in R6, but focuses on a different aspect (null vs. 0) rather than the range/minimum extraction logic."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "O6 directly describes the missing birthdate query filtering (birthdateGT/birthdateLT) in the GET /pet-types/{id}/pets endpoint, which matches R7 exactly."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1379,
+    "prompt_tokens": 877,
+    "completion_tokens": 502
+  }
+}

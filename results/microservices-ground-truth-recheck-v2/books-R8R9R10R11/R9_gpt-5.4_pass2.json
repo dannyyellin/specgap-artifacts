@@ -1,0 +1,19 @@
+{
+  "app": "public-library",
+  "variant": "books-R8R9R10R11",
+  "service": "books",
+  "req_id": "R9",
+  "requirement": "The ISBN field must be a 13-digit ISBN-13; other formats are rejected.",
+  "source_headline": "Removed ISBN format (13-digit ISBN_13)",
+  "model": "gpt-5.4",
+  "pass": 2,
+  "label": "PARTIAL",
+  "evidence": "create_book() validates ISBN only via validate_string_field(data, field, required=True) for POST_REQUIRED_FIELDS, and update_book() only checks isinstance(data[field], str) for ALL_MUTABLE_FIELDS. There is no logic enforcing 13 digits or rejecting non-ISBN-13 formats.",
+  "reasoning": "The code clearly addresses ISBN validation at a basic level by requiring the field on create and ensuring it is a string on create/update, so this is not a GAP. However, the requirement specifically demands that ISBN be a 13-digit ISBN-13 and that other formats be rejected, and no length, digit-only, or ISBN-13 validation exists. Therefore a test submitting a non-13-digit string ISBN would be accepted, so the requirement is only partially implemented.",
+  "usage": {
+    "total_tokens": 1948,
+    "prompt_tokens": 1772,
+    "completion_tokens": 176
+  },
+  "timestamp": "2026-07-16 14:54:22"
+}

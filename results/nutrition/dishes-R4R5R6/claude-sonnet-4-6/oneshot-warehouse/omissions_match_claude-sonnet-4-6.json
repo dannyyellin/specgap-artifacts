@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the missing owner-only restriction for POST/PUT/DELETE operations, which matches R5's removal of owner-only restriction for those methods."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O2 describes the missing 'contains' check for the 'ingredient' query parameter, which corresponds to R6's removal of 'contains' filtering semantics for query strings."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O3 describes the missing less-than-or-equal ($lte) comparison for nutritional field filtering, which corresponds to R6's removal of 'lte for nutrients' filtering semantics."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "O4 describes the unhandled string values from the Ninja API (e.g., 'Only available for premium subscribers.'), which relates to R4's removal of Ninja API field name mapping details including handling of such string values."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1137,
+    "prompt_tokens": 783,
+    "completion_tokens": 354
+  }
+}

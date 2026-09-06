@@ -1,0 +1,33 @@
+Categories (use exactly these names):
+
+1. ENDPOINTS: Route definitions, HTTP methods supported, URL patterns.
+   Example: Spec requires DELETE /items/{id} but no such route exists in the code.
+
+2. REQUEST_VALIDATION: Required fields, type checking, format validation,
+   media type validation, missing/invalid parameter handling.
+   Example: Spec requires "sku" as a required field on POST but the code does
+   not check for its presence.
+
+3. RESPONSE_FORMAT: Returned JSON fields, status codes for success and error cases,
+   response structure.
+   Example: Spec requires 404 when an item is not found but the code returns 500.
+
+4. BUSINESS_LOGIC: Domain rules, guards, constraints, conditional behavior,
+   access control decisions, state transitions.
+   Example: Spec requires dispatch to be rejected if quantity exceeds stock but
+   the code allows negative inventory.
+
+5. COMPUTED_VALUES: Derived or calculated fields, formulas, date arithmetic,
+   aggregations.
+   Example: Spec requires totalPrice = unitPrice * quantity but the code stores
+   totalPrice as a user-supplied value.
+
+6. EXTERNAL_INTERACTIONS: Outbound HTTP calls to other microservices or external
+   APIs, data fetched from or sent to other services, notifications.
+   Example: Spec requires notifying the purchasing service on low stock but the
+   code sends no such notification.
+
+7. DATA_PERSISTENCE: What is stored in the database, field mappings between
+   request/response and stored documents, ID generation.
+   Example: Spec requires storing last_restocked date on receipt but the code
+   never writes this field.

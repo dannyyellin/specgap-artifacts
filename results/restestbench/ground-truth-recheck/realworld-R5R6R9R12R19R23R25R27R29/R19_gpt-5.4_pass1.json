@@ -1,0 +1,26 @@
+{
+  "variant": "realworld-R5R6R9R12R19R23R25R27R29",
+  "req_id": 19,
+  "model": "gpt-5.4",
+  "pass": 1,
+  "verdict": "IMPLEMENTED",
+  "requirement_vague": "Verify article updated timestamp changes on update but created timestamp remains unchanged",
+  "omissions": [],
+  "implementation": {
+    "location": [
+      "create_article",
+      "update_article",
+      "article_response",
+      "GET /api/articles/{slug}",
+      "PUT /api/articles/{slug}"
+    ],
+    "code_reference": "article.updated_at = now_utc()\n...\n\"createdAt\": article.created_at.isoformat() + \"Z\",\n\"updatedAt\": article.updated_at.isoformat() + \"Z\"",
+    "reasoning": "The article model stores separate created_at and updated_at fields, create_article initializes both, and update_article explicitly sets only updated_at on modification without changing created_at. Both GET and PUT article responses expose these values as createdAt and updatedAt, so after an update the created timestamp remains unchanged while updated timestamp becomes newer."
+  },
+  "usage": {
+    "total_tokens": 5351,
+    "prompt_tokens": 5201,
+    "completion_tokens": 150
+  },
+  "timestamp": "2026-07-12 10:40:31"
+}

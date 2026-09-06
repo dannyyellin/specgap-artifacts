@@ -1,0 +1,20 @@
+{
+  "variant": "fastapi-R4R10R13R30R35R47",
+  "req_id": 13,
+  "model": "gpt-5.4",
+  "pass": 1,
+  "verdict": "IMPLEMENTED",
+  "requirement_vague": "Check that log in rejects a wrong password.",
+  "omissions": [],
+  "implementation": {
+    "location": "login_access_token -> authenticate",
+    "code_reference": "user = authenticate(session, form_data.username, form_data.password)\nif not user:\n    raise HTTPException(status_code=400, detail=\"Incorrect email or password\")",
+    "reasoning": "The login endpoint explicitly returns HTTP 400 with detail 'Incorrect email or password' when authentication fails. The authenticate function returns None when the password does not match the stored hashed password, so a wrong password for a registered user's email is rejected as required."
+  },
+  "usage": {
+    "total_tokens": 5851,
+    "prompt_tokens": 5739,
+    "completion_tokens": 112
+  },
+  "timestamp": "2026-07-12 10:35:35"
+}

@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of password encryption, matching R1 which states bcrypt encryption was removed."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O2 relates to the Owner special case but focuses only on the password validation aspect rather than the full removal of the Owner special case (name, pw, and privileged attributes)."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 describes an issue with the error message format for successful registration, which does not correspond to any of the three reference requirements about bcrypt, Owner special case, or username uniqueness."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 799,
+    "prompt_tokens": 552,
+    "completion_tokens": 247
+  }
+}

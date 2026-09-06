@@ -1,0 +1,127 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "Allows any authenticated user to update or delete any article regardless of ownership",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification demonstrates a security vulnerability where any user can update or delete any article, but it does not require this behavior. The code does not enforce ownership checks on article update or delete."
+      },
+      {
+        "id": "A2",
+        "description": "Returns 422 status code with detailed field errors on user registration for duplicate username or email",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification requires 400 status code with message 'Username and email must be unique' on duplicate user creation attempts, but the code returns 422 with separate field errors."
+      },
+      {
+        "id": "A3",
+        "description": "Returns 422 status code with 'Missing fields' error if username, email, or password is missing on user registration",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification does not explicitly require validation or error handling for missing fields on user registration, but the code implements this validation and returns 422."
+      },
+      {
+        "id": "A4",
+        "description": "Returns 422 status code with separate field errors for duplicate username and email instead of combined message",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification expects a combined error message 'Username and email must be unique' but the code returns separate errors for username and email fields."
+      },
+      {
+        "id": "A5",
+        "description": "Returns 422 status code with 'Missing fields' error if required fields are missing on user registration",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification does not explicitly require this validation, but the code implements it."
+      },
+      {
+        "id": "A6",
+        "description": "Returns 200 with empty object {} when article not found on GET /api/articles/{slug} instead of 404",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification states that GET after deletion returns 200 with empty object, but does not specify this for general not found articles. The code returns empty object for any missing article."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "Does not validate required fields (title, description, body) presence and types on article creation",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification requires creating articles with title, description, body, and tagList fields, but the code does not validate presence or types, allowing empty strings or missing fields."
+      },
+      {
+        "id": "O2",
+        "description": "Does not enforce that slug remains unchanged on article update",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification requires that the slug remains unchanged after article update, but the code does not enforce this explicitly (slug is not updated but no check or error if attempted)."
+      },
+      {
+        "id": "O3",
+        "description": "Does not return 404 status code when article is not found on GET /api/articles/{slug}",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification expects 200 with empty object for deleted articles but does not specify this for general not found articles. The code returns empty object with 200 status for missing articles, which may be inconsistent."
+      },
+      {
+        "id": "O4",
+        "description": "Does not validate that comment body is present and non-empty on comment creation",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification requires comment body on POST /api/articles/{slug}/comments, but the code does not validate presence or non-empty body."
+      },
+      {
+        "id": "O5",
+        "description": "Does not return 404 when deleting a comment that does not exist or does not belong to the article",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification expects proper error handling for comment deletion, but the code silently succeeds even if comment is missing or mismatched."
+      },
+      {
+        "id": "O6",
+        "description": "Does not prevent users from following or unfollowing themselves with proper error messages",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification requires 400 error with message containing 'cannot be equal' when user tries to follow or unfollow themselves, but the code raises 400 with a different error detail structure."
+      },
+      {
+        "id": "O7",
+        "description": "Does not implement pagination and filtering by tag on GET /api/articles",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification requires filtering articles by tag and pagination parameters, but the code only supports author filter and pagination, no tag filter."
+      },
+      {
+        "id": "O8",
+        "description": "Does not implement GET /api/articles/feed endpoint to return articles from followed users",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification requires a feed endpoint returning articles from followed users with pagination, but the code has no such endpoint."
+      },
+      {
+        "id": "O9",
+        "description": "Does not notify or interact with any external services on user or article events",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The specification does not explicitly require external interactions, but cross-service interactions like notifications or user directory validation are not implemented."
+      },
+      {
+        "id": "O10",
+        "description": "Does not enforce uniqueness of comment IDs or validate comment ID type in responses",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification requires comment IDs to be numbers and unique, but the code does not explicitly validate or enforce this."
+      },
+      {
+        "id": "O11",
+        "description": "Does not prevent deletion of users who have articles (no FK constraint error handling)",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states user deletion returns 500 due to FK constraint if user has articles, but the code has no user deletion endpoint implemented."
+      },
+      {
+        "id": "O12",
+        "description": "Does not implement ordering of articles by created timestamp descending with tie-breaker by ID",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification requires articles ordered by created timestamp descending, but the code orders by created_at descending and id descending, which is correct, but no explicit test for tie-breaker."
+      },
+      {
+        "id": "O13",
+        "description": "Does not validate JWT token payload contents (id, username, email) beyond user ID",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification requires JWT payload to contain id, username, and email, but the code only encodes user ID as 'sub' claim and does not include username or email."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 11270,
+    "prompt_tokens": 9743,
+    "completion_tokens": 1527
+  }
+}

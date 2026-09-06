@@ -1,0 +1,21 @@
+Timestamp: 2026-06-02 09:42:42
+Detector:  claude-sonnet-4-6
+App/Variant/Service: nutrition/dishes-R4R5R6/dishes
+Method:    oneshot-tracker
+
+Tokens: prompt=7959, completion=1431, total=9390
+Additions: 3
+Omissions: 8
+
+  A A1: The GET /dishes query supports filtering by 'id', 'name', and 'ingredients' fields using exact match, in addition to the nutritional fields
+  A A2: The GET /dishes query uses exact match for the 'ingredients' field (query['ingredients'] = value) rather than a contains/membership check
+  A A3: The GET /dishes query applies numeric filters as exact match rather than less-than-or-equal
+
+  O O1: POST /dishes does not enforce that only the Owner (privileged user) can create dishes
+  O O2: PUT /dishes/{id} does not enforce that only the Owner (privileged user) can update dishes
+  O O3: DELETE /dishes/{id} does not enforce that only the Owner (privileged user) can delete dishes
+  O O4: GET /dishes nutritional field query filters use exact match instead of less-than-or-equal comparison
+  O O5: GET /dishes 'ingredient' query filter does not check if the ingredient is contained in the dish's ingredients array
+  O O6: The Ninja API nutrition values that are non-numeric strings ('Only available for premium subscribers.') are not handled safely — float() conversion may raise an exception
+  O O7: POST /dishes returns the JSON record of the newly created resource but does not guarantee the id is unique and non-reusable when a dish is deleted
+  O O8: POST /dishes does not return 201 with the JSON record when the dish name already exists (duplicate name check is missing)

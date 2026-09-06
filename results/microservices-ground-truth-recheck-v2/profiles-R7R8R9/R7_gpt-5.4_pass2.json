@@ -1,0 +1,19 @@
+{
+  "app": "nutrition",
+  "variant": "profiles-R7R8R9",
+  "service": "profile",
+  "req_id": "R7",
+  "requirement": "The profileDishes calculation excludes protein from the computed nutrient totals.",
+  "source_headline": "Removed protein exclusion from profileDishes calculation",
+  "model": "gpt-5.4",
+  "pass": 2,
+  "label": "GAP",
+  "evidence": "NUTRITION_FIELDS includes \"protein\", and /profileDishes iterates over NUTRITION_FIELDS to send all nutrient totals as query params: `for field in NUTRITION_FIELDS: params[field] = \"{:.2f}\".format(round2(profile.get(field, 0.0)))`.",
+  "reasoning": "The requirement says profileDishes excludes protein from the computed nutrient totals. There is no code addressing that behavior; instead, protein is explicitly included in the shared nutrient field list and passed through by /profileDishes just like every other nutrient. Per the decision guide, because the behavior is absent entirely rather than partially implemented, the label is GAP.",
+  "usage": {
+    "total_tokens": 2522,
+    "prompt_tokens": 2361,
+    "completion_tokens": 161
+  },
+  "timestamp": "2026-07-16 14:58:14"
+}

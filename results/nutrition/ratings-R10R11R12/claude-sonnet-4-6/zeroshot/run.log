@@ -1,0 +1,20 @@
+Timestamp: 2026-06-02 09:45:24
+Detector:  claude-sonnet-4-6
+App/Variant/Service: nutrition/ratings-R10R11R12/ratings
+Method:    zeroshot
+
+Tokens: prompt=6525, completion=1287, total=7812
+Additions: 5
+Omissions: 5
+
+  A A1: The code checks that the dish exists by calling the dishes microservice before creating or updating a rating.
+  A A2: The POST /ratings response returns a JSON structure with 'dish_id' and 'avg_rating' (the average rating for the dish).
+  A A3: The PUT /ratings/{id} handler validates that the 'dish_id' in the request body matches the {id} path parameter.
+  A A4: The code stores a unique auto-incremented 'id' field on each rating document and maintains a counters collection.
+  A A5: The rating value is stored as a float (rounded to 2 decimal places) rather than as an integer.
+
+  O O1: The code does not validate that the 'rating' value is an integer between 1 and 5.
+  O O2: The PUT /ratings/{id} request does not restrict the operation to the user who owns the rating; any authenticated user can update any rating.
+  O O3: The GET /ratings/{id} endpoint does not check whether the dish with the given id actually exists before returning 404; it returns 404 only when no ratings exist for that dish, which conflates 'dish not found' with 'dish has no ratings'.
+  O O4: The code does not validate that 'dish_id' and 'rating' are of the correct types (integer) in the POST request body beyond basic numeric conversion.
+  O O5: The code does not check for 415 Unsupported Media Type on GET requests that include a body, but more importantly the token can only be supplied via Authorization header or 'token' header — the spec does not specify the token delivery mechanism but other services accept it in the request body as well.

@@ -1,0 +1,19 @@
+{
+  "app": "public-library",
+  "variant": "logs-R12R13",
+  "service": "logs",
+  "method": "zeroshot",
+  "model": "gpt-5.4",
+  "gen_usage": {
+    "total_tokens": 2969,
+    "prompt_tokens": 2190,
+    "completion_tokens": 779
+  },
+  "n_additions": 5,
+  "n_omissions": 1,
+  "usage": {
+    "total_tokens": 4119,
+    "prompt_tokens": 3656,
+    "completion_tokens": 463
+  }
+}

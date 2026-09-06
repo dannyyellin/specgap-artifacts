@@ -1,0 +1,84 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O1 concludes no omission exists for authentication, which does not correspond to any reference requirement about removed behaviors."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 concludes no omission for 400 handling on Ninja API, which does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O3 identifies that DELETE /pet-types/{id} does not check for existing pets before deletion, directly matching R5 which states the 'cannot delete pet-type if it has pets' constraint was removed."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "O4 identifies that birthdateGT and birthdateLT query parameters are ignored, directly matching R7 which states birthdate query filtering was removed."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 concludes no omission for case-sensitive duplicate name checking, which does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 concludes no omission for path traversal validation, which does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O7 is about picture-url validation which does not correspond to any of the reference requirements about removed behaviors."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O8 concludes no omission for 404 handling, which does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O9 concludes no omission for PUT /pet-types/{id} returning 405, which does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O10 concludes no omission for authentication/authorization, which does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O11 concludes no omission for duplicate name checking on PUT, which does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O12 concludes no omission for 404 on missing pet-type, which does not correspond to any reference requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2191,
+    "prompt_tokens": 1346,
+    "completion_tokens": 845
+  }
+}

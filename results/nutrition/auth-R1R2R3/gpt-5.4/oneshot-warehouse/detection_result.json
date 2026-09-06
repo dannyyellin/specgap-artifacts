@@ -1,0 +1,67 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "Uses configurable JWT secret and token expiration via environment variables JWT_SECRET and TOKEN_EXPIRATION_HOURS",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification requires returning a valid token and restricts allowed packages, but it does not require configurability of the signing secret or token lifetime through environment variables."
+      },
+      {
+        "id": "A2",
+        "description": "Automatically creates an Owner user record at startup if one does not already exist",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The specification states constraints on registering the special user 'Owner', but it does not require pre-populating the database with an Owner account during service startup."
+      },
+      {
+        "id": "A3",
+        "description": "Includes an expiration time and issued-at time inside generated tokens",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The specification requires login to return a valid token and validate to check it, but it does not explicitly require JWT claims such as 'exp' and 'iat' to be embedded."
+      },
+      {
+        "id": "A4",
+        "description": "Returns 401 Unauthorized for failed login when name/password do not match a user",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "For unsuccessful requests the specification only says to return the appropriate 4XX or 5XX code and error message; it does not specifically require 401 for invalid /login credentials."
+      },
+      {
+        "id": "A5",
+        "description": "Rejects empty-string name or password values on /register",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification requires that username and password be supplied and properly formatted, but it does not explicitly require trimming whitespace and rejecting empty strings after stripping."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "Passwords are stored in plaintext instead of as encrypted strings",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The specification defines each registered user document as containing 'password' as an encrypted string. The code inserts and queries the raw password value directly and never encrypts or hashes it."
+      },
+      {
+        "id": "O2",
+        "description": "The special Owner account rules are not implemented as specified: the code uses default credentials 'owner'/'owner' and does not enforce that the only allowed Owner password is 'owner#pw'",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states that only one user may register with the name 'Owner' and that this user's password must be 'owner#pw'. The code instead defines OWNER_NAME and OWNER_PASSWORD from environment variables with defaults 'owner' and 'owner', and registration does not enforce the required Owner password."
+      },
+      {
+        "id": "O3",
+        "description": "Privilege determination is based on a configurable lowercase owner name rather than specifically on user name 'Owner' with correct password",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification says privileged is True if the user_name is 'Owner' and the password is correct, and that Owner is the only privileged user. The code sets the privileged token claim when user_doc['name'] == OWNER_NAME, whose default is 'owner', not the required literal 'Owner'."
+      },
+      {
+        "id": "O4",
+        "description": "The code uses flask_pymongo, which is not in the allowed package list for this service",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification explicitly restricts this service to Python Standard Library plus flask, pymongo, pyjwt, bcrypt, and requests. The implementation imports and depends on flask_pymongo, which is outside the permitted set."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 7298,
+    "prompt_tokens": 6598,
+    "completion_tokens": 700
+  }
+}

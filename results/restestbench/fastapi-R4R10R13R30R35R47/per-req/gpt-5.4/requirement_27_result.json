@@ -1,0 +1,18 @@
+{
+  "req_id": 27,
+  "requirement_vague": "Verify a normal user cannot create another user.",
+  "requirement_precise": "Register a new normal user and obtain an access token via the authentication endpoint. Using that normal-user access token, attempt to create a new user by calling the create user operation with a JSON body containing 'email' (a random email) and 'password' (a random lowercase string). Verify the response status is 403.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": "POST /api/v1/users/ via create_user; enforced by get_current_active_superuser",
+    "code_reference": "def get_current_active_superuser(current_user: User = Depends(get_current_active_user)) -> User:\n    if not current_user.is_superuser:\n        raise HTTPException(status_code=403, detail=\"The user doesn't have enough privileges\")\n\n@api_router.post(\"/users/\", response_model=UserRead)\ndef create_user(..., current_user: User = Depends(get_current_active_superuser)):",
+    "reasoning": "The create user endpoint requires the caller to pass the get_current_active_superuser dependency. That dependency returns HTTP 403 for any authenticated user whose is_superuser flag is false, so a normal user with a valid access token cannot create another user and will receive status 403."
+  },
+  "usage": {
+    "total_tokens": 5938,
+    "prompt_tokens": 5759,
+    "completion_tokens": 179
+  },
+  "parse_error": false
+}

@@ -1,0 +1,114 @@
+```json
+{
+  "additions": [
+    {
+      "id": "A1",
+      "description": "The register endpoint returns 422 with a specific error format when username or email already exists, but the spec requires status 400 with message 'Username and email must be unique'.",
+      "category": "RESPONSE_FORMAT",
+      "reasoning": "The spec states: 'Verify the response status is 400. Verify the response contains Username and email must be unique.' The code raises HTTPException with status_code=422 and a different error message format."
+    },
+    {
+      "id": "A2",
+      "description": "The delete comment endpoint returns {\"status\": \"ok\"} instead of an empty object {}.",
+      "category": "RESPONSE_FORMAT",
+      "reasoning": "The spec does not specify the exact body for DELETE comment response, but the code returns {\"status\": \"ok\"} which is an addition not required by the spec."
+    },
+    {
+      "id": "A3",
+      "description": "The list_articles endpoint filters by 'author' query parameter but does not support filtering by 'tag' query parameter in the code's query construction — wait, actually the tag filter is missing (see omissions). The 'tag' query parameter is declared but not used.",
+      "category": "BUSINESS_LOGIC",
+      "reasoning": "This is actually an omission, not an addition. Removing this entry."
+    },
+    {
+      "id": "A4",
+      "description": "The JWT token payload uses only 'sub' (user id) and 'exp' fields, but the spec requires the payload to contain 'id', 'username', and 'email' fields.",
+      "category": "COMPUTED_VALUES",
+      "reasoning": "The spec states: 'Verify the payload contains: id matching the user's id, username equal to jwtuser1, email equal to jwtuser1@test.com.' The code only encodes 'sub' (user id) and 'exp', omitting username and email from the JWT payload. This is an omission, not an addition — moving to omissions."
+    }
+  ],
+  "omissions": [
+    {
+      "id": "O1",
+      "description": "The register endpoint returns status 422 and a non-matching error message when username or email is already taken, but the spec requires status 400 with a message containing 'Username and email must be unique'.",
+      "category": "RESPONSE_FORMAT",
+      "reasoning": "The spec explicitly states: 'Verify the response status is 400. Verify the response contains Username and email must be unique.' The code returns 422 with separate messages like 'has already been taken'."
+    },
+    {
+      "id": "O2",
+      "description": "The GET /api/articles endpoint does not support filtering by 'tag' query parameter.",
+      "category": "ENDPOINTS",
+      "reasoning": "The spec requires: 'GET /api/articles?tag=javascript. Verify articlesCount is 1 and articles array contains only First Tagged Article.' The code's list_articles function has no 'tag' parameter and performs no tag-based filtering."
+    },
+    {
+      "id": "O3",
+      "description": "The GET /api/articles/feed endpoint is not implemented.",
+      "category": "ENDPOINTS",
+      "reasoning": "The spec requires: 'Using user1's token, GET /api/articles/feed. Verify articlesCount is 0 (no follows yet). User1 follows user2. GET /api/articles/feed again. Verify articlesCount is 1.' No /api/articles/feed route exists in the code."
+    },
+    {
+      "id": "O4",
+      "description": "The JWT token payload does not include 'id', 'username', and 'email' fields.",
+      "category": "COMPUTED_VALUES",
+      "reasoning": "The spec states: 'Decode the JWT token payload. Verify the payload contains: id matching the user's id, username equal to jwtuser1, email equal to jwtuser1@test.com.' The code's create_token function only encodes 'sub' (user id as string) and 'exp'."
+    },
+    {
+      "id": "O5",
+      "description": "The DELETE /api/users/{email} endpoint is not implemented.",
+      "category": "ENDPOINTS",
+      "reasoning": "The spec requires: 'DELETE /api/users/orphanauthor1@test.com. Verify response is 500 (FK constraint error).' No such endpoint exists in the code."
+    },
+    {
+      "id": "O6",
+      "description": "The add_comment endpoint returns the full article with comments instead of just the comment object.",
+      "category": "RESPONSE_FORMAT",
+      "reasoning": "The spec states: 'Create a comment on the article via POST /api/articles/{slug}/comments with body This is my test comment. Verify response status is 200. Verify the response article has comments array with length >= 1.' While the spec's wording is ambiguous ('response article has comments array'), the standard RealWorld spec returns a comment object. The code returns the full article_response with comments included, which is a non-standard format."
+    },
+    {
+      "id": "O7",
+      "description": "The list_articles endpoint does not filter by 'favorited' query parameter.",
+      "category": "ENDPOINTS",
+      "reasoning": "While not explicitly tested in the spec scenarios provided, the RealWorld spec implies standard article listing filters. However, since the spec text does not explicitly require a 'favorited' filter, this is borderline. Keeping only clearly specified omissions."
+    }
+  ]
+}
+```
+
+Wait, I need to clean up my analysis — I accidentally left some draft reasoning in the additions array. Let me provide the final clean version:
+
+```json
+{
+  "additions": [],
+  "omissions": [
+    {
+      "id": "O1",
+      "description": "The register endpoint returns status 422 with messages like 'has already been taken' when username or email is duplicate, but the spec requires status 400 with a message containing 'Username and email must be unique'.",
+      "category": "RESPONSE_FORMAT",
+      "reasoning": "The spec explicitly states: 'Verify the response status is 400. Verify the response contains Username and email must be unique.' The code raises HTTPException with status_code=422 and separate field-level messages."
+    },
+    {
+      "id": "O2",
+      "description": "The GET /api/articles endpoint does not support filtering by 'tag' query parameter.",
+      "category": "ENDPOINTS",
+      "reasoning": "The spec requires: 'GET /api/articles?tag=javascript. Verify articlesCount is 1 and articles array contains only First Tagged Article.' The list_articles function accepts no 'tag' parameter and performs no tag-based filtering."
+    },
+    {
+      "id": "O3",
+      "description": "The GET /api/articles/feed endpoint is not implemented.",
+      "category": "ENDPOINTS",
+      "reasoning": "The spec requires: 'Using user1's token, GET /api/articles/feed. Verify articlesCount is 0 (no follows yet). User1 follows user2. GET /api/articles/feed again. Verify articlesCount is 1 and the articles array contains Article By Followed.' No /api/articles/feed route exists in the code."
+    },
+    {
+      "id": "O4",
+      "description": "The JWT token payload does not include 'id', 'username', and 'email' fields.",
+      "category": "COMPUTED_VALUES",
+      "reasoning": "The spec states: 'Decode the JWT token payload. Verify the payload contains: id matching the user's id, username equal to jwtuser1, email equal to jwtuser1@test.com.' The code's create_token only encodes 'sub' (user id as string) and 'exp', omitting username and email."
+    },
+    {
+      "id": "O5",
+      "description": "The DELETE /api/users/{email} endpoint is not implemented.",
+      "category": "ENDPOINTS",
+      "reasoning": "The spec requires: 'DELETE /api/users/orphanauthor1@test.com. Verify response is 500 (FK constraint error). GET /api/articles again and verify article still exists.' No such endpoint exists in the code."
+    }
+  ]
+}
+```

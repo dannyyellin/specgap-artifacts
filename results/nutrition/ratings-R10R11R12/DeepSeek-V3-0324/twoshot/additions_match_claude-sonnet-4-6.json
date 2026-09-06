@@ -1,0 +1,24 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R12",
+        "label": "PARTIAL",
+        "reasoning": "A1 relates to token validation data usage (storing 'privileged' field), which is in the same domain as R12 (removing user_id from token validation), but A1 describes adding/keeping an extra field rather than removing the user_id dependency."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rounding numbers to two decimal places does not correspond to any of the three spec requirements about rating range constraints, per-user-per-dish constraints, or user_id token validation."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 727,
+    "prompt_tokens": 527,
+    "completion_tokens": 200
+  }
+}

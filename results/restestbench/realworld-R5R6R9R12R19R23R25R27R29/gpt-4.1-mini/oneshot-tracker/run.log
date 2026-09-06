@@ -1,0 +1,29 @@
+Timestamp: 2026-06-01 21:41:05
+Detector:  gpt-4.1-mini
+Service:   nestjs-realworld  Round: 1  Removals: [5, 6, 9, 12, 19, 23, 25, 27, 29]
+Method:    oneshot-tracker
+
+Tokens: prompt=9743, completion=1527, total=11270
+Additions: 6
+Omissions: 13
+
+  A A1: Allows any authenticated user to update or delete any article regardless of ownership
+  A A2: Returns 422 status code with detailed field errors on user registration for duplicate username or email
+  A A3: Returns 422 status code with 'Missing fields' error if username, email, or password is missing on user registration
+  A A4: Returns 422 status code with separate field errors for duplicate username and email instead of combined message
+  A A5: Returns 422 status code with 'Missing fields' error if required fields are missing on user registration
+  A A6: Returns 200 with empty object {} when article not found on GET /api/articles/{slug} instead of 404
+
+  O O1: Does not validate required fields (title, description, body) presence and types on article creation
+  O O2: Does not enforce that slug remains unchanged on article update
+  O O3: Does not return 404 status code when article is not found on GET /api/articles/{slug}
+  O O4: Does not validate that comment body is present and non-empty on comment creation
+  O O5: Does not return 404 when deleting a comment that does not exist or does not belong to the article
+  O O6: Does not prevent users from following or unfollowing themselves with proper error messages
+  O O7: Does not implement pagination and filtering by tag on GET /api/articles
+  O O8: Does not implement GET /api/articles/feed endpoint to return articles from followed users
+  O O9: Does not notify or interact with any external services on user or article events
+  O O10: Does not enforce uniqueness of comment IDs or validate comment ID type in responses
+  O O11: Does not prevent deletion of users who have articles (no FK constraint error handling)
+  O O12: Does not implement ordering of articles by created timestamp descending with tie-breaker by ID
+  O O13: Does not validate JWT token payload contents (id, username, email) beyond user ID

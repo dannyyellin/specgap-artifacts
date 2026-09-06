@@ -1,0 +1,24 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Filtering GET /profiles by nutritional fields does not correspond to any of the three spec requirements about protein exclusion, owner-only restriction removal, or user_id token sourcing."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "R9 states that user_id should come from token validation rather than the request body, and the code accepting tokens from multiple locations (including JSON body) partially relates to how token/user identity is sourced, but the code behavior is about token location flexibility rather than specifically about user_id derivation."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 785,
+    "prompt_tokens": 580,
+    "completion_tokens": 205
+  }
+}

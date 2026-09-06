@@ -1,0 +1,25 @@
+Timestamp: 2026-06-01 20:58:58
+Detector:  gpt-4.1-mini
+App/Variant/Service: pet-store/registry-R1R2R3/registry
+Method:    oneshot-tracker
+
+Tokens: prompt=8363, completion=1165, total=9528
+Additions: 3
+Omissions: 12
+
+  A A1: Uses bcrypt cost factor of 12 for password hashing
+  A A2: Returns JSON message 'Password updated successfully' on successful password change
+  A A3: Returns JSON message 'User deleted successfully' on successful user deletion
+
+  O O1: Username validation regex incorrectly uses double dollar signs '$$' instead of single '$'
+  O O2: POST /verify returns 401 if username does not exist or password is incorrect instead of returning 200 with valid=false
+  O O3: POST /verify does not return the same response for missing username/password and incorrect credentials, returning 401 instead of 200 with valid=false
+  O O4: POST /users does not check password complexity requirements (at least one uppercase letter, one lowercase letter, and one digit)
+  O O5: POST /users does not check password length constraints (minimum 8, maximum 128 characters)
+  O O6: POST /users does not check for malformed JSON payload explicitly beyond type check
+  O O7: POST /users does not check for missing Content-Type header or invalid Content-Type header explicitly before parsing JSON
+  O O8: PUT /users/{username}/password does not validate newPassword complexity and length requirements
+  O O9: PUT /users/{username}/password returns 400 with message 'New password must be different from old password' but does not check if newPassword meets complexity requirements
+  O O10: DELETE /users/{username} does not check for missing username in URL path explicitly
+  O O11: DELETE /users/{username} does not check for missing or invalid Content-Type header before parsing JSON
+  O O12: DELETE /users/{username} returns 401 if password field is missing or incorrect but does not check if username is missing or invalid

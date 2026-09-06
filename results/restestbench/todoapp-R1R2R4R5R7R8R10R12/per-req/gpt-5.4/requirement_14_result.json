@@ -1,0 +1,18 @@
+{
+  "req_id": 14,
+  "requirement_vague": "Accessing todos without authentication returns 401 Unauthorized",
+  "requirement_precise": "Call GET /todos without providing any Authorization header or token. Verify the response status is 401 Unauthorized.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": "get_current_user dependency used by GET /todos via list_todos",
+    "code_reference": "if credentials is None:\n    raise HTTPException(\n        status_code=status.HTTP_401_UNAUTHORIZED,",
+    "reasoning": "The GET /todos route depends on get_current_user. Because HTTPBearer is configured with auto_error=False, missing Authorization credentials result in credentials being None, and the dependency explicitly raises a 401 Unauthorized response."
+  },
+  "usage": {
+    "total_tokens": 2485,
+    "prompt_tokens": 2387,
+    "completion_tokens": 98
+  },
+  "parse_error": false
+}

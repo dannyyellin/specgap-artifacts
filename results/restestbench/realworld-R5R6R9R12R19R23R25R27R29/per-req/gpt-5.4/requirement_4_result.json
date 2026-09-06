@@ -1,0 +1,21 @@
+{
+  "req_id": 4,
+  "requirement_vague": "Verify article update changes article fields and preserves slug",
+  "requirement_precise": "Create a user (username: 'updateuser1', email: 'updateuser1@test.com', password: 'pass123'). Create an article with title 'Original Title', description 'Original description', body 'Original body'. Extract the slug. Update the article via PUT /api/articles/{slug} with new title 'Updated Title' and description 'Updated description'. Verify response status is 200. Verify the response article has 'title' equal to 'Updated Title' and 'description' equal to 'Updated description'. Verify the slug in the response is unchanged. Retrieve the article by the original slug. Verify the article has the updated values.",
+  "removed": false,
+  "omissions": [
+    {
+      "id": "R4-O1",
+      "description": "Article update does not enforce ownership, so any authenticated user can update an article regardless of author.",
+      "category": "BUSINESS_LOGIC",
+      "reasoning": "The requirement scenario updates the created article as its author. In `update_article`, the code fetches the article by slug and applies updates, but never checks `article.author_id == current_user.id`. This means the expected author-only update rule is missing/incomplete for article updates."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 5322,
+    "prompt_tokens": 5215,
+    "completion_tokens": 107
+  },
+  "parse_error": false
+}

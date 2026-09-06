@@ -1,0 +1,24 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "It concerns publisher and publishedDate being tied to Google Books API behavior, but it describes the code accepting those fields from the user rather than the spec change removing that integration."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This discusses extra media type and JSON validation behavior, which does not correspond to any of the listed removed spec requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 697,
+    "prompt_tokens": 554,
+    "completion_tokens": 143
+  }
+}

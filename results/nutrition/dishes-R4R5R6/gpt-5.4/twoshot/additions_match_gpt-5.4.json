@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "It concerns the same access-control area as the removed owner-only restriction, but it describes authentication on GET requests rather than the removal of owner-only checks for POST/PUT/DELETE."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Filtering by 'id' and 'name' does not correspond to removing Ninja API field-name mapping details or removing the specified query-string filtering semantics."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "It is about query-parameter filtering semantics, but it focuses on using 'ingredients' instead of singular 'ingredient' rather than the removed specific semantics like lte/contains."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 834,
+    "prompt_tokens": 610,
+    "completion_tokens": 224
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "Stores a 'returnDate' field in the borrow record during POST, which is not required by the specification",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The specification states that 'returnDate' is computed by the service and not provided in the POST request, but the code allows and stores it if provided."
+      },
+      {
+        "id": "A2",
+        "description": "Allows updating 'returnDate' via PUT /borrows/{id}, which is not mentioned in the specification",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification does not mention that 'returnDate' can be updated via PUT, but the code implements this functionality."
+      },
+      {
+        "id": "A3",
+        "description": "Validates that 'returnDate' is not before 'loanDate', which is not explicitly required by the specification",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification does not mention any validation between 'loanDate' and 'returnDate', but the code enforces that 'returnDate' must not be before 'loanDate'."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "Does not compute 'returnDate' as loanDate + LOAN_PERIOD (30 days) when creating a borrow record",
+        "category": "COMPUTED_VALUES",
+        "reasoning": "The specification states that 'returnDate' should be computed as 'loanDate + LOAN_PERIOD' where LOAN_PERIOD is 30 days, but the code does not implement this calculation."
+      },
+      {
+        "id": "O2",
+        "description": "Does not check if the cardholder has 2 or more books overdue before allowing a new borrow",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states that 'A book can only be borrowed by a cardholder who does not have 2 or more books overdue' but the code does not implement this check."
+      },
+      {
+        "id": "O3",
+        "description": "Does not return status code 400 when a book cannot be checked out due to 2 or more overdue books",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification states that 'If a book cannot be checked out because 2 or more books are overdue, the POST request returns the status code 400' but the code does not implement this."
+      },
+      {
+        "id": "O4",
+        "description": "Does not validate that the 'ISBN' field in POST requests is a valid ISBN_13 number",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification describes ISBN as 'a string representing the ISBN_13 number' but the code does not validate the format of the ISBN."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 8385,
+    "prompt_tokens": 7739,
+    "completion_tokens": 646
+  }
+}

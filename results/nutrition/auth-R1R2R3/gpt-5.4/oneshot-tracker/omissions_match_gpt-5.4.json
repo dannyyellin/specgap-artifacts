@@ -1,0 +1,48 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "It directly states that passwords are stored in plaintext rather than encrypted, which is the removal of password encryption."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "It explicitly says bcrypt or any password-encryption mechanism is not used for registration and login, matching removal of bcrypt-based password encryption."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "It describes failure to enforce the exact special Owner registration rule, which is the removed Owner special case."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "It captures part of the Owner special-case logic around privileged status, but not the full special case including exact name, password, and registration behavior."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "It concerns incorrect derivation of the privileged flag for the Owner rule, which is only one aspect of the removed Owner special case."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "It is about package-list compliance rather than password encryption removal, Owner special-case removal, or username uniqueness removal."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1223,
+    "prompt_tokens": 844,
+    "completion_tokens": 379
+  }
+}

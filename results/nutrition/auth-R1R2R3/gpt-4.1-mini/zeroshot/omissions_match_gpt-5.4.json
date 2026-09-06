@@ -1,0 +1,54 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O1 states that passwords are stored without encryption or hashing, which is the same behavior as removing bcrypt password encryption."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O2 refers to Owner-specific name and password handling, but it describes enforcing the special case rather than its removal and omits the privileged=True aspect."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O3 concerns the privileged field being tied to the Owner special case, but it focuses on token validation logic rather than directly stating removal of the Owner special-case user behavior."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 is about malformed or missing request body handling, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 is about empty or whitespace-only input validation, which is unrelated to password encryption, Owner special-case removal, or username uniqueness removal."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 discusses HTTP methods and status codes, which do not match any reference requirement."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O7 is about inter-service token validation behavior, which is not covered by the reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1201,
+    "prompt_tokens": 761,
+    "completion_tokens": 440
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the same behavior as R9: the DELETE pet from store after purchase step is missing."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 concerns error handling for missing pet types, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 concerns purchaser/authenticated user matching, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concerns 503 error handling for unavailable pet-store service, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O5 directly describes the same behavior as R10: the purchase-id uniqueness check is missing."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1095,
+    "prompt_tokens": 746,
+    "completion_tokens": 349
+  }
+}

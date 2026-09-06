@@ -1,0 +1,21 @@
+{
+  "req_id": 4,
+  "requirement_vague": "Verify article update changes article fields and preserves slug",
+  "requirement_precise": "Create a user (username: 'updateuser1', email: 'updateuser1@test.com', password: 'pass123'). Create an article with title 'Original Title', description 'Original description', body 'Original body'. Extract the slug. Update the article via PUT /api/articles/{slug} with new title 'Updated Title' and description 'Updated description'. Verify response status is 200. Verify the response article has 'title' equal to 'Updated Title' and 'description' equal to 'Updated description'. Verify the slug in the response is unchanged. Retrieve the article by the original slug. Verify the article has the updated values.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": [
+      "PUT /api/articles/{slug} -> update_article",
+      "GET /api/articles/{slug} -> get_article"
+    ],
+    "code_reference": "if \"title\" in data:\n    article.title = data[\"title\"]\nif \"description\" in data:\n    article.description = data[\"description\"]\n...\nreturn {\"article\": article_dict(article, current_user, session)}",
+    "reasoning": "The update_article route updates the article's title and description fields from the request payload, returns the updated article with the default 200 status, and never modifies article.slug, so the slug is preserved. The get_article route looks up articles by slug and returns the stored article data, allowing retrieval by the original slug and confirming the updated values persist."
+  },
+  "usage": {
+    "total_tokens": 5490,
+    "prompt_tokens": 5323,
+    "completion_tokens": 167
+  },
+  "parse_error": false
+}

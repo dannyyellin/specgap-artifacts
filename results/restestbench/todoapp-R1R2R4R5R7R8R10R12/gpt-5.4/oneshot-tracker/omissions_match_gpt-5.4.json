@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement concerns POST /users/register returning 200 OK or the explicitness of that status code contract."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "It describes the same behavior as R2: POST /todos with empty or missing title should return 400 with a validation error about the required Title field."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "It directly matches R10's requirement that PUT /todos/{id} return 400 Bad Request when the body id differs from the path id."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement specifies successful DELETE /todos/{id} must explicitly return 200 OK."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "It captures the missing-title portion of R2, which requires 400 Bad Request rather than framework-default 422 for POST /todos without a title."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1552,
+    "prompt_tokens": 1228,
+    "completion_tokens": 324
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements describe the response body for comment deletion."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements describe the response format for adding a comment to an article."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R25",
+        "label": "MATCH",
+        "reasoning": "R25 explicitly requires the JWT payload to contain id, username, and email, but the code only encodes 'sub' and 'exp', omitting username and email."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "R9 requires status 400 with 'Username and email must be unique' for duplicate registration, but the code returns 422 with different field-specific messages."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2397,
+    "prompt_tokens": 2105,
+    "completion_tokens": 292
+  }
+}

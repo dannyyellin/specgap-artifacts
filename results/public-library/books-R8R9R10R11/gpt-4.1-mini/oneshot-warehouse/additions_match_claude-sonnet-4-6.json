@@ -1,0 +1,24 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 describes allowing ISBN updates via PUT, which does not correspond to any of the listed spec requirements about POST fields, ISBN format, Google Books API integration, or genre enumeration."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "A2 describes accepting 'publisher' and 'publishedDate' in the POST request body, which directly contradicts R10's removal of Google Books API integration that was supposed to provide those fields rather than accepting them from the client."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 763,
+    "prompt_tokens": 571,
+    "completion_tokens": 192
+  }
+}

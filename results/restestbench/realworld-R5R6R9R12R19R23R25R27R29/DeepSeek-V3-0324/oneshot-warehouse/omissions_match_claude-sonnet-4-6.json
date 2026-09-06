@@ -1,0 +1,60 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "O1 identifies the missing feed endpoint which is tested in R6, but O1 only notes the endpoint is missing rather than describing the full behavior of filtering by followed users."
+      },
+      {
+        "detection_id": "O1",
+        "requirement_id": "R23",
+        "label": "PARTIAL",
+        "reasoning": "O1 identifies the missing feed endpoint which is also tested in R23 for pagination, but only notes absence rather than the pagination behavior."
+      },
+      {
+        "detection_id": "O1",
+        "requirement_id": "R27",
+        "label": "PARTIAL",
+        "reasoning": "O1 identifies the missing feed endpoint which is tested in R27 for empty feed behavior, but only notes absence rather than the empty result behavior."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R12",
+        "label": "MATCH",
+        "reasoning": "O2 directly identifies the missing tag filtering in GET /api/articles, which is exactly what R12 tests."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements test article ownership verification before updates/deletes."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O4 directly describes the behavior tested in R5 where deleted articles return 200 with empty object {} instead of 404."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R29",
+        "label": "PARTIAL",
+        "reasoning": "O5 mentions missing user deletion endpoint and FK constraint errors, which relates to R29, but O5 focuses on missing error messages while R29 tests that deletion returns 500 due to FK constraints and articles still exist."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "O6 mentions unique constraint validation but focuses on user updates, while R9 specifically tests unique validation during user creation with specific error messages and status codes."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2601,
+    "prompt_tokens": 1994,
+    "completion_tokens": 607
+  }
+}

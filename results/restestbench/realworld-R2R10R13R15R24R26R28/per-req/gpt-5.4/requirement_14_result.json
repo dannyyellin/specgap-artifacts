@@ -1,0 +1,22 @@
+{
+  "req_id": 14,
+  "requirement_vague": "Verify user profile update modifies user data correctly",
+  "requirement_precise": "Create a user with username 'updateuser1', email 'updateuser1@test.com', password 'pass123'. Extract the token. PUT /api/user with body {\"user\": {\"bio\": \"Updated bio text\", \"image\": \"https://example.com/newimage.jpg\"}}. Verify response status is 200. Verify response contains updated bio 'Updated bio text' and image 'https://example.com/newimage.jpg'. GET /api/user with the token. Verify the updated bio and image persisted.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": [
+      "POST /api/users (register)",
+      "PUT /api/user (update_user)",
+      "GET /api/user (get_user)"
+    ],
+    "code_reference": "if \"bio\" in data:\n    current_user.bio = data[\"bio\"]\nif \"image\" in data:\n    current_user.image = data[\"image\"]\n...\nsession.commit()\n...\nreturn {\"user\": user_dict(current_user)}",
+    "reasoning": "The service supports creating a user and returns a token via POST /api/users, then PUT /api/user updates the authenticated user's bio and image, commits those changes, and returns the updated user with HTTP 200. GET /api/user uses the authenticated current user from the database and returns user_dict(current_user), so the updated bio and image persist and are visible on subsequent retrieval."
+  },
+  "usage": {
+    "total_tokens": 5476,
+    "prompt_tokens": 5294,
+    "completion_tokens": 182
+  },
+  "parse_error": false
+}

@@ -1,0 +1,19 @@
+{
+  "app": "nutrition",
+  "variant": "profiles-R7R8R9",
+  "service": "profile",
+  "req_id": "R7",
+  "requirement": "The profileDishes calculation excludes protein from the computed nutrient totals.",
+  "source_headline": "Removed protein exclusion from profileDishes calculation",
+  "model": "claude-sonnet-4-6",
+  "pass": 1,
+  "label": "GAP",
+  "evidence": "profile_dishes() function: `for field in NUTRITION_FIELDS: params[field] = \"{:.2f}\".format(round2(profile.get(field, 0.0)))` and NUTRITION_FIELDS includes 'protein'",
+  "reasoning": "The requirement states that profileDishes should exclude protein from the computed nutrient totals. However, the code iterates over all NUTRITION_FIELDS (which includes 'protein') and includes protein in the params sent to the dishes service. There is no exclusion of protein anywhere in the profileDishes route. A test checking that protein is not included in the query parameters would fail.",
+  "usage": {
+    "total_tokens": 3081,
+    "prompt_tokens": 2917,
+    "completion_tokens": 164
+  },
+  "timestamp": "2026-07-16 14:58:19"
+}

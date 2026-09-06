@@ -1,0 +1,22 @@
+Timestamp: 2026-06-02 09:15:26
+Detector:  claude-sonnet-4-6
+Service:   nestjs-realworld  Round: 2  Removals: [2, 10, 13, 15, 24, 26, 28]
+Method:    zeroshot
+
+Tokens: prompt=11096, completion=3601, total=14697
+Additions: 7
+Omissions: 5
+
+  A A1: The article response includes both 'created'/'updated' alias fields alongside the standard 'createdAt'/'updatedAt' fields. The spec only references one set of timestamp field names per context.
+  A A2: The user response object includes an 'id' field. The spec does not require the user object to expose an 'id' field in responses.
+  A A3: The PUT /api/articles/{slug} endpoint returns 403 Forbidden when the requesting user is not the article author. The spec explicitly requires that any authenticated user can update any article.
+  A A4: The DELETE /api/articles/{slug} endpoint returns 403 Forbidden when the requesting user is not the article author. The spec explicitly requires that any authenticated user can delete any article.
+  A A5: A GET /api/tags endpoint is implemented but is not described anywhere in the specification.
+  A A6: The delete_comment endpoint allows the article author (not just the comment author) to delete any comment on their article.
+  A A7: The Authorization header parsing accepts both 'Bearer <token>' and 'Token <token>' formats. The spec only specifies the 'Token <jwt>' format.
+
+  O O1: The POST /api/profiles/{username}/follow endpoint returns HTTP 200 (default) instead of the required 201.
+  O O2: The follow endpoint does not return 400 with a message containing 'cannot be equal' when a user attempts to follow themselves — it silently ignores the request.
+  O O3: The unfollow endpoint does not return 400 when a user attempts to unfollow themselves.
+  O O4: The GET /api/articles endpoint sorts articles by id descending instead of by created_at timestamp descending.
+  O O5: The GET /api/articles/feed endpoint sorts articles by id descending instead of by created_at timestamp descending.

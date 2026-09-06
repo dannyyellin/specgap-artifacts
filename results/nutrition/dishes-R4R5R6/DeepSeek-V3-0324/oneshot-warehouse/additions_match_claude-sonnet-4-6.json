@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rounding floating point numbers to 2 decimal places does not correspond to any of the removed spec requirements about API field mapping, owner restrictions, or query string filtering semantics."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A serialize_dish function for formatting dish data does not correspond to any of the removed spec requirements about API field mapping, owner restrictions, or query string filtering semantics."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "The build_query_from_args function handles query parameters which partially relates to R6's removed specific query string filtering semantics (lte for nutrients, contains), but the code property describes the function's existence rather than its specific filtering behavior."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Generating unique dish IDs does not correspond to any of the removed spec requirements about API field mapping, owner restrictions, or query string filtering semantics."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 981,
+    "prompt_tokens": 643,
+    "completion_tokens": 338
+  }
+}

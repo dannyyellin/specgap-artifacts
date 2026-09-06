@@ -1,0 +1,38 @@
+Timestamp: 2026-06-01 21:29:15
+Detector:  gpt-4.1-mini
+Service:   fastapi  Round: 1  Removals: [4, 10, 13, 30, 35, 47]
+Method:    oneshot-warehouse
+
+Tokens: prompt=12129, completion=2375, total=14504
+Additions: 3
+Omissions: 25
+
+  A A1: GET /items returns all items without filtering by owner or any other parameter
+  A A2: GET /users/ returns all users with a top-level 'data' list and 'count' field
+  A A3: POST /password-recovery-html/{email} returns HTML content embedded in a JSON 'message' field
+
+  O O1: POST /users/signup returns 400 with detail 'The user with this email already exists in the system' on duplicate email
+  O O2: POST /users/signup does not enforce password length minimum of 8 and maximum of 128 characters with 422 status
+  O O3: POST /users/signup does not enforce full_name maximum length of 255 characters with 422 status
+  O O4: POST /users/signup does not reject invalid email format with 422 status
+  O O5: GET /api/v1/items/{item_id} does not check that the requesting user has permission to read the item
+  O O6: PATCH /api/v1/items/{item_id} does not reject updates by users without permission with 400 and 'Not enough permissions'
+  O O7: DELETE /api/v1/items/{item_id} does not reject deletes by users without permission with 400 and 'Not enough permissions'
+  O O8: GET /api/v1/items/{item_id} does not return 400 with 'Not enough permissions' when a user tries to read an item owned by another user
+  O O9: PATCH /api/v1/users/me/password does not reject new password equal to current password with 400 and 'New password cannot be the same as the current one'
+  O O10: PATCH /api/v1/users/me/password does not reject incorrect current password with 400 and 'Incorrect password'
+  O O11: DELETE /api/v1/users/me allows superusers to delete themselves
+  O O12: DELETE /api/v1/users/{user_id} does not reject deletion by non-superusers with 403 and 'The user doesn't have enough privileges'
+  O O13: DELETE /api/v1/users/{user_id} does not reject superuser deleting themselves with 403 and 'Super users are not allowed to delete themselves'
+  O O14: POST /users/signup does not reject registration with null email or password with 422
+  O O15: POST /items/ does not reject creation with empty or too long title or too long description with 422
+  O O16: PATCH /users/me does not reject updating email to an existing user's email with 409 and 'User with this email already exists'
+  O O17: PATCH /users/{user_id} does not reject updating email to an existing user's email with 409 and 'User with this email already exists'
+  O O18: POST /reset-password/ does not reject invalid token with 400 and 'Invalid token'
+  O O19: POST /reset-password/ does not reject new_password with invalid length with 422
+  O O20: GET /api/v1/users/not-a-uuid and GET /api/v1/items/not-a-uuid return 422 on invalid UUID format
+  O O21: POST /login/access-token returns 400 with 'Incorrect email or password' on invalid credentials
+  O O22: GET /users/{user_id} returns 403 with 'The user doesn't have enough privileges' when a normal user tries to read another user's data
+  O O23: POST /users/ (create user) rejects creation by non-superusers with 403
+  O O24: POST /users/ rejects duplicate email with 400 and 'User with this email already exists'
+  O O25: POST /users/signup rejects duplicate email with 400 and 'User with this email already exists'

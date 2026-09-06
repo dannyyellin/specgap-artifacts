@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R1",
+        "label": "PARTIAL",
+        "reasoning": "It concerns returnDate handling in Borrows, but it describes accepting/storing a provided returnDate rather than the removed computation of returnDate as loanDate plus 30 days."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R1",
+        "label": "PARTIAL",
+        "reasoning": "It is about returnDate behavior in Borrows, but updating returnDate via PUT is different from the removed automatic returnDate computation."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R1",
+        "label": "PARTIAL",
+        "reasoning": "It addresses validation involving returnDate and loanDate, which overlaps the same fields as the removed computation requirement, but it does not describe computing or removing returnDate = loanDate + 30 days."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 808,
+    "prompt_tokens": 581,
+    "completion_tokens": 227
+  }
+}

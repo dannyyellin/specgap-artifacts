@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 describes adding extra filter fields (id, name) not in the spec, which is an addition beyond the spec rather than matching any of the three removed/changed behaviors listed."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "A2 directly describes the code using exact match for 'ingredients' instead of the contains/membership check specified in R6's removed 'contains' semantics."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "A3 directly describes the code using exact match for nutritional fields instead of the less-than-or-equal (lte) semantics that R6 references as removed."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 980,
+    "prompt_tokens": 722,
+    "completion_tokens": 258
+  }
+}

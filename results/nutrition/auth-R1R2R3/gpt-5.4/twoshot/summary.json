@@ -1,0 +1,19 @@
+{
+  "app": "nutrition",
+  "variant": "auth-R1R2R3",
+  "service": "authentication",
+  "method": "twoshot",
+  "model": "gpt-5.4",
+  "gen_usage": {
+    "total_tokens": 4545,
+    "prompt_tokens": 3190,
+    "completion_tokens": 1355
+  },
+  "n_additions": 4,
+  "n_omissions": 6,
+  "usage": {
+    "total_tokens": 8304,
+    "prompt_tokens": 7542,
+    "completion_tokens": 762
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "app": "nutrition",
+  "variant": "ratings-R10R11R12",
+  "service": "ratings",
+  "req_id": "R12",
+  "requirement": "The user_id associated with a rating is taken from token validation, not from the request body.",
+  "source_headline": "Removed that user_id comes from token validation",
+  "model": "gpt-5.4",
+  "pass": 1,
+  "label": "INFERRED",
+  "evidence": "validate_token() extracts user_id from the auth service response and returns it in auth_data. In POST /ratings, the inserted doc sets \"user_id\": int(auth_data[\"user_id\"]) and only reads dish_id/rating from the body. In PUT and DELETE /ratings/<int:dish_id>, operations are scoped by user_id = int(auth_data[\"user_id\"]) rather than any body-supplied user_id.",
+  "reasoning": "The code clearly implements the requirement: the rating's user_id comes from token validation, not from the request body. There is no code path that reads user_id from the JSON body for creating, updating, or deleting ratings. Per the decision guide, because the behavior is present and a test asserting body-supplied user_id is ignored would pass, the label is INFERRED.",
+  "usage": {
+    "total_tokens": 2537,
+    "prompt_tokens": 2353,
+    "completion_tokens": 184
+  },
+  "timestamp": "2026-07-16 14:59:42"
+}

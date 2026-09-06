@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of owner-only restriction for POST, PUT, and DELETE operations, matching R5 exactly."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "O2 relates to Ninja API field handling (string values for nutritional elements), which partially overlaps with R4's removal of Ninja API field name mapping details, but focuses on value types rather than field name mappings."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 concerns duplicate dish name handling, which does not correspond to any of the reference requirements about Ninja API mappings, owner-only restrictions, or query string filtering semantics."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "O4 relates to Ninja API returning string values for some fields, which partially overlaps with R4's removal of Ninja API field name mapping details, but focuses on numeric validation rather than field name mappings."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 concerns error responses for duplicate dish names, which does not correspond to any of the reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1092,
+    "prompt_tokens": 681,
+    "completion_tokens": 411
+  }
+}

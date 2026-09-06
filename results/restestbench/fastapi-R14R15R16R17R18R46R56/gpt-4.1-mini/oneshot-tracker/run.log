@@ -1,0 +1,37 @@
+Timestamp: 2026-06-01 21:06:30
+Detector:  gpt-4.1-mini
+Service:   fastapi  Round: 2  Removals: [14, 15, 16, 17, 18, 46, 56]
+Method:    oneshot-tracker
+
+Tokens: prompt=10656, completion=2232, total=12888
+Additions: 7
+Omissions: 20
+
+  A A1: The code returns HTTP status 400 with detail 'Not enough permissions' when a user without sufficient rights attempts to read, update, or delete an item owned by another user.
+  A A2: The code returns HTTP status 403 with detail 'The user doesn't have enough privileges' when a non-superuser attempts to access another user's data.
+  A A3: The code returns HTTP status 403 with detail 'Super users are not allowed to delete themselves' when a superuser attempts to delete their own user account.
+  A A4: The code enforces password length validation (8 to 128 characters) on user creation, password update, and password reset using Pydantic field validators.
+  A A5: The code enforces title length validation (1 to 255 characters) on item creation and update using Pydantic field validators.
+  A A6: The code uses bcrypt hashing for passwords and JWT tokens for authentication as required by the specification.
+  A A7: The code includes a pre-configured superuser with email 'admin@example.com' and password 'password123' created at startup.
+
+  O O1: The code does not implement the password recovery email sending functionality or the mailcatcher service integration for verifying sent emails.
+  O O2: The code does not implement the password recovery HTML content retrieval and password reset flow using reset tokens as described in the specification.
+  O O3: The code does not implement the GET /api/v1/users/not-a-uuid or GET /api/v1/items/not-a-uuid endpoints returning 422 for invalid UUID format; it relies on FastAPI's automatic validation but no explicit test or custom handling is shown.
+  O O4: The code does not implement the password recovery request returning 404 when the user does not exist.
+  O O5: The code does not implement the test token endpoint that returns the email of the authenticated user.
+  O O6: The code does not implement the functionality to notify other services or send notifications on user or item events.
+  O O7: The code does not implement any rate limiting or brute force protection on login or password reset endpoints.
+  O O8: The code does not implement the password reset endpoint that returns 400 with detail 'Invalid token' when an invalid token is used.
+  O O9: The code does not implement the GET /api/v1/users/me endpoint returning the user's email and profile as required.
+  O O10: The code does not implement the ability for a user to request a password recovery email via POST /api/v1/password-recovery/{email}.
+  O O11: The code does not implement the deletion of items when their owner user is deleted, nor does it verify that items are deleted after user deletion.
+  O O12: The code does not implement the ability for a user to update their own password via PATCH /api/v1/users/me/password with the required validations and error responses.
+  O O13: The code does not implement the ability for a superuser to update other users' passwords.
+  O O14: The code does not implement the ability for a user to update their own profile with email and full_name with validation for email uniqueness and format.
+  O O15: The code does not implement the ability for a superuser to create users with is_active and is_superuser flags set.
+  O O16: The code does not implement the ability for a superuser to retrieve a list of all users with count and data fields.
+  O O17: The code does not implement the ability for a superuser to delete users by ID with appropriate error handling and restrictions.
+  O O18: The code does not implement the ability for a user to delete their own account except superusers.
+  O O19: The code does not implement the ability for a user to create, read, update, and delete items with ownership and permission checks.
+  O O20: The code does not implement the ability for a superuser to retrieve all items, and for normal users to retrieve only their own items.

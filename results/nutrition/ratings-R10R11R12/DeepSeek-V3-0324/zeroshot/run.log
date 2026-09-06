@@ -1,0 +1,17 @@
+Timestamp: 2026-06-02 06:07:22
+Detector:  DeepSeek-V3-0324
+App/Variant/Service: nutrition/ratings-R10R11R12/ratings
+Method:    zeroshot
+
+Tokens: prompt=5909, completion=608, total=6517
+Additions: 3
+Omissions: 4
+
+  A A1: Code checks for 'privileged' field in token validation response but specification does not require this for ratings service
+  A A2: Code implements rounding of ratings to 2 decimal places which is not specified
+  A A3: Code accepts token in both 'Authorization: Bearer' header and custom 'token' header while spec only mentions 'token'
+
+  O O1: Code does not validate that rating is an integer between 1 and 5 as specified
+  O O2: Code does not prevent users from rating the same dish multiple times via POST (only prevents via unique index)
+  O O3: Code does not return 405 for unsupported methods on /ratings/{id} endpoint
+  O O4: Code does not validate that PUT requests match the dish_id in URL and body

@@ -1,0 +1,78 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R15",
+        "label": "PARTIAL",
+        "reasoning": "It matches the required password recovery endpoint path and operation in R15, but only captures the endpoint's absence rather than the full expected response and email-delivery verification."
+      },
+      {
+        "detection_id": "O1",
+        "requirement_id": "R16",
+        "label": "PARTIAL",
+        "reasoning": "R16 also depends on POST /api/v1/password-recovery/{email}, but O1 does not specifically capture the non-existent-user 404 behavior."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R17",
+        "label": "PARTIAL",
+        "reasoning": "R17 includes submitting POST /api/v1/reset-password/ and expecting a successful password update, but O2 only states the endpoint is missing without the surrounding flow and login verification."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R18",
+        "label": "PARTIAL",
+        "reasoning": "R18 uses the reset-password endpoint for invalid-token handling, while O2 only notes the endpoint is absent and does not capture the specific 400 Invalid token behavior."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R56",
+        "label": "PARTIAL",
+        "reasoning": "R56 concerns validation on POST /api/v1/reset-password/, and O2 overlaps on the endpoint itself but not the specific 422 password-length validation requirement."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R14",
+        "label": "MATCH",
+        "reasoning": "O3 directly describes the missing test-token endpoint that R14 requires after superuser authentication, including returning the authenticated user's email."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R15",
+        "label": "MATCH",
+        "reasoning": "O4 directly corresponds to R15's requirement that a password recovery email actually be sent and verifiable via the mailcatcher service."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R16",
+        "label": "MATCH",
+        "reasoning": "O5 directly describes the missing behavior required by R16: password recovery for a non-existent user should return HTTP 404."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R18",
+        "label": "MATCH",
+        "reasoning": "O6 exactly captures R18's required invalid-token reset-password behavior of returning HTTP 400 with detail 'Invalid token'."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R56",
+        "label": "MATCH",
+        "reasoning": "O7 directly matches R56's requirement that a 7-character new_password on reset-password yields HTTP 422 before token validation."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": "R17",
+        "label": "PARTIAL",
+        "reasoning": "O8 captures the specific superuser mechanism in R17 for retrieving password-recovery HTML/token content, but not the full reset and successful-login flow."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2154,
+    "prompt_tokens": 1405,
+    "completion_tokens": 749
+  }
+}

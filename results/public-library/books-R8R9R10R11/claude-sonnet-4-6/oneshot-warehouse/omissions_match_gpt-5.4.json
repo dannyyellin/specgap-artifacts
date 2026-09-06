@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O1 states that POST /books does not use the Google Books API for publisher and publishedDate, which is the same removed behavior described by R10."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "O2 depends on the removed Google Books API integration, but it describes a more specific consequence about choosing the first result rather than the removal itself."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "O3 is a downstream fallback rule tied to the removed Google Books API integration, so it only partially corresponds to R10."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R11",
+        "label": "MATCH",
+        "reasoning": "O4 says genre is no longer validated against the allowed list, which matches the removal of the genre enumeration in R11."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 963,
+    "prompt_tokens": 690,
+    "completion_tokens": 273
+  }
+}

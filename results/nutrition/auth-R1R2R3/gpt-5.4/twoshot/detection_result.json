@@ -1,0 +1,73 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "Automatically creates an Owner user record at service startup if one does not already exist",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The specification states constraints for registering and authenticating the special user 'Owner', but it does not require pre-populating the database with an Owner account during startup. The code's ensure_owner_user() inserts such a record automatically."
+      },
+      {
+        "id": "A2",
+        "description": "Adds token expiration and issued-at claims and rejects expired tokens",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification requires returning a valid token and validating it, but it does not require tokens to expire or include iat/exp claims. The code adds a 24-hour expiration policy and enforces it during validation."
+      },
+      {
+        "id": "A3",
+        "description": "Makes the Owner username and password configurable through environment variables",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification fixes the privileged user credentials as name 'Owner' and password 'owner#pw'. The code instead reads OWNER_NAME and OWNER_PASSWORD from environment variables, which is behavior not required by the specification."
+      },
+      {
+        "id": "A4",
+        "description": "Returns the stored password field in user_to_response helper output",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification does not require any endpoint to return user documents containing password fields. Although this helper is unused, it defines response behavior beyond the specification."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "Registered user passwords are stored as plain strings instead of encrypted strings",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The specification defines each registered user document as containing 'password' '(an encrypted string)'. The code inserts the password exactly as received and also stores the Owner password unencrypted."
+      },
+      {
+        "id": "O2",
+        "description": "The special Owner account uses the wrong required credentials",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification requires that only one user may register with the name 'Owner' and that this user's password must be 'owner#pw'. The code defaults to OWNER_NAME='owner' and OWNER_PASSWORD='owner', so the privileged account does not match the required name/password."
+      },
+      {
+        "id": "O3",
+        "description": "Privilege determination does not enforce the specification's exact Owner credentials",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification says privileged is True if the user_name is 'Owner' and the password is correct, and that Owner is the only privileged user. The code marks tokens privileged solely when user_doc['name'] == OWNER_NAME, without enforcing the required literal username 'Owner' and password 'owner#pw'."
+      },
+      {
+        "id": "O4",
+        "description": "POST /register allows registering multiple users named 'Owner' over time if the startup-created owner uses a different configured name",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification allows only one user to register with the name 'Owner'. Because the code uses configurable OWNER_NAME defaulting to 'owner', it does not specifically reserve the literal name 'Owner' as required."
+      },
+      {
+        "id": "O5",
+        "description": "The implementation uses flask_pymongo, which is not in the allowed package list for this service",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification explicitly restricts this service to Python Standard Library plus flask, pymongo, pyjwt, bcrypt, and requests. The code imports and depends on flask_pymongo, which is outside the permitted set."
+      },
+      {
+        "id": "O6",
+        "description": "The implementation does not use bcrypt to encrypt and verify passwords",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification requires passwords to be encrypted strings and lists bcrypt as an allowed package for this service. The code neither hashes passwords on registration nor verifies hashed passwords on login."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 8304,
+    "prompt_tokens": 7542,
+    "completion_tokens": 762
+  }
+}

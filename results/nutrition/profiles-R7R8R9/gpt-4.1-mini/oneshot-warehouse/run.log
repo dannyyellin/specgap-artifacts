@@ -1,0 +1,18 @@
+Timestamp: 2026-06-01 20:57:25
+Detector:  gpt-4.1-mini
+App/Variant/Service: nutrition/profiles-R7R8R9/profile
+Method:    oneshot-warehouse
+
+Tokens: prompt=7067, completion=758, total=7825
+Additions: 1
+Omissions: 7
+
+  A A1: Supports filtering GET /profiles by 'user_id' query parameter
+
+  O O1: POST /profiles does not obtain 'user_id' from token validation as required
+  O O2: GET /profiles is not restricted to the restaurant Owner
+  O O3: GET, PUT, DELETE /profiles/{id} requests are not restricted to the user of that id
+  O O4: GET /profileDishes does not exclude 'protein' field in diet comparison as required
+  O O5: POST /profiles does not reject requests with missing or invalid nutritional fields
+  O O6: POST /profiles does not check for duplicate profile creation for the same user
+  O O7: GET /profiles does not support filtering by nutritional fields with 'less than or equal' semantics

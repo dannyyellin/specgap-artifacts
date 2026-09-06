@@ -1,0 +1,20 @@
+Timestamp: 2026-06-02 06:08:49
+Detector:  DeepSeek-V3-0324
+App/Variant/Service: pet-store/petstore-R4R5R6R7/pet-store
+Method:    twoshot
+
+Tokens: prompt=12315, completion=823, total=13138
+Additions: 3
+Omissions: 7
+
+  A A1: Stores 'pets' array within pet-type documents
+  A A2: Uses 'slogan', 'color', 'skin_type', 'top_speed', 'diet', 'main_prey' fields from Ninja API for attributes
+  A A3: Default lifespan value of 0 when not provided by Ninja API
+
+  O O1: Does not implement birthdate filtering (birthdateGT/birthdateLT) for GET /pet-types/{id}/pets
+  O O2: Does not check if pet-type has pets before allowing deletion (DELETE /pet-types/{id})
+  O O3: Does not return 400 when trying to delete a pet-type that has pets
+  O O4: Does not properly handle PUT /pet-types/{id}/pets/{name} to update only provided fields
+  O O5: Does not properly validate picture-url content type as .jpg or .png
+  O O6: Does not return 'NA' for missing lifespan when Ninja API doesn't provide it
+  O O7: Does not properly split attributes from Ninja API on whitespace (keeps comma-separated values as single attributes)

@@ -1,0 +1,19 @@
+{
+  "app": "public-library",
+  "variant": "borrows-R1R2R3",
+  "service": "borrows",
+  "req_id": "R1",
+  "requirement": "When a book is checked out, the borrow's returnDate is computed as loanDate + 30 days.",
+  "source_headline": "Removed return date computation (returnDate = loanDate + 30 days) from Borrows",
+  "model": "claude-sonnet-4-6",
+  "pass": 2,
+  "label": "GAP",
+  "evidence": "borrow_doc = { 'cardholderId': data['cardholderId'], 'ISBN': data['ISBN'], 'loanDate': data['loanDate'], 'returnDate': data.get('returnDate', ''), 'id': borrow_id }",
+  "reasoning": "The POST handler constructs the borrow document using whatever returnDate the client provides (or an empty string if omitted). There is no code that computes returnDate as loanDate + 30 days. A test checking that the stored returnDate equals loanDate + 30 days would fail because the field is either empty or whatever the client sent.",
+  "usage": {
+    "total_tokens": 3698,
+    "prompt_tokens": 3527,
+    "completion_tokens": 171
+  },
+  "timestamp": "2026-07-16 14:52:05"
+}

@@ -1,0 +1,19 @@
+{
+  "app": "nutrition",
+  "variant": "profiles-R7R8R9",
+  "service": "profile",
+  "req_id": "R9",
+  "requirement": "The user_id used by the service is taken from token validation, not from the request body.",
+  "source_headline": "Removed that user_id comes from token validation (not request body)",
+  "model": "claude-sonnet-4-6",
+  "pass": 2,
+  "label": "INFERRED",
+  "evidence": "validate_token() returns auth_data with user_id from token validation response (data.get('user_id')); in POST /profiles: user_id = int(auth_data['user_id']); in /profiles/<int:profile_id>: int(auth_data['user_id']) != int(profile_id); in /profileDishes: auth_data['user_id'] used for profile lookup",
+  "reasoning": "Throughout the service, the user_id is always sourced from the token validation response (auth_data['user_id']), never from the request body. The POST handler explicitly sets user_id from auth_data, and the profile_by_id handler enforces that the token's user_id matches the requested profile_id. This fully satisfies the requirement that user_id comes from token validation, not the request body.",
+  "usage": {
+    "total_tokens": 3132,
+    "prompt_tokens": 2921,
+    "completion_tokens": 211
+  },
+  "timestamp": "2026-07-16 14:59:04"
+}

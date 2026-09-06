@@ -1,0 +1,14 @@
+{
+  "req_id": 17,
+  "requirement_vague": "Test the password recovery flow of a new user. Superuser credentials: (admin@example.com / password123)",
+  "requirement_precise": "Create a new user with a generated email and initial password. Authenticate as the superuser (admin@example.com / password123). Using the superuser access token, request the password-recovery HTML content for the created user's email. Then submit the password reset request using the extracted reset token and a new password. Verify the password reset response has HTTP 200 and the response JSON is exactly {\"message\": \"Password updated successfully\"}. Finally, verify that login with the new password succeeds (returns 200).",
+  "verdict": "NOT_LEAKED",
+  "spec_evidence": "- \"Authenticate using the existing superuser credentials (admin@example.com / password123) to obtain an access token. Using that superuser access token, update the superuser's own password by supplying the current password and a newly generated password. Verify the response status is 200 and the response body contains a field 'message' equal to 'Password updated successfully'. Then verify that login with the NEW password succeeds.\"",
+  "reasoning": "The spec does mention successful password changes and that login with the new password should work, but only for the authenticated user's own password update flow using the current password. It never states any password recovery/reset flow, recovery HTML, reset token, or superuser-initiated reset for another user, so the removed requirement is not directly implied.",
+  "parse_error": false,
+  "usage": {
+    "total_tokens": 5278,
+    "prompt_tokens": 5107,
+    "completion_tokens": 171
+  }
+}

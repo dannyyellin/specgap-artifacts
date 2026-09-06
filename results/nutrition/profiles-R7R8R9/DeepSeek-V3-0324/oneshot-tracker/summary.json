@@ -1,0 +1,16 @@
+{
+  "app": "nutrition",
+  "variant": "profiles-R7R8R9",
+  "service": "profile",
+  "method": "oneshot-tracker",
+  "detector_model": "DeepSeek-V3-0324",
+  "gen_model": "gpt-5.4",
+  "gen_usage": null,
+  "n_additions": 3,
+  "n_omissions": 5,
+  "usage": {
+    "total_tokens": 7597,
+    "prompt_tokens": 6890,
+    "completion_tokens": 707
+  }
+}

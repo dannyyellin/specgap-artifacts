@@ -1,0 +1,21 @@
+{
+  "req_id": 25,
+  "requirement_vague": "Confirm a registered user cannot retrieve another user by id.",
+  "requirement_precise": "Register a new normal user and obtain an access token via the authentication endpoint. Using the obtained token, attempt to retrieve a user by ID using a random UUID that is not the authenticated user's ID. Verify the response status is 403. Verify the response body equals {\"detail\": \"The user doesn't have enough privileges\"}.",
+  "removed": false,
+  "omissions": [
+    {
+      "id": "R25-O1",
+      "description": "Retrieving another user by a random UUID returns 404 when the user does not exist, instead of the required 403 with body {\"detail\": \"The user doesn't have enough privileges\"}.",
+      "category": "RESPONSE_FORMAT",
+      "reasoning": "In GET /api/v1/users/{user_id}, the code first loads the user and immediately raises HTTPException(status_code=404, detail=\"User not found\") if no user exists for that UUID. The privilege check that returns 403 with detail \"The user doesn't have enough privileges\" only runs after a user is found, so the required scenario using a random UUID not equal to the authenticated user's ID is not satisfied."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 4841,
+    "prompt_tokens": 4685,
+    "completion_tokens": 156
+  },
+  "parse_error": false
+}

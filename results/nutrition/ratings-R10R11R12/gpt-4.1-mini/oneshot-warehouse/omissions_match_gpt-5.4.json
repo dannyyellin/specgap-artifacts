@@ -1,0 +1,66 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R11",
+        "label": "MATCH",
+        "reasoning": "It directly states that the one-rating-per-user-per-dish constraint is not enforced."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns ownership checks on update/delete, which is different from any listed reference requirement."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "It directly describes missing validation that rating must be an integer between 1 and 5."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "It describes the same removed rating range/integer constraint as R10, for the PUT path as well."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about dish_id and general bad-request validation, not any of the three reference requirements."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This explicitly says there is no omission and does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R11",
+        "label": "MATCH",
+        "reasoning": "It describes failure to prevent a user from rating the same dish twice, which is the removed uniqueness constraint."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This says token validation is implemented correctly and does not indicate the removal of user_id coming from token validation."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about 404 behavior for missing ratings, unrelated to the listed reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1429,
+    "prompt_tokens": 926,
+    "completion_tokens": 503
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R8",
+        "label": "PARTIAL",
+        "reasoning": "Allowing GET /profiles to filter by user_id is related to broader access to profiles, but it does not specifically capture removal of the owner-only restriction."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rejecting unknown query parameters with 400 does not correspond to any of the listed spec changes."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Returning 400 when a profile already exists is unrelated to protein exclusion, GET /profiles ownership restriction, or user_id source."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "The counter-based user ID generation conflicts with the idea that user_id should not come from token validation, but the code path is unused and does not directly show user_id coming from the request body."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "Including protein in GET /profileDishes directly matches the requirement about protein exclusion in the profileDishes calculation."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1069,
+    "prompt_tokens": 737,
+    "completion_tokens": 332
+  }
+}

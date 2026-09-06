@@ -1,0 +1,73 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "POST /borrows accepts an optional client-supplied returnDate field instead of always computing it internally",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states that on POST, the client provides cardholder id, ISBN, and loan date, and that returnDate is not provided in the POST request but is computed by the service. The code allows returnDate in the POST payload via validate_borrow_payload and stores data.get(\"returnDate\", \"\")."
+      },
+      {
+        "id": "A2",
+        "description": "POST and PUT payload validation allows an id field in the request body",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification says POST returns the id for the newly created borrow record and PUT provides updated resource fields and returns the id of the updated resource; it does not require clients to send an id field in request payloads. The code explicitly permits an 'id' field in allowed_fields."
+      },
+      {
+        "id": "A3",
+        "description": "POST and PUT verify that the referenced cardholder exists by calling the Cardholders microservice",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The borrows specification does not require validating cardholderId against the Cardholders service before creating or updating a borrow record. The code performs requests to http://cardholders:5001/cardholders/{id}."
+      },
+      {
+        "id": "A4",
+        "description": "POST and PUT verify that the referenced book exists by querying the Books microservice by ISBN",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The borrows specification does not require validating ISBN against the Books service before creating or updating a borrow record. The code performs a GET to the Books service with query parameter ISBN."
+      },
+      {
+        "id": "A5",
+        "description": "GET /borrows rejects query parameters other than cardholderId, ISBN, loanDate, returnDate, id, startDate, and endDate with 400",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification says GET /borrows may specify a query string of the form field=value, implying generic field-based filtering over resource fields, but it does not require rejecting unknown query fields. The code adds strict allowlisting and returns 400 for other keys."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "POST /borrows does not compute returnDate as loanDate plus 30 days",
+        "category": "COMPUTED_VALUES",
+        "reasoning": "The specification explicitly requires: 'The returnDate is not provided in the POST request but is computed by the service as follows: returnDate = loanDate + LOAN_PERIOD, where LOAN_PERIOD is 30 days.' The code stores returnDate as data.get(\"returnDate\", \"\") and never computes the 30-day due date."
+      },
+      {
+        "id": "O2",
+        "description": "POST /borrows does not enforce the rule that a cardholder with 2 or more overdue books cannot borrow another book",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states: 'A book can only be borrowed by a cardholder who does not have 2 or more books overdue.' The code performs no overdue-book count check before creating a borrow record."
+      },
+      {
+        "id": "O3",
+        "description": "POST /borrows does not return 400 when checkout is blocked because the cardholder has 2 or more overdue books",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly requires: 'If a book cannot be checked out because 2 or more books are overdue, the POST request returns the status code 400.' Since the code does not implement the overdue-books rule, it also does not return the required 400 in that case."
+      },
+      {
+        "id": "O4",
+        "description": "The overdue-books borrowing restriction is not implemented using data retrieved from another microservice when needed",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The general guidelines require that if a microservice needs data another microservice is responsible for, it invokes a GET request on that microservice when needed. Determining whether a cardholder has 2 or more overdue books requires borrow data evaluation, but the code makes no such interaction to implement the required restriction."
+      },
+      {
+        "id": "O5",
+        "description": "Failure to create a log record is ignored instead of being handled as a REST API exception with an appropriate HTTP status",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The specification says each time a book is checked out, the Borrows service informs the Logs service which creates a new log record, and the guidelines require handling REST API exceptions and returning appropriate HTTP status codes. The code calls create_log_for_borrow(borrow_doc) but ignores its False result and still returns 201 even if the Logs service call fails."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 7061,
+    "prompt_tokens": 6111,
+    "completion_tokens": 950
+  }
+}

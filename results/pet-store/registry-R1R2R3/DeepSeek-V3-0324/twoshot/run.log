@@ -1,0 +1,15 @@
+Timestamp: 2026-06-02 06:08:09
+Detector:  DeepSeek-V3-0324
+App/Variant/Service: pet-store/registry-R1R2R3/registry
+Method:    twoshot
+
+Tokens: prompt=10046, completion=483, total=10529
+Additions: 2
+Omissions: 3
+
+  A A1: Uses BCRYPT_ROUNDS=12 for password hashing
+  A A2: Returns 401 for all verification failures including missing credentials
+
+  O O1: Does not validate password complexity requirements (length, character types)
+  O O2: Does not return the same message 'Invalid credentials' for all verification failures
+  O O3: Does not use the correct MongoDB service name 'mongoReg' as specified

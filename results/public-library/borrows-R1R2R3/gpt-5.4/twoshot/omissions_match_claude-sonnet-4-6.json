@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of the returnDate computation (loanDate + 30 days) from the Borrows service, matching R1 exactly."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O2 directly describes the absence of the overdue borrow constraint that should block checkout and return 400, matching R2 exactly."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R3",
+        "label": "PARTIAL",
+        "reasoning": "O3 captures that Borrows does not reliably notify Logs on checkout, but frames it as an unreliable implementation rather than a complete removal of the notification behavior as stated in R3."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 999,
+    "prompt_tokens": 744,
+    "completion_tokens": 255
+  }
+}

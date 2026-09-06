@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of the returnDate computation (loanDate + 30 days) from the Borrows service, matching R1 exactly."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O2 describes the absence of the overdue-book count check that blocks checkout, which is the core behavior removed in R2."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O3 describes the missing 400 status code return when 2+ overdue books block checkout, which is explicitly part of the overdue borrow constraint removed in R2."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 focuses on the absence of a microservice interaction to retrieve overdue data, which is an implementation detail not specifically described in any of the three reference requirements."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R3",
+        "label": "PARTIAL",
+        "reasoning": "O5 relates to the Borrows-to-Logs notification behavior (R3), but focuses on error handling when the log call fails rather than the removal of the notification requirement itself."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1334,
+    "prompt_tokens": 926,
+    "completion_tokens": 408
+  }
+}

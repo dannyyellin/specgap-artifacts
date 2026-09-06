@@ -1,0 +1,60 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "It matches the feed endpoint behavior in R6 but only mentions the endpoint's existence, not the required follow-based inclusion/exclusion and count checks."
+      },
+      {
+        "detection_id": "O1",
+        "requirement_id": "R23",
+        "label": "PARTIAL",
+        "reasoning": "It overlaps with R23 because both concern GET /api/articles/feed, but O1 does not capture the pagination behavior with limit and offset."
+      },
+      {
+        "detection_id": "O1",
+        "requirement_id": "R27",
+        "label": "PARTIAL",
+        "reasoning": "It relates to the same feed endpoint as R27, but does not specify the empty-feed behavior for users who follow nobody."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R12",
+        "label": "MATCH",
+        "reasoning": "Both describe tag-based filtering on GET /api/articles using the tag query parameter."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements are about authorization checks for article update or delete ownership."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "Both describe the behavior that fetching a deleted article returns status 200 with an empty object instead of 404."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R29",
+        "label": "PARTIAL",
+        "reasoning": "It refers to deleting a user who has articles, but R29 is specifically about the deletion failing with a 500 FK constraint error and the article remaining."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "It concerns unique username/email validation, but R9 is specifically about enforcing that validation during user creation, not updates."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2201,
+    "prompt_tokens": 1699,
+    "completion_tokens": 502
+  }
+}

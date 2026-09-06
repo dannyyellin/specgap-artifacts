@@ -1,0 +1,14 @@
+{
+  "req_id": 56,
+  "requirement_vague": "Password reset should reject new_password with 7 characters with a 422 validation error.",
+  "requirement_precise": "Attempt to reset password via POST /api/v1/reset-password/ with token 'fake-token' and new_password of exactly 7 characters ('1234567'). Verify the response status is 422 (validation error). Note: The token validation happens after field validation, so 422 should be returned for invalid password length.",
+  "verdict": "SPEC_LEAKED",
+  "spec_evidence": "- \"Attempt to register a new user via POST /api/v1/users/signup with email 'test47@example.com', password of exactly 7 characters ('1234567'), and full_name 'Test User'. Verify the response status is 422 (validation error).\"\n- \"Register a new user via POST /api/v1/users/signup with email 'test50@example.com' and password 'oldpass123'. Login to get token. Attempt to update password via PATCH /api/v1/users/me/password with current_password 'oldpass123' and new_password of exactly 7 characters ('1234567'). Verify the response status is 422 (validation error).\"",
+  "reasoning": "The spec explicitly establishes a password-length validation rule that rejects 7-character passwords both at signup and when setting a new password in the password-update flow. From that text alone, a reader could directly infer that another endpoint that accepts a new_password field for resetting a password should apply the same validation and return 422 before token handling.",
+  "parse_error": false,
+  "usage": {
+    "total_tokens": 5289,
+    "prompt_tokens": 5066,
+    "completion_tokens": 223
+  }
+}

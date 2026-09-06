@@ -1,0 +1,19 @@
+{
+  "app": "nutrition",
+  "variant": "auth-R1R2R3",
+  "service": "authentication",
+  "req_id": "R3",
+  "requirement": "Usernames are unique: attempting to register a name that already exists is rejected.",
+  "source_headline": "Removed username uniqueness constraint (cannot register same name twice)",
+  "model": "claude-sonnet-4-6",
+  "pass": 2,
+  "label": "INFERRED",
+  "evidence": "register() function: `existing = mongo.db.users.find_one({'name': name}); if existing is not None: return error_response('Bad request', 400)` and `ensure_indexes()`: `mongo.db.users.create_index('name', unique=True)`",
+  "reasoning": "The code explicitly checks for an existing user with the same name before insertion and returns a 400 error if found. Additionally, a unique index on the 'name' field is created at startup, providing a second enforcement layer. Both mechanisms together fully satisfy the requirement that duplicate usernames are rejected.",
+  "usage": {
+    "total_tokens": 2518,
+    "prompt_tokens": 2364,
+    "completion_tokens": 154
+  },
+  "timestamp": "2026-07-16 14:56:31"
+}

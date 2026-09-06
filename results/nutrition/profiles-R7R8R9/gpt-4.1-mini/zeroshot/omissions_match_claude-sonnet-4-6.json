@@ -1,0 +1,54 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R8",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of the owner-only restriction on GET /profiles, matching R8 exactly."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R8",
+        "label": "PARTIAL",
+        "reasoning": "O2 mentions the owner-only restriction on GET /profiles but frames it alongside /profiles/{id} access control, only partially capturing R8's specific behavior."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "O3 mentions that user_id should come from the validated token but focuses on a different aspect (duplicate profile check) rather than the core behavior of R9 that user_id must come from the token rather than the request body."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "O4 directly describes that protein should not be included in the profileDishes calculation/query, matching R7's removal of protein exclusion from profileDishes."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O7 does not correspond to any of the reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1388,
+    "prompt_tokens": 893,
+    "completion_tokens": 495
+  }
+}

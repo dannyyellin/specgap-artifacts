@@ -1,0 +1,132 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement concerns validation of required article creation fields."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R12",
+        "label": "MATCH",
+        "reasoning": "R12 specifically requires GET /api/articles?tag=... to filter articles by tag, which O2 directly describes as missing."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements mention filtering articles by favorited query parameter."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement is about slug preservation on title update, and O4 itself states there is no omission."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed reference requirements test article update authorization by owner."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "R5 tests deletion behavior and post-delete retrieval, not authorization checks on who may delete."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "R5 requires DELETE /api/articles/{slug} to return status 200 and then GET to return {}, while O7 only addresses the delete success status behavior."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement concerns validation of comment body on comment creation."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements test authorization for deleting comments."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "R6 requires GET /api/articles/feed to return followed authors' articles, which O10 says is not implemented."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": "R23",
+        "label": "MATCH",
+        "reasoning": "R23 specifically tests feed pagination on GET /api/articles/feed, so a missing feed endpoint directly covers it."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": "R27",
+        "label": "MATCH",
+        "reasoning": "R27 requires GET /api/articles/feed to return an empty feed when the user follows nobody, which O10 would prevent entirely."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement tests following a non-existent user."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement tests unfollowing oneself."
+      },
+      {
+        "detection_id": "O13",
+        "requirement_id": "R29",
+        "label": "MATCH",
+        "reasoning": "R29 explicitly requires DELETE /api/users/{email}, which O13 states is not implemented."
+      },
+      {
+        "detection_id": "O14",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "R5 expects GET after deleting an article to return 200 with {}, while O14 describes the same empty-object behavior but for non-existent articles generally rather than specifically deleted ones."
+      },
+      {
+        "detection_id": "O15",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "R9 requires duplicate username or email creation attempts to return 400 with the message 'Username and email must be unique', exactly what O15 says is not enforced."
+      },
+      {
+        "detection_id": "O16",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The reference requirements only test uniqueness on user creation, not on updating username or email."
+      },
+      {
+        "detection_id": "O17",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement concerns GET /api/profiles/{username} for a missing profile."
+      },
+      {
+        "detection_id": "O18",
+        "requirement_id": "R12",
+        "label": "PARTIAL",
+        "reasoning": "R12 requires tag filtering support, but O18 broadens this to simultaneous multi-parameter filtering, which is beyond the specific reference behavior."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 3469,
+    "prompt_tokens": 2338,
+    "completion_tokens": 1131
+  }
+}

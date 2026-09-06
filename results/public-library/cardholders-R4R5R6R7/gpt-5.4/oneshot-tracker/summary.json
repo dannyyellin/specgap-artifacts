@@ -1,0 +1,19 @@
+{
+  "app": "public-library",
+  "variant": "cardholders-R4R5R6R7",
+  "service": "cardholders",
+  "method": "oneshot-tracker",
+  "model": "gpt-5.4",
+  "gen_usage": {
+    "total_tokens": 3717,
+    "prompt_tokens": 2142,
+    "completion_tokens": 1575
+  },
+  "n_additions": 3,
+  "n_omissions": 5,
+  "usage": {
+    "total_tokens": 6089,
+    "prompt_tokens": 5390,
+    "completion_tokens": 699
+  }
+}

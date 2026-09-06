@@ -1,0 +1,90 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O1 concerns MongoDB connection configuration, which does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O2 describes that DELETE /pet-types/{id} deletes a pet-type even when pets exist, directly matching R5 which removed the 'cannot delete pet-type if it has pets' constraint."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O3 describes the absence of the 400 response when pets exist, which is the same behavior as R5 removing the constraint that prevents deletion when pets exist."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concerns an unexpected 404 response for POST /pet-types/{id}/pets, which does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 concerns lack of payload field validation for POST /pet-types/{id}/pets, which does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "O6 describes that GET /pet-types/{id}/pets does not implement birthdateGT/birthdateLT query filtering, directly matching R7 which removed birthdate query filtering."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "O7 describes the absence of strict before/after birthdate filtering logic, which is the same behavior as R7 removing birthdateGT/birthdateLT query filtering."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O8 concerns lack of payload validation for PUT /pet-types/{id}/pets/{name}, which does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "O9 describes that POST /pet-types does not compute 'attributes' using the required whitespace-splitting and punctuation-removal rules from 'temperament' or 'group_behavior', directly matching R4 which removed temperament/group_behavior to attributes extraction rules."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "O10 describes that 'group_behavior' is not used as the fallback source for attributes, which is part of the same extraction rules removed in R4."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "O11 concerns lifespan defaulting to 0 instead of null when absent, which is related to R6's removal of lifespan range handling, but R6 specifically refers to 'choose minimum' and 'extract first integer' logic rather than the null default behavior."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "O12 concerns lifespan being returned as 0 instead of null in GET responses, which is related to R6's removal of lifespan range handling but focuses on serialization rather than the specific parsing rules mentioned in R6."
+      },
+      {
+        "detection_id": "O13",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O13 concerns returning 401 instead of 503 when the registry service is unreachable, which does not correspond to any of the reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2652,
+    "prompt_tokens": 1565,
+    "completion_tokens": 1087
+  }
+}

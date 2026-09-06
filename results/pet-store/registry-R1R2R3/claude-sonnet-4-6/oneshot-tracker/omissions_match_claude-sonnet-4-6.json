@@ -1,0 +1,48 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This describes a MongoDB hostname configuration difference, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O2 describes a deviation in /verify response format (empty 401 vs JSON), which is related to R2's anti-enumeration requirement but focuses on the response structure rather than the same-error-message security behavior specifically."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O3 directly describes the removal of the same-error-message anti-enumeration security requirement for /verify, matching R2 exactly."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O4 describes the absence of password validation rules (length, uppercase, lowercase, digit) in POST /users, which directly matches R1's removal of password validation rules."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O5 describes the absence of password complexity validation in PUT /users/{username}/password, which also corresponds to R1's removal of password validation rules."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This describes a regex pattern bug with '$$' as an end anchor, which does not correspond to any of the three reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1452,
+    "prompt_tokens": 984,
+    "completion_tokens": 468
+  }
+}

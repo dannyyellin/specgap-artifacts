@@ -1,0 +1,36 @@
+Timestamp: 2026-06-01 21:37:51
+Detector:  gpt-4.1-mini
+Service:   nestjs-realworld  Round: 2  Removals: [2, 10, 13, 15, 24, 26, 28]
+Method:    oneshot-tracker
+
+Tokens: prompt=9851, completion=1921, total=11772
+Additions: 6
+Omissions: 20
+
+  A A1: The delete_comment endpoint allows deletion of a comment by either the comment author or the article author
+  A A2: The delete_article and update_article endpoints enforce ownership checks, returning 403 Forbidden if the current user is not the article author
+  A A3: The follow_user and unfollow_user endpoints allow following and unfollowing any user except self, but do not return 400 error when attempting to follow or unfollow self
+  A A4: The user_dict function includes the user's internal 'id' field in the response
+  A A5: The article_dict response includes both 'createdAt'/'updatedAt' and duplicate 'created'/'updated' timestamp fields
+  A A6: The article_dict and comment_dict responses include 'favorited' and 'favoritesCount' fields always set to false and 0 respectively
+
+  O O1: POST /api/users does not validate that username, email, and password fields are present and non-empty in the request body
+  O O2: POST /api/users/login returns 201 on successful login instead of 200 as typical for login endpoints
+  O O3: GET /api/articles returns articles sorted by article id descending instead of created timestamp descending
+  O O4: GET /api/articles and /api/articles/feed do not support filtering or ordering by created timestamp as required
+  O O5: GET /api/articles/feed returns 200 with empty articles and count 0 when user follows no one, but does not support unauthenticated access
+  O O6: POST /api/articles/{slug}/comments does not validate that comment body is present and non-empty
+  O O7: DELETE /api/articles/{slug} and PUT /api/articles/{slug} do not allow non-owners to update or delete articles, contrary to specification's demonstrated vulnerability
+  O O8: POST /api/profiles/{username}/follow and DELETE /api/profiles/{username}/follow do not return 400 error when user attempts to follow or unfollow themselves
+  O O9: DELETE /api/users/{email} does not prevent deletion of users with existing articles, but returns 500 error on FK constraint violation
+  O O10: GET /api/articles/{slug} returns empty object {} when article not found instead of 404 status
+  O O11: POST /api/users/login returns 401 Unauthorized on wrong password as required
+  O O12: User creation enforces uniqueness of username and email with 400 error and message 'Username and email must be unique'
+  O O13: Slug generation appends random suffix to ensure uniqueness for articles with duplicate titles
+  O O14: Article timestamps 'created' and 'updated' are set on creation and updated on article update
+  O O15: GET /api/articles supports filtering by tag and author and pagination with limit and offset
+  O O16: GET /api/articles/feed supports pagination with limit and offset
+  O O17: GET /api/articles/{slug}/comments returns comments with id as number and body preserved
+  O O18: POST /api/articles/{slug}/comments returns article with comments array including the new comment
+  O O19: DELETE /api/articles/{slug}/comments/{id} allows comment deletion by comment author or article author
+  O O20: GET /api/profiles/{username} returns profile with following status relative to viewer

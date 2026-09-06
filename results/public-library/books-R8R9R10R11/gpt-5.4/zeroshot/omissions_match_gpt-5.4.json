@@ -1,0 +1,54 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "Both state that POST /books should no longer use Google Books API to derive publisher and publishedDate."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "This also describes the removed Google Books API-based population of publisher and publishedDate during POST."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "Both concern removal of the requirement that ISBN be validated as a 13-digit ISBN_13 format on POST."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R11",
+        "label": "MATCH",
+        "reasoning": "Both describe removal of the fixed allowed genre enumeration for POST."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "It concerns the same ISBN_13 format constraint, but applies it to PUT updates rather than the removed POST requirement."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R11",
+        "label": "PARTIAL",
+        "reasoning": "It refers to the same genre enumeration constraint, but for PUT updates instead of the removed POST-side requirement."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "It is related to the removed Google Books-derived publisher/publishedDate behavior, but focuses on PUT mutability rather than POST integration removal."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1264,
+    "prompt_tokens": 846,
+    "completion_tokens": 418
+  }
+}

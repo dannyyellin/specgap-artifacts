@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The transaction ID counter and 'id' field do not correspond to any of the three spec requirements about removed pet selection algorithm, removed DELETE pet step, or removed unique purchase-id constraint."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Filtering on an 'id' field in GET /transactions does not relate to the removed pet selection algorithm, removed DELETE pet step, or removed unique purchase-id constraint."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Returning an empty array for unknown/malformed query parameters does not correspond to any of the three spec requirements about removed pet selection, removed DELETE step, or removed unique purchase-id constraint."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 905,
+    "prompt_tokens": 648,
+    "completion_tokens": 257
+  }
+}

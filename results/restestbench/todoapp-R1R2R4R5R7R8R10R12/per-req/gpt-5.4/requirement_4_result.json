@@ -1,0 +1,18 @@
+{
+  "req_id": 4,
+  "requirement_vague": "Getting a non-existent todo returns 404 Not Found",
+  "requirement_precise": "Register a user and login to get an access token. Call GET /todos/99999 (an ID that does not exist). Verify the response status code is 404 Not Found.",
+  "removed": true,
+  "omissions": [],
+  "implementation": {
+    "location": "GET /todos/{id} -> get_todo",
+    "code_reference": "todo = session.exec(\n    select(Todo).where(Todo.id == id, Todo.user_id == current_user.id)\n).first()\nif not todo:\n    raise HTTPException(\n        status_code=status.HTTP_404_NOT_FOUND,\n        detail=\"Todo not found\",\n    )",
+    "reasoning": "The get_todo route looks up the todo by the requested id scoped to the authenticated user, and if no matching record exists it raises an HTTPException with status 404 Not Found. This satisfies the requirement for GET /todos/99999 returning 404 when the todo does not exist."
+  },
+  "usage": {
+    "total_tokens": 2557,
+    "prompt_tokens": 2404,
+    "completion_tokens": 153
+  },
+  "parse_error": false
+}

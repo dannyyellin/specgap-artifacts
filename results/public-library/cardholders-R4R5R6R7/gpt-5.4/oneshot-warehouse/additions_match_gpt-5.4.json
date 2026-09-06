@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Restricting GET /cardholders filtering to name and email does not correspond to removing field type declarations, error code 415, fine formula, or Borrows cross-service fine computation."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rejecting PUT bodies whose id differs from the path id is unrelated to the removed type declarations, removed 415 error code, removed fine formula, and removed Borrows cross-service call."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Requiring at least one of name or email in a PUT update does not describe any of the listed removals in the specification."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "Using Mongo ObjectIds conflicts with the spec's former mention of id as a string type, but R4 is specifically about removing type declarations rather than introducing ObjectId validation."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1000,
+    "prompt_tokens": 710,
+    "completion_tokens": 290
+  }
+}

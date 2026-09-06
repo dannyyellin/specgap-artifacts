@@ -1,0 +1,54 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of Google Books API integration for obtaining publisher and publishedDate, matching R10."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O2 also describes the absence of Google Books API integration for publisher and publishedDate fields, matching R10."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "O3 describes the removal of validation that ISBN must be a 13-digit ISBN_13 string, directly matching R9."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R11",
+        "label": "MATCH",
+        "reasoning": "O4 describes the removal of genre enumeration validation, matching R11 which covers the removed valid genre list."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "O5 describes missing ISBN format validation on PUT, while R9 refers to the removed ISBN format requirement generally, but R9 is scoped to the POST/resource definition rather than PUT updates."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R11",
+        "label": "PARTIAL",
+        "reasoning": "O6 describes missing genre enumeration validation on PUT, while R11 refers to the removed genre enumeration generally, but R11 is scoped to the resource definition rather than PUT updates specifically."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "O7 partially relates to R10 in that it concerns publisher and publishedDate not being service-obtained via Google Books, but focuses on PUT mutability rather than the removal of Google Books API integration itself."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1475,
+    "prompt_tokens": 926,
+    "completion_tokens": 549
+  }
+}

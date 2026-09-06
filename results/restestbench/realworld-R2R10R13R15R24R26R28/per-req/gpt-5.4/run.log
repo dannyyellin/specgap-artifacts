@@ -1,0 +1,56 @@
+Timestamp:  2026-06-23 07:07:33
+Service:    realworld (round 2)
+Variant:    realworld-R2R10R13R15R24R26R28
+Model:      gpt-5.4
+Removals:   [2, 10, 13, 15, 24, 26, 28]
+
+Total requirements:      29
+  Implemented:           22
+  Not implemented:       7
+  Parse errors:          0
+
+Removed requirements (7):  [2, 10, 13, 15, 24, 26, 28]
+  Detected (NOT_IMPLEMENTED):  [2, 10, 15, 24, 28]
+  Missed  (IMPLEMENTED):       [13, 26]
+
+Kept requirements flagged as NOT_IMPLEMENTED (generator errors):
+  [11, 18]
+
+om_recall        (removed & not implemented / n_removed):  0.714
+ad_recall        (removed & implemented     / n_removed):  0.286
+fp_rate_on_kept  (kept    & not implemented / n_kept   ):  0.091
+
+Total omissions reported: 10
+Total tokens:             159172
+
+--- Per-requirement verdicts ---
+
+  R  1  IMPLEMENTED      Create a new user and verify the user is stored correctly  @ ['POST /api/users -> register', 'GET /api/user -> get_user', 'user_dict', 'get_current_user / parse_token_header']
+  R  2  NOT_IMPLEMENTED  Verify following a user updates the profile following status correctly [REMOVED]
+  R  3  IMPLEMENTED      Verify article creation generates slug correctly from title and articl  @ ['slugify', 'POST /api/articles', 'GET /api/articles/{slug}']
+  R  4  IMPLEMENTED      Verify article update changes article fields and preserves slug  @ ['PUT /api/articles/{slug} -> update_article', 'GET /api/articles/{slug} -> get_article']
+  R  5  IMPLEMENTED      Verify article deletion removes the article from the system  @ ['DELETE /api/articles/{slug} -> delete_article', 'GET /api/articles/{slug} -> get_article']
+  R  6  IMPLEMENTED      Verify article feed only returns articles from followed users  @ GET /api/articles/feed in feed_articles
+  R  7  IMPLEMENTED      Verify comment creation adds comment to article and can be retrieved  @ ['POST /api/articles/{slug}/comments -> add_comment', 'GET /api/articles/{slug}/comments -> get_comments', 'article_dict', 'comment_dict']
+  R  8  IMPLEMENTED      Verify comment deletion removes comment from article comments list  @ DELETE /api/articles/{slug}/comments/{comment_id} and GET /api/articles/{slug}/comments
+  R  9  IMPLEMENTED      Verify user creation rejects duplicate username or email  @ POST /api/users -> register
+  R 10  NOT_IMPLEMENTED  Verify unfollow removes follow relationship and updates profile follow [REMOVED]
+  R 11  NOT_IMPLEMENTED  Verify user login with password verification works correctly
+  R 12  IMPLEMENTED      Verify article filtering by tag works correctly  @ GET /api/articles in list_articles; POST /api/articles in create_article; attach_tags
+  R 13  IMPLEMENTED      Verify article filtering by author works correctly  @ GET /api/articles -> list_articles [REMOVED]
+  R 14  IMPLEMENTED      Verify user profile update modifies user data correctly  @ ['POST /api/users (register)', 'PUT /api/user (update_user)', 'GET /api/user (get_user)']
+  R 15  NOT_IMPLEMENTED  Verify article pagination with limit and offset works correctly [REMOVED]
+  R 16  IMPLEMENTED      Verify profile returns correct following status based on follow relati  @ ['profile_dict', 'GET /api/profiles/{username}', 'POST /api/profiles/{username}/follow', 'DELETE /api/profiles/{username}/follow']
+  R 17  IMPLEMENTED      Verify article creation correctly associates the article with its auth  @ ['POST /api/articles (create_article)', 'GET /api/articles (list_articles)', 'article_dict']
+  R 18  NOT_IMPLEMENTED  Verify article tagList is correctly stored and persisted as a simple-a
+  R 19  IMPLEMENTED      Verify article updated timestamp changes on update but created timesta  @ ['POST /api/articles in create_article', 'PUT /api/articles/{slug} in update_article', 'GET /api/articles/{slug} in get_article']
+  R 20  IMPLEMENTED      Verify article slugs are unique with random suffix  @ slugify; POST /api/articles in create_article
+  R 21  IMPLEMENTED      Verify article title and description are correctly stored and retrieve  @ ['POST /api/users', 'POST /api/articles', 'GET /api/articles/{slug}', 'article_dict']
+  R 22  IMPLEMENTED      Verify profile returns correct bio and image fields  @ ['PUT /api/user', 'GET /api/profiles/{username}', 'profile_dict']
+  R 23  IMPLEMENTED      Verify feed supports pagination with limit and offset  @ GET /api/articles/feed in feed_articles
+  R 24  NOT_IMPLEMENTED  Verify articles are returned in descending order by created date [REMOVED]
+  R 25  IMPLEMENTED      Verify JWT token contains correct user ID and username in payload  @ ['create_token', 'user_dict', 'POST /api/users', 'GET /api/user', 'get_current_user_optional']
+  R 26  IMPLEMENTED      Verify multiple comments can be added to the same article with unique   @ ['POST /api/articles/{slug}/comments (add_comment)', 'GET /api/articles/{slug}/comments (get_comments)', 'Comment SQLModel definition'] [REMOVED]
+  R 27  IMPLEMENTED      Verify empty feed is returned when user follows nobody  @ feed_articles route: GET /api/articles/feed
+  R 28  NOT_IMPLEMENTED  Verify any authenticated user can update and delete any article (no au [REMOVED]
+  R 29  IMPLEMENTED      Verify user deletion fails when user has articles (FK constraint, no c  @ DELETE /api/users/{email} in delete_user_by_email; Article.author_id foreign key in Article model; GET /api/articles in list_articles

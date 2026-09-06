@@ -1,0 +1,48 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R8",
+        "label": "MATCH",
+        "reasoning": "O1 states that GET /profiles is not restricted to the restaurant Owner, which is the same behavior as removing the owner-only restriction on GET /profiles."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 is about a path mismatch between /profile/{id} and /profiles/{id}, which does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "O3 says protein is incorrectly included in profileDishes filtering, which matches the reference requirement that protein exclusion was removed from the profileDishes calculation."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concerns validation of nutritional field types in POST and PUT payloads, which is unrelated to the listed reference requirements."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "O5 also describes profileDishes incorrectly forwarding protein as a constraint, matching the removal of protein exclusion from the profileDishes calculation."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 is about use of an unallowed package, which does not match any reference requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1217,
+    "prompt_tokens": 829,
+    "completion_tokens": 388
+  }
+}

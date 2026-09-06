@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Media type validation for POST requests does not relate to removing the loanDate date format or removing Borrows-to-Logs notifications from descriptions."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Runtime validation that loanDate and other fields are strings does not describe removing the specific 'DD-MM-YYYY' date format from Logs."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Query-parameter whitelisting for GET /logs is unrelated to either removing a loanDate format or removing Borrows-to-Logs notification text."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Returning JSON error bodies does not correspond to either of the listed spec removals."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Generating log IDs as UUID strings is unrelated to the removed loanDate format and removed Borrows-to-Logs notification."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1006,
+    "prompt_tokens": 696,
+    "completion_tokens": 310
+  }
+}

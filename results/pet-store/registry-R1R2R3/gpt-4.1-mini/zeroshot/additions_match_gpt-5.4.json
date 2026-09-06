@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "A1 describes the /verify anti-enumeration behavior about using the same response for nonexistent usernames and wrong passwords, which is exactly the requirement removed in R2."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "A2 concerns /verify returning a uniform JSON error shape for missing credentials, which is related to anti-enumeration response consistency but is not the core nonexistent-user vs wrong-password behavior in R2."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A3 discusses generic JSON error bodies across endpoints and does not correspond to removed password rules, removed /verify anti-enumeration, or removed owner pre-registration."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A4 is about bcrypt cost factor and does not match any of the listed removed requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 964,
+    "prompt_tokens": 683,
+    "completion_tokens": 281
+  }
+}

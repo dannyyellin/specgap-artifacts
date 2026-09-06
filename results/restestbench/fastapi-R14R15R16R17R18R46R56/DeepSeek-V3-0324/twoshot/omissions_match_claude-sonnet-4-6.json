@@ -1,0 +1,72 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R15",
+        "label": "PARTIAL",
+        "reasoning": "O1 notes the password recovery endpoint is missing, which is the same endpoint tested in R15, but O1 only notes absence while R15 describes full behavior including email verification."
+      },
+      {
+        "detection_id": "O1",
+        "requirement_id": "R16",
+        "label": "PARTIAL",
+        "reasoning": "O1 notes the password recovery endpoint is missing, which is also the endpoint tested in R16 for non-existent user scenario."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R17",
+        "label": "PARTIAL",
+        "reasoning": "O2 notes the reset-password endpoint is missing, which is the same endpoint used in R17 to submit the password reset request."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R18",
+        "label": "PARTIAL",
+        "reasoning": "O2 notes the reset-password endpoint is missing, which is the same endpoint tested in R18 with an invalid token."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R56",
+        "label": "PARTIAL",
+        "reasoning": "O2 notes the reset-password endpoint is missing, which is the same endpoint tested in R56 for password length validation."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R15",
+        "label": "PARTIAL",
+        "reasoning": "O3 specifically addresses the mailcatcher email verification aspect of R15, but only captures that one part of the full requirement."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements specifically test for 403 vs 400 status codes on item permission operations."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R14",
+        "label": "PARTIAL",
+        "reasoning": "O5 notes the test token endpoint is missing, which is the endpoint called in R14 to verify the access token, but O5 only notes absence while R14 describes full authentication and verification behavior."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements specifically test for the exact error message 'The user with this id does not exist in the system'."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements specifically test for the exact error message 'The user doesn't have enough privileges'."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2080,
+    "prompt_tokens": 1342,
+    "completion_tokens": 738
+  }
+}

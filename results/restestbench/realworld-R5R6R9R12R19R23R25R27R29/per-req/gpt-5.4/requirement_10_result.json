@@ -1,0 +1,23 @@
+{
+  "req_id": 10,
+  "requirement_vague": "Verify unfollow removes follow relationship and updates profile following status",
+  "requirement_precise": "Create user1 (username: 'unfollower1', email: 'unfollower1@test.com', password: 'pass123') and user2 (username: 'unfollowee1', email: 'unfollowee1@test.com', password: 'pass123'). User1 follows user2. Verify following is true. User1 unfollows user2 via DELETE /api/profiles/unfollowee1/follow. Verify response status is 200. Verify response profile has 'following' equal to false. GET profile of user2 using user1's token. Verify 'following' is false. Verify user1 cannot unfollow themselves (should return 400).",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": [
+      "@app.delete(\"/api/profiles/{username}/follow\") def unfollow_profile",
+      "@app.get(\"/api/profiles/{username}\") def get_profile",
+      "def profile_response",
+      "def is_following"
+    ],
+    "code_reference": "if viewer.id == target.id:\n    raise HTTPException(status_code=400, detail={\"errors\": {\"body\": [\"followerId and followingId cannot be equal\"]}})\nexisting = session.get(FollowLink, (viewer.id, target.id))\nif existing:\n    session.delete(existing)\n    session.commit()\nreturn profile_response(session, target, viewer)",
+    "reasoning": "The DELETE /api/profiles/{username}/follow endpoint exists, returns the default 200 status, prevents self-unfollow with a 400, deletes the FollowLink row when present, and returns the target profile computed via profile_response/is_following so `following` becomes false after deletion. The GET /api/profiles/{username} endpoint also uses the same `profile_response` logic with the authenticated viewer, so fetching the profile afterward with user1's token will report `following: false`."
+  },
+  "usage": {
+    "total_tokens": 5470,
+    "prompt_tokens": 5223,
+    "completion_tokens": 247
+  },
+  "parse_error": false
+}

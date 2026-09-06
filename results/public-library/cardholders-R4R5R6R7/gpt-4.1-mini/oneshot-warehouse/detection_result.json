@@ -1,0 +1,49 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "GET /cardholders supports filtering by 'name' and 'email' query parameters",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states GET /cardholders may specify a query string of the form 'field=value' to filter records, but does not explicitly limit filtering to 'name' and 'email' fields only. The code restricts filtering to these two fields, which is an implementation detail not required by the specification."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "GET /cardholders/fines/{id} computes fineAmount incorrectly by adding 1 per overdue book instead of number-of-days-overdue * 0.50",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states the fine per overdue book is number-of-days-overdue multiplied by FINE_PER_DAY ($0.50), and the total fine is the sum of all such fines. The code adds 1 per overdue book regardless of days overdue or the 0.50 rate."
+      },
+      {
+        "id": "O2",
+        "description": "GET /cardholders/fines/{id} does not compute the sum of fines for all books borrowed, only counts overdue books",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification requires summing fines for all books borrowed by the cardholder, calculated as days overdue times 0.50 per book. The code only increments fineAmount by 1 per overdue book without considering days overdue or summing actual fines."
+      },
+      {
+        "id": "O3",
+        "description": "GET /cardholders/fines/{id} does not handle the case where Borrows microservice returns borrow records with missing or invalid 'returnDate' fields",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification implies that the fine calculation depends on valid 'returnDate' fields from Borrows microservice. The code treats missing or invalid 'returnDate' as not overdue but does not explicitly validate or handle such cases."
+      },
+      {
+        "id": "O4",
+        "description": "PUT /cardholders/{id} does not allow updating the 'id' field to a different value",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states PUT /cardholders/{id} provides a JSON payload of the updated resource\u2019s fields and returns the id of the updated resource. It does not explicitly forbid changing the 'id' field, but the code rejects updates where 'id' in payload differs from URL id. This is an omission only if the specification requires allowing 'id' changes, but since the spec does not explicitly require it, this is not an omission."
+      },
+      {
+        "id": "O5",
+        "description": "GET /cardholders does not support filtering by 'id' query parameter",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states GET /cardholders may specify a query string of the form 'field=value' to filter records. Since 'id' is a field of cardholder records, filtering by 'id' should be supported. The code only supports filtering by 'name' and 'email'."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 6503,
+    "prompt_tokens": 5789,
+    "completion_tokens": 714
+  }
+}

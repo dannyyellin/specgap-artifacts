@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "OPTIONS method handling is not related to any of the three spec requirements about field name mapping, owner-only restrictions, or query string filtering semantics."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Counter collection for ID generation is an implementation detail not related to field name mapping, owner-only restrictions, or query string filtering semantics."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rounding numeric values to 2 decimal places is not related to any of the three spec requirements about field name mapping, owner-only restrictions, or query string filtering semantics."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 803,
+    "prompt_tokens": 564,
+    "completion_tokens": 239
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "It aligns with removal of Google Books API integration for publisher/publishedDate, but only describes accepting caller-supplied fields rather than fully establishing that the integration was removed."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This PUT id-mismatch validation behavior does not correspond to any of the listed removed POST-field, ISBN, Google Books, or genre-enumeration requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 707,
+    "prompt_tokens": 556,
+    "completion_tokens": 151
+  }
+}

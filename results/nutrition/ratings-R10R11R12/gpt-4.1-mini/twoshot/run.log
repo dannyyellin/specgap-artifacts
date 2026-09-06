@@ -1,0 +1,21 @@
+Timestamp: 2026-06-01 20:58:30
+Detector:  gpt-4.1-mini
+App/Variant/Service: nutrition/ratings-R10R11R12/ratings
+Method:    twoshot
+
+Tokens: prompt=7997, completion=983, total=8980
+Additions: 3
+Omissions: 8
+
+  A A1: Supports Authorization header with Bearer token format and also accepts token in 'token' header
+  A A2: Implements a MongoDB counter collection to generate unique 'id' values for ratings
+  A A3: Rounds rating values to two decimal places
+
+  O O1: POST /ratings does not reject if the user has already rated the same dish
+  O O2: PUT /ratings/{id} does not verify that the rating value is an integer between 1 and 5
+  O O3: POST /ratings does not verify that the rating value is an integer between 1 and 5
+  O O4: POST /ratings and PUT /ratings/{id} do not verify that the dish_id exists before creating or updating a rating
+  O O5: DELETE /ratings/{id} does not verify that the rating to delete belongs to the user issuing the request
+  O O6: GET /ratings returns average ratings for all dishes but does not support filtering by dish_id or other query parameters
+  O O7: Does not return 400 Bad Request when dish_id or rating fields are missing or invalid in PUT /ratings/{id}
+  O O8: Does not return 404 Not Found if rating to update or delete does not exist for the user

@@ -1,0 +1,19 @@
+{
+  "app": "public-library",
+  "variant": "logs-R12R13",
+  "service": "logs",
+  "req_id": "R13",
+  "requirement": "The Logs service receives checkout notifications from the Borrows service: each checkout results in a log entry being created via the Logs service's ingestion endpoint.",
+  "source_headline": "Removed Borrows-to-Logs notification from BOTH Borrows and Logs descriptions",
+  "model": "gpt-5.4",
+  "pass": 1,
+  "label": "PARTIAL",
+  "evidence": "The service exposes an ingestion endpoint at `@app.route(\"/logs\", methods=[\"GET\", \"POST\"])`; in the POST branch it validates JSON fields `cardholderId`, `borrowId`, `ISBN`, `loanDate`, inserts `log_doc` with a generated `id` via `collection.insert_one(log_doc)`, and returns `201`.",
+  "reasoning": "There is clearly code addressing log ingestion: a POST to `/logs` creates a log entry, so this is not a GAP. However, the requirement specifically states that the Logs service receives checkout notifications from the Borrows service such that each checkout results in a log entry via the ingestion endpoint. This code only provides the ingestion endpoint; it contains no behavior tying Borrows-service checkout notifications to that endpoint or ensuring each checkout triggers it, so the requirement as stated would not fully pass.",
+  "usage": {
+    "total_tokens": 1530,
+    "prompt_tokens": 1333,
+    "completion_tokens": 197
+  },
+  "timestamp": "2026-07-16 14:55:22"
+}

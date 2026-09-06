@@ -1,0 +1,20 @@
+Timestamp: 2026-06-02 09:35:33
+Detector:  claude-sonnet-4-6
+App/Variant/Service: public-library/borrows-R1R2R3/borrows
+Method:    zeroshot
+
+Tokens: prompt=6104, completion=1057, total=7161
+Additions: 7
+Omissions: 3
+
+  A A1: The code validates that unknown/extra fields in the POST/PUT payload are rejected (returns 400 for fields not in the allowed list).
+  A A2: The code validates that the cardholder exists by calling the Cardholders service before creating a borrow record.
+  A A3: The code validates that the book exists (by ISBN) by calling the Books service before creating a borrow record.
+  A A4: The code validates that returnDate is not earlier than loanDate in both POST and PUT requests.
+  A A5: The code validates that startDate is not later than endDate in the date-range GET query.
+  A A6: The code validates that both startDate and endDate must be present together (returns 400 if only one is provided).
+  A A7: On PUT, the code verifies the cardholder exists if cardholderId is being updated, and verifies the book exists if ISBN is being updated.
+
+  O O1: The code does not check whether the cardholder has 2 or more overdue books before allowing a new borrow record to be created. If 2 or more books are overdue, the POST should return 400.
+  O O2: The code accepts a user-supplied returnDate in the POST request body instead of always computing it as loanDate + 30 days.
+  O O3: The code does not define a LOAN_PERIOD constant of 30 days and does not compute returnDate = loanDate + 30 days on POST.

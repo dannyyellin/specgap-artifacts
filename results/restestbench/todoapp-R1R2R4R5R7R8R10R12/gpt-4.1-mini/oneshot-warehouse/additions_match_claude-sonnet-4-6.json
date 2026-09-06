@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement mentions setting 'isComplete' on creation; all requirements focus on title, ownership, and error handling."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement specifies the response fields returned by POST /todos, so this behavior has no corresponding requirement."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement specifies the response body content for a successful DELETE operation, only status codes and existence checks are mentioned."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1288,
+    "prompt_tokens": 1074,
+    "completion_tokens": 214
+  }
+}

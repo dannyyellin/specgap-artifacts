@@ -1,0 +1,48 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "It describes the removed owner-only restriction for POST requests."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "It describes the removed owner-only restriction for PUT requests."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "It describes the removed owner-only restriction for DELETE requests."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "It touches Ninja API field/value handling details, but focuses on non-numeric value parsing rather than field name mapping removal specifically."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "It directly describes the removed less-than-or-equal filtering semantics for nutrient query parameters."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "It directly describes the removed contains semantics for ingredient filtering."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1238,
+    "prompt_tokens": 916,
+    "completion_tokens": 322
+  }
+}

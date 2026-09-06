@@ -1,0 +1,19 @@
+{
+  "app": "nutrition",
+  "variant": "auth-R1R2R3",
+  "service": "authentication",
+  "req_id": "R3",
+  "requirement": "Usernames are unique: attempting to register a name that already exists is rejected.",
+  "source_headline": "Removed username uniqueness constraint (cannot register same name twice)",
+  "model": "gpt-5.4",
+  "pass": 1,
+  "label": "INFERRED",
+  "evidence": "ensure_indexes() creates mongo.db.users.create_index(\"name\", unique=True); register() checks existing = mongo.db.users.find_one({\"name\": name}) and if existing is not None returns error_response(\"Bad request\", 400) before insert_one(...)",
+  "reasoning": "The code explicitly addresses username uniqueness in two ways: an application-level duplicate check in /register and a database unique index on the name field. A test that registers a username twice would be rejected on the second attempt, satisfying the requirement as stated. Per the decision guide, because the behavior is present and would pass the stated test, the label is INFERRED.",
+  "usage": {
+    "total_tokens": 2048,
+    "prompt_tokens": 1896,
+    "completion_tokens": 152
+  },
+  "timestamp": "2026-07-16 14:56:15"
+}

@@ -1,0 +1,33 @@
+{
+  "req_id": 28,
+  "requirement_vague": "Verify any authenticated user can update and delete any article (no authorization check - security vulnerability)",
+  "requirement_precise": "Create user1 (username: 'owner1', email: 'owner1@test.com', password: 'pass123'). Create user2 (username: 'attacker1', email: 'attacker1@test.com', password: 'pass123'). User1 creates article with title 'Original Owner Article'. Verify article exists. User2 (NOT the owner) PUTs /api/articles/{slug} with title 'Hacked By User2'. Verify PUT response shows updated title. GET article and verify title changed. User1 creates second article 'Article To Delete'. User2 (NOT the owner) DELETEs /api/articles/{slug}. Verify DELETE succeeds with status 200. GET the deleted article and verify it returns 200 with empty object {} (implementation returns empty object for deleted articles). This demonstrates the security vulnerability that any user can update/delete any article.",
+  "removed": true,
+  "omissions": [
+    {
+      "id": "R28-O1",
+      "description": "Authenticated non-owners cannot update any article via PUT /api/articles/{slug}; the code enforces owner-only authorization instead of allowing any authenticated user to update.",
+      "category": "BUSINESS_LOGIC",
+      "reasoning": "In update_article, after loading the article, the code checks `if article.author_id != current_user.id: raise HTTPException(status_code=403, detail=\"Forbidden\")`. This prevents user2 from updating user1's article, contrary to the requirement to demonstrate the vulnerability that any authenticated user can update any article."
+    },
+    {
+      "id": "R28-O2",
+      "description": "Authenticated non-owners cannot delete any article via DELETE /api/articles/{slug}; the code enforces owner-only authorization instead of allowing any authenticated user to delete.",
+      "category": "BUSINESS_LOGIC",
+      "reasoning": "In delete_article, the code checks `if article.author_id != current_user.id: raise HTTPException(status_code=403, detail=\"Forbidden\")`. This blocks user2 from deleting user1's article, so the required vulnerable behavior is absent."
+    },
+    {
+      "id": "R28-O3",
+      "description": "DELETE /api/articles/{slug} does not return status 200 for a non-owner delete attempt as required by the scenario; it returns 403 Forbidden.",
+      "category": "RESPONSE_FORMAT",
+      "reasoning": "Because delete_article raises `HTTPException(status_code=403, detail=\"Forbidden\")` for non-owners, the scenario expectation that user2's delete succeeds with HTTP 200 is not met."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 5688,
+    "prompt_tokens": 5375,
+    "completion_tokens": 313
+  },
+  "parse_error": false
+}

@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O1 describes the same POST /todos validation behavior as R2: missing or empty title should produce 400 Bad Request with a required-field validation error."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O2 directly matches R10 by describing that PUT /todos/{id} must reject a body id that differs from the route id with 400 Bad Request."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 concerns unauthorized GET /todos without a token, which is not covered by any of the listed reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1214,
+    "prompt_tokens": 1006,
+    "completion_tokens": 208
+  }
+}

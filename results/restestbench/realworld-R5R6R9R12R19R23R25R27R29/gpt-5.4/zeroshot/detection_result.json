@@ -1,0 +1,121 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "Article list endpoint supports only the author query parameter and ignores unsupported filtering behavior beyond the specification-required set by still exposing default pagination values.",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification positively requires GET /api/articles with filters for author, tag, limit, and offset. The code exposes GET /api/articles with author, limit, and offset parameters but no tag filter. While the endpoint itself is required, the concrete implemented parameter set includes behavior not fully grounded as a separately specified contract for unsupported cases; more clearly, the code also accepts optional authentication on several read endpoints without any explicit requirement that these endpoints support anonymous-or-authenticated dual behavior."
+      },
+      {
+        "id": "A2",
+        "description": "Article and comment responses include favorited and favoritesCount fields.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification never requires favorites-related fields anywhere. The code always returns \"favorited\": false and \"favoritesCount\": 0 in article responses."
+      },
+      {
+        "id": "A3",
+        "description": "The service enables permissive CORS for all origins, methods, headers, and credentials.",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The specification does not mention any CORS behavior. This is an implementation property added by the code."
+      },
+      {
+        "id": "A4",
+        "description": "User update endpoint allows changing username, email, and password in addition to bio and image.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification only verifies updating bio and image via PUT /api/user. It does not positively require support for changing username, email, or password."
+      },
+      {
+        "id": "A5",
+        "description": "Profile and article retrieval endpoints return 404 when a profile or article comments parent article is missing.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification only defines tested behaviors for existing profiles/articles and for deleted articles returning {} with 200. It does not positively require these specific 404 behaviors for missing profiles or missing parent articles on comment routes."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "GET /api/articles does not support filtering by tag query parameter.",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification explicitly requires GET /api/articles?tag=... to filter articles by tag and verify counts/results for javascript, testing, and nonexistent tags. The code defines no tag query parameter and performs no tag-based filtering."
+      },
+      {
+        "id": "O2",
+        "description": "GET /api/articles/feed endpoint is missing.",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification explicitly requires GET /api/articles/feed, including empty feed behavior, followed-author filtering, and pagination with limit and offset. No such route exists in the code."
+      },
+      {
+        "id": "O3",
+        "description": "DELETE /api/users/{email} endpoint is missing.",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification explicitly requires deleting a user via DELETE /api/users/orphanauthor1@test.com and observing a 500 foreign-key failure when the user has articles. The code has no DELETE /api/users/{email} route."
+      },
+      {
+        "id": "O4",
+        "description": "User registration duplicate username/email handling does not return status 400 with message 'Username and email must be unique'.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification requires duplicate username and duplicate email attempts to return 400 and contain 'Username and email must be unique'. The code returns 422 with field-specific messages ('has already been taken')."
+      },
+      {
+        "id": "O5",
+        "description": "JWT payload does not include id, username, and email claims.",
+        "category": "COMPUTED_VALUES",
+        "reasoning": "The specification explicitly requires decoding the JWT and verifying the payload contains id matching the user id, username, and email. The code generates tokens containing only sub and exp."
+      },
+      {
+        "id": "O6",
+        "description": "GET and PUT article timestamps use createdAt/updatedAt fields instead of the specified created/updated fields.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly says to extract created and updated timestamps from article responses and verify created remains unchanged while updated changes after PUT. The code returns createdAt and updatedAt, not created and updated."
+      },
+      {
+        "id": "O7",
+        "description": "DELETE /api/articles/{slug} does not return status 200 with an empty object for subsequent GET of deleted article because deletion is physical and GET returns {} only when not found, not as a preserved deleted-article behavior.",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The specification explicitly describes an implementation where deleted articles subsequently return 200 with empty object {}. The code physically deletes the row and then returns {} for any missing article. This reproduces the observable GET result, but it does not implement the specified deleted-article persistence behavior as described."
+      },
+      {
+        "id": "O8",
+        "description": "Article creation does not validate required article fields title, description, and body.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification consistently defines article creation payloads with title, description, and body and relies on those fields being present and persisted. The code defaults missing title/description/body to empty strings and creates the article anyway, with no validation."
+      },
+      {
+        "id": "O9",
+        "description": "Comment creation does not validate presence of comment.body.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification requires creating comments with a body and verifying that body is preserved. The code defaults missing comment body to an empty string and creates the comment without validation."
+      },
+      {
+        "id": "O10",
+        "description": "Feed business logic based on followed authors is not implemented.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification requires /api/articles/feed to return only articles from followed users, return zero when the viewer follows nobody, and exclude articles from unfollowed authors. Since the endpoint is absent, this required follow-based filtering logic is also absent."
+      },
+      {
+        "id": "O11",
+        "description": "Feed pagination logic with limit and offset is not implemented.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification explicitly requires /api/articles/feed?limit=2 and /api/articles/feed?limit=2&offset=2 to return paginated followed-author articles while preserving total articlesCount. No feed pagination logic exists."
+      },
+      {
+        "id": "O12",
+        "description": "Tag-based article filtering logic is not implemented.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification requires article listing filtered by tag values and correct articlesCount/results. The code performs no tag matching against article tags."
+      },
+      {
+        "id": "O13",
+        "description": "User deletion behavior that triggers a 500 foreign-key constraint error when the user has articles is not implemented.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification explicitly tests that deleting a user who authored articles fails with 500 due to lack of cascade delete and that the article remains. Without any user deletion endpoint, this required behavior is absent."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 10177,
+    "prompt_tokens": 8806,
+    "completion_tokens": 1371
+  }
+}

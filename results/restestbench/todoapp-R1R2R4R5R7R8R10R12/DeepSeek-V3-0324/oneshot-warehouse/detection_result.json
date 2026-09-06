@@ -1,0 +1,37 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "The TodoUpdate model includes an optional 'id' field",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The specification does not mention or require an 'id' field in the update request body. The code includes this as optional, which is not required by the spec."
+      },
+      {
+        "id": "A2",
+        "description": "The TodoCreate and TodoUpdate models include an 'isComplete' field with a default value of false",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "While the specification mentions that todos should start with isComplete=false, it does not explicitly require this field to be part of the create/update request bodies. The code includes it in both models."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "POST /todos does not validate that the 'title' field is non-empty",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification explicitly requires rejecting empty/missing titles with 400 Bad Request, but the code accepts any string (including empty) without validation."
+      },
+      {
+        "id": "O2",
+        "description": "PUT /todos/{id} does not reject requests where the body's 'id' field doesn't match the URL's 'id'",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification requires returning 400 Bad Request when the body's id doesn't match the URL id, but the code ignores the body's id field completely."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 5166,
+    "prompt_tokens": 4797,
+    "completion_tokens": 369
+  }
+}

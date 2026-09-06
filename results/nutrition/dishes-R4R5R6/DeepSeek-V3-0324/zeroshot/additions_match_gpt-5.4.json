@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "OPTIONS method handling is unrelated to removing owner-only restrictions or removing field-name/query-filter semantics."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Using a counter collection for ID generation does not correspond to any requirement about removed owner restrictions, field mapping details, or query filtering semantics."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rounding numeric values to two decimal places does not describe removal of Ninja API field mappings, owner-only restrictions, or specific query string filtering behavior."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 712,
+    "prompt_tokens": 520,
+    "completion_tokens": 192
+  }
+}

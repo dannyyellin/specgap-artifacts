@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 describes the bcrypt cost factor setting, which does not correspond to any of the three spec requirements about password validation rules, anti-enumeration, or owner pre-registration."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R3",
+        "label": "PARTIAL",
+        "reasoning": "A2 describes logic that substitutes for owner pre-registration by granting privileges during POST /users when credentials match, which is related to R3's removal of owner pre-registration on initialization, but the code behavior is an alternative mechanism rather than a direct description of removing pre-registration."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A3 describes updating the 'privileged' field based on password changes, which does not correspond to any of the three spec requirements about password validation rules, anti-enumeration, or owner pre-registration."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R3",
+        "label": "PARTIAL",
+        "reasoning": "A4 describes init_db() resetting the owner's password, which is related to owner initialization behavior covered by R3, but R3 specifically addresses removal of owner pre-registration rather than password reset logic on restart."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A5 describes the DELETE endpoint response format, which does not correspond to any of the three spec requirements about password validation rules, anti-enumeration, or owner pre-registration."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1363,
+    "prompt_tokens": 908,
+    "completion_tokens": 455
+  }
+}

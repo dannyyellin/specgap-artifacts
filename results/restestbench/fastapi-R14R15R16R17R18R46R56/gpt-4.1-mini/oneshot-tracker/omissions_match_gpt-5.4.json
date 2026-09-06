@@ -1,0 +1,132 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R15",
+        "label": "MATCH",
+        "reasoning": "It directly describes the missing password recovery email flow and mailcatcher verification required by R15."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R17",
+        "label": "MATCH",
+        "reasoning": "It matches the missing password recovery HTML retrieval and reset-token-based password reset flow required in R17."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "It discusses invalid UUID handling, which is not covered by any listed reference requirement."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R16",
+        "label": "MATCH",
+        "reasoning": "It describes the missing 404 behavior for password recovery of a non-existent user exactly as required by R16."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R14",
+        "label": "MATCH",
+        "reasoning": "It refers to the missing test token endpoint returning the authenticated user's email, which is the core behavior of R14."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Notifications to other services are not part of any reference requirement."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rate limiting and brute force protection are not specified in any reference requirement."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": "R18",
+        "label": "MATCH",
+        "reasoning": "It directly matches the missing reset-password behavior for an invalid token returning 400 with detail 'Invalid token' in R18."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "GET /users/me is not among the provided reference requirements."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": "R15",
+        "label": "PARTIAL",
+        "reasoning": "It captures the password recovery request endpoint from R15 but omits the required success response details and mailcatcher email verification."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": "R46",
+        "label": "PARTIAL",
+        "reasoning": "It captures the item deletion/inaccessibility after deleting a user from R46 but omits the full signup, authentication, deletion response, and superuser verification flow."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "User self-password update via PATCH /users/me/password is not one of the listed reference requirements."
+      },
+      {
+        "detection_id": "O13",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Superuser updating other users' passwords is not specified in the reference requirements."
+      },
+      {
+        "detection_id": "O14",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "User profile update behavior is not covered by any listed reference requirement."
+      },
+      {
+        "detection_id": "O15",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Superuser creation of users with flags is not part of the provided reference requirements."
+      },
+      {
+        "detection_id": "O16",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Listing all users with count and data fields is not among the reference requirements."
+      },
+      {
+        "detection_id": "O17",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Superuser deletion of users by ID is not described in the listed reference requirements."
+      },
+      {
+        "detection_id": "O18",
+        "requirement_id": "R46",
+        "label": "PARTIAL",
+        "reasoning": "It overlaps with R46's self-account deletion behavior but does not include the required item creation and post-deletion item 404 verification."
+      },
+      {
+        "detection_id": "O19",
+        "requirement_id": "R46",
+        "label": "PARTIAL",
+        "reasoning": "It broadly includes item CRUD and ownership, which overlaps with item creation/access in R46, but does not specifically describe the delete-user then item-not-found behavior."
+      },
+      {
+        "detection_id": "O20",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Role-based item listing behavior is not part of any provided reference requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 3153,
+    "prompt_tokens": 2030,
+    "completion_tokens": 1123
+  }
+}

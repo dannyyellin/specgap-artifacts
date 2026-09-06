@@ -1,0 +1,24 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "It concerns attributes extraction and notes use of fields beyond temperament/group_behavior, but it does not specifically capture the removal rule itself and instead describes extra aggregation behavior."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This behavior about accepting a direct picture field on pet updates does not correspond to any listed removed requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 742,
+    "prompt_tokens": 605,
+    "completion_tokens": 137
+  }
+}

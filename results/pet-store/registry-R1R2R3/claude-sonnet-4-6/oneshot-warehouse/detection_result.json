@@ -1,0 +1,91 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "BCRYPT_ROUNDS is set to 12, which exceeds the minimum required cost factor of 10",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states 'The bcrypt cost factor should be at least 10'. Using 12 is not required by the specification, only 'at least 10' is required. This is an addition beyond the minimum requirement, though minor."
+      },
+      {
+        "id": "A2",
+        "description": "POST /users sets 'privileged' to True if the username and password match the owner credentials at registration time",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states the owner's record is pre-seeded in the database upon initialization. The spec does not describe any logic for setting 'privileged' based on credentials during a regular POST /users registration. The owner account is initialized separately; a POST /users for the owner username should return 409 (conflict) since the owner already exists, not create a new privileged user."
+      },
+      {
+        "id": "A3",
+        "description": "PUT /users/{username}/password updates the 'privileged' field based on whether the new password matches the owner's original password",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification does not describe any logic for changing the 'privileged' field when a password is changed. The spec says the owner may change their password, but does not say that changing away from the original password removes privileges, or that setting the original password grants privileges."
+      },
+      {
+        "id": "A4",
+        "description": "init_db() resets the owner's password back to the original if it has been changed",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states 'the owner may subsequently change his password', implying password changes should persist. The init_db() function checks if the stored password matches the original and resets it if not, which would undo any password change the owner made after a container restart."
+      },
+      {
+        "id": "A5",
+        "description": "DELETE /users/{username} returns 200 with a JSON body instead of 204 No Content",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification states DELETE returns 200 with a JSON object containing 'message' and 'username' fields. The Status Code Guidelines say 204 for successful DELETE. However, the spec explicitly overrides this for DELETE /users/{username} by listing 200 as a possible return code and specifying a JSON response body. The code correctly returns 200 \u2014 this is not actually an addition. Removing this entry."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "POST /verify does not return a JSON response body with 'valid': False and message 'Invalid credentials' when credentials are invalid; instead it returns 401 with an empty body",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification states: 'If the username or password is incorrect, 401 is returned' and also 'the response should not reveal whether the username exists or the password is wrong - both cases return the valid field with the value False and give the same message Invalid credentials'. The code returns 401 with an empty body instead of a JSON object with 'valid': False and the message."
+      },
+      {
+        "id": "O2",
+        "description": "POST /verify does not return a JSON response with 'valid': False when credentials are invalid \u2014 it returns 401 with no body instead of 200 with valid=False",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification says the /verify endpoint returns a JSON object with fields 'username', 'valid' (boolean), and 'privileged' (boolean), and that 'valid' is False if the username does not exist or the password is incorrect. The possible return codes listed are 200 (on success), 401, 415, 500. The spec says 401 is returned if username or password are missing from the request, and also if the username or password is incorrect. However, the spec also says the response should not reveal whether the username exists or the password is wrong and both cases return 'valid' field with value False. This is contradictory, but the code returns 401 with empty body for wrong credentials rather than a JSON body with valid=False."
+      },
+      {
+        "id": "O3",
+        "description": "Password validation is not performed on POST /users \u2014 the code does not check that the password meets requirements (at least 8 chars, max 128 chars, at least one uppercase, one lowercase, one digit)",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states 'A password must be at least 8 characters, no more than 128 characters, and must contain at least one uppercase letter, one lowercase letter, and one digit.' and 'If the password does not meet validation requirements or the payload is malformed 400 is returned.' The code does not validate the password at all before hashing and storing it."
+      },
+      {
+        "id": "O4",
+        "description": "PUT /users/{username}/password does not validate that newPassword meets password requirements (length, uppercase, lowercase, digit)",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states 'If either password field is missing or newPassword does not meet validation requirements, 400 is returned.' The code checks for missing fields and identical passwords but does not validate the newPassword against the password requirements."
+      },
+      {
+        "id": "O5",
+        "description": "The MongoDB URI uses 'mongo' as the hostname instead of 'mongoReg' as specified",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The specification states 'It stores its data in a MongoDB which is named mongoReg in the docker-compose.yml.' The code uses 'mongodb://mongo:27017/registrydb' instead of 'mongodb://mongoReg:27017/...'."
+      },
+      {
+        "id": "O6",
+        "description": "DELETE /users/{username} returns 200 instead of 204 No Content as specified by the Status Code Guidelines",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The Status Code Guidelines state '204 - No Content (successful DELETE)'. The DELETE /users/{username} spec lists possible return codes as '200, 401, 404, 415, 500' and specifies a JSON response with 'message' and 'username' fields. The spec explicitly lists 200 for this endpoint, so the code is correct here. This is not an omission."
+      },
+      {
+        "id": "O7",
+        "description": "POST /users does not validate that the password field is a string type before processing",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification requires password validation (length, character requirements). If a non-string is passed as password, the code would fail or behave unexpectedly. The spec requires 400 for malformed payloads."
+      },
+      {
+        "id": "O8",
+        "description": "The /verify endpoint does not return a response body with 'valid' and 'privileged' fields when returning 401 for missing credentials \u2014 the spec implies the JSON response format should always be returned on non-server-error responses",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification describes the /verify response as always being a JSON object with 'username', 'valid', and 'privileged' fields. The implementation returns empty bodies for 401 responses."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 11955,
+    "prompt_tokens": 10112,
+    "completion_tokens": 1843
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "DELETE /todos/{id} returns a JSON body {\"message\": \"Todo deleted\"} with implicit 200 OK",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification says DELETE /todos/{id} should return 200 OK but does not specify a response body. The code returns a specific JSON message body, which is an addition not required by the spec."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "POST /todos does not validate that the title field is non-empty/non-missing and return 400 with a message indicating 'The Title field is required'",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states: 'Call POST /todos with an empty or missing title field. Verify that the response status code is 400 Bad Request and the response body contains a validation error indicating The Title field is required.' The code defines title as a plain str in TodoCreate with no minimum length constraint, so an empty string '' would be accepted without a 400 error."
+      },
+      {
+        "id": "O2",
+        "description": "PUT /todos/{id} does not validate that the id in the request body matches the id in the URL path and return 400 Bad Request when they differ",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states: 'Call PUT /todos/X with a request body where id=Y (different from X). Verify the response status is 400 Bad Request.' The code never checks whether todo_in.id matches the path parameter id, so mismatched IDs are silently ignored."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 5927,
+    "prompt_tokens": 5501,
+    "completion_tokens": 426
+  }
+}

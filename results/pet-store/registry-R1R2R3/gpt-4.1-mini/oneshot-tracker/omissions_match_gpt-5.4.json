@@ -1,0 +1,84 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about username regex validation and does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "It directly concerns the removed anti-enumeration requirement for /verify to avoid distinguishing invalid usernames from invalid passwords."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "It describes the same /verify anti-enumeration behavior requiring indistinguishable responses for credential failures."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "It directly refers to removed password complexity rules requiring uppercase, lowercase, and digit checks."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R1",
+        "label": "PARTIAL",
+        "reasoning": "It matches the removed minimum 8-character password rule but adds a maximum 128-character constraint not present in the reference."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Malformed JSON handling is unrelated to any of the listed reference requirements."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Content-Type validation is not covered by any reference requirement."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "It describes enforcing password complexity and length rules that the reference says were removed."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "It concerns missing password complexity validation, which is the same family of removed password rules."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Missing username path validation does not match any reference requirement."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Content-Type checks on DELETE are unrelated to the reference requirements."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "DELETE username/password presence handling does not correspond to any reference requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1647,
+    "prompt_tokens": 1011,
+    "completion_tokens": 636
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "Both describe removal of the Google Books API behavior for populating publisher and publishedDate."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "It includes the removed Google Books API integration, but also adds a separate claim about accepting client-supplied publisher and publishedDate fields that is not part of the reference requirement."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R11",
+        "label": "MATCH",
+        "reasoning": "Both concern the removal of validation against a fixed allowed genre list."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about GET /books query filtering, which is unrelated to any of the listed reference requirements."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns 405 handling for unsupported methods, which does not correspond to any reference requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1000,
+    "prompt_tokens": 702,
+    "completion_tokens": 298
+  }
+}

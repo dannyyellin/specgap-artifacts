@@ -1,0 +1,24 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O1 describes the same behavior as R2: POST /todos with empty/missing title should return 400 with 'The Title field is required' validation error."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O2 describes the same behavior as R10: PUT /todos/X with a body where id=Y (different from X) should return 400 Bad Request."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1283,
+    "prompt_tokens": 1110,
+    "completion_tokens": 173
+  }
+}

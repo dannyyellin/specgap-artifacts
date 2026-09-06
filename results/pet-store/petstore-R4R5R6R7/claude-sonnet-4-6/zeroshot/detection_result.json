@@ -1,0 +1,133 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "The POST /pet-types endpoint rejects payloads that contain any field other than 'type' (enforces exact key set {'type'}), but the spec only requires the payload to contain the 'type' field.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The code checks `set(data.keys()) != {\"type\"}` and returns 400 if any extra fields are present. The specification says the POST request 'provides a JSON object payload that contains only the field named type', but this is a description of what the client sends, not an explicit server-side validation rule to reject extra fields."
+      },
+      {
+        "id": "A2",
+        "description": "The code uses a custom attributes-building logic that reads from multiple Ninja API fields (slogan, group, color, skin_type, top_speed, diet, main_prey) and splits on commas, rather than using only 'temperament' or 'group_behavior' split on whitespace.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification explicitly states attributes come from 'temperament' or 'group_behavior' fields, split on whitespace (excluding punctuation except hyphens). The code instead reads from many other fields and splits on commas, which is not specified."
+      },
+      {
+        "id": "A3",
+        "description": "The code deduplicates attributes entries, which is not required by the specification.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification describes splitting the temperament/group_behavior string into words but says nothing about deduplication. The code explicitly deduplicates the attributes array."
+      },
+      {
+        "id": "A4",
+        "description": "The code defaults lifespan to 0 when not returned by the Ninja API, but the specification requires it to be JSON null.",
+        "category": "COMPUTED_VALUES",
+        "reasoning": "The spec states: 'If the lifespan field is not returned by the Ninja API, then its value is the JSON keyword null.' The code sets lifespan to 0 in this case."
+      },
+      {
+        "id": "A5",
+        "description": "The serialize_pet_type function defaults lifespan to 0 when the field is missing from the stored document.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The spec requires lifespan to be null when not available. The serialize function uses `doc.get('lifespan', 0)` which would return 0 instead of null for missing values."
+      },
+      {
+        "id": "A6",
+        "description": "The PUT /pet-types/{id}/pets/{name} endpoint allows updating the 'picture' field directly via a 'picture' key in the payload, which is not described in the specification.",
+        "category": "ENDPOINTS",
+        "reasoning": "The spec describes the PUT payload as containing 'name', 'birthdate', and 'picture-url' fields. The code additionally accepts a 'picture' field to directly set the picture filename, which has no basis in the spec."
+      },
+      {
+        "id": "A7",
+        "description": "The MongoDB URI uses 'mongo' as the hostname instead of 'mongoPetSt' as specified in the deployment section.",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The spec states 'In the Docker-compose.yml file, this MongoDB is given the service name mongoPetSt'. The code uses MONGO_URI = f'mongodb://mongo:27017/{SERVICE_NAME}db', connecting to 'mongo' instead of 'mongoPetSt'."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "The DELETE /pet-types/{id} endpoint does not check whether there are pets of that type before deleting; the spec requires returning 400 if there are any pets of that type.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states: 'A pet-type can only be deleted if there are no pets of that type. Otherwise, it returns 400.' The code performs the delete without checking for existing pets."
+      },
+      {
+        "id": "O2",
+        "description": "The DELETE /pet-types/{id} endpoint does not check for 403 Forbidden when the user is authenticated but not the owner; it only returns 401 or 204/404.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The spec's status code guidelines and the verify_owner function can return 403, but the spec lists possible response codes for DELETE /pet-types/{id} as 204, 401, 404. However, the verify_owner function correctly handles this via the helper. Actually the verify_owner does return 403 for non-privileged users, so this is handled. Re-examining: the spec lists 204, 401, 404 for DELETE pet-types but the code can return 403 via verify_owner. This is an addition not an omission."
+      },
+      {
+        "id": "O3",
+        "description": "The attributes field is built from the wrong Ninja API fields. The spec requires using 'temperament' first, then 'group_behavior' if temperament is absent, splitting on whitespace and excluding punctuation except hyphens. The code does not implement this logic.",
+        "category": "COMPUTED_VALUES",
+        "reasoning": "The specification states: 'The attributes field is obtained from the field named either temperament or group_behavior returned by the Ninja API. If none of these fields are returned by the Ninja API, then the attributes field is the empty array. If both are listed then just use temperament. Each word in the temperament or group_behavior field returned by Ninja API becomes one string in the attributes field array... Split on whitespace but do not include punctuation except hyphens.' The code reads from many other fields and splits on commas."
+      },
+      {
+        "id": "O4",
+        "description": "The GET /pet-types/{id}/pets endpoint does not support 'birthdateGT' and 'birthdateLT' query string filtering.",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification states: 'The request supports query strings of the form birthdateGT=<date> or birthdateLT=<date> which returns only those pets with specified birth dates strictly after or strictly before the given date.' The code returns all pets without any date filtering."
+      },
+      {
+        "id": "O5",
+        "description": "The Ninja API data extraction does not look inside a 'characteristics' sub-object for 'temperament' or 'group_behavior'; the spec implies these are top-level or nested fields that must be correctly accessed.",
+        "category": "COMPUTED_VALUES",
+        "reasoning": "The code does access characteristics sub-object but looks for wrong keys (not 'temperament' or 'group_behavior'). The spec explicitly names 'temperament' and 'group_behavior' as the source fields for attributes."
+      },
+      {
+        "id": "O6",
+        "description": "The POST /pet-types/{id}/pets endpoint does not return 403 when the authenticated user is not the owner; the spec requires 403 for authenticated but unauthorized users.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The spec states 'If the user cannot be authenticated or if he is authenticated but not authorized to perform the request, 401 or 403 respectively is returned.' The verify_owner helper does return 403 for non-privileged users, so this is actually handled. Removing this."
+      },
+      {
+        "id": "O7",
+        "description": "The lifespan field is not set to null when the Ninja API does not return it; instead it defaults to 0.",
+        "category": "COMPUTED_VALUES",
+        "reasoning": "The specification explicitly states: 'If the lifespan field is not returned by the Ninja API, then its value is the JSON keyword null.' The code sets lifespan to 0 when not found."
+      },
+      {
+        "id": "O8",
+        "description": "The GET /pet-types endpoint does not support conjunctive query strings (multiple field=value pairs), only single-field queries.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "While the spec for GET /pet-types only describes single-field queries ('It will be one of two forms'), the code explicitly returns empty array for len(query) != 1, which is consistent with the spec. This is not an omission."
+      },
+      {
+        "id": "O9",
+        "description": "The PUT /pet-types/{id} route is not explicitly defined to return 405, relying only on the generic 405 error handler.",
+        "category": "ENDPOINTS",
+        "reasoning": "The spec states 'PUT request on /pet-types/{id} is not allowed by anyone and returns 405 (Method Not Allowed).' The generic Flask 405 handler will handle this correctly when no PUT route is registered for that path, so this is effectively handled."
+      },
+      {
+        "id": "O10",
+        "description": "The POST /pet-types/{id}/pets endpoint does not check for duplicate pet names returning a specific error code; it returns 400 for duplicate names but the spec does not explicitly state this. However, the spec says no two pets of the same type can have the same name, so 400 or 409 should be returned. The code returns 400 which may be acceptable.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The spec says 'No two pets of the same type in the same store can have the same name'. The code returns 400 for duplicates. The spec does not specify the exact code for this case explicitly for pets (only 409 is mentioned for pet-types). This is borderline but the code's behavior is reasonable."
+      },
+      {
+        "id": "O11",
+        "description": "The Ninja API lifespan extraction does not handle the case where lifespan is returned as a range (e.g., '4-7 years') by always taking the minimum (first integer). The code does extract the first integer, which is correct for ranges, but the attributes logic is wrong as noted above.",
+        "category": "COMPUTED_VALUES",
+        "reasoning": "The spec states 'If the lifespan returned from Ninja API is a range (e.g., 4-7 years) choose the minimum (e.g., 4). Always extract the first integer.' The code does use re.findall(r'\\d+', lifespan_raw) and takes nums[0], which correctly extracts the first integer. This is correctly implemented."
+      },
+      {
+        "id": "O12",
+        "description": "The DELETE /pet-types/{id} endpoint is missing the 403 response code for authenticated non-owner users, as the spec's general guidelines require 403 for forbidden operations.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The spec lists possible response codes for DELETE /pet-types/{id} as '204, 401, 404' without mentioning 403. However, the verify_owner function returns 403 for non-privileged users. The spec's listed codes don't include 403 for this endpoint, but the general guidelines say 403 should be returned for forbidden operations. The code returns 403 via verify_owner which is correct behavior per general guidelines."
+      },
+      {
+        "id": "O13",
+        "description": "The attributes splitting logic does not strip punctuation (except hyphens) from words as required by the specification.",
+        "category": "COMPUTED_VALUES",
+        "reasoning": "The spec states: 'Split on whitespace but do not include punctuation except hyphens.' For example, 'Gentle and smart, but stubborn' should produce ['Gentle', 'and', 'smart', 'but', 'stubborn'] \u2014 the comma after 'smart' is removed. The code does not implement this punctuation stripping at all since it uses the wrong source fields and splits on commas."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 14050,
+    "prompt_tokens": 11129,
+    "completion_tokens": 2921
+  }
+}

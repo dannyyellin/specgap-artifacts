@@ -1,0 +1,24 @@
+# MODIFIED SPEC: 4 elements removed for Cardholders experiment
+# R4: Removed field type declarations (string types for name/email/id, float for fineAmount)
+#     - GPT-5.4: PARTIAL — code validates name/email as strings (isinstance checks) but
+#       fineAmount is computed as an integer count, not a float; updated after 3-pass
+#       consistency check (pass 1 said INFERRED; passes 2 and 3 said PARTIAL)
+#     - Prior label: Highly inferrable — field names clearly suggest their types
+#     - Tests: 3, 14, 50
+# R5: Removed 415 (Unsupported media type) error code from general error codes
+#     - GPT-5.4: NOT INFERRED — code returns 400 for non-JSON requests, not 415
+#     - Prior label: Highly inferrable — standard REST practice to validate content type
+#     - Tests: 12
+# R6: Removed fine computation formula ($0.50/day * days overdue)
+#     - GPT-5.4: NOT INFERRED — code counts overdue books with += 1 instead of computing
+#       $0.50 × days_overdue; formula is wrong
+#     - Prior label: Partially inferrable — fineAmount field and /fines/{id} endpoint hint
+#       at computation
+#     - Tests: 14, 50
+# R7: Removed cross-service call to Borrows for fine computation
+#     - GPT-5.4: INFERRED — code calls BORROWS_SERVICE_URL to retrieve cardholder's
+#       borrows, then checks is_overdue() on each
+#     - Prior label: Partially inferrable — fines relate to borrowed books, calling
+#       Borrows is logical
+#     - Tests: 14, 50
+

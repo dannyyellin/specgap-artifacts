@@ -1,0 +1,30 @@
+# MODIFIED SPEC: 4 elements removed for Dishes experiment
+# R4: Removed Ninja API field name mapping details
+#     - GPT-5.4: INFERRED — code defines NINJA_FIELD_MAP with the exact specified
+#       mappings (e.g., 'carbohydrates_total_g' -> 'total_carbohydrates') and applies
+#       them when extracting nutrition values
+#     - Prior label: Partially inferrable — API exists and field names differ, but
+#       exact mapping not obvious
+#     - Tests: 4, 13
+# R4b: Removed default to 0.0 for missing Ninja API fields
+#      - GPT-5.4: INFERRED — code initializes all nutrition fields to 0.0 and uses
+#        float(item.get(field, 0.0) or 0.0) to default missing/null values
+#      - Prior label: Highly inferrable — graceful handling of missing external data
+#        with a numeric default is standard practice
+#      - Tests: 4, 13
+# R5: Removed owner-only restriction for POST/PUT/DELETE
+#     - GPT-5.4: NOT INFERRED — before_request validates token but never checks the
+#       privileged flag; POST, PUT, and DELETE execute without owner verification
+#     - Prior label: Partially inferrable — Owner concept exists in auth service,
+#       restricting menu changes to owners is a common restaurant domain pattern
+#     - Tests: 5
+# R6: Removed specific query string filtering semantics (lte for nutrients, contains
+#     for ingredients)
+#     - GPT-5.4: NOT INFERRED — filtering infrastructure exists but required semantics
+#       are entirely absent: exact match used instead of $lte for nutrients and instead
+#       of substring for ingredients; updated after 3-pass consistency check (pass 1
+#       said PARTIAL; passes 2 and 3 said GAP)
+#     - Prior label: Partially inferrable — filtering exists but less-than-or-equal
+#       and ingredient containment logic removed
+#     - Tests: 7
+

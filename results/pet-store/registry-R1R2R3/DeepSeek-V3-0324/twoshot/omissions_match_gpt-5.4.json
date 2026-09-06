@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O1 describes missing enforcement of the same password complexity rules that R1 says were removed."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O2 describes the absence of the same anti-enumeration requirement on /verify that R2 says was removed."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 concerns the MongoDB service name, which does not correspond to any reference requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 755,
+    "prompt_tokens": 574,
+    "completion_tokens": 181
+  }
+}

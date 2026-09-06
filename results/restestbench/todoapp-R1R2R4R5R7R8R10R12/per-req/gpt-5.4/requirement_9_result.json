@@ -1,0 +1,18 @@
+{
+  "req_id": 9,
+  "requirement_vague": "Updating a todo correctly changes its fields",
+  "requirement_precise": "Register a user and login. Create a todo with title 'Original Todo'. The todo should have isComplete=false. Call PUT /todos/{id} with isComplete=true and title 'Updated Todo'. Verify response is 200 OK. Then call GET /todos/{id} and verify isComplete is now true and title is 'Updated Todo'.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": "create_todo, update_todo, get_todo routes (/todos POST, /todos/{id} PUT, /todos/{id} GET)",
+    "code_reference": "todo = Todo(title=todo_in.title, isComplete=todo_in.isComplete, user_id=current_user.id)\n...\ntodo.title = todo_in.title\ntodo.isComplete = todo_in.isComplete",
+    "reasoning": "The POST /todos endpoint creates a todo with the provided title and default isComplete=false when omitted. The PUT /todos/{id} endpoint updates both title and isComplete for the authenticated user's todo, commits the changes, and GET /todos/{id} reads back the persisted updated values; FastAPI returns 200 OK by default for successful GET/POST/PUT handlers."
+  },
+  "usage": {
+    "total_tokens": 2602,
+    "prompt_tokens": 2433,
+    "completion_tokens": 169
+  },
+  "parse_error": false
+}

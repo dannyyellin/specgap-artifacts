@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This describes an additional token header format and does not correspond to removing the requirement that user_id comes from token validation."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Error response JSON formatting is unrelated to removing rating range, one-rating-per-user-per-dish, or token-derived user_id constraints."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rounding floating point numbers in responses does not match any of the removed constraints in the specification."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "GET /ratings sorting behavior is unrelated to the removed rating validation, uniqueness, or token-based user_id requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 835,
+    "prompt_tokens": 592,
+    "completion_tokens": 243
+  }
+}

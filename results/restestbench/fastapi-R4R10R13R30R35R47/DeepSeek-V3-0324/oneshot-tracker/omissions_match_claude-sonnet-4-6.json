@@ -1,0 +1,72 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers email sending verification via mailcatcher."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R35",
+        "label": "PARTIAL",
+        "reasoning": "O2 addresses duplicate email error messages which relates to R35's requirement that the detail field equals 'The user with this email already exists in the system', but O2 describes a code deficiency rather than a test scenario."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers superuser self-deletion error messages."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers the specific error message for user not found by ID."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "O5 mentions returning 'Not enough permissions' which aligns with R4's requirement that the response body contains 'Not enough permissions', but O5 notes the code returns this simpler message while the spec requires a different message, creating a partial/inverted match."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers invalid token error messages."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R13",
+        "label": "PARTIAL",
+        "reasoning": "O7 relates to incorrect password error messages, but R13 specifies 'Incorrect email or password' while O7 mentions 'Incorrect password', indicating a partial overlap in behavior."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers the error message for submitting the same password as current and new."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": "R35",
+        "label": "PARTIAL",
+        "reasoning": "O9 addresses duplicate email error messages which partially relates to R35, but the message 'User with this email already exists' differs from R35's required 'The user with this email already exists in the system'."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "O10 mentions the 'Item not found' error message which matches R10's requirement, but O10 only describes a code deficiency rather than the full test scenario including the 404 status code and non-existent item ID."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2060,
+    "prompt_tokens": 1308,
+    "completion_tokens": 752
+  }
+}

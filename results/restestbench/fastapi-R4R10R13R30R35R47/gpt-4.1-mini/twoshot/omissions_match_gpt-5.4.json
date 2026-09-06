@@ -1,0 +1,222 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns item creation status verification, which is not covered by any listed reference requirement."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "It describes the same core behavior as R4: a non-owner authenticated user must not be able to read another user's item."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "It directly matches R4 by specifying the required 400 response with detail 'Not enough permissions' for reading another user's item."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about GET item not found behavior, while the references only include DELETE item not found for items."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns updating another user's item, which is not among the provided reference requirements."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about update-item not found behavior, which is not covered by the listed references."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns delete permission checks for non-owners, which is not one of the provided reference requirements."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "It matches the non-existent item deletion outcome in R10 but omits the required superuser authentication context."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Invalid UUID handling for GET item is not covered by any listed reference requirement."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Item title and description length validation is not among the provided reference requirements."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": "R35",
+        "label": "PARTIAL",
+        "reasoning": "It addresses duplicate-email signup behavior but the required detail message differs from R35."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": "R47",
+        "label": "MATCH",
+        "reasoning": "R47 is specifically about rejecting signup with a 7-character password via validation, which this detection captures."
+      },
+      {
+        "detection_id": "O13",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rejecting password change when new and current passwords are the same is not in the listed references."
+      },
+      {
+        "detection_id": "O14",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "General password length validation for password change is not one of the provided reference requirements."
+      },
+      {
+        "detection_id": "O15",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Reset-password validation behavior is not covered by any listed reference requirement."
+      },
+      {
+        "detection_id": "O16",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Invalid reset token handling is not among the provided reference requirements."
+      },
+      {
+        "detection_id": "O17",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Password recovery for non-existent users is not covered by the listed references."
+      },
+      {
+        "detection_id": "O18",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Sending recovery email via mailcatcher is not among the provided reference requirements."
+      },
+      {
+        "detection_id": "O19",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Superuser self-deletion prohibition is not covered by any listed reference requirement."
+      },
+      {
+        "detection_id": "O20",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Non-superuser deletion privilege checks are not among the provided reference requirements."
+      },
+      {
+        "detection_id": "O21",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Superuser self-deletion prohibition on another endpoint is not covered by the listed references."
+      },
+      {
+        "detection_id": "O22",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Reading other users' data with insufficient privileges is not among the provided reference requirements."
+      },
+      {
+        "detection_id": "O23",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Updating a non-existent user is not covered by any listed reference requirement."
+      },
+      {
+        "detection_id": "O24",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Duplicate email conflict on user update is not among the provided reference requirements."
+      },
+      {
+        "detection_id": "O25",
+        "requirement_id": "R35",
+        "label": "PARTIAL",
+        "reasoning": "It targets the same duplicate-email signup scenario as R35 but uses the wrong required detail message."
+      },
+      {
+        "detection_id": "O26",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Duplicate email conflict on self-update is not covered by the listed references."
+      },
+      {
+        "detection_id": "O27",
+        "requirement_id": "R47",
+        "label": "MATCH",
+        "reasoning": "It includes signup password-length validation returning 422, which is the behavior required by R47."
+      },
+      {
+        "detection_id": "O28",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Validation for PATCH /users/me is not among the provided reference requirements."
+      },
+      {
+        "detection_id": "O29",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rejecting null email or password on signup/update is not covered by the listed references."
+      },
+      {
+        "detection_id": "O30",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Item field length validation is not among the provided reference requirements."
+      },
+      {
+        "detection_id": "O31",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Preventing public signup from creating superusers is not covered by the listed references."
+      },
+      {
+        "detection_id": "O32",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Private user creation requiring superuser authentication is not among the provided reference requirements."
+      },
+      {
+        "detection_id": "O33",
+        "requirement_id": "R13",
+        "label": "MATCH",
+        "reasoning": "It directly matches R13's requirement that invalid login credentials return 400 with detail 'Incorrect email or password'."
+      },
+      {
+        "detection_id": "O34",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Test-token returning current user info is not covered by any listed reference requirement."
+      },
+      {
+        "detection_id": "O35",
+        "requirement_id": "R30",
+        "label": "PARTIAL",
+        "reasoning": "R30 includes password change using the current password, and this captures only the sub-behavior that an incorrect current password must be rejected, not the full required flow."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 4600,
+    "prompt_tokens": 2734,
+    "completion_tokens": 1866
+  }
+}

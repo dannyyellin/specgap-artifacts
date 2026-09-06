@@ -1,0 +1,20 @@
+{
+  "variant": "todoapp-R1R2R4R5R7R8R10R12",
+  "req_id": 4,
+  "model": "claude-sonnet-4-6",
+  "pass": 2,
+  "verdict": "IMPLEMENTED",
+  "requirement_vague": "Getting a non-existent todo returns 404 Not Found",
+  "omissions": [],
+  "implementation": {
+    "location": "get_todo",
+    "code_reference": "if not todo:\n    raise HTTPException(\n        status_code=status.HTTP_404_NOT_FOUND,\n        detail=\"Todo not found\",\n    )",
+    "reasoning": "The GET /todos/{id} route queries for a todo matching both the given ID and the current user's ID, and raises a 404 HTTPException if no matching todo is found, satisfying the requirement."
+  },
+  "usage": {
+    "total_tokens": 3141,
+    "prompt_tokens": 3004,
+    "completion_tokens": 137
+  },
+  "timestamp": "2026-07-12 10:33:29"
+}

@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed reference requirements concern password recovery emails or mailcatcher verification."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed reference requirements describe deleting a user and verifying cascade deletion of that user's items."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "It describes the same cross-user item read permission scenario as R4, but the detected behavior differs on the expected status code and thus does not fully match."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed reference requirements mention password recovery token reuse or invalidation after reset."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The listed reference requirements do not include validation of empty item titles during item creation."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1311,
+    "prompt_tokens": 1021,
+    "completion_tokens": 290
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "app": "public-library",
+  "variant": "cardholders-R4R5R6R7",
+  "service": "cardholders",
+  "req_id": "R4",
+  "requirement": "Cardholder fields have declared types: name, email, and id are strings; fineAmount is a float.",
+  "source_headline": "Removed field type declarations (string types for name/email/id, float for fineAmount)",
+  "model": "gpt-5.4",
+  "pass": 2,
+  "label": "PARTIAL",
+  "evidence": "create_cardholder() and update_cardholder() validate that name and email are strings; get_cardholder_fines() returns jsonify({\"id\": cardholder_id, \"fineAmount\": fine_amount}) where fine_amount is initialized as 0 and incremented by 1, so it is an int; serialize_cardholder() exposes id as str(doc[\"_id\"]).",
+  "reasoning": "The code clearly addresses field typing for several cardholder-related fields: name and email are explicitly type-checked as strings on POST/PUT, and id is serialized as a string in responses. However, the requirement states that fineAmount is a float, while the fines endpoint computes and returns an integer value (0, 1, 2, etc.), not a float. Per the decision guide, because the mechanism exists but deviates in a material observable detail, this is PARTIAL.",
+  "usage": {
+    "total_tokens": 2324,
+    "prompt_tokens": 2123,
+    "completion_tokens": 201
+  },
+  "timestamp": "2026-07-16 14:52:46"
+}

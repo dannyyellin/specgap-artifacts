@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement concerns the status code contract of POST /users/register."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "It targets the same POST /todos validation scenario in R2, but only covers the error message mismatch for empty title and not the full required 400 behavior for empty or missing title."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "It addresses the same missing-title validation case as R2, but only captures the status code mismatch for missing title rather than the complete requirement including empty title and the specified validation message."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "It describes the same behavior as R10: PUT /todos/{id} must return 400 Bad Request when the body id differs from the path id."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1419,
+    "prompt_tokens": 1140,
+    "completion_tokens": 279
+  }
+}

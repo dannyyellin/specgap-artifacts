@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "This relates to the ID field type because the spec only keeps it as a string without format constraints, while the code adds stricter ObjectId validation."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "Date parsing and overdue checking are related to fine computation logic, but they do not specifically describe the removed fine formula itself."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R7",
+        "label": "PARTIAL",
+        "reasoning": "Overdue checking could be part of fine computation behavior, but this does not specifically indicate the removed cross-service call to Borrows."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "This concerns error-code handling and partially overlaps with the spec change removing 415, but it does not mention 415 specifically."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 826,
+    "prompt_tokens": 556,
+    "completion_tokens": 270
+  }
+}

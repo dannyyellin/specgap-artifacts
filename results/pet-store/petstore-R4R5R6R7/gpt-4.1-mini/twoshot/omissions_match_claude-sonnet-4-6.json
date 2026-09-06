@@ -1,0 +1,102 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O1 discusses payload field validation for POST /pet-types, which does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O2 directly describes the removal of the constraint that prevents deleting a pet-type if it has pets, matching R5 exactly."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 discusses duplicate pet name checking and status code differences, which does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 discusses birthdate format validation, which does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 discusses uniqueness validation for pet names on PUT, which does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 discusses PUT /pet-types/{id} returning 405, which does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O7 discusses picture-url reachability validation, which does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O8 discusses owner authentication and authorization, which does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O9 discusses filtering by 'hasAttribute' query parameter, which does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "O10 directly describes the absence of birthdateGT/birthdateLT filtering in GET /pet-types/{id}/pets, matching R7 exactly."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O11 discusses 404 handling for missing pet-types, which does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O12 discusses 404 handling for missing pets or pet-types, which does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O13",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O13 discusses DELETE /pet-types/{id}/pets/{name} authentication and status codes, which does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O14",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O14 discusses PUT /pet-types/{id}/pets/{name} authentication and status codes, which does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O15",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O15 discusses GET /pictures/{picture-name} response codes, which does not correspond to any of the reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2387,
+    "prompt_tokens": 1352,
+    "completion_tokens": 1035
+  }
+}

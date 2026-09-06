@@ -1,0 +1,24 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "A1 relates to publisher and publishedDate fields being validated in POST, which partially captures R10's removal of Google Books API integration for obtaining those fields, but A1 focuses on validation rather than the API integration itself."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "A2 relates to allowing direct updates of publisher and publishedDate via PUT, which conflicts with R10's implication that these fields should come from Google Books API, but R10 specifically addresses POST/Google Books integration rather than PUT behavior."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 768,
+    "prompt_tokens": 564,
+    "completion_tokens": 204
+  }
+}

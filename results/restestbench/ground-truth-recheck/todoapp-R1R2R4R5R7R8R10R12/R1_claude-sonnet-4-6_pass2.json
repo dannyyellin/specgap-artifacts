@@ -1,0 +1,20 @@
+{
+  "variant": "todoapp-R1R2R4R5R7R8R10R12",
+  "req_id": 1,
+  "model": "claude-sonnet-4-6",
+  "pass": 2,
+  "verdict": "IMPLEMENTED",
+  "requirement_vague": "Getting all todos returns only the current user's todos",
+  "omissions": [],
+  "implementation": {
+    "location": "list_todos",
+    "code_reference": "todos = session.exec(select(Todo).where(Todo.user_id == current_user.id)).all()",
+    "reasoning": "The GET /todos endpoint filters todos by the authenticated user's ID, ensuring each user only sees their own todos. The current user is determined via JWT authentication in get_current_user."
+  },
+  "usage": {
+    "total_tokens": 3153,
+    "prompt_tokens": 3037,
+    "completion_tokens": 116
+  },
+  "timestamp": "2026-07-12 10:32:41"
+}

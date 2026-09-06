@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns storing an optional 'store' field in purchase documents, which is unrelated to removed pet selection randomness, deleting pets after purchase, or purchase-id uniqueness reuse."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns storing an optional 'pet-name' field in purchase documents, not any of the removed behaviors about selection algorithm, pet deletion, or purchase-id uniqueness."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Adding a separate transaction 'id' field does not describe removal of random pet selection, removal of deleting a pet after purchase, or removal of purchase-id uniqueness constraints."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Authorization behavior for /transactions endpoints is unrelated to the removed purchase flow requirements listed."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Behavior for invalid query parameters on /transactions does not correspond to any of the removed requirements about pet selection, pet deletion, or purchase-id reuse."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1066,
+    "prompt_tokens": 735,
+    "completion_tokens": 331
+  }
+}

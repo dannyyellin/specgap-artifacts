@@ -1,0 +1,222 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement specifically addresses verifying the 200 status code on item creation."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "O2 identifies the missing permission check for reading items, which is the core behavior described in R4, but does not specify the 400 status code and 'Not enough permissions' detail."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "O3 directly describes the missing behavior in R4: returning 400 with 'Not enough permissions' when a non-owner user attempts to read an item."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "O4 states the code correctly returns 404 with 'Item not found' for missing items, which relates to R10's behavior, but O4 claims no omission exists while R10 is a test requirement to verify this behavior."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 states the code correctly implements the 400 'Not enough permissions' for non-owner update attempts, so it reports no omission and does not match any reference requirement describing a missing behavior."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 states the code correctly returns 404 for missing items on update, reporting no omission, and does not match any reference requirement."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O7 states the code correctly implements 400 'Not enough permissions' for non-owner delete attempts, reporting no omission, and does not match any reference requirement."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "O8 states the code correctly returns 404 with 'Item not found' for missing items on delete, which relates to R10, but O8 reports no omission while R10 specifically tests superuser deletion of non-existent items."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O9 states the code correctly handles UUID validation returning 422, reporting no omission, and does not match any reference requirement."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O10 states the code correctly validates title and description length, reporting no omission, and does not match any reference requirement."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": "R35",
+        "label": "PARTIAL",
+        "reasoning": "O11 identifies that the duplicate email error message differs from R35's required 'The user with this email already exists in the system', but frames it as a wording mismatch rather than a full behavioral description."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": "R47",
+        "label": "PARTIAL",
+        "reasoning": "O12 states password length validation (8-128) is correctly implemented, which relates to R47's test of a 7-character password returning 422, but O12 reports no omission."
+      },
+      {
+        "detection_id": "O13",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O13 states the code correctly rejects same-as-current new passwords, reporting no omission, and does not match any reference requirement."
+      },
+      {
+        "detection_id": "O14",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O14 states password length constraints are correctly validated, reporting no omission, and does not match any reference requirement."
+      },
+      {
+        "detection_id": "O15",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O15 states password length validation before token validation is correctly implemented, reporting no omission, and does not match any reference requirement."
+      },
+      {
+        "detection_id": "O16",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O16 states the code correctly returns 400 with 'Invalid token' for invalid tokens, reporting no omission, and does not match any reference requirement."
+      },
+      {
+        "detection_id": "O17",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O17 states the code correctly returns 404 for non-existent users in password recovery, reporting no omission, and does not match any reference requirement."
+      },
+      {
+        "detection_id": "O18",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O18 states the code correctly sends recovery emails, reporting no omission, and does not match any reference requirement."
+      },
+      {
+        "detection_id": "O19",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O19 states the code correctly forbids superusers from deleting themselves, reporting no omission, and does not match any reference requirement."
+      },
+      {
+        "detection_id": "O20",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O20 states the code correctly forbids non-superusers from deleting users, reporting no omission, and does not match any reference requirement."
+      },
+      {
+        "detection_id": "O21",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O21 states the code correctly forbids superusers from deleting themselves via admin endpoint, reporting no omission, and does not match any reference requirement."
+      },
+      {
+        "detection_id": "O22",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O22 states the code correctly forbids normal users from reading other users, reporting no omission, and does not match any reference requirement."
+      },
+      {
+        "detection_id": "O23",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O23 states the code correctly returns 404 for non-existent users on update, reporting no omission, and does not match any reference requirement."
+      },
+      {
+        "detection_id": "O24",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O24 states the code correctly returns 409 for duplicate email on user update, reporting no omission, and does not match any reference requirement."
+      },
+      {
+        "detection_id": "O25",
+        "requirement_id": "R35",
+        "label": "PARTIAL",
+        "reasoning": "O25 identifies that the signup duplicate email message 'User with this email already exists' differs from R35's required 'The user with this email already exists in the system', partially capturing R35's behavior."
+      },
+      {
+        "detection_id": "O26",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O26 states the code correctly returns 409 for duplicate email on profile update, reporting no omission, and does not match any reference requirement."
+      },
+      {
+        "detection_id": "O27",
+        "requirement_id": "R47",
+        "label": "PARTIAL",
+        "reasoning": "O27 states email format and password length validation returning 422 is correctly implemented, which relates to R47's 422 validation for a 7-character password, but O27 reports no omission."
+      },
+      {
+        "detection_id": "O28",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O28 states PATCH /users/me correctly validates email format and full_name length, reporting no omission, and does not match any reference requirement."
+      },
+      {
+        "detection_id": "O29",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O29 states null email/password validation is correctly implemented, reporting no omission, and does not match any reference requirement."
+      },
+      {
+        "detection_id": "O30",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O30 states item title and description length validation is correctly implemented, reporting no omission, and does not match any reference requirement."
+      },
+      {
+        "detection_id": "O31",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O31 states signup correctly prevents creating superusers, reporting no omission, and does not match any reference requirement."
+      },
+      {
+        "detection_id": "O32",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O32 states the private user creation endpoint correctly requires superuser auth, reporting no omission, and does not match any reference requirement."
+      },
+      {
+        "detection_id": "O33",
+        "requirement_id": "R13",
+        "label": "MATCH",
+        "reasoning": "O33 directly describes the behavior in R13: returning 400 with 'Incorrect email or password' on invalid login credentials."
+      },
+      {
+        "detection_id": "O34",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O34 states the test-token endpoint correctly returns user info, reporting no omission, and does not match any reference requirement."
+      },
+      {
+        "detection_id": "O35",
+        "requirement_id": "R30",
+        "label": "PARTIAL",
+        "reasoning": "O35 relates to password change rejection on incorrect current password, which is part of R30's password update flow, but R30 covers a much broader scenario including reverting the password."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 5744,
+    "prompt_tokens": 3104,
+    "completion_tokens": 2640
+  }
+}

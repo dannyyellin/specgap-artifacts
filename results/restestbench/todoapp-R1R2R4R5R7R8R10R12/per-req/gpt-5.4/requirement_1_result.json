@@ -1,0 +1,18 @@
+{
+  "req_id": 1,
+  "requirement_vague": "Getting all todos returns only the current user's todos",
+  "requirement_precise": "Register two users (userA and userB) and login with each. UserA creates a todo with title 'UserA Todo'. UserB creates a todo with title 'UserB Todo'. When userA calls GET /todos, verify the response contains exactly one todo with title 'UserA Todo'. UserB's todo should not be visible to userA.",
+  "removed": true,
+  "omissions": [],
+  "implementation": {
+    "location": "GET /todos -> list_todos; authentication via get_current_user; POST /todos -> create_todo",
+    "code_reference": "todos = session.exec(select(Todo).where(Todo.user_id == current_user.id)).all()\n...\ntodo = Todo(title=todo_in.title, isComplete=todo_in.isComplete, user_id=current_user.id)",
+    "reasoning": "The GET /todos handler filters todos by the authenticated user's id, so it returns only records owned by the current user. Todos are created with user_id set from current_user.id, ensuring userA and userB's todos are stored separately and userA cannot see userB's todo in the list."
+  },
+  "usage": {
+    "total_tokens": 2588,
+    "prompt_tokens": 2439,
+    "completion_tokens": 149
+  },
+  "parse_error": false
+}

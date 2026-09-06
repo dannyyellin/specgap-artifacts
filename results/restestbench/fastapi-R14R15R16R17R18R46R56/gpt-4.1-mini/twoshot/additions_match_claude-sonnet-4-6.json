@@ -1,0 +1,18 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This code behavior describes item filtering by owner_id for non-superusers, which does not correspond to any of the listed spec requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1164,
+    "prompt_tokens": 1074,
+    "completion_tokens": 90
+  }
+}

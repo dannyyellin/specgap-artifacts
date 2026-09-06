@@ -1,0 +1,84 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "It concerns the removed anti-enumeration behavior on /verify, but focuses on 401 vs 200/valid=false rather than the specific same-error-message requirement."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "It describes the old /verify anti-enumeration response shape, which is related to the removed requirement, but not specifically the same-error-message rule."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R1",
+        "label": "PARTIAL",
+        "reasoning": "It matches the removed uppercase/lowercase/digit password complexity rules but omits the removed minimum-length rule."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R1",
+        "label": "PARTIAL",
+        "reasoning": "It matches the removed minimum 8-character password rule but adds a maximum 128-character constraint not present in the reference."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Username uniqueness and case sensitivity are unrelated to any reference requirement."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Malformed JSON and missing-field handling for POST /users is not described by any reference requirement."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about missing credentials and JSON error formatting, not any removed reference behavior."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "It targets anti-enumeration on /verify, but the cited behavior is broader/different than the specific removed same-error-message requirement."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": "R1",
+        "label": "PARTIAL",
+        "reasoning": "It matches the removed uppercase/lowercase/digit password complexity rules, but applies them to password update rather than the original generic password validation statement."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": "R1",
+        "label": "PARTIAL",
+        "reasoning": "It overlaps with the removed minimum 8-character rule, but adds a 128-character maximum and scopes it to password update."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "DELETE username path handling is unrelated to any reference requirement."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Content-Type enforcement is not covered by the reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1792,
+    "prompt_tokens": 1080,
+    "completion_tokens": 712
+  }
+}

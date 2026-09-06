@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "It overlaps with the removed Owner special case by discussing special handling of the name 'Owner', but it only addresses uniqueness of that name rather than the full special-case account definition."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "It matches part of the removed Owner special case because it refers to the specific Owner password, but it does not cover the entire special-case behavior including fixed name and privilege."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Token format validation is unrelated to password encryption removal, Owner special-case removal, or username uniqueness removal."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 730,
+    "prompt_tokens": 517,
+    "completion_tokens": 213
+  }
+}

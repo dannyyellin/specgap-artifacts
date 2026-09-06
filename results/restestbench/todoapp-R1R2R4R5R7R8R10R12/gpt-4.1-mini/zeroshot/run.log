@@ -1,0 +1,19 @@
+Timestamp: 2026-06-01 21:45:05
+Detector:  gpt-4.1-mini
+Service:   todoapp  Removals: [1, 2, 4, 5, 7, 8, 10, 12]
+Method:    zeroshot
+
+Tokens: prompt=3223, completion=929, total=4152
+Additions: 3
+Omissions: 6
+
+  A A1: The DELETE /todos/{id} endpoint returns a JSON message {"message": "Todo deleted"} on success.
+  A A2: The POST /users/register endpoint returns the created user object with id and email.
+  A A3: The POST /users/login endpoint returns a TokenResponse model with access_token and token_type fields.
+
+  O O1: POST /todos does not validate that the title field is present and non-empty; no 400 Bad Request is returned if title is missing or empty.
+  O O2: PUT /todos/{id} does not check that the id in the request body matches the id in the URL path; no 400 Bad Request is returned if they differ.
+  O O3: GET /todos and other endpoints do not return 401 Unauthorized if Authorization header or token is missing.
+  O O4: POST /users/register does not validate that the email and password fields are present and valid; no explicit validation errors are returned.
+  O O5: PUT /todos/{id} does not verify ownership before updating; it only checks if the todo exists for the current user, but does not handle the case where the todo exists but belongs to another user.
+  O O6: DELETE /todos/{id} does not verify ownership before deleting; it only deletes if the todo belongs to the current user, otherwise returns 404 Not Found.

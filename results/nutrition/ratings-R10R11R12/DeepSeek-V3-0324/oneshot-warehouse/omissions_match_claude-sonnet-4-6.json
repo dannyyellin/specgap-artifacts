@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the absence of the rating range constraint (integer between 1 and 5), which matches R10."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R11",
+        "label": "PARTIAL",
+        "reasoning": "O2 addresses the one-rating-per-user-per-dish constraint but focuses on the implementation mechanism (unique index vs. explicit check) rather than the complete removal of the constraint as stated in R11."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 describes a missing 'avg_rating' field in the PUT /ratings/{id} response, which does not correspond to any of the reference requirements R10, R11, or R12."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 describes handling of unrated dishes in GET /ratings, which does not correspond to any of the reference requirements R10, R11, or R12."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1016,
+    "prompt_tokens": 679,
+    "completion_tokens": 337
+  }
+}

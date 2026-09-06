@@ -1,0 +1,21 @@
+Timestamp: 2026-06-02 09:12:06
+Detector:  claude-sonnet-4-6
+Service:   nestjs-realworld  Round: 1  Removals: [5, 6, 9, 12, 19, 23, 25, 27, 29]
+Method:    twoshot
+
+Tokens: prompt=13733, completion=1203, total=14936
+Additions: 4
+Omissions: 7
+
+  A A1: DELETE /api/articles/{slug}/comments/{comment_id} returns {"status": "ok"} instead of an empty object or standard response
+  A A2: POST /api/articles/{slug}/comments returns the full article object with comments array rather than just the created comment
+  A A3: The JWT token payload only contains 'sub' (user id) and 'exp' fields, not username and email
+  A A4: Registration endpoint returns 422 with separate error messages for duplicate email vs duplicate username instead of 400 with 'Username and email must be unique'
+
+  O O1: GET /api/articles does not support filtering by 'tag' query parameter
+  O O2: JWT token payload does not include 'username' and 'email' fields
+  O O3: GET /api/articles/feed endpoint is not implemented
+  O O4: DELETE /api/users/{email} endpoint is not implemented
+  O O5: Registration returns 422 instead of 400 for duplicate username/email, and error message does not contain 'Username and email must be unique'
+  O O6: list_articles does not filter by tag even though the spec requires GET /api/articles?tag={tag} to work
+  O O7: GET /api/articles/feed is missing, so feed pagination (limit/offset) is also not implemented

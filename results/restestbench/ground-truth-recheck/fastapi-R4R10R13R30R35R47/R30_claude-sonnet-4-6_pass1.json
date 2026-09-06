@@ -1,0 +1,20 @@
+{
+  "variant": "fastapi-R4R10R13R30R35R47",
+  "req_id": 30,
+  "model": "claude-sonnet-4-6",
+  "pass": 1,
+  "verdict": "IMPLEMENTED",
+  "requirement_vague": "Verify the superuser (admin@example.com / password123) can change their own password and change it back.",
+  "omissions": [],
+  "implementation": {
+    "location": "update_password_me (PATCH /api/v1/users/me/password), login_access_token (POST /api/v1/login/access-token), init_superuser",
+    "code_reference": "if not verify_password(password_in.current_password, current_user.hashed_password):\n    raise HTTPException(status_code=400, detail=\"Incorrect password\")\ncurrent_user.hashed_password = get_password_hash(password_in.new_password)",
+    "reasoning": "The code provides a PATCH /api/v1/users/me/password endpoint that verifies the current password, updates to the new password, and returns Message(message='Password updated successfully') with a 200 status. The superuser is initialized with admin@example.com/password123, and the login endpoint allows re-authentication with any valid password, supporting the full change-and-revert scenario described."
+  },
+  "usage": {
+    "total_tokens": 7723,
+    "prompt_tokens": 7477,
+    "completion_tokens": 246
+  },
+  "timestamp": "2026-07-12 10:36:01"
+}

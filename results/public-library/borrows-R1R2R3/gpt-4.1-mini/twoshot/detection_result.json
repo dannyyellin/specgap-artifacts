@@ -1,0 +1,67 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "Supports filtering borrows by 'loanDate', 'returnDate', and 'id' query parameters in GET /borrows",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states GET /borrows supports query parameter 'field=value' but does not specify which fields are supported. The code supports filtering by 'cardholderId', 'ISBN', 'loanDate', 'returnDate', and 'id', which is more extensive than the specification explicitly requires."
+      },
+      {
+        "id": "A2",
+        "description": "Validates that 'returnDate' is not earlier than 'loanDate' on POST and PUT requests",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification does not require validation that 'returnDate' is not before 'loanDate'. The code enforces this constraint."
+      },
+      {
+        "id": "A3",
+        "description": "Validates that no unknown fields are present in the JSON payload on POST and PUT",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification does not require rejecting requests with unknown fields, but the code does so."
+      },
+      {
+        "id": "A4",
+        "description": "Checks that the remote cardholder and book resources exist by making GET requests to Cardholders and Books microservices",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The specification states that Borrows service should inform Logs service on new borrow, but does not explicitly require verifying existence of cardholder or book before creating or updating a borrow. The code performs these existence checks."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "Does not compute 'returnDate' as loanDate + 30 days on POST /borrows",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states 'returnDate' is computed as loanDate + LOAN_PERIOD (30 days) and is not provided in the POST request. The code accepts 'returnDate' from the client or defaults to empty string but does not compute it."
+      },
+      {
+        "id": "O2",
+        "description": "Does not reject POST /borrows if the cardholder has 2 or more overdue books",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification requires that a book can only be borrowed if the cardholder does not have 2 or more books overdue, and to return 400 if this condition is violated. The code does not check the number of overdue books before creating a borrow."
+      },
+      {
+        "id": "O3",
+        "description": "Does not return 405 Method Not Allowed for unsupported HTTP methods on endpoints",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification requires returning 405 for unsupported methods. The code defines handlers only for supported methods but does not explicitly handle unsupported methods with 405 responses."
+      },
+      {
+        "id": "O4",
+        "description": "Does not validate that 'cardholderId', 'ISBN', and 'loanDate' are present and of correct type in PUT requests",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification requires PUT to provide a JSON payload of the resource\u2019s fields. The code allows partial updates but does not enforce presence or type validation of required fields on PUT."
+      },
+      {
+        "id": "O5",
+        "description": "Does not handle or validate the 'id' field in POST requests as per specification",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states POST request provides cardholder id, ISBN, and loan date, and returns the id of the new borrow record. The code generates a UUID for id but allows 'id' field in input JSON and validates it, which is not specified."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 8304,
+    "prompt_tokens": 7454,
+    "completion_tokens": 850
+  }
+}

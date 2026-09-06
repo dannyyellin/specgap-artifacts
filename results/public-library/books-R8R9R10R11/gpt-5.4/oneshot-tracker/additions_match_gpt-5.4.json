@@ -1,0 +1,24 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "It overlaps with the removed Google Books integration for publisher/publishedDate, but describes accepting those fields from the client rather than the spec change removing the integration itself."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This PUT body-id validation rule does not correspond to any of the listed removed POST/ISBN/Google Books/genre requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 703,
+    "prompt_tokens": 560,
+    "completion_tokens": 143
+  }
+}

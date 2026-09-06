@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement addresses anonymous/unauthenticated access to profile endpoints."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement mentions favorited or favoritesCount fields in article or comment responses."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement covers updating username, email, or password via PUT /api/user."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement addresses comment deletion response body behavior."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2230,
+    "prompt_tokens": 1984,
+    "completion_tokens": 246
+  }
+}

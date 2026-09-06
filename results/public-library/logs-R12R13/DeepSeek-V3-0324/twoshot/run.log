@@ -1,0 +1,12 @@
+Timestamp: 2026-06-02 06:05:48
+Detector:  DeepSeek-V3-0324
+App/Variant/Service: public-library/logs-R12R13/logs
+Method:    twoshot
+
+Tokens: prompt=6138, completion=295, total=6433
+Additions: 0
+Omissions: 3
+
+  O O1: GET /logs does not support filtering by 'field=value' query parameters as specified
+  O O2: POST /logs does not validate that the 'loanDate' is in the format 'DD-MM-YYYY'
+  O O3: POST /logs does not validate that the 'ISBN' is a valid ISBN_13 number

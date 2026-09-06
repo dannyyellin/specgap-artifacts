@@ -1,0 +1,19 @@
+{
+  "app": "pet-store",
+  "variant": "petorder-R8R9R10",
+  "service": "pet-order",
+  "req_id": "R10",
+  "requirement": "Each purchase-id is unique and is never reused for another purchase.",
+  "source_headline": "Removed that purchase-id must be unique and cannot be reused",
+  "model": "claude-sonnet-4-6",
+  "pass": 1,
+  "label": "INFERRED",
+  "evidence": "purchase_id = str(uuid.uuid4()) in create_purchase(); purchases_collection.insert_one(dict(purchase_doc))",
+  "reasoning": "Each purchase ID is generated via uuid.uuid4(), which produces a cryptographically random UUID. The probability of collision is negligible and UUIDs are never reused by design \u2014 each call to create_purchase() generates a fresh UUID independently. The ID is stored in MongoDB and never recycled or reassigned. A test checking that two purchases have different IDs would pass, and no code path reuses an existing purchase-id.",
+  "usage": {
+    "total_tokens": 3839,
+    "prompt_tokens": 3690,
+    "completion_tokens": 149
+  },
+  "timestamp": "2026-07-16 15:02:54"
+}

@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O1 describes enforcing owner-only access for POST/PUT/DELETE, which is exactly the behavior removed in R5."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "O2 refers to Ninja API field value/type handling, which is related to Ninja API mapping details but not clearly the same field name mapping behavior in R4."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 is about duplicate dish names, which is unrelated to any of the listed reference requirements."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "O4 concerns validating Ninja API nutritional field types, which only loosely overlaps with the removed Ninja API field name mapping details in R4."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 concerns duplicate-name error responses and does not correspond to any reference requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 945,
+    "prompt_tokens": 631,
+    "completion_tokens": 314
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Restricting GET /cardholders filtering to name and email does not correspond to removing field type declarations, removing 415, removing the fine formula, or removing the Borrows cross-service call."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rejecting PUT /cardholders/{id} when a payload id conflicts with the URL id is unrelated to any listed requirement about type declarations, 415 errors, fine computation, or Borrows integration."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Returning 400 for PUT requests with no updatable fields does not match any requirement concerning removed type declarations, removed 415 errors, removed fine formula, or removed cross-service fine computation."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 848,
+    "prompt_tokens": 614,
+    "completion_tokens": 234
+  }
+}

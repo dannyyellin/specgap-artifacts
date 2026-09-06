@@ -1,0 +1,24 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Using BCRYPT_ROUNDS=12 is an implementation detail not related to any of the three spec requirements about password validation rules, anti-enumeration, or owner pre-registration."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Returning 401 uniformly for all verification failures is not directly related to removing password validation rules, removing the same-error anti-enumeration requirement, or removing owner pre-registration; it describes consistent error handling behavior not captured by R1, R2, or R3."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 742,
+    "prompt_tokens": 543,
+    "completion_tokens": 199
+  }
+}

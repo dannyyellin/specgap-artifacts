@@ -1,0 +1,24 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 describes a specific success message string for password updates, which does not correspond to any of the three spec requirements about password validation rules, anti-enumeration security, or owner pre-registration."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A2 describes a specific success message string for user deletion, which does not correspond to any of the three spec requirements about password validation rules, anti-enumeration security, or owner pre-registration."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 759,
+    "prompt_tokens": 575,
+    "completion_tokens": 184
+  }
+}

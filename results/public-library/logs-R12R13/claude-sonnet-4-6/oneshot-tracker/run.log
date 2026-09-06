@@ -1,0 +1,12 @@
+Timestamp: 2026-06-02 09:39:26
+Detector:  claude-sonnet-4-6
+App/Variant/Service: public-library/logs-R12R13/logs
+Method:    oneshot-tracker
+
+Tokens: prompt=5254, completion=855, total=6109
+Additions: 1
+Omissions: 1
+
+  A A1: POST /logs validates that each required field value is an instance of str in addition to checking presence
+
+  O O1: GET /logs silently ignores query parameters that are not in the hardcoded whitelist, rather than applying them as filters

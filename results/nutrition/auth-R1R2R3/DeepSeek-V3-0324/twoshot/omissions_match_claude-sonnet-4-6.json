@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O1 captures part of R2 (the Owner special case) but focuses only on the uniqueness aspect, missing the privileged=True and specific password aspects of the Owner special case removal."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O2 captures another aspect of R2 (the specific 'owner#pw' password for Owner), but only addresses the password part of the Owner special case, not the full removal including privileged status."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 describes a token format validation behavior in /validate that does not correspond to any of the three reference requirements about bcrypt removal, Owner special case removal, or username uniqueness constraint removal."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 840,
+    "prompt_tokens": 568,
+    "completion_tokens": 272
+  }
+}

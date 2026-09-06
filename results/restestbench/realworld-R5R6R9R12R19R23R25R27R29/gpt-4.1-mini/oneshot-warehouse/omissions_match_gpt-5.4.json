@@ -1,0 +1,108 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "It targets the duplicate username/email user-creation behavior in R9, but states different expected status/details than the reference."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement concerns successful login status codes."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement is about restricting article updates to owners."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement is about restricting article deletion to owners."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R12",
+        "label": "MATCH",
+        "reasoning": "It describes the same GET /api/articles tag-query filtering behavior required by R12."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "R6 requires the /api/articles/feed endpoint for followed authors' articles, which O6 says is missing."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R23",
+        "label": "MATCH",
+        "reasoning": "R23 also depends on GET /api/articles/feed with pagination, so a missing endpoint directly matches it."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R27",
+        "label": "MATCH",
+        "reasoning": "R27 requires GET /api/articles/feed to return an empty feed when no follows exist, which is impossible if the endpoint is missing."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "R5 specifically expects GET by slug after deletion to return 200 with {}, while O7 discusses the same empty-object behavior but frames it against a broader non-existent-article expectation."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "R5 includes verifying DELETE /api/articles/{slug} returns 200, but O8 adds an empty-object response detail not stated in the reference."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement concerns comment body validation."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement concerns comment deletion ownership checks."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": "R29",
+        "label": "MATCH",
+        "reasoning": "R29 explicitly requires DELETE /api/users/{email}, which O11 says is missing."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement is about preventing self-follow or self-unfollow."
+      },
+      {
+        "detection_id": "O13",
+        "requirement_id": "R12",
+        "label": "PARTIAL",
+        "reasoning": "It overlaps with R12's tag filtering requirement, but adds unsupported notions of multiple tags/combined filters not present in the reference."
+      },
+      {
+        "detection_id": "O14",
+        "requirement_id": "R19",
+        "label": "MATCH",
+        "reasoning": "It refers to the same article updated-timestamp behavior tested in R19."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 3022,
+    "prompt_tokens": 2128,
+    "completion_tokens": 894
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "A1 describes extraction of temperament/group-related fields into attributes, which is the same area covered by the removal of temperament/group_behavior extraction rules in R4."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "A2 concerns lifespan handling, but R6 specifically removes lifespan range parsing rules rather than defaulting missing lifespan values."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A3 is about id query filtering on pet-types and does not correspond to any of the listed removed requirements."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A4 concerns unsupported query parameters on GET /pet-types, which is unrelated to R4\u2013R7."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "A5 directly describes deleting a pet-type without checking whether pets of that type exist, which is exactly the constraint removed by R5."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A6 is about duplicate pet-name handling and status codes, unrelated to any listed removed requirement."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A7 adds picture-url update behavior and does not match any of R4\u2013R7."
+      },
+      {
+        "detection_id": "A8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A8 is about picture-name validation on the pictures endpoint, which is unrelated to the listed requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1491,
+    "prompt_tokens": 1008,
+    "completion_tokens": 483
+  }
+}

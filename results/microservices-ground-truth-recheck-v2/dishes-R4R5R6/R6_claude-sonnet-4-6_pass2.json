@@ -1,0 +1,19 @@
+{
+  "app": "nutrition",
+  "variant": "dishes-R4R5R6",
+  "service": "dishes",
+  "req_id": "R6",
+  "requirement": "GET on dishes supports query-string filtering in which nutrient parameters filter by less-than-or-equal (lte) semantics and ingredient parameters filter by substring containment.",
+  "source_headline": "Removed specific query string filtering semantics (lte for nutrients, contains for ingredients)",
+  "model": "claude-sonnet-4-6",
+  "pass": 2,
+  "label": "PARTIAL",
+  "evidence": "build_query_from_args: `query[field] = parse_numeric_query_value(field, value)` for nutrients (exact match, not $lte) and `query['ingredients'] = value` for ingredients (exact match, not substring/regex)",
+  "reasoning": "The code does implement query-string filtering for both nutrient and ingredient parameters, so the mechanism is present. However, nutrient fields use exact equality rather than MongoDB's $lte operator, and ingredient fields use exact equality rather than a regex/substring match. Both deviations are material and observable \u2014 tests for lte semantics and substring containment would fail.",
+  "usage": {
+    "total_tokens": 3840,
+    "prompt_tokens": 3237,
+    "completion_tokens": 603
+  },
+  "timestamp": "2026-07-16 14:58:08"
+}

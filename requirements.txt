@@ -1,0 +1,10 @@
+# Scoring / reproduction from included outputs: Python 3.9+ standard library only.
+# The packages below are needed only for (a) re-running LLM experiments and
+# (b) the unit-test ground-truth validation (validate_gt_by_tests.py).
+
+openai>=1.0          # all LLM calls (Azure OpenAI-compatible endpoints)
+requests>=2.28       # anthropic-endpoint calls + RESTestBench golden tests
+fastapi>=0.100       # validate_gt_by_tests.py: loads generated FastAPI services
+sqlmodel>=0.0.14     # validate_gt_by_tests.py: in-memory SQLite harness
+httpx<0.28           # fastapi TestClient dependency pin
+pytest>=7.0          # imported by some golden tests

@@ -1,0 +1,24 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 describes bcrypt rounds configuration which does not correspond to any of the three spec requirements about password validation rules, anti-enumeration, or owner pre-registration."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A2 describes privileged status being granted when changing to the owner's password, which does not correspond to any of the three spec requirements listed."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 700,
+    "prompt_tokens": 533,
+    "completion_tokens": 167
+  }
+}

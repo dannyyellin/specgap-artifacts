@@ -1,0 +1,217 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "The code implements a password recovery HTML endpoint (/password-recovery-html/{email}) that is not mentioned in the specification.",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification does not mention any requirement for a password recovery HTML endpoint, yet the code implements one."
+      },
+      {
+        "id": "A2",
+        "description": "The code includes a test token endpoint (/login/test-token) that is not required by the specification.",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification does not mention any requirement for a test token endpoint, but the code implements one."
+      },
+      {
+        "id": "A3",
+        "description": "The code implements a UsersRead model with a 'count' field that is not mentioned in the specification.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification does not require a 'count' field in the response for listing users, but the code includes it."
+      },
+      {
+        "id": "A4",
+        "description": "The code implements an ItemsRead model with a 'count' field that is not mentioned in the specification.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification does not require a 'count' field in the response for listing items, but the code includes it."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "The specification requires a 400 status code with 'Not enough permissions' when a normal user attempts to read another user's item, but the code returns 403 with a different message.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly states that a 400 status code with 'Not enough permissions' should be returned, but the code returns 403 with 'The user doesn't have enough privileges'."
+      },
+      {
+        "id": "O2",
+        "description": "The specification requires a 400 status code with 'Not enough permissions' when a normal user attempts to update another user's item, but the code returns 400 with 'Not enough permissions'.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly states that a 400 status code with 'Not enough permissions' should be returned, and the code complies, but the message format is slightly different ('Not enough permissions' vs 'The user doesn't have enough privileges')."
+      },
+      {
+        "id": "O3",
+        "description": "The specification requires a 400 status code with 'Not enough permissions' when a normal user attempts to delete another user's item, but the code returns 400 with 'Not enough permissions'.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly states that a 400 status code with 'Not enough permissions' should be returned, and the code complies, but the message format is slightly different ('Not enough permissions' vs 'The user doesn't have enough privileges')."
+      },
+      {
+        "id": "O4",
+        "description": "The specification requires a 400 status code with 'Not enough permissions' when a normal user attempts to delete another user, but the code returns 403 with 'The user doesn't have enough privileges'.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly states that a 400 status code with 'Not enough permissions' should be returned, but the code returns 403 with 'The user doesn't have enough privileges'."
+      },
+      {
+        "id": "O5",
+        "description": "The specification requires a 400 status code with 'Invalid token' when attempting to reset a password with an invalid token, but the code returns 400 with 'Invalid token'.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly states that a 400 status code with 'Invalid token' should be returned, and the code complies."
+      },
+      {
+        "id": "O6",
+        "description": "The specification requires a 404 status code with 'The user with this id does not exist in the system' when attempting to update a non-existent user, but the code returns 404 with 'The user with this id does not exist in the system'.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly states that a 404 status code with 'The user with this id does not exist in the system' should be returned, and the code complies."
+      },
+      {
+        "id": "O7",
+        "description": "The specification requires a 404 status code with 'Item not found' when attempting to update a non-existent item, but the code returns 404 with 'Item not found'.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly states that a 404 status code with 'Item not found' should be returned, and the code complies."
+      },
+      {
+        "id": "O8",
+        "description": "The specification requires a 404 status code with 'Item not found' when attempting to delete a non-existent item, but the code returns 404 with 'Item not found'.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly states that a 404 status code with 'Item not found' should be returned, and the code complies."
+      },
+      {
+        "id": "O9",
+        "description": "The specification requires a 404 status code with 'User not found' when attempting to delete a non-existent user, but the code returns 404 with 'User not found'.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly states that a 404 status code with 'User not found' should be returned, and the code complies."
+      },
+      {
+        "id": "O10",
+        "description": "The specification requires a 409 status code with 'User with this email already exists' when attempting to update a user's email to an existing email, but the code returns 409 with 'User with this email already exists'.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly states that a 409 status code with 'User with this email already exists' should be returned, and the code complies."
+      },
+      {
+        "id": "O11",
+        "description": "The specification requires a 403 status code with 'Super users are not allowed to delete themselves' when a superuser attempts to delete their own account, but the code returns 403 with 'Super users are not allowed to delete themselves'.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly states that a 403 status code with 'Super users are not allowed to delete themselves' should be returned, and the code complies."
+      },
+      {
+        "id": "O12",
+        "description": "The specification requires a 422 status code when attempting to register a user with an invalid email format, but the code returns 422 with a validation error.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly states that a 422 status code should be returned for invalid email format, and the code complies."
+      },
+      {
+        "id": "O13",
+        "description": "The specification requires a 422 status code when attempting to register a user with a password of exactly 7 characters, but the code returns 422 with a validation error.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly states that a 422 status code should be returned for invalid password length, and the code complies."
+      },
+      {
+        "id": "O14",
+        "description": "The specification requires a 422 status code when attempting to register a user with a password of exactly 129 characters, but the code returns 422 with a validation error.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly states that a 422 status code should be returned for invalid password length, and the code complies."
+      },
+      {
+        "id": "O15",
+        "description": "The specification requires a 422 status code when attempting to register a user with a full_name of exactly 256 characters, but the code returns 422 with a validation error.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly states that a 422 status code should be returned for invalid full_name length, and the code complies."
+      },
+      {
+        "id": "O16",
+        "description": "The specification requires a 422 status code when attempting to update a password with a new_password of exactly 7 characters, but the code returns 422 with a validation error.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly states that a 422 status code should be returned for invalid new_password length, and the code complies."
+      },
+      {
+        "id": "O17",
+        "description": "The specification requires a 422 status code when attempting to update a password with a new_password of exactly 129 characters, but the code returns 422 with a validation error.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly states that a 422 status code should be returned for invalid new_password length, and the code complies."
+      },
+      {
+        "id": "O18",
+        "description": "The specification requires a 422 status code when attempting to update a password with a current_password of exactly 7 characters, but the code returns 422 with a validation error.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly states that a 422 status code should be returned for invalid current_password length, and the code complies."
+      },
+      {
+        "id": "O19",
+        "description": "The specification requires a 422 status code when attempting to create an item with a title as an empty string, but the code returns 422 with a validation error.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly states that a 422 status code should be returned for invalid title, and the code complies."
+      },
+      {
+        "id": "O20",
+        "description": "The specification requires a 422 status code when attempting to create an item with a title of exactly 256 characters, but the code returns 422 with a validation error.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly states that a 422 status code should be returned for invalid title length, and the code complies."
+      },
+      {
+        "id": "O21",
+        "description": "The specification requires a 422 status code when attempting to create an item with a description of exactly 256 characters, but the code returns 422 with a validation error.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly states that a 422 status code should be returned for invalid description length, and the code complies."
+      },
+      {
+        "id": "O22",
+        "description": "The specification requires a 422 status code when attempting to reset a password with a new_password of exactly 7 characters, but the code returns 422 with a validation error.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly states that a 422 status code should be returned for invalid new_password length, and the code complies."
+      },
+      {
+        "id": "O23",
+        "description": "The specification requires a 422 status code when attempting to register a user with email set to null, but the code returns 422 with a validation error.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly states that a 422 status code should be returned for null email, and the code complies."
+      },
+      {
+        "id": "O24",
+        "description": "The specification requires a 422 status code when attempting to register a user with password set to null, but the code returns 422 with a validation error.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly states that a 422 status code should be returned for null password, and the code complies."
+      },
+      {
+        "id": "O25",
+        "description": "The specification requires a 422 status code when attempting to create an item with title set to null, but the code returns 422 with a validation error.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly states that a 422 status code should be returned for null title, and the code complies."
+      },
+      {
+        "id": "O26",
+        "description": "The specification requires a 422 status code when attempting to update a profile with an invalid email format, but the code returns 422 with a validation error.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly states that a 422 status code should be returned for invalid email format, and the code complies."
+      },
+      {
+        "id": "O27",
+        "description": "The specification requires a 200 status code with 'Password recovery email sent' when requesting a password recovery email, but the code returns 200 with 'Password recovery email sent'.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly states that a 200 status code with 'Password recovery email sent' should be returned, and the code complies."
+      },
+      {
+        "id": "O28",
+        "description": "The specification requires a 200 status code with 'Password updated successfully' when resetting a password, but the code returns 200 with 'Password updated successfully'.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly states that a 200 status code with 'Password updated successfully' should be returned, and the code complies."
+      },
+      {
+        "id": "O29",
+        "description": "The specification requires a 200 status code with 'User deleted successfully' when deleting a user, but the code returns 200 with 'User deleted successfully'.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly states that a 200 status code with 'User deleted successfully' should be returned, and the code complies."
+      },
+      {
+        "id": "O30",
+        "description": "The specification requires a 200 status code with 'Item deleted successfully' when deleting an item, but the code returns 200 with 'Item deleted successfully'.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly states that a 200 status code with 'Item deleted successfully' should be returned, and the code complies."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 14561,
+    "prompt_tokens": 11326,
+    "completion_tokens": 3235
+  }
+}

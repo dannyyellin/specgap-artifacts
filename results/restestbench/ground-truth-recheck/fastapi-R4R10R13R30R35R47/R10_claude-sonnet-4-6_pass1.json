@@ -1,0 +1,20 @@
+{
+  "variant": "fastapi-R4R10R13R30R35R47",
+  "req_id": 10,
+  "model": "claude-sonnet-4-6",
+  "pass": 1,
+  "verdict": "IMPLEMENTED",
+  "requirement_vague": "Delete a none existing item and confirm the API reports 'Item not found'. Admin credentials: (admin@example.com / password123)",
+  "omissions": [],
+  "implementation": {
+    "location": "delete_item",
+    "code_reference": "if not item:\n    raise HTTPException(status_code=404, detail=\"Item not found\")",
+    "reasoning": "The delete_item route at DELETE /api/v1/items/{item_id} checks if the item exists and raises a 404 HTTPException with detail 'Item not found' if it does not. The superuser credentials (admin@example.com / password123) are initialized via init_superuser and can authenticate via the login endpoint."
+  },
+  "usage": {
+    "total_tokens": 7557,
+    "prompt_tokens": 7409,
+    "completion_tokens": 148
+  },
+  "timestamp": "2026-07-12 10:35:27"
+}

@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the missing Google Books API integration for fetching 'publisher' and 'publishedDate', which is exactly what R10 refers to."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R11",
+        "label": "MATCH",
+        "reasoning": "O2 describes the missing validation of genre against the enumerated list of allowed values, which matches R11's removal of genre enumeration."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "O3 describes the missing validation of the ISBN field as a 13-digit ISBN_13 number, which directly corresponds to R9."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concerns validation of 'publishedDate' format (DD-MM-YYYY), which is not referenced by any of the listed reference requirements."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 concerns returning HTTP 405 for unsupported methods, which does not correspond to any of the listed reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1204,
+    "prompt_tokens": 819,
+    "completion_tokens": 385
+  }
+}

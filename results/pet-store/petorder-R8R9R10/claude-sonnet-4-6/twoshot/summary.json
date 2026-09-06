@@ -1,0 +1,16 @@
+{
+  "app": "pet-store",
+  "variant": "petorder-R8R9R10",
+  "service": "pet-order",
+  "method": "twoshot",
+  "detector_model": "claude-sonnet-4-6",
+  "gen_model": "gpt-5.4",
+  "gen_usage": null,
+  "n_additions": 7,
+  "n_omissions": 9,
+  "usage": {
+    "total_tokens": 14531,
+    "prompt_tokens": 12582,
+    "completion_tokens": 1949
+  }
+}

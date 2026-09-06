@@ -1,0 +1,18 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "It aligns with the removal of Google Books API-derived publisher/publishedDate behavior, but describes accepting those fields from the client rather than directly stating the API integration was removed."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 563,
+    "prompt_tokens": 478,
+    "completion_tokens": 85
+  }
+}

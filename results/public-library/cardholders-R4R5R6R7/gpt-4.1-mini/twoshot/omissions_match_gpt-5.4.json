@@ -1,0 +1,54 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "It refers to the removed fine computation formula, but asserts incorrect implementation of that formula rather than the requirement that the formula itself was removed from the spec."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "It depends on the removed days-overdue fine formula, so it only partially corresponds to the reference requirement that this formula was removed."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R7",
+        "label": "PARTIAL",
+        "reasoning": "It concerns error handling around the Borrows service call, which is related to the removed cross-service call, but not the same behavior."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about validating required POST body fields, which is unrelated to any reference requirement."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns PUT validation of required fields and does not match any listed reference requirement."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "It discusses the id field being a string, which touches the removed field type declarations, but only for one field and in the opposite direction."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about query filtering support and has no correspondence to the reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1307,
+    "prompt_tokens": 878,
+    "completion_tokens": 429
+  }
+}

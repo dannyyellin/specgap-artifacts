@@ -1,0 +1,29 @@
+Timestamp: 2026-06-01 21:28:22
+Detector:  gpt-4.1-mini
+Service:   fastapi  Round: 1  Removals: [4, 10, 13, 30, 35, 47]
+Method:    zeroshot
+
+Tokens: prompt=10795, completion=1761, total=12556
+Additions: 2
+Omissions: 17
+
+  A A1: The code implements a GET /password-recovery-html/{email} endpoint that returns HTML content for password recovery, which is not required by the specification.
+  A A2: The code sends password recovery emails by making an HTTP POST request to a local mailcatcher service at http://localhost:1080/messages, which is an external interaction not explicitly required by the specification.
+
+  O O1: The GET /items/{item_id} endpoint does not enforce permission checks to restrict access to the item only to its owner or superusers.
+  O O2: The GET /items/{item_id} endpoint does not return a 400 status with detail 'Not enough permissions' when a non-owner normal user attempts to read an item owned by another user.
+  O O3: The GET /items/{item_id} endpoint does not return 404 with detail 'Item not found' when the item does not exist.
+  O O4: The GET /items/{item_id} endpoint does not return 422 for invalid UUID format in the path parameter.
+  O O5: The PATCH /items/{item_id} and DELETE /items/{item_id} endpoints return 400 with detail 'Not enough permissions' when a non-owner normal user attempts to update or delete an item, but the specification requires 403 Forbidden status code for insufficient permissions.
+  O O6: The POST /users/signup endpoint returns 400 with detail 'User with this email already exists' when attempting to register a user with an existing email, but the specification requires the detail to be 'The user with this email already exists in the system'.
+  O O7: The POST /users/signup endpoint does not enforce password length minimum of 8 and maximum of 128 characters as required by the specification.
+  O O8: The PATCH /users/me/password endpoint does not return 400 with detail 'Incorrect password' when the current password is incorrect.
+  O O9: The PATCH /users/me/password endpoint does not return 400 with detail 'New password cannot be the same as the current one' when the new password equals the current password.
+  O O10: The DELETE /users/me endpoint allows superusers to delete themselves, but the specification forbids superusers from deleting themselves and requires a 403 with detail 'Super users are not allowed to delete themselves'.
+  O O11: The DELETE /users/{user_id} endpoint allows superusers to delete users by ID but forbids deleting themselves with 403 and detail 'Super users are not allowed to delete themselves'.
+  O O12: The DELETE /users/{user_id} endpoint returns 404 with detail 'User not found' when the user does not exist.
+  O O13: The GET /users/{user_id} endpoint returns 403 with detail 'The user doesn't have enough privileges' when a normal user attempts to read another user's data.
+  O O14: The POST /users/signup endpoint returns 400 with detail 'The user with this email already exists in the system' when attempting to register a user with an existing email, but the code returns 'User with this email already exists'.
+  O O15: The POST /reset-password/ endpoint returns 422 for new_password length less than 8 or greater than 128 characters before token validation.
+  O O16: The POST /reset-password/ endpoint returns 400 with detail 'Invalid token' when the token is invalid or expired.
+  O O17: The GET /api/v1/users/not-a-uuid and GET /api/v1/items/not-a-uuid endpoints return 422 for invalid UUID format in path parameters.

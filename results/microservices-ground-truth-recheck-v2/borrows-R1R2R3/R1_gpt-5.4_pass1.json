@@ -1,0 +1,19 @@
+{
+  "app": "public-library",
+  "variant": "borrows-R1R2R3",
+  "service": "borrows",
+  "req_id": "R1",
+  "requirement": "When a book is checked out, the borrow's returnDate is computed as loanDate + 30 days.",
+  "source_headline": "Removed return date computation (returnDate = loanDate + 30 days) from Borrows",
+  "model": "gpt-5.4",
+  "pass": 1,
+  "label": "GAP",
+  "evidence": "In POST /borrows, borrow_doc sets \"returnDate\": data.get(\"returnDate\", \"\") and never computes loanDate + 30 days. In PUT /borrows/<borrow_id>, updates only copy provided fields and validate date ordering; there is no logic deriving returnDate from loanDate.",
+  "reasoning": "The code contains no behavior addressing the stated requirement to compute returnDate as loanDate plus 30 days when a book is checked out. Instead, returnDate is optional input from the client and defaults to an empty string if omitted. Per the decision guide, because there is no implementation of the required computation at all, the correct label is GAP.",
+  "usage": {
+    "total_tokens": 3000,
+    "prompt_tokens": 2844,
+    "completion_tokens": 156
+  },
+  "timestamp": "2026-07-16 14:51:52"
+}

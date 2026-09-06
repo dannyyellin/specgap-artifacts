@@ -1,0 +1,18 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "A1 directly describes the code bypassing the Google Books API integration for publisher/publishedDate, which is exactly what R10 states has been removed."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 620,
+    "prompt_tokens": 524,
+    "completion_tokens": 96
+  }
+}

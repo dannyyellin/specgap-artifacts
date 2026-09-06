@@ -1,0 +1,48 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R11",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of the one-rating-per-user-per-dish constraint, matching R11."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O2 describes that PUT /ratings/{id} no longer enforces the integer 1-5 rating range constraint, matching R10."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O3 describes that POST /ratings no longer enforces the integer 1-5 rating range constraint, matching R10."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R11",
+        "label": "PARTIAL",
+        "reasoning": "O4 focuses on the missing 400 error response for duplicate ratings, which is a consequence of removing the one-rating-per-user-per-dish constraint (R11), but emphasizes the error code rather than the constraint removal itself."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 describes a missing ownership verification for DELETE, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 explicitly states it is not an omission and does not correspond to any of the reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1240,
+    "prompt_tokens": 786,
+    "completion_tokens": 454
+  }
+}

@@ -1,0 +1,16 @@
+Timestamp: 2026-06-02 05:54:39
+Detector:  DeepSeek-V3-0324
+Service:   todoapp  Removals: [1, 2, 4, 5, 7, 8, 10, 12]
+Method:    oneshot-tracker
+
+Tokens: prompt=4357, completion=557, total=4914
+Additions: 3
+Omissions: 3
+
+  A A1: The code includes a 'UserResponse' model and returns it from the register endpoint, which is not mentioned in the specification.
+  A A2: The code includes a 'TokenResponse' model and returns it from the login endpoint, which is not mentioned in the specification.
+  A A3: The code includes a 'TodoResponse' model and returns it from todo-related endpoints, which is not mentioned in the specification.
+
+  O O1: The code does not validate that the 'title' field is not empty or missing in the POST /todos endpoint.
+  O O2: The code does not validate that the 'id' field in the PUT /todos/{id} request body matches the URL parameter.
+  O O3: The code does not return a 401 Unauthorized when GET /todos is called without an Authorization header or token.

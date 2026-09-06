@@ -1,0 +1,19 @@
+{
+  "app": "public-library",
+  "variant": "books-R8R9R10R11",
+  "service": "books",
+  "req_id": "R10",
+  "requirement": "The service obtains a book's publisher and publishedDate by calling the Google Books API.",
+  "source_headline": "Removed Google Books API integration for publisher/publishedDate",
+  "model": "gpt-5.4",
+  "pass": 2,
+  "label": "GAP",
+  "evidence": "none",
+  "reasoning": "There is no code importing or using the requests library to call the Google Books API, and no logic in create_book or update_book that fetches publisher or publishedDate from any external service. Instead, create_book simply accepts publisher and publishedDate from the request body or defaults them to empty strings. Per the decision guide, because there is no behavior addressing the stated requirement at all, the correct label is GAP.",
+  "usage": {
+    "total_tokens": 1881,
+    "prompt_tokens": 1771,
+    "completion_tokens": 110
+  },
+  "timestamp": "2026-07-16 14:54:35"
+}

@@ -1,0 +1,19 @@
+{
+  "app": "pet-store",
+  "variant": "petorder-R8R9R10",
+  "service": "pet-order",
+  "req_id": "R9",
+  "requirement": "After a successful purchase, the purchased pet is deleted from the pet store.",
+  "source_headline": "Removed the DELETE pet from store after purchase step",
+  "model": "gpt-5.4",
+  "pass": 2,
+  "label": "GAP",
+  "evidence": "none",
+  "reasoning": "The purchase flow in create_purchase() selects a pet via GET requests, then only inserts documents into purchases_collection and transactions_collection before returning 201. There is no code that sends any delete request to the pet store or otherwise removes the purchased pet after success. Per the decision guide, because no code addresses deletion of the purchased pet at all, the requirement is a GAP.",
+  "usage": {
+    "total_tokens": 3070,
+    "prompt_tokens": 2968,
+    "completion_tokens": 102
+  },
+  "timestamp": "2026-07-16 15:02:29"
+}

@@ -1,0 +1,13 @@
+dataset,method,n_runs,avg_prompt_tokens,avg_completion_tokens,avg_total_tokens,ratio_vs_zeroshot,sum_total_tokens
+microservices,zeroshot,44,6253,1052,7304,1.0,321396
+microservices,oneshot-tracker,44,7233,1020,8253,1.13,363138
+microservices,oneshot-warehouse,44,7673,984,8657,1.19,380917
+microservices,twoshot,44,8662,883,9545,1.31,419991
+restestbench,zeroshot,20,8868,1373,10241,1.0,204823
+restestbench,oneshot-tracker,20,9848,1202,11050,1.08,221010
+restestbench,oneshot-warehouse,20,10289,1357,11646,1.14,232911
+restestbench,twoshot,20,11278,1246,12523,1.22,250465
+BOTH,zeroshot,64,7070,1152,8222,1.0,526219
+BOTH,oneshot-tracker,64,8050,1077,9127,1.11,584148
+BOTH,oneshot-warehouse,64,8491,1101,9591,1.17,613828
+BOTH,twoshot,64,9480,996,10476,1.27,670456

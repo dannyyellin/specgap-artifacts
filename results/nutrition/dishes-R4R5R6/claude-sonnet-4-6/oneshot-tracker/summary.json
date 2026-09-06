@@ -1,0 +1,16 @@
+{
+  "app": "nutrition",
+  "variant": "dishes-R4R5R6",
+  "service": "dishes",
+  "method": "oneshot-tracker",
+  "detector_model": "claude-sonnet-4-6",
+  "gen_model": "gpt-5.4",
+  "gen_usage": null,
+  "n_additions": 3,
+  "n_omissions": 8,
+  "usage": {
+    "total_tokens": 9390,
+    "prompt_tokens": 7959,
+    "completion_tokens": 1431
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "Private user creation endpoint allows callers to set is_superuser in the request body",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification requires a private create-user operation and verifies fields like email, id, and is_active, but it does not require that clients be able to choose whether the created user is a superuser. The code exposes this capability through UserCreatePrivate.is_superuser and persists it."
+      },
+      {
+        "id": "A2",
+        "description": "Private user creation endpoint allows callers to set is_active in the request body",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification checks that created users are active, but it does not require the API to accept an is_active input field on user creation. The code accepts and stores caller-supplied is_active values."
+      },
+      {
+        "id": "A3",
+        "description": "GET /api/v1/items/ restricts non-superusers to listing only their own items",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification only requires that a superuser retrieving the item list sees created items. It does not positively require any item-list filtering behavior for normal users. The code adds a rule that normal users only receive items whose owner_id matches their own."
+      },
+      {
+        "id": "A4",
+        "description": "Authenticated endpoints reject inactive users with 400 'Inactive user'",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification includes is_active fields in user responses but does not require any runtime access-control behavior for inactive users. The code adds a guard in get_current_active_user that blocks inactive users from protected operations."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "Password recovery request endpoint POST /api/v1/password-recovery/{email} is not implemented",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification explicitly requires a password recovery request operation at POST /api/v1/password-recovery/{email}, including success and not-found behaviors. No such route exists in the code."
+      },
+      {
+        "id": "O2",
+        "description": "Password reset endpoint POST /api/v1/reset-password/ is not implemented",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification explicitly requires a reset-password operation that accepts a token and new_password, with defined 200, 400, and 422 behaviors. The code defines no /api/v1/reset-password/ route."
+      },
+      {
+        "id": "O3",
+        "description": "Test token endpoint is not implemented",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification requires an authenticated 'test token endpoint' that returns the authenticated user's email and 200 for the superuser. The code has no such endpoint."
+      },
+      {
+        "id": "O4",
+        "description": "Password recovery HTML content endpoint is not implemented",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification requires an operation that returns password-recovery HTML content for a user's email so a reset token can be extracted. The code provides no such endpoint."
+      },
+      {
+        "id": "O5",
+        "description": "Reading a non-existent user by ID returns the wrong error detail",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification requires that attempting to retrieve a non-existent user by ID as superuser returns a 404 with detail 'The user with this id does not exist in the system'. The code returns 404 with detail 'User not found' in GET /api/v1/users/{user_id}."
+      },
+      {
+        "id": "O6",
+        "description": "Password recovery email sending behavior is not implemented",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The specification requires that POST /api/v1/password-recovery/{email} send an email and that this be observable via the mailcatcher service at http://localhost:1080/messages. The code performs no outbound email or mailcatcher interaction."
+      },
+      {
+        "id": "O7",
+        "description": "Password reset token generation, validation, and invalid-token handling are not implemented",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification requires generating a reset token, accepting it in the reset-password operation, updating the password when valid, and returning 400 detail 'Invalid token' when invalid. The code has no reset-token workflow at all."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 11491,
+    "prompt_tokens": 10655,
+    "completion_tokens": 836
+  }
+}

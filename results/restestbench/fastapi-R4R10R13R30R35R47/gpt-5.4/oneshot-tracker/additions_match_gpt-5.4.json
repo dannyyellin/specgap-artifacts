@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The password-recovery HTML endpoint is unrelated to any listed requirement about item permissions, deletion, login failure, password change, duplicate signup, or password-length validation."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Allowing private user creation with is_active and is_superuser fields does not correspond to any listed requirement."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R30",
+        "label": "PARTIAL",
+        "reasoning": "It overlaps with password-changing behavior, but R30 specifically requires the authenticated superuser to update their own password via current/new password flow and verify login before and after, which this generic update-by-id capability does not capture."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Returning items in a wrapper object with data and count does not match any listed requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1365,
+    "prompt_tokens": 1095,
+    "completion_tokens": 270
+  }
+}

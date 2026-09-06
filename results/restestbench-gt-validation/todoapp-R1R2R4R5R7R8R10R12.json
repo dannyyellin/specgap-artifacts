@@ -1,0 +1,134 @@
+{
+  "variant": "todoapp-R1R2R4R5R7R8R10R12",
+  "service": "todoapp",
+  "results": [
+    {
+      "req_id": 1,
+      "test_status": "FAIL",
+      "test_verdict": "UNDETERMINED",
+      "llm_verdict": "IMPLEMENTED",
+      "agree": null,
+      "detail": "test_get_todos_returns_only_owned_todos: UserA create failed: {\"id\":1,\"title\":\"UserA's Todo\",\"isComplete\":false}",
+      "adaptations": [
+        {
+          "old": "login_response.json()[\"accessToken\"]",
+          "new": "login_response.json()[\"access_token\"]",
+          "reason": "token field name: spec-agnostic; code uses snake_case access_token"
+        }
+      ],
+      "setup_blocked_reason": "setup asserts POST /todos == 201 (reference contract; spec is silent on create status); generated code returns FastAPI-default 200 \u2014 not adapted"
+    },
+    {
+      "req_id": 2,
+      "test_status": "FAIL",
+      "test_verdict": "NOT_IMPLEMENTED",
+      "llm_verdict": "NOT_IMPLEMENTED",
+      "agree": true,
+      "detail": "test_create_todo_without_title_returns_validation_error: Expected 400, got 200: {\"id\":1,\"title\":\"\",\"isComplete\":false}",
+      "adaptations": [
+        {
+          "old": "login_response.json()[\"accessToken\"]",
+          "new": "login_response.json()[\"access_token\"]",
+          "reason": "token field name: spec-agnostic; code uses snake_case access_token"
+        }
+      ],
+      "setup_blocked_reason": null
+    },
+    {
+      "req_id": 4,
+      "test_status": "PASS",
+      "test_verdict": "IMPLEMENTED",
+      "llm_verdict": "IMPLEMENTED",
+      "agree": true,
+      "detail": "",
+      "adaptations": [
+        {
+          "old": "login_response.json()[\"accessToken\"]",
+          "new": "login_response.json()[\"access_token\"]",
+          "reason": "token field name: spec-agnostic; code uses snake_case access_token"
+        }
+      ],
+      "setup_blocked_reason": null
+    },
+    {
+      "req_id": 5,
+      "test_status": "FAIL",
+      "test_verdict": "UNDETERMINED",
+      "llm_verdict": "IMPLEMENTED",
+      "agree": null,
+      "detail": "test_cannot_access_another_users_todo: Create failed: {\"id\":1,\"title\":\"UserA's Private Todo\",\"isComplete\":false}",
+      "adaptations": [
+        {
+          "old": "login_response.json()[\"accessToken\"]",
+          "new": "login_response.json()[\"access_token\"]",
+          "reason": "token field name: spec-agnostic; code uses snake_case access_token"
+        }
+      ],
+      "setup_blocked_reason": "setup asserts POST /todos == 201 (reference contract; spec is silent on create status); generated code returns FastAPI-default 200 \u2014 not adapted"
+    },
+    {
+      "req_id": 7,
+      "test_status": "PASS",
+      "test_verdict": "IMPLEMENTED",
+      "llm_verdict": "IMPLEMENTED",
+      "agree": true,
+      "detail": "",
+      "adaptations": [
+        {
+          "old": "login_response.json()[\"accessToken\"]",
+          "new": "login_response.json()[\"access_token\"]",
+          "reason": "token field name: spec-agnostic; code uses snake_case access_token"
+        }
+      ],
+      "setup_blocked_reason": null
+    },
+    {
+      "req_id": 8,
+      "test_status": "FAIL",
+      "test_verdict": "UNDETERMINED",
+      "llm_verdict": "IMPLEMENTED",
+      "agree": null,
+      "detail": "test_cannot_delete_another_users_todo: Create failed: {\"id\":1,\"title\":\"UserA's Todo\",\"isComplete\":false}",
+      "adaptations": [
+        {
+          "old": "login_response.json()[\"accessToken\"]",
+          "new": "login_response.json()[\"access_token\"]",
+          "reason": "token field name: spec-agnostic; code uses snake_case access_token"
+        }
+      ],
+      "setup_blocked_reason": "setup asserts POST /todos == 201 (reference contract; spec is silent on create status); generated code returns FastAPI-default 200 \u2014 not adapted"
+    },
+    {
+      "req_id": 10,
+      "test_status": "FAIL",
+      "test_verdict": "UNDETERMINED",
+      "llm_verdict": "NOT_IMPLEMENTED",
+      "agree": null,
+      "detail": "test_update_todo_with_mismatched_id_returns_bad_request: Create failed: {\"id\":1,\"title\":\"Original Todo\",\"isComplete\":false}",
+      "adaptations": [
+        {
+          "old": "login_response.json()[\"accessToken\"]",
+          "new": "login_response.json()[\"access_token\"]",
+          "reason": "token field name: spec-agnostic; code uses snake_case access_token"
+        }
+      ],
+      "setup_blocked_reason": "setup asserts POST /todos == 201 (reference contract; spec is silent on create status); generated code returns FastAPI-default 200 \u2014 not adapted"
+    },
+    {
+      "req_id": 12,
+      "test_status": "FAIL",
+      "test_verdict": "UNDETERMINED",
+      "llm_verdict": "IMPLEMENTED",
+      "agree": null,
+      "detail": "test_cannot_update_another_users_todo: Create failed: {\"id\":1,\"title\":\"UserA's Original Todo\",\"isComplete\":false}",
+      "adaptations": [
+        {
+          "old": "login_response.json()[\"accessToken\"]",
+          "new": "login_response.json()[\"access_token\"]",
+          "reason": "token field name: spec-agnostic; code uses snake_case access_token"
+        }
+      ],
+      "setup_blocked_reason": "setup asserts POST /todos == 201 (reference contract; spec is silent on create status); generated code returns FastAPI-default 200 \u2014 not adapted"
+    }
+  ]
+}

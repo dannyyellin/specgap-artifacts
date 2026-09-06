@@ -1,0 +1,18 @@
+{
+  "req_id": 8,
+  "requirement_vague": "Verify comment deletion removes comment from article comments list",
+  "requirement_precise": "Create a user (username: 'delcommentuser1', email: 'delcommentuser1@test.com', password: 'pass123'). Create an article with title 'Delete Comment Test'. Extract the slug. Create a comment with body 'Comment to delete'. Extract the comment id from the response. Verify the article has 1 comment. Delete the comment via DELETE /api/articles/{slug}/comments/{id}. Verify response status is 200. GET the article's comments. Verify the comments array is empty or does not contain the deleted comment body.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": "DELETE /api/articles/{slug}/comments/{comment_id} and GET /api/articles/{slug}/comments",
+    "code_reference": "if comment and comment.article_id == article.id:\n    session.delete(comment)\n    session.commit()\n...\ncomments = session.exec(select(Comment).where(Comment.article_id == article.id).order_by(Comment.id)).all()",
+    "reasoning": "The delete endpoint removes the matching Comment row from the database for the specified article and returns HTTP 200 by default. The comments listing endpoint queries comments by article_id from the database, so after deletion the deleted comment will no longer appear in the returned comments array."
+  },
+  "usage": {
+    "total_tokens": 5338,
+    "prompt_tokens": 5197,
+    "completion_tokens": 141
+  },
+  "parse_error": false
+}

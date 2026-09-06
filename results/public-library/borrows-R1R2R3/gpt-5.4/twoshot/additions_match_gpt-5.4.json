@@ -1,0 +1,24 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R1",
+        "label": "PARTIAL",
+        "reasoning": "Allowing clients to supply and persist returnDate conflicts with the old computed-returnDate behavior, but it does not directly describe the spec change that removed the computation itself."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Validating cardholderId and ISBN against external services does not correspond to removing returnDate computation, removing overdue-borrow blocking, or removing checkout log notifications."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 737,
+    "prompt_tokens": 587,
+    "completion_tokens": 150
+  }
+}

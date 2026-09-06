@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "Storing passwords in plain text describes the removal of bcrypt-based password encryption."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "An unused round_float function is unrelated to password encryption, the Owner special case, or username uniqueness."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "An unused NUMERIC_ID_FIELDS constant does not correspond to any of the listed spec changes."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 677,
+    "prompt_tokens": 504,
+    "completion_tokens": 173
+  }
+}

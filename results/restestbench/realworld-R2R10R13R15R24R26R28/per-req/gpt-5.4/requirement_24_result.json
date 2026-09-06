@@ -1,0 +1,21 @@
+{
+  "req_id": 24,
+  "requirement_vague": "Verify articles are returned in descending order by created date",
+  "requirement_precise": "Create user1 (username: 'orderuser1', email: 'orderuser1@test.com', password: 'pass123'). User1 creates article1 'First Article', wait at least 1 second, then creates article2 'Second Article', wait at least 1 second, then creates article3 'Third Article'. GET /api/articles. Verify the articles array is ordered by created timestamp in descending order (newest first). Articles with identical timestamps (to the second) may have undefined relative ordering due to database timestamp precision being in seconds. This tests the ORDER BY article.created DESC clause.",
+  "removed": true,
+  "omissions": [
+    {
+      "id": "R24-O1",
+      "description": "GET /api/articles does not order articles by created timestamp descending; it sorts by article id descending instead.",
+      "category": "BUSINESS_LOGIC",
+      "reasoning": "The requirement specifically tests newest-first ordering by created date (equivalent to ORDER BY article.created DESC). In list_articles, the code loads all articles and applies `sorted(articles, key=lambda a: a.id or 0, reverse=True)`, which uses id rather than `created_at`. This does not implement the required created-date ordering."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 5437,
+    "prompt_tokens": 5315,
+    "completion_tokens": 122
+  },
+  "parse_error": false
+}

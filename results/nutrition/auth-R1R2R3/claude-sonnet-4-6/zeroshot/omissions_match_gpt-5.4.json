@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O1 directly states that passwords are stored without encryption, which is the same behavior as removing bcrypt password encryption."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O2 captures part of the removed Owner special case by focusing on failure to reserve the exact Owner username, but it does not cover the full special-case tuple of name, password, and privileged status."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O3 matches the Owner special-case requirement on the required name and password values, but it omits the privileged=True aspect."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O4 addresses the privileged behavior tied to the Owner user, which is one component of the removed Owner special case, but not the full requirement."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R3",
+        "label": "PARTIAL",
+        "reasoning": "O5 concerns duplicate username registration, which relates to username uniqueness, but it focuses on the returned status code rather than the removal of the uniqueness constraint itself."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1136,
+    "prompt_tokens": 787,
+    "completion_tokens": 349
+  }
+}

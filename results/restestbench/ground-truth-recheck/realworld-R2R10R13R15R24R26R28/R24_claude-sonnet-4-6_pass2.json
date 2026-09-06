@@ -1,0 +1,23 @@
+{
+  "variant": "realworld-R2R10R13R15R24R26R28",
+  "req_id": 24,
+  "model": "claude-sonnet-4-6",
+  "pass": 2,
+  "verdict": "NOT_IMPLEMENTED",
+  "requirement_vague": "Verify articles are returned in descending order by created date",
+  "omissions": [
+    {
+      "id": "O1",
+      "description": "The GET /api/articles endpoint sorts articles by `id` in descending order instead of by `created_at` (created date) in descending order. The code uses `sorted(articles, key=lambda a: a.id or 0, reverse=True)` rather than sorting by the `created_at` timestamp field.",
+      "category": "BUSINESS_LOGIC",
+      "reasoning": "The requirement explicitly states articles must be ordered by created timestamp in descending order (newest first), referencing an 'ORDER BY article.created DESC clause'. The code instead sorts by the article's integer `id` field. Although IDs often correlate with insertion order, the requirement mandates sorting by the `created_at` date field, which the code does not do."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 7201,
+    "prompt_tokens": 6764,
+    "completion_tokens": 437
+  },
+  "timestamp": "2026-07-12 10:44:00"
+}

@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of the integer 1-5 range constraint on the rating field, matching R10."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R11",
+        "label": "MATCH",
+        "reasoning": "O2 directly describes the absence of the one-rating-per-user-per-dish constraint, matching R11."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 concerns 405 handling for unsupported methods, which does not correspond to any of the reference requirements R10, R11, or R12."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concerns validation of dish_id consistency between URL and body, which does not correspond to any of the reference requirements R10, R11, or R12."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 944,
+    "prompt_tokens": 635,
+    "completion_tokens": 309
+  }
+}

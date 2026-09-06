@@ -1,0 +1,48 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of the constraint that prevents deleting a pet-type if it has pets, matching R5 exactly."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "O2 describes the removal of birthdateGT and birthdateLT query parameter filtering, which matches R7's removal of birthdate query filtering."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 describes an extra 'picture' field being accepted, which does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "O4 partially captures R4 by addressing temperament/group_behavior handling, but focuses on the combination logic rather than the broader removal of temperament/group_behavior from attributes extraction rules."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "O5 partially captures R4 by describing incorrect attribute extraction/splitting behavior, but focuses on punctuation/whitespace splitting rather than the removal of temperament/group_behavior rules specifically."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O6 describes the same behavior as R5 \u2014 the removal of the constraint (and 400 response) when deleting a pet-type that has pets."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1292,
+    "prompt_tokens": 812,
+    "completion_tokens": 480
+  }
+}

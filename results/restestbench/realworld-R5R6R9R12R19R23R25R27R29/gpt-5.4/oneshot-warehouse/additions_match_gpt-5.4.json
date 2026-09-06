@@ -1,0 +1,48 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Favorites metadata in article responses is not required by any listed spec requirement."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements concern PUT /api/user updating username, email, or password."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Anonymous access to GET /api/profiles/{username} is not described in any listed requirement."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No listed requirement covers updating an article's tagList via PUT /api/articles/{slug}."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "It relates to article deletion at DELETE /api/articles/{slug}, but focuses on comment cleanup rather than the required delete-and-empty-object retrieval behavior."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "CORS configuration is not mentioned in any of the listed spec requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2185,
+    "prompt_tokens": 1846,
+    "completion_tokens": 339
+  }
+}

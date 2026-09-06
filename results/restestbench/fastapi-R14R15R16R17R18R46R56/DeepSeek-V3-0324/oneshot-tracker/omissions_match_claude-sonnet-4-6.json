@@ -1,0 +1,78 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R15",
+        "label": "PARTIAL",
+        "reasoning": "O1 notes missing password recovery functionality which relates to R15's requirement for POST /api/v1/password-recovery/{email}, but O1 is broader and doesn't capture the specific verification details."
+      },
+      {
+        "detection_id": "O1",
+        "requirement_id": "R16",
+        "label": "PARTIAL",
+        "reasoning": "O1 notes missing password recovery functionality which also encompasses R16's non-existent user password recovery scenario."
+      },
+      {
+        "detection_id": "O1",
+        "requirement_id": "R17",
+        "label": "PARTIAL",
+        "reasoning": "O1 notes missing password recovery functionality which relates to R17's password recovery HTML content and reset token flow."
+      },
+      {
+        "detection_id": "O1",
+        "requirement_id": "R18",
+        "label": "PARTIAL",
+        "reasoning": "O1 notes missing password recovery functionality which partially relates to R18's invalid token reset scenario."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R15",
+        "label": "PARTIAL",
+        "reasoning": "O2 specifically addresses the missing email sending verification which is a key part of R15's requirement to verify emails via the mailcatcher service."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R14",
+        "label": "PARTIAL",
+        "reasoning": "O3 notes the missing test token endpoint which is the endpoint called in R14 after authentication to verify the email field in the response."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R46",
+        "label": "PARTIAL",
+        "reasoning": "O4 notes missing cascade deletion of items when a user is deleted, which is a key behavior tested in R46 where items should return 404 after user deletion."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R18",
+        "label": "PARTIAL",
+        "reasoning": "O5 notes missing password reset token validation which relates to R18's requirement to return HTTP 400 with 'Invalid token' detail for invalid tokens."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R56",
+        "label": "PARTIAL",
+        "reasoning": "O5 notes missing token validation which partially relates to R56, though R56 focuses on password length validation returning 422 rather than token validation."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The specific error message 'The user with this id does not exist in the system' does not correspond to any of the reference requirements listed."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The specific error message 'The user doesn't have enough privileges' does not correspond to any of the reference requirements listed."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2147,
+    "prompt_tokens": 1334,
+    "completion_tokens": 813
+  }
+}

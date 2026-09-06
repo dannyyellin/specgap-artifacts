@@ -1,0 +1,54 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the failure of the self-follow returning 400 with 'cannot be equal', which is exactly what R2 requires in its last step."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O2 describes the failure of self-unfollow to return 400, which matches the last step of R10 requiring that user1 cannot unfollow themselves and should return 400."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O3 describes the follow endpoint returning 200 instead of 201, which directly contradicts R2's requirement to verify response status 201 on successful follow."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R28",
+        "label": "MATCH",
+        "reasoning": "O4 describes that non-owners are forbidden from updating articles (403), while R28 explicitly requires that any user can update any article and receive the updated result."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R28",
+        "label": "MATCH",
+        "reasoning": "O5 describes that non-owners are forbidden from deleting articles (403), while R28 explicitly requires that any user can delete any article with status 200."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R24",
+        "label": "MATCH",
+        "reasoning": "O6 describes ordering by id instead of created timestamp, which directly contradicts R24's requirement that articles be ordered by created timestamp descending."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements describe a DELETE /api/users/{email} endpoint or a 500 foreign-key constraint failure behavior."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2623,
+    "prompt_tokens": 2063,
+    "completion_tokens": 560
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "result": {
+    "additions": [],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "No POST /api/v1/password-recovery/{email} endpoint is implemented",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification requires a password recovery endpoint at POST /api/v1/password-recovery/{email} that sends a recovery email and returns HTTP 200 with JSON message 'Password recovery email sent'. No such route exists in the code."
+      },
+      {
+        "id": "O2",
+        "description": "No POST /api/v1/reset-password/ endpoint is implemented",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification requires a reset-password endpoint at POST /api/v1/reset-password/ that accepts a token and new_password, validates the token, updates the password, and returns HTTP 200 with message 'Password updated successfully'. No such route exists in the code."
+      },
+      {
+        "id": "O3",
+        "description": "No GET /api/v1/login/test-token (or equivalent test token) endpoint is implemented",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification describes a 'test token endpoint' that, when called with a valid bearer token, returns HTTP 200 with a JSON body containing the authenticated user's 'email' field. No such route exists in the code."
+      },
+      {
+        "id": "O4",
+        "description": "Password recovery does not send an actual email to the user",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The specification requires that a password recovery email is actually sent to the correct recipient (verifiable via a mailcatcher service at GET http://localhost:1080/messages). The code has no email-sending functionality whatsoever."
+      },
+      {
+        "id": "O5",
+        "description": "No validation or 404 response for password recovery of a non-existent user email",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification requires that attempting password recovery for a non-existent email returns HTTP 404. Since the endpoint does not exist, this behavior is entirely missing."
+      },
+      {
+        "id": "O6",
+        "description": "No invalid-token handling returning HTTP 400 with detail 'Invalid token' on reset-password",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification requires that submitting an invalid token to the reset-password operation returns HTTP 400 with detail 'Invalid token'. Since the endpoint does not exist, this logic is missing."
+      },
+      {
+        "id": "O7",
+        "description": "No new_password length validation (min 8 chars) on the reset-password endpoint returning 422",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification requires that calling POST /api/v1/reset-password/ with a new_password of exactly 7 characters returns 422 before token validation. Since the endpoint does not exist, this validation is missing."
+      },
+      {
+        "id": "O8",
+        "description": "No mechanism for superuser to retrieve password-recovery HTML/token content for a given user's email",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification describes a flow where the superuser requests 'password-recovery HTML content for the created user's email' to extract a reset token used in the reset-password flow. No such endpoint or mechanism exists in the code."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 15638,
+    "prompt_tokens": 13479,
+    "completion_tokens": 2159
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "app": "pet-store",
+  "variant": "registry-R1R2R3",
+  "service": "registry",
+  "method": "oneshot-warehouse",
+  "model": "gpt-5.4",
+  "gen_usage": {
+    "total_tokens": 6678,
+    "prompt_tokens": 5344,
+    "completion_tokens": 1334
+  },
+  "n_additions": 2,
+  "n_omissions": 8,
+  "usage": {
+    "total_tokens": 9731,
+    "prompt_tokens": 8760,
+    "completion_tokens": 971
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "app": "nutrition",
+  "variant": "profiles-R7R8R9",
+  "service": "profile",
+  "method": "oneshot-warehouse",
+  "model": "gpt-5.4",
+  "gen_usage": {
+    "total_tokens": 5049,
+    "prompt_tokens": 3226,
+    "completion_tokens": 1823
+  },
+  "n_additions": 2,
+  "n_omissions": 7,
+  "usage": {
+    "total_tokens": 7882,
+    "prompt_tokens": 7066,
+    "completion_tokens": 816
+  }
+}

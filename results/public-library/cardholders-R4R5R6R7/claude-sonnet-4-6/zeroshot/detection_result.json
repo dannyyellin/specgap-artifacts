@@ -1,0 +1,67 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "The GET /cardholders endpoint restricts query filtering to only 'name' and 'email' fields, explicitly rejecting other fields.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification says the GET request may specify a query string of the form 'field=value' without restricting which fields are valid. The code explicitly limits filtering to {'name', 'email'} and silently ignores other fields, which is a stricter constraint than the specification imposes."
+      },
+      {
+        "id": "A2",
+        "description": "The PUT /cardholders/{id} endpoint returns 400 if the payload contains an 'id' field that does not match the URL cardholder_id.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification does not describe any validation rule about an 'id' field in the PUT payload conflicting with the URL parameter. This is an addition not required by the spec."
+      },
+      {
+        "id": "A3",
+        "description": "The PUT /cardholders/{id} endpoint returns 400 if no updatable fields ('name' or 'email') are present and 'id' is also absent from the payload.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification does not require rejecting a PUT request that contains no recognized fields. This guard is an addition beyond what the spec requires."
+      },
+      {
+        "id": "A4",
+        "description": "The POST /cardholders endpoint returns 400 if the Content-Type is not JSON (checks request.is_json).",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification mentions returning 415 (Unsupported Media Type) for unsupported media types, but the code returns 400 instead of 415 for non-JSON content. Additionally, the spec does not explicitly require this check for POST /cardholders specifically, but more importantly the wrong status code is used (see also O2)."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "The fine calculation does not compute the actual number of days overdue multiplied by FINE_PER_DAY ($0.50). Instead, it adds 1 (a flat count) per overdue book.",
+        "category": "COMPUTED_VALUES",
+        "reasoning": "The specification states: 'the fine per overdue book is equal to number-of-days-overdue * FINE_PER_DAY, where FINE_PER_DAY equals $.50'. The code adds 1 for each overdue book regardless of how many days overdue it is, producing an incorrect fine amount."
+      },
+      {
+        "id": "O2",
+        "description": "Non-JSON Content-Type on POST and PUT requests should return 415 (Unsupported Media Type) but the code returns 400 (Bad Request).",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly lists 415 as the status code for unsupported media type. The code checks request.is_json and returns 400 instead of 415 when the content type is not JSON."
+      },
+      {
+        "id": "O3",
+        "description": "The GET /cardholders endpoint does not support filtering by the 'id' field via query string.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states the GET request may specify a query string of the form 'field=value' for any field. Since 'id' is a field of a cardholder record, it should be filterable, but the code's allowed_fields set only includes 'name' and 'email'."
+      },
+      {
+        "id": "O4",
+        "description": "The PUT /cardholders/{id} endpoint does not return 415 when the Content-Type is not JSON; it returns 400.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "Same as O2 but for the PUT endpoint \u2014 the spec requires 415 for unsupported media type, but the code returns 400."
+      },
+      {
+        "id": "O5",
+        "description": "The POST /cardholders endpoint does not validate that 'name' and 'email' are non-empty strings; it only checks that they are strings.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states the POST request provides a JSON document containing the name and email. While the spec does not explicitly say non-empty, the code accepts empty strings. This is a minor point, but more critically the spec requires both fields to be present \u2014 the code does check isinstance but would accept empty strings silently. This is borderline; however the main omission is that if name or email is missing entirely (returns None from .get()), isinstance(None, str) is False and returns 400, so that part is handled."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 6414,
+    "prompt_tokens": 5216,
+    "completion_tokens": 1198
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Password recovery HTML functionality is not described by any of the listed requirements, which focus on auth, registration, item access, deletion, and password update flows."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A test token endpoint is not covered by any listed requirement."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Cascade deletion of a user's items is not specified by any of the listed requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1061,
+    "prompt_tokens": 884,
+    "completion_tokens": 177
+  }
+}

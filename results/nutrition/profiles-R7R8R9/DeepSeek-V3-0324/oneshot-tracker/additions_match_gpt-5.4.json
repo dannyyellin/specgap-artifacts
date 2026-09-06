@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "A1 concerns user_id generation in the service, which conflicts with the idea that user_id should not be sourced internally, but it does not specifically describe taking user_id from the request body instead of token validation."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Implementing generic 404, 405, and 500 error handlers does not correspond to removing protein exclusion, removing owner-only GET /profiles access, or changing the source of user_id."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A rounding helper for two decimal places is unrelated to any of the listed requirements about profileDishes, GET /profiles access, or user_id sourcing."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 764,
+    "prompt_tokens": 533,
+    "completion_tokens": 231
+  }
+}

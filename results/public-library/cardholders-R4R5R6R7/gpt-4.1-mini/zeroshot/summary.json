@@ -1,0 +1,16 @@
+{
+  "app": "public-library",
+  "variant": "cardholders-R4R5R6R7",
+  "service": "cardholders",
+  "method": "zeroshot",
+  "detector_model": "gpt-4.1-mini",
+  "gen_model": "gpt-5.4",
+  "gen_usage": null,
+  "n_additions": 3,
+  "n_omissions": 5,
+  "usage": {
+    "total_tokens": 5356,
+    "prompt_tokens": 4455,
+    "completion_tokens": 901
+  }
+}

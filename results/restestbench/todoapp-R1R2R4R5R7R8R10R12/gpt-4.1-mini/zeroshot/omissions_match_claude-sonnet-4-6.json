@@ -1,0 +1,48 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O1 describes the absence of validation for missing/empty title in POST /todos returning 400 Bad Request, which directly corresponds to R2's requirement."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O2 describes the missing check that the id in the PUT request body matches the URL id, which is exactly what R10 requires (400 Bad Request when they differ)."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 concludes the behavior is correctly implemented, so it does not describe a missing or incorrect behavior matching any reference requirement."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concludes validation is implicitly handled and does not correspond to any of the listed reference requirements."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 concludes ownership verification for PUT is correctly implemented, so it does not describe a missing behavior matching any reference requirement."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 concludes ownership verification for DELETE is correctly implemented, so it does not describe a missing behavior matching any reference requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1877,
+    "prompt_tokens": 1436,
+    "completion_tokens": 441
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "app": "public-library",
+  "variant": "cardholders-R4R5R6R7",
+  "service": "cardholders",
+  "req_id": "R5",
+  "requirement": "Requests with an unsupported media type receive status code 415 (Unsupported Media Type).",
+  "source_headline": "Removed 415 (Unsupported media type) error code from general error codes",
+  "model": "gpt-5.4",
+  "pass": 1,
+  "label": "PARTIAL",
+  "evidence": "create_cardholder() and update_cardholder() both check `if not request.is_json: return jsonify({\"error\": \"Bad request\"}), 400` before parsing the body.",
+  "reasoning": "The code does contain explicit handling for unsupported/non-JSON media types on the write endpoints, so this is not a GAP. However, the requirement specifically says unsupported media types must receive status 415, while the implemented behavior returns 400 Bad Request instead. Per the decision guide, the mechanism is present but the observable status code is wrong, so the requirement is only partially implemented.",
+  "usage": {
+    "total_tokens": 2247,
+    "prompt_tokens": 2117,
+    "completion_tokens": 130
+  },
+  "timestamp": "2026-07-16 14:53:14"
+}

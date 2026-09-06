@@ -1,0 +1,24 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "It relates to publisher/publishedDate sourcing, but it only says the POST handler accepts those fields rather than fully describing removal of the Google Books API integration."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Creating a unique index on the id field is not described by any of the listed spec requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 671,
+    "prompt_tokens": 535,
+    "completion_tokens": 136
+  }
+}

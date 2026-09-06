@@ -1,0 +1,18 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "R10 requires that sending a mismatched 'id' in the PUT body returns 400 Bad Request, and A1 notes the model includes an optional 'id' field, which is the mechanism enabling that validation scenario, but A1 only describes the field's existence rather than the validation behavior."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1079,
+    "prompt_tokens": 950,
+    "completion_tokens": 129
+  }
+}

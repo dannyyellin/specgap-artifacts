@@ -1,0 +1,23 @@
+Timestamp: 2026-06-02 06:01:16
+Detector:  DeepSeek-V3-0324
+Service:   fastapi  Round: 1  Removals: [4, 10, 13, 30, 35, 47]
+Method:    oneshot-tracker
+
+Tokens: prompt=12288, completion=929, total=13217
+Additions: 3
+Omissions: 10
+
+  A A1: Implements password recovery HTML endpoint (/password-recovery-html/{email})
+  A A2: Implements test token endpoint (/login/test-token)
+  A A3: Implements cascade delete for user items
+
+  O O1: Does not verify email sending in password recovery (/password-recovery/{email})
+  O O2: Does not implement proper error message for duplicate email during user creation
+  O O3: Does not implement proper error message for superuser self-deletion
+  O O4: Does not implement proper error message for user not found
+  O O5: Does not implement proper error message for insufficient permissions
+  O O6: Does not implement proper error message for invalid token
+  O O7: Does not implement proper error message for incorrect password
+  O O8: Does not implement proper error message for same password
+  O O9: Does not implement proper error message for duplicate email
+  O O10: Does not implement proper error message for item not found

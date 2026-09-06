@@ -1,0 +1,18 @@
+Timestamp: 2026-06-01 20:58:01
+Detector:  gpt-4.1-mini
+App/Variant/Service: nutrition/ratings-R10R11R12/ratings
+Method:    oneshot-tracker
+
+Tokens: prompt=6655, completion=696, total=7351
+Additions: 2
+Omissions: 6
+
+  A A1: Accepts and stores 'rating' as a floating point number with two decimal places
+  A A2: Supports token in 'Authorization' header with 'Bearer' scheme or as a raw token string
+
+  O O1: POST /ratings does not enforce that a user cannot rate the same dish twice
+  O O2: PUT /ratings/{id} does not verify that the rating value is an integer between 1 and 5
+  O O3: POST /ratings does not validate that 'rating' is an integer between 1 and 5
+  O O4: POST /ratings does not return 400 when a user tries to rate the same dish twice
+  O O5: DELETE /ratings/{id} does not verify that the rating to delete belongs to the user issuing the request
+  O O6: GET /ratings returns average ratings for all dishes, but does not support filtering or query parameters as per specification

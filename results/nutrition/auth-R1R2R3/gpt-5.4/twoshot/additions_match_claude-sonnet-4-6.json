@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "A1 describes adding an Owner user at startup, which is the opposite direction of R2 (removing the Owner special case), but both concern the Owner special user behavior."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Token expiration and iat/exp claims are not mentioned in any of the three spec requirements."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "R2 removes the Owner special case with fixed credentials, while A3 makes those credentials configurable via environment variables rather than removing them, so it partially relates to the same Owner special-case behavior but does not implement the removal."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Returning the password field in response output does not correspond to any of the three spec requirements about bcrypt removal, Owner special case removal, or username uniqueness."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1011,
+    "prompt_tokens": 686,
+    "completion_tokens": 325
+  }
+}

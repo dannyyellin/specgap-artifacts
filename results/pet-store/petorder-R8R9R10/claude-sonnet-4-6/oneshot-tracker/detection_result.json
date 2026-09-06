@@ -1,0 +1,133 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "Stores purchase documents in a 'purchases' MongoDB collection in addition to transactions",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The specification says 'For every successful POST request the service stores a transaction corresponding to this purchase in a MongoDB' and describes /purchases as a collection, but the implementation details only explicitly require storing the transaction. The spec does not require persisting the purchase document itself to MongoDB \u2014 it only requires returning it in the response and storing the transaction."
+      },
+      {
+        "id": "A2",
+        "description": "Returns 403 when the purchaser field in the payload does not match the authenticated username",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification does not require that the 'purchaser' field match the authenticated user's username. It only requires that the user be a registered user with valid credentials."
+      },
+      {
+        "id": "A3",
+        "description": "Validates that the 'purchaser' and 'pet-type' fields are non-empty strings",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification requires these fields to be present but does not specify that they must be non-empty strings or of a particular type beyond being present."
+      },
+      {
+        "id": "A4",
+        "description": "Uses a counter collection to generate sequential integer transaction IDs",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The specification does not specify how transaction IDs should be generated. It only says 'purchase-id' is a unique string and cannot be reused. The spec does not define the format of transaction IDs."
+      },
+      {
+        "id": "A5",
+        "description": "Rejects GET /transactions queries with fields not in the allowed set by returning an empty array",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification says the query string may be a conjunction of field=value pairs for transaction fields, but does not specify that unknown fields should return an empty array. The general guideline says malformed/nonsensical queries return empty array, but the code explicitly checks against an allowed set."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "MongoDB URI points to 'mongo:27017' instead of 'mongoOrd:27017' as specified",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The specification states 'In the Docker-compose.yml file, this MongoDB is given the service name mongoOrd and listens at container port 27017.' The code uses 'mongodb://mongo:27017/pet-orderdb' which references the wrong service name."
+      },
+      {
+        "id": "O2",
+        "description": "Does not randomly select a pet when multiple pets are available; instead always picks the first one",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states 'Choose a random pet from the ones available' when a store is indicated but no pet-name is given, and also 'Choose a random pet from the ones available' when no store is indicated. The code always picks the first pet (pets[0]) rather than a random one."
+      },
+      {
+        "id": "O3",
+        "description": "Does not DELETE the chosen pet from the pet-store after a successful purchase",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The specification explicitly states step (3): 'DELETE the chosen pet from the appropriate pet-store.' The code never issues a DELETE request to any pet-store service."
+      },
+      {
+        "id": "O4",
+        "description": "Does not check all stores when no store is specified; only scans up to DEFAULT_STORE_SCAN_RANGE (env var) stores",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification says 'If no store is indicated in the request, then there must be at least one pet of that type in one of the stores.' The code uses an environment variable STORE_SCAN_MAX defaulting to 10, but the spec does not define a maximum number of stores to scan \u2014 it implies all stores should be checked."
+      },
+      {
+        "id": "O5",
+        "description": "GET /transactions does not return 403 when a non-owner authenticated user accesses it; returns 401 instead",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification states only the store owner can issue a GET request on /transactions. A registered non-owner user who is authenticated but not privileged should receive 403 (Forbidden), not 401 (Unauthorized). The code returns 401 for non-privileged users."
+      },
+      {
+        "id": "O6",
+        "description": "GET /transactions/{id} does not return 403 when a non-owner authenticated user accesses it; returns 401 instead",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification states only the store owner can issue a GET request on /transactions/{id}. A registered non-owner user who is authenticated but not privileged should receive 403 (Forbidden), not 401 (Unauthorized). The code returns 401 for non-privileged users."
+      },
+      {
+        "id": "O7",
+        "description": "Transaction document does not include the 'pet-name' field",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The specification defines the transaction document fields as 'purchaser', 'pet-type', 'store', and 'purchase-id'. While 'pet-name' is not in the transaction spec, the spec says to store 'all fields' in step (4): 'Store the transaction JSON in the transactions MongoDB collection with all fields.' This could mean all fields of the purchase. However, looking at the transaction resource definition, it only lists those four fields, so this is consistent. No omission here \u2014 but the 'id' field stored in the transaction document is an addition not defined in the transaction resource spec."
+      },
+      {
+        "id": "O8",
+        "description": "Transaction documents stored in MongoDB include an 'id' field that is not part of the transaction resource definition",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The specification defines transaction documents as containing 'purchaser', 'pet-type', 'store', and 'purchase-id'. The code adds an 'id' field (sequential counter) to the stored transaction document, which is not specified."
+      },
+      {
+        "id": "O9",
+        "description": "GET /transactions/{id} uses the internal 'id' counter field to look up transactions rather than 'purchase-id'",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification defines /transactions/{id} where {id} is the transaction identifier. The transaction resource fields are 'purchaser', 'pet-type', 'store', and 'purchase-id'. The natural identifier for a transaction would be 'purchase-id', but the code uses a separately generated sequential 'id' field that is not part of the spec's transaction definition."
+      },
+      {
+        "id": "O10",
+        "description": "Does not validate that the 'pet-name' field can only be supplied if the 'store' field is also supplied when checking pet availability across stores",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states 'The pet-name field can only be supplied if the store field is supplied.' The code does check this in normalize_purchase_payload and returns 400, so this is actually implemented. Removing this from omissions."
+      },
+      {
+        "id": "O11",
+        "description": "When no store is specified and pet-name is not given, the code does not search all available stores \u2014 it relies on an environment variable cap that may miss stores",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The spec requires checking if 'at least one pet of that type in one of the stores' exists without bounding the number of stores. The implementation caps at STORE_SCAN_MAX (default 10) which is an arbitrary limit not in the spec."
+      },
+      {
+        "id": "O12",
+        "description": "The case-insensitive matching of pet-type when querying pet-store is not implemented; uses exact string match",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The spec says the pet-store matches pet-types by 'type' field. The code does an exact string comparison (pt.get('type') == pet_type) when matching the returned pet-types, which may miss case variations. However, the spec does not explicitly require case-insensitive matching for purchase pet-type lookup, so this may be acceptable."
+      },
+      {
+        "id": "O13",
+        "description": "GET /transactions does not support conjunction query strings (multiple field=value pairs)",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states the query string 'may also be a conjunction of such strings' for /transactions. The code only handles individual key=value pairs from request.args, but Flask's request.args does support multiple parameters, so this may actually work. However, the code only takes one value per key (request.args.get(key)), which would only get the first value if a key appears multiple times."
+      },
+      {
+        "id": "O14",
+        "description": "POST /purchases does not return 403 when an authenticated but non-registered (privileged-only) user attempts to purchase; only registered users should be able to purchase",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states 'Only registered users, providing their username and password, can issue a POST request.' The owner is also a registered user so can purchase. The code allows any valid credential holder including the owner to purchase, which is correct. No omission here."
+      },
+      {
+        "id": "O15",
+        "description": "The 'purchase-id' uniqueness is not enforced \u2014 uuid4 is used but no database uniqueness constraint or collision check exists",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The specification states 'The purchase-id is a unique string and cannot be reused.' While uuid4 collisions are extremely rare, the spec's requirement for uniqueness and non-reuse is not enforced at the database level."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 13458,
+    "prompt_tokens": 10958,
+    "completion_tokens": 2500
+  }
+}

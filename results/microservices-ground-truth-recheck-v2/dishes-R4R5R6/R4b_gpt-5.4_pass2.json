@@ -1,0 +1,19 @@
+{
+  "app": "nutrition",
+  "variant": "dishes-R4R5R6",
+  "service": "dishes",
+  "req_id": "R4b",
+  "requirement": "Nutrition fields missing from the API Ninjas response default to 0.0.",
+  "source_headline": "Removed default to 0.0 for missing Ninja API fields",
+  "model": "gpt-5.4",
+  "pass": 2,
+  "label": "INFERRED",
+  "evidence": "fetch_ingredient_nutrition(): initializes `totals = {field: 0.0 for field in NUTRITION_FIELDS}` and, when processing API Ninjas items, uses `float(item.get(ninja_field, 0.0) or 0.0)` for each mapped nutrition field before returning rounded totals.",
+  "reasoning": "The code explicitly addresses missing nutrition fields from the API Ninjas response by defaulting each mapped field lookup to `0.0`. Because totals are preinitialized to `0.0` and each missing field contributes `0.0`, a test where API Ninjas omits one or more nutrition keys would still yield those fields as `0.0`. Per the decision guide, this means the requirement is fully implemented.",
+  "usage": {
+    "total_tokens": 2855,
+    "prompt_tokens": 2677,
+    "completion_tokens": 178
+  },
+  "timestamp": "2026-07-16 14:56:56"
+}

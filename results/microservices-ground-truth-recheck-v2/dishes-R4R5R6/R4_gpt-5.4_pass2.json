@@ -1,0 +1,19 @@
+{
+  "app": "nutrition",
+  "variant": "dishes-R4R5R6",
+  "service": "dishes",
+  "req_id": "R4",
+  "requirement": "Nutrition values from the API Ninjas response are mapped to the service's field names according to the specified mapping (e.g. 'carbohydrates_total_g' -> 'total_carbohydrates').",
+  "source_headline": "Removed Ninja API field name mapping details",
+  "model": "gpt-5.4",
+  "pass": 2,
+  "label": "INFERRED",
+  "evidence": "NINJA_FIELD_MAP defines the mapping from API Ninjas fields to service fields, including \"carbohydrates_total_g\": \"total_carbohydrates\". In fetch_ingredient_nutrition(), the loop `for ninja_field, local_field in NINJA_FIELD_MAP.items(): totals[local_field] += float(item.get(ninja_field, 0.0) or 0.0)` applies that mapping when building nutrition totals.",
+  "reasoning": "The code explicitly addresses the requirement by declaring a field-mapping dictionary and using it to translate API Ninjas response keys into the service's nutrition field names. A test checking that values from keys like `carbohydrates_total_g` are stored under `total_carbohydrates` would pass. Per the decision guide, because the behavior is present and matches the stated mapping requirement in substance, the correct label is INFERRED.",
+  "usage": {
+    "total_tokens": 2901,
+    "prompt_tokens": 2700,
+    "completion_tokens": 201
+  },
+  "timestamp": "2026-07-16 14:56:37"
+}

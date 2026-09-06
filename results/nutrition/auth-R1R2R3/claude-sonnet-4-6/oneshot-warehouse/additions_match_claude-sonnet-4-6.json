@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "A1 relates to the Owner special case configuration but describes a modification (using env vars with wrong defaults) rather than a removal of the Owner special case as R2 specifies."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "Storing passwords in plaintext directly corresponds to the removal of bcrypt password encryption as specified in R1."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Token expiration configurability does not correspond to any of the three spec requirements about bcrypt removal, Owner special case removal, or username uniqueness constraint removal."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The additional database lookup in /validate does not correspond to any of the three spec requirements listed."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "Embedding the privileged field in the token at generation time is related to the Owner special case handling, but A5 describes an implementation detail about when privileged is computed rather than the removal of the Owner special case as R2 specifies."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1168,
+    "prompt_tokens": 775,
+    "completion_tokens": 393
+  }
+}

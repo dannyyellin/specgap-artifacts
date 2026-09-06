@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers email verification via mailcatcher service for password recovery."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers cascade deletion of items when a user is deleted."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "O3 describes the same scenario as R4 (normal user reading another user's item returning 'Not enough permissions'), but notes the code returns 403 instead of the required 400."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers invalidation of password recovery tokens after use."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers validation of empty string titles when creating items."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1452,
+    "prompt_tokens": 1129,
+    "completion_tokens": 323
+  }
+}

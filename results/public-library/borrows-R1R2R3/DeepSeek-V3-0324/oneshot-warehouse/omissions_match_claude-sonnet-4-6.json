@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of returnDate computation as loanDate + 30 days, matching R1 exactly."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O2 captures the missing overdue check behavior but doesn't mention the 400 status code return, which is part of R2."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O3 captures the missing 400 status code return but doesn't mention the overdue check itself, together with O2 they fully cover R2."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "ISBN-13 format validation is not mentioned in any of the reference requirements."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Handling of empty returnDate in date range filtering does not correspond to any of the reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1109,
+    "prompt_tokens": 753,
+    "completion_tokens": 356
+  }
+}

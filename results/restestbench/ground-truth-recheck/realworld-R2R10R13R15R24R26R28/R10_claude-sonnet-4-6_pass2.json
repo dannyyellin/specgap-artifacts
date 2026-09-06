@@ -1,0 +1,23 @@
+{
+  "variant": "realworld-R2R10R13R15R24R26R28",
+  "req_id": 10,
+  "model": "claude-sonnet-4-6",
+  "pass": 2,
+  "verdict": "NOT_IMPLEMENTED",
+  "requirement_vague": "Verify unfollow removes follow relationship and updates profile following status",
+  "omissions": [
+    {
+      "id": "O1",
+      "description": "The unfollow endpoint does not return 400 when a user attempts to unfollow themselves. The code silently succeeds (returns 200) instead of returning a 400 error.",
+      "category": "BUSINESS_LOGIC",
+      "reasoning": "The `unfollow_user` function has no guard checking if `current_user.id == target.id`. When a user tries to unfollow themselves, the code finds no FollowLink (since self-follows are prevented at follow time), does nothing, and returns 200 with following=false. The requirement explicitly states this should return 400."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 7407,
+    "prompt_tokens": 6795,
+    "completion_tokens": 612
+  },
+  "timestamp": "2026-07-12 10:43:03"
+}

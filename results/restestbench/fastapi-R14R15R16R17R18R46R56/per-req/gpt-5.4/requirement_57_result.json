@@ -1,0 +1,18 @@
+{
+  "req_id": 57,
+  "requirement_vague": "User registration should reject invalid email format. Test with 'not-an-email' string.",
+  "requirement_precise": "Attempt to register a new user via POST /api/v1/users/signup with email 'not-an-email' (invalid format), password 'validpass123', and full_name 'Test User'. Verify the response status is 422 (validation error).",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": "UserRegister/UserCreate model validation used by POST /api/v1/users/signup",
+    "code_reference": "class UserCreate(SQLModel):\n    email: EmailStr\n\n@api_router.post(\"/users/signup\", response_model=UserPublic)\ndef signup(user_in: UserRegister, session: Session = Depends(get_session)):",
+    "reasoning": "The signup endpoint accepts a UserRegister body, which inherits from UserCreate where email is typed as Pydantic EmailStr. FastAPI/Pydantic automatically rejects invalid email formats such as 'not-an-email' during request validation and returns HTTP 422 before the handler executes."
+  },
+  "usage": {
+    "total_tokens": 4814,
+    "prompt_tokens": 4676,
+    "completion_tokens": 138
+  },
+  "parse_error": false
+}

@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 describes POST /logs field type validation, which does not correspond to either R12 (removing date format) or R13 (removing Borrows-to-Logs notification)."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A2 describes GET /logs query filter allowlist behavior, which does not correspond to either R12 or R13."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A3 describes UUID-based id generation, which does not correspond to either R12 or R13."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 885,
+    "prompt_tokens": 651,
+    "completion_tokens": 234
+  }
+}

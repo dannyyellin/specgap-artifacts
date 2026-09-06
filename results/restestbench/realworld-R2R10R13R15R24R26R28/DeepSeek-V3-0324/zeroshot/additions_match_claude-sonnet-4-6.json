@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements mention favoriting articles or favoritesCount fields."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements mention a root endpoint returning a status response."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R24",
+        "label": "PARTIAL",
+        "reasoning": "R24 references ordering by 'created' timestamp, and A3 notes the code includes both 'created'/'updated' and 'createdAt'/'updatedAt' fields, which partially relates to timestamp handling but the spec requirement is about ordering, not field duplication."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1964,
+    "prompt_tokens": 1728,
+    "completion_tokens": 236
+  }
+}

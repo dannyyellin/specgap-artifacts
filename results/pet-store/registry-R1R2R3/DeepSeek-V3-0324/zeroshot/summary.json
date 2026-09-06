@@ -1,0 +1,16 @@
+{
+  "app": "pet-store",
+  "variant": "registry-R1R2R3",
+  "service": "registry",
+  "method": "zeroshot",
+  "detector_model": "DeepSeek-V3-0324",
+  "gen_model": "gpt-5.4",
+  "gen_usage": null,
+  "n_additions": 2,
+  "n_omissions": 4,
+  "usage": {
+    "total_tokens": 8163,
+    "prompt_tokens": 7674,
+    "completion_tokens": 489
+  }
+}

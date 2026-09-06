@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Accepting an optional isComplete field on todo creation is not required by any listed spec requirement, which focus on ownership, validation of missing title, not-found cases, and ID mismatch on update."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rejecting duplicate email registration is not described by any listed requirement, which only assume successful registration and login."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Including expiration and email claims in JWTs does not correspond to any listed requirement, which do not specify token claim contents."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Returning a specific JSON success body for successful deletion is not required by any listed spec requirement, which only specify 404 behavior for missing or unauthorized deletes."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1347,
+    "prompt_tokens": 1080,
+    "completion_tokens": 267
+  }
+}

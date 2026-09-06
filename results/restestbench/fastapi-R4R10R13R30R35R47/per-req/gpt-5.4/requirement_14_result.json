@@ -1,0 +1,18 @@
+{
+  "req_id": 14,
+  "requirement_vague": "Verify the test token endpoint works and its response includes the user's email.",
+  "requirement_precise": "Authenticate as a superuser using existing credentials (admin@example.com / password123) to obtain an access token, then use this access token to call the test token endpoint. Verify the response status code is 200 and that the response JSON contains the field 'email' with value 'admin@example.com'.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": "POST /api/v1/login/access-token and POST /api/v1/login/test-token",
+    "code_reference": "@api_router.post(\"/login/access-token\", response_model=Token)\ndef login_access_token(...):\n    user = authenticate(session, form_data.username, form_data.password)\n...\n@api_router.post(\"/login/test-token\", response_model=UserRead)\ndef test_token(current_user: User = Depends(get_current_active_user)):\n    return current_user",
+    "reasoning": "The code seeds a superuser with email admin@example.com and password password123 at startup, the access-token endpoint authenticates those credentials and returns a bearer token, and the test-token endpoint requires that token and returns the authenticated user as UserRead. UserRead includes the email field, so a successful call returns HTTP 200 with email set to admin@example.com."
+  },
+  "usage": {
+    "total_tokens": 5946,
+    "prompt_tokens": 5759,
+    "completion_tokens": 187
+  },
+  "parse_error": false
+}

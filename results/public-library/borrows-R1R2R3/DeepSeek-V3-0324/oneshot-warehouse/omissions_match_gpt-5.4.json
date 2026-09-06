@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O1 states that POST /borrows no longer computes returnDate as loanDate plus 30 days, which is exactly the removal described in R1."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O2 describes removal of the checkout-blocking check for cardholders with 2 or more overdue books, matching the first part of R2."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O3 describes that POST /borrows no longer returns 400 for the 2+ overdue books case, matching the second part of R2."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 is about ISBN-13 validation, which is unrelated to any of the reference requirements."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 concerns GET /borrows date-range filtering and empty returnDate handling, which does not correspond to any reference requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1003,
+    "prompt_tokens": 675,
+    "completion_tokens": 328
+  }
+}

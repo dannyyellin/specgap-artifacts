@@ -1,0 +1,48 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "A1 relates to the Owner special case (name configuration), but describes a remaining/modified implementation rather than its removal as R2 requires."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "A2 relates to the Owner password configuration, but describes a remaining/modified implementation rather than its removal as R2 requires."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Whitespace validation on /register does not correspond to any of the three spec requirements about bcrypt removal, Owner special case removal, or username uniqueness constraint removal."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The 401 status code for incorrect login credentials does not correspond to any of the three spec requirements."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": "R1",
+        "label": "PARTIAL",
+        "reasoning": "Storing the Owner's password in plaintext is related to the removal of bcrypt encryption (R1), but only partially captures it as it specifically concerns the Owner path rather than the general removal of bcrypt."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Embedding a 'privileged' claim in the JWT payload is an implementation detail not addressed by any of the three spec requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1356,
+    "prompt_tokens": 902,
+    "completion_tokens": 454
+  }
+}

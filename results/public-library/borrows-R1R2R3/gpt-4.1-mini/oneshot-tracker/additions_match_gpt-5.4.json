@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 adds validation relating returnDate and loanDate, which does not describe removal of return date computation, overdue checkout blocking, or checkout log notification."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A2 concerns extra GET /borrows filtering fields and does not correspond to any of the removed behaviors in the spec requirements."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A3 describes error response body formatting, which is unrelated to removing return date computation, overdue borrow constraints, or log notifications on checkout."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 810,
+    "prompt_tokens": 610,
+    "completion_tokens": 200
+  }
+}

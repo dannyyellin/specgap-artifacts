@@ -1,0 +1,22 @@
+{
+  "req_id": 22,
+  "requirement_vague": "Verify profile returns correct bio and image fields",
+  "requirement_precise": "Create user1 (username: 'profilebiouser1', email: 'profilebiouser1@test.com', password: 'pass123'). Update user1's profile with bio 'This is my bio text' and image 'https://example.com/avatar.jpg' via PUT /api/user. GET /api/profiles/profilebiouser1. Verify the profile contains username 'profilebiouser1', bio 'This is my bio text', and image 'https://example.com/avatar.jpg'. This tests profile data retrieval.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": [
+      "PUT /api/user",
+      "GET /api/profiles/{username}",
+      "profile_dict"
+    ],
+    "code_reference": "if \"bio\" in data:\n    current_user.bio = data[\"bio\"]\nif \"image\" in data:\n    current_user.image = data[\"image\"]\n...\nreturn {\n    \"username\": target.username,\n    \"bio\": target.bio,\n    \"image\": target.image,\n    \"following\": following,\n}",
+    "reasoning": "The PUT /api/user handler updates the authenticated user's bio and image fields and commits them to the database. The GET /api/profiles/{username} handler returns a profile built by profile_dict, which includes username, bio, and image from the stored user record, so the updated values are retrieved correctly."
+  },
+  "usage": {
+    "total_tokens": 5477,
+    "prompt_tokens": 5300,
+    "completion_tokens": 177
+  },
+  "parse_error": false
+}

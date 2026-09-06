@@ -1,0 +1,16 @@
+{
+  "app": "public-library",
+  "variant": "logs-R12R13",
+  "service": "logs",
+  "method": "twoshot",
+  "detector_model": "claude-sonnet-4-6",
+  "gen_model": "gpt-5.4",
+  "gen_usage": null,
+  "n_additions": 1,
+  "n_omissions": 1,
+  "usage": {
+    "total_tokens": 7571,
+    "prompt_tokens": 6878,
+    "completion_tokens": 693
+  }
+}

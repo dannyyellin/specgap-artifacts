@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 describes a validation added in code (returnDate not before loanDate), which does not correspond to any of the three spec requirements about removing returnDate computation, removing overdue constraints, or removing log notifications."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A2 describes additional filtering fields supported by the code, which does not correspond to any of the three spec requirements about removing returnDate computation, overdue constraints, or log notifications."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A3 describes JSON error response formatting, which does not correspond to any of the three spec requirements about removing returnDate computation, overdue constraints, or log notifications."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 946,
+    "prompt_tokens": 687,
+    "completion_tokens": 259
+  }
+}

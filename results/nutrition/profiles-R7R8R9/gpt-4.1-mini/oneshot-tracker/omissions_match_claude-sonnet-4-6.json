@@ -1,0 +1,54 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R8",
+        "label": "MATCH",
+        "reasoning": "O1 describes that the owner-only restriction on GET /profiles was removed, which directly matches R8."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 does not correspond to any of the reference requirements about removed restrictions or token validation."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "O3 relates to user_id coming from token validation for POST /profiles, which partially overlaps with R9, but O3 focuses on 401 rejection behavior rather than the source of user_id."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "O4 describes that protein is included in the diet comparison for profileDishes, which directly matches R7's removal of protein exclusion from profileDishes calculation."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 describes filtering behavior for GET /profiles nutritional fields, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O7 describes missing 405 error handling for GET /profileDishes, which does not correspond to any of the reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1420,
+    "prompt_tokens": 919,
+    "completion_tokens": 501
+  }
+}

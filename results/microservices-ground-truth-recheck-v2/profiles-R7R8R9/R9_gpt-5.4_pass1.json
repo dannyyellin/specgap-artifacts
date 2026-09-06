@@ -1,0 +1,19 @@
+{
+  "app": "nutrition",
+  "variant": "profiles-R7R8R9",
+  "service": "profile",
+  "req_id": "R9",
+  "requirement": "The user_id used by the service is taken from token validation, not from the request body.",
+  "source_headline": "Removed that user_id comes from token validation (not request body)",
+  "model": "gpt-5.4",
+  "pass": 1,
+  "label": "INFERRED",
+  "evidence": "validate_token() returns {'user_id': data.get('user_id'), ...} from AUTH_URL token validation; POST /profiles uses existing = mongo.db.profiles.find_one({'user_id': int(auth_data['user_id'])}) and sets user_id = int(auth_data['user_id']); /profiles/<int:profile_id> authorizes with if int(auth_data['user_id']) != int(profile_id): return error_response('Unauthorized', 401); no route reads user_id from request body.",
+  "reasoning": "The code clearly derives the acting user_id from token validation via validate_token(), which calls the authentication service and returns the validated user_id. Profile creation ignores any body-supplied user_id and writes auth_data['user_id'] instead, and profile-by-id operations are constrained to the validated token user. Since the requirement is that the service use user_id from token validation rather than the request body, a test for that behavior would pass.",
+  "usage": {
+    "total_tokens": 2581,
+    "prompt_tokens": 2367,
+    "completion_tokens": 214
+  },
+  "timestamp": "2026-07-16 14:58:49"
+}

@@ -1,0 +1,54 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R28",
+        "label": "MATCH",
+        "reasoning": "R28 explicitly states that user2 (not the owner) can PUT any article and the update succeeds, while A1 describes the code returning 403 Forbidden for non-owners, directly contradicting R28's documented behavior."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R28",
+        "label": "MATCH",
+        "reasoning": "R28 explicitly states that user2 (not the owner) can DELETE any article and it succeeds, while A2 describes the code returning 403 Forbidden for non-owners, directly contradicting R28's documented behavior."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R24",
+        "label": "PARTIAL",
+        "reasoning": "R24 references ordering by 'created' timestamp, and A3 notes the code returns both 'created'/'updated' and 'createdAt'/'updatedAt' fields, which partially relates to the timestamp fields used in ordering but doesn't fully match the ordering requirement."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements mention or test for the presence or absence of an 'id' field in user responses."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed spec requirements mention a GET /api/tags endpoint."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed spec requirements address who is permitted to delete comments or test article-owner comment deletion."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed spec requirements specify or test the Authorization header format accepted by the API."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2534,
+    "prompt_tokens": 1981,
+    "completion_tokens": 553
+  }
+}

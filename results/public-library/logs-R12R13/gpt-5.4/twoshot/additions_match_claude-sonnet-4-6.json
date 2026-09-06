@@ -1,0 +1,24 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 describes type validation and Content-Type enforcement for POST /logs, which does not correspond to either R12 (removing date format) or R13 (removing Borrows-to-Logs notification)."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R12",
+        "label": "PARTIAL",
+        "reasoning": "A2 mentions loanDate as one of the allowlisted query fields for GET /logs filtering, which is tangentially related to R12's removal of the date format for loanDate, but A2 does not address the removal of the date format specification itself."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 807,
+    "prompt_tokens": 599,
+    "completion_tokens": 208
+  }
+}

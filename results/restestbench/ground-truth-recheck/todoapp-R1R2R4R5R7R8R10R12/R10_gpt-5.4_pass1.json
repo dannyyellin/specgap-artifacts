@@ -1,0 +1,23 @@
+{
+  "variant": "todoapp-R1R2R4R5R7R8R10R12",
+  "req_id": 10,
+  "model": "gpt-5.4",
+  "pass": 1,
+  "verdict": "NOT_IMPLEMENTED",
+  "requirement_vague": "Updating a todo with mismatched ID returns bad request",
+  "omissions": [
+    {
+      "id": "O1",
+      "description": "PUT /todos/{id} does not reject requests where the body id differs from the path id with 400 Bad Request.",
+      "category": "BUSINESS_LOGIC",
+      "reasoning": "The update route accepts `todo_in: TodoUpdate` with an optional `id` field, but `update_todo` never compares `todo_in.id` to the path parameter `id`. It simply loads the todo by the path id and updates its fields, so a mismatched body id is ignored instead of causing a 400 response."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 2537,
+    "prompt_tokens": 2411,
+    "completion_tokens": 126
+  },
+  "timestamp": "2026-07-12 10:34:09"
+}

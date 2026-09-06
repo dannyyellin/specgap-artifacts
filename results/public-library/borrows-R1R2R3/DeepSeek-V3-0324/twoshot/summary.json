@@ -1,0 +1,16 @@
+{
+  "app": "public-library",
+  "variant": "borrows-R1R2R3",
+  "service": "borrows",
+  "method": "twoshot",
+  "detector_model": "DeepSeek-V3-0324",
+  "gen_model": "gpt-5.4",
+  "gen_usage": null,
+  "n_additions": 3,
+  "n_omissions": 4,
+  "usage": {
+    "total_tokens": 8385,
+    "prompt_tokens": 7739,
+    "completion_tokens": 646
+  }
+}

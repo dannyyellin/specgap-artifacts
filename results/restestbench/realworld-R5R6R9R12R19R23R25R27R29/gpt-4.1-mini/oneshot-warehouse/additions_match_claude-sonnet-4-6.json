@@ -1,0 +1,72 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "R9 requires uniqueness validation for username and email during user creation, and A1 notes that PUT /api/user lacks this same uniqueness check, which is a related but different operation (update vs. create)."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement explicitly addresses updating password, bio, and image via PUT /api/user."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "R5 explicitly states that GET after deletion returns 200 with an empty object {} rather than 404, which is exactly what A3 describes."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "R5 covers article deletion behavior but does not mention deleting comments as part of the process; A4 describes an implementation detail related to article deletion that partially overlaps with R5's delete scenario."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement addresses the response body of DELETE /api/articles/{slug}/comments/{comment_id}."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed spec requirements specifically test or require filtering GET /api/articles by author username."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": "R23",
+        "label": "PARTIAL",
+        "reasoning": "R23 tests feed pagination (limit/offset on /api/articles/feed), while A7 describes pagination on /api/articles; they share the same pagination concept but apply to different endpoints."
+      },
+      {
+        "detection_id": "A8",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "R6 requires GET /api/articles/feed to return articles from followed users, and A8 states this endpoint is not implemented, directly contradicting R6."
+      },
+      {
+        "detection_id": "A8",
+        "requirement_id": "R23",
+        "label": "MATCH",
+        "reasoning": "R23 requires GET /api/articles/feed with pagination, and A8 states the feed endpoint is not implemented, directly contradicting R23."
+      },
+      {
+        "detection_id": "A8",
+        "requirement_id": "R27",
+        "label": "MATCH",
+        "reasoning": "R27 requires GET /api/articles/feed to return empty results when user follows nobody, and A8 states the feed endpoint is not implemented, directly contradicting R27."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2974,
+    "prompt_tokens": 2200,
+    "completion_tokens": 774
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O1 identifies the same missing validation behavior as R2 (rejecting empty/missing titles with 400 Bad Request), but frames it as a bug/absence rather than specifying the exact expected status code and error message."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O2 directly describes the same behavior as R10: PUT /todos/{id} should return 400 Bad Request when the body's id field doesn't match the URL id, but the code ignores the mismatch."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1206,
+    "prompt_tokens": 1004,
+    "completion_tokens": 202
+  }
+}

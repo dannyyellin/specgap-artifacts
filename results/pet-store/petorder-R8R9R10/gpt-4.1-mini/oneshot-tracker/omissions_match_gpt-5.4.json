@@ -1,0 +1,72 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns response fields in POST /purchases, which is unrelated to removed pet selection randomness, deleting the pet after purchase, or purchase-id uniqueness."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about 415 handling for Content-Type and does not correspond to any of the three removed requirements."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This addresses purchaser authorization behavior, not pet selection algorithm, pet deletion after purchase, or purchase-id uniqueness."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about authorization status codes on transaction endpoints and is unrelated to the referenced removed requirements."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns query-parameter conjunction behavior for GET /transactions, which does not match any listed reference requirement."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "Both describe the behavior of deleting the chosen pet from the pet-store after a purchase."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about returning 503 when the pet-store service fails, not about any of the removed requirements."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns validating registered users via the registry service and does not correspond to the removed requirements."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about validating the store field and is unrelated to pet selection randomness, deletion after purchase, or purchase-id uniqueness."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns the error returned when no pet is available, not any of the three reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1665,
+    "prompt_tokens": 1090,
+    "completion_tokens": 575
+  }
+}

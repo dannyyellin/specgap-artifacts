@@ -1,0 +1,22 @@
+Timestamp: 2026-06-01 20:56:09
+Detector:  gpt-4.1-mini
+App/Variant/Service: nutrition/dishes-R4R5R6/dishes
+Method:    zeroshot
+
+Tokens: prompt=6046, completion=1269, total=7315
+Additions: 6
+Omissions: 6
+
+  A A1: The code requires an Authorization token for all requests including GET /dishes, but the specification only requires token for POST, PUT, DELETE requests and does not explicitly require token for GET requests.
+  A A2: The code supports filtering dishes by 'id', 'name', and 'ingredients' query parameters in addition to the nutritional fields, but the specification only mentions filtering by nutritional fields and 'ingredient'.
+  A A3: The code accepts 'ingredients' as a query parameter for filtering dishes, but the specification requires filtering by 'ingredient' (singular) only.
+  A A4: The code returns 401 Unauthorized if the Authorization header is missing or invalid for all requests except OPTIONS, including GET requests, which is stricter than the specification.
+  A A5: The code uses a MongoDB counter collection to generate unique dish IDs, which is an implementation detail not required by the specification.
+  A A6: The code supports CORS via flask-cors package, which is not mentioned or required by the specification.
+
+  O O1: The code does not restrict POST, PUT, and DELETE requests on /dishes and /dishes/{id} to only the restaurant Owner user.
+  O O2: The code does not enforce that only one user can register with the name 'Owner' and that the Owner's password must be 'owner#pw'.
+  O O3: The code does not handle the case where the Ninja API returns a string value 'Only available for premium subscribers.' for some nutritional fields by ignoring or setting those fields to 0.0 explicitly.
+  O O4: The code does not return 400 Bad Request if the POST or PUT request payload is missing required fields or is malformed beyond basic JSON validation.
+  O O5: The code does not return 405 Method Not Allowed for unsupported HTTP methods on /dishes and /dishes/{id}.
+  O O6: The code does not return 415 Unsupported Media Type if the request content type is not application/json for POST and PUT requests.

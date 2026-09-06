@@ -1,0 +1,29 @@
+{
+  "variant": "realworld-R5R6R9R12R19R23R25R27R29",
+  "req_id": 12,
+  "model": "gpt-5.4",
+  "pass": 2,
+  "verdict": "NOT_IMPLEMENTED",
+  "requirement_vague": "Verify article filtering by tag works correctly",
+  "omissions": [
+    {
+      "id": "O1",
+      "description": "GET /api/articles does not support filtering articles by the `tag` query parameter.",
+      "category": "ENDPOINTS",
+      "reasoning": "The `list_articles` route only declares `author`, `limit`, and `offset` query parameters. There is no `tag` parameter accepted or handled, so requests like `/api/articles?tag=javascript` are ignored rather than filtered."
+    },
+    {
+      "id": "O2",
+      "description": "Article listing logic does not filter returned articles by tag membership, so counts and returned titles for tag-based queries are incorrect.",
+      "category": "BUSINESS_LOGIC",
+      "reasoning": "Inside `list_articles`, the query starts as `select(Article)` and only applies an author filter when `author` is provided. It then returns all matching articles with pagination. Since no tag join/filter is applied, scenarios requiring `articlesCount` of 1 for `javascript`, 2 for `testing`, and 0 for `nonexistent` are not implemented."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 5429,
+    "prompt_tokens": 5215,
+    "completion_tokens": 214
+  },
+  "timestamp": "2026-07-12 10:40:19"
+}

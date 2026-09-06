@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R8",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of the owner-only restriction on GET /profiles, matching R8 exactly."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "O2 describes that protein is not excluded from the profileDishes diet comparison, which directly matches R7's removal of protein exclusion from profileDishes calculation."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 concludes there is no omission and does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concludes there is no omission and does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "O5 relates to token handling but focuses on forwarding tokens to external services rather than R9's specific behavior of user_id coming from token validation instead of the request body."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1196,
+    "prompt_tokens": 828,
+    "completion_tokens": 368
+  }
+}

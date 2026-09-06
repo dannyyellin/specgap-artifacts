@@ -1,0 +1,22 @@
+{
+  "method": "zeroshot",
+  "removals": [
+    1,
+    2,
+    4,
+    5,
+    7,
+    8,
+    10,
+    12
+  ],
+  "detector_model": "gpt-4.1-mini",
+  "gen_usage": null,
+  "detect_usage": {
+    "total_tokens": 4152,
+    "prompt_tokens": 3223,
+    "completion_tokens": 929
+  },
+  "n_additions": 3,
+  "n_omissions": 6
+}

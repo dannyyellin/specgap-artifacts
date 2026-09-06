@@ -1,0 +1,66 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement addresses or requires the lack of ownership checks for article updates/deletions."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "R9 requires a 400 status with 'Username and email must be unique' message, but the code returns 422 with field-specific errors, so the behavior partially overlaps (same endpoint/scenario) but differs in status code and message format."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement addresses validation errors for missing fields during user registration."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement specifies the error message content for login failure, so this specific error detail is not matched by any requirement."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "R5 requires returning an empty object {} with 200 after deletion, which the code does, but the code also returns {} for non-deleted/non-existent articles which is beyond what R5 specifies."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement specifies the response body for comment deletion."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement mentions favoriting functionality or the 'favorited'/'favoritesCount' fields in article responses."
+      },
+      {
+        "detection_id": "A8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement explicitly requires updating email or username via the user update endpoint."
+      },
+      {
+        "detection_id": "A9",
+        "requirement_id": "R23",
+        "label": "MATCH",
+        "reasoning": "R23 explicitly tests feed pagination with limit and offset parameters on /api/articles/feed, which matches the code's support for these parameters."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 3101,
+    "prompt_tokens": 2466,
+    "completion_tokens": 635
+  }
+}

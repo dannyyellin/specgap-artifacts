@@ -1,0 +1,84 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about authorization for creating pet-types, which is unrelated to any removed requirement listed."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns POST /pet-types behavior with the Ninja API, not any of the removed extraction, deletion, lifespan, or birthdate-filter rules."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "It describes the constraint that pet-types cannot be deleted if they still have pets, which is exactly the rule removed in R5."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "It directly refers to birthdateGT and birthdateLT query filtering on pets, which is the behavior removed in R7."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about duplicate pet-name validation and case sensitivity, not any reference requirement."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns picture-name path traversal validation, which does not correspond to any removed requirement."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about validating picture-url image type before fetching, unrelated to the listed removed requirements."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns 404 behavior for fetching a pet, not temperament extraction, deletion constraints, lifespan parsing, or birthdate filtering."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about PUT /pet-types/{id} returning 405, which is unrelated to any reference requirement."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns authentication/authorization for creating pets, not any removed rule in the references."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about rejecting duplicate pet names on update, which does not match any reference requirement."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns returning 404 when posting a pet to a nonexistent pet-type, unrelated to the removed requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1883,
+    "prompt_tokens": 1194,
+    "completion_tokens": 689
+  }
+}

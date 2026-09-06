@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the absence of the DELETE pet from store after purchase step, which is exactly what R9 states was removed."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 describes a missing username validation against a registry service, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 describes handling of invalid pet-type queries, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 describes improper handling of conjunctive query parameters for /transactions, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 describes missing validation of positive integer store numbers, which does not correspond to any of the three reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1051,
+    "prompt_tokens": 694,
+    "completion_tokens": 357
+  }
+}

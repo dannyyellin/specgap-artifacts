@@ -1,0 +1,21 @@
+{
+  "req_id": 62,
+  "requirement_vague": "User registration should reject null password. Test with password set to null.",
+  "requirement_precise": "Attempt to register a new user via POST /api/v1/users/signup with email 'test62@example.com', password set to null, and full_name 'Test User'. Verify the response status is 422 (validation error).",
+  "removed": false,
+  "omissions": [
+    {
+      "id": "R62-O1",
+      "description": "POST /api/v1/users/signup does not return the required 422 validation error specifically for a null password in a guaranteed way from the explicit validator logic.",
+      "category": "REQUEST_VALIDATION",
+      "reasoning": "The signup endpoint uses UserRegister/UserCreate with `password: str` and a validator that checks `if v is None`, but because the field is typed as non-optional `str`, Pydantic rejects `null` before this custom validator runs. While the request will still be rejected, the null-password handling is not implemented by the explicit validator logic described in the requirement; validation relies on framework type enforcement rather than a dedicated null-password check."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 4821,
+    "prompt_tokens": 4669,
+    "completion_tokens": 152
+  },
+  "parse_error": false
+}

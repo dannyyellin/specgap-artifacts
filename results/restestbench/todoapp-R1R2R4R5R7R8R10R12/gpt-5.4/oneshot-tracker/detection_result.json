@@ -1,0 +1,61 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "POST /todos accepts and stores an optional isComplete value from the client during todo creation",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification's create-todo scenarios only define creating a todo with a title and then verifying the created todo has isComplete=false. It does not require clients to be allowed to supply isComplete on creation, but the code exposes TodoCreate with an isComplete field and persists it."
+      },
+      {
+        "id": "A2",
+        "description": "POST /users/register rejects duplicate email addresses with 400 Bad Request",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification requires successful registration and login for valid credentials, but it does not explicitly require duplicate-email detection or a specific duplicate-registration behavior. The code adds this rule."
+      },
+      {
+        "id": "A3",
+        "description": "JWT access tokens include email and expiration claims and expire after 24 hours",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The specification requires use of JWT tokens via PyJWT, but does not require any particular token payload fields beyond returning an access token. The code additionally includes email and exp claims and sets a specific expiration duration."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "POST /users/register returns 200 OK as required by the specification, but the code uses FastAPI's default 200 only implicitly while returning a user body rather than implementing the specified success behavior explicitly",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly verifies that POST /users/register returns 200 OK. While FastAPI will default to 200 here, the endpoint does not explicitly define the status code contract. This is weaker than the specified behavior."
+      },
+      {
+        "id": "O2",
+        "description": "POST /todos with an empty title does not return 400 Bad Request with a validation error indicating 'The Title field is required.'",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification explicitly requires that POST /todos with an empty or missing title return 400 Bad Request and a validation error indicating 'The Title field is required.' The code defines title as a required string, so a missing title is handled by FastAPI/Pydantic as 422 Unprocessable Entity, and an empty string is accepted because no non-empty validation is enforced."
+      },
+      {
+        "id": "O3",
+        "description": "PUT /todos/{id} does not reject requests where the body id differs from the path id with 400 Bad Request",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification explicitly requires that when a todo is updated using path ID X and request body id=Y where Y differs from X, the response status is 400 Bad Request. The code ignores todo_in.id entirely and proceeds with the update."
+      },
+      {
+        "id": "O4",
+        "description": "DELETE /todos/{id} does not return 200 OK explicitly as required by the specification",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly verifies 200 OK for successful deletion. The code returns a JSON message and relies on FastAPI's default status code rather than explicitly defining the response contract."
+      },
+      {
+        "id": "O5",
+        "description": "POST /todos does not guarantee 400 Bad Request for a missing title; framework validation will return 422 instead",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification requires 400 Bad Request for an empty or missing title field. Because TodoCreate requires title at the schema level and no custom handler is implemented, a missing title produces FastAPI's default 422 response rather than the required 400."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 4997,
+    "prompt_tokens": 4158,
+    "completion_tokens": 839
+  }
+}

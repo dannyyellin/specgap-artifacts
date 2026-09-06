@@ -1,0 +1,24 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 concerns POST request string type validation, which does not relate to removing the loanDate date format or removing Borrows-to-Logs notifications from descriptions."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A2 concerns GET /logs query-parameter filtering, which does not correspond to either removing the loanDate date format or removing Borrows-to-Logs notification text."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 685,
+    "prompt_tokens": 538,
+    "completion_tokens": 147
+  }
+}

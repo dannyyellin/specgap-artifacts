@@ -1,0 +1,108 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the failure to return 400 with 'Username and email must be unique' on duplicate username or email, which is exactly what R9 requires."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 states code matches spec for login status code and does not correspond to any reference requirement describing a behavioral discrepancy."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements address access control for article updates."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements address access control for article deletion."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R12",
+        "label": "MATCH",
+        "reasoning": "O5 describes missing tag filtering on GET /api/articles, which is exactly the behavior tested in R12."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O6 describes the missing GET /api/articles/feed endpoint, which is the core behavior tested in R6."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R23",
+        "label": "MATCH",
+        "reasoning": "O6 also covers the missing feed endpoint with pagination that R23 tests."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R27",
+        "label": "MATCH",
+        "reasoning": "O6 covers the missing feed endpoint that R27 tests for empty feed when user follows nobody."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "O7 partially relates to R5 which explicitly expects a 200 with empty object for deleted articles, but O7 frames it as a potential omission rather than confirming the expected behavior."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "O8 confirms DELETE /api/articles/{slug} returns 200 with empty object matching spec, which aligns with part of R5's verification of the delete response."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement addresses comment body validation."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement addresses comment ownership verification before deletion."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": "R29",
+        "label": "PARTIAL",
+        "reasoning": "O11 identifies the missing DELETE /api/users/{email} endpoint, which R29 uses to test FK constraint behavior, but O11 only notes the endpoint is missing rather than describing the FK constraint/500 error behavior."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O12 states code matches spec for self-follow prevention and does not correspond to any reference requirement describing a behavioral discrepancy."
+      },
+      {
+        "detection_id": "O13",
+        "requirement_id": "R12",
+        "label": "MATCH",
+        "reasoning": "O13 describes missing tag filtering on GET /api/articles, which is the same behavior R12 tests."
+      },
+      {
+        "detection_id": "O14",
+        "requirement_id": "R19",
+        "label": "PARTIAL",
+        "reasoning": "O14 mentions the @BeforeUpdate hook updating the updated timestamp, which is exactly what R19 tests, but O14 states there is no explicit test rather than identifying a behavioral omission."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 3585,
+    "prompt_tokens": 2476,
+    "completion_tokens": 1109
+  }
+}

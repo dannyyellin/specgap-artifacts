@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Allowing clients to supply isComplete during todo creation is not described by any listed requirement, which focus on ownership, validation of title, not-found cases, and ID mismatch on update."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rejecting duplicate registration emails is an extra registration rule not covered by any listed requirement."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Including an email claim in JWT tokens is not required by any listed spec item."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Returning a specific JSON message body for successful deletion does not correspond to any listed requirement, which only specify 404 behavior for deleting nonexistent or unauthorized todos."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1319,
+    "prompt_tokens": 1066,
+    "completion_tokens": 253
+  }
+}

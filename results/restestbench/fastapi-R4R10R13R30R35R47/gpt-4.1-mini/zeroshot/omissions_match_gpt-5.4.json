@@ -1,0 +1,114 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "It describes the same read-item authorization behavior for a second non-owner user that R4 requires to be denied."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "It directly states the expected 400 'Not enough permissions' response when a non-owner user reads another user's item, which is exactly R4."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement concerns GET item by nonexistent ID returning 404; R10 is about DELETE with superuser auth."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed reference requirements concern invalid UUID format for item path parameters."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The detected requirement is about update/delete permissions for non-owner users, which is not covered by any listed reference requirement."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R35",
+        "label": "MATCH",
+        "reasoning": "It addresses duplicate registration using an existing email and the exact required detail message from R35."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R47",
+        "label": "MATCH",
+        "reasoning": "It concerns enforcement of the minimum password length on signup, which is the behavior tested by R47."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "R30 is about successful password change and login verification, not the incorrect-current-password error case."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No listed reference requirement covers rejecting a new password equal to the current password."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements concern superusers deleting themselves."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No listed reference requirement is about DELETE /users/{user_id} self-deletion restrictions."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about nonexistent users on DELETE /users/{user_id}, which is not among the reference requirements."
+      },
+      {
+        "detection_id": "O13",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The reference set does not include a requirement about normal users reading other users' data."
+      },
+      {
+        "detection_id": "O14",
+        "requirement_id": "R35",
+        "label": "MATCH",
+        "reasoning": "It is the same duplicate-email signup behavior and exact expected error detail specified in R35."
+      },
+      {
+        "detection_id": "O15",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement concerns reset-password validation ordering or length checks."
+      },
+      {
+        "detection_id": "O16",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Invalid reset token handling is not covered by any listed reference requirement."
+      },
+      {
+        "detection_id": "O17",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The reference requirements do not include invalid UUID checks for users or items endpoints."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2787,
+    "prompt_tokens": 1860,
+    "completion_tokens": 927
+  }
+}

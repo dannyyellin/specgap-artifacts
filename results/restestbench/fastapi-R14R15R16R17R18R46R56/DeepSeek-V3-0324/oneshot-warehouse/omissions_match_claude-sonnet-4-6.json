@@ -1,0 +1,72 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R15",
+        "label": "PARTIAL",
+        "reasoning": "O1 notes password recovery endpoints are not implemented, which partially relates to R15's requirement to test POST /api/v1/password-recovery/{email}, but O1 is a general statement about missing implementation rather than a specific test behavior."
+      },
+      {
+        "detection_id": "O1",
+        "requirement_id": "R16",
+        "label": "PARTIAL",
+        "reasoning": "O1 notes password recovery functionality is missing, which also relates to R16's test of password recovery for a non-existent user, but again is a general implementation gap rather than a specific behavioral test."
+      },
+      {
+        "detection_id": "O1",
+        "requirement_id": "R17",
+        "label": "PARTIAL",
+        "reasoning": "O1 notes password recovery/reset endpoints are not implemented, which relates to R17's full password reset flow test, but O1 is a general statement rather than describing the specific behavior."
+      },
+      {
+        "detection_id": "O1",
+        "requirement_id": "R18",
+        "label": "PARTIAL",
+        "reasoning": "O1 notes password recovery/reset is not implemented, which relates to R18's test of reset-password with an invalid token returning 400, but O1 is a general implementation gap statement."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R15",
+        "label": "PARTIAL",
+        "reasoning": "O2 specifically mentions the missing email verification via mailcatcher service, which is a key part of R15's requirement, but O2 frames it as a missing implementation rather than a specific test scenario."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R56",
+        "label": "PARTIAL",
+        "reasoning": "O3 mentions password length validation (specifically 7 characters), which aligns with R56's test of a 7-character password expecting a 422 validation error, but O3 focuses on registration rather than the reset-password endpoint."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concerns full_name length validation which does not correspond to any of the reference requirements listed."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 concerns 403 vs 400 status for unauthorized user access, which does not correspond to any of the listed reference requirements."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R46",
+        "label": "PARTIAL",
+        "reasoning": "O6 notes that cascade deletion of items when a user is deleted is not implemented, which directly relates to R46's requirement to verify that items are deleted (return 404) after the user account is deleted."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R18",
+        "label": "PARTIAL",
+        "reasoning": "O7 mentions missing specific 'detail' field messages, which partially relates to R18's requirement that the 'detail' field contains exactly 'Invalid token', but O7 is a general statement about multiple error cases."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2209,
+    "prompt_tokens": 1349,
+    "completion_tokens": 860
+  }
+}

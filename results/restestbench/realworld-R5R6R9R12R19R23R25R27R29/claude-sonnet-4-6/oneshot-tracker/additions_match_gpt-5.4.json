@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "Both concern duplicate user creation validation, but the code behavior uses 422 and separate field-specific messages instead of the spec's 400 with a unified uniqueness message."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No listed requirement concerns deleting article comments or constrains that response body format."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R25",
+        "label": "PARTIAL",
+        "reasoning": "Both address JWT payload contents, but the code omits the required id, username, and email fields and uses only sub and exp."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R12",
+        "label": "PARTIAL",
+        "reasoning": "Both concern GET /api/articles filtering by tag, but the code behavior states tag filtering is not implemented while the spec requires it."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2013,
+    "prompt_tokens": 1751,
+    "completion_tokens": 262
+  }
+}

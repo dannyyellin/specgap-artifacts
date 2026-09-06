@@ -1,0 +1,48 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "A1 relates to the Owner special case but describes changed/different values via environment variables rather than the removal of the Owner special case entirely."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R1",
+        "label": "PARTIAL",
+        "reasoning": "A2 describes plaintext password storage for the Owner, which is consistent with bcrypt encryption being removed, but only covers the Owner case rather than all users."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "A3 directly describes that no password encryption/hashing is applied anywhere in the code, matching R1's removal of bcrypt password encryption."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "A4 describes login verification using plaintext comparison instead of bcrypt, which is a direct consequence of removing bcrypt password encryption as stated in R1."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Token expiration and issued-at claims are not mentioned in any of the three spec requirements."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Exposing the password field in responses is not related to any of the three spec requirements about bcrypt removal, Owner special case removal, or username uniqueness."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1306,
+    "prompt_tokens": 856,
+    "completion_tokens": 450
+  }
+}

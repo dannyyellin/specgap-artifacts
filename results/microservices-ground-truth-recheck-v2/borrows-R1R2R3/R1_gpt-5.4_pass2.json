@@ -1,0 +1,19 @@
+{
+  "app": "public-library",
+  "variant": "borrows-R1R2R3",
+  "service": "borrows",
+  "req_id": "R1",
+  "requirement": "When a book is checked out, the borrow's returnDate is computed as loanDate + 30 days.",
+  "source_headline": "Removed return date computation (returnDate = loanDate + 30 days) from Borrows",
+  "model": "gpt-5.4",
+  "pass": 2,
+  "label": "GAP",
+  "evidence": "POST /borrows constructs borrow_doc with \"returnDate\": data.get(\"returnDate\", \"\") and never computes loanDate + 30 days; PUT /borrows/<borrow_id> only validates returnDate is not before loanDate.",
+  "reasoning": "There is code handling returnDate fields, so the requirement is addressed only superficially, but the specific required behavior is absent: no logic adds 30 days to loanDate when a book is checked out. A test creating a borrow without returnDate and expecting an auto-computed date 30 days after loanDate would fail, so per the decision guide this is GAP.",
+  "usage": {
+    "total_tokens": 2992,
+    "prompt_tokens": 2844,
+    "completion_tokens": 148
+  },
+  "timestamp": "2026-07-16 14:51:55"
+}

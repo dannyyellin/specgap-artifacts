@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements mention favoriting functionality or favorited/favoritesCount fields in article responses."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed spec requirements describe updating user email or password via PUT /api/user."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements explicitly mention password hashing with bcrypt; R25 mentions JWT token generation but not password hashing."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2114,
+    "prompt_tokens": 1903,
+    "completion_tokens": 211
+  }
+}

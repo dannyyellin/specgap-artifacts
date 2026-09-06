@@ -1,0 +1,60 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R28",
+        "label": "MATCH",
+        "reasoning": "R28 explicitly tests that any user can update/delete any article (security vulnerability), while A1 describes the opposite behavior where the code enforces ownership and returns 403, directly contradicting R28's expected behavior."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement mentions or tests Bearer token prefix support in Authorization headers."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement specifies the exact response body format for delete operations beyond the status code."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement addresses the presence or absence of an internal user ID field in user response objects."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement specifies that duplicate timestamp fields should not be present in responses."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement addresses favoriting functionality or the presence of 'favorited'/'favoritesCount' fields in article responses."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "R2 explicitly requires that a user attempting to follow themselves receives a 400 error with 'cannot be equal', but A7 states the code allows self-follow without error."
+      },
+      {
+        "detection_id": "A8",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "R10 explicitly requires that a user attempting to unfollow themselves receives a 400 error, but A8 states the code allows self-unfollow without error."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2626,
+    "prompt_tokens": 2056,
+    "completion_tokens": 570
+  }
+}

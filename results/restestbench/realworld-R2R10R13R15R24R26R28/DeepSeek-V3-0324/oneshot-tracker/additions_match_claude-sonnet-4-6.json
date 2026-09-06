@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements mention favoriting functionality or favoritesCount fields."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements mention a DELETE /api/users/{email} endpoint."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements mention a GET /api/tags endpoint."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1855,
+    "prompt_tokens": 1665,
+    "completion_tokens": 190
+  }
+}

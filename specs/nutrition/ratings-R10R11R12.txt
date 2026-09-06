@@ -1,0 +1,160 @@
+(I) Description of microservices for the application Restaurant-Nutrition:
+{"Name": "authentication microservice",
+"Description": "Responsible for authenticating users.  Users can register with a name and password.  Once
+registered, users can log in with their name and password and the service returns a valid token.  They then supply this
+token to other services they wish to use. Those requested services ask the authentication service to validate the token.",
+
+"Resources": "/register, /login, /validate
+
+Each registered user consists of a JSON a document containing the fields 'name' (of type string), 'password'
+(an encrypted string) and 'id' (of type number). These resources allow a new user to register and create a new user
+document, an existing user to login and receive a token, and for a service to validate a given token.",
+
+"REST requests": "(1) POST request on /register.  The request provides a JSON document containing the name and
+password of the user.   If successful, the service returns the response code 201 with the message 'successful'.  If the
+request is not successful because the input is not formatted properly or is missing information, or that username is
+already registered, the service returns the appropriate response code and a message explaining the error.
+(2) POST request on /login. The request provides a JSON document containing the name and password of the user.  If
+successful, the service returns the response code 201 with a JSON document containing the field 'token' (a valid token).
+Otherwise, it returns the appropriate response code and error message.
+(3) POST request on /validate.  The request provides a JSON document containing a token.  If
+successful, the service returns the response code 201 with a JSON document containing the fields 'valid' (of type
+Boolean) and 'privileged' (of type Boolean) and 'user_id' (of type number).   If the token provided is valid, the 'valid'
+field is True and the 'user_id' is the id of the user associated with this token.  If the user_name is 'Owner' and the
+password is correct, the 'privileged' field is True.  Otherwise, it is False.   If the token is not valid or not provided,
+the appropriate response code and error message are returned.",
+
+"Implementation details": "The service allows only one user to register with the name 'Owner'.  The password of this user
+must be 'owner#pw'.  The 'Owner' is the only privileged user.  The code for this service should only use packages from
+the Python Standard Library or the following packages:  flask, pymongo, pyjwt, bcrypt, requests.",
+
+"Deployment": "The authentication microservice runs in a Docker container and listens on external port 5001. Another
+microservice can send it requests using the URL http://authentication:5001/<resource>."
+}
+
+{"Name": "dishes microservice",
+"Description": "Responsible for creating, retrieving, updating, and deleting dishes offered by the restaurant.",
+
+"Resources": "/dishes, /dishes/{id}.
+An id is of type number.  Each dish (/dishes/{id}) consists of a JSON document containing the fields: 'name' (string),
+'id' (number), 'ingredients' (JSON array where each element is the name of an ingredient of type string),
+total_fat (float, in grams), saturated_fat (float, in grams), protein (float, in grams), sodium (float, in mg),
+cholesterol (float, in mg), total_carbohydrates (float, in grams), fiber (float, in grams), and sugar (float, in grams).
+The name of the dish and its ingredients are provided in the POST request, while the values of the other fields are
+computed by the service implementation.",
+
+"REST requests": "(1) GET and POST request on /dishes.  GET returns a JSON array of all records in the collection.  The
+GET request may specify a query string of one or more clauses of the form 'field=value'.  If the 'field' is one of
+the nutritional data elements 'total_fat', 'saturated_fat', 'protein', 'sodium', 'cholesterol',
+'total_carbohydrates', 'fiber', or 'sugar' then the 'value' is a number and any dish that has less than or equal
+to that value for that nutritional element satisfies the clause. Otherwise, if 'field' equals 'ingredient', then any
+dish that contains the 'value' satisfies the clause.  Only those dishes that satisfy all clauses are returned.
+The POST request provides a JSON document containing the name of the dish and its ingredients
+(a JSON array, where each element in the array is the name of an ingredient).  The POST request returns the JSON record
+of the newly created resource, which includes the id assigned to this dish by the service.
+(2) GET, PUT and DELETE requests on /dishes/{id}.  The GET request returns a JSON record of the requested resource.  The
+PUT request provides a JSON payload of the resource's fields "name" and "ingredients" and returns the updated JSON
+structure upon success.
+The DELETE request returns the status of the request with no content.",
+
+"Implementation details": "POST and DELETE and PUT requests are only allowed by the restaurant Owner.
+To compute the nutritional information of each ingredient of the dish, the service invokes the 3rd party API Ninjas
+nutritional service, available at https://api-ninjas.com/api/nutrition.  The API key for this service is provided in the
+environment variable 'NINJA_API_KEY' and you should use this variable to access the service.  If the Ninja API returned
+value does not contain an entry for one of the fields, then that field has the 0.0.  It is important to note that the
+names of the nutritional elements returned by API Ninjas are slightly different from the names used by the application.
+The field names returned by the Ninja Nutrition API are:  'name', 'calories', 'serving_size_g', 'fat_total_g',
+'fat_saturated_g', 'protein_g', 'sodium_mg', 'potassium_mg', 'cholesterol_mg', 'carbohydrates_total_g', 'fiber_g', and
+'sugar_g'.  These need to be mapped to the corresponding resource name for nutritional elements in the application.  For example,
+'carbohydrates_total_g' maps to 'total_carbohydrates'.   Furthermore, not all elements returned by Ninja are needed by the
+resource.  For instance, 'potassium_mg' has no counterpart in the resource and can be ignored.  Also be aware that some of the
+nutritional elements returned by Ninja but not used by the application will have a string value ('Only available for
+premium subscribers.'), not a numeric value.
+The nutritional values of a dish is the sum of the nutritional values of its ingredients.
+The code for this service should only use packages from the Python Standard Library or the following packages:
+flask, pymongo, requests, flask-cors",
+
+"Deployment": "The dishes microservice runs in a Docker container and listens on external port 5002.  Another microservice
+can send it requests using the URL http://dishes:5002/<resource>."
+}
+
+{"Name": "profile microservice",
+"Description": "Responsible for creating, retrieving, updating, and deleting user profiles.  Each user profile contains
+a nutritional diet for that user.",
+
+"Resources": "/profiles, /profiles/{id}, /profileDishes.
+An id is of type number.  Each profile (/profiles/{id}) consists of a JSON document containing the fields 'user_id' (the
+id of the user, the same as the id in /profiles/{id}), total_fat (float, in grams), saturated_fat (float, in grams),
+protein (float, in grams), sodium (float, in mg),
+cholesterol (float, in mg), total_carbohydrates(float, in grams), fiber (float, in grams), and sugar (float, in grams).",
+
+"REST requests": "(1) GET and POST requests on /profiles.  GET returns a JSON array of all records in the resource.  The
+GET request may specify a query string of the form 'field=value'.  In this case, only those profile records satisfying
+that constraint are returned.
+The POST request provides a JSON document containing a subset of the following fields:
+total_fat (float, in grams), saturated_fat (float, in grams), protein (float, in grams), sodium (float, in mg),
+cholesterol (float, in mg), total_carbohydrates(float, in grams), fiber (float, in grams), and sugar (float, in grams).
+The 'user_id' field is obtained when
+validating the token provided in the request.  The POST request returns the JSON record of the newly created resource.
+(2) GET, PUT and DELETE requests on /profiles/{id}. The GET request returns a JSON record of the requested resource. The
+PUT request provides a valid JSON payload as in a POST request and returns the updated JSON structure upon success.
+The DELETE request returns the status of the request with no content.
+(3) GET requests on /profileDishes. This request returns all the dishes that satisfy the diet of the user issuing
+the request. A dish satisfies the diet of the user if the contents of each the fields in the dish (total_fat,
+saturated_fat, ... except the field protein, which is not considered in this calculation.) are less than or equal to
+those fields in the diet.",
+
+"Implementation": "The GET /profiles request is only allowed by the restaurant Owner.  The GET, DELETE and PUT
+/profile/{id} requests are only allowed by the user of that id.
+The code for this service should only use packages from the Python Standard Library or the following packages:
+flask, pymongo, requests.",
+
+"Deployment": "The profile microservice runs in a Docker container and listens on external port 5003.  Another
+microservice can send it requests using the URL http://profiles:5003/<resource>."
+}
+
+{"Name": "ratings microservice",
+"Description": "Responsible for maintaining ratings of restaurant dishes and computing the average rating for a dish.",
+
+"Resources": "/ratings, /ratings/{id}
+An id is of type number.  Each rating (/ratings/{id}) consists of a JSON document containing the fields 'dish_id' (the id
+if the dish being rated), 'user_id' (the id of a user providing the rating), and 'rating' (a number).",
+
+"REST requests": "(1) GET and POST request on /ratings.  GET returns a JSON array.  Each element of the array contains
+a JSON structure with two fields 'dish_id' (the id of a dish) and 'avg_rating' (of type float and is the average of all
+the ratings provided for this dish).   If a dish has not been rated, then it is not included in the response.  The
+POST request supplies a JSON structure with two fields: 'dish_id' (the id of a dish being rated) and 'rating' (a number).  This creates a new rating for the dish from the user issuing the request.
+(2) GET, PUT and DELETE requests on /ratings/{id}. The GET request returns a JSON structure with two fields 'dish_id'
+(the id of a dish) and 'avg_rating'.  The PUT request provides a JSON structure containing the fields 'dish_id' and
+'rating' and returns a JSON structure with two fields: 'dish_id' and 'avg_rating', which is the updated average rating
+for the dish.  The DELETE request removed this user's rating of the given dish and returns the status of the request
+with no content.",
+
+"Implementation Details": "The PUT and DELETE requests on
+/ratings/{id} will update or delete the rating given by that user for the dish of the given id.
+The code for this service should only use packages from the Python Standard Library or the following packages:
+flask, pymongo, requests.",
+
+"Deployment": "The ratings microservice runs in a Docker container and listens on external port 5004.   Another
+microservice can send it requests using the URL http://ratings:5004/ratings."
+}
+
+A request to a service (other than a POST request to /register and /login) must supply a valid token. If an authentication token is not provided or is invalid, then 401 (Unauthorized) is returned.
+If a username or password is not supplied upon for requests to /register and /login, then 400 (Bad request) is returned.
+For successful requests, the appropriate 2XX code is returned:  201 (successful POST), 204 (successful DELETE) and 200 (success for other requests).
+For unsuccessful requests, the appropriate 4XX or 5XX code is returned: 400 (Bad request), 404 (Not Found), 405 (Method Not Allowed), 415 (Unsupported media type), and 500 (Internal Server Error).
+If a service uses an external API, and it fails to respond, then 500 (Internal Server Error) is returned.
+All ids must be unique and cannot be reused.
+
+
+(II) Code Generation Guidelines:
+Code Generation Guidelines
+•	Each microservice is to be written in Python.
+•	Besides generating the code, the Python packages that need to be installed must be listed in a comment at the beginning of the code
+•	The code must be executable.  Besides comments in the code, no other text is allowed in the response.
+•	All floating point numbers have two decimal places; e.g., 4.38
+•	Each microservice stores its persistent data in a Mongo database.   Assume that Mongo is available at 'mongodb://mongo:27017/'.
+•	If a microservice requires data that another microservice is responsible for, it invokes a GET request on that microservice to retrieve that data when it needs it.  It does not replicate and store the data locally.
+•	The generated code handles REST API exceptions and return the appropriate REST (HTTP) status code as described above.
+•	Each microservice will run in its own Docker container.
+•	The code you generate should be complete and executable. The generated code should not include any text other than comments.  In other words, the generated code should be executable without having to strip any extraneous text from the beginning or end of the code.

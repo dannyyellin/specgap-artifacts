@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O1 states that POST /ratings does not enforce the rating being an integer between 1 and 5, which is the same removed constraint described by R10."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O2 states that PUT /ratings/{id} does not enforce the rating being an integer between 1 and 5, matching the removed rating range constraint in R10."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R11",
+        "label": "PARTIAL",
+        "reasoning": "O3 concerns the one-rating-per-user-per-dish rule from R11, but it says the code still relies on a unique index to prevent duplicates rather than that the constraint was removed."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 is about deployment/base path handling and does not correspond to any of R10, R11, or R12."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1001,
+    "prompt_tokens": 710,
+    "completion_tokens": 291
+  }
+}

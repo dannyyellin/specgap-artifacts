@@ -1,0 +1,79 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "The GET /dishes query supports filtering by 'id', 'name', and 'ingredients' fields using exact match, in addition to the nutritional fields",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification only defines query filtering for nutritional fields (<=) and 'ingredient' (contains). It does not specify filtering by 'id' or 'name' as query parameters. The code adds these as supported query fields."
+      },
+      {
+        "id": "A2",
+        "description": "The GET /dishes query uses exact match for the 'ingredients' field (query['ingredients'] = value) rather than a contains/membership check",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states 'if field equals ingredient, then any dish that contains the value satisfies the clause', implying a membership/contains check. The code stores ingredients as an array and does an exact match on the field, which in MongoDB would match the entire array rather than checking if the value is an element of the array. However, this is a logic error rather than an addition \u2014 flagged separately as an omission."
+      },
+      {
+        "id": "A3",
+        "description": "The GET /dishes query applies numeric filters as exact match rather than less-than-or-equal",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states nutritional field filters should return dishes with values less than or equal to the given value. The code builds the query as {field: value} (exact match), not {field: {$lte: value}}. This is a logic error \u2014 flagged as an omission."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "POST /dishes does not enforce that only the Owner (privileged user) can create dishes",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states 'POST and DELETE and PUT requests are only allowed by the restaurant Owner.' The code validates the token but never checks the 'privileged' field in the auth response to restrict POST to the Owner only."
+      },
+      {
+        "id": "O2",
+        "description": "PUT /dishes/{id} does not enforce that only the Owner (privileged user) can update dishes",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states 'POST and DELETE and PUT requests are only allowed by the restaurant Owner.' The code validates the token but never checks the 'privileged' field in the auth response to restrict PUT to the Owner only."
+      },
+      {
+        "id": "O3",
+        "description": "DELETE /dishes/{id} does not enforce that only the Owner (privileged user) can delete dishes",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states 'POST and DELETE and PUT requests are only allowed by the restaurant Owner.' The code validates the token but never checks the 'privileged' field in the auth response to restrict DELETE to the Owner only."
+      },
+      {
+        "id": "O4",
+        "description": "GET /dishes nutritional field query filters use exact match instead of less-than-or-equal comparison",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states 'if the field is one of the nutritional data elements... the value is a number and any dish that has less than or equal to that value for that nutritional element satisfies the clause.' The code builds query as {field: value} (exact match), not {field: {$lte: value}}."
+      },
+      {
+        "id": "O5",
+        "description": "GET /dishes 'ingredient' query filter does not check if the ingredient is contained in the dish's ingredients array",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states 'if field equals ingredient, then any dish that contains the value satisfies the clause.' The code sets query['ingredients'] = value, which in MongoDB performs an exact match on the array rather than checking membership. The correct query would be {ingredients: value} with MongoDB's array element matching, but the field name used is 'ingredients' (plural) while the spec uses 'ingredient' (singular) as the query parameter name."
+      },
+      {
+        "id": "O6",
+        "description": "The Ninja API nutrition values that are non-numeric strings ('Only available for premium subscribers.') are not handled safely \u2014 float() conversion may raise an exception",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification notes 'some of the nutritional elements returned by Ninja but not used by the application will have a string value.' The code uses `float(item.get(ninja_field, 0.0) or 0.0)` which would raise a ValueError if a mapped field contains a string value, potentially causing a 500 error instead of treating it as 0.0."
+      },
+      {
+        "id": "O7",
+        "description": "POST /dishes returns the JSON record of the newly created resource but does not guarantee the id is unique and non-reusable when a dish is deleted",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The specification states 'All ids must be unique and cannot be reused.' The counter-based approach increments monotonically, which satisfies non-reuse. However, if the counter document is reset or the sequence is manipulated, reuse could occur. More critically, the spec requires ids cannot be reused after deletion, which the monotonic counter does satisfy \u2014 this is acceptable."
+      },
+      {
+        "id": "O8",
+        "description": "POST /dishes does not return 201 with the JSON record when the dish name already exists (duplicate name check is missing)",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification does not explicitly forbid duplicate dish names, so this is not a clear omission. Skipping."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 9390,
+    "prompt_tokens": 7959,
+    "completion_tokens": 1431
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "req_id": 14,
+  "requirement_vague": "Verify user profile update modifies user data correctly",
+  "requirement_precise": "Create a user with username 'updateuser1', email 'updateuser1@test.com', password 'pass123'. Extract the token. PUT /api/user with body {\"user\": {\"bio\": \"Updated bio text\", \"image\": \"https://example.com/newimage.jpg\"}}. Verify response status is 200. Verify response contains updated bio 'Updated bio text' and image 'https://example.com/newimage.jpg'. GET /api/user with the token. Verify the updated bio and image persisted.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": [
+      "POST /api/users",
+      "PUT /api/user",
+      "GET /api/user",
+      "user_response"
+    ],
+    "code_reference": "@app.put(\"/api/user\")\ndef update_user(payload: dict, session: Session = Depends(get_session), current_user: User = Depends(get_current_user)):\n    ...\n    if \"bio\" in user_data:\n        current_user.bio = user_data[\"bio\"]\n    if \"image\" in user_data:\n        current_user.image = user_data[\"image\"]\n    session.add(current_user)\n    session.commit()\n    session.refresh(current_user)\n    return user_response(current_user)",
+    "reasoning": "The service supports authenticated PUT /api/user, updates the current user's bio and image from the request body, commits the changes, and returns the updated user payload with the default 200 status. GET /api/user uses the authenticated current user from the database and returns bio and image via user_response, so the updated values persist and are returned on subsequent reads."
+  },
+  "usage": {
+    "total_tokens": 5409,
+    "prompt_tokens": 5186,
+    "completion_tokens": 223
+  },
+  "parse_error": false
+}

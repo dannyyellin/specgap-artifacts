@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R8",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of the owner-only restriction on GET /profiles, matching R8 exactly."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "O2 directly describes the removal of protein exclusion from the profileDishes diet calculation, matching R7 exactly."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 describes a missing validation for nutritional fields in POST /profiles, which does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 describes a missing validation for nutritional fields in PUT /profiles/{id}, which does not correspond to any of the reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 947,
+    "prompt_tokens": 654,
+    "completion_tokens": 293
+  }
+}

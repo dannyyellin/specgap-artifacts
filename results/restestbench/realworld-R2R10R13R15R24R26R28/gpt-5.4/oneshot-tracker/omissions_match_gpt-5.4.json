@@ -1,0 +1,54 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "It matches the successful follow endpoint and required 201 status from R2, but does not cover the response body fields or subsequent GET verification."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "It directly describes R2's requirement that attempting to follow yourself must be rejected with status 400 and an appropriate error message."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "It directly corresponds to R10's requirement that a user cannot unfollow themselves and should receive status 400."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R28",
+        "label": "MATCH",
+        "reasoning": "It describes the exact R28 behavior that a non-owner is able to update another user's article successfully."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R28",
+        "label": "MATCH",
+        "reasoning": "It describes the exact R28 behavior that a non-owner is able to delete another user's article successfully."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R24",
+        "label": "MATCH",
+        "reasoning": "It directly matches R24's requirement that article listing be ordered by created timestamp descending rather than by id."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "It refers to user deletion and foreign key behavior, which are not covered by any of the provided reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2299,
+    "prompt_tokens": 1870,
+    "completion_tokens": 429
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "R2 explicitly requires that attempting to follow oneself via POST /api/profiles/follower1/follow returns 400, which is exactly the behavior O1 addresses."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "R10 explicitly requires that a user cannot unfollow themselves and should receive a 400 response, which is exactly what O2 describes."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "R2 specifically requires POST /api/profiles/followee1/follow to return status 201, and O3 identifies that this endpoint returns 200 instead."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements mention the /api/articles/feed endpoint or route ordering behavior."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R24",
+        "label": "MATCH",
+        "reasoning": "R24 requires GET /api/articles to be ordered by created timestamp descending, and O5 directly describes failure of that exact ordering requirement."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The reference requirements do not include any requirement about ordering on GET /api/articles/feed."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R26",
+        "label": "PARTIAL",
+        "reasoning": "R26 concerns creating multiple comments and verifying they persist and are returned correctly on GET, so O7 overlaps on the comment-creation endpoint but focuses on response shape not specified by R26."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": "R26",
+        "label": "PARTIAL",
+        "reasoning": "R26 is about multiple comment creation and retrieval, while O8 discusses create-comment response structure and status semantics, which only loosely overlaps with that workflow."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2507,
+    "prompt_tokens": 1978,
+    "completion_tokens": 529
+  }
+}

@@ -1,0 +1,59 @@
+[
+  {
+    "id": 1,
+    "requirement": "Register two users (userA and userB) and login with each. UserA creates a todo with title 'UserA Todo'. UserB creates a todo with title 'UserB Todo'. When userA calls GET /todos, verify the response contains exactly one todo with title 'UserA Todo'. UserB's todo should not be visible to userA.",
+    "mutant_files": [
+      "Todo.Api/Todos/TodoApi.cs"
+    ]
+  },
+  {
+    "id": 2,
+    "requirement": "Register a user and login to get an access token. Call POST /todos with an empty or missing title field. Verify that the response status code is 400 Bad Request and the response body contains a validation error indicating 'The Title field is required.'",
+    "mutant_files": [
+      "Todo.Api/Todos/Todo.cs",
+      "Todo.Api/Todos/TodoApi.cs"
+    ]
+  },
+  {
+    "id": 4,
+    "requirement": "Register a user and login to get an access token. Call GET /todos/99999 (an ID that does not exist). Verify the response status code is 404 Not Found.",
+    "mutant_files": [
+      "Todo.Api/Todos/TodoApi.cs"
+    ]
+  },
+  {
+    "id": 5,
+    "requirement": "Register two users (userA and userB) and login with each. UserA creates a todo and notes the returned ID. UserB calls GET /todos/{id} using userA's todo ID. Verify the response status is 404 Not Found (because userB doesn't own it and is not admin).",
+    "mutant_files": [
+      "Todo.Api/Todos/TodoApi.cs"
+    ]
+  },
+  {
+    "id": 7,
+    "requirement": "Register a user and login to get an access token. Call DELETE /todos/99999 (an ID that does not exist). Verify the response status code is 404 Not Found.",
+    "mutant_files": [
+      "Todo.Api/Todos/TodoApi.cs"
+    ]
+  },
+  {
+    "id": 8,
+    "requirement": "Register two users (userA and userB) and login with each. UserA creates a todo and notes the returned ID. UserB calls DELETE /todos/{id} using userA's todo ID. Verify the response status is 404 Not Found. Then userA verifies their todo still exists by calling GET /todos/{id} and confirming 200 OK.",
+    "mutant_files": [
+      "Todo.Api/Todos/TodoApi.cs"
+    ]
+  },
+  {
+    "id": 10,
+    "requirement": "Register a user and login. Create a todo (returns ID=X). Call PUT /todos/X with a request body where id=Y (different from X). Verify the response status is 400 Bad Request.",
+    "mutant_files": [
+      "Todo.Api/Todos/TodoApi.cs"
+    ]
+  },
+  {
+    "id": 12,
+    "requirement": "Register two users (userA and userB) and login with each. UserA creates a todo with title 'UserA Todo' and notes the ID. UserB calls PUT /todos/{id} with userA's todo ID, attempting to change the title to 'Hacked'. Verify the response status is 404 Not Found. Then userA verifies the title is still 'UserA Todo' by calling GET /todos/{id}.",
+    "mutant_files": [
+      "Todo.Api/Todos/TodoApi.cs"
+    ]
+  }
+]

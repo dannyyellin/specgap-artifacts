@@ -1,0 +1,19 @@
+{
+  "app": "pet-store",
+  "variant": "petorder-R8R9R10",
+  "service": "pet-order",
+  "req_id": "R8",
+  "requirement": "When multiple pets match a purchase request, the pet to purchase is selected at random among them.",
+  "source_headline": "Removed pet selection algorithm (random when multiple available)",
+  "model": "gpt-5.4",
+  "pass": 2,
+  "label": "PARTIAL",
+  "evidence": "choose_pet(): when no specific pet-name is requested, it calls fetch_pets(store_num, pet_type_id) and then deterministically selects pets[0] via `first_pet = pets[0]` and returns that pet. It also scans stores in fixed ascending order with `list(range(1, DEFAULT_STORE_SCAN_RANGE + 1))` and returns on the first matching store.",
+  "reasoning": "The code clearly addresses pet selection for purchase requests, so this is not a GAP. However, the requirement specifically says that when multiple pets match, the selected pet must be random among them; this implementation always picks the first pet in the first matching store, which is deterministic and observably different. Therefore a test checking randomness among multiple matches would fail, making this PARTIAL.",
+  "usage": {
+    "total_tokens": 3152,
+    "prompt_tokens": 2972,
+    "completion_tokens": 180
+  },
+  "timestamp": "2026-07-16 15:02:12"
+}

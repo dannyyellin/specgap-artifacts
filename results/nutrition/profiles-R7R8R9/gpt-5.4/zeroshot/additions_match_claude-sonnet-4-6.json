@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 describes a uniqueness constraint on profile creation, which does not correspond to any of the three spec requirements listed (R7, R8, R9)."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "R9 states that user_id should come from token validation rather than the request body, and A2 describes accepting tokens from multiple locations including the JSON body, which partially relates to how token/user identity is sourced but covers a broader scope than just user_id extraction."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R8",
+        "label": "PARTIAL",
+        "reasoning": "R8 removed the owner-only restriction on GET /profiles, and A3 describes additional filtering behavior on GET /profiles, but A3 does not specifically address the owner-only restriction removal\u2014it describes extra query parameter support rather than access control changes."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 951,
+    "prompt_tokens": 657,
+    "completion_tokens": 294
+  }
+}

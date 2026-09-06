@@ -1,0 +1,18 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 concerns POST /logs field type validation, which does not correspond to removing the loanDate format from Logs or removing Borrows-to-Logs notifications from descriptions."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 537,
+    "prompt_tokens": 456,
+    "completion_tokens": 81
+  }
+}

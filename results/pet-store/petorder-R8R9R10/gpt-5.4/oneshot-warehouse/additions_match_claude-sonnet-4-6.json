@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Storing purchase documents in a MongoDB 'purchases' collection does not correspond to any of the three spec requirements about removed pet selection, removed DELETE pet step, or removed unique purchase-id constraint."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Adding an 'id' field to transaction documents and querying by it does not relate to the removed pet selection algorithm, removed DELETE pet step, or removed unique purchase-id constraint."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Enforcing that the 'purchaser' field matches the authenticated username does not correspond to any of the three spec requirements about removed pet selection, removed DELETE pet step, or removed unique purchase-id constraint."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 930,
+    "prompt_tokens": 666,
+    "completion_tokens": 264
+  }
+}

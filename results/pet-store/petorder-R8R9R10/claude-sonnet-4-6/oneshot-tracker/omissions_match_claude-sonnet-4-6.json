@@ -1,0 +1,102 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about MongoDB URI configuration, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R8",
+        "label": "MATCH",
+        "reasoning": "O2 directly describes the absence of random pet selection when multiple pets are available, matching R8 which states the random selection algorithm was removed."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "O3 directly describes the missing DELETE pet from pet-store step after purchase, matching R9 exactly."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about a store scan range cap not mentioned in any of the three reference requirements."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about incorrect HTTP status codes (401 vs 403) for GET /transactions, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about incorrect HTTP status codes (401 vs 403) for GET /transactions/{id}, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This discusses the pet-name field in transaction documents and concludes no omission, not matching any reference requirement."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about an extra 'id' field in transaction documents, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about using an internal counter 'id' instead of 'purchase-id' for transaction lookup, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concludes the pet-name/store validation is actually implemented correctly, and does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about a store scan cap when no store is specified, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about case-insensitive matching of pet-type, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O13",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about conjunction query string support for GET /transactions, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O14",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concludes no omission regarding purchase authorization, and does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O15",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "O15 addresses the lack of enforcement of purchase-id uniqueness, partially matching R10 which states the requirement that purchase-id must be unique and cannot be reused was removed; however O15 frames it as a missing enforcement rather than a removed requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2950,
+    "prompt_tokens": 1892,
+    "completion_tokens": 1058
+  }
+}

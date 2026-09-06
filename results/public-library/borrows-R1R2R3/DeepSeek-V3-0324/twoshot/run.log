@@ -1,0 +1,17 @@
+Timestamp: 2026-06-02 06:04:34
+Detector:  DeepSeek-V3-0324
+App/Variant/Service: public-library/borrows-R1R2R3/borrows
+Method:    twoshot
+
+Tokens: prompt=7739, completion=646, total=8385
+Additions: 3
+Omissions: 4
+
+  A A1: Stores a 'returnDate' field in the borrow record during POST, which is not required by the specification
+  A A2: Allows updating 'returnDate' via PUT /borrows/{id}, which is not mentioned in the specification
+  A A3: Validates that 'returnDate' is not before 'loanDate', which is not explicitly required by the specification
+
+  O O1: Does not compute 'returnDate' as loanDate + LOAN_PERIOD (30 days) when creating a borrow record
+  O O2: Does not check if the cardholder has 2 or more books overdue before allowing a new borrow
+  O O3: Does not return status code 400 when a book cannot be checked out due to 2 or more overdue books
+  O O4: Does not validate that the 'ISBN' field in POST requests is a valid ISBN_13 number

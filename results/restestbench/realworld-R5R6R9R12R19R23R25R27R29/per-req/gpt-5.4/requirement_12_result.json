@@ -1,0 +1,21 @@
+{
+  "req_id": 12,
+  "requirement_vague": "Verify article filtering by tag works correctly",
+  "requirement_precise": "Create a user. Create article1 with title 'First Tagged Article' and tagList ['javascript', 'testing']. Create article2 with title 'Second Tagged Article' and tagList ['python', 'testing']. Create article3 with title 'No Match Article' and tagList ['ruby']. GET /api/articles?tag=javascript. Verify articlesCount is 1 and articles array contains only 'First Tagged Article'. GET /api/articles?tag=testing. Verify articlesCount is 2 and articles array contains both 'First Tagged Article' and 'Second Tagged Article'. GET /api/articles?tag=nonexistent. Verify articlesCount is 0.",
+  "removed": true,
+  "omissions": [
+    {
+      "id": "R12-O1",
+      "description": "GET /api/articles does not implement filtering by the tag query parameter.",
+      "category": "BUSINESS_LOGIC",
+      "reasoning": "The requirement is to return only articles matching the provided tag and to report the corresponding articlesCount. In list_articles, the endpoint accepts only author, limit, and offset query parameters and applies filtering only by author. There is no tag query parameter and no query/join against ArticleTagLink or Tag to restrict results by tag, so requests like /api/articles?tag=javascript, /api/articles?tag=testing, and /api/articles?tag=nonexistent will not produce the required filtered results."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 5362,
+    "prompt_tokens": 5215,
+    "completion_tokens": 147
+  },
+  "parse_error": false
+}

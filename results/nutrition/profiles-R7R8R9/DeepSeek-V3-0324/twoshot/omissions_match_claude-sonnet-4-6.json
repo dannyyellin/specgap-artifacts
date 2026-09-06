@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R8",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of the owner-only restriction on GET /profiles, matching R8 exactly."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 concerns missing rating validation in POST /ratings, which does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R7",
+        "label": "PARTIAL",
+        "reasoning": "O3 describes missing diet-based filtering in /profileDishes, which partially relates to R7's removal of protein exclusion from profileDishes calculation, but O3 is broader (entire filtering logic missing) while R7 is specifically about protein exclusion."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concerns missing 415 status code handling for the dishes service, which does not correspond to any of the reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 964,
+    "prompt_tokens": 646,
+    "completion_tokens": 318
+  }
+}

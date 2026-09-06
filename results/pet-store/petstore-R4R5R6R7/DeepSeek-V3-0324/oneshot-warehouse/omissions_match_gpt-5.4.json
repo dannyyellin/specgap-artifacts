@@ -1,0 +1,48 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "Both describe removal of the constraint preventing deletion of a pet-type when pets of that type exist."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "Both refer to removal of birthdateGT/birthdateLT query filtering for pet listings."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns updating the picture field, which is unrelated to any reference requirement."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "Both concern the removed extraction rules involving temperament and group_behavior attributes."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "It discusses attribute extraction behavior, but focuses on token splitting and punctuation handling rather than specifically the removed temperament/group_behavior rules."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "Both describe the removed requirement to block pet-type deletion when pets of that type exist."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1064,
+    "prompt_tokens": 724,
+    "completion_tokens": 340
+  }
+}

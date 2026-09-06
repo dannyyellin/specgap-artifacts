@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "O1 discusses the fine formula behavior, but it claims the formula should exist and be applied incorrectly, whereas R6 says the formula was removed from the requirements."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "O2 is about returning 415 for unsupported media type, while R5 specifically says 415 was removed from the general error codes."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 concerns query filtering by id, which is unrelated to removed type declarations, 415 removal, fine formula removal, or cross-service call removal."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "O4 concerns use of 415 on PUT requests, but R5 states that 415 was removed from the general error codes rather than specifying endpoint behavior."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 is about validating non-empty strings for name and email, which does not correspond to any listed removed requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1192,
+    "prompt_tokens": 852,
+    "completion_tokens": 340
+  }
+}

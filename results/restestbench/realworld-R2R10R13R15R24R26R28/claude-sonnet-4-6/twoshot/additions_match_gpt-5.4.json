@@ -1,0 +1,54 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements check article response timestamp field names or whether both created/updated and createdAt/updatedAt are present."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements validate the shape of the user response object or whether it contains an id field."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R28",
+        "label": "PARTIAL",
+        "reasoning": "R28 is specifically about a non-owner being able to update any article, while A3 addresses the same endpoint and scenario but with the opposite enforced behavior and status."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R28",
+        "label": "PARTIAL",
+        "reasoning": "R28 requires that a non-owner can delete any article successfully, while A4 covers the same delete scenario but says the code blocks it with 403."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements concern deleting comments or who is authorized to delete them."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements mention the tags endpoint."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements validate article favoriting fields or favorites counts."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2140,
+    "prompt_tokens": 1725,
+    "completion_tokens": 415
+  }
+}

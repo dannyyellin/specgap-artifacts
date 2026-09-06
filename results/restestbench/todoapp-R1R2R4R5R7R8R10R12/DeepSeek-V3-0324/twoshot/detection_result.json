@@ -1,0 +1,37 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "The TodoUpdate model includes an optional 'id' field",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The specification does not mention or require an 'id' field in the update request body, yet the code includes it as an optional field in the TodoUpdate model."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "POST /todos does not validate that the 'title' field is non-empty",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification requires that a 400 Bad Request response is returned if the title field is empty or missing, but the code does not perform this validation."
+      },
+      {
+        "id": "O2",
+        "description": "PUT /todos/{id} does not reject requests where the request body 'id' does not match the URL 'id'",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification requires that a 400 Bad Request response is returned if the request body 'id' does not match the URL 'id', but the code does not perform this check."
+      },
+      {
+        "id": "O3",
+        "description": "GET /todos without an Authorization header does not return 401 Unauthorized",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification requires that a 401 Unauthorized response is returned if no Authorization header is provided, but the code does not explicitly test for this scenario in the GET /todos endpoint."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 6136,
+    "prompt_tokens": 5767,
+    "completion_tokens": 369
+  }
+}

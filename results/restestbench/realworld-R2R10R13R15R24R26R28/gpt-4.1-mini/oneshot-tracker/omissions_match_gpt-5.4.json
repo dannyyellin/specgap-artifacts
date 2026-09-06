@@ -1,0 +1,156 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns user creation field validation, which is not covered by any listed reference requirement."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns login status codes, which are not addressed by any listed reference requirement."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R24",
+        "label": "MATCH",
+        "reasoning": "Both describe the ordering behavior of GET /api/articles and specifically whether results are sorted by created timestamp descending."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R24",
+        "label": "PARTIAL",
+        "reasoning": "It overlaps with R24 on ordering by created timestamp, but adds feed behavior and filtering not part of R24."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R13",
+        "label": "PARTIAL",
+        "reasoning": "It partially overlaps because R13 tests author filtering on GET /api/articles, though O4 also discusses feed and timestamp ordering beyond that requirement."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about feed behavior and authentication, which none of the listed reference requirements cover."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns validation of comment body presence, while the listed comment requirement only checks multiple comments are persisted and returned."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R28",
+        "label": "MATCH",
+        "reasoning": "R28 explicitly requires that non-owners can update and delete any article, which O7 directly addresses as missing."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "R2 requires a 400 error when a user attempts to follow themselves, which O8 directly describes."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "R10 requires a 400 error when a user attempts to unfollow themselves, which O8 directly describes."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "User deletion and foreign key handling are not part of any listed reference requirement."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": "R28",
+        "label": "PARTIAL",
+        "reasoning": "R28 includes verifying GET on a deleted article returns 200 with empty object, which O10 captures, but O10 omits the surrounding unauthorized delete/update behavior."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Invalid login behavior is not covered by any listed reference requirement."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "User uniqueness constraints are not addressed by any listed reference requirement."
+      },
+      {
+        "detection_id": "O13",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Slug uniqueness behavior is not covered by any listed reference requirement."
+      },
+      {
+        "detection_id": "O14",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Timestamp setting and updating on articles are not directly specified in the listed reference requirements."
+      },
+      {
+        "detection_id": "O15",
+        "requirement_id": "R13",
+        "label": "PARTIAL",
+        "reasoning": "R13 tests author filtering on GET /api/articles, and O15 includes author filtering, but also adds tag filtering and pagination not part of R13."
+      },
+      {
+        "detection_id": "O15",
+        "requirement_id": "R15",
+        "label": "MATCH",
+        "reasoning": "R15 is specifically about pagination with limit and offset on GET /api/articles, which O15 directly states is supported."
+      },
+      {
+        "detection_id": "O16",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Feed pagination is not covered by any listed reference requirement."
+      },
+      {
+        "detection_id": "O17",
+        "requirement_id": "R26",
+        "label": "PARTIAL",
+        "reasoning": "R26 requires returned comments to preserve bodies and have unique ids, and O17 captures id presence/type and body preservation but not the multiple-comment uniqueness/count scenario."
+      },
+      {
+        "detection_id": "O18",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Returning the article with comments after comment creation is not part of any listed reference requirement."
+      },
+      {
+        "detection_id": "O19",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Comment deletion authorization is not covered by any listed reference requirement."
+      },
+      {
+        "detection_id": "O20",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "R2 includes GET /api/profiles/{username} showing following=true relative to the viewer, which O20 captures generally but without the specific follow/self-follow scenario."
+      },
+      {
+        "detection_id": "O20",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "R10 includes GET /api/profiles/{username} showing following=false after unfollow, which O20 captures only as the general profile-following field behavior."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 3594,
+    "prompt_tokens": 2208,
+    "completion_tokens": 1386
+  }
+}

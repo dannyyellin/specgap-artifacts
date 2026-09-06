@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns POST /logs request-body type validation, which does not relate to removing the loanDate date format or removing Borrows-to-Logs notifications from descriptions."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns GET /logs filtering behavior, which does not correspond to either removing the loanDate date format or removing Borrows-to-Logs notifications from descriptions."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This describes UUID generation for log IDs, unrelated to the removed loanDate format requirement and the removed Borrows-to-Logs notification text."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This describes JSON error response structure, which does not match either spec change about loanDate formatting or description notifications."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 910,
+    "prompt_tokens": 645,
+    "completion_tokens": 265
+  }
+}

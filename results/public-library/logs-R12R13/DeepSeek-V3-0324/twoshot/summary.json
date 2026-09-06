@@ -1,0 +1,16 @@
+{
+  "app": "public-library",
+  "variant": "logs-R12R13",
+  "service": "logs",
+  "method": "twoshot",
+  "detector_model": "DeepSeek-V3-0324",
+  "gen_model": "gpt-5.4",
+  "gen_usage": null,
+  "n_additions": 0,
+  "n_omissions": 3,
+  "usage": {
+    "total_tokens": 6433,
+    "prompt_tokens": 6138,
+    "completion_tokens": 295
+  }
+}

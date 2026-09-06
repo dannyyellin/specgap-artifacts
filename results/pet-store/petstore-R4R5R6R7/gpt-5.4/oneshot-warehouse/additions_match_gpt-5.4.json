@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Embedding pets inside a pet-type document is a persistence-model choice and does not correspond to any removed rule about attributes extraction, delete constraints, lifespan handling, or birthdate filtering."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Picture-name path validation is unrelated to the removed requirements concerning attributes extraction, pet-type deletion constraints, lifespan parsing, or birthdate query filters."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "R4 removes the temperament/group_behavior-based attributes extraction rules, and A3 describes attributes being populated from API fields, directly addressing that same attributes-extraction behavior."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 817,
+    "prompt_tokens": 602,
+    "completion_tokens": 215
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "variant": "fastapi-R14R15R16R17R18R46R56",
+  "service": "fastapi",
+  "results": [
+    {
+      "req_id": 14,
+      "test_status": "FAIL",
+      "test_verdict": "NOT_IMPLEMENTED",
+      "llm_verdict": "NOT_IMPLEMENTED",
+      "agree": true,
+      "detail": "test_use_access_token: ",
+      "adaptations": [],
+      "setup_blocked_reason": null
+    },
+    {
+      "req_id": 15,
+      "test_status": "FAIL",
+      "test_verdict": "NOT_IMPLEMENTED",
+      "llm_verdict": "NOT_IMPLEMENTED",
+      "agree": true,
+      "detail": "test_recovery_password: ",
+      "adaptations": [],
+      "setup_blocked_reason": null
+    },
+    {
+      "req_id": 16,
+      "test_status": "FAIL",
+      "test_verdict": "NOT_IMPLEMENTED",
+      "llm_verdict": "NOT_IMPLEMENTED",
+      "agree": true,
+      "detail": "test_recovery_password_user_not_exists: ",
+      "adaptations": [],
+      "setup_blocked_reason": null
+    },
+    {
+      "req_id": 17,
+      "test_status": "FAIL",
+      "test_verdict": "NOT_IMPLEMENTED",
+      "llm_verdict": "NOT_IMPLEMENTED",
+      "agree": true,
+      "detail": "test_reset_password: ",
+      "adaptations": [],
+      "setup_blocked_reason": null
+    },
+    {
+      "req_id": 18,
+      "test_status": "FAIL",
+      "test_verdict": "NOT_IMPLEMENTED",
+      "llm_verdict": "NOT_IMPLEMENTED",
+      "agree": true,
+      "detail": "test_reset_password_invalid_token: ",
+      "adaptations": [],
+      "setup_blocked_reason": null
+    },
+    {
+      "req_id": 46,
+      "test_status": "PASS",
+      "test_verdict": "IMPLEMENTED",
+      "llm_verdict": "IMPLEMENTED",
+      "agree": true,
+      "detail": "",
+      "adaptations": [],
+      "setup_blocked_reason": null
+    },
+    {
+      "req_id": 56,
+      "test_status": "FAIL",
+      "test_verdict": "NOT_IMPLEMENTED",
+      "llm_verdict": "NOT_IMPLEMENTED",
+      "agree": true,
+      "detail": "test_reset_password_new_password_too_short_7_chars: Expected 422 for 7-char new_password, got 404",
+      "adaptations": [],
+      "setup_blocked_reason": null
+    }
+  ]
+}

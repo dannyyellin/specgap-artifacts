@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A superuser HTML password-recovery-token endpoint is not described by any listed requirement."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A superuser endpoint to update arbitrary users does not correspond to any requirement, which only mentions registration, login, item access/deletion, and self password change."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Support for superusers modifying is_active and is_superuser fields is not covered by any of the provided requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1101,
+    "prompt_tokens": 912,
+    "completion_tokens": 189
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "A1 concerns enforcing MongoDB ObjectId syntax for IDs, which conflicts with the removed explicit string type declaration for id, but it is about stricter validation/internal representation rather than the spec change itself."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A2 describes PUT body/path ID consistency validation, which does not correspond to removing field type declarations, removing 415, removing the fine formula, or removing the Borrows cross-service call."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A3 is about limiting query filtering to name and email fields, which does not match any of the listed spec removals."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 867,
+    "prompt_tokens": 643,
+    "completion_tokens": 224
+  }
+}

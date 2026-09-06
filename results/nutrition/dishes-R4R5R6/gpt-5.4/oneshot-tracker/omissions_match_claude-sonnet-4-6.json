@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of owner-only restriction for POST/PUT/DELETE on dishes, matching R5 exactly."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "O2 describes a missing 'ingredient' (contains) query parameter, which partially overlaps with R6's removal of 'contains' filtering semantics, but R6 also covers lte for nutrients which O2 does not address."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O3 directly describes the missing less-than-or-equal comparison for nutritional query fields, which matches R6's removal of lte filtering semantics for nutrients."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "O4 relates to Ninja API field handling and mapping behavior, partially overlapping with R4's removal of Ninja API field name mapping details, though O4 focuses on error handling for non-numeric strings rather than field name mapping specifically."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 describes use of a disallowed package (flask-pymongo), which does not correspond to any of the reference requirements R4, R5, or R6."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1266,
+    "prompt_tokens": 830,
+    "completion_tokens": 436
+  }
+}

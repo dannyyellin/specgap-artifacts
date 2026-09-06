@@ -1,0 +1,24 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of the overdue borrow constraint (2+ overdue books blocks checkout, returns 400) from Borrows, matching R2 exactly."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O2 directly describes the removal of the returnDate computation (loanDate + 30 days) from Borrows, matching R1 exactly."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 794,
+    "prompt_tokens": 622,
+    "completion_tokens": 172
+  }
+}

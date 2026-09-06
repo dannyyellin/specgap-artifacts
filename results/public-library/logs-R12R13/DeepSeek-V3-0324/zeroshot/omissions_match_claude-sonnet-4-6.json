@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R12",
+        "label": "PARTIAL",
+        "reasoning": "O1 detects that 'DD-MM-YYYY' format validation is missing in code, which relates to R12's removal of that date format requirement, but O1 frames it as a missing validation bug rather than an intentional removal of the format specification."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 concerns ISBN_13 format validation, which does not correspond to either R12 or R13."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 concerns UUID/ID format validation for cardholderId and borrowId, which does not correspond to either R12 or R13."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concerns handling of unknown query parameters in GET requests, which does not correspond to either R12 or R13."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1037,
+    "prompt_tokens": 713,
+    "completion_tokens": 324
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns unsupported filtering by id on GET /cardholders, which does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "It discusses validation of name and email as strings, which overlaps with removed string type declarations, but it adds a non-empty constraint not present in the reference requirement."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "It directly describes the fine computation formula using $0.50 per day times days overdue, which is the same behavior referenced as removed."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "It is about fine computation logic and mentions failure to compute days overdue times $0.50, but it also focuses on overdue-status determination rather than just the removed formula itself."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "It explicitly refers to the 415 Unsupported Media Type error code, matching the reference requirement that this error code was removed."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1161,
+    "prompt_tokens": 824,
+    "completion_tokens": 337
+  }
+}

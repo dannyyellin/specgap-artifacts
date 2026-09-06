@@ -1,0 +1,18 @@
+{
+  "req_id": 11,
+  "requirement_vague": "Updating a non-existent todo returns 404 Not Found",
+  "requirement_precise": "Register a user and login. Call PUT /todos/99999 with a valid todo body (id=99999, title='Test', isComplete=false). Verify the response status is 404 Not Found.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": "update_todo route: PUT /todos/{id}",
+    "code_reference": "todo = session.exec(\n    select(Todo).where(Todo.id == id, Todo.user_id == current_user.id)\n).first()\nif not todo:\n    raise HTTPException(\n        status_code=status.HTTP_404_NOT_FOUND,\n        detail=\"Todo not found\",\n    )",
+    "reasoning": "The PUT /todos/{id} handler looks up the todo by the path id and current user, and if no matching record exists it raises an HTTPException with status 404 Not Found. This satisfies the requirement for updating a non-existent todo to return 404 after authentication."
+  },
+  "usage": {
+    "total_tokens": 2560,
+    "prompt_tokens": 2409,
+    "completion_tokens": 151
+  },
+  "parse_error": false
+}

@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Filtering GET /borrows by specific fields does not describe removal of return date computation, removal of overdue checkout blocking, or removal of checkout log notification."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R1",
+        "label": "PARTIAL",
+        "reasoning": "Validation involving returnDate relates to returnDate handling in Borrows, but it is not the same as the spec's removal of automatic returnDate computation."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R1",
+        "label": "PARTIAL",
+        "reasoning": "Allowing clients to update returnDate concerns the same field affected by the removal of computed returnDate, but it does not directly describe removing the loanDate+30-days computation."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Error response JSON structure is unrelated to the removed borrow behaviors in the listed spec requirements."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Date-range filtering and its validation do not correspond to removing return date computation, overdue borrow blocking, or checkout-triggered log notification."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1137,
+    "prompt_tokens": 805,
+    "completion_tokens": 332
+  }
+}

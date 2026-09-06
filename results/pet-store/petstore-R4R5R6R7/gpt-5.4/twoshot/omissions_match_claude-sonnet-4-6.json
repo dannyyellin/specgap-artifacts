@@ -1,0 +1,108 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of the constraint that prevents deletion of a pet-type when it still has pets, which is exactly R5."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O2 describes the same behavior as O1 from a different angle (no 400 response), both matching R5's removal of the 'cannot delete pet-type if it has pets' constraint."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 (first instance) concerns 403 for non-owner users, which does not correspond to any of the four reference requirements."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 (second instance) concerns returning 404 for missing pet-type on POST, which does not correspond to any of the four reference requirements."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concerns validation of allowed fields in the POST payload, which does not correspond to any of the four reference requirements."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "O5 directly describes the absence of birthdateGT/birthdateLT query filtering, which is exactly what R7 states was removed."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R7",
+        "label": "PARTIAL",
+        "reasoning": "O6 describes missing strict before/after birthdate filtering logic, which is related to R7's removal of birthdate query filtering but focuses on the filtering logic rather than the query parameters themselves."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R7",
+        "label": "PARTIAL",
+        "reasoning": "O7 concerns malformed query string handling for birthdate filters, which is a secondary behavior of R7's birthdate query filtering removal but not the primary behavior described."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "O8 describes the absence of deriving 'attributes' from 'group_behavior', which directly corresponds to R4's removal of temperament/group_behavior to attributes extraction rules."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "O9 describes the missing precedence rule of temperament over group_behavior, which is part of the extraction rules removed per R4."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "O10 describes the missing tokenization logic for building 'attributes' from temperament/group_behavior text, which is part of the extraction rules removed per R4."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "O11 concerns lifespan defaulting to 0 instead of null, which is related to R6's removal of lifespan range handling but focuses on a different aspect (null handling vs. range/minimum extraction)."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "O12 concerns incorrect field mapping for lifespan extraction, which is related to R6's removal of lifespan range handling but addresses field location rather than range/minimum logic."
+      },
+      {
+        "detection_id": "O13",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O13 concerns returning 503 vs 500 when the registry service is unavailable, which does not correspond to any of the four reference requirements."
+      },
+      {
+        "detection_id": "O14",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O14 concerns returning 503 instead of 401 when the registry service fails, which does not correspond to any of the four reference requirements."
+      },
+      {
+        "detection_id": "O15",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O15 concerns MongoDB service naming configuration, which does not correspond to any of the four reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2971,
+    "prompt_tokens": 1732,
+    "completion_tokens": 1239
+  }
+}

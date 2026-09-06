@@ -1,0 +1,23 @@
+{
+  "variant": "realworld-R2R10R13R15R24R26R28",
+  "req_id": 10,
+  "model": "gpt-5.4",
+  "pass": 1,
+  "verdict": "NOT_IMPLEMENTED",
+  "requirement_vague": "Verify unfollow removes follow relationship and updates profile following status",
+  "omissions": [
+    {
+      "id": "O1",
+      "description": "DELETE /api/profiles/{username}/follow does not reject self-unfollow with 400.",
+      "category": "BUSINESS_LOGIC",
+      "reasoning": "The requirement says a user cannot unfollow themselves and this should return 400. In unfollow_user, the code looks up the target and deletes any FollowLink if present, then always returns 200 with the profile. There is no check for current_user.id == target.id and no 400 response."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 5443,
+    "prompt_tokens": 5331,
+    "completion_tokens": 112
+  },
+  "timestamp": "2026-07-12 10:42:35"
+}

@@ -1,0 +1,54 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R8",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of the owner-only restriction on GET /profiles, matching R8 exactly."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 concerns a route naming discrepancy (/profiles/{id} vs /profile/{id}) which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "O3 describes protein being incorrectly included in the profileDishes diet comparison, which directly corresponds to R7's removal of protein exclusion from profileDishes calculation."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concerns unknown fields being silently ignored in POST /profiles, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 concerns unknown fields being silently ignored in PUT /profiles/{id}, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 concerns invalid numeric values being converted to 0.00 instead of causing a 400 error, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "O7 describes the same behavior as O3/R7 \u2014 protein is forwarded to the dishes service when it should be excluded from the profileDishes calculation."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1529,
+    "prompt_tokens": 995,
+    "completion_tokens": 534
+  }
+}

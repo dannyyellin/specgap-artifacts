@@ -1,0 +1,72 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "R9 is about uniqueness validation during user creation, while A1 concerns missing uniqueness validation during user update, so they overlap on uniqueness but not the same operation."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements concern PUT /api/user updating password, bio, or image fields."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "R5 explicitly requires GET /api/articles/{slug} after deletion to return status 200 with an empty object {}, which is exactly the behavior described."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "A4 concerns article deletion behavior at the same endpoint used in R5, but it describes comment cleanup rather than the required deletion and retrieval semantics."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements describe deleting comments or the response body for comment deletion."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the provided requirements involve filtering articles by author username."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": "R23",
+        "label": "PARTIAL",
+        "reasoning": "R23 requires pagination on the feed endpoint specifically, while A7 describes pagination support on the general article listing endpoint."
+      },
+      {
+        "detection_id": "A8",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "R6 requires GET /api/articles/feed to return followed authors' articles, and A8 states that this required endpoint is not implemented."
+      },
+      {
+        "detection_id": "A8",
+        "requirement_id": "R23",
+        "label": "MATCH",
+        "reasoning": "R23 specifically requires the feed endpoint with pagination, and A8 states that the feed endpoint is not implemented."
+      },
+      {
+        "detection_id": "A8",
+        "requirement_id": "R27",
+        "label": "MATCH",
+        "reasoning": "R27 requires GET /api/articles/feed to return an empty feed for a user following nobody, and A8 states that the feed endpoint is not implemented."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2503,
+    "prompt_tokens": 1882,
+    "completion_tokens": 621
+  }
+}

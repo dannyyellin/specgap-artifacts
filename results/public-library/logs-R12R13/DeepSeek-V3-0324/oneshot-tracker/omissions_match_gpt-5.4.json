@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R12",
+        "label": "PARTIAL",
+        "reasoning": "O1 discusses missing validation for loanDate in DD-MM-YYYY format, while R12 says that date format was removed from Logs, so they overlap on the same field/format but assert opposite requirement intent."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 concerns ISBN_13 validation, which is unrelated to either the removed loanDate format in Logs or the removed Borrows-to-Logs notification description."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 concerns validating referenced record existence, which does not correspond to either reference requirement."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concerns error handling for nonexistent referenced IDs, which is unrelated to the reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 854,
+    "prompt_tokens": 590,
+    "completion_tokens": 264
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O1 concerns query-parameter filtering behavior on GET /logs, which is unrelated to removing a loanDate format or removing Borrows-to-Logs notifications from descriptions."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 is about 405 handling for unsupported methods on /logs/{id}, which does not correspond to either reference removal requirement."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R12",
+        "label": "PARTIAL",
+        "reasoning": "O3 discusses loanDate format handling on logs, but it asserts the format should be validated whereas R12 says the DD-MM-YYYY format was removed."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 915,
+    "prompt_tokens": 704,
+    "completion_tokens": 211
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "GET /dishes supports filtering by 'id', 'name', and 'ingredients' query parameters in addition to nutritional fields",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification only defines filtering by nutritional fields (with <= comparison) and by 'ingredient' (membership check). The code also allows filtering by 'id' and 'name' as exact-match query parameters, which are not mentioned in the specification."
+      },
+      {
+        "id": "A2",
+        "description": "Nutritional field query filtering uses exact equality rather than less-than-or-equal comparison",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states that for nutritional fields, any dish with a value less than or equal to the query value satisfies the clause. The code builds a MongoDB query using exact equality (query[field] = value), not a $lte operator."
+      },
+      {
+        "id": "A3",
+        "description": "GET /dishes filters by 'ingredients' as an exact field match rather than a membership/contains check",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states that for the 'ingredient' query parameter, any dish that contains that ingredient satisfies the clause (membership check). The code uses 'ingredients' (plural) as an exact equality match on the array field, not a contains/membership check, and uses the wrong parameter name ('ingredients' vs 'ingredient')."
+      },
+      {
+        "id": "A4",
+        "description": "All endpoints require authentication including GET /dishes and GET /dishes/{id}",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states POST, DELETE, and PUT requests are only allowed by the restaurant Owner, implying GET requests are publicly accessible or at least do not require Owner privileges. The code applies token validation to ALL requests via before_request, requiring a valid token even for GET requests."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "POST /dishes and PUT/DELETE /dishes/{id} do not verify that the authenticated user is the restaurant Owner (privileged user)",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states 'POST and DELETE and PUT requests are only allowed by the restaurant Owner.' The code validates the token but never checks the 'privileged' field returned by the authentication service to ensure the requester is the Owner."
+      },
+      {
+        "id": "O2",
+        "description": "GET /dishes does not support filtering by 'ingredient' query parameter as a membership/contains check",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states 'if field equals ingredient, then any dish that contains the value satisfies the clause.' The code uses 'ingredients' (plural) with exact equality, not a contains check on the array, and does not handle the 'ingredient' (singular) parameter name as specified."
+      },
+      {
+        "id": "O3",
+        "description": "Nutritional field query filtering does not use less-than-or-equal comparison ($lte)",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states 'any dish that has less than or equal to that value for that nutritional element satisfies the clause.' The code uses exact equality matching in MongoDB queries instead of $lte."
+      },
+      {
+        "id": "O4",
+        "description": "Ninja API field values that are strings (e.g., 'Only available for premium subscribers.') are not handled gracefully \u2014 they may cause errors",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification notes 'some of the nutritional elements returned by Ninja but not used by the application will have a string value.' While the mapped fields should be numeric, the code uses float() conversion with a fallback of 0.0 via 'or 0.0', but a non-empty string like 'Only available for premium subscribers.' is truthy and would cause a ValueError in float(). The specification requires these to default to 0.0."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 9493,
+    "prompt_tokens": 8485,
+    "completion_tokens": 1008
+  }
+}

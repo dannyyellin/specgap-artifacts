@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O1 describes missing password complexity validation for length and character classes, which is the same behavior removed in R1."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O2 concerns /verify handling of invalid credentials, but it focuses on HTTP status/response shape rather than the specific removed same-error-message anti-enumeration requirement in R2."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O3 directly describes that /verify does not return the same response for invalid username and invalid password, matching the removed anti-enumeration requirement in R2."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 is about MongoDB connection error handling, which does not correspond to any of the listed reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 836,
+    "prompt_tokens": 563,
+    "completion_tokens": 273
+  }
+}

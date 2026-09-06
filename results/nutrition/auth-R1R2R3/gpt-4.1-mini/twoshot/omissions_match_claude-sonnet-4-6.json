@@ -1,0 +1,60 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of password encryption (bcrypt), matching R1."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O2 partially captures R2 by noting the Owner special case is not enforced, but focuses on environment variables rather than the complete removal of the Owner special case including the privileged flag."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 describes missing JSON error messages, which does not correspond to any of the three reference requirements about bcrypt, Owner special case, or username uniqueness."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 describes missing input validation for empty/whitespace strings, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R3",
+        "label": "PARTIAL",
+        "reasoning": "O5 partially captures R3 by noting the 400 response lacks a JSON error message, but R3 is about the complete removal of the username uniqueness constraint, not just the response format."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 describes missing JSON error messages for invalid tokens on /validate, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O7 partially relates to R2 by noting the 'privileged' field is set from token payload rather than verifying the Owner name and password, touching on the Owner special case behavior."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O8 describes missing 415 status code handling for unsupported media types, which does not correspond to any of the three reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1521,
+    "prompt_tokens": 907,
+    "completion_tokens": 614
+  }
+}

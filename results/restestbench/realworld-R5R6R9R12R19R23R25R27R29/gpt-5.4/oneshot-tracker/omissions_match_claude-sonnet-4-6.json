@@ -1,0 +1,84 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the failure mode for R9: duplicate user creation returns 422 instead of 400 with 'Username and email must be unique'."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R25",
+        "label": "MATCH",
+        "reasoning": "O2 directly describes the failure mode for R25: the JWT payload does not contain id, username, and email as required."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R12",
+        "label": "MATCH",
+        "reasoning": "O3 directly describes the failure mode for R12: GET /api/articles does not support tag filtering, which R12 explicitly tests."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O4 describes the absence of GET /api/articles/feed, which is the core endpoint tested in R6."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R23",
+        "label": "MATCH",
+        "reasoning": "O4 also covers R23, which tests feed pagination via GET /api/articles/feed with limit and offset parameters."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R27",
+        "label": "MATCH",
+        "reasoning": "O4 also covers R27, which tests the empty feed behavior via GET /api/articles/feed when the user follows nobody."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "O5 relates to R5's DELETE and subsequent GET behavior but conflates the DELETE response with the GET response, partially capturing the requirement."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers the DELETE comment endpoint response body or ownership validation behavior described in O6."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R29",
+        "label": "MATCH",
+        "reasoning": "O7 directly describes the missing DELETE /api/users/{email} endpoint that R29 explicitly tests."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement tests validation of required article fields (title, description, body) on POST /api/articles."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement tests validation of the comment body field on POST /api/articles/{slug}/comments."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement tests uniqueness enforcement on the PUT /api/user update endpoint."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 3374,
+    "prompt_tokens": 2543,
+    "completion_tokens": 831
+  }
+}

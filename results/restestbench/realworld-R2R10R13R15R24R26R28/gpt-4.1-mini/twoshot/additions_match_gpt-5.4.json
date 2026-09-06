@@ -1,0 +1,72 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R13",
+        "label": "MATCH",
+        "reasoning": "R13 explicitly requires GET /api/articles to filter by the author query parameter."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements mention filtering articles by tag."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R15",
+        "label": "MATCH",
+        "reasoning": "R15 requires GET /api/articles to support limit and offset pagination behavior."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R24",
+        "label": "PARTIAL",
+        "reasoning": "R24 requires descending order by created timestamp, while A4 describes descending order by article.id, which may correlate but is not the same specified behavior."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": "R28",
+        "label": "MATCH",
+        "reasoning": "R28 explicitly expects GET on a deleted article to return 200 with an empty object {}."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No listed requirement specifies deleting comments as part of article deletion."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No listed requirement mentions clearing article tags during deletion."
+      },
+      {
+        "detection_id": "A8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements mention a GET /api/tags endpoint."
+      },
+      {
+        "detection_id": "A9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements mention deleting users by email or FK constraint behavior for that endpoint."
+      },
+      {
+        "detection_id": "A10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements require user responses to include an id field."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2357,
+    "prompt_tokens": 1826,
+    "completion_tokens": 531
+  }
+}

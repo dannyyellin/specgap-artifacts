@@ -1,0 +1,72 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements describe forbidding superusers from deleting themselves."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements describe forbidding setting a new password equal to the current password."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R17",
+        "label": "MATCH",
+        "reasoning": "R17 explicitly requires verifying the password reset response JSON is exactly {\"message\": \"Password updated successfully\"}, which matches this behavior."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements explicitly test or verify that superuser authentication is required for POST /api/v1/users/."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed spec requirements describe verifying the GET /api/v1/users/ response format with 'data' and 'count' fields."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed spec requirements describe verifying the GET /api/v1/items/ response format with 'data' and 'count' fields."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": "R56",
+        "label": "MATCH",
+        "reasoning": "R56 explicitly tests that a password of exactly 7 characters returns a 422 validation error, which is enforced by the 8-128 character password length validation."
+      },
+      {
+        "detection_id": "A8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed spec requirements explicitly test email format validation using EmailStr."
+      },
+      {
+        "detection_id": "A9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed spec requirements test item title length validation constraints."
+      },
+      {
+        "detection_id": "A10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed spec requirements test maximum length constraints on description or full_name fields."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2318,
+    "prompt_tokens": 1642,
+    "completion_tokens": 676
+  }
+}

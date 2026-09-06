@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No listed requirement concerns the private user creation endpoint accepting writable is_active or is_superuser fields."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the provided requirements mention a password-recovery HTML endpoint or its route/method."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the provided requirements are about list responses including a top-level count field for users or items."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1196,
+    "prompt_tokens": 1021,
+    "completion_tokens": 175
+  }
+}

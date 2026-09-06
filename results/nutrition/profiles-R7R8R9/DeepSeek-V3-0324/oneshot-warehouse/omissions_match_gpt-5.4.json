@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R8",
+        "label": "MATCH",
+        "reasoning": "Both state that the owner-only restriction on GET /profiles was removed, allowing non-owner access."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "Both describe that protein should no longer be excluded in the profileDishes calculation."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns validation of nutritional fields on POST /profiles, which is unrelated to any reference requirement."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns validation of nutritional fields on PUT /profiles/{id}, which is unrelated to any reference requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 838,
+    "prompt_tokens": 606,
+    "completion_tokens": 232
+  }
+}

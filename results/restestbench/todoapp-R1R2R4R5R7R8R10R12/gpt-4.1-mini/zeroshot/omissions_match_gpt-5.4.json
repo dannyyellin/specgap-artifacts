@@ -1,0 +1,48 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O1 describes the same POST /todos validation behavior as R2: missing or empty title should produce 400 Bad Request with a required-title validation error."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O2 exactly matches R10's requirement that PUT /todos/{id} return 400 Bad Request when the body id differs from the URL id."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 discusses unauthorized access without a token, which is not covered by any of the listed reference requirements."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concerns validation on user registration fields, which is not specified by any reference requirement."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R12",
+        "label": "MATCH",
+        "reasoning": "O5 addresses updating another user's todo and expecting 404 Not Found, which is the core behavior required by R12."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R8",
+        "label": "PARTIAL",
+        "reasoning": "O6 matches the unauthorized delete returning 404 portion of R8 but omits the follow-up verification that the owner can still retrieve the todo with 200 OK."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1709,
+    "prompt_tokens": 1320,
+    "completion_tokens": 389
+  }
+}

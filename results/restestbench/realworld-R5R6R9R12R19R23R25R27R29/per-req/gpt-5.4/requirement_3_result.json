@@ -1,0 +1,22 @@
+{
+  "req_id": 3,
+  "requirement_vague": "Verify article creation generates slug correctly from title and article can be retrieved by slug",
+  "requirement_precise": "Create a user (username: 'author1', email: 'author1@test.com', password: 'pass123') and authenticate. Create an article with title 'My Test Article', description 'Test description', body 'Article body content', tagList ['testing', 'nestjs']. Verify response status is 201. Verify the returned article has 'title' equal to 'My Test Article', 'description' equal to 'Test description', 'tagList' containing 'testing' and 'nestjs', and 'slug' starting with 'my-test-article-' (lowercase with hyphen suffix). Extract the slug. Retrieve the article via GET /api/articles/{slug}. Verify status 200 and the returned article title is 'My Test Article'.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": [
+      "slugify",
+      "POST /api/articles",
+      "GET /api/articles/{slug}"
+    ],
+    "code_reference": "def slugify(title: str) -> str:\n    base = re.sub(r\"[^a-z0-9]+\", \"-\", title.lower()).strip(\"-\")\n    suffix = secrets.token_hex(4)\n    return f\"{base}-{suffix}\"\n\narticle = Article(\n    slug=slugify(title),\n    title=title,\n...\n@app.get(\"/api/articles/{slug}\")\ndef get_article(slug: str, session: Session = Depends(get_session), viewer: Optional[User] = Depends(get_current_user_optional)):\n    article = session.exec(select(Article).where(Article.slug == slug)).first()",
+    "reasoning": "The service generates the article slug from the lowercased title with non-alphanumeric characters replaced by hyphens and appends a random hex suffix, which satisfies the required 'my-test-article-' prefix behavior. It creates articles at POST /api/articles with status 201 and returns the article payload including title, description, tagList, and slug, and it supports retrieving the same article by slug via GET /api/articles/{slug} with a 200 response containing the article title."
+  },
+  "usage": {
+    "total_tokens": 5519,
+    "prompt_tokens": 5241,
+    "completion_tokens": 278
+  },
+  "parse_error": false
+}

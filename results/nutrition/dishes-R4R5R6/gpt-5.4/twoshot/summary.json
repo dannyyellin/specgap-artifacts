@@ -1,0 +1,19 @@
+{
+  "app": "nutrition",
+  "variant": "dishes-R4R5R6",
+  "service": "dishes",
+  "method": "twoshot",
+  "model": "gpt-5.4",
+  "gen_usage": {
+    "total_tokens": 5042,
+    "prompt_tokens": 2908,
+    "completion_tokens": 2134
+  },
+  "n_additions": 3,
+  "n_omissions": 7,
+  "usage": {
+    "total_tokens": 9246,
+    "prompt_tokens": 8323,
+    "completion_tokens": 923
+  }
+}

@@ -1,0 +1,41 @@
+Timestamp:  2026-06-22 18:12:56
+Service:    todoapp (round 1)
+Variant:    todoapp-R1R2R4R5R7R8R10R12
+Model:      gpt-5.4
+Removals:   [1, 2, 4, 5, 7, 8, 10, 12]
+
+Total requirements:      14
+  Implemented:           12
+  Not implemented:       2
+  Parse errors:          0
+
+Removed requirements (8):  [1, 2, 4, 5, 7, 8, 10, 12]
+  Detected (NOT_IMPLEMENTED):  [2, 10]
+  Missed  (IMPLEMENTED):       [1, 4, 5, 7, 8, 12]
+
+Kept requirements flagged as NOT_IMPLEMENTED (generator errors):
+  []
+
+om_recall        (removed & not implemented / n_removed):  0.250
+ad_recall        (removed & implemented     / n_removed):  0.750
+fp_rate_on_kept  (kept    & not implemented / n_kept   ):  0.000
+
+Total omissions reported: 2
+Total tokens:             35976
+
+--- Per-requirement verdicts ---
+
+  R  1  IMPLEMENTED      Getting all todos returns only the current user's todos  @ GET /todos -> list_todos; authentication via get_current_user; POST /todos -> create_todo [REMOVED]
+  R  2  NOT_IMPLEMENTED  Creating a todo without a title returns a validation error [REMOVED]
+  R  3  IMPLEMENTED      Getting a specific todo by ID returns the correct todo  @ GET /todos/{id} in get_todo; POST /todos in create_todo
+  R  4  IMPLEMENTED      Getting a non-existent todo returns 404 Not Found  @ GET /todos/{id} -> get_todo [REMOVED]
+  R  5  IMPLEMENTED      Users cannot access another user's todo  @ GET /todos/{id} -> get_todo [REMOVED]
+  R  6  IMPLEMENTED      Deleting a todo removes it from the database  @ DELETE /todos/{id} in delete_todo, and GET /todos/{id} in get_todo
+  R  7  IMPLEMENTED      Deleting a non-existent todo returns a failing response  @ delete_todo route: DELETE /todos/{id} [REMOVED]
+  R  8  IMPLEMENTED      Users cannot delete another user's todo  @ ['delete_todo', 'get_todo'] [REMOVED]
+  R  9  IMPLEMENTED      Updating a todo correctly changes its fields  @ create_todo, update_todo, get_todo routes (/todos POST, /todos/{id} PUT, /todos/{id} GET)
+  R 10  NOT_IMPLEMENTED  Updating a todo with mismatched ID returns bad request [REMOVED]
+  R 11  IMPLEMENTED      Updating a non-existent todo returns 404 Not Found  @ update_todo route: PUT /todos/{id}
+  R 12  IMPLEMENTED      Users cannot update another user's todo  @ update_todo route (`PUT /todos/{id}`), with verification also enforced by `get_todo` (`GET /todos/{id}`) [REMOVED]
+  R 13  IMPLEMENTED      Registering a user with valid credentials succeeds  @ ['POST /users/register -> register_user', 'POST /users/login -> login_user']
+  R 14  IMPLEMENTED      Accessing todos without authentication returns 401 Unauthorized  @ get_current_user dependency used by GET /todos via list_todos

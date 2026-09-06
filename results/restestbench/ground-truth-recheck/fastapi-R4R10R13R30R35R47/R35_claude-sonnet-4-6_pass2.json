@@ -1,0 +1,23 @@
+{
+  "variant": "fastapi-R4R10R13R30R35R47",
+  "req_id": 35,
+  "model": "claude-sonnet-4-6",
+  "pass": 2,
+  "verdict": "NOT_IMPLEMENTED",
+  "requirement_vague": "Ensure registering a user with an existing email gets rejected.",
+  "omissions": [
+    {
+      "id": "O1",
+      "description": "The signup endpoint returns detail 'User with this email already exists' instead of the required 'The user with this email already exists in the system'.",
+      "category": "RESPONSE_FORMAT",
+      "reasoning": "The requirement specifies the response body field 'detail' must equal 'The user with this email already exists in the system'. The code at the /users/signup route raises HTTPException with detail='User with this email already exists', which does not match the required message."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 7596,
+    "prompt_tokens": 7397,
+    "completion_tokens": 199
+  },
+  "timestamp": "2026-07-12 10:36:27"
+}

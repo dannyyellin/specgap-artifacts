@@ -1,0 +1,18 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 describes GET /items listing behavior with implicit owner-based filtering, which does not correspond to any listed requirement about authentication, password recovery/reset, token testing, or deletion effects on fetching a specific item."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1055,
+    "prompt_tokens": 966,
+    "completion_tokens": 89
+  }
+}

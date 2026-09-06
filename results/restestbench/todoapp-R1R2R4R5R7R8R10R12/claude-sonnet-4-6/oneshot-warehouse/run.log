@@ -1,0 +1,13 @@
+Timestamp: 2026-06-02 07:32:15
+Detector:  claude-sonnet-4-6
+Service:   todoapp  Removals: [1, 2, 4, 5, 7, 8, 10, 12]
+Method:    oneshot-warehouse
+
+Tokens: prompt=5501, completion=426, total=5927
+Additions: 1
+Omissions: 2
+
+  A A1: DELETE /todos/{id} returns a JSON body {"message": "Todo deleted"} with implicit 200 OK
+
+  O O1: POST /todos does not validate that the title field is non-empty/non-missing and return 400 with a message indicating 'The Title field is required'
+  O O2: PUT /todos/{id} does not validate that the id in the request body matches the id in the URL path and return 400 Bad Request when they differ

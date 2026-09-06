@@ -1,0 +1,20 @@
+Timestamp: 2026-06-02 09:40:48
+Detector:  claude-sonnet-4-6
+App/Variant/Service: nutrition/auth-R1R2R3/authentication
+Method:    oneshot-tracker
+
+Tokens: prompt=7106, completion=1204, total=8310
+Additions: 6
+Omissions: 4
+
+  A A1: OWNER_NAME is configurable via environment variable and defaults to 'owner' (lowercase), rather than being hardcoded as 'Owner'
+  A A2: OWNER_PASSWORD is configurable via environment variable and defaults to 'owner', rather than being hardcoded as 'owner#pw'
+  A A3: Passwords are stored in plaintext rather than encrypted
+  A A4: Token expiration is implemented with a configurable TOKEN_EXPIRATION_HOURS
+  A A5: The /register endpoint rejects empty strings for name and password
+  A A6: The privileged field in the token payload is computed at token generation time (login) rather than at validation time
+
+  O O1: The Owner user is pre-seeded with a plaintext password instead of the required 'owner#pw', and the owner registration restriction is not enforced on /register
+  O O2: Passwords are not encrypted using bcrypt (or any encryption) as required by the specification
+  O O3: The /validate endpoint does not re-verify that the user's name is 'Owner' and password is correct when determining the privileged field
+  O O4: The /register endpoint does not return 409 or a distinct error code for duplicate username; it returns 400

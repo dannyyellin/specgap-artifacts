@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O1 directly states that the code does not enforce rating being an integer between 1 and 5, which is exactly the removed rating range constraint."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 is about authorization/ownership on updating ratings, which does not correspond to any of R10, R11, or R12."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 concerns dish existence checks and 404 behavior, which is unrelated to the removed constraints in the reference requirements."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "O4 partially overlaps R10 because it mentions failure to enforce integer typing for rating, but it does not fully capture the removed 1-to-5 range constraint and also includes unrelated dish_id typing."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R12",
+        "label": "PARTIAL",
+        "reasoning": "O5 partially relates to R12 because it discusses how the token is supplied, but it does not clearly state the specific removed requirement that user_id no longer comes from token validation."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1250,
+    "prompt_tokens": 897,
+    "completion_tokens": 353
+  }
+}

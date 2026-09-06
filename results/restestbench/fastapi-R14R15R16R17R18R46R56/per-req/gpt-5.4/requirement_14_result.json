@@ -1,0 +1,21 @@
+{
+  "req_id": 14,
+  "requirement_vague": "Verify the test token endpoint works and its response includes the user's email.",
+  "requirement_precise": "Authenticate as a superuser using existing credentials (admin@example.com / password123) to obtain an access token, then use this access token to call the test token endpoint. Verify the response status code is 200 and that the response JSON contains the field 'email' with value 'admin@example.com'.",
+  "removed": true,
+  "omissions": [
+    {
+      "id": "R14-O1",
+      "description": "The service does not implement a dedicated test token endpoint that can be called with an access token and returns the authenticated user's email.",
+      "category": "ENDPOINTS",
+      "reasoning": "The requirement refers to a 'test token endpoint' used after obtaining an access token. In the code, there is a login endpoint (`POST /api/v1/login/access-token`) and a current-user endpoint (`GET /api/v1/users/me`), but no route such as `/login/test-token` or any explicitly defined token-test endpoint exists."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 4810,
+    "prompt_tokens": 4684,
+    "completion_tokens": 126
+  },
+  "parse_error": false
+}

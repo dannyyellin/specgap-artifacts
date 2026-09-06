@@ -1,0 +1,20 @@
+{
+  "variant": "realworld-R2R10R13R15R24R26R28",
+  "req_id": 26,
+  "model": "claude-sonnet-4-6",
+  "pass": 1,
+  "verdict": "IMPLEMENTED",
+  "requirement_vague": "Verify multiple comments can be added to the same article with unique IDs",
+  "omissions": [],
+  "implementation": {
+    "location": "add_comment, get_comments, Comment model",
+    "code_reference": "comment = Comment(body=body, created_at=ts, updated_at=ts, author_id=current_user.id, article_id=article.id)\nsession.add(comment)\nsession.commit()",
+    "reasoning": "The Comment model uses an auto-incremented primary key (id) ensuring uniqueness across multiple comments. The add_comment endpoint persists each comment independently, and get_comments returns all comments for an article sorted by id, preserving bodies and unique IDs."
+  },
+  "usage": {
+    "total_tokens": 6924,
+    "prompt_tokens": 6761,
+    "completion_tokens": 163
+  },
+  "timestamp": "2026-07-12 10:44:12"
+}

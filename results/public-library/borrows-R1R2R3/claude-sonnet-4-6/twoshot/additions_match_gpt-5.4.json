@@ -1,0 +1,48 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Validating cardholder existence is unrelated to removing return date computation, removing the overdue-borrow checkout block, or removing checkout notifications to Logs."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Validating book existence does not correspond to any of the specified removals in Borrows or Logs."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "PUT-time validation of cardholder existence is not the same behavior as any removed requirement listed in the spec."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "PUT-time validation of ISBN existence does not match removal of return date computation, overdue constraints, or Logs notification behavior."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": "R1",
+        "label": "PARTIAL",
+        "reasoning": "This concerns returnDate handling in Borrows and indicates returnDate is no longer purely service-computed, but it is a different validation rule rather than the specific removed 30-day computation."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "If POST /borrows accepts a returnDate from the client, that directly aligns with the removal of the prior behavior where Borrows computed returnDate as loanDate plus 30 days."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1149,
+    "prompt_tokens": 755,
+    "completion_tokens": 394
+  }
+}

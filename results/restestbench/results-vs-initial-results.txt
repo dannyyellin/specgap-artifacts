@@ -1,0 +1,224 @@
+Comparison: Revised Results vs Initial Results — RESTestBench
+==================================================================
+Date: 2026-05-26
+
+Summary of changes between initial and revised experiments:
+  - Prompts: revised terminology (properties, not behaviors), symmetric
+    output schema, new categories.txt with examples, CODEGEN_REQUIREMENTS
+    added to detector spec, "domain-standard behaviors" removed as valid
+    omission source
+  - Methods: 4 detection methods (zeroshot, oneshot-tracker, oneshot-warehouse,
+    twoshot) vs. single zeroshot in initial experiments
+  - Model: gpt-5.4 throughout (initial used gpt-4.1-mini for code gen on
+    some runs; gpt-5.4 added as comparison in initial)
+  - RealWorld Round 1: R20 replaced with R23 (R20 conflicted with slug
+    code-gen instruction; R23 creates a genuine gap)
+
+==================================================================
+PER-APP COMPARISON (zeroshot, gpt-5.4 — most comparable pairing)
+==================================================================
+
+--- TodoApp (R1, R2, R4, R5, R7, R8, R10, R12) ---
+
+  Removal | Initial (zeroshot) | Revised (zeroshot)
+  --------|--------------------|--------------------
+  R1      | Inferred           | Inferred
+  R2      | YES                | YES
+  R4      | Inferred           | Inferred
+  R5      | Inferred           | Inferred
+  R7      | Inferred           | Inferred
+  R8      | Inferred           | Inferred
+  R10     | YES                | YES
+  R12     | Inferred           | Inferred
+  TOTAL   | 2/8                | 2/8
+
+  Result: IDENTICAL. Both detect R2 (title validation format) and R10
+  (PUT id mismatch) and infer the same 6 requirements. Most stable
+  comparison in the dataset — good evidence of consistency.
+
+--- FastAPI Round 1 (R4, R10, R13, R30, R35, R47) ---
+
+  Removal | Initial (gpt-4.1-mini) | Revised (zeroshot, gpt-5.4)
+  --------|------------------------|-----------------------------
+  R4      | Inferred               | DETECTED (all 4 methods)
+  R10     | Inferred               | Inferred
+  R13     | Inferred               | Inferred
+  R30     | Inferred               | Inferred
+  R35     | Inferred               | DETECTED (all 4 methods)
+  R47     | Inferred               | Inferred
+  TOTAL   | 0/6                    | 2/6
+
+  Result: +2. However, the initial run used gpt-4.1-mini for code
+  generation, and that run's code happened to implement R4 (item ownership)
+  and R35 (exact error message) correctly. The revised run with gpt-5.4
+  generated code that omits R4 ownership and uses a wrong R35 message.
+  This is partly code-generation variance, not purely prompt improvement.
+
+--- FastAPI Round 2 (R14, R15, R16, R17, R18, R46, R56) ---
+
+  Removal | Initial (gpt-5.4, zeroshot) | Revised (zeroshot)
+  --------|-----------------------------|--------------------
+  R14     | YES                         | YES
+  R15     | YES                         | YES
+  R16     | YES*                        | YES*
+  R17     | YES                         | YES
+  R18     | YES                         | YES
+  R46     | NO                          | YES
+  R56     | YES* (subsumed)             | YES* (subsumed)
+  TOTAL   | 6/7                         | 7/7
+
+  *R16 and R56 detected by endpoint-subsumption in both runs.
+
+  Result: +1. R46 (delete user → items become inaccessible) was missed
+  by the initial zeroshot prompt and caught by the revised prompt. This
+  is a genuine prompt improvement.
+
+--- RealWorld Round 1 (R5, R6, R9, R12, R19, R20→R23, R25, R27, R29) ---
+
+  Removal  | Initial (gpt-5.4, zeroshot) | Revised (zeroshot)
+  ---------|-----------------------------|--------------------
+  R5       | Inferred                    | YES
+  R6       | Inferred                    | YES
+  R9       | YES (partial)               | YES
+  R12      | YES                         | YES
+  R19      | NO                          | YES
+  R20/R23  | R20: Inferred (slug leaked) | R23: YES (genuine gap)
+  R25      | YES                         | YES
+  R27      | Inferred                    | YES
+  R29      | YES                         | YES
+  TOTAL    | ~4/9                        | 9/9
+
+  Result: +5, but with two important caveats:
+  (a) R20→R23 substitution: R20 was inferred because the code-gen
+      instruction ("articles use slug-based URLs") directly hints at it.
+      R23 (feed pagination) creates a genuine gap. Accounts for +1.
+  (b) R5, R6, R27 flip from "inferred" to "detected": in the initial run
+      the code generation happened to implement these features; in the
+      revised run the same model produced code without them. This is
+      code-generation variance between runs at temperature=0, not
+      improved detection. Accounts for +3.
+  (c) R19 (timestamp field names): genuinely improved — the initial
+      gpt-5.4 zeroshot missed this, the revised prompt catches it. +1.
+
+--- RealWorld Round 2 (R2, R10, R13, R15, R24, R26, R28) ---
+
+  Removal | Initial (gpt-5.4, zeroshot) | Revised (zeroshot)
+  --------|-----------------------------|-----------------
+  R2      | Inferred                    | YES
+  R10     | Inferred                    | YES
+  R13     | Inferred                    | Inferred
+  R15     | Inferred                    | Inferred
+  R24     | YES                         | YES
+  R26     | NO                          | NO
+  R28     | YES (reversed gap)          | YES (reversed gap)
+  TOTAL   | 2/7 (+ 1 reversed)         | 4/7 (+ 1 reversed)
+
+  Result: +2. R2 and R10 flip from "inferred" to "detected" in the
+  revised run. As with RealWorld Round 1, this reflects a different
+  code generation run producing code that doesn't implement these
+  features rather than the detector improving.
+
+==================================================================
+AGGREGATE COMPARISON (zeroshot, gpt-5.4)
+==================================================================
+
+  App / Round        | Initial  | Revised  | Delta  | Notes
+  -------------------|----------|----------|--------|--------
+  TodoApp (8)        | 2/8      | 2/8      |   0    | Stable
+  FastAPI R1 (6)     | 0/6      | 2/6      |  +2    | Code-gen variance
+  FastAPI R2 (7)     | 6/7      | 7/7      |  +1    | R46: genuine prompt gain
+  RealWorld R1 (9)   | ~4/9     | 9/9      |  +5    | R23 sub (+1), code variance (+3), R19 (+1)
+  RealWorld R2 (7)   | 2/7      | 4/7      |  +2    | Code-gen variance
+  TOTAL (37)         | ~14/37   | 24/37    |  +10   |
+                     | (~38%)   | (~65%)   |        |
+
+Genuine prompt-driven improvements (attributable to revised prompts):
+  - R46 FastAPI R2: cascade delete detection — clear prompt gain
+  - R19 RealWorld R1: timestamp naming — clear prompt gain
+  - R23 substitution: methodological correction enabling real gap
+
+Code-generation variance (different run at temperature=0 produced
+different code, creating gaps that didn't exist before):
+  - R5, R6, R27 RealWorld R1: LLM omitted feed features in new run
+  - R2, R10 RealWorld R2: LLM omitted follow/unfollow details in new run
+  - R4 FastAPI R1: LLM omitted item ownership check in new run
+
+==================================================================
+EFFECT OF EXAMPLES (FEW-SHOT) ACROSS EXPERIMENTS
+==================================================================
+
+The value of in-context examples differs markedly between the two
+rounds of experiments:
+
+  Initial experiments (gpt-4.1-mini, microservices):
+
+    Method              Recall
+    Zero-shot           10/20 (50%)
+    One-shot (tracker)  10/20 (50%)
+    One-shot (warehouse)  9/20 (45%)
+    Two-shot             7/20 (35%)
+    Union of all 3       15/20 (75%)
+
+    Each variant found UNIQUE gaps the others missed. The examples
+    acted as "attention primers" that directed the model toward
+    different gap types:
+      - Tracker example → validation gaps, auth gaps
+      - Warehouse example → field-update gaps, business-logic guards
+    Running the union of 3 prompts raised recall from 50% to 75%.
+
+  Revised experiments (gpt-5.4, RESTestBench):
+
+    Method              RealWorld  FastAPI  TodoApp
+    Zero-shot           13/16      9/13     2/8
+    One-shot (tracker)  12/16      9/13     2/8
+    One-shot (warehouse)12/16      8/13     2/8
+    Two-shot            12/16      9/13     2/8
+    Union of all 4      13/16      9/13     2/8
+
+    Zero-shot is the strongest method (or tied). The example-based
+    methods add noise without adding unique detections. The union of
+    all 4 methods matches zero-shot alone.
+
+  Interpretation: gpt-5.4 already reasons about all gap categories
+  (ENDPOINTS, validations, field-update logic, business rules) from
+  zero-shot. The attention-priming effect that helped gpt-4.1-mini is
+  no longer needed — gpt-5.4 covers these patterns without examples.
+
+  This is consistent with the general finding that stronger models
+  benefit less from few-shot demonstrations because they are better
+  zero-shot reasoners.
+
+  CAVEAT: Two confounds prevent a clean conclusion:
+  (a) The prompts changed between rounds (not just the model).
+      The revised zero-shot prompt is better structured than the
+      initial one, which may close part of the gap.
+  (b) The datasets differ (microservices vs. RESTestBench).
+      It is possible the RESTestBench gaps are simpler and don't
+      require the attention-priming that microservice gaps do.
+  Holding all other variables constant by re-running the initial
+  microservice experiments with gpt-5.4 would isolate the model
+  effect cleanly. See TODO.
+
+==================================================================
+PRECISION COMPARISON
+==================================================================
+
+  Initial (gpt-4.1-mini, single zeroshot):
+    FastAPI R1:  13 additions + 11 omissions = 24 total, ~2 TP → ~8%
+    FastAPI R2:   5 additions +  9 omissions = 14 total, ~6 TP → ~43%
+    TodoApp:      7 additions +  2 omissions =  9 total,  2 TP → ~22%
+    RealWorld R1: 4 additions +  4 omissions =  8 total, ~4 TP → ~50%
+    RealWorld R2: 7 additions +  7 omissions = 14 total, ~4 TP → ~29%
+    Average: ~30%
+
+  Revised (gpt-5.4, zeroshot):
+    FastAPI R1:   4 additions +  4 omissions =  8 total, ~4 TP → ~50%
+    FastAPI R2:   3 additions +  7 omissions = 10 total, ~7 TP → ~70%
+    TodoApp:      5 additions +  2 omissions =  7 total,  2 TP → ~29%
+    RealWorld R1: 5 additions + 13 omissions = 18 total, ~9 TP → ~50%
+    RealWorld R2: 6 additions +  7 omissions = 13 total, ~5 TP → ~38%
+    Average: ~47%
+
+  Precision roughly doubles from initial to revised. Fewer false-positive
+  omissions (no spurious domain-standard behavior claims) and more focused
+  additions account for most of the improvement.

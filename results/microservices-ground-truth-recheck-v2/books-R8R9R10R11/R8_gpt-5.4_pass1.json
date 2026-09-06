@@ -1,0 +1,19 @@
+{
+  "app": "public-library",
+  "variant": "books-R8R9R10R11",
+  "service": "books",
+  "req_id": "R8",
+  "requirement": "POST /books requires the fields title, authors, ISBN, and genre; requests missing any of them are rejected.",
+  "source_headline": "Removed which fields POST requires (title, authors, ISBN, genre)",
+  "model": "gpt-5.4",
+  "pass": 1,
+  "label": "INFERRED",
+  "evidence": "POST /books in create_book(); POST_REQUIRED_FIELDS = [\"title\", \"authors\", \"ISBN\", \"genre\"]; loop `for field in POST_REQUIRED_FIELDS: if not validate_string_field(data, field, required=True): return jsonify({\"error\": \"Bad Request\"}), 400`. `validate_string_field` returns False when `required` is True and the field is missing.",
+  "reasoning": "The code explicitly defines the required POST fields as title, authors, ISBN, and genre, and the create_book route rejects the request with 400 if any required field is absent. Because this directly enforces the requirement as stated for POST /books, a test for missing any of those fields would pass. Per the decision guide, this is fully implemented, so the label is INFERRED.",
+  "usage": {
+    "total_tokens": 1962,
+    "prompt_tokens": 1777,
+    "completion_tokens": 185
+  },
+  "timestamp": "2026-07-16 14:54:04"
+}

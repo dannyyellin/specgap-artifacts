@@ -1,0 +1,66 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns nonexistent profile retrieval, while none of the listed requirements specify profile GET behavior for missing users."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about follow/unfollow returning 404 for nonexistent target profiles, which is not covered by any listed requirement."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The listed requirements do not cover comment endpoints or missing-article behavior for comments."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Extra favorite-related fields in article responses are not required by any of the listed specifications."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "Both concern user registration validation failures, but R9 specifically requires duplicate username/email rejection with HTTP 400 and a uniqueness message, not missing-field rejection with HTTP 422."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": "R25",
+        "label": "PARTIAL",
+        "reasoning": "R25 uses the JWT token to successfully GET /api/user, so the Authorization scheme is related, but the specific malformed/invalid token error handling is not required there."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements describe updating the current user profile fields via PUT /api/user."
+      },
+      {
+        "detection_id": "A8",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "It overlaps with article deletion at DELETE /api/articles/{slug}, but R5 requires the deleted article to become unretrievable except as an empty object, not comment-cascade behavior."
+      },
+      {
+        "detection_id": "A9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements specify global article list ordering by created_at with id as a tie-breaker."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2592,
+    "prompt_tokens": 2035,
+    "completion_tokens": 557
+  }
+}

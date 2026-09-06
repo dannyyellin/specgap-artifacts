@@ -1,0 +1,150 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers validation of non-empty fields during user creation."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement specifies the status code for login endpoints."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R24",
+        "label": "MATCH",
+        "reasoning": "R24 requires articles ordered by created timestamp descending, and O3 identifies that the code sorts by id instead of created timestamp."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R24",
+        "label": "PARTIAL",
+        "reasoning": "O4 partially relates to R24's ordering requirement but also conflates filtering concerns not specific to R24."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers unauthenticated access to the feed endpoint."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement specifies validation of non-empty comment body."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R28",
+        "label": "MATCH",
+        "reasoning": "R28 explicitly demonstrates the security vulnerability that any user can update/delete any article, and O7 identifies that the code restricts this to owners only, contradicting R28."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "R2 requires a 400 error when a user attempts to follow themselves, and O8 identifies that this validation is missing."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "R10 requires a 400 error when a user attempts to unfollow themselves, and O8 identifies that this validation is missing for both follow and unfollow."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers user deletion or FK constraint handling."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": "R28",
+        "label": "PARTIAL",
+        "reasoning": "R28 mentions that GET on a deleted article returns 200 with empty object {}, and O10 confirms this behavior matches, but O10 frames it as correct behavior rather than a vulnerability."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement specifies the 401 status code for invalid login."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers uniqueness enforcement for username and email."
+      },
+      {
+        "detection_id": "O13",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers slug generation with random suffix for uniqueness."
+      },
+      {
+        "detection_id": "O14",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement specifically covers article timestamp creation and update behavior."
+      },
+      {
+        "detection_id": "O15",
+        "requirement_id": "R13",
+        "label": "PARTIAL",
+        "reasoning": "O15 mentions filtering by author which relates to R13, but O15 is broader and doesn't specifically verify the articlesCount and content as R13 requires."
+      },
+      {
+        "detection_id": "O15",
+        "requirement_id": "R15",
+        "label": "PARTIAL",
+        "reasoning": "O15 mentions pagination with limit and offset which relates to R15, but doesn't capture the specific verification of counts and item differences required by R15."
+      },
+      {
+        "detection_id": "O16",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers feed pagination specifically."
+      },
+      {
+        "detection_id": "O17",
+        "requirement_id": "R26",
+        "label": "PARTIAL",
+        "reasoning": "O17 relates to R26's requirement that comments have id and body preserved, but doesn't capture the full scope of R26 including multiple comments and unique ids."
+      },
+      {
+        "detection_id": "O18",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement specifies that comment creation returns the article with comments array."
+      },
+      {
+        "detection_id": "O19",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers comment deletion permissions."
+      },
+      {
+        "detection_id": "O20",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O20 relates to R2's requirement to GET profile with following status, but is broader and not specific to the follow/unfollow scenario in R2."
+      },
+      {
+        "detection_id": "O20",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "O20 relates to R10's requirement to GET profile and verify following is false after unfollow, but is broader and not specific to the unfollow scenario."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 4006,
+    "prompt_tokens": 2505,
+    "completion_tokens": 1501
+  }
+}

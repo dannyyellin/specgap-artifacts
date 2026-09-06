@@ -1,0 +1,48 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the absence of Google Books API integration for obtaining publisher and publishedDate, which matches R10."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "O2 describes a specific sub-behavior of the Google Books API integration (selecting the first result), which is part of R10's removed integration but is a more specific detail not explicitly called out in R10."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "O3 describes another sub-behavior of the Google Books API integration (defaulting missing fields to empty string), which is part of R10's removed integration but is a more specific detail."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R11",
+        "label": "MATCH",
+        "reasoning": "O4 directly describes the absence of genre enumeration validation against the fixed allowed values list, which matches R11."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "O5 directly describes the absence of ISBN format validation as a 13-digit ISBN_13 number, which matches R9."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements mention validation of publishedDate format (DD-MM-YYYY); the reference requirements focus on removed fields, ISBN format, Google Books integration, and genre enumeration."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1356,
+    "prompt_tokens": 880,
+    "completion_tokens": 476
+  }
+}

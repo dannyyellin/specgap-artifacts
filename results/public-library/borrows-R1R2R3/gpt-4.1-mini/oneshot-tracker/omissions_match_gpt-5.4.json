@@ -1,0 +1,66 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O1 describes the removed rule that borrowers with 2 or more overdue books are blocked from checkout and that POST /borrows returns 400."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O2 describes the removed behavior of computing returnDate as loanDate plus 30 days in Borrows."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 is about generic validation error handling for POST fields, which is unrelated to any reference requirement."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concerns date format validation, which is not covered by the reference requirements."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 discusses GET /borrows date-range filtering, which does not correspond to any listed removed requirement."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 is about 405 handling for unsupported methods, unrelated to the reference requirements."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O7 concerns 415 Unsupported Media Type handling, which is not in the reference list."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O8 is about validating cardholderId and ISBN on PUT updates, not any of the removed Borrows/Logs behaviors."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O9 concerns pagination on GET /borrows, which is unrelated to the reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1598,
+    "prompt_tokens": 1081,
+    "completion_tokens": 517
+  }
+}

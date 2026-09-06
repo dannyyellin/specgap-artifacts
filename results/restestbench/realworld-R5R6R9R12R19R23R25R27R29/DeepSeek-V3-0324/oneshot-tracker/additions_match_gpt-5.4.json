@@ -1,0 +1,24 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement mentions favorited or favoritesCount fields in article responses."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements specify password hashing behavior; they only cover user creation, JWT payload contents, articles, feeds, tags, timestamps, and deletion behavior."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1679,
+    "prompt_tokens": 1550,
+    "completion_tokens": 129
+  }
+}

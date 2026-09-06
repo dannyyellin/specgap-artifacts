@@ -1,0 +1,24 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This describes mutability of ISBN on PUT, which is not covered by any listed requirement about removed POST fields, ISBN format, Google Books integration, or genre enumeration."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "It overlaps with the removed Google Books API handling for publisher and publishedDate, but it describes accepting those fields in POST rather than the removal of the integration itself."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 671,
+    "prompt_tokens": 520,
+    "completion_tokens": 151
+  }
+}

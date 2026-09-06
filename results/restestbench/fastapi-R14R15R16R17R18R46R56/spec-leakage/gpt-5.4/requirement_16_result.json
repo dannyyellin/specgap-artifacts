@@ -1,0 +1,14 @@
+{
+  "req_id": 16,
+  "requirement_vague": "Recovering a password for a non existing user gets rejected.",
+  "requirement_precise": "Attempt to recover the password for a non-existent user with the email 'jVgQr@example.com'. Verify that the password recovery request returns an HTTP 404 status code indicating the user does not exist.",
+  "verdict": "NOT_LEAKED",
+  "spec_evidence": null,
+  "reasoning": "The reduced specification contains no password recovery endpoint or behavior at all, so it does not state or directly entail what should happen when recovering a password for a non-existent user. Although other endpoints return 404 for non-existent resources, extending that pattern to password recovery would require inference beyond the text.",
+  "parse_error": false,
+  "usage": {
+    "total_tokens": 5119,
+    "prompt_tokens": 5038,
+    "completion_tokens": 81
+  }
+}

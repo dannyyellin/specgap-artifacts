@@ -1,0 +1,18 @@
+{
+  "req_id": 31,
+  "requirement_vague": "Confirm that attempting to change the current user's password by submitting the same incorrect string for current and new password is rejected. Admin credentials: (admin@example.com / password123)",
+  "requirement_precise": "Sign in using the built-in admin account (username 'admin@example.com', password 'password123') to obtain an access token. Using that token, attempt to change the currently authenticated user's password by submitting a payload where both the current password and the new password are the same random string that does not match the real password. Verify the response status is 400. Verify the response body contains a detail message equal to 'Incorrect password'.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": "POST /api/v1/login/access-token and PATCH /api/v1/users/me/password (functions: login_access_token, update_password_me)",
+    "code_reference": "user = authenticate(session, form_data.username, form_data.password)\nif not user:\n    raise HTTPException(status_code=400, detail=\"Incorrect email or password\")\n...\nif not verify_password(password_in.current_password, current_user.hashed_password):\n    raise HTTPException(status_code=400, detail=\"Incorrect password\")",
+    "reasoning": "The built-in admin credentials are defined as admin@example.com/password123 and startup initializes that superuser, so signing in to obtain a token is supported. The password-change endpoint first verifies the submitted current_password against the authenticated user's real password and returns HTTP 400 with detail 'Incorrect password' before checking whether current and new passwords are equal, so submitting the same incorrect string for both fields is rejected exactly as required."
+  },
+  "usage": {
+    "total_tokens": 6007,
+    "prompt_tokens": 5805,
+    "completion_tokens": 202
+  },
+  "parse_error": false
+}

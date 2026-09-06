@@ -1,0 +1,18 @@
+Timestamp: 2026-06-02 09:35:51
+Detector:  claude-sonnet-4-6
+App/Variant/Service: public-library/borrows-R1R2R3/borrows
+Method:    oneshot-tracker
+
+Tokens: prompt=7190, completion=876, total=8066
+Additions: 6
+Omissions: 2
+
+  A A1: Validates that the cardholder exists by calling the Cardholders service before creating a borrow record
+  A A2: Validates that the book exists (by ISBN) by calling the Books service before creating a borrow record
+  A A3: Validates that cardholder and book exist when updating a borrow record (PUT /borrows/{id})
+  A A4: Rejects POST requests where returnDate < loanDate, and PUT requests where the resulting returnDate < loanDate
+  A A5: Accepts a 'returnDate' field in the POST request body and stores it if provided
+  A A6: Rejects GET requests with query parameters that are not in the allowed field list
+
+  O O1: Does not check whether the cardholder has 2 or more overdue books before allowing a new borrow (POST /borrows)
+  O O2: returnDate is not computed as loanDate + 30 days; instead it defaults to an empty string

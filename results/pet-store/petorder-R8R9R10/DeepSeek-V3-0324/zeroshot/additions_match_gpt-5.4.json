@@ -1,0 +1,24 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "Using a counter collection to generate transaction IDs relates to purchase-id uniqueness, but it does not specifically describe the removed rule that IDs must be unique and cannot be reused."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R8",
+        "label": "PARTIAL",
+        "reasoning": "Limiting the range of store numbers to scan affects pet selection behavior, but it does not specifically capture the removed random-selection algorithm when multiple pets are available."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 661,
+    "prompt_tokens": 508,
+    "completion_tokens": 153
+  }
+}

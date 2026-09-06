@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns strict POST payload key validation, which does not correspond to any listed removed requirement."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "R4 removes extraction rules tied to temperament/group_behavior, and A2 describes code still using those plus additional Ninja fields to build attributes, so it overlaps but is broader than the specific removed rule."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about accepting a direct picture field in pet updates, unrelated to any of the removed requirements listed."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "R6 removes lifespan range handling rules like choosing a minimum or first integer, while A4 is about the fallback value when lifespan is missing, which is lifespan-related but not the same behavior."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns the MongoDB hostname in configuration, which does not match any listed removed requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1141,
+    "prompt_tokens": 813,
+    "completion_tokens": 328
+  }
+}

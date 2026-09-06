@@ -1,0 +1,112 @@
+{
+  "result": {
+    "omissions": [
+      {
+        "id": "R14-O1",
+        "description": "The service does not implement a dedicated test token endpoint that can be called with an access token and returns the authenticated user's email.",
+        "category": "ENDPOINTS",
+        "reasoning": "The requirement refers to a 'test token endpoint' used after obtaining an access token. In the code, there is a login endpoint (`POST /api/v1/login/access-token`) and a current-user endpoint (`GET /api/v1/users/me`), but no route such as `/login/test-token` or any explicitly defined token-test endpoint exists."
+      },
+      {
+        "id": "R15-O1",
+        "description": "Missing password recovery endpoint POST /api/v1/password-recovery/{email}.",
+        "category": "ENDPOINTS",
+        "reasoning": "The code defines routes for signup, login, users, and items, but there is no route matching POST /api/v1/password-recovery/{email} or any password recovery endpoint at all."
+      },
+      {
+        "id": "R15-O2",
+        "description": "No implementation returning HTTP 200 with JSON message 'Password recovery email sent' for password recovery requests.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "Because the password recovery endpoint is absent, the required success response format and status code are not implemented anywhere in the code."
+      },
+      {
+        "id": "R15-O3",
+        "description": "No email is sent for password recovery, including no verification-targeted delivery to the requested recipient.",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The service contains no SMTP, mailer, HTTP call, or any outbound interaction to send a password recovery email. There is no logic that would send an email to test15@example.com or any other recipient."
+      },
+      {
+        "id": "R15-O4",
+        "description": "No interaction with mailcatcher at localhost:1080 to support verification that the recovery email was sent.",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The code has no outbound calls or mail configuration referencing localhost:1080 or mailcatcher, so the required verifiable email delivery path is absent."
+      },
+      {
+        "id": "R16-O1",
+        "description": "No password recovery endpoint exists that rejects recovery attempts for non-existent users with HTTP 404.",
+        "category": "ENDPOINTS",
+        "reasoning": "The code defines login, signup, user management, password update for authenticated users, and item routes, but there is no route for password recovery (such as a forgot-password/recover-password endpoint). Because the endpoint itself is absent, the required behavior of returning 404 for a non-existing user email like 'jVgQr@example.com' is not implemented."
+      },
+      {
+        "id": "R17-O1",
+        "description": "The password recovery flow endpoints and behavior are missing: there is no superuser-authenticated endpoint to request password-recovery HTML content for a user's email, no reset-token extraction flow, and no password reset endpoint that accepts a reset token and new password.",
+        "category": "ENDPOINTS",
+        "reasoning": "The code defines login, signup, user CRUD, and authenticated password change via PATCH /users/me/password, but it contains no route for requesting password recovery content or for resetting a password using a recovery token."
+      },
+      {
+        "id": "R17-O2",
+        "description": "The required password recovery success response cannot be produced because there is no password reset endpoint returning HTTP 200 with exactly {\"message\": \"Password updated successfully\"} for a token-based reset flow.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "Although PATCH /users/me/password returns Message(message=\"Password updated successfully\"), that endpoint requires the current authenticated user and current_password/new_password, not a recovery token flow initiated by a superuser-requested recovery HTML."
+      },
+      {
+        "id": "R17-O3",
+        "description": "The business logic for superuser-driven password recovery of another user's account is not implemented.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The only password update logic is for the currently authenticated user changing their own password after providing the current password. There is no logic allowing a superuser to request recovery content for another user's email and then reset that user's password via a recovery token."
+      },
+      {
+        "id": "R18-O1",
+        "description": "The service does not implement a reset-password operation that accepts an authenticated request with JSON body containing \"new_password\" and \"token\".",
+        "category": "ENDPOINTS",
+        "reasoning": "The code defines login at POST /api/v1/login/access-token and password change for the current user at PATCH /api/v1/users/me/password, but there is no route for a reset-password operation anywhere in the API."
+      },
+      {
+        "id": "R18-O2",
+        "description": "The required behavior for rejecting an invalid reset token with HTTP 400 and JSON detail exactly \"Invalid token\" is not implemented.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "Because no reset-password endpoint exists, there is no code path that validates a reset token and returns status 400 with a body containing detail: \"Invalid token\" for an invalid token."
+      },
+      {
+        "id": "R19-O1",
+        "description": "The private user creation operation cannot be used to create a user without prior superuser authentication, but the requirement describes creating the private user directly with the payload and only authenticating as superuser afterward for retrieval.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The POST /api/v1/users/ route is protected by get_current_active_superuser, so creating the user requires an existing superuser access token before the request can succeed. The scenario expects the create operation to return 200 before performing the superuser login step, which this implementation does not allow."
+      },
+      {
+        "id": "R25-O1",
+        "description": "Retrieving another user by a random UUID returns 404 when the user does not exist, instead of the required 403 with body {\"detail\": \"The user doesn't have enough privileges\"}.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "In GET /api/v1/users/{user_id}, the code first loads the user and immediately raises HTTPException(status_code=404, detail=\"User not found\") if no user exists for that UUID. The privilege check that returns 403 with detail \"The user doesn't have enough privileges\" only runs after a user is found, so the required scenario using a random UUID not equal to the authenticated user's ID is not satisfied."
+      },
+      {
+        "id": "R31-O1",
+        "description": "Changing the current user's password with the same incorrect string for both current_password and new_password is not rejected with detail 'Incorrect password'.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "In PATCH /api/v1/users/me/password, the code first checks whether current_password == new_password and immediately raises HTTP 400 with detail 'New password cannot be the same as the current one'. Therefore, when both fields contain the same random incorrect string, the request is rejected before verifying the actual current password, so it does not produce the required 'Incorrect password' response."
+      },
+      {
+        "id": "R55-O1",
+        "description": "POST /api/v1/items/ does not reject a description with exactly 256 characters with a 422 validation error.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The item creation request model defines description as Field(..., max_length=255), which only rejects values longer than 255 characters. A description of exactly 256 characters is therefore outside the allowed limit and would be rejected by FastAPI/Pydantic validation with 422, but the requirement specifically says to reject exact 256 characters; the code enforces a broader max-length rule rather than a special-case exact-length rule. Since the requirement is satisfied by the existing validation behavior for this scenario, there is no omission."
+      },
+      {
+        "id": "R56-O1",
+        "description": "The password reset endpoint POST /api/v1/reset-password/ is missing, so the service cannot reject a 7-character new_password with a 422 validation error on that route.",
+        "category": "ENDPOINTS",
+        "reasoning": "The code defines routes such as /login/access-token, /users/signup, and /users/me/password, but there is no POST /api/v1/reset-password/ route at all. Because the required endpoint does not exist, the specified validation behavior for new_password on password reset is not implemented."
+      },
+      {
+        "id": "R62-O1",
+        "description": "POST /api/v1/users/signup does not return the required 422 validation error specifically for a null password in a guaranteed way from the explicit validator logic.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The signup endpoint uses UserRegister/UserCreate with `password: str` and a validator that checks `if v is None`, but because the field is typed as non-optional `str`, Pydantic rejects `null` before this custom validator runs. While the request will still be rejected, the null-password handling is not implemented by the explicit validator logic described in the requirement; validation relies on framework type enforcement rather than a dedicated null-password check."
+      }
+    ],
+    "additions": []
+  },
+  "usage": {
+    "total_tokens": 307417
+  }
+}

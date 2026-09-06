@@ -1,0 +1,90 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns MongoDB deployment configuration, which is unrelated to any reference requirement."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "It describes the deleted constraint that a pet-type cannot be deleted when pets of that type exist."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "It is the same deleted behavior as R5, expressed in terms of the missing 400 response when pets still exist."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about an unexpected 404 response for creating pets, not any removed reference requirement."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns payload field validation for POST /pet-types/{id}/pets, which does not match the reference requirements."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "It directly describes missing birthdateGT/birthdateLT query filtering on GET /pet-types/{id}/pets."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "It describes the same removed birthdate query filtering behavior, focusing on the strict comparison semantics."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about PUT payload validation and does not correspond to any listed reference requirement."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "It directly concerns the removed attributes extraction rules from temperament/group_behavior."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "It also describes the removed rule that attributes should fall back to group_behavior when temperament is absent."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about missing lifespan defaulting to null versus 0, not the removed lifespan range handling in R6."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns serialization of absent lifespan as null versus 0, which is different from the removed lifespan range extraction behavior."
+      },
+      {
+        "detection_id": "O13",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about registry-service failure status codes and has no correspondence to the reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2107,
+    "prompt_tokens": 1376,
+    "completion_tokens": 731
+  }
+}

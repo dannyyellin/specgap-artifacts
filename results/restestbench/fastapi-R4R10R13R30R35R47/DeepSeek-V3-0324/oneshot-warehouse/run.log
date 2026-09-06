@@ -1,0 +1,19 @@
+Timestamp: 2026-06-02 06:01:26
+Detector:  DeepSeek-V3-0324
+Service:   fastapi  Round: 1  Removals: [4, 10, 13, 30, 35, 47]
+Method:    oneshot-warehouse
+
+Tokens: prompt=12728, completion=752, total=13480
+Additions: 3
+Omissions: 6
+
+  A A1: Implements a password recovery HTML endpoint (/password-recovery-html/{email}) that is not mentioned in the specification
+  A A2: Implements a test token endpoint (/login/test-token) that is not mentioned in the specification
+  A A3: Implements a UserUpdate model with fields for is_active and is_superuser that are not mentioned in the specification for user updates
+
+  O O1: Does not verify that items are deleted when their owner user is deleted (as implied by the specification's requirement to verify items are not found after user deletion)
+  O O2: Does not return 400 with 'Not enough permissions' when a normal user attempts to read another user's item (as required by the specification)
+  O O3: Does not implement email verification via mailcatcher service for password recovery (as required by the specification)
+  O O4: Does not validate that the title field is not empty when creating an item (as required by the specification)
+  O O5: Does not return 422 for invalid UUID format in GET /api/v1/users/{user_id} (as required by the specification)
+  O O6: Does not return 422 for invalid UUID format in GET /api/v1/items/{item_id} (as required by the specification)

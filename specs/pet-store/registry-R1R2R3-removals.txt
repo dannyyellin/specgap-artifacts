@@ -1,0 +1,21 @@
+# MODIFIED SPEC: 3 elements removed for Registry experiment
+# R1: Removed password validation rules (8+ chars, uppercase, lowercase, digit)
+#     - GPT-5.4: NOT INFERRED — POST /users accepts any password string; no length,
+#       case, or digit complexity checks implemented
+#     - Prior label: Highly inferrable — password strength requirements are standard
+#       security practice; any developer would add some form of validation
+#     - Tests: 21
+# R2: Removed "same error message" anti-enumeration security requirement for /verify
+#     - GPT-5.4: INFERRED — POST /verify returns identical make_response("", 401) for
+#       both bad username and bad password cases; no enumeration possible
+#     - Prior label: Partially inferrable — preventing username enumeration is a known
+#       security pattern, but the specific implementation choice (same message) is not
+#       obvious
+#     - Tests: 21
+# R3: Removed owner pre-registration on initialization
+#     - GPT-5.4: INFERRED — @app.before_first_request seeds the Owner account with
+#       hardcoded credentials if it does not already exist in the database
+#     - Prior label: Partially inferrable — pre-seeded admin account is common, but
+#       the specific requirement to store the owner hash at startup is an
+#       implementation detail
+#     - Tests: 21

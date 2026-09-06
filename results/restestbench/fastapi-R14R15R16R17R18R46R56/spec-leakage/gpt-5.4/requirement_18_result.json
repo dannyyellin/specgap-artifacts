@@ -1,0 +1,14 @@
+{
+  "req_id": 18,
+  "requirement_vague": "Reset a password with an invalid reset token and confirm the reset is rejected.",
+  "requirement_precise": "Authenticate as the superuser (admin@example.com / password123) to obtain an access token, then attempt to reset a password using an invalid token. Using the superuser's access token in the Authorization header, call the reset-password operation with JSON body {\"new_password\": \"changethis\", \"token\": \"invalid\"}. Verify the response has HTTP status 400, the JSON body contains a \"detail\" field, and the value of \"detail\" is exactly \"Invalid token\".",
+  "verdict": "NOT_LEAKED",
+  "spec_evidence": null,
+  "reasoning": "The reduced specification contains no mention of any reset-password operation, reset tokens, or token validation behavior for password resets. Inferring that an invalid reset token must yield HTTP 400 with detail 'Invalid token' would require assumptions not stated in the spec.",
+  "parse_error": false,
+  "usage": {
+    "total_tokens": 5171,
+    "prompt_tokens": 5098,
+    "completion_tokens": 73
+  }
+}

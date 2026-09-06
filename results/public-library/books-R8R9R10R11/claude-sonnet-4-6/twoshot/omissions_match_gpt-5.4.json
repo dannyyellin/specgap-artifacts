@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "Both state that the Google Books API integration for obtaining publisher and publishedDate during POST /books was removed or is absent."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "This depends on the removed Google Books API integration, but it describes a specific result-selection rule rather than the core removal of publisher/publishedDate integration itself."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "This is a downstream fallback behavior tied to the removed Google Books API integration, not the direct removal of the integration requirement itself."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R11",
+        "label": "MATCH",
+        "reasoning": "Both describe removal or absence of validation that genre must be one of a fixed allowed enumeration."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 947,
+    "prompt_tokens": 686,
+    "completion_tokens": 261
+  }
+}

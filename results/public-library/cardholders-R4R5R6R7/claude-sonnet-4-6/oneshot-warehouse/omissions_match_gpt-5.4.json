@@ -1,0 +1,48 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns query filtering by id on GET /cardholders, which is unrelated to any reference requirement."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about validating non-empty name and email values, not about removing field type declarations or any other listed reference behavior."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "It directly addresses the fine computation formula using days overdue multiplied by $0.50, which is the behavior removed in R6."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "It captures the days-overdue part of the removed fine formula but does not mention the full formula including the $0.50 rate."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "It directly concerns returning 415 Unsupported Media Type, which R5 says was removed from the general error codes."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "It directly concerns returning 415 Unsupported Media Type, which R5 says was removed from the general error codes."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1211,
+    "prompt_tokens": 838,
+    "completion_tokens": 373
+  }
+}

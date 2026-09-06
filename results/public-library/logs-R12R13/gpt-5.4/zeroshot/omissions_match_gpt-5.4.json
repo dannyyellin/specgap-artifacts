@@ -1,0 +1,18 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R12",
+        "label": "PARTIAL",
+        "reasoning": "O1 discusses loanDate format validation for logs using DD-MM-YYYY, which overlaps with R12's removal of that date format requirement, but it frames it as a missing validation bug rather than the spec change itself."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 517,
+    "prompt_tokens": 422,
+    "completion_tokens": 95
+  }
+}

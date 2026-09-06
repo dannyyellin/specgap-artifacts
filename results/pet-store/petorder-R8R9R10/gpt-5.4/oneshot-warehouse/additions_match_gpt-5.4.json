@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Storing purchase documents in a MongoDB purchases collection does not describe removing pet selection randomness, removing pet deletion after purchase, or removing purchase-id uniqueness constraints."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Adding an id field to transaction documents and querying by it is unrelated to the removed pet selection algorithm, removed pet deletion step, and removed purchase-id uniqueness requirement."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Requiring the purchaser field to match the authenticated username does not correspond to any of the listed removed behaviors about pet selection, pet deletion, or purchase-id uniqueness."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 831,
+    "prompt_tokens": 618,
+    "completion_tokens": 213
+  }
+}

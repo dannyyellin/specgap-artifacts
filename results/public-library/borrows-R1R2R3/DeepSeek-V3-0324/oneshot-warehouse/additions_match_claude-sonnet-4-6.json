@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This property concerns updatable fields via PUT, which does not correspond to any of the three spec requirements about return date computation, overdue constraints, or log notifications."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R1",
+        "label": "PARTIAL",
+        "reasoning": "A2 relates to returnDate validation logic, which is in the same domain as R1 (return date computation removal), but A2 describes a validation check rather than the removal of automatic return date computation."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Detailed JSON error messages in responses do not correspond to any of the three spec requirements about return date computation, overdue constraints, or log notifications."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 845,
+    "prompt_tokens": 593,
+    "completion_tokens": 252
+  }
+}

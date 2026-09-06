@@ -1,0 +1,19 @@
+{
+  "app": "nutrition",
+  "variant": "ratings-R10R11R12",
+  "service": "ratings",
+  "req_id": "R12",
+  "requirement": "The user_id associated with a rating is taken from token validation, not from the request body.",
+  "source_headline": "Removed that user_id comes from token validation",
+  "model": "claude-sonnet-4-6",
+  "pass": 2,
+  "label": "INFERRED",
+  "evidence": "validate_token() extracts user_id from the token validation response (data.get('user_id')), and in ratings_collection() POST: `'user_id': int(auth_data['user_id'])` \u2014 the user_id stored in the rating document comes from auth_data, not from request body. Similarly in rating_item() PUT/DELETE: `user_id = int(auth_data['user_id'])`.",
+  "reasoning": "The code never reads user_id from the request body; it always uses the user_id returned by the token validation endpoint. The POST handler builds the rating document with `'user_id': int(auth_data['user_id'])`, and the PUT/DELETE handlers use `user_id = int(auth_data['user_id'])` for lookups. This fully satisfies the requirement as stated.",
+  "usage": {
+    "total_tokens": 3084,
+    "prompt_tokens": 2872,
+    "completion_tokens": 212
+  },
+  "timestamp": "2026-07-16 14:59:56"
+}

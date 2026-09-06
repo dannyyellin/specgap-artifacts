@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R7",
+        "label": "PARTIAL",
+        "reasoning": "Including overdue/date-parsing logic in this service partially aligns with the removed cross-service Borrows dependency, but it is not the same behavior as removing a Borrows call for fine computation."
+      },
+      {
+        "detection_id": "A1",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "The presence of overdue-related logic partially overlaps with removed fine computation behavior, but it does not specifically describe the removed $0.50/day formula."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "The code's listed error handlers concern HTTP error codes, which partially relates to the spec's removal of 415 from general error codes, but 415 itself is not mentioned."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 750,
+    "prompt_tokens": 522,
+    "completion_tokens": 228
+  }
+}

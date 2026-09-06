@@ -1,0 +1,48 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the missing DELETE pet from store after purchase step, which is exactly what R9 states was removed."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 concerns error handling for external service failures (500/503 responses), which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R8",
+        "label": "MATCH",
+        "reasoning": "O3 directly describes the absence of random pet selection when multiple pets are available, which is exactly what R8 states was removed."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concerns GET /transactions/{id} error behavior and id scheme, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 concerns MongoDB connection string configuration, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 concerns deployment service naming, which does not correspond to any of the three reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1400,
+    "prompt_tokens": 978,
+    "completion_tokens": 422
+  }
+}

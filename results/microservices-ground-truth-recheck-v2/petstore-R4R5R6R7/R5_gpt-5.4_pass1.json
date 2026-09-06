@@ -1,0 +1,19 @@
+{
+  "app": "pet-store",
+  "variant": "petstore-R4R5R6R7",
+  "service": "pet-store",
+  "req_id": "R5",
+  "requirement": "A pet-type cannot be deleted while it still has pets; such a DELETE request is rejected.",
+  "source_headline": "Removed \"cannot delete pet-type if it has pets\" constraint",
+  "model": "gpt-5.4",
+  "pass": 1,
+  "label": "GAP",
+  "evidence": "delete_pet_type() unconditionally calls pet_types_collection.delete_one({\"id\": pet_id}) and returns 204 on success, with no check of the document's pets array",
+  "reasoning": "The requirement says a pet-type cannot be deleted while it still has pets and that such a DELETE must be rejected. There is code for deleting pet-types, but it performs no inspection of whether pets exist before deletion, so a test deleting a pet-type with non-empty pets would succeed instead of being rejected. Per the decision guide, because the required behavior is absent entirely, this is GAP.",
+  "usage": {
+    "total_tokens": 4167,
+    "prompt_tokens": 4027,
+    "completion_tokens": 140
+  },
+  "timestamp": "2026-07-16 15:01:22"
+}

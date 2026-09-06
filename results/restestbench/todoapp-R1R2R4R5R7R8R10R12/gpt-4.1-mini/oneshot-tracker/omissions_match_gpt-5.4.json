@@ -1,0 +1,54 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "It describes the same POST /todos validation behavior for missing or empty title returning 400 Bad Request with the required-field error."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "It matches the requirement that PUT /todos/{id} must return 400 Bad Request when the body id differs from the path id."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "It explicitly covers GET /todos/{id} returning 404 Not Found when a different user accesses another user's todo."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R8",
+        "label": "PARTIAL",
+        "reasoning": "It covers the cross-user DELETE /todos/{id} returning 404 Not Found, but omits the follow-up verification that the owner can still retrieve the todo with 200 OK."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement concerns GET /todos without an Authorization header returning 401 Unauthorized."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement is about duplicate email registration validation."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers login failure behavior for invalid credentials."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1634,
+    "prompt_tokens": 1218,
+    "completion_tokens": 416
+  }
+}

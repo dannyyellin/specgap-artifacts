@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 describes MongoDB ObjectId validation behavior, which does not correspond to any of the listed spec requirements about removed field types, error codes, fine formulas, or cross-service calls."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A2 describes filtering behavior for GET /cardholders, which does not correspond to any of the listed spec requirements about removed field types, error codes, fine formulas, or cross-service calls."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A3 describes PUT /cardholders/{id} body validation behavior, which does not correspond to any of the listed spec requirements about removed field types, error codes, fine formulas, or cross-service calls."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A4 describes extra validation for PUT /cardholders/{id} requiring at least one updatable field, which does not correspond to any of the listed spec requirements about removed field types, error codes, fine formulas, or cross-service calls."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1113,
+    "prompt_tokens": 751,
+    "completion_tokens": 362
+  }
+}

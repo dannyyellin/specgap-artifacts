@@ -1,0 +1,66 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O1 describes the same POST /todos validation behavior as R2: missing or empty title should return 400 with a required-field validation error."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O2 exactly matches R10's requirement that PUT /todos/{id} must return 400 when the body id differs from the path id."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 discusses unauthorized access without a token, which is not covered by any of the listed reference requirements."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concerns login with invalid credentials, a behavior not present in the reference requirements."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 is about duplicate-email registration handling, which does not correspond to any listed reference requirement."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O6 covers the requirement that a user cannot access another user's todo and should receive 404, which matches R5."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R8",
+        "label": "MATCH",
+        "reasoning": "O6 also covers the requirement that a user cannot delete another user's todo and should receive 404, which is part of R8."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R12",
+        "label": "MATCH",
+        "reasoning": "O6 includes that a user cannot modify another user's todo and should receive 404, matching the core behavior in R12."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O7 refers to verifying GET returns 404 after a successful delete, which is not one of the listed reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1832,
+    "prompt_tokens": 1279,
+    "completion_tokens": 553
+  }
+}

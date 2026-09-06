@@ -1,0 +1,19 @@
+{
+  "app": "nutrition",
+  "variant": "dishes-R4R5R6",
+  "service": "dishes",
+  "req_id": "R4",
+  "requirement": "Nutrition values from the API Ninjas response are mapped to the service's field names according to the specified mapping (e.g. 'carbohydrates_total_g' -> 'total_carbohydrates').",
+  "source_headline": "Removed Ninja API field name mapping details",
+  "model": "gpt-5.4",
+  "pass": 1,
+  "label": "INFERRED",
+  "evidence": "NINJA_FIELD_MAP defines the mapping including \"carbohydrates_total_g\": \"total_carbohydrates\" and other nutrition fields. In fetch_ingredient_nutrition(), the loop `for ninja_field, local_field in NINJA_FIELD_MAP.items(): totals[local_field] += float(item.get(ninja_field, 0.0) or 0.0)` applies that mapping from API Ninjas response keys to the service's field names.",
+  "reasoning": "The code explicitly contains a field-mapping table from API Ninjas keys to local service field names, including the example mapping required. That mapping is used when processing the API response to populate the service's nutrition totals, so a test checking that Ninjas fields are mapped to the service field names would pass. Per the decision guide, this is behavior directly addressing and satisfying the requirement in substance.",
+  "usage": {
+    "total_tokens": 2897,
+    "prompt_tokens": 2700,
+    "completion_tokens": 197
+  },
+  "timestamp": "2026-07-16 14:56:34"
+}

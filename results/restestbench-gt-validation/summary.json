@@ -1,0 +1,167 @@
+{
+  "n_compared": 28,
+  "agreement": 0.9642857142857143,
+  "agree_count": 27,
+  "confusion_matrix": {
+    "IMPLEMENTED": {
+      "IMPLEMENTED": 11,
+      "NOT_IMPLEMENTED": 0
+    },
+    "NOT_IMPLEMENTED": {
+      "IMPLEMENTED": 1,
+      "NOT_IMPLEMENTED": 16
+    }
+  },
+  "n_disagreements": 1,
+  "disagreements": [
+    {
+      "variant": "realworld-R2R10R13R15R24R26R28",
+      "req_id": 24,
+      "test_status": "PASS",
+      "test_verdict": "IMPLEMENTED",
+      "llm_verdict": "NOT_IMPLEMENTED",
+      "agree": false,
+      "detail": "",
+      "adaptations": [],
+      "setup_blocked_reason": null
+    }
+  ],
+  "n_undetermined": 9,
+  "undetermined": [
+    {
+      "variant": "todoapp-R1R2R4R5R7R8R10R12",
+      "req_id": 1,
+      "test_status": "FAIL",
+      "test_verdict": "UNDETERMINED",
+      "llm_verdict": "IMPLEMENTED",
+      "agree": null,
+      "detail": "test_get_todos_returns_only_owned_todos: UserA create failed: {\"id\":1,\"title\":\"UserA's Todo\",\"isComplete\":false}",
+      "adaptations": [
+        {
+          "old": "login_response.json()[\"accessToken\"]",
+          "new": "login_response.json()[\"access_token\"]",
+          "reason": "token field name: spec-agnostic; code uses snake_case access_token"
+        }
+      ],
+      "setup_blocked_reason": "setup asserts POST /todos == 201 (reference contract; spec is silent on create status); generated code returns FastAPI-default 200 \u2014 not adapted"
+    },
+    {
+      "variant": "todoapp-R1R2R4R5R7R8R10R12",
+      "req_id": 5,
+      "test_status": "FAIL",
+      "test_verdict": "UNDETERMINED",
+      "llm_verdict": "IMPLEMENTED",
+      "agree": null,
+      "detail": "test_cannot_access_another_users_todo: Create failed: {\"id\":1,\"title\":\"UserA's Private Todo\",\"isComplete\":false}",
+      "adaptations": [
+        {
+          "old": "login_response.json()[\"accessToken\"]",
+          "new": "login_response.json()[\"access_token\"]",
+          "reason": "token field name: spec-agnostic; code uses snake_case access_token"
+        }
+      ],
+      "setup_blocked_reason": "setup asserts POST /todos == 201 (reference contract; spec is silent on create status); generated code returns FastAPI-default 200 \u2014 not adapted"
+    },
+    {
+      "variant": "todoapp-R1R2R4R5R7R8R10R12",
+      "req_id": 8,
+      "test_status": "FAIL",
+      "test_verdict": "UNDETERMINED",
+      "llm_verdict": "IMPLEMENTED",
+      "agree": null,
+      "detail": "test_cannot_delete_another_users_todo: Create failed: {\"id\":1,\"title\":\"UserA's Todo\",\"isComplete\":false}",
+      "adaptations": [
+        {
+          "old": "login_response.json()[\"accessToken\"]",
+          "new": "login_response.json()[\"access_token\"]",
+          "reason": "token field name: spec-agnostic; code uses snake_case access_token"
+        }
+      ],
+      "setup_blocked_reason": "setup asserts POST /todos == 201 (reference contract; spec is silent on create status); generated code returns FastAPI-default 200 \u2014 not adapted"
+    },
+    {
+      "variant": "todoapp-R1R2R4R5R7R8R10R12",
+      "req_id": 10,
+      "test_status": "FAIL",
+      "test_verdict": "UNDETERMINED",
+      "llm_verdict": "NOT_IMPLEMENTED",
+      "agree": null,
+      "detail": "test_update_todo_with_mismatched_id_returns_bad_request: Create failed: {\"id\":1,\"title\":\"Original Todo\",\"isComplete\":false}",
+      "adaptations": [
+        {
+          "old": "login_response.json()[\"accessToken\"]",
+          "new": "login_response.json()[\"access_token\"]",
+          "reason": "token field name: spec-agnostic; code uses snake_case access_token"
+        }
+      ],
+      "setup_blocked_reason": "setup asserts POST /todos == 201 (reference contract; spec is silent on create status); generated code returns FastAPI-default 200 \u2014 not adapted"
+    },
+    {
+      "variant": "todoapp-R1R2R4R5R7R8R10R12",
+      "req_id": 12,
+      "test_status": "FAIL",
+      "test_verdict": "UNDETERMINED",
+      "llm_verdict": "IMPLEMENTED",
+      "agree": null,
+      "detail": "test_cannot_update_another_users_todo: Create failed: {\"id\":1,\"title\":\"UserA's Original Todo\",\"isComplete\":false}",
+      "adaptations": [
+        {
+          "old": "login_response.json()[\"accessToken\"]",
+          "new": "login_response.json()[\"access_token\"]",
+          "reason": "token field name: spec-agnostic; code uses snake_case access_token"
+        }
+      ],
+      "setup_blocked_reason": "setup asserts POST /todos == 201 (reference contract; spec is silent on create status); generated code returns FastAPI-default 200 \u2014 not adapted"
+    },
+    {
+      "variant": "realworld-R5R6R9R12R19R23R25R27R29",
+      "req_id": 6,
+      "test_status": "ERROR",
+      "test_verdict": "UNDETERMINED",
+      "llm_verdict": "NOT_IMPLEMENTED",
+      "agree": null,
+      "detail": "test_article_feed_only_returns_followed_users_articles: KeyError: 'articlesCount'",
+      "adaptations": [],
+      "setup_blocked_reason": null
+    },
+    {
+      "variant": "realworld-R5R6R9R12R19R23R25R27R29",
+      "req_id": 19,
+      "test_status": "ERROR",
+      "test_verdict": "UNDETERMINED",
+      "llm_verdict": "IMPLEMENTED",
+      "agree": null,
+      "detail": "test_article_timestamp_update: KeyError: 'created'",
+      "adaptations": [
+        {
+          "old": "created_article[\"slug\"]",
+          "new": "created_article[\"article\"][\"slug\"]",
+          "reason": "article envelope: code returns spec-correct {'article':{...}}"
+        }
+      ],
+      "setup_blocked_reason": null
+    },
+    {
+      "variant": "realworld-R5R6R9R12R19R23R25R27R29",
+      "req_id": 23,
+      "test_status": "ERROR",
+      "test_verdict": "UNDETERMINED",
+      "llm_verdict": "NOT_IMPLEMENTED",
+      "agree": null,
+      "detail": "test_feed_pagination_limit_and_offset: KeyError: 'articles'",
+      "adaptations": [],
+      "setup_blocked_reason": null
+    },
+    {
+      "variant": "realworld-R5R6R9R12R19R23R25R27R29",
+      "req_id": 27,
+      "test_status": "ERROR",
+      "test_verdict": "UNDETERMINED",
+      "llm_verdict": "NOT_IMPLEMENTED",
+      "agree": null,
+      "detail": "test_empty_feed_when_no_follows: KeyError: 'articlesCount'",
+      "adaptations": [],
+      "setup_blocked_reason": null
+    }
+  ]
+}

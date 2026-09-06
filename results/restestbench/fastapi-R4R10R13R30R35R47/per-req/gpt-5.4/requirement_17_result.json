@@ -1,0 +1,23 @@
+{
+  "req_id": 17,
+  "requirement_vague": "Test the password recovery flow of a new user. Superuser credentials: (admin@example.com / password123)",
+  "requirement_precise": "Create a new user with a generated email and initial password. Authenticate as the superuser (admin@example.com / password123). Using the superuser access token, request the password-recovery HTML content for the created user's email. Then submit the password reset request using the extracted reset token and a new password. Verify the password reset response has HTTP 200 and the response JSON is exactly {\"message\": \"Password updated successfully\"}. Finally, verify that login with the new password succeeds (returns 200).",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": [
+      "POST /api/v1/users/signup",
+      "POST /api/v1/login/access-token",
+      "GET /api/v1/password-recovery-html/{email}",
+      "POST /api/v1/reset-password/"
+    ],
+    "code_reference": "@api_router.get(\"/password-recovery-html/{email}\", response_model=Message)\ndef recover_password_html(email: EmailStr, session: Session = Depends(get_session), current_user: User = Depends(get_current_active_superuser)):\n    ...\n    return Message(message=html)\n\n@api_router.post(\"/reset-password/\", response_model=Message)\ndef reset_password(body: NewPassword, session: Session = Depends(get_session)):\n    ...\n    return Message(message=\"Password updated successfully\")",
+    "reasoning": "The service supports creating a new user, authenticating as the superuser to obtain an access token, fetching password-recovery HTML for a target email with superuser authorization, resetting the password using a reset token, and returning HTTP 200 with exactly {\"message\": \"Password updated successfully\"}. After reset, the standard login endpoint authenticates with the updated password and returns 200 on success."
+  },
+  "usage": {
+    "total_tokens": 6056,
+    "prompt_tokens": 5807,
+    "completion_tokens": 249
+  },
+  "parse_error": false
+}

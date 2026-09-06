@@ -1,0 +1,19 @@
+{
+  "app": "nutrition",
+  "variant": "ratings-R10R11R12",
+  "service": "ratings",
+  "req_id": "R10",
+  "requirement": "A rating must be an integer between 1 and 5; values outside this range or non-integer values are rejected.",
+  "source_headline": "Removed rating range constraint (integer between 1 and 5)",
+  "model": "gpt-5.4",
+  "pass": 1,
+  "label": "PARTIAL",
+  "evidence": "In POST /ratings and PUT /ratings/<int:dish_id>, the code parses rating with `rating = round2(float(data[\"rating\"]))` inside a try/except and rejects only values that cannot be converted to float. There is no check that the rating is an integer or that it lies between 1 and 5 before inserting/updating `\"rating\": rating`.",
+  "reasoning": "The code does address validation of the rating field by requiring it to be numeric-convertible, so this is not a GAP. However, the stated requirement is stricter: ratings must be integers from 1 to 5, and non-integers or out-of-range values must be rejected. Because the implementation accepts floats like 3.5 and values outside the range such as 0 or 6, a test of the requirement as stated would fail.",
+  "usage": {
+    "total_tokens": 2548,
+    "prompt_tokens": 2359,
+    "completion_tokens": 189
+  },
+  "timestamp": "2026-07-16 14:59:07"
+}

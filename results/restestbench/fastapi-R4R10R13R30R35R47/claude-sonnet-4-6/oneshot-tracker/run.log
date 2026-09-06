@@ -1,0 +1,12 @@
+Timestamp: 2026-06-02 09:29:58
+Detector:  claude-sonnet-4-6
+Service:   fastapi  Round: 1  Removals: [4, 10, 13, 30, 35, 47]
+Method:    oneshot-tracker
+
+Tokens: prompt=14252, completion=1564, total=15816
+Additions: 0
+Omissions: 3
+
+  O O1: GET /api/v1/items/{item_id} does not check ownership: any authenticated non-superuser can read any item, but the spec requires a 400 'Not enough permissions' response when a user tries to read an item they do not own
+  O O2: POST /api/v1/users/signup returns detail 'User with this email already exists' instead of the required 'The user with this email already exists in the system'
+  O O3: The password recovery email is sent via a direct HTTP POST to the mailcatcher REST API (http://localhost:1080/messages) rather than via SMTP, which is not how mailcatcher receives mail, so emails will not appear in GET http://localhost:1080/messages

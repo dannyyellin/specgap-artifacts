@@ -1,0 +1,23 @@
+{
+  "variant": "fastapi-R14R15R16R17R18R46R56",
+  "req_id": 16,
+  "model": "gpt-5.4",
+  "pass": 1,
+  "verdict": "NOT_IMPLEMENTED",
+  "requirement_vague": "Recovering a password for a non existing user gets rejected.",
+  "omissions": [
+    {
+      "id": "O1",
+      "description": "No password recovery endpoint exists to handle recovery requests and reject non-existent users with HTTP 404.",
+      "category": "ENDPOINTS",
+      "reasoning": "The code defines login, signup, user CRUD, password update for authenticated users, and item routes, but there is no route for password recovery (e.g. forgot-password/recover-password). Without such an endpoint, the scenario of attempting password recovery for email 'jVgQr@example.com' cannot return a 404 for a non-existent user."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 4783,
+    "prompt_tokens": 4663,
+    "completion_tokens": 120
+  },
+  "timestamp": "2026-07-12 10:37:43"
+}

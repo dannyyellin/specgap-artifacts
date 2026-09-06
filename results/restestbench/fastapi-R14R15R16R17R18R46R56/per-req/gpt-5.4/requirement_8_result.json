@@ -1,0 +1,18 @@
+{
+  "req_id": 8,
+  "requirement_vague": "Verify a user cannot update another user's item.",
+  "requirement_precise": "Register a first normal user and obtain an access token by registering and logging in. Using this first user's token, create an item via the API. Then register a second normal user and obtain their access token. Attempt to update the first user's item using the second user's access token. Verify that the update operation fails with HTTP status code 400 and the value 'Not enough permissions' in the detail field of the body.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": "PATCH /api/v1/items/{item_id} in update_item",
+    "code_reference": "if not current_user.is_superuser and item.owner_id != current_user.id:\n    raise HTTPException(status_code=400, detail=\"Not enough permissions\")",
+    "reasoning": "The item update endpoint checks that the authenticated user is either a superuser or the owner of the item. If a different normal user attempts to update another user's item, it fails with HTTP 400 and detail set to 'Not enough permissions', matching the requirement."
+  },
+  "usage": {
+    "total_tokens": 4821,
+    "prompt_tokens": 4702,
+    "completion_tokens": 119
+  },
+  "parse_error": false
+}

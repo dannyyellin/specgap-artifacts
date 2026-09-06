@@ -1,0 +1,28 @@
+Timestamp: 2026-06-01 21:37:21
+Detector:  gpt-4.1-mini
+Service:   nestjs-realworld  Round: 2  Removals: [2, 10, 13, 15, 24, 26, 28]
+Method:    zeroshot
+
+Tokens: prompt=8915, completion=1538, total=10453
+Additions: 8
+Omissions: 10
+
+  A A1: The code returns 403 Forbidden when a user tries to update or delete an article they do not own, enforcing ownership checks.
+  A A2: The code supports 'Bearer ' prefix in Authorization header for JWT tokens in addition to 'Token ' prefix.
+  A A3: The code returns 'status': 'ok' JSON object on successful article deletion and comment deletion instead of just HTTP 200 with empty body.
+  A A4: The code returns 'id' field in user_dict response for user objects, exposing internal user ID.
+  A A5: The code returns both 'createdAt'/'updatedAt' and duplicate 'created'/'updated' fields in article and comment JSON responses.
+  A A6: The code returns 'favorited' and 'favoritesCount' fields in article JSON responses, always false and zero respectively.
+  A A7: The code allows users to follow themselves without returning an error, missing the 400 error for self-follow attempts.
+  A A8: The code allows users to unfollow themselves without returning an error, missing the 400 error for self-unfollow attempts.
+
+  O O1: The code does not implement the security vulnerability described in the specification where any user can update or delete any article regardless of ownership.
+  O O2: The code does not return 200 with empty object {} when an article is deleted and then retrieved; instead, it returns 404 or empty response.
+  O O3: The code does not implement pagination ordering by created timestamp descending for articles and feed; it orders by article.id descending instead.
+  O O4: The code does not prevent deletion of users who have articles, resulting in FK constraint error but does not explicitly handle or document this behavior.
+  O O5: The code does not validate required fields or types in article creation and update payloads, e.g., missing title or description are not checked.
+  O O6: The code does not validate comment body presence or non-empty on comment creation.
+  O O7: The code does not return 400 error when a user attempts to follow or unfollow themselves.
+  O O8: The code does not implement the slug uniqueness test by appending random suffix to ensure unique slugs for articles with same title.
+  O O9: The code does not implement the 'favorites' feature (favoriting articles) though fields are present in responses.
+  O O10: The code does not implement the 'feed' endpoint returning articlesCount and articles filtered by followed authors with pagination ordered by created timestamp descending.

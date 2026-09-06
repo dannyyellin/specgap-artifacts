@@ -1,0 +1,19 @@
+{
+  "app": "pet-store",
+  "variant": "registry-R1R2R3",
+  "service": "registry",
+  "req_id": "R3",
+  "requirement": "The owner account is pre-registered when the service initializes.",
+  "source_headline": "Removed owner pre-registration on initialization",
+  "model": "gpt-5.4",
+  "pass": 2,
+  "label": "INFERRED",
+  "evidence": "@app.before_first_request\ndef init_db(): ... owner = users_collection().find_one({\"username\": OWNER_USERNAME}); if owner is None: users_collection().insert_one({\"username\": OWNER_USERNAME, \"password\": hash_password(OWNER_PASSWORD), \"privileged\": True}) ...; also in __main__: init_db()",
+  "reasoning": "The code explicitly initializes the database and ensures the owner account exists, inserting it with the configured owner username/password and privileged status if absent. This directly addresses pre-registering the owner account during service initialization, so a test checking for the owner account after initialization would pass. The additional update logic for an existing owner does not conflict with the requirement.",
+  "usage": {
+    "total_tokens": 2034,
+    "prompt_tokens": 1872,
+    "completion_tokens": 162
+  },
+  "timestamp": "2026-07-16 15:00:35"
+}

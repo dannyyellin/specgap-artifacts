@@ -1,0 +1,108 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O1 describes the removed constraint that a pet-type cannot be deleted if it still has pets."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O2 is the same deleted-pet-type-with-existing-pets constraint expressed in terms of the missing 400 response."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns authorization behavior for creating pets, which is unrelated to any reference requirement."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns an unspecified 404 response for creating pets, which does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Payload field validation for POST /pet-types/{id}/pets is unrelated to the listed removed requirements."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "O5 directly describes birthdateGT/birthdateLT query filtering, which R7 says was removed."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "O6 is another formulation of the removed birthdateGT/birthdateLT filtering behavior."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R7",
+        "label": "PARTIAL",
+        "reasoning": "O7 is about malformed query-string handling tied to birthdate filters, which is adjacent to but more specific than the removed birthdate filtering requirement."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "O8 describes extracting attributes from group_behavior, which R4 says was removed."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "O9 describes the temperament versus group_behavior precedence rule within attributes extraction, matching R4."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "O10 concerns the tokenization rules used when extracting attributes from temperament/group_behavior, which falls under R4."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "O11 is about lifespan handling, but it concerns missing-value null behavior rather than the specific removed range-handling rules in R6."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O12 concerns where family, genus, and lifespan are extracted from in the Ninja API object, not the removed lifespan range handling in R6."
+      },
+      {
+        "detection_id": "O13",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Registry service failure status handling is unrelated to any of the reference requirements."
+      },
+      {
+        "detection_id": "O14",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "External registry-service unavailability behavior does not match any listed removed requirement."
+      },
+      {
+        "detection_id": "O15",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "MongoDB service naming/configuration is unrelated to the reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2443,
+    "prompt_tokens": 1530,
+    "completion_tokens": 913
+  }
+}

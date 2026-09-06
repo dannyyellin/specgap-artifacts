@@ -1,0 +1,61 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "Validates that the cardholder exists by calling the Cardholders service before creating a borrow record",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The specification does not require the Borrows service to verify that the cardholderId refers to a valid cardholder. The spec only states that a book cannot be borrowed if the cardholder has 2 or more overdue books, but does not require a general existence check."
+      },
+      {
+        "id": "A2",
+        "description": "Validates that the book exists (by ISBN) by calling the Books service before creating a borrow record",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The specification does not require the Borrows service to verify that the ISBN refers to a valid book in the Books service. No such requirement is stated."
+      },
+      {
+        "id": "A3",
+        "description": "Validates that cardholder and book exist when updating a borrow record (PUT /borrows/{id})",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The specification does not require existence checks for cardholderId or ISBN on PUT requests. This is an addition with no basis in the spec."
+      },
+      {
+        "id": "A4",
+        "description": "Rejects POST requests where returnDate < loanDate, and PUT requests where the resulting returnDate < loanDate",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification does not state that returnDate must be after loanDate as a validation rule. The spec only defines how returnDate is computed (loanDate + 30 days) and does not mention this constraint."
+      },
+      {
+        "id": "A5",
+        "description": "Accepts a 'returnDate' field in the POST request body and stores it if provided",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification explicitly states 'The returnDate is not provided in the POST request but is computed by the service.' Accepting returnDate in POST is an addition not required by the spec."
+      },
+      {
+        "id": "A6",
+        "description": "Rejects GET requests with query parameters that are not in the allowed field list",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification does not state that unknown query parameters should be rejected with a 400 error. It only describes the supported query forms."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "Does not check whether the cardholder has 2 or more overdue books before allowing a new borrow (POST /borrows)",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states 'A book can only be borrowed by a cardholder who does not have 2 or more books overdue. If a book cannot be checked out because 2 or more books are overdue, the POST request returns the status code 400.' The code does not implement this check."
+      },
+      {
+        "id": "O2",
+        "description": "returnDate is not computed as loanDate + 30 days; instead it defaults to an empty string",
+        "category": "COMPUTED_VALUES",
+        "reasoning": "The specification states 'returnDate = loanDate + LOAN_PERIOD, where LOAN_PERIOD is 30 days.' The code sets returnDate to data.get('returnDate', '') rather than computing it from loanDate + 30 days."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 8066,
+    "prompt_tokens": 7190,
+    "completion_tokens": 876
+  }
+}

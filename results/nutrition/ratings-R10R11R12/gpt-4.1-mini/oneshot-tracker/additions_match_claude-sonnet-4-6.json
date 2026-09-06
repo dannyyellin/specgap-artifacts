@@ -1,0 +1,24 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "A1 addresses the removal of the integer 1-5 range constraint (R10) by accepting floats, but goes beyond merely removing the range constraint by also changing the type from integer to float with two decimal places."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A2 describes token header format flexibility, which does not correspond to any of the three spec requirements about rating range, per-user-per-dish constraint, or user_id sourcing."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 726,
+    "prompt_tokens": 535,
+    "completion_tokens": 191
+  }
+}

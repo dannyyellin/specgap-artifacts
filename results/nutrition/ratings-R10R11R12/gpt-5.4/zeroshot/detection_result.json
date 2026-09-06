@@ -1,0 +1,67 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "The service accepts authentication tokens from the Authorization header (including Bearer format) and from a custom token header.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification only requires that requests supply a valid token and that services validate it; it does not specify or require support for multiple header formats or a custom token header."
+      },
+      {
+        "id": "A2",
+        "description": "POST and PUT responses return avg_rating rounded to exactly two decimal places.",
+        "category": "COMPUTED_VALUES",
+        "reasoning": "The general guidelines say floating point numbers have two decimal places, but the ratings resource definition does not explicitly require rounding behavior for computed averages beyond being a float. Implementing explicit round-to-two-decimals formatting for averages is additional behavior not positively required by the ratings specification itself."
+      },
+      {
+        "id": "A3",
+        "description": "The service verifies that the referenced dish exists by calling the dishes microservice before creating or updating a rating.",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The ratings specification says ratings contain a dish_id for a dish being rated, but it does not explicitly require the ratings service to call the dishes service to confirm existence before POST or PUT."
+      },
+      {
+        "id": "A4",
+        "description": "The service stores an internal unique id field for each rating document and maintains a counters collection to generate it.",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The ratings resource is identified externally by dish id in /ratings/{id}, and the specification defines rating fields as dish_id, user_id, and rating. It does not require storing a separate internal id or a counters collection."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "The code allows non-integer rating values and stores them as floats instead of enforcing that rating is an integer between 1 and 5.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification explicitly requires the rating field to be an integer between 1 and 5 for rating resources and POST input. The code converts rating using float(...) and round2(...), so values like 4.5 are accepted, and there is no integer-only validation."
+      },
+      {
+        "id": "O2",
+        "description": "The code does not enforce the allowed rating range of 1 through 5.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification explicitly states that rating must be an integer between 1 and 5. The code checks only that rating is numeric, with no lower or upper bound validation on POST or PUT."
+      },
+      {
+        "id": "O3",
+        "description": "GET /ratings/{id} returns 404 when a dish has no ratings instead of returning a JSON structure with dish_id and avg_rating.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification for GET /ratings/{id} says it returns a JSON structure with two fields, dish_id and avg_rating. It does not say unrated dishes should produce 404; instead, only GET /ratings excludes unrated dishes. The code returns 404 whenever no ratings exist for the dish."
+      },
+      {
+        "id": "O4",
+        "description": "The service does not ensure that all successful GET /ratings/{id} requests correspond to an existing dish resource.",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The ratings resource is defined as being about restaurant dishes, and the service checks dish existence for POST and PUT but not for GET /ratings/{id}. As implemented, GET can return an average for a dish id even if the dish no longer exists, which does not align with the resource being tied to actual dishes managed by the dishes service."
+      },
+      {
+        "id": "O5",
+        "description": "The code uses flask_pymongo, which is outside the allowed package set for this service.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification explicitly restricts the ratings service to Python standard library plus flask, pymongo, and requests. The code imports and depends on flask_pymongo/PyMongo, which is not in the allowed list."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 6517,
+    "prompt_tokens": 5718,
+    "completion_tokens": 799
+  }
+}

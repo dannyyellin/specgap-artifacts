@@ -1,0 +1,24 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This property describes DELETE endpoint response behavior, which does not correspond to any of the three spec requirements about password validation, anti-enumeration, or owner pre-registration."
+      },
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This property describes privileged field calculation logic, which does not correspond to any of the three spec requirements about password validation rules, anti-enumeration security, or owner pre-registration on initialization."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 832,
+    "prompt_tokens": 657,
+    "completion_tokens": 175
+  }
+}

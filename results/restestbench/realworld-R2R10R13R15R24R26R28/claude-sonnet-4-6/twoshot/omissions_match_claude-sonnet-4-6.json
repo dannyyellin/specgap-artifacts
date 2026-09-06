@@ -1,0 +1,54 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "R2 explicitly requires the follow endpoint to return status 201, and O1 identifies that the implementation returns 200 instead."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "R2 requires that self-follow returns status 400 with a message containing 'cannot be equal', and O2 identifies that the implementation silently skips the self-follow and returns 200 instead."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "R10 requires that a user cannot unfollow themselves and should return 400, and O3 identifies that the unfollow endpoint has no self-unfollow guard."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R24",
+        "label": "MATCH",
+        "reasoning": "R24 requires articles to be ordered by created timestamp descending, and O4 identifies that the implementation sorts by id instead."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements describe the ordering behavior of the feed endpoint specifically."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements describe or test the feed endpoint route registration order issue."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R26",
+        "label": "PARTIAL",
+        "reasoning": "R26 requires that GET comments returns 3 comments with unique ids and correct bodies, and O7 identifies that the comment endpoint returns an unconventional article-wrapped structure rather than a comment-centric response, which would affect comment retrieval verification."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2595,
+    "prompt_tokens": 2054,
+    "completion_tokens": 541
+  }
+}

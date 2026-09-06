@@ -1,0 +1,78 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R15",
+        "label": "PARTIAL",
+        "reasoning": "Both concern password recovery functionality, but O1 broadly claims it is not implemented while R15 specifically requires recovery email request behavior and verification."
+      },
+      {
+        "detection_id": "O1",
+        "requirement_id": "R16",
+        "label": "PARTIAL",
+        "reasoning": "Both address the password recovery endpoint, but O1 is a general statement about missing functionality whereas R16 specifically tests the 404 behavior for a non-existent user."
+      },
+      {
+        "detection_id": "O1",
+        "requirement_id": "R17",
+        "label": "PARTIAL",
+        "reasoning": "R17 depends on password recovery/reset flow for obtaining reset content and completing a reset, while O1 only generally states password recovery is not implemented."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R15",
+        "label": "MATCH",
+        "reasoning": "Both specifically require verifying that a password recovery email is actually sent to the correct recipient."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R14",
+        "label": "MATCH",
+        "reasoning": "Both describe the missing test token endpoint that should be callable with a superuser token and return the user's email."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R46",
+        "label": "MATCH",
+        "reasoning": "Both concern deletion of a user causing that user's item to no longer be retrievable, i.e. cascade deletion behavior."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R18",
+        "label": "MATCH",
+        "reasoning": "Both specifically concern validating password reset tokens and rejecting an invalid token."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R17",
+        "label": "PARTIAL",
+        "reasoning": "R17 includes using a valid extracted reset token in a successful password reset flow, while O5 only addresses token validation generally."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R56",
+        "label": "PARTIAL",
+        "reasoning": "R56 involves reset-password input validation with a fake token and short password, whereas O5 only mentions token validation and misses the key 422 password-length validation behavior."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements specify this exact user-not-found error message."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements specify this exact insufficient-privileges error message."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1890,
+    "prompt_tokens": 1218,
+    "completion_tokens": 672
+  }
+}

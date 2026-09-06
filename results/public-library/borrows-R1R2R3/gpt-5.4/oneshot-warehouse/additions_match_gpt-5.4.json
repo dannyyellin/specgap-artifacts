@@ -1,0 +1,54 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about validating cardholder existence via an external service, which is unrelated to removing return-date computation, removing the overdue constraint, or removing Logs notification."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns ISBN validation against the Books service and does not correspond to any of the listed removals in the Borrows or Logs specs."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This describes external validation during PUT updates, not removal of returnDate computation, overdue blocking, or checkout notification to Logs."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rejecting unsupported query parameters on GET /borrows is a separate validation behavior and does not match any listed spec removal."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Allowing partial PUT updates is unrelated to the removed POST checkout behaviors in the Borrows and Logs specs."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rejecting unknown JSON fields is additional payload validation and does not correspond to any of the three removed requirements."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": "R1",
+        "label": "PARTIAL",
+        "reasoning": "It involves returnDate behavior, but it adds chronological validation rather than describing the removed automatic computation of returnDate as loanDate plus 30 days."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1361,
+    "prompt_tokens": 923,
+    "completion_tokens": 438
+  }
+}

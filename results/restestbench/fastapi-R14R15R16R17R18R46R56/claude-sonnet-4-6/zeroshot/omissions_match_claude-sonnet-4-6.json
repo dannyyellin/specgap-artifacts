@@ -1,0 +1,96 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R15",
+        "label": "PARTIAL",
+        "reasoning": "O1 identifies the missing POST /api/v1/password-recovery/{email} endpoint, which is the same endpoint required by R15, but O1 only notes its absence rather than describing the full behavior (200 response, message, and email sent)."
+      },
+      {
+        "detection_id": "O1",
+        "requirement_id": "R16",
+        "label": "PARTIAL",
+        "reasoning": "O1 also covers the missing endpoint required by R16 (password recovery for non-existent user returning 404), since the endpoint doesn't exist at all."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R17",
+        "label": "PARTIAL",
+        "reasoning": "O2 identifies the missing POST /api/v1/reset-password/ endpoint, which is required by R17 for the password reset step, but only notes its absence."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R18",
+        "label": "PARTIAL",
+        "reasoning": "O2 identifies the missing POST /api/v1/reset-password/ endpoint, which is also required by R18 for testing invalid token behavior."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R56",
+        "label": "PARTIAL",
+        "reasoning": "O2 identifies the missing POST /api/v1/reset-password/ endpoint, which is required by R56 for testing password length validation."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R14",
+        "label": "MATCH",
+        "reasoning": "O3 directly identifies the missing GET /api/v1/login/test-token endpoint that R14 requires to verify the authenticated user's email field in the response."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R15",
+        "label": "MATCH",
+        "reasoning": "O4 directly identifies the missing email-sending functionality required by R15, which specifies that the password recovery endpoint must actually send an email verifiable via mailcatcher."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R16",
+        "label": "MATCH",
+        "reasoning": "O5 directly describes the same behavior as R16: password recovery for a non-existent user should return HTTP 404."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R17",
+        "label": "MATCH",
+        "reasoning": "O6 directly matches R17's requirement that the reset-password endpoint returns HTTP 200 with exactly {\"message\": \"Password updated successfully\"}."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R18",
+        "label": "MATCH",
+        "reasoning": "O7 directly matches R18's requirement that the reset-password endpoint returns HTTP 400 with detail 'Invalid token' for invalid tokens."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": "R56",
+        "label": "MATCH",
+        "reasoning": "O8 directly matches R56's requirement that the reset-password endpoint returns 422 for a new_password shorter than 8 characters."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O9 discusses null email validation returning 422, which does not correspond to any of the listed reference requirements."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O10 discusses pagination support for GET /api/v1/users/, which does not correspond to any of the listed reference requirements."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": "R17",
+        "label": "MATCH",
+        "reasoning": "O11 directly identifies the missing HTML endpoint for retrieving the reset token that R17 requires (superuser requests password-recovery HTML content to extract the reset token)."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2976,
+    "prompt_tokens": 1880,
+    "completion_tokens": 1096
+  }
+}

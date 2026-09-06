@@ -1,0 +1,20 @@
+# MODIFIED SPEC: 3 elements removed, with cross-service hints adjusted
+# R1: Removed return date computation (returnDate = loanDate + 30 days) from Borrows
+#     - GPT-5.4: NOT INFERRED — code accepts client-supplied returnDate directly;
+#       no automatic +30-day computation
+#     - Prior label: Partially inferrable — 30-day period absent from spec, only
+#       "days-overdue" hint in Cardholders
+#     - Tests: 14, 42, 50
+# R2: Removed overdue borrow constraint (2+ overdue books blocks checkout, returns 400) from Borrows
+#     - GPT-5.4: NOT INFERRED — POST /borrows validates cardholder/book existence but
+#       never checks overdue count; no checkout-blocking logic
+#     - Prior label: Inferrable only from domain knowledge — nothing in spec hints at
+#       a borrowing limit
+#     - Tests: 42
+# R3: Removed "Borrows notifies Logs on checkout" from BOTH Borrows and Logs specs
+#     - GPT-5.4: INFERRED — code calls create_log_for_borrow() which POSTs to LOGS_URL
+#       on checkout; notification implemented despite no remaining spec hint
+#     - Prior label: Not inferrable — no cross-service hint after removal
+#     - Logs description changed to neutral: "Responsible for log records of borrowed books."
+#     - Tests: 43, 44, 45
+

@@ -1,0 +1,24 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Storing purchase documents in a 'purchases' collection is an extra behavior not described by R8, R9, or R10, which concern pet selection, deletion after purchase, and purchase-id uniqueness respectively."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Adding an 'id' field to transaction documents and supporting queries by that field does not correspond to any of R8 (pet selection algorithm), R9 (DELETE pet after purchase), or R10 (purchase-id uniqueness)."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 801,
+    "prompt_tokens": 603,
+    "completion_tokens": 198
+  }
+}

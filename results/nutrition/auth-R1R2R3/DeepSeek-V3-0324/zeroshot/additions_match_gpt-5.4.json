@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A rounding helper for floats is unrelated to removing bcrypt, removing the Owner special case, or removing username uniqueness."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A user-to-response conversion function does not describe any of the specified removals involving password encryption, Owner handling, or username uniqueness."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A constant for numeric ID fields has no clear connection to the removal of bcrypt, the Owner special case, or the username uniqueness constraint."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Extra HTTP error handlers are not the same behavior as removing password encryption, removing the Owner special case, or removing username uniqueness."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 816,
+    "prompt_tokens": 563,
+    "completion_tokens": 253
+  }
+}

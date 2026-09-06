@@ -1,0 +1,54 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No listed requirement concerns extra article timestamp alias fields like 'created' or 'updated'."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements are about the shape of the user response including an 'id' field."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the provided requirements mention DELETE /api/users/{email}."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the provided requirements involve GET /api/tags."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": "R28",
+        "label": "PARTIAL",
+        "reasoning": "It targets the same non-owner article deletion scenario as R28, but the behavior contradicts the requirement because R28 expects deletion by a non-owner to succeed."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": "R28",
+        "label": "PARTIAL",
+        "reasoning": "It targets the same non-owner article update scenario as R28, but the behavior contradicts the requirement because R28 expects update by a non-owner to succeed."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements describe comment deletion authorization rules involving article owners versus comment authors."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2142,
+    "prompt_tokens": 1733,
+    "completion_tokens": 409
+  }
+}

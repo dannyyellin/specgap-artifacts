@@ -1,0 +1,78 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements R14-R18, R46, R56 describe unauthorized item access returning 400 with 'Not enough permissions'."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed spec requirements describe a 403 response for non-superuser accessing another user's data."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed spec requirements describe a superuser attempting to delete their own account and receiving a 403 error."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R56",
+        "label": "MATCH",
+        "reasoning": "R56 specifically tests that a password of exactly 7 characters triggers a 422 validation error, which is enforced by the password length validation (minimum 8 characters) described in A4."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R17",
+        "label": "PARTIAL",
+        "reasoning": "R17 involves a password reset operation where password validation would apply, but A4's focus on length validation is only a partial aspect of R17's broader password reset flow."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed spec requirements describe item title length validation."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": "R14",
+        "label": "PARTIAL",
+        "reasoning": "R14 involves authentication and obtaining an access token, which relies on bcrypt and JWT as described in A6, but A6 describes the implementation mechanism rather than the specific test scenario in R14."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": "R14",
+        "label": "MATCH",
+        "reasoning": "R14 requires authenticating as a superuser with email 'admin@example.com' and password 'password123', which directly depends on the pre-configured superuser described in A7."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": "R17",
+        "label": "PARTIAL",
+        "reasoning": "R17 requires authenticating as the superuser (admin@example.com / password123), which relies on the pre-configured superuser in A7, but A7 only partially captures R17's broader password reset flow."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": "R18",
+        "label": "PARTIAL",
+        "reasoning": "R18 requires authenticating as the superuser (admin@example.com / password123), which relies on the pre-configured superuser in A7, but A7 only partially captures R18's broader invalid token reset scenario."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": "R46",
+        "label": "PARTIAL",
+        "reasoning": "R46 requires logging in as superuser (admin@example.com / password123), which relies on the pre-configured superuser in A7, but A7 only partially captures R46's broader user deletion and item verification flow."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2302,
+    "prompt_tokens": 1415,
+    "completion_tokens": 887
+  }
+}

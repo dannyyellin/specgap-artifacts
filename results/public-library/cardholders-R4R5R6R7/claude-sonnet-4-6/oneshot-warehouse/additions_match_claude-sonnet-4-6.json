@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Restricting query filtering to 'name' and 'email' fields does not correspond to any of the listed spec requirements about type declarations, error codes, fine computation, or cross-service calls."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rejecting mismatched 'id' in PUT payload does not correspond to any of the listed spec requirements."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Returning 400 when no updatable fields are provided does not correspond to any of the listed spec requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 922,
+    "prompt_tokens": 690,
+    "completion_tokens": 232
+  }
+}

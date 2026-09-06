@@ -1,0 +1,14 @@
+{
+  "req_id": 1,
+  "requirement_vague": "Getting all todos returns only the current user's todos",
+  "requirement_precise": "Register two users (userA and userB) and login with each. UserA creates a todo with title 'UserA Todo'. UserB creates a todo with title 'UserB Todo'. When userA calls GET /todos, verify the response contains exactly one todo with title 'UserA Todo'. UserB's todo should not be visible to userA.",
+  "verdict": "NOT_LEAKED",
+  "spec_evidence": "\"Each user manages their own set of todos via CRUD endpoints.\"",
+  "reasoning": "The reduced spec states ownership in a general way, but it never explicitly says that GET /todos filters results to only the authenticated user's todos or that one user's todos must be hidden from another user. Concluding that behavior would require additional assumptions beyond the concrete requirements listed.",
+  "parse_error": false,
+  "usage": {
+    "total_tokens": 1012,
+    "prompt_tokens": 924,
+    "completion_tokens": 88
+  }
+}

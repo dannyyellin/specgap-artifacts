@@ -1,0 +1,122 @@
+{
+  "variant": "realworld-R2R10R13R15R24R26R28",
+  "model": "gpt-5.4",
+  "timestamp": "2026-06-28 19:16:54",
+  "n_removed": 7,
+  "n_spec_leaked": 3,
+  "n_not_leaked": 4,
+  "n_uncertain": 0,
+  "n_parse_errors": 0,
+  "spec_leaked_ids": [
+    10,
+    13,
+    15
+  ],
+  "not_leaked_ids": [
+    2,
+    24,
+    26,
+    28
+  ],
+  "uncertain_ids": [],
+  "per_requirement": [
+    {
+      "req_id": 2,
+      "requirement_vague": "Verify following a user updates the profile following status correctly and prevents self-following",
+      "requirement_precise": "Create two users: user1 (username: 'follower1', email: 'follower1@test.com', password: 'pass123') and user2 (username: 'followee1', email: 'followee1@test.com', password: 'pass123'). Using user1's token, follow user2 by POST to /api/profiles/followee1/follow. Verify the response status is 201. Verify the response body profile has 'following' equal to true and 'username' equal to 'followee1'. Then GET the profile /api/profiles/followee1 with user1's token and verify 'following' is true. Next, using user1's token, attempt to follow themselves by POST to /api/profiles/follower1/follow. Verify this returns status 400 with message containing 'cannot be equal'.",
+      "verdict": "NOT_LEAKED",
+      "spec_evidence": "- \"Using user1's token, GET /api/profiles/profiletarget1. Verify profile has 'following' equal to false (no relationship yet). User1 follows user2 via POST /api/profiles/profiletarget1/follow. GET /api/profiles/profiletarget1 again with user1's token. Verify profile has 'following' equal to true and username is 'profiletarget1'. User1 unfollows user2. GET /api/profiles/profiletarget1 again. Verify profile has 'following' equal to false again.\"",
+      "reasoning": "The reduced spec does state that following a different user updates the profile's 'following' status, so that portion is covered. However, nothing in the spec states or entails that attempting to follow oneself must be rejected with status 400 or a message containing 'cannot be equal', so the full removed requirement is not directly implied.",
+      "parse_error": false,
+      "usage": {
+        "total_tokens": 3584,
+        "prompt_tokens": 3381,
+        "completion_tokens": 203
+      }
+    },
+    {
+      "req_id": 10,
+      "requirement_vague": "Verify unfollow removes follow relationship and updates profile following status",
+      "requirement_precise": "Create user1 (username: 'unfollower1', email: 'unfollower1@test.com', password: 'pass123') and user2 (username: 'unfollowee1', email: 'unfollowee1@test.com', password: 'pass123'). User1 follows user2. Verify following is true. User1 unfollows user2 via DELETE /api/profiles/unfollowee1/follow. Verify response status is 200. Verify response profile has 'following' equal to false. GET profile of user2 using user1's token. Verify 'following' is false. Verify user1 cannot unfollow themselves (should return 400).",
+      "verdict": "SPEC_LEAKED",
+      "spec_evidence": "Create user1 (username: 'profileviewer1', email: 'profileviewer1@test.com', password: 'pass123') and user2 (username: 'profiletarget1', email: 'profiletarget1@test.com', password: 'pass123'). Using user1's token, GET /api/profiles/profiletarget1. Verify profile has 'following' equal to false (no relationship yet). User1 follows user2 via POST /api/profiles/profiletarget1/follow. GET /api/profiles/profiletarget1 again with user1's token. Verify profile has 'following' equal to true and username is 'profiletarget1'. User1 unfollows user2. GET /api/profiles/profiletarget1 again. Verify profile has 'following' equal to false again.",
+      "reasoning": "The reduced spec explicitly states that after user1 unfollows user2, a subsequent profile GET must show 'following' equal to false again, which directly implies that unfollow removes the follow relationship and updates profile following status. However, the self-unfollow 400 behavior is not stated elsewhere in the spec.",
+      "parse_error": false,
+      "usage": {
+        "total_tokens": 3579,
+        "prompt_tokens": 3339,
+        "completion_tokens": 240
+      }
+    },
+    {
+      "req_id": 13,
+      "requirement_vague": "Verify article filtering by author works correctly",
+      "requirement_precise": "Create user1 (username: 'author1', email: 'author1@test.com', password: 'pass123') and user2 (username: 'author2', email: 'author2@test.com', password: 'pass123'). User1 creates article 'Article By Author1'. User2 creates article 'Article By Author2'. GET /api/articles?author=author1. Verify articlesCount is 1 and articles array contains only 'Article By Author1'. GET /api/articles?author=author2. Verify articlesCount is 1 and articles array contains only 'Article By Author2'. GET /api/articles (no filter). Verify articlesCount is 2.",
+      "verdict": "SPEC_LEAKED",
+      "spec_evidence": "- Create user1 (username: 'articleauthor1', email: 'articleauthor1@test.com', password: 'pass123') and user2 (username: 'articleauthor2', email: 'articleauthor2@test.com', password: 'pass123'). User1 creates article 'User1 Article'. User2 creates article 'User2 Article'. GET /api/articles?author=articleauthor1. Verify articlesCount is 1 and contains only 'User1 Article'. GET /api/articles?author=articleauthor2. Verify articlesCount is 1 and contains only 'User2 Article'. This tests the author-article relationship established during article creation.",
+      "reasoning": "The reduced spec already explicitly requires that filtering articles by the author query parameter returns only that author's article. The removed requirement is the same behavioral constraint with different usernames/article titles, plus an extra unfiltered count check not needed for the core constraint.",
+      "parse_error": false,
+      "usage": {
+        "total_tokens": 3539,
+        "prompt_tokens": 3337,
+        "completion_tokens": 202
+      }
+    },
+    {
+      "req_id": 15,
+      "requirement_vague": "Verify article pagination with limit and offset works correctly",
+      "requirement_precise": "Create a user. Create 5 articles with titles 'Article 1', 'Article 2', 'Article 3', 'Article 4', 'Article 5' (in that order). GET /api/articles?limit=2. Verify articlesCount is 5 (total) but articles array has only 2 items. GET /api/articles?limit=2&offset=2. Verify articles array has 2 items and they are different from the first request (offset skipped first 2). GET /api/articles?limit=10. Verify articles array has all 5 items.",
+      "verdict": "SPEC_LEAKED",
+      "spec_evidence": "- \"Create user1 (username: 'feedpageuser1', email: 'feedpageuser1@test.com', password: 'pass123'). Create user2 (username: 'feedpageauthor1', email: 'feedpageauthor1@test.com', password: 'pass123'). User1 follows user2. User2 creates 5 articles: 'Article 1', 'Article 2', 'Article 3', 'Article 4', 'Article 5'. User1 GETs /api/articles/feed?limit=2. Verify articlesCount is 5 (total) but only 2 articles returned. User1 GETs /api/articles/feed?limit=2&offset=2. Verify 2 different articles returned. This tests feed pagination.\"",
+      "reasoning": "The spec explicitly requires limit/offset pagination behavior on the closely related article feed endpoint, including total count staying 5 while only 2 items are returned and offset yielding different items. A reader could directly infer the same pagination constraint for article listing from this retained pagination requirement over articles.",
+      "parse_error": false,
+      "usage": {
+        "total_tokens": 3554,
+        "prompt_tokens": 3322,
+        "completion_tokens": 232
+      }
+    },
+    {
+      "req_id": 24,
+      "requirement_vague": "Verify articles are returned in descending order by created date",
+      "requirement_precise": "Create user1 (username: 'orderuser1', email: 'orderuser1@test.com', password: 'pass123'). User1 creates article1 'First Article', wait at least 1 second, then creates article2 'Second Article', wait at least 1 second, then creates article3 'Third Article'. GET /api/articles. Verify the articles array is ordered by created timestamp in descending order (newest first). Articles with identical timestamps (to the second) may have undefined relative ordering due to database timestamp precision being in seconds. This tests the ORDER BY article.created DESC clause.",
+      "verdict": "NOT_LEAKED",
+      "spec_evidence": "- \"Create user1 (username: 'feedpageuser1', email: 'feedpageuser1@test.com', password: 'pass123'). Create user2 (username: 'feedpageauthor1', email: 'feedpageauthor1@test.com', password: 'pass123'). User1 follows user2. User2 creates 5 articles: 'Article 1', 'Article 2', 'Article 3', 'Article 4', 'Article 5'. User1 GETs /api/articles/feed?limit=2. Verify articlesCount is 5 (total) but only 2 articles returned. User1 GETs /api/articles/feed?limit=2&offset=2. Verify 2 different articles returned. This tests feed pagination.\"\n- \"Create a user (username: 'timestampuser1', email: 'timestampuser1@test.com', password: 'pass123'). Create an article with title 'Timestamp Test Article'. Extract slug, created, and updated timestamps from response. Wait briefly, then PUT /api/articles/{slug} with updated title 'Updated Timestamp Article'. GET /api/articles/{slug}. Verify the 'created' timestamp is unchanged from original. Verify the 'updated' timestamp is different (newer) than the original.\"",
+      "reasoning": "The spec mentions timestamps existing and pagination over feed results, but nowhere explicitly states that article listings must be sorted by created date, either for GET /api/articles or by analogy elsewhere. Concluding descending creation-time order would require outside assumptions about typical API behavior rather than direct entailment from the text.",
+      "parse_error": false,
+      "usage": {
+        "total_tokens": 3662,
+        "prompt_tokens": 3323,
+        "completion_tokens": 339
+      }
+    },
+    {
+      "req_id": 26,
+      "requirement_vague": "Verify multiple comments can be added to the same article with unique IDs",
+      "requirement_precise": "Create user1 (username: 'multicommentuser1', email: 'multicommentuser1@test.com', password: 'pass123'). User1 creates an article 'Multi Comment Article'. User1 adds comment 'First comment'. User1 adds comment 'Second comment'. User1 adds comment 'Third comment'. GET /api/articles/{slug}/comments. Verify 3 comments are returned. Verify each comment has a unique id (no duplicates). Verify the comment bodies are preserved correctly. This tests comment creation and persistence with multiple comments.",
+      "verdict": "NOT_LEAKED",
+      "spec_evidence": "- \"Create a comment on the article via POST /api/articles/{slug}/comments with body 'This is my test comment'. ... Verify the comments array contains a comment with body 'This is my test comment'. Verify the comment has an 'id' field that is a number.\"\n- \"Create a comment with body 'Comment to delete'. Extract the comment id from the response. Verify the article has 1 comment. Delete the comment via DELETE /api/articles/{slug}/comments/{id}.\"",
+      "reasoning": "The spec shows that a single comment has a numeric id and can be deleted by id, but it never explicitly states or directly entails that multiple comments on the same article must all have distinct ids or that several comments can be added and preserved together. Concluding uniqueness across multiple comments would require outside assumptions beyond the text.",
+      "parse_error": false,
+      "usage": {
+        "total_tokens": 3503,
+        "prompt_tokens": 3315,
+        "completion_tokens": 188
+      }
+    },
+    {
+      "req_id": 28,
+      "requirement_vague": "Verify any authenticated user can update and delete any article (no authorization check - security vulnerability)",
+      "requirement_precise": "Create user1 (username: 'owner1', email: 'owner1@test.com', password: 'pass123'). Create user2 (username: 'attacker1', email: 'attacker1@test.com', password: 'pass123'). User1 creates article with title 'Original Owner Article'. Verify article exists. User2 (NOT the owner) PUTs /api/articles/{slug} with title 'Hacked By User2'. Verify PUT response shows updated title. GET article and verify title changed. User1 creates second article 'Article To Delete'. User2 (NOT the owner) DELETEs /api/articles/{slug}. Verify DELETE succeeds with status 200. GET the deleted article and verify it returns 200 with empty object {} (implementation returns empty object for deleted articles). This demonstrates the security vulnerability that any user can update/delete any article.",
+      "verdict": "NOT_LEAKED",
+      "spec_evidence": null,
+      "reasoning": "The reduced spec shows that article owners can update and delete their own articles, but it never states or entails what should happen when a different authenticated user attempts those actions. Concluding that any authenticated user may update or delete any article would require assumptions not explicitly provided by the spec.",
+      "parse_error": false,
+      "usage": {
+        "total_tokens": 3461,
+        "prompt_tokens": 3383,
+        "completion_tokens": 78
+      }
+    }
+  ]
+}

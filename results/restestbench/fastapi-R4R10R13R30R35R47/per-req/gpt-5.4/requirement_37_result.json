@@ -1,0 +1,23 @@
+{
+  "req_id": 37,
+  "requirement_vague": "Update a user as admin (admin@example.com / password123) using a random UUID. The update should fail.",
+  "requirement_precise": "Authenticate as the system superuser using the known credentials (username 'admin@example.com', password 'password123') to obtain an access token. With that superuser access token, attempt to update a user identified by a newly generated UUID that does not exist in the system. Provide an update payload that sets the user's full name to 'Updated_full_name'. Verify the response status is 404. Verify the response body contains a field named 'detail' with the exact text: \"The user with this id does not exist in the system\".",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": [
+      "POST /api/v1/login/access-token",
+      "PATCH /api/v1/users/{user_id}",
+      "get_current_active_superuser",
+      "init_superuser"
+    ],
+    "code_reference": "FIRST_SUPERUSER = \"admin@example.com\"\nFIRST_SUPERUSER_PASSWORD = \"password123\"\n...\n@api_router.patch(\"/users/{user_id}\", response_model=UserRead)\ndef update_user_by_id(..., current_user: User = Depends(get_current_active_superuser)):\n    user = session.get(User, user_id)\n    if not user:\n        raise HTTPException(status_code=404, detail=\"The user with this id does not exist in the system\")",
+    "reasoning": "The code initializes the superuser with the required credentials, provides token-based authentication via /api/v1/login/access-token, and restricts PATCH /api/v1/users/{user_id} to superusers. When the target UUID does not exist, the update endpoint returns HTTP 404 with a response body containing detail exactly equal to \"The user with this id does not exist in the system\"."
+  },
+  "usage": {
+    "total_tokens": 6049,
+    "prompt_tokens": 5815,
+    "completion_tokens": 234
+  },
+  "parse_error": false
+}

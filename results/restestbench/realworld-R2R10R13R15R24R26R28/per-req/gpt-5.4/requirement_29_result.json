@@ -1,0 +1,18 @@
+{
+  "req_id": 29,
+  "requirement_vague": "Verify user deletion fails when user has articles (FK constraint, no cascade delete)",
+  "requirement_precise": "Create user1 (username: 'orphanauthor1', email: 'orphanauthor1@test.com', password: 'pass123'). User1 creates article with title 'Orphan Article Test'. GET /api/articles and verify article exists with author username 'orphanauthor1'. DELETE /api/users/orphanauthor1@test.com. Verify response is 500 (FK constraint error). GET /api/articles again and verify article still exists. This tests that articles block user deletion (no CASCADE DELETE configured).",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": "DELETE /api/users/{email} in delete_user_by_email; Article.author_id foreign key in Article model; GET /api/articles in list_articles",
+    "code_reference": "author_id: int = Field(foreign_key=\"user.id\")\n...\nsession.delete(user)\nsession.commit()\n...\nexcept Exception as e:\n    session.rollback()\n    return JSONResponse(status_code=500, content={\"detail\": str(e)})",
+    "reasoning": "The Article model stores a foreign key to User without any cascade delete configuration, so deleting a user with existing articles is blocked by the database constraint. The delete_user_by_email route catches the resulting failure and returns HTTP 500, and since the transaction is rolled back, the article remains available through GET /api/articles with its author's username preserved."
+  },
+  "usage": {
+    "total_tokens": 5481,
+    "prompt_tokens": 5304,
+    "completion_tokens": 177
+  },
+  "parse_error": false
+}

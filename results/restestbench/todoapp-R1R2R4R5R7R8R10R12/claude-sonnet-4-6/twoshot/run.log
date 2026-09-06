@@ -1,0 +1,11 @@
+Timestamp: 2026-06-02 07:32:24
+Detector:  claude-sonnet-4-6
+Service:   todoapp  Removals: [1, 2, 4, 5, 7, 8, 10, 12]
+Method:    twoshot
+
+Tokens: prompt=6599, completion=321, total=6920
+Additions: 0
+Omissions: 2
+
+  O O1: POST /todos does not validate that the title field is non-empty and return 400 with a message indicating 'The Title field is required' when title is empty or missing
+  O O2: PUT /todos/{id} does not validate that the id in the request body matches the id in the URL path and return 400 Bad Request when they differ

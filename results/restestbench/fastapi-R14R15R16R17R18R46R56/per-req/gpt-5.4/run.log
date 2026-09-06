@@ -1,0 +1,90 @@
+Timestamp:  2026-06-22 18:24:26
+Service:    fastapi (round 2)
+Variant:    fastapi-R14R15R16R17R18R46R56
+Model:      gpt-5.4
+Removals:   [14, 15, 16, 17, 18, 46, 56]
+
+Total requirements:      63
+  Implemented:           52
+  Not implemented:       11
+  Parse errors:          0
+
+Removed requirements (7):  [14, 15, 16, 17, 18, 46, 56]
+  Detected (NOT_IMPLEMENTED):  [14, 15, 16, 17, 18, 56]
+  Missed  (IMPLEMENTED):       [46]
+
+Kept requirements flagged as NOT_IMPLEMENTED (generator errors):
+  [19, 25, 31, 55, 62]
+
+om_recall        (removed & not implemented / n_removed):  0.857
+ad_recall        (removed & implemented     / n_removed):  0.143
+fp_rate_on_kept  (kept    & not implemented / n_kept   ):  0.089
+
+Total omissions reported: 17
+Total tokens:             307417
+
+--- Per-requirement verdicts ---
+
+  R  1  IMPLEMENTED      Creating a valid item yields an appropriate response  @ POST /api/v1/items/ in create_item, with user registration via POST /api/v1/users/signup and authentication via POST /api/v1/login/access-token
+  R  2  IMPLEMENTED      Create and retrieve a Item. Ensure the retrieved item matches the crea  @ ['POST /api/v1/login/access-token', 'POST /api/v1/items/', 'GET /api/v1/items/{item_id}', 'init_db']
+  R  3  IMPLEMENTED      Log in and attempt to read a non-existent item and confirm a not-found  @ ['POST /api/v1/login/access-token', 'GET /api/v1/items/{item_id}', 'init_db']
+  R  4  IMPLEMENTED      Verify that a second user cannot read another user's item. Confirm acc  @ POST /api/v1/users/signup, POST /api/v1/login/access-token, POST /api/v1/items/, GET /api/v1/items/{item_id} (read_item)
+  R  5  IMPLEMENTED      Create two items, then fetch all items and confirm the created items a  @ ['POST /api/v1/login/access-token', 'POST /api/v1/items/', 'GET /api/v1/items/', 'init_db']
+  R  6  IMPLEMENTED      Update a items title and description as the owner. Confirm the update   @ ['POST /api/v1/login/access-token', 'POST /api/v1/items/', 'PATCH /api/v1/items/{item_id}']
+  R  7  IMPLEMENTED      Confirm updating a not existing item fails with an item-not-found erro  @ PATCH /api/v1/items/{item_id} in update_item
+  R  8  IMPLEMENTED      Verify a user cannot update another user's item.  @ PATCH /api/v1/items/{item_id} in update_item
+  R  9  IMPLEMENTED      Confirm deleting a item as a admin (admin@example.com / password123) w  @ ['POST /api/v1/login/access-token', 'POST /api/v1/items/', 'DELETE /api/v1/items/{item_id}', 'GET /api/v1/items/{item_id}', 'init_db']
+  R 10  IMPLEMENTED      Delete a none existing item and confirm the API reports 'Item not foun  @ ['POST /api/v1/login/access-token', 'DELETE /api/v1/items/{item_id}', 'init_db']
+  R 11  IMPLEMENTED      Verify that a second user cannot delete an item created by an other us  @ DELETE /api/v1/items/{item_id} in delete_item
+  R 12  IMPLEMENTED      Confirm login works and returns a valid access token for admin@example  @ ['init_db', 'login_access_token', 'read_user_me', 'get_current_user']
+  R 13  IMPLEMENTED      Check that log in rejects a wrong password.  @ login_access_token -> authenticate
+  R 14  NOT_IMPLEMENTED  Verify the test token endpoint works and its response includes the use [REMOVED]
+  R 15  NOT_IMPLEMENTED  Ensure requesting password recovery works and an email is actually sen [REMOVED]
+  R 16  NOT_IMPLEMENTED  Recovering a password for a non existing user gets rejected. [REMOVED]
+  R 17  NOT_IMPLEMENTED  Test the password recovery flow of a new user. Superuser credentials:  [REMOVED]
+  R 18  NOT_IMPLEMENTED  Reset a password with an invalid reset token and confirm the reset is  [REMOVED]
+  R 19  NOT_IMPLEMENTED  Create a private user (pollo@listo.com, password123, Pollo Listo) retr
+  R 20  IMPLEMENTED      A superuser ('admin@example.com' / 'password123') retrieves its own pr  @ ['POST /api/v1/login/access-token', 'GET /api/v1/users/me', 'init_db']
+  R 21  IMPLEMENTED      Test the read me endpoint. Confirm the returned profile matches the re  @ ['POST /api/v1/users/signup', 'POST /api/v1/login/access-token', 'GET /api/v1/users/me', 'signup', 'login_access_token', 'read_user_me']
+  R 22  IMPLEMENTED      Verify a superuser can create a new user. Check values in the response  @ ['POST /api/v1/login/access-token', 'POST /api/v1/users/', 'init_db', 'get_current_active_superuser']
+  R 23  IMPLEMENTED      Retrieving a registered user by id should work. Admin credentials: (ad  @ ['POST /api/v1/users/signup', 'POST /api/v1/login/access-token', 'GET /api/v1/users/{user_id}', 'init_db']
+  R 24  IMPLEMENTED      Ensure that a user can retrieve himselfe with his id. Confirm the retu  @ ['POST /api/v1/users/signup', 'POST /api/v1/login/access-token', 'GET /api/v1/users/{user_id}', 'UserPublic']
+  R 25  NOT_IMPLEMENTED  Confirm a registered user cannot retrieve another user by id.
+  R 26  IMPLEMENTED      Duplicate creation of a user as admin (admin@example.com / password123  @ POST /api/v1/users/ in create_user; superuser bootstrap in init_db; authentication in POST /api/v1/login/access-token
+  R 27  IMPLEMENTED      Verify a normal user cannot create another user.  @ create_user route (/api/v1/users/) with get_current_active_superuser dependency
+  R 28  IMPLEMENTED      A superuser (admin@example.com / password123) creates 2 random users a  @ ['POST /api/v1/login/access-token', 'POST /api/v1/users/', 'GET /api/v1/users/', 'init_db', 'get_current_active_superuser']
+  R 29  IMPLEMENTED      A user should be able to update himself with full name "Updated Name"   @ POST /api/v1/users/signup, POST /api/v1/login/access-token, PATCH /api/v1/users/me
+  R 30  IMPLEMENTED      Verify the superuser (admin@example.com / password123) can change thei  @ ['POST /api/v1/login/access-token', 'PATCH /api/v1/users/me/password', 'init_db()']
+  R 31  NOT_IMPLEMENTED  Confirm that attempting to change the current user's password by submi
+  R 32  IMPLEMENTED      Ensure an authenticated user cannot change their email to an email alr  @ PATCH /api/v1/users/me in update_user_me
+  R 33  IMPLEMENTED      Verify a superuser (admin@example.com / password123) cannot change the  @ POST /api/v1/login/access-token; PATCH /api/v1/users/me/password (update_password_me); init_db
+  R 34  IMPLEMENTED      Confirm registering a new user works as expected.  @ ['POST /api/v1/users/signup', 'POST /api/v1/login/access-token', 'authenticate']
+  R 35  IMPLEMENTED      Ensure registering a user with an existing email gets rejected.  @ POST /api/v1/users/signup in signup(); startup initialization in init_db()
+  R 36  IMPLEMENTED      Check that a superuser can change a registered user's full_name. Admin  @ ['POST /api/v1/users/signup', 'POST /api/v1/login/access-token', 'PATCH /api/v1/users/{user_id}', 'GET /api/v1/users/{user_id}', 'get_current_active_superuser', 'init_db']
+  R 37  IMPLEMENTED      Update a user as admin (admin@example.com / password123) using a rando  @ ['POST /api/v1/login/access-token', 'PATCH /api/v1/users/{user_id}', 'init_db']
+  R 38  IMPLEMENTED      Verify an admin cannot change a user's email to an email already used   @ ['POST /api/v1/users/signup', 'POST /api/v1/login/access-token', 'PATCH /api/v1/users/{user_id}', 'get_current_active_superuser', 'init_db']
+  R 39  IMPLEMENTED      Verify a registered user can delete their own account successfully.  @ ['POST /api/v1/users/signup', 'POST /api/v1/login/access-token', 'DELETE /api/v1/users/me', 'authenticate', 'get_current_user']
+  R 40  IMPLEMENTED      Verify a superuser cannot delete their own account.  @ POST /api/v1/login/access-token, DELETE /api/v1/users/me, DELETE /api/v1/users/{user_id}
+  R 41  IMPLEMENTED      Verify that a superuser (username 'admin@example.com', password 'passw  @ ['POST /api/v1/users/signup', 'POST /api/v1/login/access-token', 'DELETE /api/v1/users/{user_id}', 'init_db']
+  R 42  IMPLEMENTED      Verify that attempting to delete a non-existing user gets rejected. Ad  @ ['POST /api/v1/login/access-token', 'DELETE /api/v1/users/{user_id}', 'init_db']
+  R 43  IMPLEMENTED      Verify a superuser (username 'admin@example.com' and password 'passwor  @ ['POST /api/v1/login/access-token', 'GET /api/v1/users/me', 'DELETE /api/v1/users/{user_id}', 'init_db']
+  R 44  IMPLEMENTED      Ensure a user can not delete another user.  @ get_current_active_superuser; DELETE /api/v1/users/{user_id} (delete_user_by_id)
+  R 45  IMPLEMENTED      Deleting a user as admin should also delete all their items. Admin cre  @ ['User.items relationship definition', 'delete_user_by_id', 'read_item', 'init_db']
+  R 46  IMPLEMENTED      When a user deletes their own account, all their items should also be   @ User.items relationship on the User model; DELETE /api/v1/users/me in delete_user_me; GET /api/v1/items/{item_id} in read_item; superuser bootstrap in init_db [REMOVED]
+  R 47  IMPLEMENTED      User registration should reject passwords with 7 characters.  @ UserCreate.validate_password and POST /api/v1/users/signup (signup)
+  R 48  IMPLEMENTED      User registration should reject passwords longer than 128 characters.   @ UserCreate.validate_password and POST /api/v1/users/signup (signup)
+  R 49  IMPLEMENTED      User registration should reject full_name with exact 256 characters.  @ POST /api/v1/users/signup via signup(user_in: UserRegister, ...) with UserRegister/UserCreate model validation
+  R 50  IMPLEMENTED      Password update should reject new_password shorter than 8 characters.   @ UpdatePassword.validate_new_password and PATCH /api/v1/users/me/password (update_password_me)
+  R 51  IMPLEMENTED      Password update should reject new_password longer than 128 characters.  @ UpdatePassword.validate_new_password and PATCH /api/v1/users/me/password
+  R 52  IMPLEMENTED      Password update should reject current_password with 7 characters. Expe  @ UpdatePassword.validate_current_password and PATCH /api/v1/users/me/password (update_password_me)
+  R 53  IMPLEMENTED      Item creation should reject empty title (0 characters).  @ ItemCreate.validate_title and POST /api/v1/items/ (create_item)
+  R 54  IMPLEMENTED      Item creation should reject title longer than 255 characters. Test wit  @ ItemCreate.validate_title and POST /api/v1/items/ create_item
+  R 55  NOT_IMPLEMENTED  Item creation should reject description with exact 256 characters.
+  R 56  NOT_IMPLEMENTED  Password reset should reject new_password with 7 characters with a 422 [REMOVED]
+  R 57  IMPLEMENTED      User registration should reject invalid email format. Test with 'not-a  @ UserRegister/UserCreate model validation used by POST /api/v1/users/signup
+  R 58  IMPLEMENTED      User profile update should reject invalid email format. Test with 'inv  @ UserUpdateMe model and PATCH /api/v1/users/me route (update_user_me)
+  R 59  IMPLEMENTED      Getting user by ID should reject invalid UUID format. Test with 'not-a  @ POST /api/v1/login/access-token and GET /api/v1/users/{user_id} in login_access_token and read_user_by_id
+  R 60  IMPLEMENTED      Getting item by ID should reject invalid UUID format. Test with 'not-a  @ GET /api/v1/items/{item_id} in read_item
+  R 61  IMPLEMENTED      User registration should reject null email. Test with email set to nul  @ POST /api/v1/users/signup via signup(user_in: UserRegister, ...) and UserCreate.email
+  R 62  NOT_IMPLEMENTED  User registration should reject null password. Test with password set 
+  R 63  IMPLEMENTED      Item creation should reject null title. Test with title set to null.  @ ItemCreate.validate_title and POST /api/v1/items/ (create_item)

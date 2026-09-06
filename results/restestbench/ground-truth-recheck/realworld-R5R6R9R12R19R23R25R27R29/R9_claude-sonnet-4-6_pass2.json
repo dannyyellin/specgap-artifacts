@@ -1,0 +1,29 @@
+{
+  "variant": "realworld-R5R6R9R12R19R23R25R27R29",
+  "req_id": 9,
+  "model": "claude-sonnet-4-6",
+  "pass": 2,
+  "verdict": "NOT_IMPLEMENTED",
+  "requirement_vague": "Verify user creation rejects duplicate username or email",
+  "omissions": [
+    {
+      "id": "O1",
+      "description": "The code returns status 422 (not 400) when a duplicate username or email is detected.",
+      "category": "RESPONSE_FORMAT",
+      "reasoning": "The requirement specifies that duplicate username or email attempts should return HTTP status 400. The code raises HTTPException with status_code=422 for both duplicate email and duplicate username cases."
+    },
+    {
+      "id": "O2",
+      "description": "The error message returned does not contain 'Username and email must be unique'. Instead, the code returns separate messages like 'has already been taken' under 'errors.email' or 'errors.username'.",
+      "category": "RESPONSE_FORMAT",
+      "reasoning": "The requirement specifies the response must contain the string 'Username and email must be unique'. The code returns {'errors': {'email': ['has already been taken']}} or {'errors': {'username': ['has already been taken']}}, which do not match the required message."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 6969,
+    "prompt_tokens": 6703,
+    "completion_tokens": 266
+  },
+  "timestamp": "2026-07-12 10:40:13"
+}

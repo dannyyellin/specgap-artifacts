@@ -1,0 +1,20 @@
+# MODIFIED SPEC: 3 elements removed for Profiles experiment
+# R7: Removed protein exclusion from profileDishes calculation
+#     - GPT-5.4: NOT INFERRED — protein is included in NUTRITION_FIELDS when building
+#       the diet-matching query; no protein exclusion logic
+#     - Prior label: Not inferrable — no domain knowledge or spec hint suggests protein
+#       should be excluded; this is an arbitrary business rule
+#     - Tests: 10
+# R8: Removed owner-only restriction on GET /profiles
+#     - GPT-5.4: NOT INFERRED — GET /profiles validates token but never checks the
+#       privileged flag; not restricted to the Owner
+#     - Prior label: Partially inferrable — Owner concept exists and restricting access
+#       to all user profiles is a common privacy pattern
+#     - Tests: 9
+# R9: Removed that user_id comes from token validation (not request body)
+#     - GPT-5.4: INFERRED — code extracts user_id from auth_data["user_id"] (set by
+#       token validation), not from the request JSON body
+#     - Prior label: Partially inferrable — authentication exists and user context is
+#       available from tokens, but specific mechanism removed
+#     - Tests: 8
+

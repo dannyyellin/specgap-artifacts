@@ -1,0 +1,21 @@
+{
+  "req_id": 31,
+  "requirement_vague": "Confirm that attempting to change the current user's password by submitting the same incorrect string for current and new password is rejected. Admin credentials: (admin@example.com / password123)",
+  "requirement_precise": "Sign in using the built-in admin account (username 'admin@example.com', password 'password123') to obtain an access token. Using that token, attempt to change the currently authenticated user's password by submitting a payload where both the current password and the new password are the same random string that does not match the real password. Verify the response status is 400. Verify the response body contains a detail message equal to 'Incorrect password'.",
+  "removed": false,
+  "omissions": [
+    {
+      "id": "R31-O1",
+      "description": "Changing the current user's password with the same incorrect string for both current_password and new_password is not rejected with detail 'Incorrect password'.",
+      "category": "BUSINESS_LOGIC",
+      "reasoning": "In PATCH /api/v1/users/me/password, the code first checks whether current_password == new_password and immediately raises HTTP 400 with detail 'New password cannot be the same as the current one'. Therefore, when both fields contain the same random incorrect string, the request is rejected before verifying the actual current password, so it does not produce the required 'Incorrect password' response."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 4865,
+    "prompt_tokens": 4730,
+    "completion_tokens": 135
+  },
+  "parse_error": false
+}

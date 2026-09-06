@@ -1,0 +1,73 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "The code checks whether a dish exists by calling the dishes microservice before creating or updating a rating",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The specification does not require the ratings service to verify that a dish exists before creating or updating a rating. The spec only says POST /ratings creates a new rating for the dish from the user issuing the request, with no mention of validating dish existence."
+      },
+      {
+        "id": "A2",
+        "description": "POST /ratings returns a JSON structure with 'dish_id' and 'avg_rating' on success",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification does not describe what the POST /ratings response body should contain. It only says the POST request creates a new rating. The code returns avg_rating data, which is not specified for POST responses."
+      },
+      {
+        "id": "A3",
+        "description": "The rating value is stored as a float (rounded to 2 decimal places) rather than as an integer",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The specification defines 'rating' as an integer between 1 and 5. The code applies round2() converting it to a float before storing."
+      },
+      {
+        "id": "A4",
+        "description": "PUT /ratings/{id} validates that the dish_id in the request body matches the dish_id in the URL path",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification does not require that the dish_id in the PUT body must match the URL path parameter. The spec only says PUT provides a JSON structure containing 'dish_id' and 'rating'."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "POST /ratings does not enforce that 'rating' is an integer between 1 and 5",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states the 'rating' field is 'an integer between 1 and 5'. The code converts the value to a float and does not validate that it is an integer or within the range 1-5."
+      },
+      {
+        "id": "O2",
+        "description": "PUT /ratings/{id} does not enforce that 'rating' is an integer between 1 and 5",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states the 'rating' field is 'an integer between 1 and 5'. The PUT handler converts the value to a float and does not validate that it is an integer or within the range 1-5."
+      },
+      {
+        "id": "O3",
+        "description": "POST /ratings does not prevent a user from rating the same dish twice",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states 'The POST /ratings request is only allowed once for a given user for a given dish; a user cannot rate the same dish twice'. The code relies on a MongoDB unique index to enforce this but catches the resulting PyMongoError and returns 400 (Bad Request) rather than a more specific error. However, the duplicate prevention via unique index is present. Actually the unique index on (dish_id, user_id) does enforce this \u2014 this is implemented. Retracting this omission."
+      },
+      {
+        "id": "O4",
+        "description": "GET /ratings/{id} is described as returning the avg_rating for the dish of that id, but the spec says the id in /ratings/{id} refers to a rating document id, not a dish_id \u2014 the code treats the URL parameter as dish_id",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification defines /ratings/{id} where 'id' is the id of a rating document (each rating has fields dish_id, user_id, rating). The GET /ratings/{id} should return the avg_rating for the dish associated with that rating id. The code instead treats the URL parameter as dish_id directly, which conflates the rating id with the dish_id."
+      },
+      {
+        "id": "O5",
+        "description": "PUT /ratings/{id} and DELETE /ratings/{id} use dish_id as the URL parameter instead of the rating document id",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification defines /ratings/{id} where id is the rating document id. The spec says 'PUT and DELETE requests on /ratings/{id} will update or delete the rating given by that user for the dish of the given id.' The code uses the URL parameter as dish_id, not as the rating's own id field."
+      },
+      {
+        "id": "O6",
+        "description": "The service does not listen on port 5004 as specified; it listens on 5004 but the deployment URL in the spec is http://ratings:5004/ratings \u2014 the service correctly uses port 5004",
+        "category": "ENDPOINTS",
+        "reasoning": "Actually the port is correct. Retracting."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 9368,
+    "prompt_tokens": 8137,
+    "completion_tokens": 1231
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "app": "nutrition",
+  "variant": "ratings-R10R11R12",
+  "service": "ratings",
+  "req_id": "R10",
+  "requirement": "A rating must be an integer between 1 and 5; values outside this range or non-integer values are rejected.",
+  "source_headline": "Removed rating range constraint (integer between 1 and 5)",
+  "model": "gpt-5.4",
+  "pass": 2,
+  "label": "PARTIAL",
+  "evidence": "In POST /ratings and PUT /ratings/<int:dish_id>, the code parses rating with `rating = round2(float(data[\"rating\"]))` inside a try/except and rejects only values that cannot be converted to float. There is no check that the rating is an integer or that it lies between 1 and 5 before inserting/updating `\"rating\": rating` in MongoDB.",
+  "reasoning": "The code clearly addresses validation of the rating field by requiring it to be present and numeric-convertible, so this is not a GAP. However, the requirement specifically demands an integer in the range 1 through 5, and the implementation accepts non-integer numeric values (e.g. 3.5) and out-of-range values (e.g. 0 or 6) after rounding to two decimals. Therefore a test of the requirement as stated would fail on those cases, making this PARTIAL.",
+  "usage": {
+    "total_tokens": 2570,
+    "prompt_tokens": 2359,
+    "completion_tokens": 211
+  },
+  "timestamp": "2026-07-16 14:59:10"
+}

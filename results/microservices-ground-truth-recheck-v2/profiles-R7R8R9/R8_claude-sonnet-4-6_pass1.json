@@ -1,0 +1,19 @@
+{
+  "app": "nutrition",
+  "variant": "profiles-R7R8R9",
+  "service": "profile",
+  "req_id": "R8",
+  "requirement": "GET /profiles may only be accessed by the Owner (privileged) user; requests by other users are denied.",
+  "source_headline": "Removed owner-only restriction on GET /profiles",
+  "model": "claude-sonnet-4-6",
+  "pass": 1,
+  "label": "GAP",
+  "evidence": "The GET /profiles handler in the `profiles()` function calls `validate_token()` to check authentication, but after that it does not check `auth_data['privileged']` at all before returning results.",
+  "reasoning": "The requirement states that GET /profiles may only be accessed by the Owner (privileged) user and other users must be denied. The code validates the token but never checks whether the authenticated user has `privileged=True`. Any authenticated user, privileged or not, will receive the full list of profiles. A test sending a non-privileged user's token to GET /profiles would receive a 200 response instead of a 401/403 denial, so the requirement is entirely absent.",
+  "usage": {
+    "total_tokens": 3097,
+    "prompt_tokens": 2924,
+    "completion_tokens": 173
+  },
+  "timestamp": "2026-07-16 14:58:40"
+}

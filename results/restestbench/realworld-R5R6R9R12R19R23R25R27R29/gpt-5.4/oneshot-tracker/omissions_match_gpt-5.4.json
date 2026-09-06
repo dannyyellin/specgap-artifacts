@@ -1,0 +1,84 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "R9 is specifically about rejecting duplicate username or email creation with status 400 and the message 'Username and email must be unique', which O1 directly describes as violated."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R25",
+        "label": "MATCH",
+        "reasoning": "R25 requires the JWT payload to contain id, username, and email, exactly the behavior O2 says is missing."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R12",
+        "label": "MATCH",
+        "reasoning": "R12 tests GET /api/articles filtering by the tag query parameter, which O3 states is unsupported."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "R6 requires GET /api/articles/feed with followed-author filtering behavior, and O4 says that endpoint is not implemented."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R23",
+        "label": "MATCH",
+        "reasoning": "R23 requires feed pagination on GET /api/articles/feed using limit and offset, which O4 covers by stating the endpoint is absent."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R27",
+        "label": "MATCH",
+        "reasoning": "R27 requires empty-feed behavior on GET /api/articles/feed for users following nobody, which O4 includes as part of the missing endpoint."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "R5 covers article deletion and subsequent GET returning {}, but O5 focuses on the DELETE response body mismatch and does not fully capture the post-delete retrieval behavior."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements concern deleting comments, so this does not correspond to any listed requirement."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R29",
+        "label": "MATCH",
+        "reasoning": "R29 explicitly tests DELETE /api/users/{email} and expects a 500 FK-constraint failure when the user has articles, which O7 says is not implemented."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The reference requirements create articles with fields present but do not specify validation of missing title, description, or body."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement addresses comment-body validation, so this detection has no match."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "R9 is limited to duplicate handling during user creation, not updating users via PUT /api/user, so this is a different behavior."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2951,
+    "prompt_tokens": 2195,
+    "completion_tokens": 756
+  }
+}

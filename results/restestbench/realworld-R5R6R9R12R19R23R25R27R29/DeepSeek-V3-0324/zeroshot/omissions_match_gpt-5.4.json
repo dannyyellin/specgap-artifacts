@@ -1,0 +1,66 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R12",
+        "label": "MATCH",
+        "reasoning": "O1 describes article filtering by tag via GET /api/articles?tag=..., which is exactly the behavior tested in R12."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O2 describes the feed endpoint showing articles from followed users, which is the core behavior verified in R6."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R23",
+        "label": "PARTIAL",
+        "reasoning": "R23 is specifically about pagination on the feed endpoint, while O2 mentions the feed endpoint generally but not its pagination behavior."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R27",
+        "label": "MATCH",
+        "reasoning": "O2's description of GET /api/articles/feed corresponds to R27's empty-feed behavior for users who follow nobody."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O3 exactly captures R5's requirement that fetching a deleted article returns 200 with an empty object rather than 404."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the provided reference requirements concern preventing a user from following themselves."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "O5 matches R9's requirement for unique username/email validation and the specific error message 'Username and email must be unique'."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R19",
+        "label": "MATCH",
+        "reasoning": "O6 describes verifying timestamp changes on article update, which is exactly what R19 tests."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R23",
+        "label": "PARTIAL",
+        "reasoning": "R23 specifically tests pagination for the feed endpoint, while O7 refers more broadly to article listing pagination rather than feed pagination."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2316,
+    "prompt_tokens": 1765,
+    "completion_tokens": 551
+  }
+}

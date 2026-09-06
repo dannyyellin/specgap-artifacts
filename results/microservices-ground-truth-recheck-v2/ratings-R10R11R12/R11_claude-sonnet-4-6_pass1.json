@@ -1,0 +1,19 @@
+{
+  "app": "nutrition",
+  "variant": "ratings-R10R11R12",
+  "service": "ratings",
+  "req_id": "R11",
+  "requirement": "A user may have at most one rating per dish; a duplicate rating by the same user for the same dish is prevented.",
+  "source_headline": "Removed one-rating-per-user-per-dish constraint",
+  "model": "claude-sonnet-4-6",
+  "pass": 1,
+  "label": "INFERRED",
+  "evidence": "ensure_indexes() calls: mongo.db.ratings.create_index([('dish_id', 1), ('user_id', 1)], unique=True). In ratings_collection() POST, a PyMongoError on insert_one returns 400. The unique compound index enforces one rating per (dish_id, user_id) pair at the database level.",
+  "reasoning": "The code creates a unique compound index on (dish_id, user_id) via ensure_indexes(), which prevents duplicate ratings by the same user for the same dish at the database level. When a duplicate insert is attempted, MongoDB raises a DuplicateKeyError (a subclass of PyMongoError), which is caught and returns a 400 error. This is an equivalent mechanism to an explicit duplicate check, so the requirement is fully satisfied.",
+  "usage": {
+    "total_tokens": 3080,
+    "prompt_tokens": 2877,
+    "completion_tokens": 203
+  },
+  "timestamp": "2026-07-16 14:59:34"
+}

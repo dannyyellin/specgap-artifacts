@@ -1,0 +1,90 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O1 describes the deleted constraint preventing deletion of a pet-type when pets of that type exist."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 concerns 403 handling for DELETE /pet-types/{id}, which is unrelated to any reference requirement."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "O3 describes the removed rule that attributes should be extracted from temperament/group_behavior."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "O4 directly describes the removed birthdateGT/birthdateLT query filtering behavior."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "O5 is still about extracting attributes from temperament/group_behavior fields, matching the removed extraction rule."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 is about 403 authorization behavior on POST /pet-types/{id}/pets, not any listed reference requirement."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O7 concerns null versus 0 defaulting for lifespan, which is different from the removed lifespan range-handling rule."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O8 discusses conjunctive query support on GET /pet-types, unrelated to the reference requirements."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O9 is about PUT /pet-types/{id} returning 405, which does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O10 concerns duplicate pet names and error codes, unrelated to the reference requirements."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O11 explicitly discusses the removed lifespan range handling rule of taking the first/minimum integer."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O12 is about 403 response handling for DELETE /pet-types/{id}, not any listed reference requirement."
+      },
+      {
+        "detection_id": "O13",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "O13 captures only the punctuation-stripping part of the removed temperament/group_behavior attributes extraction rules."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2566,
+    "prompt_tokens": 1826,
+    "completion_tokens": 740
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "variant": "fastapi-R4R10R13R30R35R47",
+  "req_id": 13,
+  "model": "gpt-5.4",
+  "pass": 2,
+  "verdict": "IMPLEMENTED",
+  "requirement_vague": "Check that log in rejects a wrong password.",
+  "omissions": [],
+  "implementation": {
+    "location": "authenticate; POST /api/v1/login/access-token",
+    "code_reference": "def authenticate(session: Session, email: str, password: str) -> Optional[User]:\n    user = session.exec(select(User).where(User.email == email)).first()\n    if not user:\n        return None\n    if not verify_password(password, user.hashed_password):\n        return None\n\n@api_router.post(\"/login/access-token\", response_model=Token)\ndef login_access_token(session: Session = Depends(get_session), form_data: OAuth2PasswordRequestForm = Depends()):\n    user = authenticate(session, form_data.username, form_data.password)\n    if not user:\n        raise HTTPException(status_code=400, detail=\"Incorrect email or password\")",
+    "reasoning": "The login endpoint authenticates using the submitted username/email and password, and `authenticate` returns `None` when the password does not match the stored hash. The route then responds with HTTP 400 and the exact detail message 'Incorrect email or password', satisfying the requirement for wrong-password login rejection."
+  },
+  "usage": {
+    "total_tokens": 5975,
+    "prompt_tokens": 5739,
+    "completion_tokens": 236
+  },
+  "timestamp": "2026-07-12 10:35:38"
+}

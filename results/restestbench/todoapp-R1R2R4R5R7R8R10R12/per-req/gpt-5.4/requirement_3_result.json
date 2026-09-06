@@ -1,0 +1,18 @@
+{
+  "req_id": 3,
+  "requirement_vague": "Getting a specific todo by ID returns the correct todo",
+  "requirement_precise": "Register a user and login. Create a todo with title 'My Test Todo'. Use the returned todo ID to call GET /todos/{id}. Verify the response status is 200 OK, the returned todo has the same ID and title 'My Test Todo', and isComplete is false.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": "GET /todos/{id} in get_todo; POST /todos in create_todo",
+    "code_reference": "@app.get(\"/todos/{id}\", response_model=TodoResponse)\ndef get_todo(...):\n    todo = session.exec(select(Todo).where(Todo.id == id, Todo.user_id == current_user.id)).first()\n...\n@app.post(\"/todos\", response_model=TodoResponse)\ndef create_todo(...):\n    todo = Todo(title=todo_in.title, isComplete=todo_in.isComplete, user_id=current_user.id)",
+    "reasoning": "The service defines an authenticated GET /todos/{id} endpoint that looks up the todo by the provided ID for the current user and returns it with response_model TodoResponse, which includes id, title, and isComplete. Todo creation defaults isComplete to false via TodoCreate and Todo model defaults, so creating a todo with title 'My Test Todo' and then fetching it by the returned ID will return 200 OK with the same id, title, and isComplete=false."
+  },
+  "usage": {
+    "total_tokens": 2657,
+    "prompt_tokens": 2425,
+    "completion_tokens": 232
+  },
+  "parse_error": false
+}

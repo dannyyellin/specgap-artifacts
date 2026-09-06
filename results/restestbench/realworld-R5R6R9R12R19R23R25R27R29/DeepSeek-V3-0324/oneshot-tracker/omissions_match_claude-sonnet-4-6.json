@@ -1,0 +1,84 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "O1 identifies the missing feed endpoint which is tested in R6, R23, and R27, but only partially captures the specific behaviors described in those requirements."
+      },
+      {
+        "detection_id": "O1",
+        "requirement_id": "R23",
+        "label": "PARTIAL",
+        "reasoning": "O1 identifies the missing feed endpoint which is also tested in R23 for pagination behavior."
+      },
+      {
+        "detection_id": "O1",
+        "requirement_id": "R27",
+        "label": "PARTIAL",
+        "reasoning": "O1 identifies the missing feed endpoint which is also tested in R27 for empty feed behavior."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R12",
+        "label": "MATCH",
+        "reasoning": "O2 directly identifies the missing tag filtering support in GET /api/articles, which is exactly what R12 tests."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement describes validation of tagList containing only strings."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement describes validation that title must be non-empty."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R29",
+        "label": "PARTIAL",
+        "reasoning": "O5 identifies the missing user deletion endpoint, which is tested in R29, but R29 specifically tests that deletion fails with a 500 FK constraint error rather than succeeding."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement describes validation preventing users from following themselves."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement describes a 404 error when trying to follow a non-existent user."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement describes validation that comment body must be non-empty."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement describes pagination support for comments."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement describes validation preventing users from updating or deleting other users' articles."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2902,
+    "prompt_tokens": 2144,
+    "completion_tokens": 758
+  }
+}

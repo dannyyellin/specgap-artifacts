@@ -1,0 +1,48 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns the MongoDB hostname configuration, which is unrelated to any reference requirement."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "It concerns /verify invalid-credential responses, but focuses on missing JSON fields rather than specifically the removed same-error-message anti-enumeration requirement."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "It directly describes the same anti-enumeration behavior on /verify requiring identical handling/message for username-not-found and wrong-password cases."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "It directly states that password complexity validation is not enforced, matching the removed password validation rules requirement."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "It also describes missing enforcement of the same password complexity rules, just on the password-change endpoint."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about username regex validation and does not correspond to any reference requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1255,
+    "prompt_tokens": 899,
+    "completion_tokens": 356
+  }
+}

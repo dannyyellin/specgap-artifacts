@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 describes filtering behavior on GET /cardholders, which does not correspond to any of the spec requirements about removed field type declarations, error codes, fine computation, or cross-service calls."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A2 describes a 400 rejection for missing updatable fields on PUT, which does not correspond to any of the listed spec requirements."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A3 describes payload id vs URL id validation on PUT, which does not correspond to any of the listed spec requirements."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "A4 involves string type validation for 'name' and 'email' on POST, which partially relates to R4's removal of string type declarations, but A4 describes the code adding type checks rather than removing field type declarations as R4 specifies."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1102,
+    "prompt_tokens": 765,
+    "completion_tokens": 337
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "A1 describes that the code extracts additional fields beyond 'temperament' or 'group_behavior' for the attributes array, which directly corresponds to R4's removal of the temperament/group_behavior extraction rules."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement addresses the default value of the lifespan field when not returned by the Ninja API."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement addresses filtering by 'id' or handling of malformed integer query parameters."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement addresses the behavior for unsupported query parameters on GET /pet-types."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "A5 directly describes that the DELETE /pet-types/{id} endpoint does not check for existing pets before deleting, which matches R5's removal of the 'cannot delete pet-type if it has pets' constraint."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement addresses the status code for duplicate pet names on POST /pet-types/{id}/pets."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement addresses the 'picture-url' field support in PUT /pet-types/{id}/pets/{name}."
+      },
+      {
+        "detection_id": "A8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement addresses validation on picture-name format for GET /pictures/{picture-name}."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1703,
+    "prompt_tokens": 1126,
+    "completion_tokens": 577
+  }
+}

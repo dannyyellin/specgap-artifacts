@@ -1,0 +1,73 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "The code checks that the dish exists by calling the dishes microservice before creating or updating a rating.",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The specification does not require verifying dish existence via the dishes microservice before posting or updating a rating. The spec only says the POST request supplies a dish_id and rating."
+      },
+      {
+        "id": "A2",
+        "description": "The POST /ratings response returns a JSON structure with 'dish_id' and 'avg_rating' (the average rating for the dish).",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification does not describe what the POST /ratings response body should contain beyond creating a new rating. The spec describes the GET /ratings/{id} response as containing 'dish_id' and 'avg_rating', but does not specify the POST response body format."
+      },
+      {
+        "id": "A3",
+        "description": "The PUT /ratings/{id} handler validates that the 'dish_id' in the request body matches the {id} path parameter.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification does not require that the dish_id in the PUT body must match the URL path parameter. The spec simply says PUT provides 'dish_id' and 'rating' fields."
+      },
+      {
+        "id": "A4",
+        "description": "The code stores a unique auto-incremented 'id' field on each rating document and maintains a counters collection.",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The specification describes each rating as containing 'dish_id', 'user_id', and 'rating' fields. It does not require a separate unique 'id' field on individual rating documents."
+      },
+      {
+        "id": "A5",
+        "description": "The rating value is stored as a float (rounded to 2 decimal places) rather than as an integer.",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The specification explicitly states that 'rating' is an integer between 1 and 5. The code converts it to a float via round2()."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "The code does not validate that the 'rating' value is an integer between 1 and 5.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification explicitly states that 'rating' is an integer between 1 and 5. The code accepts any numeric value without checking this constraint."
+      },
+      {
+        "id": "O2",
+        "description": "The PUT /ratings/{id} request does not restrict the operation to the user who owns the rating; any authenticated user can update any rating.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states 'The PUT and DELETE requests on /ratings/{id} will update or delete the rating given by that user for the dish of the given id', implying the {id} refers to the dish_id and the operation applies to the requesting user's rating. While the code does filter by user_id, the {id} in the URL is treated as dish_id which is consistent, but the spec says the PUT updates the rating 'given by that user' \u2014 this is actually implemented. However, the spec says the POST is only allowed once per user per dish, and the code enforces this via a unique index, which is correct."
+      },
+      {
+        "id": "O3",
+        "description": "The GET /ratings/{id} endpoint does not check whether the dish with the given id actually exists before returning 404; it returns 404 only when no ratings exist for that dish, which conflates 'dish not found' with 'dish has no ratings'.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification states GET /ratings/{id} returns a JSON structure with 'dish_id' and 'avg_rating'. If a dish has not been rated, it is not included in the GET /ratings response, but the spec does not explicitly address what GET /ratings/{id} returns when there are no ratings \u2014 this is a minor ambiguity rather than a clear omission."
+      },
+      {
+        "id": "O4",
+        "description": "The code does not validate that 'dish_id' and 'rating' are of the correct types (integer) in the POST request body beyond basic numeric conversion.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states 'rating' is an integer between 1 and 5 and 'dish_id' is a number. The code accepts floats for rating (e.g., 3.7) without rejecting non-integer values."
+      },
+      {
+        "id": "O5",
+        "description": "The code does not check for 415 Unsupported Media Type on GET requests that include a body, but more importantly the token can only be supplied via Authorization header or 'token' header \u2014 the spec does not specify the token delivery mechanism but other services accept it in the request body as well.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The general spec says 'a request must supply a valid token' without specifying the mechanism, but this is a minor implementation detail."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 7812,
+    "prompt_tokens": 6525,
+    "completion_tokens": 1287
+  }
+}

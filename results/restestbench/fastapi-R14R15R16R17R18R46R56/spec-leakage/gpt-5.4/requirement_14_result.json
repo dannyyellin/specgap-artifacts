@@ -1,0 +1,14 @@
+{
+  "req_id": 14,
+  "requirement_vague": "Verify the test token endpoint works and its response includes the user's email.",
+  "requirement_precise": "Authenticate as a superuser using existing credentials (admin@example.com / password123) to obtain an access token, then use this access token to call the test token endpoint. Verify the response status code is 200 and that the response JSON contains the field 'email' with value 'admin@example.com'.",
+  "verdict": "SPEC_LEAKED",
+  "spec_evidence": "- \"Authenticate using superuser credentials (admin@example.com / password123) to obtain an access token. Verify the response status code is 200 OK, the 'token_type' field equals 'bearer' and the 'access_token' field is not empty. Then call the protected GET /api/v1/users/me endpoint with the token to verify it works and returns the user's email.\"\n- \"Authenticate as a superuser with username 'admin@example.com' and password 'password123' to obtain an access token, then retrieve the currently authenticated user's profile (the \\\"me\\\" resource). Verify the response body is present (non-empty). Verify the response JSON 'is_active' is True. Verify the response JSON 'is_superuser' is True. Verify the response JSON 'email' equals the configured first superuser.\"",
+  "reasoning": "The removed requirement is that a valid superuser access token can be used on a token-checking protected endpoint and that the response includes the authenticated user's email. The reduced spec already explicitly requires that using the superuser token on a protected endpoint identifying the current user succeeds and returns email 'admin@example.com', which conveys the same underlying constraint in a different endpoint context.",
+  "parse_error": false,
+  "usage": {
+    "total_tokens": 5322,
+    "prompt_tokens": 5059,
+    "completion_tokens": 263
+  }
+}

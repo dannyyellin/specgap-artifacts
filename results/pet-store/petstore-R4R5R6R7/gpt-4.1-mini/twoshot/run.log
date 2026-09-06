@@ -1,0 +1,33 @@
+Timestamp: 2026-06-01 21:01:44
+Detector:  gpt-4.1-mini
+App/Variant/Service: pet-store/petstore-R4R5R6R7/pet-store
+Method:    twoshot
+
+Tokens: prompt=11854, completion=2037, total=13891
+Additions: 8
+Omissions: 15
+
+  A A1: The fetch_pet_type_from_ninja function extracts multiple fields (temperament, slogan, group, color, skin_type, top_speed, diet, main_prey) from the Ninja API response to build the 'attributes' array, instead of only 'temperament' or 'group_behavior' as specified.
+  A A2: The lifespan field defaults to 0 if not returned by the Ninja API, instead of null as specified.
+  A A3: The GET /pet-types endpoint supports filtering by 'id' as an integer, but returns empty array if the query parameter value cannot be converted to int, instead of ignoring or erroring.
+  A A4: The GET /pet-types endpoint returns empty array for any query parameter other than the specified fields, instead of returning 400 or error.
+  A A5: The DELETE /pet-types/{id} endpoint deletes the pet-type without checking if there are pets of that type, contrary to specification.
+  A A6: The POST /pet-types/{id}/pets endpoint returns 400 if a pet with the same name already exists, instead of 409.
+  A A7: The PUT /pet-types/{id}/pets/{name} endpoint supports a 'picture-url' field to update the picture by fetching a new image, which is not specified.
+  A A8: The GET /pictures/{picture-name} endpoint returns 400 if the picture name contains slashes or is empty, which is not specified.
+
+  O O1: POST /pet-types does not validate that the JSON payload contains only the 'type' field and no others.
+  O O2: DELETE /pet-types/{id} does not check if there are pets of that type before deletion and does not return 400 if pets exist.
+  O O3: POST /pet-types/{id}/pets does not check for duplicate pet names case-sensitively and returns 400 instead of 409 for duplicates.
+  O O4: POST /pet-types/{id}/pets does not validate that 'birthdate' is in DD-MM-YYYY format if provided.
+  O O5: PUT /pet-types/{id}/pets/{name} does not validate that the updated 'name' is unique among pets of the same type.
+  O O6: PUT /pet-types/{id} is not implemented and returns 405 as required.
+  O O7: POST /pet-types/{id}/pets returns 400 if the picture-url is not reachable or does not contain a .jpg or .png image.
+  O O8: All endpoints requiring owner authentication verify credentials by contacting the registry service and enforce authorization.
+  O O9: GET /pet-types supports filtering by 'hasAttribute' query parameter as specified.
+  O O10: GET /pet-types/{id}/pets supports query parameters 'birthdateGT' and 'birthdateLT' to filter pets by birthdate.
+  O O11: GET /pet-types/{id}/pets returns 404 if the pet-type does not exist.
+  O O12: GET /pet-types/{id}/pets/{name} returns 404 if the pet or pet-type does not exist.
+  O O13: DELETE /pet-types/{id}/pets/{name} requires owner authentication and returns appropriate status codes.
+  O O14: PUT /pet-types/{id}/pets/{name} requires owner authentication and returns appropriate status codes.
+  O O15: GET /pictures/{picture-name} returns 200 with the image if found, 404 if not found, and 400 for invalid picture names.

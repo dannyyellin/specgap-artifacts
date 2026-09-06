@@ -1,0 +1,24 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Favorited metadata on article responses is not described in any of the listed requirements, which focus on deletion, feed behavior, uniqueness, tag filtering, timestamps, JWT payloads, and FK deletion behavior."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Comment updatedAt tracking does not correspond to any listed requirement, and R19 is specifically about article created/updated timestamps rather than comments."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1698,
+    "prompt_tokens": 1548,
+    "completion_tokens": 150
+  }
+}

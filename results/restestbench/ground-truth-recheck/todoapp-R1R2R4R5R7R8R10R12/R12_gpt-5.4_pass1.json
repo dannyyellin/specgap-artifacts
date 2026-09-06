@@ -1,0 +1,20 @@
+{
+  "variant": "todoapp-R1R2R4R5R7R8R10R12",
+  "req_id": 12,
+  "model": "gpt-5.4",
+  "pass": 1,
+  "verdict": "IMPLEMENTED",
+  "requirement_vague": "Users cannot update another user's todo",
+  "omissions": [],
+  "implementation": {
+    "location": "PUT /todos/{id} in update_todo; GET /todos/{id} in get_todo",
+    "code_reference": "todo = session.exec(\n    select(Todo).where(Todo.id == id, Todo.user_id == current_user.id)\n).first()\nif not todo:\n    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=\"Todo not found\")",
+    "reasoning": "Both update and fetch operations scope the todo lookup by the authenticated user's id. This prevents userB from updating userA's todo and causes PUT /todos/{id} to return 404 when the todo does not belong to the caller; userA can still retrieve their own unchanged todo via GET /todos/{id}."
+  },
+  "usage": {
+    "total_tokens": 2617,
+    "prompt_tokens": 2455,
+    "completion_tokens": 162
+  },
+  "timestamp": "2026-07-12 10:34:24"
+}

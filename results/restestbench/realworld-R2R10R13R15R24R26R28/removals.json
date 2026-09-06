@@ -1,0 +1,51 @@
+[
+  {
+    "id": 2,
+    "requirement": "Create two users: user1 (username: 'follower1', email: 'follower1@test.com', password: 'pass123') and user2 (username: 'followee1', email: 'followee1@test.com', password: 'pass123'). Using user1's token, follow user2 by POST to /api/profiles/followee1/follow. Verify the response status is 201. Verify the response body profile has 'following' equal to true and 'username' equal to 'followee1'. Then GET the profile /api/profiles/followee1 with user1's token and verify 'following' is true. Next, using user1's token, attempt to follow themselves by POST to /api/profiles/follower1/follow. Verify this returns status 400 with message containing 'cannot be equal'.",
+    "mutant_files": [
+      "src/profile/profile.service.ts"
+    ]
+  },
+  {
+    "id": 10,
+    "requirement": "Create user1 (username: 'unfollower1', email: 'unfollower1@test.com', password: 'pass123') and user2 (username: 'unfollowee1', email: 'unfollowee1@test.com', password: 'pass123'). User1 follows user2. Verify following is true. User1 unfollows user2 via DELETE /api/profiles/unfollowee1/follow. Verify response status is 200. Verify response profile has 'following' equal to false. GET profile of user2 using user1's token. Verify 'following' is false. Verify user1 cannot unfollow themselves (should return 400).",
+    "mutant_files": [
+      "src/profile/profile.service.ts"
+    ]
+  },
+  {
+    "id": 13,
+    "requirement": "Create user1 (username: 'author1', email: 'author1@test.com', password: 'pass123') and user2 (username: 'author2', email: 'author2@test.com', password: 'pass123'). User1 creates article 'Article By Author1'. User2 creates article 'Article By Author2'. GET /api/articles?author=author1. Verify articlesCount is 1 and articles array contains only 'Article By Author1'. GET /api/articles?author=author2. Verify articlesCount is 1 and articles array contains only 'Article By Author2'. GET /api/articles (no filter). Verify articlesCount is 2.",
+    "mutant_files": [
+      "src/article/article.service.ts"
+    ]
+  },
+  {
+    "id": 15,
+    "requirement": "Create a user. Create 5 articles with titles 'Article 1', 'Article 2', 'Article 3', 'Article 4', 'Article 5' (in that order). GET /api/articles?limit=2. Verify articlesCount is 5 (total) but articles array has only 2 items. GET /api/articles?limit=2&offset=2. Verify articles array has 2 items and they are different from the first request (offset skipped first 2). GET /api/articles?limit=10. Verify articles array has all 5 items.",
+    "mutant_files": [
+      "src/article/article.service.ts"
+    ]
+  },
+  {
+    "id": 24,
+    "requirement": "Create user1 (username: 'orderuser1', email: 'orderuser1@test.com', password: 'pass123'). User1 creates article1 'First Article', wait at least 1 second, then creates article2 'Second Article', wait at least 1 second, then creates article3 'Third Article'. GET /api/articles. Verify the articles array is ordered by created timestamp in descending order (newest first). Articles with identical timestamps (to the second) may have undefined relative ordering due to database timestamp precision being in seconds. This tests the ORDER BY article.created DESC clause.",
+    "mutant_files": [
+      "src/article/article.service.ts"
+    ]
+  },
+  {
+    "id": 26,
+    "requirement": "Create user1 (username: 'multicommentuser1', email: 'multicommentuser1@test.com', password: 'pass123'). User1 creates an article 'Multi Comment Article'. User1 adds comment 'First comment'. User1 adds comment 'Second comment'. User1 adds comment 'Third comment'. GET /api/articles/{slug}/comments. Verify 3 comments are returned. Verify each comment has a unique id (no duplicates). Verify the comment bodies are preserved correctly. This tests comment creation and persistence with multiple comments.",
+    "mutant_files": [
+      "src/article/article.service.ts"
+    ]
+  },
+  {
+    "id": 28,
+    "requirement": "Create user1 (username: 'owner1', email: 'owner1@test.com', password: 'pass123'). Create user2 (username: 'attacker1', email: 'attacker1@test.com', password: 'pass123'). User1 creates article with title 'Original Owner Article'. Verify article exists. User2 (NOT the owner) PUTs /api/articles/{slug} with title 'Hacked By User2'. Verify PUT response shows updated title. GET article and verify title changed. User1 creates second article 'Article To Delete'. User2 (NOT the owner) DELETEs /api/articles/{slug}. Verify DELETE succeeds with status 200. GET the deleted article and verify it returns 200 with empty object {} (implementation returns empty object for deleted articles). This demonstrates the security vulnerability that any user can update/delete any article.",
+    "mutant_files": [
+      "src/article/article.service.ts"
+    ]
+  }
+]

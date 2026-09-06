@@ -1,0 +1,18 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 describes behavior about updating ISBN on PUT, which does not correspond to any of the removed spec requirements (R8-R11) about POST fields, ISBN format, Google Books API, or genre enumeration."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 585,
+    "prompt_tokens": 479,
+    "completion_tokens": 106
+  }
+}

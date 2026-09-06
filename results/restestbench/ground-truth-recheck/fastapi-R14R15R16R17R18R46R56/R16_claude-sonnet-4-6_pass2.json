@@ -1,0 +1,23 @@
+{
+  "variant": "fastapi-R14R15R16R17R18R46R56",
+  "req_id": 16,
+  "model": "claude-sonnet-4-6",
+  "pass": 2,
+  "verdict": "NOT_IMPLEMENTED",
+  "requirement_vague": "Recovering a password for a non existing user gets rejected.",
+  "omissions": [
+    {
+      "id": "O1",
+      "description": "There is no password recovery endpoint in the code. The requirement specifies that attempting to recover a password for a non-existent user should return HTTP 404, but no such route (e.g., POST /password-recovery/{email} or similar) exists anywhere in the codebase.",
+      "category": "ENDPOINTS",
+      "reasoning": "Searching the entire codebase reveals no route related to password recovery or password reset. There is no endpoint that accepts an email for password recovery and returns 404 when the user does not exist."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 6244,
+    "prompt_tokens": 6079,
+    "completion_tokens": 165
+  },
+  "timestamp": "2026-07-12 10:37:56"
+}

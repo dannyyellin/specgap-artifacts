@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of the integer 1-5 rating range constraint, which matches R10."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R11",
+        "label": "PARTIAL",
+        "reasoning": "O2 describes that the one-rating-per-user-per-dish constraint is only enforced via a unique index rather than explicit validation, partially capturing R11's removal of that constraint but focusing on implementation detail rather than complete removal."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 concerns missing 405 responses for unsupported methods, which does not correspond to any of the reference requirements R10, R11, or R12."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concerns validation of dish_id matching between URL and body for PUT requests, which does not correspond to any of the reference requirements R10, R11, or R12."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 974,
+    "prompt_tokens": 639,
+    "completion_tokens": 335
+  }
+}

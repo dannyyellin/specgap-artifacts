@@ -1,0 +1,55 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "Private user creation endpoint allows clients to set is_active and is_superuser in the request body",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification requires a private user creation operation and verifies fields like email, id, and is_active in responses, but it does not state that callers may supply is_active or is_superuser values. The code exposes both as writable input fields on POST /api/v1/users/."
+      },
+      {
+        "id": "A2",
+        "description": "Superuser item listing is returned with a top-level data/count wrapper rather than as a plain collection",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification for listing items only requires that the returned data contain at least the created items. It does not positively require a wrapper object with data and count fields, but the code always returns ItemsPublic with those top-level fields."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "Missing test-token endpoint required by the authentication specification",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification explicitly requires 'use this access token to call the test token endpoint' and expects a 200 response containing the field email='admin@example.com'. The code defines no such endpoint under /api/v1/."
+      },
+      {
+        "id": "O2",
+        "description": "Missing password recovery request endpoint POST /api/v1/password-recovery/{email}",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification explicitly requires requesting a password recovery email via POST /api/v1/password-recovery/{email}. No password-recovery route exists in the code."
+      },
+      {
+        "id": "O3",
+        "description": "Missing password reset endpoint POST /api/v1/reset-password/",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification explicitly requires submitting a password reset request with token and new_password to the reset-password operation and checking both success and invalid-token behavior. The code has no reset-password endpoint."
+      },
+      {
+        "id": "O4",
+        "description": "Password recovery flow does not send an email and does not interact with the mailcatcher service",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The specification requires that password recovery send an email and that it be verifiable via GET http://localhost:1080/messages. The code contains no outbound email or mailcatcher interaction at all."
+      },
+      {
+        "id": "O5",
+        "description": "No implementation of password recovery token generation, retrieval of password-recovery HTML content, or token-based password reset",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification requires generating a reset token, obtaining password-recovery HTML content for a user's email, resetting the password with that token, returning {\"message\": \"Password updated successfully\"} on success, and returning 400 detail 'Invalid token' for an invalid token. None of this token-based recovery/reset logic exists in the code."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 11628,
+    "prompt_tokens": 11053,
+    "completion_tokens": 575
+  }
+}

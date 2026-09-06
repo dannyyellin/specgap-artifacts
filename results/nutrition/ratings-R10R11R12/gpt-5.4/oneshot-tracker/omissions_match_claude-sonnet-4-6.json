@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes that the rating range constraint (integer between 1 and 5) is not enforced, matching R10's removal of that constraint."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 describes a deviation in POST /ratings response format that does not correspond to any of the three reference requirements about removed constraints."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 describes missing dish existence validation in DELETE /ratings/{id}, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 describes use of a disallowed package (flask_pymongo), which does not correspond to any of the three reference requirements about removed constraints."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1069,
+    "prompt_tokens": 763,
+    "completion_tokens": 306
+  }
+}

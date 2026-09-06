@@ -1,0 +1,84 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "Both describe the GET /api/articles/feed endpoint for retrieving articles from followed users based on follow relationships."
+      },
+      {
+        "detection_id": "O1",
+        "requirement_id": "R23",
+        "label": "PARTIAL",
+        "reasoning": "R23 specifically requires feed pagination behavior, while O1 only mentions the feed endpoint generally and not its limit/offset pagination semantics."
+      },
+      {
+        "detection_id": "O1",
+        "requirement_id": "R27",
+        "label": "MATCH",
+        "reasoning": "R27 tests the same feed endpoint behavior when the user follows nobody and expects an empty feed."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R12",
+        "label": "MATCH",
+        "reasoning": "Both concern support for filtering articles in GET /api/articles using the ?tag= query parameter."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements specify validation that tagList elements must be strings."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements test or require rejecting empty article titles."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R29",
+        "label": "PARTIAL",
+        "reasoning": "R29 requires a user deletion endpoint and specific foreign-key failure behavior, while O5 only notes the endpoint is missing and uses a different path."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement concerns preventing a user from following themselves."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers following a non-existent user or the associated error message."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements mention comment body validation."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements specify pagination support for comments."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements address authorization checks preventing users from modifying or deleting others' articles."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2487,
+    "prompt_tokens": 1836,
+    "completion_tokens": 651
+  }
+}

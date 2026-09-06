@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "A1 concerns the type/format of the cardholder id and thus overlaps with R4's removal of explicit string type declarations, but it adds a stricter ObjectId constraint rather than describing the removal itself."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A2 is about validating consistency between body id and path id, which does not correspond to removing field type declarations, error code 415, fine formula, or Borrows cross-service calls."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A3 is about limiting query filtering fields and does not match any requirement about removed type declarations, removed 415 errors, removed fine formula, or removed Borrows integration."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 856,
+    "prompt_tokens": 621,
+    "completion_tokens": 235
+  }
+}

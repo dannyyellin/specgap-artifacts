@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "Both describe that passwords are no longer encrypted and are stored directly instead of using bcrypt/encrypted storage."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "Both concern the removed Owner special case, but O2 only captures the fixed password aspect and not the full special-case removal including name and privileged status."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns a success/error message mismatch, which is unrelated to password encryption, Owner special-case removal, or username uniqueness removal."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 705,
+    "prompt_tokens": 507,
+    "completion_tokens": 198
+  }
+}

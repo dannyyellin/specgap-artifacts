@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R12",
+        "label": "PARTIAL",
+        "reasoning": "R12 requires tag filtering on GET /api/articles, but A1 states the code does not support the tag parameter, meaning the code partially implements the required article list endpoint but is missing the tag filter behavior."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement mentions favorited or favoritesCount fields in article or comment responses."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement mentions CORS configuration or behavior."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement covers updating username, email, or password via the user update endpoint."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "R5 specifies that a deleted article returns an empty object {} with status 200 rather than 404, which partially overlaps with A5's mention of article retrieval returning 404 for missing articles, but the spec explicitly requires 200 with {} rather than 404, making this a conflicting partial match."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2512,
+    "prompt_tokens": 2125,
+    "completion_tokens": 387
+  }
+}

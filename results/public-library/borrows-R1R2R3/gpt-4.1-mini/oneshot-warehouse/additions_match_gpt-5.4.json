@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Filtering GET /borrows by specific fields is unrelated to removing return date computation, removing overdue checkout blocking, or removing checkout notifications to Logs."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Validating that returnDate is not earlier than loanDate does not describe removal of computed return dates, overdue constraints, or Borrows-to-Logs checkout notifications."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Supporting startDate/endDate filtering for GET /borrows is a separate query feature and does not correspond to any of the listed removals in the spec."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 826,
+    "prompt_tokens": 617,
+    "completion_tokens": 209
+  }
+}

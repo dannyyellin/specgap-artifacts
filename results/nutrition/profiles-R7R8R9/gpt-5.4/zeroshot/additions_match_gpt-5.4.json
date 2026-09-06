@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rejecting duplicate profile creation for an authenticated user does not correspond to removing protein exclusion, removing owner-only restriction on GET /profiles, or removing token-derived user_id behavior."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Accepting tokens from multiple input locations is unrelated to the listed requirements about profileDishes protein exclusion, GET /profiles owner restriction, or sourcing user_id from the request body instead of token validation."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R8",
+        "label": "PARTIAL",
+        "reasoning": "Supporting GET /profiles filtering by user_id touches the same endpoint affected by removal of the owner-only restriction, but it does not clearly state that access is no longer limited to the owner."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 836,
+    "prompt_tokens": 605,
+    "completion_tokens": 231
+  }
+}

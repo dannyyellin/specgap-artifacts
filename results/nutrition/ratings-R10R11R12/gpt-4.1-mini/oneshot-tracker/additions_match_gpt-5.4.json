@@ -1,0 +1,24 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "A1 reflects removal of the integer-only aspect of the old 1-to-5 integer constraint, but it does not clearly establish that the 1-to-5 range constraint itself was removed."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A2 concerns accepted token header formats, not removal of rating constraints, one-rating-per-user-per-dish, or the requirement that user_id comes from token validation."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 646,
+    "prompt_tokens": 488,
+    "completion_tokens": 158
+  }
+}

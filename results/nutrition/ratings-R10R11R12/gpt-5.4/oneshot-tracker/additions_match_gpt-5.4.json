@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This describes accepted token header formats, not removal of rating bounds, duplicate-rating constraints, or token-derived user_id."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Dish existence validation against another service is unrelated to the removed constraints on rating value, per-user uniqueness, or token-sourced user_id."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Using an internal numeric id and counters does not correspond to removing rating range limits, one-rating-per-user-per-dish enforcement, or deriving user_id from token validation."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 807,
+    "prompt_tokens": 606,
+    "completion_tokens": 201
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements mention or test the 'Bearer' token format; they only use standard token-based auth."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements check for or require an 'id' field in user response objects."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "While R24 tests ordering by created timestamp, A3 describes returning both camelCase and simplified timestamp fields, which is an implementation detail not directly required by any spec requirement."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed spec requirements specifically require or verify the presence of 'body', 'favorited', 'favoritesCount', or nested author bio/image/following fields in article responses."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements mention a GET /api/tags endpoint."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements mention or require a root GET / endpoint."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed spec requirements test or require updating username, email, or password via PUT /api/user."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2491,
+    "prompt_tokens": 2009,
+    "completion_tokens": 482
+  }
+}

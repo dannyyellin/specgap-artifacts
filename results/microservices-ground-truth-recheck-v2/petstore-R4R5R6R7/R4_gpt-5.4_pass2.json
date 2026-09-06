@@ -1,0 +1,19 @@
+{
+  "app": "pet-store",
+  "variant": "petstore-R4R5R6R7",
+  "service": "pet-store",
+  "req_id": "R4",
+  "requirement": "The temperament and group_behavior values from the external animals API are extracted into the pet-type's attributes according to the specified extraction rules.",
+  "source_headline": "Removed temperament/group_behavior to attributes extraction rules",
+  "model": "gpt-5.4",
+  "pass": 2,
+  "label": "PARTIAL",
+  "evidence": "fetch_pet_type_from_ninja() extracts characteristics into attributes via `for key in [\"temperament\", \"slogan\", \"group\", \"color\", \"skin_type\", \"top_speed\", \"diet\", \"main_prey\"]:` and splits string values on commas before deduping. create_pet_type() stores `attributes: ninja_data.get(\"attributes\", [])` from that function.",
+  "reasoning": "There is clearly code addressing extraction of external API fields into pet-type attributes, so this is not GAP. However, the requirement specifically names `temperament` and `group_behavior`, while the implementation extracts `temperament` and `group` instead, with no handling of a `group_behavior` field. A test requiring extraction according to the stated rules for `group_behavior` would therefore fail, making this PARTIAL.",
+  "usage": {
+    "total_tokens": 4223,
+    "prompt_tokens": 4034,
+    "completion_tokens": 189
+  },
+  "timestamp": "2026-07-16 15:00:52"
+}

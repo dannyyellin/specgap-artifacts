@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "A1 identifies the same uniqueness-check scenario as R9 but notes the code returns 422 with a different error format instead of the required 400 with 'Username and email must be unique'."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements describe the delete_comment endpoint response body, so this behavior has no matching requirement."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R12",
+        "label": "PARTIAL",
+        "reasoning": "R12 tests tag-based filtering of articles, and A3 touches the list_articles endpoint behavior, but A3's main claim is about a secondary sort order addition rather than tag filtering correctness, making it only a partial match."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R25",
+        "label": "MATCH",
+        "reasoning": "R25 explicitly requires the JWT payload to contain 'id', 'username', and 'email' fields, and A4 identifies that the code only includes 'sub' and 'exp', directly contradicting that requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2498,
+    "prompt_tokens": 2140,
+    "completion_tokens": 358
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "app": "public-library",
+  "variant": "cardholders-R4R5R6R7",
+  "service": "cardholders",
+  "req_id": "R6",
+  "requirement": "A cardholder's fine is computed as $0.50 per day multiplied by the number of days each book is overdue.",
+  "source_headline": "Removed fine computation formula ($0.50/day * days overdue)",
+  "model": "gpt-5.4",
+  "pass": 1,
+  "label": "PARTIAL",
+  "evidence": "Route `GET /cardholders/fines/<cardholder_id>` in `get_cardholder_fines` computes fines by iterating borrows and doing `if isinstance(return_date, str) and is_overdue(return_date): fine_amount += 1`. Helper `is_overdue` only returns a boolean based on whether `due_date.date() < datetime.utcnow().date()`; there is no calculation of overdue days or multiplication by `$0.50`.",
+  "reasoning": "The code clearly addresses the requirement by providing a fines endpoint and checking overdue books, so this is not a GAP. However, a test of the stated requirement would fail because the implementation adds a flat `1` per overdue book instead of computing `0.50 * number_of_days_overdue` for each book. Since the machinery exists but the core formula is materially wrong, the correct label is PARTIAL.",
+  "usage": {
+    "total_tokens": 2317,
+    "prompt_tokens": 2126,
+    "completion_tokens": 191
+  },
+  "timestamp": "2026-07-16 14:53:29"
+}

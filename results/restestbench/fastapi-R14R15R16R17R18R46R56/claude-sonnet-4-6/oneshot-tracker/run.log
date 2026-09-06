@@ -1,0 +1,13 @@
+Timestamp: 2026-06-02 09:33:34
+Detector:  claude-sonnet-4-6
+Service:   fastapi  Round: 2  Removals: [14, 15, 16, 17, 18, 46, 56]
+Method:    oneshot-tracker
+
+Tokens: prompt=12953, completion=1968, total=14921
+Additions: 0
+Omissions: 4
+
+  O O1: No POST /api/v1/password-recovery/{email} endpoint is implemented
+  O O2: No POST /api/v1/reset-password/ endpoint is implemented
+  O O3: No GET /api/v1/login/test-token (or equivalent test-token) endpoint is implemented
+  O O4: Password recovery does not send an email to the user

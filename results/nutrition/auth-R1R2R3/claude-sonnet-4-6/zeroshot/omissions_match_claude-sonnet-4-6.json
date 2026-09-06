@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of password encryption (bcrypt), matching R1 exactly."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O2 partially captures R2 by noting the Owner special case is broken, but focuses on a case-sensitivity issue rather than the full removal of the Owner special case (name, password, and privileged flag)."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O3 captures part of R2 by noting the Owner user has wrong name and password, but R2 also includes the privileged=True aspect and describes the removal of the special case entirely."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O4 partially relates to R2 in that the privileged field handling is part of the Owner special case, but focuses on JWT payload vs. runtime check rather than the removal of the Owner special case."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R3",
+        "label": "PARTIAL",
+        "reasoning": "O5 is related to R3 (username uniqueness) but focuses on the wrong HTTP status code returned rather than the removal of the uniqueness constraint itself."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1286,
+    "prompt_tokens": 866,
+    "completion_tokens": 420
+  }
+}

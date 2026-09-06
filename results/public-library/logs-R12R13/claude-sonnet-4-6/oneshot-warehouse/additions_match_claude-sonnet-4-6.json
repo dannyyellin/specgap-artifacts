@@ -1,0 +1,18 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 describes type-checking of string fields in POST /logs, which does not correspond to either R12 (removing date format) or R13 (removing Borrows-to-Logs notification descriptions)."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 600,
+    "prompt_tokens": 492,
+    "completion_tokens": 108
+  }
+}

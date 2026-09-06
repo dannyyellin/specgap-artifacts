@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the absence of password complexity validation (uppercase, lowercase, digit, length), which matches R1's removal of password validation rules."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O2 describes the /verify endpoint not returning the same message for invalid username vs invalid password, which directly matches R2's removal of the same error message anti-enumeration requirement."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O3 partially overlaps with R2 in that it concerns the /verify endpoint's response format for failed verifications, but focuses on missing JSON fields rather than the anti-enumeration same-message behavior."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concerns MongoDB connection string configuration, which does not correspond to any of the three reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1021,
+    "prompt_tokens": 697,
+    "completion_tokens": 324
+  }
+}

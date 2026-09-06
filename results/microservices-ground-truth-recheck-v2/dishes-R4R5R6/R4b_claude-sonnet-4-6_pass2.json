@@ -1,0 +1,19 @@
+{
+  "app": "nutrition",
+  "variant": "dishes-R4R5R6",
+  "service": "dishes",
+  "req_id": "R4b",
+  "requirement": "Nutrition fields missing from the API Ninjas response default to 0.0.",
+  "source_headline": "Removed default to 0.0 for missing Ninja API fields",
+  "model": "claude-sonnet-4-6",
+  "pass": 2,
+  "label": "INFERRED",
+  "evidence": "fetch_ingredient_nutrition: `totals = {field: 0.0 for field in NUTRITION_FIELDS}` and `totals[local_field] += float(item.get(ninja_field, 0.0) or 0.0)`",
+  "reasoning": "The code initializes all nutrition fields to 0.0 before processing the API response. When extracting values from each item, it uses `item.get(ninja_field, 0.0)` which defaults to 0.0 if the field is missing, and the `or 0.0` handles None/falsy values. Any field absent from the API Ninjas response will therefore contribute 0.0 to the total, fully satisfying the requirement.",
+  "usage": {
+    "total_tokens": 3409,
+    "prompt_tokens": 3219,
+    "completion_tokens": 190
+  },
+  "timestamp": "2026-07-16 14:57:08"
+}

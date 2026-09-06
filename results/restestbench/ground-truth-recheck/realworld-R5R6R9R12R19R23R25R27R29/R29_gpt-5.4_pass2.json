@@ -1,0 +1,23 @@
+{
+  "variant": "realworld-R5R6R9R12R19R23R25R27R29",
+  "req_id": 29,
+  "model": "gpt-5.4",
+  "pass": 2,
+  "verdict": "NOT_IMPLEMENTED",
+  "requirement_vague": "Verify user deletion fails when user has articles (FK constraint, no cascade delete)",
+  "omissions": [
+    {
+      "id": "O1",
+      "description": "No user deletion endpoint exists for DELETE /api/users/{email}, so the required deletion attempt and resulting FK-constraint failure behavior cannot occur.",
+      "category": "ENDPOINTS",
+      "reasoning": "The code defines POST /api/users, POST /api/users/login, GET/PUT /api/user, profile follow routes, and article/comment routes, but there is no DELETE route under /api/users or any route that deletes a user by email."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 5305,
+    "prompt_tokens": 5196,
+    "completion_tokens": 109
+  },
+  "timestamp": "2026-07-12 10:41:50"
+}

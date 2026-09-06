@@ -1,0 +1,28 @@
+Timestamp: 2026-06-02 09:51:58
+Detector:  claude-sonnet-4-6
+App/Variant/Service: pet-store/petstore-R4R5R6R7/pet-store
+Method:    oneshot-warehouse
+
+Tokens: prompt=12741, completion=2669, total=15410
+Additions: 5
+Omissions: 13
+
+  A A1: POST /pet-types rejects payloads where the JSON object contains any key other than 'type' (enforces exact key set)
+  A A2: fetch_pet_type_from_ninja builds 'attributes' from multiple Ninja API fields (slogan, group, color, skin_type, top_speed, diet, main_prey) beyond what the spec requires
+  A A3: PUT /pet-types/{id}/pets/{name} accepts a 'picture' field directly in the payload to update the picture filename
+  A A4: lifespan defaults to 0 when not returned by Ninja API instead of null
+  A A5: The MongoDB URI uses 'mongo' as the hostname instead of 'mongoPetSt'
+
+  O O1: DELETE /pet-types/{id} does not check whether pets of that type exist before deleting; it should return 400 if any pets exist
+  O O2: DELETE /pet-types/{id} does not require owner authentication to return 403; it returns 401 for both missing credentials and non-owner users but the spec requires 403 for authenticated non-owners
+  O O3: fetch_pet_type_from_ninja reads 'group_behavior' from characteristics but the spec says it should be a top-level field or at least the code never correctly reads it from the Ninja API response structure used for 'temperament'
+  O O4: Attributes splitting does not follow the spec: spec requires splitting on whitespace and removing punctuation except hyphens; code splits on commas instead
+  O O5: GET /pet-types/{id}/pets does not support 'birthdateGT' and 'birthdateLT' query string filtering
+  O O6: PUT /pet-types/{id} is not explicitly handled to return 405
+  O O7: POST /pet-types/{id}/pets does not return 404 when the pet-type id does not exist before checking for duplicate pet names
+  O O8: GET /pet-types/{id}/pets does not return 404 when the pet-type id does not exist (returns empty array instead)
+  O O9: POST /pet-types/{id}/pets does not return 404 when the pet-type does not exist; it checks for the pet-type after processing picture-url
+  O O10: The service does not handle the case where two pets of different pet-types could have the same name — but more importantly, duplicate pet name check uses case-sensitive comparison which is correct per spec, but the spec says 'No two pets of the same type in the same store can have the same name' — the code does implement this correctly for POST but PUT does not check if the new name conflicts with an existing pet name in the same type when the name is changed
+  O O11: The Ninja API lifespan extraction does not set null when lifespan is not returned; it defaults to 0
+  O O12: POST /pet-types/{id}/pets does not check for duplicate pet names returning a specific error code; it returns 400 but the spec does not explicitly state the code — however the spec says no two pets of the same type can have the same name, implying 409 Conflict
+  O O13: The service connects to MongoDB using the wrong service name ('mongo' instead of 'mongoPetSt')

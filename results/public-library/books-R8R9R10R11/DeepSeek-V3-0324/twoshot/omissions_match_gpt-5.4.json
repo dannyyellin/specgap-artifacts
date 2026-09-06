@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "Both describe removal of the Google Books API behavior for populating publisher and publishedDate."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R11",
+        "label": "MATCH",
+        "reasoning": "Both concern the removed requirement that genre must be validated against a fixed allowed list."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "Both refer to the removed requirement enforcing 13-digit ISBN_13 format validation."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "It depends on the Google Books integration covered by R10, but focuses on a specific no-data edge case rather than the core integration itself."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 826,
+    "prompt_tokens": 587,
+    "completion_tokens": 239
+  }
+}

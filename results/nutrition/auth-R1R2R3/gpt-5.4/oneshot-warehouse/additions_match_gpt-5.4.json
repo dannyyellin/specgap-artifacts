@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "JWT secret and token expiration configurability is unrelated to removing bcrypt, removing the Owner special case, or removing username uniqueness."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "Automatically creating an Owner account concerns the Owner special case, but it is the opposite of removing that special-case behavior."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Adding exp and iat claims to tokens does not correspond to any requirement about bcrypt removal, Owner special-case removal, or username uniqueness removal."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Returning 401 for failed login is unrelated to the three listed removal requirements."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rejecting empty registration fields does not describe removing bcrypt, removing the Owner special case, or removing username uniqueness."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 956,
+    "prompt_tokens": 653,
+    "completion_tokens": 303
+  }
+}

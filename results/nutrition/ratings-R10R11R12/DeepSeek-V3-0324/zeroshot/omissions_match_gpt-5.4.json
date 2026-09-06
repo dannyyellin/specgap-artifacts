@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O1 describes the absence of validation that rating must be an integer between 1 and 5, which is the same constraint removed in R10."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R11",
+        "label": "MATCH",
+        "reasoning": "O2 concerns allowing the same user to rate the same dish multiple times, matching the removal of the one-rating-per-user-per-dish constraint in R11."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 is about 405 handling for unsupported methods, which is unrelated to any of R10, R11, or R12."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concerns validating dish_id consistency between URL and body on PUT, which does not correspond to any reference requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 856,
+    "prompt_tokens": 587,
+    "completion_tokens": 269
+  }
+}

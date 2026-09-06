@@ -1,0 +1,61 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "POST /borrows validates that the cardholder exists by calling the Cardholders service before creating a borrow record",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The specification does not require the Borrows service to verify that the cardholderId refers to a valid cardholder before creating a borrow record. The spec only states that a book cannot be borrowed if the cardholder has 2 or more overdue books, not that the cardholder's existence must be verified."
+      },
+      {
+        "id": "A2",
+        "description": "POST /borrows validates that the ISBN refers to an existing book by calling the Books service before creating a borrow record",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The specification does not require the Borrows service to verify that the ISBN refers to an existing book in the Books service. The spec only mentions checking overdue books for the cardholder."
+      },
+      {
+        "id": "A3",
+        "description": "PUT /borrows/{id} validates that an updated cardholderId refers to an existing cardholder",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The specification does not require the Borrows service to verify cardholder existence on PUT requests."
+      },
+      {
+        "id": "A4",
+        "description": "PUT /borrows/{id} validates that an updated ISBN refers to an existing book",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The specification does not require the Borrows service to verify book existence on PUT requests."
+      },
+      {
+        "id": "A5",
+        "description": "Validates that returnDate is not before loanDate on POST and PUT",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification does not state any constraint that returnDate must be after loanDate. This is an additional validation not required by the spec."
+      },
+      {
+        "id": "A6",
+        "description": "POST /borrows accepts a 'returnDate' field in the request body",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states 'The returnDate is not provided in the POST request but is computed by the service'. Accepting returnDate in the POST payload contradicts the spec."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "POST /borrows does not compute returnDate as loanDate + 30 days (LOAN_PERIOD); instead it defaults to an empty string",
+        "category": "COMPUTED_VALUES",
+        "reasoning": "The specification states 'returnDate = loanDate + LOAN_PERIOD, where LOAN_PERIOD is 30 days'. The code sets returnDate to data.get('returnDate', '') rather than computing it from loanDate."
+      },
+      {
+        "id": "O2",
+        "description": "POST /borrows does not check whether the cardholder has 2 or more overdue books before allowing a checkout",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states 'A book can only be borrowed by a cardholder who does not have 2 or more books overdue. If a book cannot be checked out because 2 or more books are overdue, the POST request returns the status code 400.' The code does not implement this check at all."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 9666,
+    "prompt_tokens": 8814,
+    "completion_tokens": 852
+  }
+}

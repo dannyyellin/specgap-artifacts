@@ -1,0 +1,28 @@
+# MODIFIED SPEC: 4 elements removed for Pet-Store experiment
+# R4: Removed temperament/group_behavior to attributes extraction rules
+#     - GPT-5.4: PARTIAL — code iterates temperament first (correct priority) but also
+#       includes extra Ninja API fields (slogan, group, color, etc.) beyond the spec's
+#       2-field temperament/group_behavior rule
+#     - Prior label: Partially inferrable — field names suggest some mapping, but
+#       specific priority and tokenization rules are not obvious
+#     - Tests: 57
+# R5: Removed "cannot delete pet-type if it has pets" constraint
+#     - GPT-5.4: NOT INFERRED — DELETE /pet-types/{id} never checks if the pets array
+#       is non-empty; deletion proceeds even when pets of that type exist
+#     - Prior label: Highly inferrable — referential integrity (don't delete parent if
+#       children exist) is a standard database pattern any developer would consider
+#     - Tests: 57
+# R6: Removed lifespan range handling ("choose minimum", "extract first integer")
+#     - GPT-5.4: PARTIAL — code correctly extracts first integer from range strings via
+#       regex (e.g., "4-7 years" → 4) but sets lifespan to 0 instead of JSON null when
+#       the Ninja API omits it; updated after 3-pass consistency check (pass 1 incorrectly
+#       stated "sets None"; passes 2 and 3 correctly read 0 as the default)
+#     - Prior label: Partially inferrable — API returns ranges but spec field is int;
+#       some conversion needed but specific rule is arbitrary
+#     - Tests: 57
+# R7: Removed birthdate query filtering (birthdateGT/birthdateLT)
+#     - GPT-5.4: NOT INFERRED — GET /pet-types/{id}/pets has no query parameter
+#       handling; birthdateGT and birthdateLT filters not implemented
+#     - Prior label: Partially inferrable — date range filtering is common for date
+#       fields, but specific parameter names and semantics are not standard
+#     - Tests: 57

@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "R5 removed the owner-only restriction for POST/PUT/DELETE, and A1 describes that the code never checks Owner privilege for write operations but still enforces token validation for GET requests, which partially relates to the removal of owner-only restrictions but focuses on GET rather than write operations."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "R6 removed specific query string filtering semantics, and A2 describes the code supporting filtering by 'id' and 'name' which are not part of the specified query parameters (nutritional fields and 'ingredient'), indicating a deviation from the removed/specified filtering semantics."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "R6 removed specific query string filtering semantics including the 'ingredient' field, and A3 describes the code using 'ingredients' (plural) instead of the specified singular 'ingredient', which is a deviation in the filtering semantics that R6 addresses."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 990,
+    "prompt_tokens": 663,
+    "completion_tokens": 327
+  }
+}

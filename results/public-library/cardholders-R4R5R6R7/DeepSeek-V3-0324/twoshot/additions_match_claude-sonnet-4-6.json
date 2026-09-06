@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "A1 describes implementing fine calculation logic (date parsing and overdue checking) in the cardholders service, which partially relates to R6's removal of the fine computation formula, but R6 specifically addresses removing the $0.50/day formula rather than the presence of date parsing logic."
+      },
+      {
+        "detection_id": "A1",
+        "requirement_id": "R7",
+        "label": "PARTIAL",
+        "reasoning": "A1 describes fine computation being implemented locally rather than via a cross-service call to Borrows, which is the inverse of what R7 requires (removing the cross-service call), indicating the code does not comply with R7."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "A2 relates to the 'id' field naming in the cardholder resource, which partially overlaps with R4's removal of field type declarations (including the 'id' field), but R4 is about removing type declarations rather than field naming conventions."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 886,
+    "prompt_tokens": 570,
+    "completion_tokens": 316
+  }
+}

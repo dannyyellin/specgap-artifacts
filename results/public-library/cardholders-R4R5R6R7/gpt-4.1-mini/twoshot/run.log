@@ -1,0 +1,18 @@
+Timestamp: 2026-06-01 20:54:01
+Detector:  gpt-4.1-mini
+App/Variant/Service: public-library/cardholders-R4R5R6R7/cardholders
+Method:    twoshot
+
+Tokens: prompt=6733, completion=785, total=7518
+Additions: 1
+Omissions: 7
+
+  A A1: GET /cardholders supports filtering by 'name' and 'email' query parameters
+
+  O O1: GET /cardholders/fines/{id} computes fineAmount incorrectly by adding 1 per overdue book instead of number-of-days-overdue * 0.50
+  O O2: GET /cardholders/fines/{id} does not compute the number of days overdue for each borrowed book
+  O O3: GET /cardholders/fines/{id} does not handle the case where the Borrows microservice returns an error other than 400 or 200 appropriately
+  O O4: POST /cardholders does not validate that 'name' and 'email' fields are present and non-empty in the request body
+  O O5: PUT /cardholders/{id} does not validate that the updated resource contains all required fields 'name' and 'email'
+  O O6: GET /cardholders/{id} does not return the 'id' field as a string in the JSON document as required
+  O O7: GET /cardholders does not support filtering by 'id' query parameter as allowed by specification

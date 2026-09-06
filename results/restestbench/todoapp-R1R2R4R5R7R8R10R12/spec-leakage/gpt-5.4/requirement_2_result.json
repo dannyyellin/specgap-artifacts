@@ -1,0 +1,14 @@
+{
+  "req_id": 2,
+  "requirement_vague": "Creating a todo without a title returns a validation error",
+  "requirement_precise": "Register a user and login to get an access token. Call POST /todos with an empty or missing title field. Verify that the response status code is 400 Bad Request and the response body contains a validation error indicating 'The Title field is required.'",
+  "verdict": "NOT_LEAKED",
+  "spec_evidence": null,
+  "reasoning": "The reduced specification shows successful todo creation with a title and various retrieval/update/delete/authentication behaviors, but it never states that title is required or that missing fields cause validation errors. Concluding a 400 error for an empty or missing title would require outside assumptions not expressed in the text.",
+  "parse_error": false,
+  "usage": {
+    "total_tokens": 982,
+    "prompt_tokens": 902,
+    "completion_tokens": 80
+  }
+}

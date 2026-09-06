@@ -1,0 +1,16 @@
+Timestamp: 2026-06-02 05:54:33
+Detector:  DeepSeek-V3-0324
+Service:   todoapp  Removals: [1, 2, 4, 5, 7, 8, 10, 12]
+Method:    zeroshot
+
+Tokens: prompt=3395, completion=538, total=3933
+Additions: 3
+Omissions: 3
+
+  A A1: The code includes a 'UserResponse' model and returns it from the register endpoint, but the specification does not require returning user details after registration.
+  A A2: The code allows setting 'isComplete' when creating a todo (TodoCreate model), but the specification does not mention this field in the creation process.
+  A A3: The code includes a message in the delete response ('Todo deleted}'), but the specification does not require any specific response body for delete operations.
+
+  O O1: The code does not validate that the title field is not empty when creating a todo, as required by the specification.
+  O O2: The code does not validate that the ID in the request body matches the ID in the URL when updating a todo, as required by the specification.
+  O O3: The code does not return a 401 Unauthorized when calling GET /todos without an Authorization header, as required by the specification.

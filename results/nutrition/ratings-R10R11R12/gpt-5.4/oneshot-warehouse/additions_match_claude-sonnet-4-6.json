@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "A1 describes accepting arbitrary floating-point values instead of integers 1-5, which directly corresponds to R10's removal of the integer 1-5 rating range constraint."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The internal unique id and counters collection for sequence generation does not correspond to any of the three removed constraints listed in R10, R11, or R12."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R12",
+        "label": "PARTIAL",
+        "reasoning": "A3 describes accepting tokens from multiple header sources beyond standard token validation, which partially relates to R12's removal of user_id derivation from token validation, but A3 focuses on header flexibility rather than removing the user_id-from-token requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 929,
+    "prompt_tokens": 657,
+    "completion_tokens": 272
+  }
+}

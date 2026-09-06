@@ -1,0 +1,73 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "OWNER_NAME is configurable via environment variable and defaults to 'owner' (lowercase), rather than being hardcoded as 'Owner'",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states 'The service allows only one user to register with the name Owner' and 'If the user_name is Owner and the password is correct, the privileged field is True.' The code uses OWNER_NAME = os.environ.get('OWNER_NAME', 'owner'), making the owner name configurable and defaulting to lowercase 'owner' instead of 'Owner'."
+      },
+      {
+        "id": "A2",
+        "description": "OWNER_PASSWORD is configurable via environment variable and defaults to 'owner', rather than being hardcoded as 'owner#pw'",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states 'The password of this user must be owner#pw.' The code uses OWNER_PASSWORD = os.environ.get('OWNER_PASSWORD', 'owner'), which defaults to 'owner' instead of 'owner#pw'."
+      },
+      {
+        "id": "A3",
+        "description": "Passwords are stored in plaintext rather than encrypted",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The specification states the password field is 'an encrypted string' and lists bcrypt as an allowed package. The code stores passwords as plaintext strings without any encryption."
+      },
+      {
+        "id": "A4",
+        "description": "Token expiration is implemented with a configurable TOKEN_EXPIRATION_HOURS",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification does not mention token expiration. The code adds expiration logic (defaulting to 24 hours) that has no basis in the specification."
+      },
+      {
+        "id": "A5",
+        "description": "The /register endpoint rejects empty strings for name and password",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification only requires that name and password be present (not missing). The code additionally checks that name.strip() != '' and password.strip() != '', which is not required by the specification."
+      },
+      {
+        "id": "A6",
+        "description": "The privileged field in the token payload is computed at token generation time (login) rather than at validation time",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification says 'If the user_name is Owner and the password is correct, the privileged field is True' in the context of /validate. The code embeds privileged in the JWT at login and reads it back at validate time, rather than checking the user's name at validation time."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "The Owner user is pre-seeded with a plaintext password instead of the required 'owner#pw', and the owner registration restriction is not enforced on /register",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states 'The service allows only one user to register with the name Owner. The password of this user must be owner#pw.' The code does not prevent a caller from registering a user named 'Owner' via /register (since OWNER_NAME defaults to 'owner', a POST to /register with name='Owner' would succeed), and the pre-seeded owner password defaults to 'owner' not 'owner#pw'."
+      },
+      {
+        "id": "O2",
+        "description": "Passwords are not encrypted using bcrypt (or any encryption) as required by the specification",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The specification defines the password field as 'an encrypted string' and lists bcrypt as an allowed package specifically for this purpose. The code stores and compares passwords in plaintext."
+      },
+      {
+        "id": "O3",
+        "description": "The /validate endpoint does not re-verify that the user's name is 'Owner' and password is correct when determining the privileged field",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states 'If the user_name is Owner and the password is correct, the privileged field is True.' The code reads the privileged flag from the JWT payload set at login time, without re-checking the user's name or password at validation time."
+      },
+      {
+        "id": "O4",
+        "description": "The /register endpoint does not return 409 or a distinct error code for duplicate username; it returns 400",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification states 'If the request is not successful because... that username is already registered, the service returns the appropriate response code.' A duplicate username is a distinct condition from a malformed request (400), and the specification implies a different appropriate code should be used."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 8310,
+    "prompt_tokens": 7106,
+    "completion_tokens": 1204
+  }
+}

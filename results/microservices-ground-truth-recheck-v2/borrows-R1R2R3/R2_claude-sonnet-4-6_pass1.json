@@ -1,0 +1,19 @@
+{
+  "app": "public-library",
+  "variant": "borrows-R1R2R3",
+  "service": "borrows",
+  "req_id": "R2",
+  "requirement": "A cardholder with 2 or more overdue books is blocked from checking out another book; such a checkout attempt returns status 400.",
+  "source_headline": "Removed overdue borrow constraint (2+ overdue books blocks checkout, returns 400) from Borrows",
+  "model": "claude-sonnet-4-6",
+  "pass": 1,
+  "label": "GAP",
+  "evidence": "none",
+  "reasoning": "The POST /borrows handler validates cardholder existence and book existence, but contains no logic to count overdue books for the cardholder. There is no query against the borrows collection to find overdue (unreturned or past-due) records for the cardholder, no threshold check of 2 or more, and no corresponding 400 response for that condition. The requirement is entirely absent from the code.",
+  "usage": {
+    "total_tokens": 3650,
+    "prompt_tokens": 3532,
+    "completion_tokens": 118
+  },
+  "timestamp": "2026-07-16 14:52:18"
+}

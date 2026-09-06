@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements mention anything about the register endpoint response body or returning user details."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "R2 concerns validation of the title field during todo creation, and A2 notes an extra field (isComplete) is allowed during creation, but they describe different aspects of the creation process without directly overlapping on the same specific behavior."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed spec requirements specify or restrict the response body content for delete operations beyond the status code."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1309,
+    "prompt_tokens": 1076,
+    "completion_tokens": 233
+  }
+}

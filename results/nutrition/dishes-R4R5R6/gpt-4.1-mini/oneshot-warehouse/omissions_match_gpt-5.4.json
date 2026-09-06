@@ -1,0 +1,54 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O1 states that POST, PUT, and DELETE are not restricted to the Owner user, which is the same behavior as removing the owner-only restriction."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "O2 is about query-parameter filtering semantics on GET /dishes, which overlaps with R6's removal of specific query string filtering semantics, but it focuses on a parameter name mismatch rather than the referenced lte/contains semantics."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 concerns unauthorized-token handling, which is unrelated to field name mapping, owner-only restrictions, or the removed filtering semantics."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 is about 400 validation behavior for POST and PUT bodies, which does not correspond to any listed reference requirement."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 concerns 404 handling for invalid dish IDs, which is not covered by the reference requirements."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 is about 405 Method Not Allowed handling, which does not match any reference requirement."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O7 concerns 500 error handling for external API failures, not the removed field mapping details, owner restriction, or query filtering semantics."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1272,
+    "prompt_tokens": 817,
+    "completion_tokens": 455
+  }
+}

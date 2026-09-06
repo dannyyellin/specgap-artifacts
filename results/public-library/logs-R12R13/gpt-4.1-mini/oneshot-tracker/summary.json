@@ -1,0 +1,16 @@
+{
+  "app": "public-library",
+  "variant": "logs-R12R13",
+  "service": "logs",
+  "method": "oneshot-tracker",
+  "detector_model": "gpt-4.1-mini",
+  "gen_model": "gpt-5.4",
+  "gen_usage": null,
+  "n_additions": 0,
+  "n_omissions": 0,
+  "usage": {
+    "total_tokens": 4608,
+    "prompt_tokens": 4593,
+    "completion_tokens": 15
+  }
+}

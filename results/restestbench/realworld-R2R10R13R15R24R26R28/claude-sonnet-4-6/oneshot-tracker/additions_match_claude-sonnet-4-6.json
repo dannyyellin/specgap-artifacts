@@ -1,0 +1,54 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements mention or test for 'created'/'updated' alias fields in article responses."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements mention or test for an 'id' field in user responses."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed spec requirements describe or require a DELETE /api/users/{email} endpoint."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed spec requirements mention a GET /api/tags endpoint."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": "R28",
+        "label": "PARTIAL",
+        "reasoning": "R28 explicitly states that any user (non-owner) can delete any article and expects DELETE to succeed, but the code returns 403 Forbidden instead, directly contradicting the spec requirement."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": "R28",
+        "label": "PARTIAL",
+        "reasoning": "R28 explicitly states that any user (non-owner) can update any article and expects the PUT to succeed, but the code returns 403 Forbidden instead, directly contradicting the spec requirement."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed spec requirements describe ownership restrictions or 403 responses for comment deletion."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2470,
+    "prompt_tokens": 1982,
+    "completion_tokens": 488
+  }
+}

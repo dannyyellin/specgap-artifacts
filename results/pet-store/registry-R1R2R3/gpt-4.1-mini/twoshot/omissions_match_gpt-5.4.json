@@ -1,0 +1,144 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about username regex validation, which is unrelated to any of the removed requirements."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "It concerns the /verify anti-enumeration behavior, but it describes enforcing that requirement rather than its removal."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about error body formatting for missing credentials on /verify, not any listed removed requirement."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "It refers to the same anti-enumeration-style invalid-credentials messaging on /verify, but describes a specific response field rather than the removal of the requirement."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R1",
+        "label": "PARTIAL",
+        "reasoning": "It covers part of the removed password validation rules by mentioning uppercase, lowercase, and digit checks, but omits the 8+ character rule."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R1",
+        "label": "PARTIAL",
+        "reasoning": "It covers only the password length portion of the removed password validation rules and not the uppercase/lowercase/digit requirements."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Malformed JSON handling is unrelated to password-rule removal, /verify anti-enumeration removal, or owner pre-registration removal."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Username case-sensitive uniqueness is unrelated to any of the three reference removals."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about username validation behavior, not any listed removed requirement."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Content-Type handling does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Missing username/password handling on POST /users is unrelated to the removed requirements."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Username casing reuse is unrelated to password-rule removal, /verify anti-enumeration removal, or owner pre-registration removal."
+      },
+      {
+        "detection_id": "O13",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Duplicate username conflict handling is not one of the reference requirements."
+      },
+      {
+        "detection_id": "O14",
+        "requirement_id": "R1",
+        "label": "PARTIAL",
+        "reasoning": "It matches part of the removed password validation rules by covering complexity checks but not the 8+ character rule."
+      },
+      {
+        "detection_id": "O15",
+        "requirement_id": "R1",
+        "label": "PARTIAL",
+        "reasoning": "It matches only the password length aspect of the removed password validation rules."
+      },
+      {
+        "detection_id": "O16",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rejecting identical old and new passwords is unrelated to any listed removed requirement."
+      },
+      {
+        "detection_id": "O17",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "User-not-found behavior for password updates is unrelated to the reference removals."
+      },
+      {
+        "detection_id": "O18",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Incorrect old password handling does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O19",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "DELETE authentication behavior is unrelated to the removed requirements."
+      },
+      {
+        "detection_id": "O20",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "DELETE user-not-found behavior is not related to any reference requirement."
+      },
+      {
+        "detection_id": "O21",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "DELETE success response shape is unrelated to password validation, /verify anti-enumeration, or owner pre-registration."
+      },
+      {
+        "detection_id": "O22",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "It clearly targets the /verify anti-enumeration requirement, but it describes enforcing that behavior rather than the fact that the requirement was removed."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2680,
+    "prompt_tokens": 1468,
+    "completion_tokens": 1212
+  }
+}

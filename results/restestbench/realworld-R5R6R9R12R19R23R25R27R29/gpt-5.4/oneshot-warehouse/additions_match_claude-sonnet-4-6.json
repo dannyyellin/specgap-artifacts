@@ -1,0 +1,48 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement mentions or tests favorited/favoritesCount fields in article responses."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement covers updating username, email, or password via PUT /api/user."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement tests anonymous access to GET /api/profiles/{username}."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement tests replacing tagList via PUT /api/articles/{slug}."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "R5 requires article deletion and verifies the article is gone afterward, but does not mention cascading comment deletion; A5 describes the cascade behavior that supports the deletion outcome tested in R5."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "CORS configuration is not mentioned in any spec requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2553,
+    "prompt_tokens": 2164,
+    "completion_tokens": 389
+  }
+}

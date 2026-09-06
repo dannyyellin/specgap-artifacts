@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This describes listing all items via GET /items, while none of the provided requirements concern item listing behavior."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This describes the response shape of the users list endpoint, which is not covered by any of the provided requirements."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns password recovery HTML formatting, but none of the listed requirements mention password recovery or this endpoint."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1180,
+    "prompt_tokens": 999,
+    "completion_tokens": 181
+  }
+}

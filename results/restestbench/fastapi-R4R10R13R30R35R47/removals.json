@@ -1,0 +1,45 @@
+[
+  {
+    "id": 4,
+    "requirement": "Register a new user and obtain an access token via the authentication endpoint. Create an item in the system with that user. Register a second user and get its access token. Attempt to read the created item using the access token of the second user. Verify that the response status code is 400 and the response body contains a detail field with the value \"Not enough permissions\" indicating the user does not have sufficient permissions to read the item.",
+    "mutant_files": [
+      "backend/app/api/routes/items.py"
+    ]
+  },
+  {
+    "id": 10,
+    "requirement": "Attempt to delete an item using superuser authentication (use superuser credentials admin@example.com / password123) with a non-existent item ID. Verify that the response status code is 404 and the response body contains a 'detail' field with the value 'Item not found'.",
+    "mutant_files": [
+      "backend/app/api/routes/items.py"
+    ]
+  },
+  {
+    "id": 13,
+    "requirement": "Register a new user, then attempt to obtain an access token by logging in with the registered user's email but an incorrect password. Verify that the response status code is 400 and the detail message is 'Incorrect email or password'.",
+    "mutant_files": [
+      "backend/app/api/routes/login.py",
+      "backend/app/crud.py"
+    ]
+  },
+  {
+    "id": 30,
+    "requirement": "Authenticate using the existing superuser credentials (admin@example.com / password123) to obtain an access token. Using that superuser access token, update the superuser's own password by supplying the current password and a newly generated password. Verify the response status is 200 and the response body contains a field 'message' equal to 'Password updated successfully'. Then verify that login with the NEW password succeeds. Finally, revert the password back to the original by supplying the new password as current and the original password as new. Verify the response status is 200 and verify that login with the ORIGINAL password succeeds again.",
+    "mutant_files": [
+      "backend/app/api/routes/users.py"
+    ]
+  },
+  {
+    "id": 35,
+    "requirement": "Attempt to register a user using the existing superuser email 'admin@example.com' with a random password and random full name by calling the user registration operation. Verify the response status is 400. Verify the response body field 'detail' equals 'The user with this email already exists in the system'.",
+    "mutant_files": [
+      "backend/app/api/routes/users.py"
+    ]
+  },
+  {
+    "id": 47,
+    "requirement": "Attempt to register a new user via POST /api/v1/users/signup with email 'test47@example.com', password of exactly 7 characters ('1234567'), and full_name 'Test User'. Verify the response status is 422 (validation error).",
+    "mutant_files": [
+      "backend/app/models.py"
+    ]
+  }
+]

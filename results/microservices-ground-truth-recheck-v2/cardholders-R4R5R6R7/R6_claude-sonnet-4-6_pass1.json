@@ -1,0 +1,19 @@
+{
+  "app": "public-library",
+  "variant": "cardholders-R4R5R6R7",
+  "service": "cardholders",
+  "req_id": "R6",
+  "requirement": "A cardholder's fine is computed as $0.50 per day multiplied by the number of days each book is overdue.",
+  "source_headline": "Removed fine computation formula ($0.50/day * days overdue)",
+  "model": "claude-sonnet-4-6",
+  "pass": 1,
+  "label": "PARTIAL",
+  "evidence": "get_cardholder_fines function, lines: `fine_amount += 1` inside the overdue check loop",
+  "reasoning": "The code does implement a fines endpoint and does detect overdue books, so there is clearly machinery addressing this requirement. However, instead of computing $0.50 per day multiplied by the number of days overdue, the code simply adds 1 for each overdue book (a flat count), with no calculation of days overdue and no $0.50 per-day rate. A test checking that a book 3 days overdue produces a fine of $1.50 would fail because the code would return 1.",
+  "usage": {
+    "total_tokens": 2809,
+    "prompt_tokens": 2642,
+    "completion_tokens": 167
+  },
+  "timestamp": "2026-07-16 14:53:38"
+}

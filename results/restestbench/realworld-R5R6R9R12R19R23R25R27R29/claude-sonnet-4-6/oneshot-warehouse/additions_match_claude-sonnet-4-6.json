@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements mention DELETE /api/articles/{slug}/comments/{id} or its response body."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements describe the POST /api/articles/{slug}/comments endpoint or its response format."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "R9 requires status 400 and the message 'Username and email must be unique', but the code returns status 422 with separate field-specific error messages, so the endpoint is correct but both the status code and message format differ."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "R9 tests duplicate username and duplicate email registration, and the order of checks is an implementation detail related to that requirement, but the spec does not prescribe check order and the error format still diverges."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2384,
+    "prompt_tokens": 2058,
+    "completion_tokens": 326
+  }
+}

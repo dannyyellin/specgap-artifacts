@@ -1,0 +1,24 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "It relates to where user identity or token data comes from, but it does not specifically describe removing the rule that user_id must come from the request body rather than token validation."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This behavior about preventing duplicate profiles does not correspond to removing protein exclusion, removing owner-only GET /profiles access, or removing token-derived user_id handling."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 666,
+    "prompt_tokens": 515,
+    "completion_tokens": 151
+  }
+}

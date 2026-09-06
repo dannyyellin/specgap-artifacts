@@ -1,0 +1,102 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers validation of required fields on article creation."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement specifically tests that the slug remains unchanged after an article update."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "R5 specifies that a deleted article returns 200 with empty object, and O3 describes the same behavior (200 with empty object instead of 404) but frames it as a general missing-article issue rather than specifically post-deletion."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers validation of comment body presence on comment creation."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers error handling for deleting non-existent or mismatched comments."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement tests self-follow/unfollow prevention behavior."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R12",
+        "label": "MATCH",
+        "reasoning": "R12 specifically tests filtering articles by tag via GET /api/articles?tag=..., and O7 states that tag filtering is not implemented."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "R6 tests the GET /api/articles/feed endpoint returning articles from followed users, and O8 states this feed endpoint is not implemented."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": "R23",
+        "label": "MATCH",
+        "reasoning": "R23 tests feed pagination via GET /api/articles/feed with limit/offset, and O8 states the feed endpoint is not implemented."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": "R27",
+        "label": "MATCH",
+        "reasoning": "R27 tests the empty feed case via GET /api/articles/feed, and O8 states the feed endpoint is not implemented."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers external service interactions or notifications."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers uniqueness or type validation of comment IDs."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": "R29",
+        "label": "MATCH",
+        "reasoning": "R29 specifically tests that deleting a user who has articles returns a 500 FK constraint error, and O11 states there is no user deletion endpoint or FK constraint error handling implemented."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement specifically tests article ordering tie-breaking by ID."
+      },
+      {
+        "detection_id": "O13",
+        "requirement_id": "R25",
+        "label": "MATCH",
+        "reasoning": "R25 specifically tests that the JWT payload contains id, username, and email, and O13 states the JWT only encodes user ID and not username or email."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 3474,
+    "prompt_tokens": 2464,
+    "completion_tokens": 1010
+  }
+}

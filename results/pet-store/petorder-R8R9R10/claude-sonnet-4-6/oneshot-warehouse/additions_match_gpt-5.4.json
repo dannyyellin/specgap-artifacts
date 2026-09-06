@@ -1,0 +1,66 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Storing purchase documents in an extra MongoDB collection is unrelated to removed pet selection, deletion after purchase, or purchase-id uniqueness reuse."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Enforcing that the authenticated username match the purchaser field does not correspond to any of the removed requirements about selection, deletion, or purchase-id uniqueness."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Returning 401 versus 403 for unauthorized transaction access is unrelated to the removed purchase flow requirements listed."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Returning 401 versus 403 on GET /transactions/{id} does not describe removed pet selection, deletion after purchase, or purchase-id uniqueness behavior."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Filtering unsupported query parameters on GET /transactions is unrelated to the three removed requirements."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": "R8",
+        "label": "MATCH",
+        "reasoning": "This directly describes the removed random pet selection behavior when no store is specified and multiple pets are available."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": "R8",
+        "label": "MATCH",
+        "reasoning": "This directly describes the removed random pet selection behavior when a store is specified but no pet-name is given."
+      },
+      {
+        "detection_id": "A8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Using the wrong MongoDB hostname does not correspond to any of the removed requirements."
+      },
+      {
+        "detection_id": "A9",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "Using a generated sequential transaction id touches identifier handling, but it does not clearly implement or contradict the removed rule that purchase-id must be unique and non-reusable."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1607,
+    "prompt_tokens": 1061,
+    "completion_tokens": 546
+  }
+}

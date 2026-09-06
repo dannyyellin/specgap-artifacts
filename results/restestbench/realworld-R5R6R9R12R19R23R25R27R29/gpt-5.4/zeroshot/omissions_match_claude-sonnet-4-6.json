@@ -1,0 +1,108 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R12",
+        "label": "MATCH",
+        "reasoning": "O1 directly identifies the missing tag-based filtering on GET /api/articles, which is exactly what R12 tests."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O2 identifies the missing GET /api/articles/feed endpoint, which is required by R6 for followed-author feed testing."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R23",
+        "label": "MATCH",
+        "reasoning": "O2 also covers the missing feed endpoint required by R23 for feed pagination testing."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R27",
+        "label": "MATCH",
+        "reasoning": "O2 also covers the missing feed endpoint required by R27 for empty feed behavior testing."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R29",
+        "label": "MATCH",
+        "reasoning": "O3 identifies the missing DELETE /api/users/{email} endpoint, which is exactly what R29 requires to test FK constraint errors."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "O4 identifies that duplicate username/email registration returns 422 instead of 400 with 'Username and email must be unique', which is exactly what R9 tests."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R25",
+        "label": "MATCH",
+        "reasoning": "O5 identifies that the JWT payload lacks id, username, and email claims, which is exactly what R25 requires to verify."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R19",
+        "label": "MATCH",
+        "reasoning": "O6 identifies that article timestamps are returned as createdAt/updatedAt instead of created/updated, which is exactly what R19 tests."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "O7 addresses the same delete-then-GET behavior as R5 but argues the implementation achieves the observable result differently than specified, making it a partial match on behavior vs. implementation."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement tests article field validation (required title, description, body)."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement tests comment body validation."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O10 identifies the missing follow-based feed filtering logic, which is exactly what R6 tests."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": "R27",
+        "label": "MATCH",
+        "reasoning": "O10 also covers the empty-follows behavior tested in R27."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": "R23",
+        "label": "MATCH",
+        "reasoning": "O11 identifies the missing feed pagination logic with limit and offset, which is exactly what R23 tests."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": "R12",
+        "label": "MATCH",
+        "reasoning": "O12 identifies the missing tag-based article filtering logic, which is exactly what R12 tests."
+      },
+      {
+        "detection_id": "O13",
+        "requirement_id": "R29",
+        "label": "MATCH",
+        "reasoning": "O13 identifies the missing user deletion behavior that triggers a 500 FK constraint error, which is exactly what R29 tests."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 3742,
+    "prompt_tokens": 2641,
+    "completion_tokens": 1101
+  }
+}

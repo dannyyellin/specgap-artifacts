@@ -1,0 +1,16 @@
+{
+  "app": "nutrition",
+  "variant": "ratings-R10R11R12",
+  "service": "ratings",
+  "method": "twoshot",
+  "detector_model": "DeepSeek-V3-0324",
+  "gen_model": "gpt-5.4",
+  "gen_usage": null,
+  "n_additions": 2,
+  "n_omissions": 5,
+  "usage": {
+    "total_tokens": 8908,
+    "prompt_tokens": 8281,
+    "completion_tokens": 627
+  }
+}

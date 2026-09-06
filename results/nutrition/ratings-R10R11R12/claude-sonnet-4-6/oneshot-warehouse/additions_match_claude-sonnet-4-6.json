@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of R10, R11, or R12 concern validating dish existence before creating/updating a rating."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of R10, R11, or R12 relate to the response structure of POST /ratings."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "R10 removed the integer-between-1-and-5 constraint, and storing as a float rather than an integer is related to removing the integer part of that constraint, though A3 focuses on float storage rather than the full range removal."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of R10, R11, or R12 concern validating that the dish_id in the PUT body matches the URL path parameter."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1025,
+    "prompt_tokens": 711,
+    "completion_tokens": 314
+  }
+}

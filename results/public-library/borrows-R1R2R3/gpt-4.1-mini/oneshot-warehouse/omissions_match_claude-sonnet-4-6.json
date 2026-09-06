@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of the returnDate computation (loanDate + 30 days) from the Borrows service, matching R1 exactly."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O2 directly describes the removal of the overdue borrow constraint that blocks checkout when a cardholder has 2 or more overdue books, matching R2 exactly."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R3",
+        "label": "PARTIAL",
+        "reasoning": "O3 captures the removal of the Borrows-to-Logs notification behavior but characterizes it as a partial omission (code calls the function but doesn't handle failure) rather than a complete removal, and only addresses the Borrows side without mentioning the Logs spec side."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 987,
+    "prompt_tokens": 704,
+    "completion_tokens": 283
+  }
+}

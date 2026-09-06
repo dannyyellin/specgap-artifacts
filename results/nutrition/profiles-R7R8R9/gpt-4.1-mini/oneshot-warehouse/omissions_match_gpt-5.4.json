@@ -1,0 +1,54 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "Both concern whether user_id comes from token validation versus the request body, but O1 is framed around POST /profiles behavior and says the code still obtains user_id from token validation."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R8",
+        "label": "MATCH",
+        "reasoning": "Both describe removal of the owner-only restriction on GET /profiles."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about authorization on GET/PUT/DELETE /profiles/{id}, which is not covered by any reference requirement."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "Both describe removing protein exclusion from the profileDishes calculation."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns validation of nutritional fields on POST /profiles, which is not in the reference requirements."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about duplicate profile creation checks, which do not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns filtering semantics on GET /profiles, which is not covered by the reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1245,
+    "prompt_tokens": 841,
+    "completion_tokens": 404
+  }
+}

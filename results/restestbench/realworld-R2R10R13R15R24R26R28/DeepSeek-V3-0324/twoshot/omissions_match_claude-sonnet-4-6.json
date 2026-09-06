@@ -1,0 +1,48 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R28",
+        "label": "PARTIAL",
+        "reasoning": "R28 specifies that GET on a deleted article returns 200 with empty object {}, while O1 describes the opposite behavior (code does NOT return empty object), partially relating to the same endpoint/scenario."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "R2 requires that self-follow returns 400 with 'cannot be equal', while O2 describes the code returning 404 instead of 400, capturing the same self-follow validation behavior but noting the wrong status code."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "R10 also requires that self-unfollow returns 400, and O2 describes the failure to return 400 for self-follow/unfollow actions, partially overlapping with R10's self-unfollow validation."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements describe testing user deletion with FK constraints or expecting a 500 response."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements specify that user responses must include an 'id' field."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements describe validating that tagList is an array of strings during article creation or update."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2258,
+    "prompt_tokens": 1780,
+    "completion_tokens": 478
+  }
+}

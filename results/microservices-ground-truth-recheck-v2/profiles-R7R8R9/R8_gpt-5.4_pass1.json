@@ -1,0 +1,19 @@
+{
+  "app": "nutrition",
+  "variant": "profiles-R7R8R9",
+  "service": "profile",
+  "req_id": "R8",
+  "requirement": "GET /profiles may only be accessed by the Owner (privileged) user; requests by other users are denied.",
+  "source_headline": "Removed owner-only restriction on GET /profiles",
+  "model": "gpt-5.4",
+  "pass": 1,
+  "label": "PARTIAL",
+  "evidence": "In `profiles()` the route `/profiles` calls `validate_token()` for all methods, but in the `GET` branch it immediately processes query params and returns matching profiles: `docs = mongo.db.profiles.find(query, {\"_id\": 0}).sort(\"user_id\", 1); return jsonify([format_profile(doc) for doc in docs]), 200`. `validate_token()` does extract `privileged` from the auth service response, but `/profiles` GET never checks `auth_data[\"privileged\"]` or otherwise restricts access to Owner users.",
+  "reasoning": "There is code addressing access control in general, since `/profiles` requires a valid token via `validate_token()`. However, the specific requirement says GET `/profiles` may only be accessed by the privileged Owner user and other users must be denied; that privileged-role check is absent. Per the decision guide, because the mechanism exists but misses the material role restriction, this is PARTIAL rather than GAP.",
+  "usage": {
+    "total_tokens": 2585,
+    "prompt_tokens": 2371,
+    "completion_tokens": 214
+  },
+  "timestamp": "2026-07-16 14:58:30"
+}

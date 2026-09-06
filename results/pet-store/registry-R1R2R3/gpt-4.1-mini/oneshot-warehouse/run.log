@@ -1,0 +1,25 @@
+Timestamp: 2026-06-01 20:59:17
+Detector:  gpt-4.1-mini
+App/Variant/Service: pet-store/registry-R1R2R3/registry
+Method:    oneshot-warehouse
+
+Tokens: prompt=8761, completion=1275, total=10036
+Additions: 3
+Omissions: 12
+
+  A A1: Uses bcrypt cost factor of 12 for password hashing
+  A A2: Returns JSON message 'Password updated successfully' on successful password change
+  A A3: Returns JSON message 'User deleted successfully' on successful user deletion
+
+  O O1: POST /verify returns 401 if username or password is incorrect instead of returning 200 with valid=false
+  O O2: POST /verify does not return 'valid': false and 'privileged': false when username or password is incorrect
+  O O3: POST /users does not check password complexity requirements (at least one uppercase letter, one lowercase letter, and one digit)
+  O O4: POST /users does not check password length constraints (minimum 8, maximum 128 characters)
+  O O5: POST /users does not check that username is unique case-sensitively
+  O O6: POST /users does not return 400 if the JSON payload is malformed or missing required fields
+  O O7: POST /verify returns 401 if username or password is missing instead of returning 401 with JSON error message
+  O O8: POST /verify does not prevent username enumeration by returning different status codes for non-existent username and incorrect password
+  O O9: PUT /users/{username}/password does not validate newPassword complexity requirements (uppercase, lowercase, digit)
+  O O10: PUT /users/{username}/password does not validate newPassword length constraints (8-128 characters)
+  O O11: DELETE /users/{username} does not check that username is provided in the URL path
+  O O12: All methods requiring JSON payload do not check Content-Type header for exact 'application/json' and return 415 if missing

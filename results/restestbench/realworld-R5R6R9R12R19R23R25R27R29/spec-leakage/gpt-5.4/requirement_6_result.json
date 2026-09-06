@@ -1,0 +1,14 @@
+{
+  "req_id": 6,
+  "requirement_vague": "Verify article feed only returns articles from followed users",
+  "requirement_precise": "Create user1 (username: 'feeduser1', email: 'feeduser1@test.com', password: 'pass123'), user2 (username: 'feedauthor1', email: 'feedauthor1@test.com', password: 'pass123'), and user3 (username: 'feedauthor2', email: 'feedauthor2@test.com', password: 'pass123'). User2 creates article 'Article By Followed'. User3 creates article 'Article By Not Followed'. Using user1's token, GET /api/articles/feed. Verify articlesCount is 0 (no follows yet). User1 follows user2. GET /api/articles/feed again. Verify articlesCount is 1. Verify the articles array contains 'Article By Followed' and does NOT contain 'Article By Not Followed'.",
+  "verdict": "NOT_LEAKED",
+  "spec_evidence": "- Create two users: user1 ... follow user2 by POST to /api/profiles/followee1/follow. Verify ... 'following' equal to true ...\n- Create user1 ... User1 follows user2. Verify following is true. User1 unfollows user2 ...\n- Create user1 ... GET /api/profiles/profiletarget1 ... Verify profile has 'following' equal to false ... User1 follows user2 ... Verify profile has 'following' equal to true ...",
+  "reasoning": "The reduced spec establishes that users can follow/unfollow and that profile responses expose a following flag, but it never mentions /api/articles/feed or states that article listings are filtered by followed users. Concluding the feed behavior would require outside knowledge about what a 'feed' should do, so the requirement is not directly implied.",
+  "parse_error": false,
+  "usage": {
+    "total_tokens": 3415,
+    "prompt_tokens": 3228,
+    "completion_tokens": 187
+  }
+}

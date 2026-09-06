@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This describes extra GET filtering by id and name, which does not correspond to removing owner-only restrictions or removing specific query-string filtering semantics."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "It concerns ingredient-based query filtering on GET /dishes, but it changes the parameter name to 'ingredients' rather than reflecting the spec's removal of specific filtering semantics."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Unsupported media type handling for POST and PUT is unrelated to removed owner-only restrictions, removed Ninja API field-name mapping details, or removed query filtering semantics."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rounding floating-point nutritional values is not the same behavior as any of the listed removed-spec requirements."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "CORS support does not correspond to any of the listed spec removals."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 952,
+    "prompt_tokens": 635,
+    "completion_tokens": 317
+  }
+}

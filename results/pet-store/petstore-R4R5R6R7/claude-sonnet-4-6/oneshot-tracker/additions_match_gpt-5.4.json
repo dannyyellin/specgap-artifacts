@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 is about rejecting extra fields in POST /pet-types payloads, which does not correspond to any of the listed removed requirements."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "R4 removes temperament/group_behavior-based attributes extraction rules, and A2 discusses attributes extraction from Ninja API fields, but it focuses on extra unsupported fields rather than specifically the removed temperament/group_behavior rule."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A3 concerns accepting a raw picture field in pet updates, which is unrelated to any of R4 through R7."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "R6 removes lifespan range handling rules, while A4 is about the default value when lifespan is missing, so it is lifespan-related but not the same specific behavior."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1041,
+    "prompt_tokens": 759,
+    "completion_tokens": 282
+  }
+}

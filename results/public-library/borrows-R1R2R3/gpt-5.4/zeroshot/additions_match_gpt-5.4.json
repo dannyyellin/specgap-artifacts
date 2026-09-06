@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Validating cardholder existence against the Cardholders service is unrelated to removing return-date computation, removing the overdue-borrow checkout block, or removing checkout notifications to Logs."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Validating book existence via the Books service does not describe any of the specified removals in Borrows or Logs."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Supporting partial updates on PUT is a separate API behavior and does not correspond to any requirement about removing return-date computation, overdue constraints, or Logs notifications."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "If the service accepts and stores a client-supplied returnDate on POST and PUT, that directly aligns with the removal of service-side returnDate computation from Borrows."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Checking that returnDate is not earlier than loanDate is an additional validation rule, not one of the specified removals."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1105,
+    "prompt_tokens": 771,
+    "completion_tokens": 334
+  }
+}

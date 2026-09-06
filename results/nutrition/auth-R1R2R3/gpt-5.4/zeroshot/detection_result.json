@@ -1,0 +1,67 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "The service auto-creates an Owner user record at startup if one does not already exist.",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The specification states constraints for registering/logging in as Owner, but it does not require pre-populating the database with an Owner account on service startup. The code's ensure_owner_user() inserts such a record automatically."
+      },
+      {
+        "id": "A2",
+        "description": "Authentication tokens include expiration and issued-at timestamps, and token validity is limited by a configurable expiration period.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification requires returning a valid token and validating it, but it does not require token expiration, issued-at claims, or a configurable lifetime. The code adds exp/iat claims and enforces expiration."
+      },
+      {
+        "id": "A3",
+        "description": "The service exposes privileged status inside the JWT payload itself.",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The specification requires /validate to return whether the user is privileged, but it does not require embedding the privileged flag inside the token. The code adds a privileged claim to generated tokens."
+      },
+      {
+        "id": "A4",
+        "description": "The Owner credentials are configurable through environment variables OWNER_NAME and OWNER_PASSWORD.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification fixes the privileged user name and password as 'Owner' and 'owner#pw'. Making these values configurable is additional behavior not required by the specification."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "Registered user passwords are stored in plaintext instead of encrypted form.",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The specification defines each registered user document as containing 'password' as an encrypted string. The code inserts the provided password directly into MongoDB and also stores the auto-created Owner password directly."
+      },
+      {
+        "id": "O2",
+        "description": "The implementation does not enforce that the only privileged user is named exactly 'Owner' with password exactly 'owner#pw'.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification explicitly requires that only one user may register with the name 'Owner', that this user's password must be 'owner#pw', and that Owner is the only privileged user. The code instead uses environment defaults OWNER_NAME='owner' and OWNER_PASSWORD='owner', so it does not implement the specified fixed credentials/casing."
+      },
+      {
+        "id": "O3",
+        "description": "The /validate response determines privileged status from the token claim instead of verifying the current rule that privileged is true only for the user named 'Owner'.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification says that if the user_name is 'Owner' and the password is correct, privileged is True; otherwise False. In validate(), the code returns payload.get('privileged') rather than deriving privileged status from the associated user record and the specified Owner rule."
+      },
+      {
+        "id": "O4",
+        "description": "The code uses flask_pymongo, which is not in the allowed package list for this service.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification restricts this service to Python Standard Library plus flask, pymongo, pyjwt, bcrypt, and requests. The code imports and depends on flask_pymongo/PyMongo, which is outside the permitted set."
+      },
+      {
+        "id": "O5",
+        "description": "The code does not use bcrypt or any other encryption/hashing mechanism for passwords.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification requires stored passwords to be encrypted strings. Although bcrypt is listed as an allowed package specifically suitable for this, the code compares raw passwords directly and never hashes/encrypts them."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 5995,
+    "prompt_tokens": 5264,
+    "completion_tokens": 731
+  }
+}

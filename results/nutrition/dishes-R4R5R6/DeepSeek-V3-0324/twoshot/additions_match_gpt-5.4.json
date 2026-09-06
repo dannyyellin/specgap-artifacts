@@ -1,0 +1,24 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rounding numeric fields in serialization is unrelated to removed API field-name mapping details, owner-only restrictions, or query string filtering semantics."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "This concerns query filtering behavior, but it describes extra filters by id and name rather than the removed specific semantics like lte for nutrients or contains."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 644,
+    "prompt_tokens": 503,
+    "completion_tokens": 141
+  }
+}

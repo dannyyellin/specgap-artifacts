@@ -1,0 +1,18 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This describes the success response body for DELETE /todos/{id}, while none of the listed requirements specify or test that successful delete response payload."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 966,
+    "prompt_tokens": 890,
+    "completion_tokens": 76
+  }
+}

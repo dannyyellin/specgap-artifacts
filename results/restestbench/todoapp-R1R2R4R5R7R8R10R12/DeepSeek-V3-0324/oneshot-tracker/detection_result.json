@@ -1,0 +1,49 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "The code includes a 'UserResponse' model and returns it from the register endpoint, which is not mentioned in the specification.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification does not mention any specific format for the response from the register endpoint, only that it should return 200 OK."
+      },
+      {
+        "id": "A2",
+        "description": "The code includes a 'TokenResponse' model and returns it from the login endpoint, which is not mentioned in the specification.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification does not mention any specific format for the response from the login endpoint, only that it should return a token."
+      },
+      {
+        "id": "A3",
+        "description": "The code includes a 'TodoResponse' model and returns it from todo-related endpoints, which is not mentioned in the specification.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification does not mention any specific format for the response from todo-related endpoints, only the fields that should be present."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "The code does not validate that the 'title' field is not empty or missing in the POST /todos endpoint.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification requires that calling POST /todos with an empty or missing title field should return a 400 Bad Request with a validation error, but the code does not implement this check."
+      },
+      {
+        "id": "O2",
+        "description": "The code does not validate that the 'id' field in the PUT /todos/{id} request body matches the URL parameter.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification requires that calling PUT /todos/X with a request body where id=Y should return a 400 Bad Request, but the code does not implement this check."
+      },
+      {
+        "id": "O3",
+        "description": "The code does not return a 401 Unauthorized when GET /todos is called without an Authorization header or token.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification requires that calling GET /todos without providing any Authorization header or token should return a 401 Unauthorized, but the code does not implement this check."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 4914,
+    "prompt_tokens": 4357,
+    "completion_tokens": 557
+  }
+}

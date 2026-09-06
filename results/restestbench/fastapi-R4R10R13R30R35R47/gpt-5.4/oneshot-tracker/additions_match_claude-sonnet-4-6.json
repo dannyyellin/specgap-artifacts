@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements mention a password-recovery HTML endpoint."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements address setting is_active or is_superuser during user creation via a private endpoint."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements describe updating password, is_active, or is_superuser via an update-by-id endpoint."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements specify that the items list endpoint must return a wrapper object with both data and count fields."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1487,
+    "prompt_tokens": 1217,
+    "completion_tokens": 270
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "req_id": 21,
+  "requirement_vague": "Test the read me endpoint. Confirm the returned profile matches the registered email, is active, and is not a superuser.",
+  "requirement_precise": "Register a new user via the user registration operation using a test email address and password. Obtain an access token for that user via the login access token operation. Using the obtained access token in the Authorization header, retrieve the authenticated user's profile via the read current user operation. Verify the response body is present (non-empty). Verify the response JSON field \"is_active\" is True. Verify the response JSON field \"is_superuser\" is False. Verify the response JSON field \"email\" equals the email used when registering the user.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": [
+      "POST /api/v1/users/signup",
+      "POST /api/v1/login/access-token",
+      "GET /api/v1/users/me",
+      "signup",
+      "login_access_token",
+      "read_user_me"
+    ],
+    "code_reference": "user = User(\n    email=user_in.email,\n    ...\n    is_active=True,\n    is_superuser=False,\n)\n...\n@api_router.get(\"/users/me\", response_model=UserPublic)\ndef read_user_me(current_user: User = Depends(get_current_active_user)):\n    return current_user",
+    "reasoning": "The signup flow creates newly registered users with is_active=True and is_superuser=False and stores the provided email. The login endpoint issues a bearer token for that user, and the authenticated read-current-user endpoint returns the current user as UserPublic, which includes non-empty profile data with email, is_active, and is_superuser fields matching the registered user."
+  },
+  "usage": {
+    "total_tokens": 4936,
+    "prompt_tokens": 4740,
+    "completion_tokens": 196
+  },
+  "parse_error": false
+}

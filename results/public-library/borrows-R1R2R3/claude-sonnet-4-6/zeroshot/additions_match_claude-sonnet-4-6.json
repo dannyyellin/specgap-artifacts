@@ -1,0 +1,54 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rejecting extra/unknown fields is not related to any of the three removed spec requirements."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "A2 describes a cardholder-existence check that is not in the spec, but it partially overlaps with R2 in that R2 removed the overdue-borrow pre-condition check (another pre-checkout validation), yet A2 is a different, additional validation not covered by R2."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Verifying book existence before creating a borrow record is not mentioned in any of the three removed spec requirements."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R1",
+        "label": "PARTIAL",
+        "reasoning": "R1 removed the returnDate computation (loanDate + 30 days), and A4 describes a validation that returnDate is not earlier than loanDate; these both concern returnDate logic but A4 is a different constraint rather than the removed computation."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Validating that startDate is not later than endDate in a date-range query is unrelated to any of the three removed spec requirements."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Requiring both startDate and endDate to be present together is unrelated to any of the three removed spec requirements."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Existence checks for cardholder and book during a PUT operation are not related to any of the three removed spec requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1431,
+    "prompt_tokens": 877,
+    "completion_tokens": 554
+  }
+}

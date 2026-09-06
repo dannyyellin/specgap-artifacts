@@ -1,0 +1,54 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements mention or test for duplicate/extra timestamp fields in article responses."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements mention or test for an 'id' field in user responses."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R28",
+        "label": "MATCH",
+        "reasoning": "R28 explicitly states that user2 (non-owner) should be able to PUT and update an article successfully, but the code enforces ownership and returns 403, directly contradicting this requirement."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R28",
+        "label": "MATCH",
+        "reasoning": "R28 explicitly states that user2 (non-owner) should be able to DELETE an article with status 200, but the code enforces ownership and returns 403, directly contradicting this requirement."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements describe comment deletion behavior by article owners versus comment authors."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements mention a GET /api/tags endpoint."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements mention favoriting functionality or 'favorited'/'favoritesCount' fields in article responses."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2468,
+    "prompt_tokens": 1979,
+    "completion_tokens": 489
+  }
+}

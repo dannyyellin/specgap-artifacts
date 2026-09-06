@@ -1,0 +1,49 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "The service validates POST requests to require Content-Type application/json and returns 415 Unsupported Media Type otherwise.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification says unsuccessful requests may return 415 and that requests return appropriate HTTP status codes, but it does not explicitly require media type validation for the Logs service POST endpoint. This behavior is implemented in code without a positive requirement in the spec."
+      },
+      {
+        "id": "A2",
+        "description": "The service validates that POST fields cardholderId, borrowId, ISBN, and loanDate are strings.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification defines these resource fields as strings, but it does not explicitly require rejecting POST requests when provided values are of the wrong type. The code adds strict runtime type validation not positively required by the spec."
+      },
+      {
+        "id": "A3",
+        "description": "GET /logs filters only on a fixed whitelist of query parameters and ignores any other query parameters.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification allows a query string of the form field=value to filter log records, but does not require ignoring unsupported fields specifically. The code implements this extra constraint/behavior without explicit basis in the spec."
+      },
+      {
+        "id": "A4",
+        "description": "The service returns JSON error bodies such as {\"error\": \"Bad request\"} for error responses.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification requires status codes in addition to any JSON payload if there is one, but does not prescribe a JSON error-body structure. The specific error JSON format is an implementation addition."
+      },
+      {
+        "id": "A5",
+        "description": "Log record IDs are generated as UUID strings.",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The specification requires id to be a string and that POST returns the id, but does not require any particular ID generation scheme. Using UUIDs is an added implementation choice."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "POST /logs does not validate that loanDate is in the required DD-MM-YYYY format.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states that each log record contains loanDate as a string of the form DD-MM-YYYY. The code only checks that loanDate is a string and accepts any string format."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 4119,
+    "prompt_tokens": 3656,
+    "completion_tokens": 463
+  }
+}

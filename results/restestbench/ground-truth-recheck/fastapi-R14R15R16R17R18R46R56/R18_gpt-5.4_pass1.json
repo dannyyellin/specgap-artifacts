@@ -1,0 +1,29 @@
+{
+  "variant": "fastapi-R14R15R16R17R18R46R56",
+  "req_id": 18,
+  "model": "gpt-5.4",
+  "pass": 1,
+  "verdict": "NOT_IMPLEMENTED",
+  "requirement_vague": "Reset a password with an invalid reset token and confirm the reset is rejected.",
+  "omissions": [
+    {
+      "id": "O1",
+      "description": "The service does not implement any reset-password operation that accepts a token and new_password, so an invalid reset token cannot be rejected with the required 400 response and detail message.",
+      "category": "ENDPOINTS",
+      "reasoning": "The code defines login at POST /api/v1/login/access-token and password change for the current user at PATCH /api/v1/users/me/password, but there is no reset-password route anywhere in the application. Therefore the specified call using body {\"new_password\":\"changethis\",\"token\":\"invalid\"} cannot be made."
+    },
+    {
+      "id": "O2",
+      "description": "There is no logic to validate a password reset token and return HTTP 400 with JSON detail exactly \"Invalid token\" when the token is invalid.",
+      "category": "BUSINESS_LOGIC",
+      "reasoning": "The only password-related handler is update_password_me, which checks current_password and new_password for an authenticated user. No code parses or validates a reset token, and no handler raises HTTPException(status_code=400, detail=\"Invalid token\") for password reset attempts."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 4954,
+    "prompt_tokens": 4723,
+    "completion_tokens": 231
+  },
+  "timestamp": "2026-07-12 10:38:25"
+}

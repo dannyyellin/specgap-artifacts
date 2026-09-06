@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R12",
+        "label": "PARTIAL",
+        "reasoning": "R12 removes the requirement that user_id comes from token validation, while A1 describes an additional token extraction method, which is related to token handling but not the same as removing user_id derivation from tokens."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements R10, R11, or R12 relate to the format of error response messages."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements R10, R11, or R12 relate to rounding floating point numbers in responses."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements R10, R11, or R12 relate to sorting behavior of GET /ratings responses."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 951,
+    "prompt_tokens": 645,
+    "completion_tokens": 306
+  }
+}

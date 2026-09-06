@@ -1,0 +1,49 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "POST /users/register returns a UserResponse (id, email) with status 200 OK instead of just confirming registration",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification does not define what the register endpoint returns beyond a 200 OK status. Returning a UserResponse with id and email is an addition not required by the spec."
+      },
+      {
+        "id": "A2",
+        "description": "POST /users/register checks for duplicate email and returns 400 Bad Request if already registered",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification does not mention any constraint or behavior around duplicate email registration. This guard is an addition."
+      },
+      {
+        "id": "A3",
+        "description": "DELETE /todos/{id} returns a JSON body {\"message\": \"Todo deleted\"} on success",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification only states the response status should be 200 OK for a successful delete. The specific response body is not required by the spec."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "POST /todos does not validate that the title field is non-empty and return 400 with a message indicating 'The Title field is required' when title is empty or missing",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states: 'Call POST /todos with an empty or missing title field. Verify that the response status code is 400 Bad Request and the response body contains a validation error indicating The Title field is required.' The code defines title as a required str in TodoCreate, which will cause a 422 Unprocessable Entity from FastAPI/Pydantic for missing title, not a 400, and the error message will not match the required text."
+      },
+      {
+        "id": "O2",
+        "description": "PUT /todos/{id} does not validate that the id in the request body matches the id in the URL path and return 400 Bad Request when they differ",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states: 'Call PUT /todos/X with a request body where id=Y (different from X). Verify the response status is 400 Bad Request.' The code never checks whether todo_in.id matches the path parameter id."
+      },
+      {
+        "id": "O3",
+        "description": "GET /todos without an Authorization header returns 403 Forbidden instead of 401 Unauthorized",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification states: 'Call GET /todos without providing any Authorization header or token. Verify the response status is 401 Unauthorized.' With auto_error=False on HTTPBearer, FastAPI will not automatically raise a 401; the get_current_user function does raise 401 when credentials is None, so this should work \u2014 however, HTTPBearer with auto_error=False may return 403 in some FastAPI versions when no credentials are provided. This is a potential gap depending on FastAPI version behavior."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 5745,
+    "prompt_tokens": 4975,
+    "completion_tokens": 770
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "A1 discusses attributes extraction rules around temperament/group_behavior, but it describes adding extra sources rather than the spec change removing those extraction rules."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "ID generation via a counters collection is unrelated to any of R4\u2013R7."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Updating a pet picture in PUT requests does not correspond to removal of attributes extraction, delete constraints, lifespan handling, or birthdate filtering."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Supporting picture-url in PUT requests is unrelated to any of the listed removed behaviors."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Registry-service error handling status codes do not match any of R4\u2013R7."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Duplicate pet-name handling is unrelated to the removed behaviors in R4\u2013R7."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "A7 is about the delete-pet-type-with-pets constraint, but it inconsistently describes both enforcing and omitting the check rather than clearly matching the spec removal."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1465,
+    "prompt_tokens": 1046,
+    "completion_tokens": 419
+  }
+}

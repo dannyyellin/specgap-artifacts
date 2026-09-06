@@ -1,0 +1,17 @@
+Timestamp: 2026-06-02 09:46:40
+Detector:  claude-sonnet-4-6
+App/Variant/Service: nutrition/ratings-R10R11R12/ratings
+Method:    twoshot
+
+Tokens: prompt=9235, completion=844, total=10079
+Additions: 3
+Omissions: 4
+
+  A A1: The code checks whether a dish exists by calling the dishes microservice before creating or updating a rating
+  A A2: POST /ratings returns the avg_rating JSON structure (dish_id and avg_rating) on success
+  A A3: The rating value is stored as a float (rounded to 2 decimal places) rather than as an integer
+
+  O O1: POST /ratings does not validate that 'rating' is an integer between 1 and 5
+  O O2: PUT /ratings/{id} does not validate that 'rating' is an integer between 1 and 5
+  O O3: POST /ratings does not enforce that a user cannot rate the same dish twice
+  O O4: The service listens on port 5004 but the deployment URL in the spec uses path /ratings, yet the code does not enforce the base path constraint noted in the deployment section

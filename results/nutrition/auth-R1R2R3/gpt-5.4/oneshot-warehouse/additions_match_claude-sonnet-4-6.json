@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Configurable JWT secret and token expiration via environment variables is not related to any of the three spec requirements about bcrypt removal, Owner special case removal, or username uniqueness constraint removal."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R2",
+        "label": "NONE",
+        "reasoning": "Auto-creating an Owner user at startup is the opposite of removing the Owner special case; R2 requires removing the Owner special case, but A2 describes adding/maintaining it, so this does not match."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Embedding expiration and issued-at claims in JWT tokens is unrelated to the three spec requirements about bcrypt removal, Owner special case removal, or username uniqueness constraint removal."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Returning 401 for failed login does not correspond to any of the three spec requirements about bcrypt removal, Owner special case removal, or username uniqueness constraint removal."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rejecting empty-string name or password on /register is unrelated to the three spec requirements about bcrypt removal, Owner special case removal, or username uniqueness constraint removal."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1141,
+    "prompt_tokens": 722,
+    "completion_tokens": 419
+  }
+}

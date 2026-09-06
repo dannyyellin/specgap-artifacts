@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "O1 identifies the missing ownership/permission check on GET /api/v1/items/{item_id} which is the same behavior R4 tests, but O1 describes a code-level finding rather than the full end-to-end test scenario including status code and detail message verification."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 concerns item accessibility after user deletion, which does not correspond to any of the listed reference requirements."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R35",
+        "label": "MATCH",
+        "reasoning": "O3 directly describes the same behavior as R35: attempting to register with the existing superuser email returns 400, but the detail message differs from the required 'The user with this email already exists in the system'."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1385,
+    "prompt_tokens": 1106,
+    "completion_tokens": 279
+  }
+}

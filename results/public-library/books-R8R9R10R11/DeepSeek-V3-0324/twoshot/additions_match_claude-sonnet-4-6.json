@@ -1,0 +1,24 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "A1 describes the code storing 'publisher' and 'publishedDate' in POST /books, which directly contradicts R10's removal of Google Books API integration for obtaining those fields."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "A2 describes validating 'publisher' and 'publishedDate' in PUT requests, which is related to R10's removal of Google Books API integration for those fields, but R10 specifically addresses POST/API integration rather than PUT endpoint behavior."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 743,
+    "prompt_tokens": 542,
+    "completion_tokens": 201
+  }
+}

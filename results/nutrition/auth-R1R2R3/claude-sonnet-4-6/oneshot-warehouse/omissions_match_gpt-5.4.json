@@ -1,0 +1,48 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "It concerns the special Owner user details, but focuses on incorrect default credentials rather than the reference requirement that the Owner special case was removed entirely."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "It directly states that passwords are stored without encryption or hashing, which is the same behavior as removing bcrypt password encryption."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "It addresses continued special handling of the Owner username, but only one aspect of the removed Owner special case rather than the full special-case behavior."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "It describes privileged status being tied to the Owner name, which is part of the Owner special case, but not the full removed special-case definition."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "It discusses login/register status-code handling, which does not correspond to password encryption, Owner special-case removal, or username uniqueness removal."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "It concerns creation of the special Owner user, but the reference requirement is specifically that the Owner special case was removed, not merely that initialization may fail."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1345,
+    "prompt_tokens": 944,
+    "completion_tokens": 401
+  }
+}

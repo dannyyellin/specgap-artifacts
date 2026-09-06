@@ -1,0 +1,18 @@
+{
+  "req_id": 32,
+  "requirement_vague": "Ensure an authenticated user cannot change their email to an email already registered by another account.",
+  "requirement_precise": "Register a new normal user and obtain an access token. Register a second user with a different random email. Using the access token for the first (authenticated) user, attempt to update the authenticated user's email to the email of the already-registered second user. Verify the response status is 409. Verify the response body contains a JSON field \"detail\" with the value \"User with this email already exists\".",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": "PATCH /api/v1/users/me in update_user_me",
+    "code_reference": "if user_in.email and user_in.email != current_user.email:\n    existing = session.exec(select(User).where(User.email == user_in.email)).first()\n    if existing:\n        raise HTTPException(status_code=409, detail=\"User with this email already exists\")",
+    "reasoning": "The authenticated self-update endpoint checks whether the requested new email belongs to another existing user before applying the change. If such a user exists, it returns HTTP 409 with a JSON error body containing detail set to \"User with this email already exists\", matching the requirement."
+  },
+  "usage": {
+    "total_tokens": 5925,
+    "prompt_tokens": 5783,
+    "completion_tokens": 142
+  },
+  "parse_error": false
+}

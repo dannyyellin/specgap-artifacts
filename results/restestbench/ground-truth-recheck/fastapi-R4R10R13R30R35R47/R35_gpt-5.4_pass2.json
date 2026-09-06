@@ -1,0 +1,23 @@
+{
+  "variant": "fastapi-R4R10R13R30R35R47",
+  "req_id": 35,
+  "model": "gpt-5.4",
+  "pass": 2,
+  "verdict": "NOT_IMPLEMENTED",
+  "requirement_vague": "Ensure registering a user with an existing email gets rejected.",
+  "omissions": [
+    {
+      "id": "O1",
+      "description": "The user registration operation does reject duplicate emails with status 400, but the error response body detail does not match the required message for an existing email such as admin@example.com.",
+      "category": "RESPONSE_FORMAT",
+      "reasoning": "In the signup route, when a user with the same email already exists, the code raises HTTPException(status_code=400, detail=\"User with this email already exists\"). The requirement expects detail to equal exactly 'The user with this email already exists in the system', so the specified response body is not fully implemented."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 5886,
+    "prompt_tokens": 5756,
+    "completion_tokens": 130
+  },
+  "timestamp": "2026-07-12 10:36:13"
+}

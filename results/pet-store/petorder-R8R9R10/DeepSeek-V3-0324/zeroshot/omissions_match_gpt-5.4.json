@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "O1 describes the DELETE pet from store after purchase step, which is exactly the behavior removed in R9."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 concerns handling missing pet types and error messaging, which is unrelated to R8, R9, or R10."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 is about validating the purchaser against the authenticated user, which does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concerns 503 handling for pet-store unavailability, which is not described by any reference requirement."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O5 describes enforcing unique, non-reusable purchase-id values, which is exactly the behavior removed in R10."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 989,
+    "prompt_tokens": 685,
+    "completion_tokens": 304
+  }
+}

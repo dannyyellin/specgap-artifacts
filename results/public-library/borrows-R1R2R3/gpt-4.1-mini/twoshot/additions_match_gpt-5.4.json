@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Filtering borrows by loanDate, returnDate, and id in GET /borrows does not correspond to removing return date computation, removing overdue-borrow blocking, or removing Logs notification on checkout."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R1",
+        "label": "PARTIAL",
+        "reasoning": "This involves returnDate behavior in Borrows, but it is a validation constraint rather than the removed computation of returnDate as loanDate plus 30 days."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rejecting unknown JSON fields on POST and PUT is unrelated to any of the listed removals in the Borrows and Logs specs."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Checking existence of remote cardholder and book resources does not describe removed return-date computation, removed overdue checkout blocking, or removed Logs notification on checkout."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 939,
+    "prompt_tokens": 658,
+    "completion_tokens": 281
+  }
+}

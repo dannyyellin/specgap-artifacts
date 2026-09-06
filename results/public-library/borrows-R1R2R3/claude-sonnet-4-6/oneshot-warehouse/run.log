@@ -1,0 +1,18 @@
+Timestamp: 2026-06-02 09:36:07
+Detector:  claude-sonnet-4-6
+App/Variant/Service: public-library/borrows-R1R2R3/borrows
+Method:    oneshot-warehouse
+
+Tokens: prompt=7716, completion=836, total=8552
+Additions: 6
+Omissions: 2
+
+  A A1: POST /borrows validates that the cardholder exists by calling the Cardholders service before creating a borrow record
+  A A2: POST /borrows validates that the ISBN refers to an existing book by calling the Books service before creating a borrow record
+  A A3: PUT /borrows/{id} validates that an updated cardholderId refers to an existing cardholder and an updated ISBN refers to an existing book
+  A A4: GET /borrows rejects query parameters that are not in the allowed field list, returning 400
+  A A5: PUT /borrows/{id} rejects a payload where returnDate is earlier than loanDate
+  A A6: POST /borrows accepts a 'returnDate' field in the request body and stores it if provided
+
+  O O1: POST /borrows does not compute returnDate as loanDate + 30 days (LOAN_PERIOD); instead it stores an empty string or a client-supplied value
+  O O2: POST /borrows does not check whether the cardholder has 2 or more overdue books before allowing checkout

@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R8",
+        "label": "PARTIAL",
+        "reasoning": "Supporting a user_id query filter on GET /profiles is related to broader access on that endpoint, but it does not specifically describe removal of the owner-only restriction."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "Accepting token from the JSON body is related to authentication input handling, but it does not clearly state that user_id is taken from the request body instead of token validation."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The error JSON structure does not correspond to removing protein exclusion, removing owner-only GET /profiles restriction, or removing token-derived user_id behavior."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rounding nutritional values to two decimals does not correspond to any of the listed spec changes."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 899,
+    "prompt_tokens": 628,
+    "completion_tokens": 271
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "app": "nutrition",
+  "variant": "auth-R1R2R3",
+  "service": "authentication",
+  "req_id": "R1",
+  "requirement": "User passwords are encrypted with bcrypt before being stored; passwords are never stored in plaintext.",
+  "source_headline": "Removed password encryption (bcrypt)",
+  "model": "claude-sonnet-4-6",
+  "pass": 1,
+  "label": "GAP",
+  "evidence": "register() stores password as plaintext: `mongo.db.users.insert_one({'name': name, 'password': password, 'id': user_id})`. ensure_owner_user() also stores OWNER_PASSWORD plaintext. login() queries with raw password: `mongo.db.users.find_one({'name': name, 'password': password})`. No import of bcrypt anywhere in the file.",
+  "reasoning": "The requirement states passwords must be encrypted with bcrypt before storage and never stored in plaintext. The code contains no bcrypt import or usage anywhere. Passwords are stored directly as plaintext strings in MongoDB and compared directly during login. A test checking that stored passwords are bcrypt hashes would fail entirely.",
+  "usage": {
+    "total_tokens": 2547,
+    "prompt_tokens": 2366,
+    "completion_tokens": 181
+  },
+  "timestamp": "2026-07-16 14:55:47"
+}

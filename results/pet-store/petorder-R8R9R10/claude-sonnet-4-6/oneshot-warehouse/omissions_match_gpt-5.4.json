@@ -1,0 +1,60 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "O1 states that POST /purchases does not delete the chosen pet from the pet-store after selection, which is exactly the removed DELETE-after-purchase step."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 discusses transaction document fields, which does not correspond to removed pet selection randomness, removed pet deletion, or removed purchase-id uniqueness."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 is about GET /transactions/{id} error handling and does not match any of the listed removed requirements."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concerns authorization behavior for POST /purchases, unrelated to pet selection randomness, deletion after purchase, or purchase-id uniqueness."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 is about availability checks and unreachable stores, not any of the three removed behaviors in the reference list."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 concerns support for conjunction query strings on GET /transactions and does not correspond to the reference requirements."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O7 is about Content-Type checking order and has no relation to the removed selection, deletion, or uniqueness requirements."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O8 discusses case sensitivity in pet-type matching, which is distinct from the removed random selection algorithm and the other reference removals."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1664,
+    "prompt_tokens": 1169,
+    "completion_tokens": 495
+  }
+}

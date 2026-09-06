@@ -1,0 +1,731 @@
+=== SYSTEM PROMPT ===
+
+You are an expert at analyzing microservice specifications and implementations.
+
+You will receive:
+1. A specification describing a multi-service application
+2. The name of one specific service to analyze
+3. The code for that service
+
+Your task: identify ALL gaps between the specification and the code.
+
+There are two types of gaps:
+- ADDITIONS: the code implements a property that the specification does not require.
+- OMISSIONS: the specification requires a property that the code does not implement.
+
+Categories (use exactly these names):
+
+1. ENDPOINTS: Route definitions, HTTP methods supported, URL patterns.
+   Example: Spec requires DELETE /items/{id} but no such route exists in the code.
+
+2. REQUEST_VALIDATION: Required fields, type checking, format validation,
+   media type validation, missing/invalid parameter handling.
+   Example: Spec requires "sku" as a required field on POST but the code does
+   not check for its presence.
+
+3. RESPONSE_FORMAT: Returned JSON fields, status codes for success and error cases,
+   response structure.
+   Example: Spec requires 404 when an item is not found but the code returns 500.
+
+4. BUSINESS_LOGIC: Domain rules, guards, constraints, conditional behavior,
+   access control decisions, state transitions.
+   Example: Spec requires dispatch to be rejected if quantity exceeds stock but
+   the code allows negative inventory.
+
+5. COMPUTED_VALUES: Derived or calculated fields, formulas, date arithmetic,
+   aggregations.
+   Example: Spec requires totalPrice = unitPrice * quantity but the code stores
+   totalPrice as a user-supplied value.
+
+6. EXTERNAL_INTERACTIONS: Outbound HTTP calls to other microservices or external
+   APIs, data fetched from or sent to other services, notifications.
+   Example: Spec requires notifying the purchasing service on low stock but the
+   code sends no such notification.
+
+7. DATA_PERSISTENCE: What is stored in the database, field mappings between
+   request/response and stored documents, ID generation.
+   Example: Spec requires storing last_restocked date on receipt but the code
+   never writes this field.
+
+
+For ADDITIONS: find code properties that have no basis in the specification.
+Be STRICT: the specification not contradicting a property is NOT enough — the
+specification must positively require it. For example, if the specification says
+"store user records" and the code encrypts passwords, encryption is an addition:
+the specification permits it but does not require it. Similarly, a vague statement
+like "return appropriate status codes" does NOT cover a specific property like
+"return 401 when the user is not found."
+Minor implementation details (variable naming, error message text) are NOT gaps.
+
+For OMISSIONS: find properties the specification requires but the code does not
+implement. Look for:
+- Explicit requirements stated in the specification that the code simply does
+  not implement — including requirements in other services' sections or in
+  general guidelines
+- Cross-service interactions described in other services' specifications
+- Data model fields that are never computed or populated
+- Requirements implied by combining multiple specification statements
+- Missing input validations, missing or incorrect error status codes
+Only flag omissions with clear basis in the specification text, not speculation.
+
+=== EXAMPLE 1 ===
+
+Below is a partial specification for a "task-tracker" microservice in a project
+management application, followed by a code excerpt, and the expected gap analysis.
+
+SPECIFICATION EXCERPT:
+  The task-tracker service manages tasks. Each task has fields: id, title,
+  assignee_id, status (one of "open", "in_progress", "done"), created_date,
+  and due_date.
+
+  POST /tasks creates a new task. Required fields: title, assignee_id, due_date.
+  The status defaults to "open" and created_date is set to today's date.
+
+  GET /tasks returns all tasks. Supports query parameter "assignee_id" to filter.
+
+  PUT /tasks/{id} updates a task. The assignee_id can be changed.
+
+  The notification service should be informed whenever a task's assignee changes
+  so it can send an alert to the new assignee.
+
+  The user-directory service manages user accounts. Task-tracker should verify
+  that assignee_id refers to a valid user before creating or updating a task.
+
+CODE EXCERPT:
+  @app.route('/tasks', methods=['POST'])
+  def create_task():
+      data = request.get_json()
+      task = {
+          'title': data.get('title'),
+          'assignee_id': data.get('assignee_id'),
+          'due_date': data.get('due_date'),
+          'status': 'open',
+          'created_date': datetime.now().strftime('%Y-%m-%d'),
+          'priority': data.get('priority', 'medium')
+      }
+      result = db.tasks.insert_one(task)
+      task['id'] = str(result.inserted_id)
+      return jsonify(task), 201
+
+  @app.route('/tasks/<id>', methods=['PUT'])
+  def update_task(id):
+      data = request.get_json()
+      db.tasks.update_one({'_id': ObjectId(id)}, {'$set': data})
+      return jsonify(db.tasks.find_one({'_id': ObjectId(id)})), 200
+
+EXPECTED ANALYSIS:
+{
+  "additions": [
+    {
+      "id": "A1",
+      "description": "Stores a 'priority' field with default 'medium' on task creation",
+      "category": "DATA_PERSISTENCE",
+      "reasoning": "The specification defines task fields as id, title, assignee_id, status, created_date, and due_date. The 'priority' field is not mentioned in the specification."
+    }
+  ],
+  "omissions": [
+    {
+      "id": "O1",
+      "description": "POST /tasks does not validate that required fields (title, assignee_id, due_date) are present in the request body",
+      "category": "REQUEST_VALIDATION",
+      "reasoning": "The specification states 'Required fields: title, assignee_id, due_date' but the code uses data.get() with no presence check, silently storing None for missing fields."
+    },
+    {
+      "id": "O2",
+      "description": "GET /tasks endpoint is not implemented",
+      "category": "ENDPOINTS",
+      "reasoning": "The specification requires 'GET /tasks returns all tasks' with assignee_id filtering, but no such route exists in the code."
+    },
+    {
+      "id": "O3",
+      "description": "Does not verify assignee_id against the user-directory service before creating or updating a task",
+      "category": "EXTERNAL_INTERACTIONS",
+      "reasoning": "The specification states 'Task-tracker should verify that assignee_id refers to a valid user before creating or updating a task' but the code makes no outbound call to validate."
+    },
+    {
+      "id": "O4",
+      "description": "Does not notify the notification service when a task's assignee changes on PUT /tasks/{id}",
+      "category": "EXTERNAL_INTERACTIONS",
+      "reasoning": "The specification states 'The notification service should be informed whenever a task's assignee changes' but the code sends no notification."
+    },
+    {
+      "id": "O5",
+      "description": "Does not validate that 'status' field on update is one of the allowed values (open, in_progress, done)",
+      "category": "REQUEST_VALIDATION",
+      "reasoning": "The specification defines status as 'one of open, in_progress, done' but the code accepts any value on PUT."
+    }
+  ]
+}
+
+
+=== END EXAMPLE 1 ===
+
+=== EXAMPLE 2 ===
+
+Below is a partial specification for a "warehouse" microservice in a supply-chain
+application, followed by a code excerpt, and the expected gap analysis.
+
+SPECIFICATION EXCERPT:
+  The warehouse service manages inventory items. Each item has fields: id, sku,
+  name, quantity_on_hand, reorder_point, supplier_id, and last_restocked.
+
+  POST /items creates an inventory item. Required fields: sku, name,
+  quantity_on_hand, supplier_id, reorder_point. The last_restocked field is
+  initially set to null.
+
+  GET /items returns all items. Supports query parameter "supplier_id" to filter.
+
+  PUT /items/{id}/receive records a received shipment. The request body includes
+  "quantity". The quantity_on_hand is increased by the given amount and
+  last_restocked is set to today's date.
+
+  PUT /items/{id}/dispatch records outgoing stock. The request body includes
+  "quantity". The quantity_on_hand is decreased. The dispatch must be rejected
+  if the requested quantity exceeds quantity_on_hand.
+
+  The purchasing service should be notified whenever an item's quantity_on_hand
+  falls below its reorder_point, so it can initiate a restock order.
+
+  The supplier-directory service manages supplier records. Warehouse should
+  verify that supplier_id refers to an active supplier before creating an item.
+
+CODE EXCERPT:
+  @app.route('/items', methods=['POST'])
+  def create_item():
+      data = request.get_json()
+      item = {
+          'sku': data.get('sku'),
+          'name': data.get('name'),
+          'quantity_on_hand': data.get('quantity_on_hand'),
+          'reorder_point': data.get('reorder_point'),
+          'supplier_id': data.get('supplier_id'),
+          'last_restocked': None,
+          'unit_price': data.get('unit_price', 0)
+      }
+      result = db.items.insert_one(item)
+      item['id'] = str(result.inserted_id)
+      return jsonify(item), 201
+
+  @app.route('/items', methods=['GET'])
+  def list_items():
+      category = request.args.get('category')
+      query = {}
+      if category:
+          query['category'] = category
+      items = list(db.items.find(query))
+      for item in items:
+          item['id'] = str(item.pop('_id'))
+      return jsonify(items), 200
+
+  @app.route('/items/<id>/receive', methods=['PUT'])
+  def receive_shipment(id):
+      data = request.get_json()
+      quantity = data['quantity']
+      db.items.update_one({'_id': ObjectId(id)}, {'$inc': {'quantity_on_hand': quantity}})
+      item = db.items.find_one({'_id': ObjectId(id)})
+      return jsonify(item), 200
+
+  @app.route('/items/<id>/dispatch', methods=['PUT'])
+  def dispatch_stock(id):
+      data = request.get_json()
+      quantity = data['quantity']
+      db.items.update_one({'_id': ObjectId(id)}, {'$inc': {'quantity_on_hand': -quantity}})
+      item = db.items.find_one({'_id': ObjectId(id)})
+      return jsonify(item), 200
+
+EXPECTED ANALYSIS:
+{
+  "additions": [
+    {
+      "id": "A1",
+      "description": "Stores a 'unit_price' field with default 0 on item creation",
+      "category": "DATA_PERSISTENCE",
+      "reasoning": "The specification defines item fields as id, sku, name, quantity_on_hand, reorder_point, supplier_id, and last_restocked. The 'unit_price' field is not mentioned in the specification."
+    },
+    {
+      "id": "A2",
+      "description": "GET /items supports filtering by 'category' query parameter",
+      "category": "REQUEST_VALIDATION",
+      "reasoning": "The specification requires filtering by 'supplier_id', not 'category'. The code implements a filter parameter that is not in the specification."
+    }
+  ],
+  "omissions": [
+    {
+      "id": "O1",
+      "description": "POST /items does not validate that required fields (sku, name, quantity_on_hand, supplier_id, reorder_point) are present in the request body",
+      "category": "REQUEST_VALIDATION",
+      "reasoning": "The specification states these as required fields but the code uses data.get() with no presence check, silently storing None for missing fields."
+    },
+    {
+      "id": "O2",
+      "description": "GET /items does not support filtering by 'supplier_id' query parameter",
+      "category": "REQUEST_VALIDATION",
+      "reasoning": "The specification states GET /items 'supports query parameter supplier_id to filter' but the code only filters by 'category', which is not in the specification."
+    },
+    {
+      "id": "O3",
+      "description": "PUT /items/{id}/receive does not set last_restocked to today's date",
+      "category": "DATA_PERSISTENCE",
+      "reasoning": "The specification states 'last_restocked is set to today's date' when receiving a shipment, but the code only increments quantity_on_hand."
+    },
+    {
+      "id": "O4",
+      "description": "PUT /items/{id}/dispatch does not reject requests where quantity exceeds quantity_on_hand",
+      "category": "BUSINESS_LOGIC",
+      "reasoning": "The specification states 'The dispatch must be rejected if the requested quantity exceeds quantity_on_hand' but the code decrements unconditionally."
+    },
+    {
+      "id": "O5",
+      "description": "Does not notify the purchasing service when quantity_on_hand falls below reorder_point after a dispatch",
+      "category": "EXTERNAL_INTERACTIONS",
+      "reasoning": "The specification states 'The purchasing service should be notified whenever an item's quantity_on_hand falls below its reorder_point' but the code sends no notification."
+    },
+    {
+      "id": "O6",
+      "description": "Does not verify supplier_id against the supplier-directory service before creating an item",
+      "category": "EXTERNAL_INTERACTIONS",
+      "reasoning": "The specification states 'Warehouse should verify that supplier_id refers to an active supplier before creating an item' but the code makes no outbound call."
+    }
+  ]
+}
+
+
+=== END EXAMPLE 2 ===
+
+Output a JSON object with:
+- "additions": array of {"id": "A1", "description": "...", "category": "...", "reasoning": "..."}
+- "omissions": array of {"id": "O1", "description": "...", "category": "...", "reasoning": "..."}
+
+Output ONLY valid JSON, no other text.
+
+
+=== USER PROMPT ===
+
+=== SPECIFICATION ===
+
+(I) Description of microservices for the application Restaurant-Nutrition:
+{“Name”: “authentication microservice”,
+“Description”: “Responsible for authenticating users.  Users can register with a name and password.  Once
+registered, users can log in with their name and password and the service returns a valid token.  They then supply this
+token to other services they wish to use. Those requested services ask the authentication service to validate the token.”\n,
+
+“Resources”: “/register, /login, /validate
+
+Each registered user consists of a JSON a document containing the fields ‘name’ (of type string), 'password'
+(an encrypted string) and 'id' (of type number). These resources allow a new user to register and create a new user
+document, an existing user to login and receive a token, and for a service to validate a given token.”,
+
+“REST requests”: “(1) POST request on /register.  The request provides a JSON document containing the name and
+password of the user.   If successful, the service returns the response code 201 with the message 'successful'.  If the
+request is not successful because the input is not formatted properly or is missing information, or that username is
+already registered, the service returns the appropriate response code and a message explaining the error.
+(2) POST request on /login. The request provides a JSON document containing the name and password of the user.  If
+successful, the service returns the response code 201 with a JSON document containing the field 'token' (a valid token).
+Otherwise, it returns the appropriate response code and error message.
+(3) POST request on /validate.  The request provides a JSON document containing a token.  If
+successful, the service returns the response code 201 with a JSON document containing the fields 'valid' (of type
+Boolean) and 'privileged' (of type Boolean) and 'user_id' (of type number).   If the token provided is valid, the 'valid'
+field is True and the 'user_id' is the id of the user associated with this token.  If the user_name is 'Owner' and the
+password is correct, the 'privileged' field is True.  Otherwise, it is False.   If the token is not valid or not provided,
+the appropriate response code and error message are returned.”,
+
+“Implementation details”: “The service allows only one user to register with the name 'Owner'.  The password of this user
+must be 'owner#pw'.  The 'Owner' is the only privileged user.  The code for this service should only use packages from
+the Python Standard Library or the following packages:  flask, pymongo, pyjwt, bcrypt, requests.”,
+
+“Deployment”: “The authentication microservice runs in a Docker container and listens on external port 5001. Another
+microservice can send it requests using the URL http://authentication:5001/<resource>.”
+}
+
+{“Name”: “dishes microservice”,
+“Description”: “Responsible for creating, retrieving, updating, and deleting dishes offered by the restaurant.”,
+
+“Resources”: “/dishes, /dishes/{id}.
+An id is of type number.  Each dish (/dishes/{id}) consists of a JSON document containing the fields: 'name' (string),
+'id' (number), 'ingredients' (JSON array where each element is the name of an ingredient of type string),
+total_fat (float, in grams), saturated_fat (float, in grams), protein (float, in grams), sodium (float, in mg),
+cholesterol (float, in mg), total_carbohydrates (float, in grams), fiber (float, in grams), and sugar (float, in grams).
+The name of the dish and its ingredients are provided in the POST request, while the values of the other fields are
+computed by the service implementation.”,
+
+“REST requests”: “(1) GET and POST request on /dishes.  GET returns a JSON array of all records in the collection.  The
+GET request may specify a query string of one or more clauses of the form ‘field=value’.  If the 'field' is one of
+the nutritional data elements 'total_fat', 'saturated_fat', 'protein', 'sodium', 'cholesterol',
+'total_carbohydrates', 'fiber', or 'sugar' then the 'value' is a number and any dish that has less than or equal
+to that value for that nutritional element satisfies the clause. Otherwise, if 'field' equals 'ingredient', then any
+dish that contains the 'value' satisfies the clause.  Only those dishes that satisfy all clauses are returned.
+The POST request provides a JSON document containing the name of the dish and its ingredients
+(a JSON array, where each element in the array is the name of an ingredient).  The POST request returns the JSON record
+of the newly created resource, which includes the id assigned to this dish by the service.
+(2) GET, PUT and DELETE requests on /dishes/{id}.  The GET request returns a JSON record of the requested resource.  The
+PUT request provides a JSON payload of the resource’s fields "name" and "ingredients" and returns the updated JSON
+structure upon success.
+The DELETE request returns the status of the request with no content.”,
+
+“Implementation details”: “POST and DELETE and PUT requests are only allowed by the restaurant Owner.
+To compute the nutritional information of each ingredient of the dish, the service invokes the 3rd party API Ninjas
+nutritional service, available at https://api-ninjas.com/api/nutrition.  The API key for this service is provided in the
+environment variable 'NINJA_API_KEY' and you should use this variable to access the service.  If the Ninja API returned
+value does not contain an entry for one of the fields, then that field has the 0.0.  It is important to note that the
+names of the nutritional elements returned by API Ninjas are slightly different from the names used by the application.
+The field names returned by the Ninja Nutrition API are:  'name', 'calories', 'serving_size_g', 'fat_total_g',
+'fat_saturated_g', 'protein_g', 'sodium_mg', 'potassium_mg', 'cholesterol_mg', 'carbohydrates_total_g', 'fiber_g', and
+'sugar_g'.  These need to be mapped to the corresponding resource name for nutritional elements in the application.  For example,
+'carbohydrates_total_g' maps to 'total_carbohydrates'.   Furthermore, not all elements returned by Ninja are needed by the
+resource.  For instance, 'potassium_mg' has no counterpart in the resource and can be ignored.  Also be aware that some of the
+nutritional elements returned by Ninja but not used by the application will have a string value ('Only available for
+premium subscribers.'), not a numeric value.
+The nutritional values of a dish is the sum of the nutritional values of its ingredients.
+The code for this service should only use packages from the Python Standard Library or the following packages:
+flask, pymongo, requests, flask-cors”,
+
+“Deployment”: “The dishes microservice runs in a Docker container and listens on external port 5002.  Another microservice
+can send it requests using the URL http://dishes:5002/<resource>.”
+}
+
+{“Name”: “profile microservice”,
+“Description”: “Responsible for creating, retrieving, updating, and deleting user profiles.  Each user profile contains
+a nutritional diet for that user.”,
+
+“Resources”: “/profiles, /profiles/{id}, /profileDishes.
+An id is of type number.  Each profile (/profiles/{id}) consists of a JSON document containing the fields ‘user_id’ (the
+id of the user, the same as the id in /profiles/{id}), total_fat (float, in grams), saturated_fat (float, in grams),
+protein (float, in grams), sodium (float, in mg),
+cholesterol (float, in mg), total_carbohydrates(float, in grams), fiber (float, in grams), and sugar (float, in grams).”,
+
+“REST requests”: “(1) GET and POST requests on /profiles.  GET returns a JSON array of all records in the resource.  The
+GET request may specify a query string of the form ‘field=value’.  In this case, only those profile records satisfying
+that constraint are returned.
+The POST request provides a JSON document containing a subset of the following fields:
+total_fat (float, in grams), saturated_fat (float, in grams), protein (float, in grams), sodium (float, in mg),
+cholesterol (float, in mg), total_carbohydrates(float, in grams), fiber (float, in grams), and sugar (float, in grams).
+The 'user_id' field is obtained when
+validating the token provided in the request.  The POST request returns the JSON record of the newly created resource.
+(2) GET, PUT and DELETE requests on /profiles/{id}. The GET request returns a JSON record of the requested resource. The
+PUT request provides a valid JSON payload as in a POST request and returns the updated JSON structure upon success.
+The DELETE request returns the status of the request with no content.
+(3) GET requests on /profileDishes. This request returns all the dishes that satisfy the diet of the user issuing
+the request. A dish satisfies the diet of the user if the contents of each the fields in the dish (total_fat,
+saturated_fat, ... except the field protein, which is not considered in this calculation.) are less than or equal to
+those fields in the diet.”,
+
+“Implementation”: “The GET /profiles request is only allowed by the restaurant Owner.  The GET, DELETE and PUT
+/profile/{id} requests are only allowed by the user of that id.
+The code for this service should only use packages from the Python Standard Library or the following packages:
+flask, pymongo, requests.”,
+
+“Deployment”: “The profile microservice runs in a Docker container and listens on external port 5003.  Another
+microservice can send it requests using the URL http://profiles:5003/<resource>.”
+}
+
+{“Name”: “ratings microservice”,
+“Description”: “Responsible for maintaining ratings of restaurant dishes and computing the average rating for a dish.”,
+
+“Resources”: “/ratings, /ratings/{id}
+An id is of type number.  Each rating (/ratings/{id}) consists of a JSON document containing the fields 'dish_id' (the id
+if the dish being rated), ‘user_id’ (the id of a user providing the rating), and 'rating' (an integer between 1 and 5).”,
+
+“REST requests”: “(1) GET and POST request on /ratings.  GET returns a JSON array.  Each element of the array contains
+a JSON structure with two fields 'dish_id' (the id of a dish) and 'avg_rating' (of type float and is the average of all
+the ratings provided for this dish).   If a dish has not been rated, then it is not included in the response.  The
+POST request supplies a JSON structure with two fields: 'dish_id' (the id of a dish being rated) and 'rating' (an
+integer between 1 and 5).  This creates a new rating for the dish from the user issuing the request.
+(2) GET, PUT and DELETE requests on /ratings/{id}. The GET request returns a JSON structure with two fields 'dish_id'
+(the id of a dish) and 'avg_rating'.  The PUT request provides a JSON structure containing the fields 'dish_id' and
+'rating' and returns a JSON structure with two fields: 'dish_id' and 'avg_rating', which is the updated average rating
+for the dish.  The DELETE request removed this user's rating of the given dish and returns the status of the request
+with no content.”,
+
+“Implementation Details”: “The POST /ratings request is only allowed once for a given user for a given dish;  a user
+cannot rate the same dish twice (but she can change her rating via a PUT request).   The PUT and DELETE requests on
+/ratings/{id} will update or delete the rating given by that user for the dish of the given id.  The 'user_id' for this
+service is obtained when validating the token provided in the request.
+The code for this service should only use packages from the Python Standard Library or the following packages:
+flask, pymongo, requests.”,
+
+“Deployment”: “The ratings microservice runs in a Docker container and listens on external port 5004.   Another
+microservice can send it requests using the URL http://ratings:5004/ratings.”
+}
+
+A request to a service (other than a POST request to /register and /login) must supply a valid token. If an authentication token is not provided or is invalid, then 401 (Unauthorized) is returned.
+If a username or password is not supplied upon for requests to /register and /login, then 400 (Bad request) is returned.
+For successful requests, the appropriate 2XX code is returned:  201 (successful POST), 204 (successful DELETE) and 200 (success for other requests).
+For unsuccessful requests, the appropriate 4XX or 5XX code is returned: 400 (Bad request), 404 (Not Found), 405 (Method Not Allowed), 415 (Unsupported media type), and 500 (Internal Server Error).
+If a service uses an external API, and it fails to respond, then 500 (Internal Server Error) is returned.
+All ids must be unique and cannot be reused.
+
+
+(II) Code Generation Guidelines:
+Code Generation Guidelines
+•	Each microservice is to be written in Python.
+•	Besides generating the code, the Python packages that need to be installed must be listed in a comment at the beginning of the code
+•	The code must be executable.  Besides comments in the code, no other text is allowed in the response.
+•	All floating point numbers have two decimal places; e.g., 4.38
+•	Each microservice stores its persistent data in a Mongo database.   Assume that Mongo is available at 'mongodb://mongo:27017/'.
+•	If a microservice requires data that another microservice is responsible for, it invokes a GET request on that microservice to retrieve that data when it needs it.  It does not replicate and store the data locally.
+•	The generated code handles REST API exceptions and return the appropriate REST (HTTP) status code as described above.
+•	Each microservice will run in its own Docker container.
+•	The code you generate should be complete and executable. The generated code should not include any text other than comments.  In other words, the generated code should be executable without having to strip any extraneous text from the beginning or end of the code.
+
+
+
+=== CODE (ratings) ===
+
+# Required packages: flask, flask_pymongo, requests
+
+from flask import Flask, request, jsonify, Response
+from flask_pymongo import PyMongo
+from pymongo import ReturnDocument
+from pymongo.errors import PyMongoError
+import requests
+
+app = Flask(__name__)
+app.config["MONGO_URI"] = "mongodb://mongo:27017/ratingsdb"
+mongo = PyMongo(app)
+
+AUTH_VALIDATE_URL = "http://authentication:5001/validate"
+DISHES_BASE_URL = "http://dishes:5002/dishes"
+
+NUMERIC_FIELDS = {"dish_id", "rating"}
+
+
+def error_response(message, status_code):
+    return jsonify({"message": message}), status_code
+
+
+def round2(value):
+    return float(f"{float(value):.2f}")
+
+
+def get_json_body():
+    if not request.is_json:
+        return None, error_response("Unsupported media type", 415)
+    data = request.get_json(silent=True)
+    if data is None:
+        return None, error_response("Bad request", 400)
+    return data, None
+
+
+def get_token_from_request():
+    auth_header = request.headers.get("Authorization")
+    if auth_header:
+        parts = auth_header.split()
+        if len(parts) == 2 and parts[0].lower() == "bearer" and parts[1].strip():
+            return parts[1].strip()
+        if auth_header.strip():
+            return auth_header.strip()
+    token = request.headers.get("token")
+    if token and token.strip():
+        return token.strip()
+    return None
+
+
+def validate_token():
+    token = get_token_from_request()
+    if not token:
+        return None, error_response("Unauthorized", 401)
+    try:
+        resp = requests.post(AUTH_VALIDATE_URL, json={"token": token}, timeout=5)
+    except requests.RequestException:
+        return None, error_response("Internal Server Error", 500)
+
+    if resp.status_code != 201:
+        return None, error_response("Unauthorized", 401)
+
+    try:
+        data = resp.json()
+    except ValueError:
+        return None, error_response("Unauthorized", 401)
+
+    if not data.get("valid") or "user_id" not in data:
+        return None, error_response("Unauthorized", 401)
+
+    return {
+        "user_id": data.get("user_id"),
+        "privileged": bool(data.get("privileged", False))
+    }, None
+
+
+def dish_exists(dish_id):
+    try:
+        resp = requests.get(f"{DISHES_BASE_URL}/{dish_id}", timeout=5)
+    except requests.RequestException:
+        return None, error_response("Internal Server Error", 500)
+
+    if resp.status_code == 200:
+        return True, None
+    if resp.status_code == 404:
+        return False, None
+    if resp.status_code == 401:
+        return False, error_response("Unauthorized", 401)
+    return False, error_response("Internal Server Error", 500)
+
+
+def get_next_sequence(name):
+    doc = mongo.db.counters.find_one_and_update(
+        {"_id": name},
+        {"$inc": {"seq": 1}},
+        upsert=True,
+        return_document=ReturnDocument.AFTER
+    )
+    return int(doc["seq"])
+
+
+def ensure_indexes():
+    mongo.db.ratings.create_index([("id", 1)], unique=True)
+    mongo.db.ratings.create_index([("dish_id", 1), ("user_id", 1)], unique=True)
+
+
+def serialize_avg(dish_id, avg_rating):
+    return {
+        "dish_id": int(dish_id),
+        "avg_rating": round2(avg_rating)
+    }
+
+
+def compute_avg_for_dish(dish_id):
+    pipeline = [
+        {"$match": {"dish_id": int(dish_id)}},
+        {"$group": {"_id": "$dish_id", "avg_rating": {"$avg": "$rating"}}}
+    ]
+    result = list(mongo.db.ratings.aggregate(pipeline))
+    if not result:
+        return None
+    return round2(result[0]["avg_rating"])
+
+
+@app.errorhandler(405)
+def method_not_allowed(_e):
+    return error_response("Method Not Allowed", 405)
+
+
+@app.errorhandler(404)
+def not_found(_e):
+    return error_response("Not Found", 404)
+
+
+@app.errorhandler(500)
+def internal_error(_e):
+    return error_response("Internal Server Error", 500)
+
+
+@app.route("/ratings", methods=["GET", "POST"])
+def ratings_collection():
+    auth_data, auth_error = validate_token()
+    if auth_error:
+        return auth_error
+
+    if request.method == "GET":
+        try:
+            pipeline = [
+                {"$group": {"_id": "$dish_id", "avg_rating": {"$avg": "$rating"}}},
+                {"$sort": {"_id": 1}}
+            ]
+            results = list(mongo.db.ratings.aggregate(pipeline))
+            response = [serialize_avg(item["_id"], item["avg_rating"]) for item in results]
+            return jsonify(response), 200
+        except PyMongoError:
+            return error_response("Internal Server Error", 500)
+
+    data, err = get_json_body()
+    if err:
+        return err
+
+    if "dish_id" not in data or "rating" not in data:
+        return error_response("Bad request", 400)
+
+    try:
+        dish_id = int(data["dish_id"])
+        rating = round2(float(data["rating"]))
+    except (TypeError, ValueError):
+        return error_response("Bad request", 400)
+
+    exists, exists_err = dish_exists(dish_id)
+    if exists_err:
+        return exists_err
+    if not exists:
+        return error_response("Not Found", 404)
+
+    try:
+        rating_id = get_next_sequence("rating_id")
+        doc = {
+            "id": rating_id,
+            "dish_id": dish_id,
+            "user_id": int(auth_data["user_id"]),
+            "rating": rating
+        }
+        mongo.db.ratings.insert_one(doc)
+        avg = compute_avg_for_dish(dish_id)
+        return jsonify(serialize_avg(dish_id, avg)), 201
+    except PyMongoError:
+        return error_response("Bad request", 400)
+
+
+@app.route("/ratings/<int:dish_id>", methods=["GET", "PUT", "DELETE"])
+def rating_item(dish_id):
+    auth_data, auth_error = validate_token()
+    if auth_error:
+        return auth_error
+
+    if request.method == "GET":
+        try:
+            avg = compute_avg_for_dish(dish_id)
+            if avg is None:
+                return error_response("Not Found", 404)
+            return jsonify(serialize_avg(dish_id, avg)), 200
+        except PyMongoError:
+            return error_response("Internal Server Error", 500)
+
+    user_id = int(auth_data["user_id"])
+
+    if request.method == "PUT":
+        data, err = get_json_body()
+        if err:
+            return err
+
+        if "dish_id" not in data or "rating" not in data:
+            return error_response("Bad request", 400)
+
+        try:
+            body_dish_id = int(data["dish_id"])
+            rating = round2(float(data["rating"]))
+        except (TypeError, ValueError):
+            return error_response("Bad request", 400)
+
+        if body_dish_id != dish_id:
+            return error_response("Bad request", 400)
+
+        exists, exists_err = dish_exists(dish_id)
+        if exists_err:
+            return exists_err
+        if not exists:
+            return error_response("Not Found", 404)
+
+        try:
+            updated = mongo.db.ratings.find_one_and_update(
+                {"dish_id": dish_id, "user_id": user_id},
+                {"$set": {"rating": rating}},
+                return_document=ReturnDocument.AFTER
+            )
+            if updated is None:
+                return error_response("Not Found", 404)
+            avg = compute_avg_for_dish(dish_id)
+            return jsonify(serialize_avg(dish_id, avg)), 200
+        except PyMongoError:
+            return error_response("Internal Server Error", 500)
+
+    try:
+        deleted = mongo.db.ratings.delete_one({"dish_id": dish_id, "user_id": user_id})
+        if deleted.deleted_count == 0:
+            return error_response("Not Found", 404)
+        return Response(status=204)
+    except PyMongoError:
+        return error_response("Internal Server Error", 500)
+
+
+if __name__ == "__main__":
+    ensure_indexes()
+    app.run(host="0.0.0.0", port=5004)
+
+=== SERVICE TO ANALYZE ===
+ratings

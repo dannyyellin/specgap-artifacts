@@ -1,0 +1,90 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the missing 'cannot delete pet-type if it has pets' constraint, which is exactly what R5 states was removed."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 discusses authentication/authorization response codes for DELETE /pet-types/{id}, which does not correspond to any of the four reference requirements."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "O3 describes the missing extraction of 'temperament'/'group_behavior' fields from the Ninja API response for attributes, which matches R4's removal of temperament/group_behavior to attributes extraction rules."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "O4 describes incorrect splitting logic for the temperament/group_behavior field (comma vs whitespace), which is part of the attributes extraction rules removed per R4."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "O5 directly describes the missing birthdateGT/birthdateLT query filtering on GET /pet-types/{id}/pets, which matches R7's removal of birthdate query filtering."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 discusses PUT /pet-types/{id} returning 405, which does not correspond to any of the four reference requirements."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O7 discusses ordering of pet-type existence check vs picture processing in POST /pet-types/{id}/pets, which does not correspond to any of the four reference requirements."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O8 concludes the 404 behavior is correctly implemented and does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O9 discusses side-effect ordering in POST /pet-types/{id}/pets, which does not correspond to any of the four reference requirements."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O10 is withdrawn/self-contradicted and does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "O11 describes incorrect lifespan default (0 instead of null) when not returned by Ninja API, which partially overlaps with R6's removal of lifespan range handling, but focuses on the null default rather than the 'choose minimum'/'extract first integer' logic."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O12 discusses the response code for duplicate pet names (400 vs 409), which does not correspond to any of the four reference requirements."
+      },
+      {
+        "detection_id": "O13",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O13 discusses the MongoDB service name in the connection URI, which does not correspond to any of the four reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 3028,
+    "prompt_tokens": 2026,
+    "completion_tokens": 1002
+  }
+}

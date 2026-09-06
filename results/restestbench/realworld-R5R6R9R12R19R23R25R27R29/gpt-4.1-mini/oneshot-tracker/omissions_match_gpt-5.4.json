@@ -1,0 +1,102 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about validating article creation fields, which is not covered by any reference requirement."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement checks slug immutability on article update."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "It concerns GET /api/articles/{slug} for a missing/deleted article, but it conflicts with R5 because R5 explicitly expects 200 with an empty object rather than 404."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Comment body validation is not addressed by any reference requirement."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Comment deletion error handling is not covered by the reference requirements."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Self-follow/self-unfollow validation is not part of any listed reference requirement."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R12",
+        "label": "PARTIAL",
+        "reasoning": "R12 specifically requires tag filtering on GET /api/articles, while O7 combines that with pagination and overstates the missing behavior."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "R6 requires implementing GET /api/articles/feed to return articles from followed users."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": "R23",
+        "label": "MATCH",
+        "reasoning": "R23 also depends on the feed endpoint returning followed users' articles, with pagination."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": "R27",
+        "label": "MATCH",
+        "reasoning": "R27 requires the feed endpoint to return an empty feed when the user follows nobody."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "External service notifications are unrelated to any reference requirement."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Comment ID uniqueness/type validation is not mentioned in the reference requirements."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": "R29",
+        "label": "MATCH",
+        "reasoning": "R29 specifically tests that deleting a user with existing articles fails due to foreign key constraints."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement checks article ordering by created timestamp with ID tie-breaker."
+      },
+      {
+        "detection_id": "O13",
+        "requirement_id": "R25",
+        "label": "MATCH",
+        "reasoning": "R25 explicitly requires the JWT payload to contain id, username, and email."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2947,
+    "prompt_tokens": 2140,
+    "completion_tokens": 807
+  }
+}

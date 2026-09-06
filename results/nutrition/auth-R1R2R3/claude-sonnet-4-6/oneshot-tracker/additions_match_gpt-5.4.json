@@ -1,0 +1,48 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "It concerns the Owner special case by changing the special username from hardcoded 'Owner' to a configurable/lowercase value, but it does not by itself describe removing the special case entirely."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "It modifies the special Owner password from hardcoded 'owner#pw' to a configurable/default 'owner', which is related to the Owner special case but not a full removal of that special case."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "Storing passwords in plaintext rather than encrypted clearly corresponds to removing bcrypt password encryption."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Token expiration is unrelated to removing bcrypt, removing the Owner special case, or removing username uniqueness."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rejecting empty name/password inputs does not correspond to any of the listed removal requirements."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "It still describes special handling for privileged Owner behavior, but changes when that privilege is computed rather than removing the Owner special case altogether."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1190,
+    "prompt_tokens": 801,
+    "completion_tokens": 389
+  }
+}

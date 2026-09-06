@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of computing returnDate as loanDate plus 30 days when creating a borrow, which is exactly R1."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O2 directly matches the removed constraint that borrowers with 2 or more overdue books are blocked from checkout."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O3 captures only the removed 400-response consequence of the overdue-borrow constraint, while R2 includes the broader checkout-blocking rule as well."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concerns ISBN_13 validation, which is unrelated to any of the reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 900,
+    "prompt_tokens": 643,
+    "completion_tokens": 257
+  }
+}

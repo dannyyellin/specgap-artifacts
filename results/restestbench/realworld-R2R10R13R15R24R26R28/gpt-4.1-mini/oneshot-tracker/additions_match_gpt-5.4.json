@@ -1,0 +1,54 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns comment deletion permissions, which is not described by any listed requirement."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R28",
+        "label": "PARTIAL",
+        "reasoning": "It addresses the same update/delete ownership behavior as R28, but the code enforces authorization whereas R28 expects unauthorized users to be able to update and delete articles."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "It matches the follow-self scenario in R2, but the code fails the required 400 self-follow rejection."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "It matches the unfollow-self scenario in R10, but the code fails the required 400 self-unfollow rejection."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Including an internal user id in responses is not a behavior covered by any listed requirement."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Extra timestamp fields in article responses are not part of any listed requirement."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Favorite-related response fields are not described by any of the listed requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2075,
+    "prompt_tokens": 1669,
+    "completion_tokens": 406
+  }
+}

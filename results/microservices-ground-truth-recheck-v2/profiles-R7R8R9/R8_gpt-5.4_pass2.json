@@ -1,0 +1,19 @@
+{
+  "app": "nutrition",
+  "variant": "profiles-R7R8R9",
+  "service": "profile",
+  "req_id": "R8",
+  "requirement": "GET /profiles may only be accessed by the Owner (privileged) user; requests by other users are denied.",
+  "source_headline": "Removed owner-only restriction on GET /profiles",
+  "model": "gpt-5.4",
+  "pass": 2,
+  "label": "PARTIAL",
+  "evidence": "In `profiles()` the route `/profiles` calls `validate_token()` for all methods, but in the `GET` branch it performs no privileged/Owner check before querying MongoDB and returning results: `docs = mongo.db.profiles.find(query, {\"_id\": 0}).sort(\"user_id\", 1); return jsonify([format_profile(doc) for doc in docs]), 200`. `validate_token()` does return a `privileged` flag, but `/profiles` GET never uses `auth_data[\"privileged\"]`.",
+  "reasoning": "There is code addressing access control on `/profiles` in the sense that authentication is required via `validate_token()`, so this is not a GAP. However, the requirement specifically says `GET /profiles` may only be accessed by the Owner/privileged user, and the GET handler does not check the privileged flag at all. Therefore non-privileged authenticated users would be allowed, so a test of the stated requirement would fail.",
+  "usage": {
+    "total_tokens": 2586,
+    "prompt_tokens": 2371,
+    "completion_tokens": 215
+  },
+  "timestamp": "2026-07-16 14:58:33"
+}

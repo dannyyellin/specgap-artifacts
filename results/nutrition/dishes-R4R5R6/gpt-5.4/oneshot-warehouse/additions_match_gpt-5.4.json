@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "It concerns query filtering semantics on GET /dishes, but it describes extra supported filter fields rather than the removed specific semantics like lte for nutrients or contains behavior."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Authorization header parsing with an optional Bearer prefix does not correspond to removed Ninja API field mapping, owner-only restrictions, or query string filtering semantics."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "CORS enablement is unrelated to the listed removals about Ninja API field mapping, owner-only write restrictions, or query filtering semantics."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 775,
+    "prompt_tokens": 565,
+    "completion_tokens": 210
+  }
+}

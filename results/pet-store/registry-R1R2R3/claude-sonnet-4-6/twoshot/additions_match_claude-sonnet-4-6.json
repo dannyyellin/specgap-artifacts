@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 describes the bcrypt cost factor setting, which does not correspond to any of the three spec requirements about password validation rules, anti-enumeration, or owner pre-registration."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A2 describes logic to update the 'privileged' field on password change, which does not correspond to any of the three spec requirements listed."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R3",
+        "label": "PARTIAL",
+        "reasoning": "A3 describes granting privileges during normal registration by matching hardcoded owner credentials, which is a workaround related to the removal of owner pre-registration on initialization (R3), but it is an added behavior rather than a direct description of removing pre-registration."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R3",
+        "label": "PARTIAL",
+        "reasoning": "A4 describes init_db() resetting the owner's credentials on every startup, which is related to owner pre-registration on initialization (R3), but the spec requirement is about removing that pre-registration entirely, whereas A4 describes a persistent and potentially overriding re-seeding behavior."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1130,
+    "prompt_tokens": 754,
+    "completion_tokens": 376
+  }
+}

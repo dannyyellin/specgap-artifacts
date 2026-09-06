@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This property concerns updatability of cardholderId and ISBN fields, which does not correspond to any of the three spec requirements about returnDate computation, overdue constraints, or logging."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R1",
+        "label": "PARTIAL",
+        "reasoning": "R1 removed the automatic returnDate computation (loanDate + 30 days), and A2 describes a validation on returnDate that the spec no longer mentions, but A2 focuses on a validation rule rather than the removal of the computation itself."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R1",
+        "label": "PARTIAL",
+        "reasoning": "A3 relates to handling of returnDate in PUT requests, which is tangentially connected to R1's removal of returnDate computation, but A3 specifically addresses empty string handling rather than the removal of the date computation logic."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 905,
+    "prompt_tokens": 619,
+    "completion_tokens": 286
+  }
+}

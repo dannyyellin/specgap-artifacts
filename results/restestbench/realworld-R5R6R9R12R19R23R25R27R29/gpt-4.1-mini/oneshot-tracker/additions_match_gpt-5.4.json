@@ -1,0 +1,48 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "It overlaps with article deletion behavior on the same endpoint, but R5 is about deleting an article and verifying retrieval after deletion, not about missing ownership checks or unauthorized deletion by other users."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "It addresses duplicate username/email registration, but R9 specifically requires status 400 and a combined uniqueness message rather than 422 with detailed field errors."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement concerns missing required fields during user registration."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "It matches the duplicate username/email scenario in R9, but the response format and status code differ from the required 400 with the combined message."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The spec does not include any requirement about handling missing registration fields."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "R5 requires GET after deletion to return 200 with an empty object, while this property describes the same response for any missing article rather than specifically the deleted-article case."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2193,
+    "prompt_tokens": 1804,
+    "completion_tokens": 389
+  }
+}

@@ -1,0 +1,150 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R15",
+        "label": "MATCH",
+        "reasoning": "R15 explicitly requires sending a password recovery email and verifying it via mailcatcher, which O1 directly describes as missing."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R15",
+        "label": "MATCH",
+        "reasoning": "R15 requires POST /api/v1/password-recovery/{email} to initiate password recovery, exactly the endpoint O2 says is not implemented."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R16",
+        "label": "MATCH",
+        "reasoning": "R16 also depends on the password recovery request endpoint for a non-existent user email, which O2 identifies as missing."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R17",
+        "label": "MATCH",
+        "reasoning": "R17 requires retrieving password-recovery HTML content and using the extracted token, which O3 directly states is not implemented."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R17",
+        "label": "MATCH",
+        "reasoning": "R17 requires the reset-password endpoint to update the password using a token, which O4 says is missing."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R18",
+        "label": "MATCH",
+        "reasoning": "R18 requires calling the reset-password operation with an invalid token, and O4 states that endpoint is not implemented."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R56",
+        "label": "MATCH",
+        "reasoning": "R56 requires POST /api/v1/reset-password/ behavior for invalid password length, and O4 says the reset-password endpoint itself is absent."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed reference requirements concern invalid UUID path parameter validation."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements are about a normal user retrieving another user's data by ID."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The reference requirements do not cover normal-user access denial for reading, updating, or deleting another user's item."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement concerns duplicate-email conflicts during user creation or update."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The reference requirements do not include normal-user attempts to create a new user."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements concern preventing a superuser from deleting their own account."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The reference requirements do not cover deleting a non-existent user by ID."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": "R46",
+        "label": "PARTIAL",
+        "reasoning": "R46 includes verifying 404 'Item not found' after deleting the owning user, while O12 only captures the generic non-existent item 404 behavior without the account-deletion context."
+      },
+      {
+        "detection_id": "O13",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The reference requirements do not test failed login with wrong credentials."
+      },
+      {
+        "detection_id": "O14",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement concerns changing password with an incorrect current password."
+      },
+      {
+        "detection_id": "O15",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The reference requirements do not cover rejecting a new password equal to the current password."
+      },
+      {
+        "detection_id": "O16",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement addresses duplicate-email conflicts during user email updates."
+      },
+      {
+        "detection_id": "O17",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The reference requirements do not include a case where a normal user attempts to delete another user by ID."
+      },
+      {
+        "detection_id": "O18",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The reference requirements do not cover normal-user attempts to update or delete another user's item."
+      },
+      {
+        "detection_id": "O19",
+        "requirement_id": "R56",
+        "label": "PARTIAL",
+        "reasoning": "R56 specifically requires a 422 validation error for reset-password when new_password is only 7 characters, while O19 only describes generic invalid input validation behavior."
+      },
+      {
+        "detection_id": "O20",
+        "requirement_id": "R14",
+        "label": "MATCH",
+        "reasoning": "R14 requires a test token endpoint that returns the authenticated user's email, exactly the behavior O20 says is missing."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 3357,
+    "prompt_tokens": 2051,
+    "completion_tokens": 1306
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "variant": "realworld-R2R10R13R15R24R26R28",
+  "req_id": 13,
+  "model": "gpt-5.4",
+  "pass": 2,
+  "verdict": "IMPLEMENTED",
+  "requirement_vague": "Verify article filtering by author works correctly",
+  "omissions": [],
+  "implementation": {
+    "location": "GET /api/articles in list_articles",
+    "code_reference": "articles = session.exec(select(Article)).all()\nif author:\n    author_user = session.exec(select(User).where(User.username == author)).first()\n    if author_user:\n        articles = [a for a in articles if a.author_id == author_user.id]",
+    "reasoning": "The articles listing endpoint accepts an author query parameter, resolves it to a user by username, and filters articles to only those whose author_id matches that user. It also computes articlesCount from the filtered list and returns all articles when no author filter is provided."
+  },
+  "usage": {
+    "total_tokens": 5466,
+    "prompt_tokens": 5329,
+    "completion_tokens": 137
+  },
+  "timestamp": "2026-07-12 10:43:08"
+}

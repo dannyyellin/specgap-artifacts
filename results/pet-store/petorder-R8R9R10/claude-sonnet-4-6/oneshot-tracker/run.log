@@ -1,0 +1,30 @@
+Timestamp: 2026-06-02 09:54:29
+Detector:  claude-sonnet-4-6
+App/Variant/Service: pet-store/petorder-R8R9R10/pet-order
+Method:    oneshot-tracker
+
+Tokens: prompt=10958, completion=2500, total=13458
+Additions: 5
+Omissions: 15
+
+  A A1: Stores purchase documents in a 'purchases' MongoDB collection in addition to transactions
+  A A2: Returns 403 when the purchaser field in the payload does not match the authenticated username
+  A A3: Validates that the 'purchaser' and 'pet-type' fields are non-empty strings
+  A A4: Uses a counter collection to generate sequential integer transaction IDs
+  A A5: Rejects GET /transactions queries with fields not in the allowed set by returning an empty array
+
+  O O1: MongoDB URI points to 'mongo:27017' instead of 'mongoOrd:27017' as specified
+  O O2: Does not randomly select a pet when multiple pets are available; instead always picks the first one
+  O O3: Does not DELETE the chosen pet from the pet-store after a successful purchase
+  O O4: Does not check all stores when no store is specified; only scans up to DEFAULT_STORE_SCAN_RANGE (env var) stores
+  O O5: GET /transactions does not return 403 when a non-owner authenticated user accesses it; returns 401 instead
+  O O6: GET /transactions/{id} does not return 403 when a non-owner authenticated user accesses it; returns 401 instead
+  O O7: Transaction document does not include the 'pet-name' field
+  O O8: Transaction documents stored in MongoDB include an 'id' field that is not part of the transaction resource definition
+  O O9: GET /transactions/{id} uses the internal 'id' counter field to look up transactions rather than 'purchase-id'
+  O O10: Does not validate that the 'pet-name' field can only be supplied if the 'store' field is also supplied when checking pet availability across stores
+  O O11: When no store is specified and pet-name is not given, the code does not search all available stores — it relies on an environment variable cap that may miss stores
+  O O12: The case-insensitive matching of pet-type when querying pet-store is not implemented; uses exact string match
+  O O13: GET /transactions does not support conjunction query strings (multiple field=value pairs)
+  O O14: POST /purchases does not return 403 when an authenticated but non-registered (privileged-only) user attempts to purchase; only registered users should be able to purchase
+  O O15: The 'purchase-id' uniqueness is not enforced — uuid4 is used but no database uniqueness constraint or collision check exists

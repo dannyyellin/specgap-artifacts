@@ -1,0 +1,21 @@
+{
+  "req_id": 9,
+  "requirement_vague": "Verify user creation rejects duplicate username or email",
+  "requirement_precise": "Create a user (username: 'uniqueuser1', email: 'unique1@test.com', password: 'pass123'). Verify status 201. Attempt to create another user with the same username but different email (username: 'uniqueuser1', email: 'different@test.com'). Verify the response status is 400. Verify the response contains 'Username and email must be unique'. Attempt to create another user with different username but same email (username: 'differentuser', email: 'unique1@test.com'). Verify the response status is 400. Verify the response contains 'Username and email must be unique'.",
+  "removed": true,
+  "omissions": [
+    {
+      "id": "R9-O1",
+      "description": "User creation does not return the required 400 status and unified message when a duplicate username or duplicate email is submitted.",
+      "category": "RESPONSE_FORMAT",
+      "reasoning": "In POST /api/users, duplicate email raises HTTPException(status_code=422, detail={\"errors\": {\"email\": [\"has already been taken\"]}}) and duplicate username raises HTTPException(status_code=422, detail={\"errors\": {\"username\": [\"has already been taken\"]}}). The requirement expects status 400 and a response containing 'Username and email must be unique' for both cases."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 5347,
+    "prompt_tokens": 5208,
+    "completion_tokens": 139
+  },
+  "parse_error": false
+}

@@ -1,0 +1,47 @@
+{
+  "variant": "fastapi-R14R15R16R17R18R46R56",
+  "req_id": 17,
+  "model": "gpt-5.4",
+  "pass": 1,
+  "verdict": "NOT_IMPLEMENTED",
+  "requirement_vague": "Test the password recovery flow of a new user. Superuser credentials: (admin@example.com / password123)",
+  "omissions": [
+    {
+      "id": "O1",
+      "description": "No password recovery endpoints exist to request password-recovery HTML content for a user's email or to submit a reset token with a new password.",
+      "category": "ENDPOINTS",
+      "reasoning": "The code defines login, signup, user CRUD, and authenticated password change at PATCH /api/v1/users/me/password, but there is no route for initiating password recovery (e.g. by email) and no route for resetting a password via a recovery token."
+    },
+    {
+      "id": "O2",
+      "description": "The password recovery flow using a superuser access token is not implemented.",
+      "category": "BUSINESS_LOGIC",
+      "reasoning": "Although superuser authentication exists via /api/v1/login/access-token and get_current_active_superuser, there is no logic allowing a superuser to request recovery content for another user's email, extract or generate a reset token, or authorize such a recovery operation."
+    },
+    {
+      "id": "O3",
+      "description": "No response is implemented for password reset via recovery token that returns HTTP 200 with exactly {\"message\": \"Password updated successfully\"}.",
+      "category": "RESPONSE_FORMAT",
+      "reasoning": "The only matching success message appears in PATCH /api/v1/users/me/password for an authenticated current-password change, not for a password recovery/reset endpoint. Therefore the required recovery-reset response contract is absent."
+    },
+    {
+      "id": "O4",
+      "description": "No reset token generation, transport in HTML content, or validation for password recovery is implemented.",
+      "category": "COMPUTED_VALUES",
+      "reasoning": "The code creates only access tokens for login using create_access_token. There is no computed password reset token, no HTML content containing such a token, and no logic to validate an extracted reset token during password reset."
+    },
+    {
+      "id": "O5",
+      "description": "No external interaction or content generation exists to provide password-recovery HTML content for the target user's email.",
+      "category": "EXTERNAL_INTERACTIONS",
+      "reasoning": "The requirement calls for requesting password-recovery HTML content, but the service has no email/template generation endpoint, no outbound email behavior, and no HTML-producing recovery mechanism."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 5160,
+    "prompt_tokens": 4732,
+    "completion_tokens": 428
+  },
+  "timestamp": "2026-07-12 10:38:03"
+}

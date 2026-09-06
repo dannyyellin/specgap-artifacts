@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O1 is about filtering by 'id' in GET /cardholders, which does not correspond to any of the reference requirements about field type declarations, error codes, fine computation, or cross-service calls."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O2 directly describes the removal/absence of the fine computation formula ($0.50/day * days overdue), which is exactly what R6 states."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O3 describes the absence of the days-overdue calculation multiplied by FINE_PER_DAY ($0.50), which matches R6's removal of the fine computation formula."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O4 describes the absence of the 415 Unsupported Media Type error response, which directly matches R5's removal of the 415 error code."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "O5 partially relates to R6 in that it discusses the fine computation logic being incorrect, but focuses more on overdue status logic rather than specifically the $0.50/day formula removal."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1442,
+    "prompt_tokens": 1013,
+    "completion_tokens": 429
+  }
+}

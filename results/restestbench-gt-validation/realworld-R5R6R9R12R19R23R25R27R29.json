@@ -1,0 +1,114 @@
+{
+  "variant": "realworld-R5R6R9R12R19R23R25R27R29",
+  "service": "nestjs-realworld",
+  "results": [
+    {
+      "req_id": 5,
+      "test_status": "PASS",
+      "test_verdict": "IMPLEMENTED",
+      "llm_verdict": "IMPLEMENTED",
+      "agree": true,
+      "detail": "",
+      "adaptations": [
+        {
+          "old": "created_article[\"slug\"]",
+          "new": "created_article[\"article\"][\"slug\"]",
+          "reason": "article envelope: code returns spec-correct {'article':{...}}"
+        }
+      ],
+      "setup_blocked_reason": null
+    },
+    {
+      "req_id": 6,
+      "test_status": "ERROR",
+      "test_verdict": "UNDETERMINED",
+      "llm_verdict": "NOT_IMPLEMENTED",
+      "agree": null,
+      "detail": "test_article_feed_only_returns_followed_users_articles: KeyError: 'articlesCount'",
+      "adaptations": [],
+      "setup_blocked_reason": null
+    },
+    {
+      "req_id": 9,
+      "test_status": "FAIL",
+      "test_verdict": "NOT_IMPLEMENTED",
+      "llm_verdict": "NOT_IMPLEMENTED",
+      "agree": true,
+      "detail": "test_user_creation_rejects_duplicates: Expected 400 for duplicate username, got 422: {\"detail\":{\"errors\":{\"username\":[\"has already been taken\"]}}}",
+      "adaptations": [],
+      "setup_blocked_reason": null
+    },
+    {
+      "req_id": 12,
+      "test_status": "FAIL",
+      "test_verdict": "NOT_IMPLEMENTED",
+      "llm_verdict": "NOT_IMPLEMENTED",
+      "agree": true,
+      "detail": "test_article_filtering_by_tag: Should NOT contain 'Second Tagged Article 4vt3tg'",
+      "adaptations": [],
+      "setup_blocked_reason": null
+    },
+    {
+      "req_id": 19,
+      "test_status": "ERROR",
+      "test_verdict": "UNDETERMINED",
+      "llm_verdict": "IMPLEMENTED",
+      "agree": null,
+      "detail": "test_article_timestamp_update: KeyError: 'created'",
+      "adaptations": [
+        {
+          "old": "created_article[\"slug\"]",
+          "new": "created_article[\"article\"][\"slug\"]",
+          "reason": "article envelope: code returns spec-correct {'article':{...}}"
+        }
+      ],
+      "setup_blocked_reason": null
+    },
+    {
+      "req_id": 23,
+      "test_status": "ERROR",
+      "test_verdict": "UNDETERMINED",
+      "llm_verdict": "NOT_IMPLEMENTED",
+      "agree": null,
+      "detail": "test_feed_pagination_limit_and_offset: KeyError: 'articles'",
+      "adaptations": [],
+      "setup_blocked_reason": null
+    },
+    {
+      "req_id": 25,
+      "test_status": "FAIL",
+      "test_verdict": "NOT_IMPLEMENTED",
+      "llm_verdict": "NOT_IMPLEMENTED",
+      "agree": true,
+      "detail": "test_jwt_contains_correct_payload: JWT payload should contain username",
+      "adaptations": [],
+      "setup_blocked_reason": null
+    },
+    {
+      "req_id": 27,
+      "test_status": "ERROR",
+      "test_verdict": "UNDETERMINED",
+      "llm_verdict": "NOT_IMPLEMENTED",
+      "agree": null,
+      "detail": "test_empty_feed_when_no_follows: KeyError: 'articlesCount'",
+      "adaptations": [],
+      "setup_blocked_reason": null
+    },
+    {
+      "req_id": 29,
+      "test_status": "FAIL",
+      "test_verdict": "NOT_IMPLEMENTED",
+      "llm_verdict": "NOT_IMPLEMENTED",
+      "agree": true,
+      "detail": "test_user_delete_blocked_by_articles: User delete should fail with FK constraint, got: 404",
+      "adaptations": [
+        {
+          "old": "article_response.json()[\"slug\"]",
+          "new": "article_response.json()[\"article\"][\"slug\"]",
+          "reason": "article envelope: spec-correct {'article':{...}}; a['slug'] on list elements (later lines) is left unchanged and correct"
+        }
+      ],
+      "setup_blocked_reason": null
+    }
+  ]
+}

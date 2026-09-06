@@ -1,0 +1,48 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of owner-only restriction for POST, matching R5's removal of owner-only restriction for POST/PUT/DELETE."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O2 directly describes the removal of owner-only restriction for PUT, matching R5's removal of owner-only restriction for POST/PUT/DELETE."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O3 directly describes the removal of owner-only restriction for DELETE, matching R5's removal of owner-only restriction for POST/PUT/DELETE."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "O4 partially touches on Ninja API field handling (non-numeric string values) which relates to R4's Ninja API field name mapping details, but the detected requirement conflates multiple issues and doesn't clearly describe field name mapping removal."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O5 directly describes the missing lte (less-than-or-equal) filtering semantics for nutritional query parameters, matching R6's removal of lte filtering for nutrients."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O6 directly describes the missing 'contains' filtering semantics for the ingredient field, matching R6's removal of 'contains' query string filtering semantics."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1475,
+    "prompt_tokens": 977,
+    "completion_tokens": 498
+  }
+}

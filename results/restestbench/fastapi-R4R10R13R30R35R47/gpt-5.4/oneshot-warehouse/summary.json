@@ -1,0 +1,25 @@
+{
+  "method": "oneshot-warehouse",
+  "round": 1,
+  "removals": [
+    4,
+    10,
+    13,
+    30,
+    35,
+    47
+  ],
+  "model": "gpt-5.4",
+  "gen_usage": {
+    "total_tokens": 9691,
+    "prompt_tokens": 4848,
+    "completion_tokens": 4843
+  },
+  "detect_usage": {
+    "total_tokens": 12429,
+    "prompt_tokens": 12128,
+    "completion_tokens": 301
+  },
+  "n_additions": 0,
+  "n_omissions": 3
+}

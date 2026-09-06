@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O1 describes the removed behavior of computing returnDate as loanDate plus 30 days in Borrows."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O2 directly describes the removed overdue-borrow constraint that blocks checkout when a cardholder has 2 or more overdue books."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O3 matches the removed part of the overdue-borrow constraint specifying a 400 response when checkout is blocked for 2 or more overdue books."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concerns cross-microservice data retrieval implementation details, which are not part of any reference requirement."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R3",
+        "label": "PARTIAL",
+        "reasoning": "O5 refers to Borrows notifying Logs on checkout, but focuses on error handling for log creation rather than the removal of that notification from both specs."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1150,
+    "prompt_tokens": 827,
+    "completion_tokens": 323
+  }
+}

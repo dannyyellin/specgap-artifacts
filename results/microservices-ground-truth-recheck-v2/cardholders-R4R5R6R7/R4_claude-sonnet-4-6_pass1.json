@@ -1,0 +1,19 @@
+{
+  "app": "public-library",
+  "variant": "cardholders-R4R5R6R7",
+  "service": "cardholders",
+  "req_id": "R4",
+  "requirement": "Cardholder fields have declared types: name, email, and id are strings; fineAmount is a float.",
+  "source_headline": "Removed field type declarations (string types for name/email/id, float for fineAmount)",
+  "model": "claude-sonnet-4-6",
+  "pass": 1,
+  "label": "PARTIAL",
+  "evidence": "get_cardholder_fines: `fine_amount = 0` (int), `fine_amount += 1` (int increment), returned as `{\"fineAmount\": fine_amount}` \u2014 integer not float. serialize_cardholder: `\"id\": str(doc[\"_id\"])`, create_cardholder/update_cardholder: `isinstance(name, str)`, `isinstance(email, str)` checks.",
+  "reasoning": "The code correctly declares and enforces string types for name, email, and id through isinstance checks and explicit str() conversion. However, fineAmount is computed as a Python integer (initialized with 0 and incremented with +=1), not a float, so a test asserting fineAmount is a float type would fail. Three of four type requirements are satisfied, but the fineAmount float requirement is not met.",
+  "usage": {
+    "total_tokens": 3251,
+    "prompt_tokens": 2638,
+    "completion_tokens": 613
+  },
+  "timestamp": "2026-07-16 14:52:59"
+}

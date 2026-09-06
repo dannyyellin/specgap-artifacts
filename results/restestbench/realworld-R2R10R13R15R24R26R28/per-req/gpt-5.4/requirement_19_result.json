@@ -1,0 +1,22 @@
+{
+  "req_id": 19,
+  "requirement_vague": "Verify article updated timestamp changes on update but created timestamp remains unchanged",
+  "requirement_precise": "Create a user (username: 'timestampuser1', email: 'timestampuser1@test.com', password: 'pass123'). Create an article with title 'Timestamp Test Article'. Extract slug, created, and updated timestamps from response. Wait briefly, then PUT /api/articles/{slug} with updated title 'Updated Timestamp Article'. GET /api/articles/{slug}. Verify the 'created' timestamp is unchanged from original. Verify the 'updated' timestamp is different (newer) than the original. This tests the @BeforeUpdate hook that updates the timestamp.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": [
+      "POST /api/articles in create_article",
+      "PUT /api/articles/{slug} in update_article",
+      "GET /api/articles/{slug} in get_article"
+    ],
+    "code_reference": "ts = now_iso()\narticle = Article(..., created_at=ts, updated_at=ts, ...)\n...\narticle.updated_at = now_iso()",
+    "reasoning": "On article creation, both created_at and updated_at are initialized to the same timestamp. On article update, only updated_at is reassigned while created_at is never modified, and GET /api/articles/{slug} returns these values as created/updated (and createdAt/updatedAt), so the created timestamp remains unchanged and the updated timestamp changes after an update."
+  },
+  "usage": {
+    "total_tokens": 5466,
+    "prompt_tokens": 5309,
+    "completion_tokens": 157
+  },
+  "parse_error": false
+}

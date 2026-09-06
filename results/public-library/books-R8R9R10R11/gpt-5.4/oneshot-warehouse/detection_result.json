@@ -1,0 +1,73 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "POST /books accepts and stores client-supplied 'publisher' and 'publishedDate' fields",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The specification states that POST /books provides a JSON document containing the title, authors, ISBN, and genre, and that 'publisher' and 'publishedDate' are obtained by the service using the Google Books API. The code additionally allows these fields in the POST body and persists them from client input."
+      },
+      {
+        "id": "A2",
+        "description": "PUT /books allows updating 'publisher' and 'publishedDate' directly from the client payload",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The specification says these fields are obtained by the service from Google Books based on ISBN; it does not positively require accepting client-provided values for them on updates. The code treats both as mutable client-supplied fields."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "POST /books does not invoke the Google Books API to obtain 'publisher' and 'publishedDate' from the submitted ISBN",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The specification explicitly requires that 'publisher' and 'publishedDate' are not provided in the POST request but are obtained by the service using the 3rd party Google Books API by supplying the ISBN number."
+      },
+      {
+        "id": "O2",
+        "description": "POST /books does not use the first Google Books entry when multiple entries are returned",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification explicitly states: 'If Google Books returns more than one entry, the first entry is used.' The code makes no Google Books request and therefore does not implement this rule."
+      },
+      {
+        "id": "O3",
+        "description": "POST /books does not set missing Google Books fields to the empty string when Google Books lacks an entry for 'publisher' or 'publishedDate'",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification requires that if Google Books does not contain an entry for one of these fields, that field has value ''. The code defaults these fields from client input or missing request data rather than from Google Books lookup results."
+      },
+      {
+        "id": "O4",
+        "description": "POST /books does not validate that 'ISBN' is a string representing a 13-digit ISBN_13 number",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification defines ISBN as 'a string representing the 13 digit ISBN_13 number of the book'. The code only checks that ISBN is a string, not that it is 13 digits."
+      },
+      {
+        "id": "O5",
+        "description": "POST /books does not validate that 'genre' is one of the allowed values",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification restricts genre to one of 'Fiction', 'Children', 'Biography', 'Science', 'Science Fiction', 'Fantasy', or 'Other'. The code only checks that genre is a string."
+      },
+      {
+        "id": "O6",
+        "description": "PUT /books does not validate that an updated 'ISBN' is a string representing a 13-digit ISBN_13 number",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The resource definition applies to book records generally, including updates. The code allows any string value for ISBN on PUT."
+      },
+      {
+        "id": "O7",
+        "description": "PUT /books does not validate that an updated 'genre' is one of the allowed values",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification defines the allowed genre values for book resources. The code accepts any string for genre during updates."
+      },
+      {
+        "id": "O8",
+        "description": "PUT /books does not obtain 'publisher' and 'publishedDate' from Google Books when ISBN is updated",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "Because the specification defines 'publisher' and 'publishedDate' as fields obtained by the service using the ISBN, updating ISBN should require the service to retrieve the corresponding metadata rather than rely on client-supplied values. The code performs no such external lookup."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 6250,
+    "prompt_tokens": 5440,
+    "completion_tokens": 810
+  }
+}

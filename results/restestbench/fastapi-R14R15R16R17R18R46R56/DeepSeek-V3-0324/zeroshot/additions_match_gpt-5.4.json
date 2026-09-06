@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R56",
+        "label": "PARTIAL",
+        "reasoning": "R56 specifically expects a 422 validation error for a 7-character new_password, and A1 describes the underlying 8-128 character password length validation that supports this behavior but is broader than the requirement."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements mention item title length validation."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements concern a user full_name field."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The listed requirements do not specify any behavior about preventing superusers from deleting their own accounts."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1342,
+    "prompt_tokens": 1103,
+    "completion_tokens": 239
+  }
+}

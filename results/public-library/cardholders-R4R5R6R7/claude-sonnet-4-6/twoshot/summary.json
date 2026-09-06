@@ -1,0 +1,16 @@
+{
+  "app": "public-library",
+  "variant": "cardholders-R4R5R6R7",
+  "service": "cardholders",
+  "method": "twoshot",
+  "detector_model": "claude-sonnet-4-6",
+  "gen_model": "gpt-5.4",
+  "gen_usage": null,
+  "n_additions": 3,
+  "n_omissions": 5,
+  "usage": {
+    "total_tokens": 8930,
+    "prompt_tokens": 7926,
+    "completion_tokens": 1004
+  }
+}

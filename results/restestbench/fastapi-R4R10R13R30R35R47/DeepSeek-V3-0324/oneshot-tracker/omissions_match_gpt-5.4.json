@@ -1,0 +1,72 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns password recovery email sending, which is not covered by any reference requirement listed."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R35",
+        "label": "PARTIAL",
+        "reasoning": "Both address duplicate-email registration with admin@example.com, but the detected requirement is about a mismatched error message during user creation and does not capture the full registration scenario and exact specified message."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Superuser self-deletion is not described by any of the reference requirements."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This refers to user-not-found messaging, while the references only include item-not-found and other unrelated behaviors."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "It overlaps with the insufficient-permissions read-item case, but the detected requirement gives a different expected message and omits the specific cross-user item access scenario and status code."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Invalid-token handling is not among the provided reference requirements."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R13",
+        "label": "PARTIAL",
+        "reasoning": "Both concern failed login due to bad credentials, but R13 specifically requires logging in with the correct email and wrong password and the exact message 'Incorrect email or password', not merely 'Incorrect password'."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Same-password validation is not covered by any listed reference requirement."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": "R35",
+        "label": "PARTIAL",
+        "reasoning": "This is about duplicate-email registration behavior, but the expected message differs from R35 and the detected requirement does not mention the specific existing superuser email scenario."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "Both describe deleting a non-existent item and expecting a 404 response with detail 'Item not found'."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1808,
+    "prompt_tokens": 1192,
+    "completion_tokens": 616
+  }
+}

@@ -1,0 +1,20 @@
+Timestamp: 2026-06-02 05:57:01
+Detector:  DeepSeek-V3-0324
+Service:   nestjs-realworld  Round: 1  Removals: [5, 6, 9, 12, 19, 23, 25, 27, 29]
+Method:    zeroshot
+
+Tokens: prompt=9219, completion=755, total=9974
+Additions: 3
+Omissions: 7
+
+  A A1: The code includes 'favorited' and 'favoritesCount' fields in article responses which are not mentioned in the specification.
+  A A2: The code allows updating user email and password via PUT /api/user which is not mentioned in the specification.
+  A A3: The code implements password hashing with bcrypt which is not explicitly required by the specification.
+
+  O O1: The specification requires filtering articles by tag (GET /api/articles?tag=...) but the code doesn't implement this.
+  O O2: The specification requires a feed endpoint (GET /api/articles/feed) to show articles from followed users, which is not implemented.
+  O O3: The specification requires returning empty object {} for deleted articles but the code returns 404.
+  O O4: The specification requires checking for self-follow attempts (user trying to follow themselves) but the code doesn't implement this check.
+  O O5: The specification requires unique username and email validation with specific error messages but the code uses generic messages.
+  O O6: The specification requires testing timestamp updates on article modification but the code doesn't show this functionality.
+  O O7: The specification requires pagination for article listings but the code doesn't implement offset/limit correctly for all cases.

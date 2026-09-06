@@ -1,0 +1,24 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R1",
+        "label": "PARTIAL",
+        "reasoning": "R1 removes service-side computation of returnDate, while A1 shows the code still handles returnDate explicitly by accepting and validating it rather than eliminating that behavior."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R1",
+        "label": "PARTIAL",
+        "reasoning": "R1 removes the computed returnDate behavior, and A2 is only indirectly related because it adds validation on returnDate rather than describing the removed computation itself."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 654,
+    "prompt_tokens": 502,
+    "completion_tokens": 152
+  }
+}

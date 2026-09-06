@@ -1,0 +1,54 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R8",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes that GET /profiles is not restricted to the restaurant Owner, which matches R8's removal of the owner-only restriction on GET /profiles."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 describes missing Owner access for GET /profiles/{id}, which is not covered by any of the three reference requirements."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 describes missing Owner access for DELETE /profiles/{id}, which is not covered by any of the three reference requirements."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 describes missing Owner access for PUT /profiles/{id}, which is not covered by any of the three reference requirements."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "O5 directly describes that protein is incorrectly included in the profileDishes filter, matching R7's removal of protein exclusion from the profileDishes calculation."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 describes a cross-service data access guideline violation for profileDishes, which is not covered by any of the three reference requirements."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O7 describes use of a disallowed package (flask_pymongo), which is not covered by any of the three reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1516,
+    "prompt_tokens": 999,
+    "completion_tokens": 517
+  }
+}

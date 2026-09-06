@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The spec requirements do not specify what the register endpoint returns, so this behavior has no matching requirement."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements mention duplicate email registration handling."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R7",
+        "label": "NONE",
+        "reasoning": "R7 only tests DELETE on a non-existent ID (404), not the success case body; no spec requirement describes the response body for a successful DELETE."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1282,
+    "prompt_tokens": 1072,
+    "completion_tokens": 210
+  }
+}

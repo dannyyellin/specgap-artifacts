@@ -1,0 +1,162 @@
+Inferability Assessment Consistency Check
+==========================================
+Date: 2026-05-27
+Three independent code-reading passes by separate LLM agents.
+Each pass read the 11 generated gpt-5.4 files and classified
+all 36 removed requirements as INFERRED, GAP, or PARTIAL.
+
+==================================================================
+FULL COMPARISON TABLE
+==================================================================
+
+Requirement              | Pass 1 | Pass 2 | Pass 3 | Consensus
+-------------------------|--------|--------|--------|----------
+borrows     R1           | GAP    | GAP    | GAP    | GAP    ✓
+borrows     R2           | GAP    | GAP    | GAP    | GAP    ✓
+borrows     R3           | INF    | INF    | INF    | INF    ✓
+cardholders R4           | INF    | PAR    | PAR    | PAR    *
+cardholders R5           | GAP    | GAP    | GAP    | GAP    ✓
+cardholders R6           | GAP    | GAP    | GAP    | GAP    ✓
+cardholders R7           | INF    | INF    | INF    | INF    ✓
+books       R8           | INF    | INF    | INF    | INF    ✓
+books       R9           | GAP    | GAP    | GAP    | GAP    ✓
+books       R10          | GAP    | GAP    | GAP    | GAP    ✓
+books       R11          | GAP    | GAP    | GAP    | GAP    ✓
+logs        R12          | GAP    | GAP    | GAP    | GAP    ✓
+logs        R13          | INF    | INF    | INF    | INF    ✓
+auth        R1           | GAP    | GAP    | GAP    | GAP    ✓
+auth        R2           | GAP    | GAP    | PAR    | GAP    *
+auth        R3           | INF    | INF    | INF    | INF    ✓
+dishes      R4           | INF    | INF    | INF    | INF    ✓
+dishes      R4b          | INF    | INF    | INF    | INF    ✓
+dishes      R5           | GAP    | GAP    | GAP    | GAP    ✓
+dishes      R6           | PAR    | GAP    | GAP    | GAP    *
+profiles    R7           | GAP    | GAP    | GAP    | GAP    ✓
+profiles    R8           | GAP    | GAP    | GAP    | GAP    ✓
+profiles    R9           | INF    | INF    | INF    | INF    ✓
+ratings     R10          | GAP    | GAP    | GAP    | GAP    ✓
+ratings     R11          | INF    | INF    | INF    | INF    ✓
+ratings     R12          | INF    | INF    | INF    | INF    ✓
+registry    R1           | GAP    | GAP    | GAP    | GAP    ✓
+registry    R2           | INF    | INF    | INF    | INF    ✓
+registry    R3           | INF    | INF    | INF    | INF    ✓
+petstore    R4           | PAR    | PAR    | PAR    | PAR    ✓
+petstore    R5           | GAP    | GAP    | GAP    | GAP    ✓
+petstore    R6           | INF    | PAR    | PAR    | PAR    *
+petstore    R7           | GAP    | GAP    | GAP    | GAP    ✓
+petorder    R8           | GAP    | GAP    | GAP    | GAP    ✓
+petorder    R9           | GAP    | GAP    | GAP    | GAP    ✓
+petorder    R10          | PAR    | PAR    | PAR    | PAR    ✓
+
+INF = INFERRED, PAR = PARTIAL, ✓ = unanimous, * = disputed (2/3 majority)
+
+Agreement: 32/36 unanimous (89%), 4/36 disputed but all with clear 2/3 majority.
+Consensus resolution: 100% (no unresolvable ties).
+
+
+==================================================================
+THE 4 DISPUTED CASES
+==================================================================
+
+--- cardholders R4: Field type declarations ---
+  Pass 1: INFERRED — "validates isinstance(name, str), isinstance(email, str)"
+  Pass 2: PARTIAL  — "validates name/email as strings but fineAmount is not
+                      float; formula missing"
+  Pass 3: PARTIAL  — "name/email validated as strings, fineAmount is integer
+                      not float"
+  Consensus: PARTIAL
+
+  Reason for dispute: R4 covers types for BOTH name/email/id (strings) AND
+  fineAmount (float). Pass 1 focused on the string validations and called it
+  INFERRED. Passes 2 and 3 noticed that fineAmount is computed as an integer
+  count (fine_amount += 1) rather than a float, making the type declaration
+  for fineAmount wrong. More precise reading supports PARTIAL.
+
+--- auth R2: Owner special case (name='Owner', pw='owner#pw', privileged=True) ---
+  Pass 1: GAP     — "uses 'owner'/'owner' not 'Owner'/'owner#pw'"
+  Pass 2: GAP     — "does not match spec: wrong name, wrong password"
+  Pass 3: PARTIAL — "hardcoded values present but not exact (lowercase, no #)"
+  Consensus: GAP
+
+  Reason for dispute: Pass 3 read the existence of Owner credential config as
+  partial implementation; passes 1 and 2 read wrong-values-for-a-specific-
+  constant as a full gap. Since the spec gives exact strings ('Owner', 'owner#pw')
+  and the code uses wrong defaults ('owner', 'owner'), this is a GAP — the
+  mechanism exists but does not satisfy the specific requirement.
+
+--- dishes R6: Query filter semantics (lte for nutrients, substring for ingredients) ---
+  Pass 1: PARTIAL — "filtering logic implemented but semantics wrong"
+  Pass 2: GAP     — "uses exact match, not lte or substring"
+  Pass 3: GAP     — "uses exact matching, not lte/substring semantics"
+  Consensus: GAP
+
+  Reason for dispute: Pass 1 noted that filtering infrastructure exists (query
+  params are parsed and passed to MongoDB) and called it PARTIAL. Passes 2 and
+  3 focused on the required semantics (lte, contains) being completely absent
+  and called it GAP. Since the specific behavior removed — less-than-or-equal
+  for nutrients and substring matching for ingredients — is entirely missing,
+  GAP is the correct label.
+
+--- petstore R6: Lifespan range handling (extract first integer; null when absent) ---
+  Pass 1: INFERRED — "parses first integer from range string; sets None when absent"
+  Pass 2: PARTIAL  — "extracts first integer correctly but defaults to 0, not null"
+  Pass 3: PARTIAL  — "extracts first integer with regex; returns 0 when absent,
+                      not null"
+  Consensus: PARTIAL
+
+  Reason for dispute: Pass 1 incorrectly stated the code "sets None" — passes
+  2 and 3 correctly read that the code sets 0 (not None/null) when lifespan is
+  absent. The spec requires JSON null; the code uses 0. The first-integer
+  extraction is correct; the absent-case handling is wrong. PARTIAL is correct.
+
+
+==================================================================
+CONSENSUS FINAL COUNTS
+==================================================================
+
+  INFERRED: 12   (borrows R3; cardholders R7; books R8; logs R13;
+                  auth R3; dishes R4, R4b; profiles R9;
+                  ratings R11, R12; registry R2, R3)
+
+  GAP:      20   (borrows R1, R2; cardholders R5, R6; books R9, R10, R11;
+                  logs R12; auth R1, R2; dishes R5, R6;
+                  profiles R7, R8; ratings R10; registry R1;
+                  petstore R5, R7; petorder R8, R9)
+
+  PARTIAL:   4   (cardholders R4; petstore R4, R6; petorder R10)
+
+  Total:    36
+
+  Revision from pass 1 baseline:
+    cardholders R4: INFERRED → PARTIAL  (-1 INF, +1 PAR)
+    dishes      R6: PARTIAL  → GAP      (-1 PAR, +1 GAP)
+    petstore    R6: INFERRED → PARTIAL  (-1 INF, +1 PAR)
+    (auth R2 unchanged at GAP)
+
+
+==================================================================
+IMPLICATIONS
+==================================================================
+
+Reliability: The assessment is highly consistent — 89% unanimous and
+100% resolvable by majority. The 4 disputes are all borderline cases
+where the classification boundary (PARTIAL vs. GAP, INFERRED vs. PARTIAL)
+is genuinely ambiguous. There are no cases where passes disagree between
+INFERRED and GAP directly, which would indicate a fundamental misread.
+
+Revised detection ceiling: With 20 true GAPs (up from 19) and 4 PARTIALs:
+  Maximum detectable (if detector were perfect): 24/36 = 67%
+  Intrinsic floor (requirements always inferred): 12/36 = 33%
+
+Effect on main claims: The inferability rate is 33% (12/36), slightly
+lower than the 39% (14/36) reported from pass 1 alone. The correction
+comes from two requirements (cardholders R4, petstore R6) that pass 1
+over-classified as fully inferred. The qualitative pattern is unchanged:
+the LLM infers architectural conventions and misses constraint specifications.
+
+Borderline case note: The 4 PARTIAL cases all represent requirements where
+the LLM implemented the right structure but got a specific detail wrong
+(wrong formula units, wrong literal value, wrong null vs. 0 default,
+wrong field selection logic). These sit on the GAP/INFERRED boundary and
+are the most likely to flip if the code generation were re-run at a
+different temperature or with a different model.

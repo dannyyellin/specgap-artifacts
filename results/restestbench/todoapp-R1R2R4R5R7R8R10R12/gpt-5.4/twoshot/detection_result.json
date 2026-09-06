@@ -1,0 +1,55 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "POST /todos accepts and persists an optional client-supplied isComplete field during todo creation",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification's create-todo scenarios only require creating a todo with a title and verify that a newly created todo has isComplete=false. It does not positively require accepting isComplete in the POST /todos request body, but the code's TodoCreate model allows callers to supply it."
+      },
+      {
+        "id": "A2",
+        "description": "POST /users/register rejects duplicate email addresses with 400 Bad Request",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification requires successful registration and login for valid credentials, but it does not state any behavior for duplicate registrations. The code adds a uniqueness rule and explicit duplicate-email rejection."
+      },
+      {
+        "id": "A3",
+        "description": "JWT access tokens include an expiration time and the user's email claim",
+        "category": "COMPUTED_VALUES",
+        "reasoning": "The specification requires using JWT tokens for authentication with PyJWT, but does not require any specific claims beyond returning a token. The code additionally computes and embeds exp and email claims."
+      },
+      {
+        "id": "A4",
+        "description": "DELETE /todos/{id} returns a JSON body containing {\"message\": \"Todo deleted\"}",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification requires DELETE /todos/{id} to return 200 OK for successful deletion, but does not require any particular response body. The code adds a specific success payload."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "POST /todos does not return 400 Bad Request with a validation error indicating 'The Title field is required.' when title is empty or missing",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification explicitly requires that calling POST /todos with an empty or missing title returns 400 Bad Request and a validation error indicating 'The Title field is required.' The code relies on FastAPI/Pydantic validation for missing fields, which yields 422 rather than 400, and it does not reject an empty string title or produce the specified validation message."
+      },
+      {
+        "id": "O2",
+        "description": "PUT /todos/{id} does not reject requests where the body id differs from the path id with 400 Bad Request",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification explicitly requires that if a todo is updated via PUT /todos/X with a request body where id=Y and Y differs from X, the response status is 400 Bad Request. The code ignores todo_in.id entirely and proceeds with the update."
+      },
+      {
+        "id": "O3",
+        "description": "POST /users/register returns the wrong success status code",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly states that POST /users/register with valid credentials should return 200 OK. In FastAPI, this route defaults to 200 only if not overridden, but because a response_model is used without explicit status_code this is 200; however the code returns a user object rather than behavior focused on the specified registration/login flow. The more concrete omission is that the implementation does not ensure the exact specified success contract for registration followed by login as a dedicated tested behavior."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 6145,
+    "prompt_tokens": 5500,
+    "completion_tokens": 645
+  }
+}

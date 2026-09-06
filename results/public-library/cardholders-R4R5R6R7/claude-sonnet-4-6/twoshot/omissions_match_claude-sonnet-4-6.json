@@ -1,0 +1,48 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O1 is about filtering by 'id' field in GET /cardholders, which does not correspond to any of the reference requirements about type declarations, error codes, fine computation formula, or cross-service calls."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 is about missing non-empty string validation for POST /cardholders fields, which does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O3 directly describes the removal/absence of the fine computation formula ($0.50/day * days overdue), matching R6 which states the formula was removed."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "O4 partially captures R6 by noting the days-overdue calculation and $0.50 rate are not used, but focuses on the method of determining overdue status rather than the complete removal of the formula."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R7",
+        "label": "NONE",
+        "reasoning": "O4 does not address the cross-service call to Borrows for fine computation that R7 describes."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O5 directly describes the absence of 415 (Unsupported media type) error handling, matching R5 which states the 415 error code was removed from general error codes."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1436,
+    "prompt_tokens": 939,
+    "completion_tokens": 497
+  }
+}

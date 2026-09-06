@@ -1,0 +1,19 @@
+{
+  "app": "nutrition",
+  "variant": "dishes-R4R5R6",
+  "service": "dishes",
+  "req_id": "R4",
+  "requirement": "Nutrition values from the API Ninjas response are mapped to the service's field names according to the specified mapping (e.g. 'carbohydrates_total_g' -> 'total_carbohydrates').",
+  "source_headline": "Removed Ninja API field name mapping details",
+  "model": "claude-sonnet-4-6",
+  "pass": 2,
+  "label": "INFERRED",
+  "evidence": "NINJA_FIELD_MAP = {'fat_total_g': 'total_fat', 'fat_saturated_g': 'saturated_fat', 'protein_g': 'protein', 'sodium_mg': 'sodium', 'cholesterol_mg': 'cholesterol', 'carbohydrates_total_g': 'total_carbohydrates', 'fiber_g': 'fiber', 'sugar_g': 'sugar'} and in fetch_ingredient_nutrition: for ninja_field, local_field in NINJA_FIELD_MAP.items(): totals[local_field] += float(item.get(ninja_field, 0.0) or 0.0)",
+  "reasoning": "The code explicitly defines NINJA_FIELD_MAP with the exact mapping specified in the requirement, including 'carbohydrates_total_g' -> 'total_carbohydrates'. The fetch_ingredient_nutrition function iterates over this map to translate API Ninjas field names to the service's field names when accumulating nutrition totals. A test verifying this mapping would pass.",
+  "usage": {
+    "total_tokens": 3527,
+    "prompt_tokens": 3249,
+    "completion_tokens": 278
+  },
+  "timestamp": "2026-07-16 14:56:51"
+}

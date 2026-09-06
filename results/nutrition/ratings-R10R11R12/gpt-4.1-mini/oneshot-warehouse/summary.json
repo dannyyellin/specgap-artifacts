@@ -1,0 +1,16 @@
+{
+  "app": "nutrition",
+  "variant": "ratings-R10R11R12",
+  "service": "ratings",
+  "method": "oneshot-warehouse",
+  "detector_model": "gpt-4.1-mini",
+  "gen_model": "gpt-5.4",
+  "gen_usage": null,
+  "n_additions": 4,
+  "n_omissions": 9,
+  "usage": {
+    "total_tokens": 8173,
+    "prompt_tokens": 7053,
+    "completion_tokens": 1120
+  }
+}

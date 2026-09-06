@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O1 identifies the missing title validation behavior described in R2, but focuses on the code deficiency rather than specifying the exact 400 status code and 'The Title field is required' error message."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "O2 identifies the missing ID mismatch validation described in R10, but focuses on the code deficiency rather than the full test scenario with specific status code verification."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements describe the behavior of calling GET /todos without an Authorization header and expecting a 401 Unauthorized response."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1324,
+    "prompt_tokens": 1071,
+    "completion_tokens": 253
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "app": "pet-store",
+  "variant": "registry-R1R2R3",
+  "service": "registry",
+  "req_id": "R2",
+  "requirement": "The /verify endpoint returns an identical error response for an unknown username and for a wrong password, so that responses do not reveal whether a username exists.",
+  "source_headline": "Removed \"same error message\" anti-enumeration security requirement for /verify",
+  "model": "gpt-5.4",
+  "pass": 2,
+  "label": "INFERRED",
+  "evidence": "In `verify_user()` (`/verify`), after parsing input it does `user = users_collection().find_one({\"username\": username})`; if `user is None` it returns `make_response(\"\", 401)`, and if `not check_password(password, user.get(\"password\", \"\"))` it also returns `make_response(\"\", 401)`.",
+  "reasoning": "The code clearly addresses this requirement and the observable behavior matches it: both an unknown username and a wrong password produce the same empty-body 401 response from the same endpoint. Under the decision guide, a test checking that `/verify` does not distinguish those two cases would pass, so the requirement is fully implemented.",
+  "usage": {
+    "total_tokens": 2046,
+    "prompt_tokens": 1890,
+    "completion_tokens": 156
+  },
+  "timestamp": "2026-07-16 15:00:17"
+}

@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "Allowing clients to supply and store publisher and publishedDate directly corresponds to removing the Google Books API integration that previously provided those fields."
+      },
+      {
+        "detection_id": "A1",
+        "requirement_id": "R8",
+        "label": "PARTIAL",
+        "reasoning": "A1 implies POST is not limited to only title, authors, ISBN, and genre, but it addresses extra allowed fields rather than directly stating those original fields are no longer required."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The PUT body-id validation rule is unrelated to removing POST required fields, ISBN format, Google Books integration, or genre enumeration."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Creating a unique MongoDB index on id is a storage implementation detail not described by any of the listed removed requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 849,
+    "prompt_tokens": 581,
+    "completion_tokens": 268
+  }
+}

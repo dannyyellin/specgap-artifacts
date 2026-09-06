@@ -1,0 +1,18 @@
+{
+  "req_id": 60,
+  "requirement_vague": "Getting item by ID should reject invalid UUID format. Test with 'not-a-uuid' string.",
+  "requirement_precise": "Register a new user via POST /api/v1/users/signup with email 'test60@example.com' and password 'validpass123'. Login to get token. Attempt to GET /api/v1/items/not-a-uuid (invalid UUID format). Verify the response status is 422 (validation error).",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": "GET /api/v1/items/{item_id} in read_item",
+    "code_reference": "@api_router.get(\"/items/{item_id}\", response_model=ItemPublic)\ndef read_item(\n    item_id: UUID,",
+    "reasoning": "The route declares item_id as a UUID path parameter, so FastAPI/Pydantic validates the path value before entering the handler. An invalid value like 'not-a-uuid' is rejected as a validation error, which FastAPI returns with HTTP 422."
+  },
+  "usage": {
+    "total_tokens": 4806,
+    "prompt_tokens": 4690,
+    "completion_tokens": 116
+  },
+  "parse_error": false
+}

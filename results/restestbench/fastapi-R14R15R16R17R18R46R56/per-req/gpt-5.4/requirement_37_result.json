@@ -1,0 +1,22 @@
+{
+  "req_id": 37,
+  "requirement_vague": "Update a user as admin (admin@example.com / password123) using a random UUID. The update should fail.",
+  "requirement_precise": "Authenticate as the system superuser using the known credentials (username 'admin@example.com', password 'password123') to obtain an access token. With that superuser access token, attempt to update a user identified by a newly generated UUID that does not exist in the system. Provide an update payload that sets the user's full name to 'Updated_full_name'. Verify the response status is 404. Verify the response body contains a field named 'detail' with the exact text: \"The user with this id does not exist in the system\".",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": [
+      "POST /api/v1/login/access-token",
+      "PATCH /api/v1/users/{user_id}",
+      "init_db"
+    ],
+    "code_reference": "FIRST_SUPERUSER = \"admin@example.com\"\nFIRST_SUPERUSER_PASSWORD = \"password123\"\n...\nif not user:\n    raise HTTPException(status_code=404, detail=\"The user with this id does not exist in the system\")",
+    "reasoning": "The code initializes a superuser with the required credentials at startup, provides a login endpoint to obtain a bearer token, and the admin-only PATCH /api/v1/users/{user_id} endpoint returns HTTP 404 with a JSON body containing detail set exactly to \"The user with this id does not exist in the system\" when the target UUID does not exist. The update payload can include full_name, so the described scenario is supported and fails as required."
+  },
+  "usage": {
+    "total_tokens": 4928,
+    "prompt_tokens": 4740,
+    "completion_tokens": 188
+  },
+  "parse_error": false
+}

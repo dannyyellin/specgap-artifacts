@@ -1,0 +1,20 @@
+Timestamp: 2026-06-01 21:45:28
+Detector:  gpt-4.1-mini
+Service:   todoapp  Removals: [1, 2, 4, 5, 7, 8, 10, 12]
+Method:    oneshot-warehouse
+
+Tokens: prompt=4557, completion=905, total=5462
+Additions: 3
+Omissions: 7
+
+  A A1: POST /todos allows setting 'isComplete' field on creation
+  A A2: POST /todos returns the created todo with 'isComplete' field included
+  A A3: DELETE /todos/{id} returns JSON message {'message': 'Todo deleted'} on success
+
+  O O1: POST /todos does not validate that the 'title' field is present and non-empty, and does not return 400 with validation error if missing or empty
+  O O2: PUT /todos/{id} does not reject requests where the request body 'id' field is present and different from the URL path id, returning 400 Bad Request
+  O O3: GET /todos and other endpoints do not return 401 Unauthorized when Authorization header or token is missing
+  O O4: No explicit check or error for login with invalid credentials returning 401 Unauthorized with specific error message
+  O O5: No explicit handling of user registration with duplicate email returning 400 Bad Request
+  O O6: No explicit verification that user cannot access or modify todos owned by other users, returning 404 Not Found
+  O O7: No explicit test or code to verify that after deleting a todo, subsequent GET returns 404 Not Found

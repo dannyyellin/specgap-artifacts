@@ -1,0 +1,60 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R11",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of the one-rating-per-user-per-dish constraint, matching R11 exactly."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O2 describes that PUT /ratings/{id} does not validate the rating as an integer between 1 and 5, which matches R10's removal of the rating range constraint."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O3 describes that POST /ratings does not validate the rating as an integer between 1 and 5, which matches R10's removal of the rating range constraint."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concerns dish existence validation which does not correspond to any of the three reference requirements about rating range, one-rating-per-user, or user_id from token."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 concerns ownership verification for DELETE which does not directly correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 concerns filtering support on GET /ratings which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O7 concludes there is no omission regarding 400 Bad Request validation, so it does not match any reference requirement."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O8 concludes there is no omission regarding 404 Not Found responses, so it does not match any reference requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1530,
+    "prompt_tokens": 939,
+    "completion_tokens": 591
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O1 states that POST, PUT, and DELETE are not restricted to the Owner user, which is the same behavior as removing the owner-only restriction."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "O2 concerns removed query filtering semantics, but it focuses on ingredient vs ingredients field naming rather than the specific lte/contains semantics described in R6."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 is about authentication and 401 handling, which is not described by any of R4, R5, or R6."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "O4 references Ninja API response handling, but it is about numeric validation rather than the removal of Ninja API field name mapping details."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "O5 concerns Ninja API missing-data handling, which is related to Ninja API integration but not specifically to field name mapping details."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 is about request body validation for POST/PUT fields, which does not correspond to any listed reference requirement."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O7 discusses 404 behavior for missing dish IDs, which is unrelated to the reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1294,
+    "prompt_tokens": 844,
+    "completion_tokens": 450
+  }
+}

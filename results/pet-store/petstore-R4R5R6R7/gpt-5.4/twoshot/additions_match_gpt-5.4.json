@@ -1,0 +1,24 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "It concerns pet-type attributes extraction and notes use of fields beyond temperament/group_behavior, but it does not specifically capture the removal rule limited to those fields."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Accepting a direct picture field on pet update does not correspond to removed attributes extraction, delete constraints, lifespan handling, or birthdate query filtering."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 740,
+    "prompt_tokens": 595,
+    "completion_tokens": 145
+  }
+}

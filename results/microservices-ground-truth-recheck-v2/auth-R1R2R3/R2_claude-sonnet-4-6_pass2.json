@@ -1,0 +1,19 @@
+{
+  "app": "nutrition",
+  "variant": "auth-R1R2R3",
+  "service": "authentication",
+  "req_id": "R2",
+  "requirement": "A special Owner user exists with name 'Owner', password 'owner#pw', and privileged=True.",
+  "source_headline": "Removed Owner special case (name='Owner', pw='owner#pw', privileged=True)",
+  "model": "claude-sonnet-4-6",
+  "pass": 2,
+  "label": "PARTIAL",
+  "evidence": "OWNER_NAME = os.environ.get('OWNER_NAME', 'owner'); OWNER_PASSWORD = os.environ.get('OWNER_PASSWORD', 'owner'); ensure_owner_user() inserts with these values; generate_token checks bool(user_doc['name'] == OWNER_NAME) for privileged",
+  "reasoning": "The code does create a special Owner user with privileged=True behavior (via token generation) and ensures it exists at startup. However, the requirement specifies name='Owner' (capital O) and password='owner#pw', while the code defaults to name='owner' (lowercase) and password='owner'. These are materially different observable values \u2014 a test checking for name 'Owner' and password 'owner#pw' would fail. The mechanism is present but the specific required values are wrong.",
+  "usage": {
+    "total_tokens": 2576,
+    "prompt_tokens": 2371,
+    "completion_tokens": 205
+  },
+  "timestamp": "2026-07-16 14:56:13"
+}

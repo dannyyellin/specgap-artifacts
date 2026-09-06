@@ -1,0 +1,72 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R15",
+        "label": "PARTIAL",
+        "reasoning": "R15 requires the password recovery endpoint to work for an existing user and send an email, while O1 only captures that the endpoint is missing."
+      },
+      {
+        "detection_id": "O1",
+        "requirement_id": "R16",
+        "label": "PARTIAL",
+        "reasoning": "R16 depends on the same password recovery endpoint but specifically requires a 404 response for a non-existent user, which O1 does not mention."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R17",
+        "label": "PARTIAL",
+        "reasoning": "R17 includes successful use of the reset-password endpoint with a valid token and subsequent login verification, while O2 only states the endpoint is not implemented."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R18",
+        "label": "PARTIAL",
+        "reasoning": "R18 exercises the reset-password endpoint with an invalid token and expects a specific 400 error payload, which O2 only partially covers by naming the endpoint."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R56",
+        "label": "PARTIAL",
+        "reasoning": "R56 also targets the reset-password endpoint but specifically requires a 422 validation error for a too-short password, which O2 does not capture."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R15",
+        "label": "MATCH",
+        "reasoning": "R15 explicitly requires verifying that a password recovery email was sent via the mailcatcher service, which O3 describes directly."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed reference requirements concern 403 versus 400 permission errors on item operations."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R14",
+        "label": "PARTIAL",
+        "reasoning": "R14 requires calling the test token endpoint with a superuser token and validating a 200 response containing the admin email, while O5 only notes the endpoint is missing."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The reference requirements provided do not specify this exact user-not-found error message."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The reference requirements provided do not specify this exact permission-denied error message."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1855,
+    "prompt_tokens": 1217,
+    "completion_tokens": 638
+  }
+}

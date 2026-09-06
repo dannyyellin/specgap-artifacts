@@ -1,0 +1,22 @@
+{
+  "method": "zeroshot",
+  "round": 2,
+  "removals": [
+    14,
+    15,
+    16,
+    17,
+    18,
+    46,
+    56
+  ],
+  "detector_model": "claude-sonnet-4-6",
+  "gen_usage": null,
+  "detect_usage": {
+    "total_tokens": 13119,
+    "prompt_tokens": 11867,
+    "completion_tokens": 1252
+  },
+  "n_additions": 0,
+  "n_omissions": 11
+}

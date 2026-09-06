@@ -1,0 +1,24 @@
+{
+  "result": {
+    "additions": [],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "POST /todos does not validate that the title field is non-empty; an empty string title is accepted without returning 400 Bad Request with a message indicating 'The Title field is required.'",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification explicitly states: 'Call POST /todos with an empty or missing title field. Verify that the response status code is 400 Bad Request and the response body contains a validation error indicating The Title field is required.' The code defines `title: str` in TodoCreate but does not add a validator (e.g., min_length=1 or a custom validator) to reject empty strings."
+      },
+      {
+        "id": "O2",
+        "description": "PUT /todos/{id} does not validate that the id field in the request body matches the path parameter id, and does not return 400 Bad Request when they differ.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states: 'Call PUT /todos/X with a request body where id=Y (different from X). Verify the response status is 400 Bad Request.' The code never checks whether todo_in.id matches the path id, so mismatched IDs are silently ignored."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 4218,
+    "prompt_tokens": 3889,
+    "completion_tokens": 329
+  }
+}

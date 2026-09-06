@@ -1,0 +1,18 @@
+{
+  "req_id": 13,
+  "requirement_vague": "Check that log in rejects a wrong password.",
+  "requirement_precise": "Register a new user, then attempt to obtain an access token by logging in with the registered user's email but an incorrect password. Verify that the response status code is 400 and the detail message is 'Incorrect email or password'.",
+  "removed": true,
+  "omissions": [],
+  "implementation": {
+    "location": "POST /api/v1/login/access-token in login_access_token; password check in authenticate",
+    "code_reference": "user = authenticate(session, form_data.username, form_data.password)\nif not user:\n    raise HTTPException(status_code=400, detail=\"Incorrect email or password\")",
+    "reasoning": "The login endpoint authenticates using the submitted username/email and password, and when authentication fails\u2014including when the password is incorrect\u2014it raises an HTTP 400 with detail exactly 'Incorrect email or password'. A newly registered user can be created via POST /api/v1/users/signup, after which logging in with the same email and wrong password will hit this failure path."
+  },
+  "usage": {
+    "total_tokens": 5884,
+    "prompt_tokens": 5739,
+    "completion_tokens": 145
+  },
+  "parse_error": false
+}

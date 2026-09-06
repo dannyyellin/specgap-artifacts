@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R28",
+        "label": "PARTIAL",
+        "reasoning": "R28 includes verifying that GET on a deleted article returns 200 with empty object {}, but O1 only captures that single post-delete response detail and not the broader unauthorized delete scenario."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "R2 requires that attempting to follow oneself returns 400 with a message containing 'cannot be equal', while O2 captures the self-follow 400 check but omits the required message detail and surrounding follow/profile verification."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement describes user deletion being blocked by article foreign key constraints."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R28",
+        "label": "MATCH",
+        "reasoning": "R28 explicitly tests that a non-owner user can update and delete another user's article, which is exactly the behavior described in O4."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1793,
+    "prompt_tokens": 1512,
+    "completion_tokens": 281
+  }
+}

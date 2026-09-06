@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O1 describes missing enforcement of owner-only restrictions on POST/PUT/DELETE, which is the same behavior referenced by R5 as having that restriction removed."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 concerns handling string-valued Ninja API nutrient fields, which is different from the removed field name mapping details in R4 and unrelated to R5 or R6."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 is about validating that ingredients is non-empty, which does not correspond to any of R4, R5, or R6."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concerns returning 404 for missing dishes, which is unrelated to the removed requirements in R4, R5, and R6."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 is about defaulting missing Ninja API nutritional fields to 0.0, which does not match the removed field mapping details in R4 or the other references."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1017,
+    "prompt_tokens": 672,
+    "completion_tokens": 345
+  }
+}

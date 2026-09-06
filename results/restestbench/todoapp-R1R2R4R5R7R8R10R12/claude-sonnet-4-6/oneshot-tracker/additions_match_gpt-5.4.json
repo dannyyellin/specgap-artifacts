@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Returning a UserResponse from POST /users/register is not a behavior required or described by any listed spec requirement."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Duplicate-email validation during user registration is not covered by any of the listed spec requirements."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A success response body for DELETE /todos/{id} is not specified by any listed requirement, which only cover not-found and authorization cases for delete."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1180,
+    "prompt_tokens": 993,
+    "completion_tokens": 187
+  }
+}

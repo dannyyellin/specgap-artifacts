@@ -1,0 +1,24 @@
+{
+  "req_id": 25,
+  "requirement_vague": "Verify JWT token contains correct user ID and username in payload",
+  "requirement_precise": "Create user1 (username: 'jwtuser1', email: 'jwtuser1@test.com', password: 'pass123'). Extract the JWT token from the response. Decode the JWT token payload (base64 decode the middle segment). Verify the payload contains: id matching the user's id, username equal to 'jwtuser1', email equal to 'jwtuser1@test.com'. Use the token to GET /api/user and verify the returned user matches. This tests the JWT payload generation in generateJWT method.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": [
+      "create_token",
+      "user_dict",
+      "POST /api/users",
+      "GET /api/user",
+      "get_current_user_optional"
+    ],
+    "code_reference": "def create_token(user: User) -> str:\n    payload = {\"id\": user.id, \"username\": user.username, \"email\": user.email, \"exp\": datetime.now(timezone.utc) + timedelta(days=7)}\n...\ndef get_user(current_user: User = Depends(get_current_user)):\n    return {\"user\": user_dict(current_user)}",
+    "reasoning": "The JWT payload is generated in create_token with id, username, and email taken directly from the persisted user. Registration returns that token via user_dict, and GET /api/user decodes the token in get_current_user_optional using the payload id to load the user, then returns the matching user data."
+  },
+  "usage": {
+    "total_tokens": 5478,
+    "prompt_tokens": 5298,
+    "completion_tokens": 180
+  },
+  "parse_error": false
+}

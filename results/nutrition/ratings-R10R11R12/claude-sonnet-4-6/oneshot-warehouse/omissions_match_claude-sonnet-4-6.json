@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O1 describes that POST /ratings does not enforce the integer 1-5 range constraint, which directly corresponds to R10's removal of the rating range constraint."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O2 describes that PUT /ratings/{id} does not enforce the integer 1-5 range constraint, which also corresponds to R10's removal of the rating range constraint."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R11",
+        "label": "PARTIAL",
+        "reasoning": "O3 initially identifies a potential removal of the one-rating-per-user-per-dish constraint but then retracts it, concluding the constraint is still enforced, so it only partially relates to R11."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 describes an implementation detail about how the URL parameter is interpreted (dish_id vs rating document id), which does not correspond to any of the reference requirements R10, R11, or R12."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 describes an implementation detail about URL parameter semantics (dish_id vs rating document id), which does not correspond to any of the reference requirements R10, R11, or R12."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1445,
+    "prompt_tokens": 1010,
+    "completion_tokens": 435
+  }
+}

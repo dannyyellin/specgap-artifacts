@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This describes accepted token locations, which does not correspond to removing protein exclusion, removing owner-only GET /profiles access, or removing token-derived user_id behavior."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns duplicate profile creation on POST /profiles, which is unrelated to any of the listed removals in the spec requirements."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R8",
+        "label": "PARTIAL",
+        "reasoning": "It concerns GET /profiles behavior, but it is about query-parameter filtering restrictions rather than the removal of the owner-only restriction."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 777,
+    "prompt_tokens": 574,
+    "completion_tokens": 203
+  }
+}

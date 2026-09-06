@@ -1,0 +1,19 @@
+{
+  "app": "public-library",
+  "variant": "logs-R12R13",
+  "service": "logs",
+  "req_id": "R12",
+  "requirement": "The loanDate field of a log entry is in the date format 'DD-MM-YYYY'.",
+  "source_headline": "Removed date format ('DD-MM-YYYY') for loanDate in Logs",
+  "model": "claude-sonnet-4-6",
+  "pass": 1,
+  "label": "GAP",
+  "evidence": "The POST handler checks `if field not in data or not isinstance(data[field], str)` for loanDate, but performs no format validation. The loanDate is stored and returned as-is: `\"loanDate\": data[\"loanDate\"]`.",
+  "reasoning": "The requirement states that the loanDate field must be in 'DD-MM-YYYY' format. The code accepts any string for loanDate without validating or enforcing this format. There is no regex check, date parsing, or any other mechanism to ensure the format is correct. A test submitting a loanDate in a different format (e.g., 'YYYY-MM-DD') would succeed when it should fail, meaning the requirement is entirely absent.",
+  "usage": {
+    "total_tokens": 1779,
+    "prompt_tokens": 1590,
+    "completion_tokens": 189
+  },
+  "timestamp": "2026-07-16 14:55:09"
+}

@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O1 makes a broad claim about password recovery not being implemented, but the reference requirements assume it is implemented and test specific behaviors; this detected requirement doesn't match any specific reference requirement's behavior."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 is about email format validation which does not correspond to any of the reference requirements listed."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 is about 422 responses for invalid UUID formats, which does not correspond to any of the reference requirements listed."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R15",
+        "label": "PARTIAL",
+        "reasoning": "O4 mentions verifying email sending via a mailcatcher service which is part of R15, but O4 only broadly states the feature is missing rather than describing the specific behavior tested in R15."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 is about generic vs specific error messages and does not correspond to any specific reference requirement's behavior."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1631,
+    "prompt_tokens": 1253,
+    "completion_tokens": 378
+  }
+}

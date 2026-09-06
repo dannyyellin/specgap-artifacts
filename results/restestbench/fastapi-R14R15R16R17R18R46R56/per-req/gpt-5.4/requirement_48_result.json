@@ -1,0 +1,18 @@
+{
+  "req_id": 48,
+  "requirement_vague": "User registration should reject passwords longer than 128 characters. Test with exactly 129 characters.",
+  "requirement_precise": "Attempt to register a new user via POST /api/v1/users/signup with email 'test48@example.com', password of exactly 129 characters (129 'a' characters), and full_name 'Test User'. Verify the response status is 422 (validation error).",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": "UserCreate.validate_password and POST /api/v1/users/signup (signup)",
+    "code_reference": "@field_validator(\"password\")\ndef validate_password(cls, v: str):\n    if v is None or len(v) < 8 or len(v) > 128:\n        raise ValueError(\"Password must be between 8 and 128 characters\")",
+    "reasoning": "The signup endpoint accepts a UserRegister body, which inherits UserCreate, so password validation is applied to POST /api/v1/users/signup. A password of exactly 129 characters fails the len(v) > 128 check, and FastAPI/Pydantic returns a 422 validation error before the signup handler creates the user."
+  },
+  "usage": {
+    "total_tokens": 4838,
+    "prompt_tokens": 4681,
+    "completion_tokens": 157
+  },
+  "parse_error": false
+}

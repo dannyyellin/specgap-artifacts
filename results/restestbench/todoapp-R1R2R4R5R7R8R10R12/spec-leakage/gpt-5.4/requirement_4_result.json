@@ -1,0 +1,14 @@
+{
+  "req_id": 4,
+  "requirement_vague": "Getting a non-existent todo returns 404 Not Found",
+  "requirement_precise": "Register a user and login to get an access token. Call GET /todos/99999 (an ID that does not exist). Verify the response status code is 404 Not Found.",
+  "verdict": "SPEC_LEAKED",
+  "spec_evidence": "- \"Then call GET /todos/{id} and verify the response is 404 Not Found (todo no longer exists).\"\n- \"Call PUT /todos/99999 with a valid todo body (id=99999, title='Test', isComplete=false). Verify the response status is 404 Not Found.\"",
+  "reasoning": "The spec explicitly states that GET /todos/{id} returns 404 when the todo no longer exists after deletion, which directly implies that requesting a non-existent todo by ID yields 404. The separate 404 behavior for PUT on ID 99999 further reinforces that missing todo IDs are treated as not found.",
+  "parse_error": false,
+  "usage": {
+    "total_tokens": 1046,
+    "prompt_tokens": 889,
+    "completion_tokens": 157
+  }
+}

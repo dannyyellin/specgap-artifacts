@@ -1,0 +1,23 @@
+{
+  "variant": "fastapi-R14R15R16R17R18R46R56",
+  "req_id": 56,
+  "model": "claude-sonnet-4-6",
+  "pass": 1,
+  "verdict": "NOT_IMPLEMENTED",
+  "requirement_vague": "Password reset should reject new_password with 7 characters with a 422 validation error.",
+  "omissions": [
+    {
+      "id": "O1",
+      "description": "There is no POST /api/v1/reset-password/ endpoint in the code. The password reset endpoint is entirely missing.",
+      "category": "ENDPOINTS",
+      "reasoning": "Searching the entire codebase, there is no route defined for /reset-password/ or any password reset functionality. The only password-related endpoints are /login/access-token and /users/me/password (PATCH). Therefore, the requirement to validate new_password length at POST /api/v1/reset-password/ cannot be satisfied."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 6278,
+    "prompt_tokens": 6113,
+    "completion_tokens": 165
+  },
+  "timestamp": "2026-07-12 10:39:09"
+}

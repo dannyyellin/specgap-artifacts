@@ -1,0 +1,19 @@
+Timestamp: 2026-06-02 05:59:18
+Detector:  DeepSeek-V3-0324
+Service:   nestjs-realworld  Round: 2  Removals: [2, 10, 13, 15, 24, 26, 28]
+Method:    oneshot-tracker
+
+Tokens: prompt=10234, completion=637, total=10871
+Additions: 3
+Omissions: 6
+
+  A A1: Implements 'favorited' and 'favoritesCount' fields in article responses
+  A A2: Implements DELETE /api/users/{email} endpoint
+  A A3: Implements GET /api/tags endpoint
+
+  O O1: Does not return empty object {} for deleted articles as specified
+  O O2: Does not prevent non-owners from updating/deleting articles as specified
+  O O3: Does not return 500 when attempting to delete a user with articles
+  O O4: Does not validate that comment IDs are numbers as specified
+  O O5: Does not implement POST /users/login endpoint as specified
+  O O6: Does not return 400 when attempting to follow oneself

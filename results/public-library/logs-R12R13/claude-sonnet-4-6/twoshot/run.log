@@ -1,0 +1,12 @@
+Timestamp: 2026-06-02 09:40:01
+Detector:  claude-sonnet-4-6
+App/Variant/Service: public-library/logs-R12R13/logs
+Method:    twoshot
+
+Tokens: prompt=6878, completion=693, total=7571
+Additions: 1
+Omissions: 1
+
+  A A1: POST /logs validates that each required field value is of type string using isinstance checks
+
+  O O1: GET /logs does not support filtering by arbitrary 'field=value' query strings; it silently ignores unrecognized field names

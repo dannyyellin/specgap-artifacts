@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Filtering by nutritional fields on GET /profiles does not correspond to removing owner-only restriction, protein exclusion, or token-derived user_id behavior."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Sorting GET /profiles by user_id is unrelated to the specified removals about access restriction, profileDishes protein exclusion, or user_id source."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Allowing partial nutritional fields on POST /profiles does not match any of the listed requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 717,
+    "prompt_tokens": 525,
+    "completion_tokens": 192
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of owner-only restriction for POST/PUT/DELETE, matching R5 exactly."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "O2 relates to filtering semantics for query parameters, which partially overlaps with R6's removal of specific query string filtering semantics, but focuses on the 'ingredient' field name rather than the broader filtering semantics (lte for nutrients, contains)."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 concerns 401 authentication handling which does not correspond to any of the three reference requirements about Ninja API field mapping, owner-only restrictions, or query string filtering semantics."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "O4 relates to handling Ninja API field values (string vs numeric), which partially overlaps with R4's removal of Ninja API field name mapping details, but focuses on data type validation rather than field name mapping."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "O5 concerns handling missing Ninja API data entries, which is loosely related to R4's Ninja API field name mapping details, but addresses missing data handling rather than field name mapping specifically."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 concerns validation of required fields in POST/PUT requests, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O7 concerns 404 handling for missing dishes, which does not correspond to any of the three reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1480,
+    "prompt_tokens": 909,
+    "completion_tokens": 571
+  }
+}

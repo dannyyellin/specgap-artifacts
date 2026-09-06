@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements describe the behavior of GET /items returning all items without filtering by owner."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements describe the GET /users/ endpoint returning a 'data' list and 'count' field."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements describe a POST /password-recovery-html/{email} endpoint or its response format."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1314,
+    "prompt_tokens": 1102,
+    "completion_tokens": 212
+  }
+}

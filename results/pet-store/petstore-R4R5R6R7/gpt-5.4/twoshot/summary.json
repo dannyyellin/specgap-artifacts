@@ -1,0 +1,19 @@
+{
+  "app": "pet-store",
+  "variant": "petstore-R4R5R6R7",
+  "service": "pet-store",
+  "method": "twoshot",
+  "model": "gpt-5.4",
+  "gen_usage": {
+    "total_tokens": 8558,
+    "prompt_tokens": 5076,
+    "completion_tokens": 3482
+  },
+  "n_additions": 2,
+  "n_omissions": 16,
+  "usage": {
+    "total_tokens": 13481,
+    "prompt_tokens": 11853,
+    "completion_tokens": 1628
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R28",
+        "label": "MATCH",
+        "reasoning": "R28 explicitly requires that after a non-owner deletes an article, GET /api/articles/{slug} returns 200 with an empty object {}, which is exactly the behavior O1 discusses."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "R2 includes preventing a user from following themselves with status 400, and O2 refers to the same self-follow case but focuses only on the wrong returned status."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements concern deleting a user with existing articles or a foreign key constraint error."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements specify that user responses must include an id field."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements mention validating tagList as an array of strings during article creation or update."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1867,
+    "prompt_tokens": 1550,
+    "completion_tokens": 317
+  }
+}

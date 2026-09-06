@@ -1,0 +1,449 @@
+{
+  "records": [
+    {
+      "variant": "fastapi-R14R15R16R17R18R46R56",
+      "req_id": 14,
+      "original": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass1": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass2": "NOT_IMPLEMENTED",
+      "sonnet_pass1": "NOT_IMPLEMENTED",
+      "sonnet_pass2": "NOT_IMPLEMENTED",
+      "unanimous": true,
+      "matches_original": true
+    },
+    {
+      "variant": "fastapi-R14R15R16R17R18R46R56",
+      "req_id": 15,
+      "original": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass1": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass2": "NOT_IMPLEMENTED",
+      "sonnet_pass1": "NOT_IMPLEMENTED",
+      "sonnet_pass2": "NOT_IMPLEMENTED",
+      "unanimous": true,
+      "matches_original": true
+    },
+    {
+      "variant": "fastapi-R14R15R16R17R18R46R56",
+      "req_id": 16,
+      "original": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass1": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass2": "NOT_IMPLEMENTED",
+      "sonnet_pass1": "NOT_IMPLEMENTED",
+      "sonnet_pass2": "NOT_IMPLEMENTED",
+      "unanimous": true,
+      "matches_original": true
+    },
+    {
+      "variant": "fastapi-R14R15R16R17R18R46R56",
+      "req_id": 17,
+      "original": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass1": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass2": "NOT_IMPLEMENTED",
+      "sonnet_pass1": "NOT_IMPLEMENTED",
+      "sonnet_pass2": "NOT_IMPLEMENTED",
+      "unanimous": true,
+      "matches_original": true
+    },
+    {
+      "variant": "fastapi-R14R15R16R17R18R46R56",
+      "req_id": 18,
+      "original": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass1": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass2": "NOT_IMPLEMENTED",
+      "sonnet_pass1": "NOT_IMPLEMENTED",
+      "sonnet_pass2": "NOT_IMPLEMENTED",
+      "unanimous": true,
+      "matches_original": true
+    },
+    {
+      "variant": "fastapi-R14R15R16R17R18R46R56",
+      "req_id": 46,
+      "original": "IMPLEMENTED",
+      "gpt-5.4_pass1": "IMPLEMENTED",
+      "gpt-5.4_pass2": "IMPLEMENTED",
+      "sonnet_pass1": "IMPLEMENTED",
+      "sonnet_pass2": "IMPLEMENTED",
+      "unanimous": true,
+      "matches_original": true
+    },
+    {
+      "variant": "fastapi-R14R15R16R17R18R46R56",
+      "req_id": 56,
+      "original": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass1": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass2": "NOT_IMPLEMENTED",
+      "sonnet_pass1": "NOT_IMPLEMENTED",
+      "sonnet_pass2": "NOT_IMPLEMENTED",
+      "unanimous": true,
+      "matches_original": true
+    },
+    {
+      "variant": "fastapi-R4R10R13R30R35R47",
+      "req_id": 4,
+      "original": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass1": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass2": "NOT_IMPLEMENTED",
+      "sonnet_pass1": "NOT_IMPLEMENTED",
+      "sonnet_pass2": "NOT_IMPLEMENTED",
+      "unanimous": true,
+      "matches_original": true
+    },
+    {
+      "variant": "fastapi-R4R10R13R30R35R47",
+      "req_id": 10,
+      "original": "IMPLEMENTED",
+      "gpt-5.4_pass1": "IMPLEMENTED",
+      "gpt-5.4_pass2": "IMPLEMENTED",
+      "sonnet_pass1": "IMPLEMENTED",
+      "sonnet_pass2": "IMPLEMENTED",
+      "unanimous": true,
+      "matches_original": true
+    },
+    {
+      "variant": "fastapi-R4R10R13R30R35R47",
+      "req_id": 13,
+      "original": "IMPLEMENTED",
+      "gpt-5.4_pass1": "IMPLEMENTED",
+      "gpt-5.4_pass2": "IMPLEMENTED",
+      "sonnet_pass1": "IMPLEMENTED",
+      "sonnet_pass2": "IMPLEMENTED",
+      "unanimous": true,
+      "matches_original": true
+    },
+    {
+      "variant": "fastapi-R4R10R13R30R35R47",
+      "req_id": 30,
+      "original": "IMPLEMENTED",
+      "gpt-5.4_pass1": "IMPLEMENTED",
+      "gpt-5.4_pass2": "IMPLEMENTED",
+      "sonnet_pass1": "IMPLEMENTED",
+      "sonnet_pass2": "IMPLEMENTED",
+      "unanimous": true,
+      "matches_original": true
+    },
+    {
+      "variant": "fastapi-R4R10R13R30R35R47",
+      "req_id": 35,
+      "original": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass1": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass2": "NOT_IMPLEMENTED",
+      "sonnet_pass1": "NOT_IMPLEMENTED",
+      "sonnet_pass2": "NOT_IMPLEMENTED",
+      "unanimous": true,
+      "matches_original": true
+    },
+    {
+      "variant": "fastapi-R4R10R13R30R35R47",
+      "req_id": 47,
+      "original": "IMPLEMENTED",
+      "gpt-5.4_pass1": "IMPLEMENTED",
+      "gpt-5.4_pass2": "IMPLEMENTED",
+      "sonnet_pass1": "IMPLEMENTED",
+      "sonnet_pass2": "IMPLEMENTED",
+      "unanimous": true,
+      "matches_original": true
+    },
+    {
+      "variant": "realworld-R2R10R13R15R24R26R28",
+      "req_id": 2,
+      "original": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass1": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass2": "NOT_IMPLEMENTED",
+      "sonnet_pass1": "NOT_IMPLEMENTED",
+      "sonnet_pass2": "NOT_IMPLEMENTED",
+      "unanimous": true,
+      "matches_original": true
+    },
+    {
+      "variant": "realworld-R2R10R13R15R24R26R28",
+      "req_id": 10,
+      "original": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass1": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass2": "NOT_IMPLEMENTED",
+      "sonnet_pass1": "NOT_IMPLEMENTED",
+      "sonnet_pass2": "NOT_IMPLEMENTED",
+      "unanimous": true,
+      "matches_original": true
+    },
+    {
+      "variant": "realworld-R2R10R13R15R24R26R28",
+      "req_id": 13,
+      "original": "IMPLEMENTED",
+      "gpt-5.4_pass1": "IMPLEMENTED",
+      "gpt-5.4_pass2": "IMPLEMENTED",
+      "sonnet_pass1": "IMPLEMENTED",
+      "sonnet_pass2": "IMPLEMENTED",
+      "unanimous": true,
+      "matches_original": true
+    },
+    {
+      "variant": "realworld-R2R10R13R15R24R26R28",
+      "req_id": 15,
+      "original": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass1": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass2": "NOT_IMPLEMENTED",
+      "sonnet_pass1": "IMPLEMENTED",
+      "sonnet_pass2": "IMPLEMENTED",
+      "unanimous": false,
+      "matches_original": false
+    },
+    {
+      "variant": "realworld-R2R10R13R15R24R26R28",
+      "req_id": 24,
+      "original": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass1": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass2": "NOT_IMPLEMENTED",
+      "sonnet_pass1": "NOT_IMPLEMENTED",
+      "sonnet_pass2": "NOT_IMPLEMENTED",
+      "unanimous": true,
+      "matches_original": true
+    },
+    {
+      "variant": "realworld-R2R10R13R15R24R26R28",
+      "req_id": 26,
+      "original": "IMPLEMENTED",
+      "gpt-5.4_pass1": "IMPLEMENTED",
+      "gpt-5.4_pass2": "IMPLEMENTED",
+      "sonnet_pass1": "IMPLEMENTED",
+      "sonnet_pass2": "IMPLEMENTED",
+      "unanimous": true,
+      "matches_original": true
+    },
+    {
+      "variant": "realworld-R2R10R13R15R24R26R28",
+      "req_id": 28,
+      "original": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass1": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass2": "NOT_IMPLEMENTED",
+      "sonnet_pass1": "NOT_IMPLEMENTED",
+      "sonnet_pass2": "NOT_IMPLEMENTED",
+      "unanimous": true,
+      "matches_original": true
+    },
+    {
+      "variant": "realworld-R5R6R9R12R19R23R25R27R29",
+      "req_id": 5,
+      "original": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass1": "IMPLEMENTED",
+      "gpt-5.4_pass2": "NOT_IMPLEMENTED",
+      "sonnet_pass1": "IMPLEMENTED",
+      "sonnet_pass2": "IMPLEMENTED",
+      "unanimous": false,
+      "matches_original": false
+    },
+    {
+      "variant": "realworld-R5R6R9R12R19R23R25R27R29",
+      "req_id": 6,
+      "original": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass1": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass2": "NOT_IMPLEMENTED",
+      "sonnet_pass1": "NOT_IMPLEMENTED",
+      "sonnet_pass2": "NOT_IMPLEMENTED",
+      "unanimous": true,
+      "matches_original": true
+    },
+    {
+      "variant": "realworld-R5R6R9R12R19R23R25R27R29",
+      "req_id": 9,
+      "original": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass1": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass2": "NOT_IMPLEMENTED",
+      "sonnet_pass1": "NOT_IMPLEMENTED",
+      "sonnet_pass2": "NOT_IMPLEMENTED",
+      "unanimous": true,
+      "matches_original": true
+    },
+    {
+      "variant": "realworld-R5R6R9R12R19R23R25R27R29",
+      "req_id": 12,
+      "original": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass1": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass2": "NOT_IMPLEMENTED",
+      "sonnet_pass1": "NOT_IMPLEMENTED",
+      "sonnet_pass2": "NOT_IMPLEMENTED",
+      "unanimous": true,
+      "matches_original": true
+    },
+    {
+      "variant": "realworld-R5R6R9R12R19R23R25R27R29",
+      "req_id": 19,
+      "original": "IMPLEMENTED",
+      "gpt-5.4_pass1": "IMPLEMENTED",
+      "gpt-5.4_pass2": "IMPLEMENTED",
+      "sonnet_pass1": "IMPLEMENTED",
+      "sonnet_pass2": "IMPLEMENTED",
+      "unanimous": true,
+      "matches_original": true
+    },
+    {
+      "variant": "realworld-R5R6R9R12R19R23R25R27R29",
+      "req_id": 23,
+      "original": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass1": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass2": "NOT_IMPLEMENTED",
+      "sonnet_pass1": "NOT_IMPLEMENTED",
+      "sonnet_pass2": "NOT_IMPLEMENTED",
+      "unanimous": true,
+      "matches_original": true
+    },
+    {
+      "variant": "realworld-R5R6R9R12R19R23R25R27R29",
+      "req_id": 25,
+      "original": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass1": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass2": "NOT_IMPLEMENTED",
+      "sonnet_pass1": "NOT_IMPLEMENTED",
+      "sonnet_pass2": "NOT_IMPLEMENTED",
+      "unanimous": true,
+      "matches_original": true
+    },
+    {
+      "variant": "realworld-R5R6R9R12R19R23R25R27R29",
+      "req_id": 27,
+      "original": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass1": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass2": "NOT_IMPLEMENTED",
+      "sonnet_pass1": "NOT_IMPLEMENTED",
+      "sonnet_pass2": "NOT_IMPLEMENTED",
+      "unanimous": true,
+      "matches_original": true
+    },
+    {
+      "variant": "realworld-R5R6R9R12R19R23R25R27R29",
+      "req_id": 29,
+      "original": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass1": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass2": "NOT_IMPLEMENTED",
+      "sonnet_pass1": "NOT_IMPLEMENTED",
+      "sonnet_pass2": "NOT_IMPLEMENTED",
+      "unanimous": true,
+      "matches_original": true
+    },
+    {
+      "variant": "todoapp-R1R2R4R5R7R8R10R12",
+      "req_id": 1,
+      "original": "IMPLEMENTED",
+      "gpt-5.4_pass1": "IMPLEMENTED",
+      "gpt-5.4_pass2": "IMPLEMENTED",
+      "sonnet_pass1": "IMPLEMENTED",
+      "sonnet_pass2": "IMPLEMENTED",
+      "unanimous": true,
+      "matches_original": true
+    },
+    {
+      "variant": "todoapp-R1R2R4R5R7R8R10R12",
+      "req_id": 2,
+      "original": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass1": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass2": "NOT_IMPLEMENTED",
+      "sonnet_pass1": "NOT_IMPLEMENTED",
+      "sonnet_pass2": "NOT_IMPLEMENTED",
+      "unanimous": true,
+      "matches_original": true
+    },
+    {
+      "variant": "todoapp-R1R2R4R5R7R8R10R12",
+      "req_id": 4,
+      "original": "IMPLEMENTED",
+      "gpt-5.4_pass1": "IMPLEMENTED",
+      "gpt-5.4_pass2": "IMPLEMENTED",
+      "sonnet_pass1": "IMPLEMENTED",
+      "sonnet_pass2": "IMPLEMENTED",
+      "unanimous": true,
+      "matches_original": true
+    },
+    {
+      "variant": "todoapp-R1R2R4R5R7R8R10R12",
+      "req_id": 5,
+      "original": "IMPLEMENTED",
+      "gpt-5.4_pass1": "IMPLEMENTED",
+      "gpt-5.4_pass2": "IMPLEMENTED",
+      "sonnet_pass1": "IMPLEMENTED",
+      "sonnet_pass2": "IMPLEMENTED",
+      "unanimous": true,
+      "matches_original": true
+    },
+    {
+      "variant": "todoapp-R1R2R4R5R7R8R10R12",
+      "req_id": 7,
+      "original": "IMPLEMENTED",
+      "gpt-5.4_pass1": "IMPLEMENTED",
+      "gpt-5.4_pass2": "IMPLEMENTED",
+      "sonnet_pass1": "IMPLEMENTED",
+      "sonnet_pass2": "IMPLEMENTED",
+      "unanimous": true,
+      "matches_original": true
+    },
+    {
+      "variant": "todoapp-R1R2R4R5R7R8R10R12",
+      "req_id": 8,
+      "original": "IMPLEMENTED",
+      "gpt-5.4_pass1": "IMPLEMENTED",
+      "gpt-5.4_pass2": "IMPLEMENTED",
+      "sonnet_pass1": "IMPLEMENTED",
+      "sonnet_pass2": "IMPLEMENTED",
+      "unanimous": true,
+      "matches_original": true
+    },
+    {
+      "variant": "todoapp-R1R2R4R5R7R8R10R12",
+      "req_id": 10,
+      "original": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass1": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass2": "NOT_IMPLEMENTED",
+      "sonnet_pass1": "NOT_IMPLEMENTED",
+      "sonnet_pass2": "NOT_IMPLEMENTED",
+      "unanimous": true,
+      "matches_original": true
+    },
+    {
+      "variant": "todoapp-R1R2R4R5R7R8R10R12",
+      "req_id": 12,
+      "original": "IMPLEMENTED",
+      "gpt-5.4_pass1": "IMPLEMENTED",
+      "gpt-5.4_pass2": "IMPLEMENTED",
+      "sonnet_pass1": "IMPLEMENTED",
+      "sonnet_pass2": "IMPLEMENTED",
+      "unanimous": true,
+      "matches_original": true
+    }
+  ],
+  "disagreements": [
+    {
+      "variant": "realworld-R2R10R13R15R24R26R28",
+      "req_id": 15,
+      "original": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass1": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass2": "NOT_IMPLEMENTED",
+      "sonnet_pass1": "IMPLEMENTED",
+      "sonnet_pass2": "IMPLEMENTED",
+      "unanimous": false,
+      "matches_original": false
+    },
+    {
+      "variant": "realworld-R5R6R9R12R19R23R25R27R29",
+      "req_id": 5,
+      "original": "NOT_IMPLEMENTED",
+      "gpt-5.4_pass1": "IMPLEMENTED",
+      "gpt-5.4_pass2": "NOT_IMPLEMENTED",
+      "sonnet_pass1": "IMPLEMENTED",
+      "sonnet_pass2": "IMPLEMENTED",
+      "unanimous": false,
+      "matches_original": false
+    }
+  ],
+  "stats": {
+    "n_requirements": 37,
+    "n_unanimous": 35,
+    "n_match_original": 35,
+    "total_tokens": 812281,
+    "models": [
+      "gpt-5.4",
+      "claude-sonnet-4-6"
+    ],
+    "passes": [
+      1,
+      2
+    ]
+  }
+}

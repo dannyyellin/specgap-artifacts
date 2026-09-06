@@ -1,0 +1,174 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers password length validation during signup."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers email format validation during signup."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers full_name length validation during signup."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers item title length validation."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers item description length validation."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers non-owner access to items returning 400."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R46",
+        "label": "PARTIAL",
+        "reasoning": "R46 verifies a 404 with 'Item not found' after user deletion, but O7 describes the general case of item not found without the specific deletion context."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers non-owner item update returning 400."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers item not found on PATCH."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers non-owner item deletion returning 400."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers item not found on DELETE."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers normal user accessing another user's data returning 403."
+      },
+      {
+        "detection_id": "O13",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers user not found on GET /api/v1/users/{user_id}."
+      },
+      {
+        "detection_id": "O14",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers user not found on PATCH /api/v1/users/{user_id}."
+      },
+      {
+        "detection_id": "O15",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers duplicate email on PATCH /api/v1/users/{user_id}."
+      },
+      {
+        "detection_id": "O16",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers user not found on DELETE /api/v1/users/{user_id}."
+      },
+      {
+        "detection_id": "O17",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers superuser self-deletion returning 403."
+      },
+      {
+        "detection_id": "O18",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement specifically covers DELETE /api/v1/users/{user_id} returning 200 with 'User deleted successfully' (R46 covers DELETE /api/v1/users/me)."
+      },
+      {
+        "detection_id": "O19",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers failed authentication returning 400 with 'Incorrect email or password'."
+      },
+      {
+        "detection_id": "O20",
+        "requirement_id": "R14",
+        "label": "PARTIAL",
+        "reasoning": "R14 covers authentication returning a token but also requires calling the test token endpoint and verifying the email field, while O20 only covers the login response."
+      },
+      {
+        "detection_id": "O21",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers GET /api/v1/users/me returning profile fields."
+      },
+      {
+        "detection_id": "O22",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers duplicate email rejection during signup."
+      },
+      {
+        "detection_id": "O23",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers duplicate email on PATCH /api/v1/users/me."
+      },
+      {
+        "detection_id": "O24",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers incorrect current password on password change."
+      },
+      {
+        "detection_id": "O25",
+        "requirement_id": "R46",
+        "label": "PARTIAL",
+        "reasoning": "R46 includes deleting the user's own account via DELETE /api/v1/users/me and verifying 200 with 'User deleted successfully', which matches O25, but R46 also includes additional steps beyond just the deletion."
+      },
+      {
+        "detection_id": "O26",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers invalid UUID format for item_id returning 422."
+      },
+      {
+        "detection_id": "O27",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers invalid UUID format for user_id returning 422."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 4350,
+    "prompt_tokens": 2711,
+    "completion_tokens": 1639
+  }
+}

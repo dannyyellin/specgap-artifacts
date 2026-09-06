@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The presence of a full_name field in user models is not described or implied by any of the listed requirements."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "An authenticated PATCH /api/v1/users/me/password endpoint is a different feature from the specified password recovery and reset flows."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R46",
+        "label": "MATCH",
+        "reasoning": "Automatic cascade deletion of a user's items directly explains why, after deleting the user, a superuser would receive 404 Item not found when fetching that item."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1258,
+    "prompt_tokens": 1061,
+    "completion_tokens": 197
+  }
+}

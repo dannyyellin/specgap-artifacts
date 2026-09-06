@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R12",
+        "label": "PARTIAL",
+        "reasoning": "O1 discusses loanDate format validation for 'DD-MM-YYYY', which overlaps with R12's removal of that date format requirement, but it asserts the opposite behavior."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 concerns ISBN_13 validation, which is unrelated to either the removed loanDate format or removed Borrows-to-Logs notification descriptions."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 concerns validation of cardholderId and borrowId formats, which does not correspond to either reference requirement."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concerns handling of unexpected GET query parameters, which is unrelated to the reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 900,
+    "prompt_tokens": 642,
+    "completion_tokens": 258
+  }
+}

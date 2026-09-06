@@ -1,0 +1,48 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement addresses ownership checks or security vulnerabilities for article update/delete operations."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "R9 expects 400 status with 'Username and email must be unique' message, but the code returns 422 with detailed field errors instead."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement addresses validation or error handling for missing fields on user registration."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "R9 expects a combined error message 'Username and email must be unique' but the code returns separate field errors, matching the same scenario but with different error format."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement addresses validation for missing fields on user registration."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "R5 explicitly states that GET after deletion returns 200 with empty object {}, which matches the code behavior of returning empty object for missing articles."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2518,
+    "prompt_tokens": 2103,
+    "completion_tokens": 415
+  }
+}

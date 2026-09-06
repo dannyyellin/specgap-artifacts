@@ -1,0 +1,37 @@
+Timestamp: 2026-06-01 21:40:48
+Detector:  gpt-4.1-mini
+Service:   nestjs-realworld  Round: 1  Removals: [5, 6, 9, 12, 19, 23, 25, 27, 29]
+Method:    zeroshot
+
+Tokens: prompt=8807, completion=2554, total=11361
+Additions: 9
+Omissions: 18
+
+  A A1: The code allows any authenticated user to update or delete any article regardless of ownership.
+  A A2: The code returns 422 status code with detailed field-specific error messages for user registration uniqueness violations instead of 400 with a generic 'Username and email must be unique' message.
+  A A3: The code returns 422 status code with 'Missing fields' error detail when required user registration fields are missing.
+  A A4: The code returns 422 status code with 'email or password is invalid' error detail on login failure instead of 401 with a generic unauthorized message.
+  A A5: The code returns an empty JSON object {} when an article is not found or after deletion instead of 404 status code.
+  A A6: The code returns a 'status': 'ok' JSON response on comment deletion instead of an empty object or 200 status only.
+  A A7: The code includes 'favorited' and 'favoritesCount' fields in article responses, always set to false and 0 respectively.
+  A A8: The code supports updating user email and username via PUT /api/user, which is not explicitly required by the specification.
+  A A9: The code supports pagination parameters (limit and offset) on /api/articles/feed endpoint, but the specification only explicitly tests pagination on /api/articles and /api/articles/feed with limit and offset but does not require offset parameter support explicitly.
+
+  O O1: The code does not prevent users from updating or deleting articles they do not own.
+  O O2: The code does not return 400 status with message containing 'cannot be equal' when a user attempts to follow or unfollow themselves.
+  O O3: The code does not return 500 status code when attempting to delete a user who has articles (foreign key constraint error).
+  O O4: The code does not implement the GET /api/articles/feed endpoint to return articles from followed users with correct articlesCount and pagination.
+  O O5: The code does not implement the POST /api/users endpoint to create a user with the exact error message 'Username and email must be unique' on duplicate username or email.
+  O O6: The code does not implement the GET /api/articles/feed endpoint to return 0 articlesCount and empty articles array when the user follows no one.
+  O O7: The code does not implement the ordering of articles by created timestamp descending in the feed endpoint.
+  O O8: The code does not implement the slug uniqueness check to ensure slugs are unique and start with slugified title plus random suffix.
+  O O9: The code does not implement the updated timestamp update on article update via @BeforeUpdate hook or equivalent.
+  O O10: The code does not implement the GET /api/articles endpoint filtering by tag parameter.
+  O O11: The code does not implement the GET /api/articles endpoint filtering by favorited parameter.
+  O O12: The code does not implement the GET /api/articles endpoint filtering by multiple parameters combined (author, tag, favorited).
+  O O13: The code does not implement the GET /api/articles/{slug} endpoint to return 404 status code when article not found.
+  O O14: The code does not implement the GET /api/articles/{slug}/comments endpoint to return comments with unique numeric IDs and correct bodies.
+  O O15: The code does not implement the POST /api/articles/{slug}/comments endpoint to return 200 status code and article with comments array including the new comment.
+  O O16: The code does not implement the DELETE /api/articles/{slug}/comments/{id} endpoint to return 200 status code and remove the comment.
+  O O17: The code does not implement the GET /api/profiles/{username} endpoint to return profile with following status.
+  O O18: The code does not implement the POST and DELETE /api/profiles/{username}/follow endpoints with correct status codes and error handling.

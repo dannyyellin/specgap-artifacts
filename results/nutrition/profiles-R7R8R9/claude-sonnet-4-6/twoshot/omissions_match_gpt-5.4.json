@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R8",
+        "label": "MATCH",
+        "reasoning": "O1 states that GET /profiles is not restricted to the restaurant Owner only, which is the same behavior as removing the owner-only restriction on GET /profiles."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 discusses query filtering semantics for GET /profiles, which does not correspond to any of the listed reference requirements."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 concerns PUT /profiles/{id} update behavior, which is unrelated to the reference requirements provided."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 is about token forwarding/authentication when /profileDishes calls /dishes, not about protein exclusion, GET /profiles owner restriction, or user_id source in request handling."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 979,
+    "prompt_tokens": 711,
+    "completion_tokens": 268
+  }
+}

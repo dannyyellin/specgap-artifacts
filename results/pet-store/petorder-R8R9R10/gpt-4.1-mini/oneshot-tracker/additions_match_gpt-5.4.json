@@ -1,0 +1,18 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Adding a separate transaction sequence-number 'id' field does not describe pet selection, deleting a pet after purchase, or purchase-id uniqueness/reuse."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 540,
+    "prompt_tokens": 463,
+    "completion_tokens": 77
+  }
+}

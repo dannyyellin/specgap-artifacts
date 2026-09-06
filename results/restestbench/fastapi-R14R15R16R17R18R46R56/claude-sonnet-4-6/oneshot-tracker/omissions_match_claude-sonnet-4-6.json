@@ -1,0 +1,54 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R15",
+        "label": "PARTIAL",
+        "reasoning": "O1 identifies the missing password recovery endpoint, which is required by R15 (and R16), but only partially captures the full behavior described in those requirements."
+      },
+      {
+        "detection_id": "O1",
+        "requirement_id": "R16",
+        "label": "PARTIAL",
+        "reasoning": "O1 also covers the missing endpoint needed for R16's 404 non-existent user scenario, but doesn't specifically describe that behavior."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R17",
+        "label": "PARTIAL",
+        "reasoning": "O2 identifies the missing reset-password endpoint required by R17, but only partially captures the full flow including superuser token extraction and login verification."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R18",
+        "label": "PARTIAL",
+        "reasoning": "O2 identifies the missing reset-password endpoint and mentions the 400 invalid token behavior required by R18, partially matching that requirement."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R56",
+        "label": "PARTIAL",
+        "reasoning": "O2 mentions the 422 validation error for passwords shorter than 8 characters, which matches R56's scenario, but O2 covers multiple behaviors beyond just R56."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R14",
+        "label": "MATCH",
+        "reasoning": "O3 directly identifies the missing test-token endpoint that R14 requires, which should return the authenticated user's email field."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R15",
+        "label": "PARTIAL",
+        "reasoning": "O4 identifies the missing email-sending functionality required by R15, which specifies that an actual email must be sent and verifiable via mailcatcher, but doesn't cover the full R15 scenario."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1818,
+    "prompt_tokens": 1263,
+    "completion_tokens": 555
+  }
+}

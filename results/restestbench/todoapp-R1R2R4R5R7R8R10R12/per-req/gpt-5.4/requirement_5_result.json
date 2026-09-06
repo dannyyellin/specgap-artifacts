@@ -1,0 +1,18 @@
+{
+  "req_id": 5,
+  "requirement_vague": "Users cannot access another user's todo",
+  "requirement_precise": "Register two users (userA and userB) and login with each. UserA creates a todo and notes the returned ID. UserB calls GET /todos/{id} using userA's todo ID. Verify the response status is 404 Not Found (because userB doesn't own it and is not admin).",
+  "removed": true,
+  "omissions": [],
+  "implementation": {
+    "location": "GET /todos/{id} -> get_todo",
+    "code_reference": "todo = session.exec(\n    select(Todo).where(Todo.id == id, Todo.user_id == current_user.id)\n).first()\nif not todo:\n    raise HTTPException(\n        status_code=status.HTTP_404_NOT_FOUND,",
+    "reasoning": "The todo lookup is scoped to both the requested todo ID and the authenticated user's ID, so a user cannot retrieve another user's todo. If no matching owned todo exists, the handler returns 404 Not Found, which matches the requirement."
+  },
+  "usage": {
+    "total_tokens": 2556,
+    "prompt_tokens": 2426,
+    "completion_tokens": 130
+  },
+  "parse_error": false
+}

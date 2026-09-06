@@ -1,0 +1,14 @@
+{
+  "req_id": 30,
+  "requirement_vague": "Verify the superuser (admin@example.com / password123) can change their own password and change it back.",
+  "requirement_precise": "Authenticate using the existing superuser credentials (admin@example.com / password123) to obtain an access token. Using that superuser access token, update the superuser's own password by supplying the current password and a newly generated password. Verify the response status is 200 and the response body contains a field 'message' equal to 'Password updated successfully'. Then verify that login with the NEW password succeeds. Finally, revert the password back to the original by supplying the new password as current and the original password as new. Verify the response status is 200 and verify that login with the ORIGINAL password succeeds again.",
+  "verdict": "SPEC_LEAKED",
+  "spec_evidence": "- \"Create a new user with a generated email and initial password. Authenticate as the superuser (admin@example.com / password123). Using the superuser access token, request the password-recovery HTML content for the created user's email. Then submit the password reset request using the extracted reset token and a new password. Verify the password reset response has HTTP 200 and the response JSON is exactly {\\\"message\\\": \\\"Password updated successfully\\\"}. Finally, verify that login with the new password succeeds (returns 200).\"\n- \"Authenticate as the superuser (use superuser credentials admin@example.com / password123) to obtain an access token. Using that access token, invoke the update own password operation for the authenticated user with a payload where 'current_password' and 'new_password' are both set to the configured first superuser password. Verify the response status is 400. Verify the response JSON body contains a 'detail' field equal to 'New password cannot be the same as the current one'.\"\n- \"Sign in using the built-in admin account (username 'admin@example.com', password 'password123') to obtain an access token. Using that token, attempt to change the currently authenticated user's password by submitting a payload where both the current password and the new password are the same random string that does not match the real password. Verify the response status is 400. Verify the response body contains a detail message equal to 'Incorrect password'.\"",
+  "reasoning": "The spec explicitly defines an 'update own password' operation for the authenticated user and tests its failure conditions for the superuser, which directly entails that the operation applies to the superuser as well. Combined with the separate password-change success flow showing that a successful password update enables login with the new password, a reader can infer the missing successful superuser own-password-change scenario.",
+  "parse_error": false,
+  "usage": {
+    "total_tokens": 5639,
+    "prompt_tokens": 5246,
+    "completion_tokens": 393
+  }
+}

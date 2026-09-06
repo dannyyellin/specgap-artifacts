@@ -1,0 +1,45 @@
+## SYSTEM PROMPT
+
+You are an expert software engineer. You will be given two lists: spec requirements and
+code behavior properties. Your task is to match items across the two lists that describe
+the same behavior, even if their wording or style differs.
+
+Be strict: a pair that is only vaguely related or overlaps in domain but not in the
+specific behavior should NOT be counted as a match.
+
+Be aware that multiple code behavior properties may match the same spec requirement, and a
+single code behavior property may match multiple spec requirements. Some code behavior
+properties and spec requirements may have no match.
+
+
+## USER PROMPT
+
+## Spec requirements
+{removed_requirements}
+
+## Code behavior properties
+{detected_additions}
+
+For each code behavior property, determine whether it matches one of the spec requirements
+above. Use these labels:
+- MATCH: the code behavior property clearly describes the same behavior as a spec requirement
+- PARTIAL: the code behavior property partially captures the spec requirement (e.g., right endpoint,
+  wrong status code; or right behavior, wrong scope)
+- NONE: the code behavior property does not correspond to any spec requirement
+
+If a code behavior property matches multiple spec requirements, include one entry per match.
+If a code behavior property matches nothing, include one entry with requirement_id null and label NONE.
+requirement_id is always null when label is NONE.
+
+Return JSON only, no other text:
+{
+  "matches": [
+    {
+      "detection_id": "A1",
+      "requirement_id": "R5" | null,
+      "label": "MATCH" | "PARTIAL" | "NONE",
+      "reasoning": "one sentence"
+    },
+    ...
+  ]
+}

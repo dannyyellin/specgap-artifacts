@@ -1,0 +1,60 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the missing DELETE pet from store after purchase step, which is exactly what R9 specifies was removed."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R8",
+        "label": "MATCH",
+        "reasoning": "O2 directly describes the missing random pet selection algorithm when multiple pets are available, matching R8 exactly."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 concerns incorrect HTTP status codes (500 vs 503) for external service failures, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "O4 is about not rejecting client-supplied purchase-id fields, which is related to purchase-id uniqueness constraints in R10, but R10 specifically refers to purchase-id reuse uniqueness rather than rejecting client-supplied purchase-id in the payload."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 concerns incorrect status codes for GET /transactions errors, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 concerns malformed transaction ID handling in GET /transactions/{id}, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O7 concerns an incorrect MongoDB hostname in the connection URI, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "O8 partially overlaps with R9 by noting the missing DELETE interaction with pet-store, but frames it more broadly as a cross-service data replication concern rather than specifically the missing DELETE pet step."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1747,
+    "prompt_tokens": 1129,
+    "completion_tokens": 618
+  }
+}

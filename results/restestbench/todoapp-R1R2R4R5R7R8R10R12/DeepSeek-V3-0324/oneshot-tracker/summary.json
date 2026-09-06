@@ -1,0 +1,22 @@
+{
+  "method": "oneshot-tracker",
+  "removals": [
+    1,
+    2,
+    4,
+    5,
+    7,
+    8,
+    10,
+    12
+  ],
+  "detector_model": "DeepSeek-V3-0324",
+  "gen_usage": null,
+  "detect_usage": {
+    "total_tokens": 4914,
+    "prompt_tokens": 4357,
+    "completion_tokens": 557
+  },
+  "n_additions": 3,
+  "n_omissions": 3
+}

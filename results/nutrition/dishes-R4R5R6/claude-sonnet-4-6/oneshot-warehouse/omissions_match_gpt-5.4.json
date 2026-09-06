@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O1 describes that POST/PUT/DELETE are not restricted to the restaurant owner, which is the same owner-only restriction removed in R5."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O2 describes missing contains-style filtering for ingredient query parameters, which is one of the specific query string filtering semantics removed in R6."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O3 describes missing less-than-or-equal nutrient filtering semantics, which directly matches the lte filtering semantics removed in R6."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "O4 concerns handling string-valued Ninja API fields, which is related to Ninja API field mapping details but focuses on value conversion behavior rather than field name mapping specifically."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 997,
+    "prompt_tokens": 720,
+    "completion_tokens": 277
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This password-recovery HTML endpoint is unrelated to any listed requirement about item permissions, deletion, login failure, password update, duplicate signup, or password-length validation."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Returning HTML inside a JSON message field for password recovery does not correspond to any of the provided requirements."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Sending password recovery emails to mailcatcher is not described by any of the listed requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1139,
+    "prompt_tokens": 951,
+    "completion_tokens": 188
+  }
+}

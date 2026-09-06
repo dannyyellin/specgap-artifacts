@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O1 identifies the missing validation for the title field in POST /todos, which corresponds to R2's requirement, but O1 describes the absence of the check rather than the expected 400 Bad Request response behavior."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "O2 identifies the missing validation that the body id must match the URL parameter in PUT /todos/{id}, which corresponds to R10's requirement, but describes the absence of the check rather than the expected 400 Bad Request response."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements describe the behavior of GET /todos returning 401 when called without an Authorization header or token."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1352,
+    "prompt_tokens": 1085,
+    "completion_tokens": 267
+  }
+}

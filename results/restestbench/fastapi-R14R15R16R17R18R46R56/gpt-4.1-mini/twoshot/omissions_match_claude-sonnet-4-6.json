@@ -1,0 +1,162 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers item title length validation behavior."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement specifically addresses the HTTP status code returned on item creation."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers the status code for insufficient permissions on item read."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers validation of title/description lengths on item update."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement specifically requires verifying deletion by re-fetching the item after DELETE /api/v1/items/{item_id}."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers password length and email format validation on signup returning 422."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers the duplicate superuser email error behavior on signup."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers strict password length enforcement on signup."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers rejection of same-as-current password on password change."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers password length validation on password change endpoint."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers superuser self-deletion restriction on DELETE /api/v1/users/me."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers 403 response when non-superuser accesses another user's data."
+      },
+      {
+        "detection_id": "O13",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers 409 on email conflict during user update."
+      },
+      {
+        "detection_id": "O14",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers 403 when superuser tries to delete themselves via DELETE /api/v1/users/{user_id}."
+      },
+      {
+        "detection_id": "O15",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers 422 validation error for invalid UUID format on item or user endpoints."
+      },
+      {
+        "detection_id": "O16",
+        "requirement_id": "R15",
+        "label": "PARTIAL",
+        "reasoning": "O16 notes that password recovery endpoints are not implemented, which partially relates to R15 (password recovery via POST /api/v1/password-recovery/{email}), but does not cover the full behavior including mailcatcher verification."
+      },
+      {
+        "detection_id": "O16",
+        "requirement_id": "R16",
+        "label": "PARTIAL",
+        "reasoning": "O16 notes missing password recovery endpoint, which is also required by R16 for the non-existent user scenario, but does not address the 404 response behavior."
+      },
+      {
+        "detection_id": "O16",
+        "requirement_id": "R17",
+        "label": "PARTIAL",
+        "reasoning": "O16 notes missing password recovery/reset endpoints, which are central to R17's password reset flow, but does not capture the full reset and login verification behavior."
+      },
+      {
+        "detection_id": "O17",
+        "requirement_id": "R15",
+        "label": "PARTIAL",
+        "reasoning": "O17 notes no email sending or mailcatcher integration, which is part of R15's requirement to verify email delivery via mailcatcher, but does not cover the full R15 behavior."
+      },
+      {
+        "detection_id": "O18",
+        "requirement_id": "R14",
+        "label": "PARTIAL",
+        "reasoning": "O18 notes no test token endpoint returning user email, which matches R14's requirement to call the test token endpoint and verify the email field, but does not address the authentication step."
+      },
+      {
+        "detection_id": "O19",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers logout or token revocation."
+      },
+      {
+        "detection_id": "O20",
+        "requirement_id": "R18",
+        "label": "MATCH",
+        "reasoning": "O20 directly describes the missing password reset token validation returning 'Invalid token' detail, which is exactly what R18 requires when an invalid token is submitted."
+      },
+      {
+        "detection_id": "O20",
+        "requirement_id": "R56",
+        "label": "PARTIAL",
+        "reasoning": "O20 mentions missing token validation logic, which is related to R56's reset-password endpoint, but R56 specifically tests password length validation (422) rather than invalid token (400)."
+      },
+      {
+        "detection_id": "O21",
+        "requirement_id": "R46",
+        "label": "PARTIAL",
+        "reasoning": "O21 notes no cascade deletion of items when a user is deleted, which is part of R46's requirement that after deleting a user, their items return 404, but does not cover the full R46 scenario."
+      },
+      {
+        "detection_id": "O22",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement specifically addresses the absence of explicit response status codes on create/update/delete operations."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 3991,
+    "prompt_tokens": 2323,
+    "completion_tokens": 1668
+  }
+}

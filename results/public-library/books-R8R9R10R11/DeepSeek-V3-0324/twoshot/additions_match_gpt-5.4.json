@@ -1,0 +1,24 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "A1 concerns publisher and publishedDate in POST /books, which overlaps with the removed Google Books API handling for those fields, but it describes accepting client-provided values rather than the integration itself."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A2 is about validating publisher and publishedDate in PUT /books/{id}, which is not described by any of the listed spec removals."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 647,
+    "prompt_tokens": 493,
+    "completion_tokens": 154
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A password recovery HTML endpoint is not described by any of the listed requirements, which focus on signup, login failure, item access/deletion, and password update."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A test-token endpoint is not covered by any listed requirement, which do not specify token validation via a dedicated endpoint."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Support for updating is_active and is_superuser fields does not correspond to any listed requirement, including the password-update requirement which concerns only changing a password."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1111,
+    "prompt_tokens": 908,
+    "completion_tokens": 203
+  }
+}

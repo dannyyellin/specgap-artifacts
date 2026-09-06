@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R3",
+        "label": "PARTIAL",
+        "reasoning": "A1 describes a workaround for owner registration during POST /users rather than pre-registration on initialization, which is related to R3's removal of owner pre-registration but addresses it through a different mechanism."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement describes removing or adding logic to update the 'privileged' field during password changes."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R3",
+        "label": "PARTIAL",
+        "reasoning": "A3 describes init_db resetting the owner's password, which is related to owner pre-registration on initialization (R3), but focuses on password persistence rather than the presence or absence of pre-registration itself."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 957,
+    "prompt_tokens": 700,
+    "completion_tokens": 257
+  }
+}

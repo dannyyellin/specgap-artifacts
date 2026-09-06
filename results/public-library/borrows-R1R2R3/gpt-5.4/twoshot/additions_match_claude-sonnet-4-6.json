@@ -1,0 +1,24 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "A1 describes the code accepting a client-supplied returnDate rather than computing it as loanDate + 30 days, which directly corresponds to R1's removal of the returnDate computation from Borrows."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A2 describes outbound validation calls to Cardholders and Books services, which does not correspond to any of the three removed behaviors (returnDate computation, overdue constraint, or Logs notification)."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 839,
+    "prompt_tokens": 647,
+    "completion_tokens": 192
+  }
+}

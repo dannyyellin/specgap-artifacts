@@ -1,0 +1,19 @@
+{
+  "app": "pet-store",
+  "variant": "petstore-R4R5R6R7",
+  "service": "pet-store",
+  "req_id": "R4",
+  "requirement": "The temperament and group_behavior values from the external animals API are extracted into the pet-type's attributes according to the specified extraction rules.",
+  "source_headline": "Removed temperament/group_behavior to attributes extraction rules",
+  "model": "gpt-5.4",
+  "pass": 1,
+  "label": "PARTIAL",
+  "evidence": "fetch_pet_type_from_ninja() extracts characteristics into attributes via `for key in [\"temperament\", \"slogan\", \"group\", \"color\", \"skin_type\", \"top_speed\", \"diet\", \"main_prey\"]:` and splits string values on commas before deduping. However, it looks for `group` rather than the required external API field `group_behavior`, and there is no code referencing `group_behavior` anywhere.",
+  "reasoning": "There is clearly code addressing the requirement: the service fetches animal data and populates the pet-type `attributes` from external API characteristics, including `temperament`. But the requirement specifically states that both `temperament` and `group_behavior` values must be extracted according to the rules, and this code does not extract `group_behavior` at all, using `group` instead. Per the decision guide, because the mechanism exists but misses a material required field, the correct label is PARTIAL.",
+  "usage": {
+    "total_tokens": 4250,
+    "prompt_tokens": 4034,
+    "completion_tokens": 216
+  },
+  "timestamp": "2026-07-16 15:00:48"
+}

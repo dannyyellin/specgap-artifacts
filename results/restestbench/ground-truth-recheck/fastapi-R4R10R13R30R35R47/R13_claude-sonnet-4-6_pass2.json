@@ -1,0 +1,20 @@
+{
+  "variant": "fastapi-R4R10R13R30R35R47",
+  "req_id": 13,
+  "model": "claude-sonnet-4-6",
+  "pass": 2,
+  "verdict": "IMPLEMENTED",
+  "requirement_vague": "Check that log in rejects a wrong password.",
+  "omissions": [],
+  "implementation": {
+    "location": "login_access_token",
+    "code_reference": "user = authenticate(session, form_data.username, form_data.password)\nif not user:\n    raise HTTPException(status_code=400, detail=\"Incorrect email or password\")",
+    "reasoning": "The login endpoint calls authenticate(), which returns None if the password does not match via verify_password(). When None is returned, the endpoint raises an HTTPException with status code 400 and detail 'Incorrect email or password', exactly as required."
+  },
+  "usage": {
+    "total_tokens": 7525,
+    "prompt_tokens": 7376,
+    "completion_tokens": 149
+  },
+  "timestamp": "2026-07-12 10:35:47"
+}

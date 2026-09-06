@@ -1,0 +1,18 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R8",
+        "label": "PARTIAL",
+        "reasoning": "A1 relates to GET /profiles filtering by 'user_id', which is connected to R8's removal of owner-only restriction on GET /profiles, but A1 focuses on query parameter filtering rather than the access restriction change itself."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 601,
+    "prompt_tokens": 487,
+    "completion_tokens": 114
+  }
+}

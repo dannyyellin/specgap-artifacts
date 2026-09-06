@@ -1,0 +1,22 @@
+Timestamp: 2026-06-01 21:02:55
+Detector:  gpt-4.1-mini
+App/Variant/Service: pet-store/petorder-R8R9R10/pet-order
+Method:    twoshot
+
+Tokens: prompt=10799, completion=1174, total=11973
+Additions: 5
+Omissions: 7
+
+  A A1: Stores a 'store' field in the purchase document even if it was not supplied in the request
+  A A2: Stores a 'pet-name' field in the purchase document even if it was not supplied in the request
+  A A3: Generates a separate numeric transaction 'id' field for transactions, distinct from 'purchase-id'
+  A A4: Returns 401 Unauthorized when a non-owner user attempts to access /transactions endpoints
+  A A5: Returns empty JSON array when query parameters on /transactions are invalid or unknown
+
+  O O1: POST /purchases does not return 401 if the Authorization header is missing or invalid
+  O O2: POST /purchases does not return 403 if the purchaser in the payload does not match the authenticated user
+  O O3: POST /purchases does not return 400 with message {"error": "No pet of this type is available"} if no pet is available
+  O O4: POST /purchases does not delete the chosen pet from the appropriate pet-store
+  O O5: GET /transactions does not support conjunction of multiple query parameters as filters
+  O O6: GET /transactions/{id} does not return 400 if the id parameter is missing or empty
+  O O7: POST, PUT, DELETE, PATCH methods on /purchases and /transactions/{id} return 405 as required

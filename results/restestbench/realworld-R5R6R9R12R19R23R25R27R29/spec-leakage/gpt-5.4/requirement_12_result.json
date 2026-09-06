@@ -1,0 +1,14 @@
+{
+  "req_id": 12,
+  "requirement_vague": "Verify article filtering by tag works correctly",
+  "requirement_precise": "Create a user. Create article1 with title 'First Tagged Article' and tagList ['javascript', 'testing']. Create article2 with title 'Second Tagged Article' and tagList ['python', 'testing']. Create article3 with title 'No Match Article' and tagList ['ruby']. GET /api/articles?tag=javascript. Verify articlesCount is 1 and articles array contains only 'First Tagged Article'. GET /api/articles?tag=testing. Verify articlesCount is 2 and articles array contains both 'First Tagged Article' and 'Second Tagged Article'. GET /api/articles?tag=nonexistent. Verify articlesCount is 0.",
+  "verdict": "NOT_LEAKED",
+  "spec_evidence": "- Create a user (username: 'taglistuser1', email: 'taglistuser1@test.com', password: 'pass123'). Create an article with title 'Multi Tag Article' and tagList ['tag1', 'tag2', 'tag3']. Extract the slug from response. GET /api/articles/{slug}. Verify the article's tagList contains exactly ['tag1', 'tag2', 'tag3'] in array format. Create another article with empty tagList []. GET that article. Verify tagList is an empty array []. This tests the simple-array column handling for tagList.",
+  "reasoning": "The reduced spec states that articles store and return a tagList, but it never states that GET /api/articles supports filtering by a tag query parameter or that such filtering must affect articlesCount/results. Concluding tag-based filtering would require outside knowledge beyond the text.",
+  "parse_error": false,
+  "usage": {
+    "total_tokens": 3389,
+    "prompt_tokens": 3194,
+    "completion_tokens": 195
+  }
+}

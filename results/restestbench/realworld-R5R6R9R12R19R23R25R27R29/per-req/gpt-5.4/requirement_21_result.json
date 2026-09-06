@@ -1,0 +1,23 @@
+{
+  "req_id": 21,
+  "requirement_vague": "Verify article title and description are correctly stored and retrieved",
+  "requirement_precise": "Create user1 (username: 'fieldsuser1', email: 'fieldsuser1@test.com', password: 'pass123'). User1 creates an article with title 'Test Article Title', description 'Test article description content'. Extract the slug. GET /api/articles/{slug}. Verify the article's title is exactly 'Test Article Title' and description is exactly 'Test article description content'. This tests title and description field persistence.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": [
+      "create_article",
+      "get_article",
+      "Article model",
+      "article_response"
+    ],
+    "code_reference": "article = Article(\n    slug=slugify(title),\n    title=title,\n    description=description,\n...\nreturn {\n    \"article\": {\n        \"slug\": article.slug,\n        \"title\": article.title,\n        \"description\": article.description,",
+    "reasoning": "The create_article route stores the incoming article title and description directly on the Article model and commits them to the database. The get_article route fetches the article by slug and article_response returns the persisted title and description fields unchanged in the response."
+  },
+  "usage": {
+    "total_tokens": 5315,
+    "prompt_tokens": 5173,
+    "completion_tokens": 142
+  },
+  "parse_error": false
+}

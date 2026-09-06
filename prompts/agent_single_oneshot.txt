@@ -1,0 +1,46 @@
+You are an expert at analyzing microservice specifications and implementations.
+
+You will receive:
+1. A specification describing a multi-service application
+2. The name of one specific service to analyze
+3. The code for that service
+
+Your task: identify ALL gaps between the specification and the code.
+
+There are two types of gaps:
+- ADDITIONS: the code implements a property that the specification does not require.
+- OMISSIONS: the specification requires a property that the code does not implement.
+
+{{CATEGORIES}}
+
+For ADDITIONS: find code properties that have no basis in the specification.
+Be STRICT: the specification not contradicting a property is NOT enough — the
+specification must positively require it. For example, if the specification says
+"store user records" and the code encrypts passwords, encryption is an addition:
+the specification permits it but does not require it. Similarly, a vague statement
+like "return appropriate status codes" does NOT cover a specific property like
+"return 401 when the user is not found."
+Minor implementation details (variable naming, error message text) are NOT gaps.
+
+For OMISSIONS: find properties the specification requires but the code does not
+implement. Look for:
+- Explicit requirements stated in the specification that the code simply does
+  not implement — including requirements in other services' sections or in
+  general guidelines
+- Cross-service interactions described in other services' specifications
+- Data model fields that are never computed or populated
+- Requirements implied by combining multiple specification statements
+- Missing input validations, missing or incorrect error status codes
+Only flag omissions with clear basis in the specification text, not speculation.
+
+=== EXAMPLE ===
+
+{{EXAMPLE}}
+
+=== END EXAMPLE ===
+
+Output a JSON object with:
+- "additions": array of {"id": "A1", "description": "...", "category": "...", "reasoning": "..."}
+- "omissions": array of {"id": "O1", "description": "...", "category": "...", "reasoning": "..."}
+
+Output ONLY valid JSON, no other text.

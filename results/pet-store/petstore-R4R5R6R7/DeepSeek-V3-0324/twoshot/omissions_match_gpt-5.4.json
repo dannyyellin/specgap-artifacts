@@ -1,0 +1,54 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "O1 describes missing birthdateGT/birthdateLT filtering, which is the same behavior referenced in R7."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O2 describes the constraint preventing deletion of a pet-type when it has pets, which is exactly the behavior in R5."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "O3 concerns the status code returned when enforcing the 'cannot delete pet-type if it has pets' rule, so it only partially captures the broader constraint removed in R5."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 is about partial field updates in PUT and does not correspond to any listed reference requirement."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 concerns picture-url validation, which is unrelated to any of R4\u2013R7."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R6",
+        "label": "NONE",
+        "reasoning": "O6 is about missing lifespan defaulting behavior, not the removed lifespan range parsing rules described in R6."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "O7 concerns attribute extraction/splitting from the Ninja API, which overlaps with R4's removal of temperament/group_behavior extraction rules but does not clearly mention those specific source fields."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1196,
+    "prompt_tokens": 747,
+    "completion_tokens": 449
+  }
+}

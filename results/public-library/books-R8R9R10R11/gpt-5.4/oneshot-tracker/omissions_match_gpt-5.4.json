@@ -1,0 +1,48 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "Both describe removal of the Google Books API behavior for obtaining publisher and publishedDate during POST."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "This is a specific sub-behavior of the removed Google Books integration, so it only partially corresponds to the broader removal requirement."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "This concerns fallback behavior tied to Google Books responses, which is only a detail within the removed Google Books integration."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement concerns publishedDate format validation."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R11",
+        "label": "MATCH",
+        "reasoning": "Both describe removal of validation against a fixed allowed genre list."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "Both describe removal of the 13-digit ISBN_13 format requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1147,
+    "prompt_tokens": 811,
+    "completion_tokens": 336
+  }
+}

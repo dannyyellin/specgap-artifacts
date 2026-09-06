@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R8",
+        "label": "PARTIAL",
+        "reasoning": "Both concern GET /profiles access/filtering, but A1 is about supporting a user_id query parameter rather than removing the owner-only restriction."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rejecting unrecognized query parameters on GET /profiles does not correspond to any listed requirement."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Duplicate-profile rejection on POST /profiles is unrelated to the listed requirements."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "Including protein in /profileDishes directly matches the requirement that protein exclusion was removed from the profileDishes calculation."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 897,
+    "prompt_tokens": 656,
+    "completion_tokens": 241
+  }
+}

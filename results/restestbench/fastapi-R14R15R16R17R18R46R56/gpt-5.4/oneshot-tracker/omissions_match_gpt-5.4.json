@@ -1,0 +1,78 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R15",
+        "label": "PARTIAL",
+        "reasoning": "It matches the required password recovery request endpoint and thus the core behavior, but it does not cover the signup precondition, 200 response body, or email verification details."
+      },
+      {
+        "detection_id": "O1",
+        "requirement_id": "R16",
+        "label": "PARTIAL",
+        "reasoning": "It corresponds to the same password recovery endpoint used for a non-existent user, but only states the endpoint is missing rather than the specific required 404 behavior."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R17",
+        "label": "PARTIAL",
+        "reasoning": "R17 requires the reset-password endpoint as part of the successful password reset flow, but O2 only states the endpoint is absent and omits the token extraction, success response, and login verification."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R18",
+        "label": "PARTIAL",
+        "reasoning": "It refers to the same reset-password operation, but does not capture the specific invalid-token request and required 400 detail response."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R56",
+        "label": "PARTIAL",
+        "reasoning": "It concerns the same reset-password endpoint, but does not mention the specific 422 validation behavior for a 7-character password."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R14",
+        "label": "PARTIAL",
+        "reasoning": "It identifies the same test token endpoint required by R14, but omits the authentication setup and the exact expected 200 response containing email admin@example.com."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R17",
+        "label": "PARTIAL",
+        "reasoning": "It matches the password-recovery HTML content step in the password reset flow, but not the rest of the required end-to-end reset and login verification."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns retrieving a non-existent user by ID, which is not among the provided reference requirements."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R15",
+        "label": "PARTIAL",
+        "reasoning": "It captures the email-sending and mailcatcher verification portion of the password recovery requirement, but not the signup precondition or the exact 200 JSON response."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R17",
+        "label": "PARTIAL",
+        "reasoning": "It overlaps with the reset-token generation and successful password update flow in R17, but does not include the HTML retrieval step, exact success body, or final login verification."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R18",
+        "label": "MATCH",
+        "reasoning": "It directly describes the required invalid reset token handling, including returning 400 with detail 'Invalid token'."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2057,
+    "prompt_tokens": 1309,
+    "completion_tokens": 748
+  }
+}

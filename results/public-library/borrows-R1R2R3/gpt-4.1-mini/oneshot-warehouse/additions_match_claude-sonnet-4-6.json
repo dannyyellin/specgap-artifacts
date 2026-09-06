@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 describes filtering fields for GET /borrows, which does not correspond to any of the three spec requirements about return date computation, overdue constraints, or log notifications."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A2 describes a validation that returnDate is not earlier than loanDate, which is an added constraint unrelated to the removed return date computation (R1), overdue borrow constraint (R2), or log notification (R3)."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A3 describes date range filtering via startDate/endDate query parameters, which does not correspond to any of the three spec requirements about return date computation, overdue constraints, or log notifications."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 957,
+    "prompt_tokens": 687,
+    "completion_tokens": 270
+  }
+}

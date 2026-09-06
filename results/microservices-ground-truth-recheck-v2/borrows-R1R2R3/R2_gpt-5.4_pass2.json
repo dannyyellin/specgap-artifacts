@@ -1,0 +1,19 @@
+{
+  "app": "public-library",
+  "variant": "borrows-R1R2R3",
+  "service": "borrows",
+  "req_id": "R2",
+  "requirement": "A cardholder with 2 or more overdue books is blocked from checking out another book; such a checkout attempt returns status 400.",
+  "source_headline": "Removed overdue borrow constraint (2+ overdue books blocks checkout, returns 400) from Borrows",
+  "model": "gpt-5.4",
+  "pass": 2,
+  "label": "GAP",
+  "evidence": "In POST /borrows, the code validates JSON, checks cardholder existence via remote_resource_exists(CARDHOLDERS_URL, data[\"cardholderId\"]), checks book existence via book_exists_by_isbn(data[\"ISBN\"]), then inserts the borrow and returns 201. There is no query or logic anywhere that counts overdue borrows for a cardholder or blocks checkout attempts based on having 2 or more overdue books.",
+  "reasoning": "Per the decision guide, the first question is whether any code addresses this requirement at all. It does not: no function computes overdue status, no route checks a cardholder's existing borrows before creating a new one, and no 400 is returned for this condition. Therefore a test expecting checkout to be blocked for cardholders with 2+ overdue books would fail because the behavior is absent entirely.",
+  "usage": {
+    "total_tokens": 3043,
+    "prompt_tokens": 2849,
+    "completion_tokens": 194
+  },
+  "timestamp": "2026-07-16 14:52:12"
+}

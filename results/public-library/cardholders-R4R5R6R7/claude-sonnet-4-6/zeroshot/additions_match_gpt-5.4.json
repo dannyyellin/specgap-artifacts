@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Restricting filterable query fields to name and email does not correspond to removing field type declarations, removing 415, removing the fine formula, or removing the Borrows cross-service call."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Validating that a payload id matches the URL id is unrelated to any listed requirement about field types, 415 errors, fine formula removal, or Borrows integration removal."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rejecting PUT requests with no updatable fields does not describe any of the specified removals."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "It concerns unsupported media type handling, but it says the code returns 400 for non-JSON instead of aligning with the requirement that 415 was removed from general error codes."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1011,
+    "prompt_tokens": 729,
+    "completion_tokens": 282
+  }
+}

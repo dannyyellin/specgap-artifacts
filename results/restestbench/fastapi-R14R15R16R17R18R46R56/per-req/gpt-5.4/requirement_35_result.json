@@ -1,0 +1,18 @@
+{
+  "req_id": 35,
+  "requirement_vague": "Ensure registering a user with an existing email gets rejected.",
+  "requirement_precise": "Attempt to register a user using the existing superuser email 'admin@example.com' with a random password and random full name by calling the user registration operation. Verify the response status is 400. Verify the response body field 'detail' equals 'The user with this email already exists in the system'.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": "POST /api/v1/users/signup in signup(); startup initialization in init_db()",
+    "code_reference": "user = get_user_by_email(session, FIRST_SUPERUSER)\nif not user:\n    superuser = User(email=FIRST_SUPERUSER, ...)\n...\nexisting_user = get_user_by_email(session, user_in.email)\nif existing_user:\n    raise HTTPException(status_code=400, detail=\"The user with this email already exists in the system\")",
+    "reasoning": "The startup logic ensures a superuser with email 'admin@example.com' exists, and the signup endpoint checks for an existing user by email before creation. If that email is already present, it rejects the registration with HTTP 400 and the exact required detail message."
+  },
+  "usage": {
+    "total_tokens": 4848,
+    "prompt_tokens": 4681,
+    "completion_tokens": 167
+  },
+  "parse_error": false
+}

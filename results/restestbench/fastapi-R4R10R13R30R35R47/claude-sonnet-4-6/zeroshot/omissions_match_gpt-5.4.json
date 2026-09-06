@@ -1,0 +1,24 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "O1 describes the same scenario as R4: a second non-superuser reading another user's item should be rejected with HTTP 400 and detail 'Not enough permissions'."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R35",
+        "label": "MATCH",
+        "reasoning": "O2 matches R35 because both concern duplicate signup using admin@example.com and require the exact error detail message for an already existing user."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1116,
+    "prompt_tokens": 968,
+    "completion_tokens": 148
+  }
+}

@@ -1,0 +1,19 @@
+Timestamp: 2026-06-02 09:36:46
+Detector:  claude-sonnet-4-6
+App/Variant/Service: public-library/cardholders-R4R5R6R7/cardholders
+Method:    zeroshot
+
+Tokens: prompt=5216, completion=1198, total=6414
+Additions: 4
+Omissions: 5
+
+  A A1: The GET /cardholders endpoint restricts query filtering to only 'name' and 'email' fields, explicitly rejecting other fields.
+  A A2: The PUT /cardholders/{id} endpoint returns 400 if the payload contains an 'id' field that does not match the URL cardholder_id.
+  A A3: The PUT /cardholders/{id} endpoint returns 400 if no updatable fields ('name' or 'email') are present and 'id' is also absent from the payload.
+  A A4: The POST /cardholders endpoint returns 400 if the Content-Type is not JSON (checks request.is_json).
+
+  O O1: The fine calculation does not compute the actual number of days overdue multiplied by FINE_PER_DAY ($0.50). Instead, it adds 1 (a flat count) per overdue book.
+  O O2: Non-JSON Content-Type on POST and PUT requests should return 415 (Unsupported Media Type) but the code returns 400 (Bad Request).
+  O O3: The GET /cardholders endpoint does not support filtering by the 'id' field via query string.
+  O O4: The PUT /cardholders/{id} endpoint does not return 415 when the Content-Type is not JSON; it returns 400.
+  O O5: The POST /cardholders endpoint does not validate that 'name' and 'email' are non-empty strings; it only checks that they are strings.

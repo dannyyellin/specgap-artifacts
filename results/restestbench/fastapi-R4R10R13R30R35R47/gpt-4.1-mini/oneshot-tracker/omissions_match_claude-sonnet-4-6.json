@@ -1,0 +1,138 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "O1 identifies the missing permission check on GET /items/{item_id} that R4 tests, but O1 describes it as a code omission rather than the expected 400 'Not enough permissions' behavior."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers filtering of item listings for non-superusers."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement specifically tests unauthenticated item creation behavior."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R35",
+        "label": "PARTIAL",
+        "reasoning": "O4 identifies the wrong error message for duplicate email registration, which is exactly what R35 tests, but O4 states the wrong message rather than confirming the correct one."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 concludes there is no omission, so it does not describe a failing behavior matching any reference requirement."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 concludes there is no omission regarding same-password checks, so it does not match any reference requirement."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O7 concludes correct behavior with no omission, not matching any reference requirement."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O8 concludes correct behavior with no omission, not matching any reference requirement."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "O9 mentions DELETE /items/{item_id} permission checks but does not specifically address the 404 for non-existent item IDs that R10 tests."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": "R13",
+        "label": "PARTIAL",
+        "reasoning": "O10 confirms the correct 400 'Incorrect email or password' response on failed login, which is part of what R13 tests, but does not cover the full scenario of registering a user first."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers 422 errors for invalid UUID format in path parameters."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": "R47",
+        "label": "PARTIAL",
+        "reasoning": "O12 states password length validations are implemented, which relates to R47's test of a 7-character password returning 422, but does not specifically describe that scenario."
+      },
+      {
+        "detection_id": "O13",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers password recovery for non-existent users."
+      },
+      {
+        "detection_id": "O14",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers the reset password endpoint behavior."
+      },
+      {
+        "detection_id": "O15",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers unique email constraint enforcement on user update endpoints."
+      },
+      {
+        "detection_id": "O16",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "O16 mentions item deletion returning 404 for non-existent items, which partially aligns with R10, but is too general to be a full match."
+      },
+      {
+        "detection_id": "O17",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers a user attempting to update another user's profile."
+      },
+      {
+        "detection_id": "O18",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers a user attempting to read another user's profile."
+      },
+      {
+        "detection_id": "O19",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement specifically tests the same-password update restriction."
+      },
+      {
+        "detection_id": "O20",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers superuser self-deletion restriction."
+      },
+      {
+        "detection_id": "O21",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O21 concludes correct behavior with no omission, not matching any reference requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 3112,
+    "prompt_tokens": 1744,
+    "completion_tokens": 1368
+  }
+}

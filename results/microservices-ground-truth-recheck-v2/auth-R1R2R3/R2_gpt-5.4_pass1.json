@@ -1,0 +1,19 @@
+{
+  "app": "nutrition",
+  "variant": "auth-R1R2R3",
+  "service": "authentication",
+  "req_id": "R2",
+  "requirement": "A special Owner user exists with name 'Owner', password 'owner#pw', and privileged=True.",
+  "source_headline": "Removed Owner special case (name='Owner', pw='owner#pw', privileged=True)",
+  "model": "gpt-5.4",
+  "pass": 1,
+  "label": "PARTIAL",
+  "evidence": "OWNER_NAME = os.environ.get(\"OWNER_NAME\", \"owner\"); OWNER_PASSWORD = os.environ.get(\"OWNER_PASSWORD\", \"owner\"); ensure_owner_user() inserts a user with {\"name\": OWNER_NAME, \"password\": OWNER_PASSWORD, \"id\": owner_id}; generate_token() sets \"privileged\": bool(user_doc[\"name\"] == OWNER_NAME)",
+  "reasoning": "The code clearly implements the mechanism for a special owner account by creating one at startup and marking that account privileged in generated tokens. However, the requirement as stated is for a user with exact name 'Owner', password 'owner#pw', and privileged=True. The implementation defaults to lowercase 'owner'/'owner' and does not store a privileged=True field on the user, so a test for the exact required credentials and attribute would fail.",
+  "usage": {
+    "total_tokens": 2087,
+    "prompt_tokens": 1900,
+    "completion_tokens": 187
+  },
+  "timestamp": "2026-07-16 14:55:55"
+}

@@ -1,0 +1,54 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R8",
+        "label": "MATCH",
+        "reasoning": "Both state that the owner-only restriction on GET /profiles was removed so any authenticated user may access it."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns validation of nutritional fields on POST /profiles, which is unrelated to any reference requirement."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "It involves user_id being supplied in the request body rather than derived solely from token validation, but focuses on integer validation and duplicate checking rather than the removal of token-derived user_id."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This discusses authorization for PUT/DELETE /profiles/{id}, which does not correspond to any listed reference requirement."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "Both describe that protein should no longer be excluded from profileDishes calculation/filtering."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Handling of a 201 response from the dishes service is not mentioned in the reference requirements."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about token presence validation for POST /profiles and does not match any reference requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1230,
+    "prompt_tokens": 814,
+    "completion_tokens": 416
+  }
+}

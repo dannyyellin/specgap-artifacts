@@ -1,0 +1,24 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 is about bcrypt cost factor strength, which does not correspond to any of the removed requirements about password rules, /verify error messaging, or owner pre-registration."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R3",
+        "label": "PARTIAL",
+        "reasoning": "A2 concerns owner-related privileged status tied to password changes, which overlaps with owner registration behavior but is not the same as removing owner pre-registration on initialization."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 639,
+    "prompt_tokens": 489,
+    "completion_tokens": 150
+  }
+}

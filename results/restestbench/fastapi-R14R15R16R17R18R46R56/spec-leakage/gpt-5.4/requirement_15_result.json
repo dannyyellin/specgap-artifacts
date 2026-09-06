@@ -1,0 +1,14 @@
+{
+  "req_id": 15,
+  "requirement_vague": "Ensure requesting password recovery works and an email is actually sent to the correct recipient (verify via mailcatcher at localhost:1080).",
+  "requirement_precise": "Register a normal user with email test15@example.com via POST /api/v1/users/signup. Then request a password recovery email via POST /api/v1/password-recovery/{email}. Verify that the API responds with HTTP status code 200, a JSON message 'Password recovery email sent', and that an email was actually sent to the correct recipient via the mailcatcher service (verify via GET http://localhost:1080/messages).",
+  "verdict": "NOT_LEAKED",
+  "spec_evidence": null,
+  "reasoning": "The reduced specification contains no mention of any password recovery endpoint, recovery workflow, email delivery, or mailcatcher verification. A reader could not deduce from the remaining text alone that requesting password recovery must send an email to the specified recipient.",
+  "parse_error": false,
+  "usage": {
+    "total_tokens": 5170,
+    "prompt_tokens": 5099,
+    "completion_tokens": 71
+  }
+}

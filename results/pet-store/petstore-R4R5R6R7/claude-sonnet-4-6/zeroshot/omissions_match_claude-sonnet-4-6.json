@@ -1,0 +1,84 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the missing 'cannot delete pet-type if it has pets' constraint, which is exactly what R5 refers to as removed."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 discusses 403 handling for DELETE /pet-types/{id} which does not correspond to any of the four reference requirements."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "O3 describes the missing logic for extracting attributes from 'temperament'/'group_behavior' fields, which matches R4's removal of temperament/group_behavior extraction rules."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "O4 directly describes the missing birthdateGT/birthdateLT query filtering, which is exactly what R7 refers to as removed."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "O5 partially captures R4 by noting the wrong keys are used for attributes extraction, but focuses on the nesting structure rather than the core temperament/group_behavior field selection logic."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "O7 relates to lifespan handling but describes a null vs 0 default issue rather than the range handling ('choose minimum'/'extract first integer') that R6 specifically refers to."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O8 concludes the behavior is consistent with the spec and does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O9 concludes the 405 handling is effectively correct and does not correspond to any of the four reference requirements."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O10 discusses duplicate pet name handling which does not correspond to any of the four reference requirements."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "O11 discusses the lifespan range extraction logic and concludes it is correctly implemented, which is related to R6 but does not identify it as a missing/removed behavior."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O12 discusses 403 handling for DELETE /pet-types/{id} which does not correspond to any of the four reference requirements."
+      },
+      {
+        "detection_id": "O13",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "O13 describes missing punctuation stripping in attributes splitting, which is part of the temperament/group_behavior extraction rules referenced in R4, but focuses on a sub-aspect of that logic."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2972,
+    "prompt_tokens": 2055,
+    "completion_tokens": 917
+  }
+}

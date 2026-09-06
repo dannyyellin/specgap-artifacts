@@ -1,0 +1,14 @@
+{
+  "req_id": 7,
+  "requirement_vague": "Deleting a non-existent todo returns a failing response",
+  "requirement_precise": "Register a user and login to get an access token. Call DELETE /todos/99999 (an ID that does not exist). Verify the response status code is 404 Not Found.",
+  "verdict": "NOT_LEAKED",
+  "spec_evidence": "- Register a user and login. Create a todo with title 'Todo to Delete' and note the ID. Call DELETE /todos/{id}. Verify the response status is 200 OK. Then call GET /todos/{id} and verify the response is 404 Not Found (todo no longer exists).\n- Register a user and login. Call PUT /todos/99999 with a valid todo body (id=99999, title='Test', isComplete=false). Verify the response status is 404 Not Found.",
+  "reasoning": "The spec states that GET on a deleted todo returns 404 and that PUT on a non-existent todo returns 404, but it never states what DELETE should return when the target todo does not exist. Concluding that DELETE /todos/99999 must also return 404 would require extrapolation beyond the explicit text.",
+  "parse_error": false,
+  "usage": {
+    "total_tokens": 1086,
+    "prompt_tokens": 889,
+    "completion_tokens": 197
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "app": "public-library",
+  "variant": "borrows-R1R2R3",
+  "service": "borrows",
+  "req_id": "R3",
+  "requirement": "On each checkout, the Borrows service notifies the Logs service so that a log entry is created for the borrow.",
+  "source_headline": "Removed \"Borrows notifies Logs on checkout\" from BOTH Borrows and Logs specs",
+  "model": "gpt-5.4",
+  "pass": 1,
+  "label": "INFERRED",
+  "evidence": "`create_log_for_borrow(borrow_doc)` builds a payload and does `requests.post(LOGS_URL, json=payload, timeout=5)` to `http://logs:5004/logs`. In `POST /borrows`, after `borrows_collection().insert_one(borrow_doc)`, the code calls `create_log_for_borrow(borrow_doc)` before returning `201`.",
+  "reasoning": "The code clearly contains behavior addressing the requirement: every checkout is the `POST /borrows` path, and that path invokes the Logs service to create a log entry for the new borrow. Although the result of the log call is not enforced, the requirement as stated only says the Borrows service notifies the Logs service on each checkout, which this code does. Per the decision guide, a test checking that a notification request is sent on checkout would pass.",
+  "usage": {
+    "total_tokens": 3036,
+    "prompt_tokens": 2846,
+    "completion_tokens": 190
+  },
+  "timestamp": "2026-07-16 14:52:25"
+}

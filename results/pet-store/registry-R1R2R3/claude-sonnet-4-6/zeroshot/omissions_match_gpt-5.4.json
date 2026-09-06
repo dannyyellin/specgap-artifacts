@@ -1,0 +1,54 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "It concerns the /verify anti-enumeration behavior and same invalid-credentials handling, but adds conflicting status/body requirements rather than simply identifying that the same-error-message requirement was removed."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R1",
+        "label": "PARTIAL",
+        "reasoning": "It matches the removed password complexity rules on user creation, but includes extra constraints like maximum length and endpoint-specific enforcement beyond the reference's listed removed rules."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R1",
+        "label": "PARTIAL",
+        "reasoning": "It refers to enforcing the removed password complexity rules, but only for password change on one endpoint rather than the reference requirement in general."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about MongoDB hostname configuration and does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns DELETE response status/body behavior, which is unrelated to the listed reference requirements."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about a username regex bug and does not match any reference requirement."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "It targets /verify invalid-credential response uniformity, but focuses on requiring a specific JSON body rather than the removed same-error-message anti-enumeration requirement itself."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1664,
+    "prompt_tokens": 1221,
+    "completion_tokens": 443
+  }
+}

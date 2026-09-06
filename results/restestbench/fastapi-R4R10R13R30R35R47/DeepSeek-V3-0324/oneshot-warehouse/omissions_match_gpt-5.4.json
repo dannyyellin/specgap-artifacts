@@ -1,0 +1,48 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement concerns deleting a user and verifying cascade deletion of that user's items."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "It describes the same core scenario of one normal user trying to read another user's item, but states the implementation returns the wrong status/message instead of the required 400 with 'Not enough permissions'."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed reference requirements mention password recovery email verification or mailcatcher."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement addresses validation of an item's title being empty during item creation."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements concern invalid UUID handling for GET /api/v1/users/{user_id}."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements concern invalid UUID handling for GET /api/v1/items/{item_id}."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1459,
+    "prompt_tokens": 1105,
+    "completion_tokens": 354
+  }
+}

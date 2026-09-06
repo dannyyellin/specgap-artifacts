@@ -1,0 +1,18 @@
+{
+  "req_id": 20,
+  "requirement_vague": "Verify article slugs are unique with random suffix",
+  "requirement_precise": "Create user1 (username: 'sluguser1', email: 'sluguser1@test.com', password: 'pass123'). User1 creates two articles with the SAME title 'Duplicate Title Article'. Verify both articles are created successfully (both return 201). Extract both slugs. Verify the two slugs are DIFFERENT from each other (random suffix makes them unique). Both slugs should start with 'duplicate-title-article-' but have different suffixes. This tests the slugify function that appends random suffix.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": "slugify(), create_article()",
+    "code_reference": "def slugify(title: str) -> str:\n    base = re.sub(r\"[^a-z0-9]+\", \"-\", title.lower()).strip(\"-\")\n    suffix = secrets.token_hex(4)\n    return f\"{base}-{suffix}\"\n\n@app.post(\"/api/articles\", status_code=201)\ndef create_article(...):\n    article = Article(\n        slug=slugify(title),",
+    "reasoning": "The article creation endpoint returns 201 and generates each slug via slugify(), which appends a random hex suffix to the normalized title. Because the slug is built as '<base>-<random suffix>' and Article.slug is also constrained unique, two articles with the same title will receive different slugs starting with 'duplicate-title-article-'."
+  },
+  "usage": {
+    "total_tokens": 5379,
+    "prompt_tokens": 5191,
+    "completion_tokens": 188
+  },
+  "parse_error": false
+}

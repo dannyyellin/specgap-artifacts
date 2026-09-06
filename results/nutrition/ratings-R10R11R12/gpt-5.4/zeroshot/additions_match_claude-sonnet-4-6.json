@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 describes support for multiple authentication header formats, which does not correspond to any of the three removed constraints (rating range, one-rating-per-user-per-dish, or user_id from token)."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A2 describes rounding behavior for avg_rating responses, which does not correspond to any of the three removed constraints listed in R10\u2013R12."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A3 describes cross-service dish existence validation, which does not correspond to any of the three removed constraints in R10\u2013R12."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A4 describes internal ID storage and a counters collection, which does not correspond to any of the three removed constraints in R10\u2013R12."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1037,
+    "prompt_tokens": 715,
+    "completion_tokens": 322
+  }
+}

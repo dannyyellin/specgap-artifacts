@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of the owner-only restriction for POST/PUT/DELETE operations, matching R5 exactly."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "O2 captures the missing lte filtering for nutritional fields, which is part of R6, but does not address the 'contains' filtering for ingredients also mentioned in R6."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "O3 captures the missing 'contains' filtering for the ingredient field, which is part of R6, but does not address the lte filtering for nutritional fields also mentioned in R6."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 was self-retracted and does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "O5 relates to handling of Ninja API field values (string vs numeric), which touches on Ninja API field name mapping details covered by R4, but focuses on error handling rather than field name mapping specifically."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1312,
+    "prompt_tokens": 916,
+    "completion_tokens": 396
+  }
+}

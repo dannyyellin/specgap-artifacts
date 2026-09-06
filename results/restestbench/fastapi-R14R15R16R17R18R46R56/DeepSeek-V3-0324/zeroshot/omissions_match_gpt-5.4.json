@@ -1,0 +1,66 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R15",
+        "label": "PARTIAL",
+        "reasoning": "R15 requires password recovery email functionality, but O1 only generally mentions missing password recovery without the specific signup, response, and mailcatcher verification details."
+      },
+      {
+        "detection_id": "O1",
+        "requirement_id": "R16",
+        "label": "PARTIAL",
+        "reasoning": "R16 is specifically about password recovery for a non-existent user returning 404, while O1 only broadly states password recovery is not implemented."
+      },
+      {
+        "detection_id": "O1",
+        "requirement_id": "R17",
+        "label": "PARTIAL",
+        "reasoning": "R17 includes password recovery HTML/token retrieval and reset flow, and O1 only captures the broad absence of password recovery functionality."
+      },
+      {
+        "detection_id": "O1",
+        "requirement_id": "R18",
+        "label": "PARTIAL",
+        "reasoning": "R18 concerns reset-password behavior with an invalid token, which falls under password recovery, but O1 does not capture the specific authenticated invalid-token scenario."
+      },
+      {
+        "detection_id": "O1",
+        "requirement_id": "R56",
+        "label": "PARTIAL",
+        "reasoning": "R56 is a specific reset-password validation case within password recovery, while O1 only states the functionality is not implemented in general."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements concern invalid email format validation."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements mention invalid UUID format handling or a 422 response for UUID parsing."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R15",
+        "label": "MATCH",
+        "reasoning": "R15 explicitly requires verifying that a password recovery email was sent via mailcatcher, which O4 directly describes."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The cited example and generic claim about specific error messages do not correspond clearly to any of the listed reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1699,
+    "prompt_tokens": 1139,
+    "completion_tokens": 560
+  }
+}

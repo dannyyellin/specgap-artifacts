@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R8",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of the owner-only restriction on GET /profiles, matching R8 exactly."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "O2 describes protein being included in the profileDishes calculation contrary to the spec, which corresponds to R7's removal of protein exclusion from profileDishes calculation."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 describes a missing token forwarding issue when calling the dishes service, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R8",
+        "label": "MATCH",
+        "reasoning": "O4 restates the same owner-only restriction issue on GET /profiles already captured in O1, matching R8."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1027,
+    "prompt_tokens": 724,
+    "completion_tokens": 303
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "app": "pet-store",
+  "variant": "petstore-R4R5R6R7",
+  "service": "pet-store",
+  "req_id": "R5",
+  "requirement": "A pet-type cannot be deleted while it still has pets; such a DELETE request is rejected.",
+  "source_headline": "Removed \"cannot delete pet-type if it has pets\" constraint",
+  "model": "claude-sonnet-4-6",
+  "pass": 2,
+  "label": "GAP",
+  "evidence": "delete_pet_type function: `result = pet_types_collection.delete_one({\"id\": pet_id})` with no check on pets array",
+  "reasoning": "The `delete_pet_type` route performs an unconditional `delete_one` on the pet type document without checking whether the `pets` array is non-empty. There is no guard that rejects the deletion when pets exist. A test sending a DELETE request for a pet type that has associated pets would succeed (204) rather than being rejected, so the requirement is entirely absent.",
+  "usage": {
+    "total_tokens": 5096,
+    "prompt_tokens": 4952,
+    "completion_tokens": 144
+  },
+  "timestamp": "2026-07-16 15:01:35"
+}

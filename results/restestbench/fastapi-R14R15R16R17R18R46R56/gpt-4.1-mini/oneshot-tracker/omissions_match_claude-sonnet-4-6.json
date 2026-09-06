@@ -1,0 +1,144 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R15",
+        "label": "PARTIAL",
+        "reasoning": "O1 identifies the absence of password recovery email sending and mailcatcher verification, which is the core behavior tested in R15."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R17",
+        "label": "PARTIAL",
+        "reasoning": "O2 identifies the absence of password recovery HTML content retrieval and password reset token flow, which is exactly what R17 tests."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 concerns 422 responses for invalid UUID path parameters, which does not correspond to any of the listed reference requirements."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R16",
+        "label": "MATCH",
+        "reasoning": "O4 directly identifies the missing 404 response for password recovery requests for non-existent users, which is exactly what R16 requires."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R14",
+        "label": "PARTIAL",
+        "reasoning": "O5 identifies the absence of the test token endpoint returning the user's email, which is part of what R14 tests (calling the test token endpoint and verifying the email field)."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 discusses notifications on user/item events, which does not correspond to any of the listed reference requirements."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O7 discusses rate limiting and brute force protection, which does not correspond to any of the listed reference requirements."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": "R18",
+        "label": "MATCH",
+        "reasoning": "O8 directly identifies the missing reset-password endpoint that returns 400 with 'Invalid token' detail, which is exactly what R18 requires."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": "R56",
+        "label": "PARTIAL",
+        "reasoning": "O8 also partially relates to R56 since both concern the reset-password endpoint, though R56 specifically tests 422 for short password rather than 400 for invalid token."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O9 concludes the GET /users/me endpoint is implemented, so it does not flag a missing behavior matching any reference requirement."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": "R15",
+        "label": "PARTIAL",
+        "reasoning": "O10 identifies the missing POST /api/v1/password-recovery/{email} endpoint, which is a key part of R15's tested behavior."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": "R16",
+        "label": "PARTIAL",
+        "reasoning": "O10 also relates to R16 since R16 tests the same password-recovery endpoint for a non-existent user."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": "R46",
+        "label": "PARTIAL",
+        "reasoning": "O11 identifies the missing verification that items are deleted (return 404) after their owner user is deleted, which is exactly what R46 requires."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O12 concludes the password update endpoint is implemented, so it does not flag a missing behavior matching any reference requirement."
+      },
+      {
+        "detection_id": "O13",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O13 discusses superuser updating other users' passwords, which does not correspond to any of the listed reference requirements."
+      },
+      {
+        "detection_id": "O14",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O14 concludes the user profile update endpoint is implemented, so it does not flag a missing behavior matching any reference requirement."
+      },
+      {
+        "detection_id": "O15",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O15 concludes superuser user creation is implemented, so it does not flag a missing behavior matching any reference requirement."
+      },
+      {
+        "detection_id": "O16",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O16 concludes the user listing endpoint is implemented, so it does not flag a missing behavior matching any reference requirement."
+      },
+      {
+        "detection_id": "O17",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O17 concludes superuser user deletion is implemented, so it does not flag a missing behavior matching any reference requirement."
+      },
+      {
+        "detection_id": "O18",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O18 concludes the self-deletion endpoint is implemented, so it does not flag a missing behavior matching any reference requirement."
+      },
+      {
+        "detection_id": "O19",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O19 concludes item CRUD is implemented, so it does not flag a missing behavior matching any reference requirement."
+      },
+      {
+        "detection_id": "O20",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O20 concludes item listing with ownership filtering is implemented, so it does not flag a missing behavior matching any reference requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 3802,
+    "prompt_tokens": 2243,
+    "completion_tokens": 1559
+  }
+}

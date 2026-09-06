@@ -1,0 +1,19 @@
+{
+  "app": "pet-store",
+  "variant": "petorder-R8R9R10",
+  "service": "pet-order",
+  "method": "twoshot",
+  "model": "gpt-5.4",
+  "gen_usage": {
+    "total_tokens": 7838,
+    "prompt_tokens": 5411,
+    "completion_tokens": 2427
+  },
+  "n_additions": 2,
+  "n_omissions": 8,
+  "usage": {
+    "total_tokens": 11768,
+    "prompt_tokens": 10798,
+    "completion_tokens": 970
+  }
+}

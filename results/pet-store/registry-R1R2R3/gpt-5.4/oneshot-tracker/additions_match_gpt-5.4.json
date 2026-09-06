@@ -1,0 +1,18 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 describes the success response shape for DELETE /users/{username}, which is unrelated to removed password validation rules, removed anti-enumeration behavior for /verify, or removed owner pre-registration on initialization."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 543,
+    "prompt_tokens": 454,
+    "completion_tokens": 89
+  }
+}

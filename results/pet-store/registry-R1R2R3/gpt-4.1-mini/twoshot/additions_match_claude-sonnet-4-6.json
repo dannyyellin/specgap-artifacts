@@ -1,0 +1,18 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The bcrypt cost factor of 12 does not correspond to any of the three spec requirements, which concern password validation rules, anti-enumeration security, and owner pre-registration."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 567,
+    "prompt_tokens": 468,
+    "completion_tokens": 99
+  }
+}

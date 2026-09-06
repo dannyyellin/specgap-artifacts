@@ -1,0 +1,54 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Storing purchase documents in a separate 'purchases' collection is not related to R8, R9, or R10."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Enforcing purchaser field matches authenticated username is not related to any of R8, R9, or R10."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Returning 403 for purchaser name mismatch is not related to R8, R9, or R10."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Counter-based sequential transaction IDs are not related to R8, R9, or R10."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rejecting unknown query parameters for GET /transactions is not related to R8, R9, or R10."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": "R8",
+        "label": "MATCH",
+        "reasoning": "The code selects the first pet instead of a random one, directly corresponding to R8 which states the random pet selection algorithm was removed."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Using 'mongo' instead of 'mongoOrd' as the MongoDB service hostname is not related to R8, R9, or R10."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1432,
+    "prompt_tokens": 940,
+    "completion_tokens": 492
+  }
+}

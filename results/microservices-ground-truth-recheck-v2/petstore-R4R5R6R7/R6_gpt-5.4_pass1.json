@@ -1,0 +1,19 @@
+{
+  "app": "pet-store",
+  "variant": "petstore-R4R5R6R7",
+  "service": "pet-store",
+  "req_id": "R6",
+  "requirement": "When the animals API returns a lifespan range, the minimum value (the first integer appearing in the range string) is used as the lifespan.",
+  "source_headline": "Removed lifespan range handling (\"choose minimum\", \"extract first integer\")",
+  "model": "gpt-5.4",
+  "pass": 1,
+  "label": "INFERRED",
+  "evidence": "In fetch_pet_type_from_ninja(), lifespan_raw = characteristics.get(\"lifespan\", \"\") and then for string values it does nums = re.findall(r\"\\d+\", lifespan_raw); if nums: lifespan = int(nums[0]). The created pet type stores this value in new_doc[\"lifespan\"] in create_pet_type().",
+  "reasoning": "The code explicitly parses all integers from the animals API lifespan string and uses the first one, which is the minimum in a range like \"10-12 years\". That directly satisfies the requirement as stated, so a test checking that the first integer is used would pass. Per the decision guide, because the behavior is present and observably correct, the label is INFERRED.",
+  "usage": {
+    "total_tokens": 4202,
+    "prompt_tokens": 4036,
+    "completion_tokens": 166
+  },
+  "timestamp": "2026-07-16 15:01:38"
+}

@@ -1,0 +1,21 @@
+{
+  "req_id": 10,
+  "requirement_vague": "Updating a todo with mismatched ID returns bad request",
+  "requirement_precise": "Register a user and login. Create a todo (returns ID=X). Call PUT /todos/X with a request body where id=Y (different from X). Verify the response status is 400 Bad Request.",
+  "removed": true,
+  "omissions": [
+    {
+      "id": "R10-O1",
+      "description": "PUT /todos/{id} does not reject a request body whose id differs from the path id with 400 Bad Request.",
+      "category": "BUSINESS_LOGIC",
+      "reasoning": "The update_todo route accepts TodoUpdate with an optional body field id, but it never compares todo_in.id to the path parameter id. It proceeds to update the todo after only checking existence/ownership, so a mismatched body id is ignored instead of causing a 400 response as required."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 2525,
+    "prompt_tokens": 2409,
+    "completion_tokens": 116
+  },
+  "parse_error": false
+}

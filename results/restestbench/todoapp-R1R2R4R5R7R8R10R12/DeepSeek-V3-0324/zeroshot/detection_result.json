@@ -1,0 +1,49 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "The code includes a 'UserResponse' model and returns it from the register endpoint, but the specification does not require returning user details after registration.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification only mentions that the response status should be 200 OK after registration, not that user details should be returned."
+      },
+      {
+        "id": "A2",
+        "description": "The code allows setting 'isComplete' when creating a todo (TodoCreate model), but the specification does not mention this field in the creation process.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification only mentions the title field when creating a todo, not the isComplete status."
+      },
+      {
+        "id": "A3",
+        "description": "The code includes a message in the delete response ('Todo deleted}'), but the specification does not require any specific response body for delete operations.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification only checks for the 200 OK status code after deletion, not for any specific response body."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "The code does not validate that the title field is not empty when creating a todo, as required by the specification.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification explicitly requires returning a 400 Bad Request when the title field is empty or missing, but the code does not implement this validation."
+      },
+      {
+        "id": "O2",
+        "description": "The code does not validate that the ID in the request body matches the ID in the URL when updating a todo, as required by the specification.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification requires returning a 400 Bad Request when the IDs don't match, but the code ignores the ID in the request body."
+      },
+      {
+        "id": "O3",
+        "description": "The code does not return a 401 Unauthorized when calling GET /todos without an Authorization header, as required by the specification.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly requires this behavior, but the current implementation would raise an exception due to the auto_error=False setting in HTTPBearer."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 3933,
+    "prompt_tokens": 3395,
+    "completion_tokens": 538
+  }
+}

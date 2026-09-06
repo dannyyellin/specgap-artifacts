@@ -1,0 +1,24 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rounding numeric fields to two decimal places is unrelated to any of the three spec requirements about API field name mapping, owner-only restrictions, or query string filtering semantics."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "A2 relates to query string filtering behavior (filtering by 'id' and 'name'), which partially overlaps with R6's removal of specific query string filtering semantics, but R6 focuses on nutritional data filtering (lte, contains) rather than id/name filtering."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 758,
+    "prompt_tokens": 556,
+    "completion_tokens": 202
+  }
+}

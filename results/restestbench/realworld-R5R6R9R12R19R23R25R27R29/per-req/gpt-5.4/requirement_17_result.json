@@ -1,0 +1,18 @@
+{
+  "req_id": 17,
+  "requirement_vague": "Verify article creation correctly associates the article with its author",
+  "requirement_precise": "Create user1 (username: 'articleauthor1', email: 'articleauthor1@test.com', password: 'pass123') and user2 (username: 'articleauthor2', email: 'articleauthor2@test.com', password: 'pass123'). User1 creates article 'User1 Article'. User2 creates article 'User2 Article'. GET /api/articles?author=articleauthor1. Verify articlesCount is 1 and contains only 'User1 Article'. GET /api/articles?author=articleauthor2. Verify articlesCount is 1 and contains only 'User2 Article'. This tests the author-article relationship established during article creation.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": "create_article and list_articles routes (/api/articles POST and GET)",
+    "code_reference": "article = Article(\n    ...\n    author_id=current_user.id,\n)\n...\nif author_user:\n    query = query.where(Article.author_id == author_user.id)",
+    "reasoning": "Article creation stores the authenticated user's id in Article.author_id, establishing the author-article relationship. Listing articles by author resolves the username to a User record and filters articles by that user's id, so each author's query returns only their own articles and the corresponding articlesCount."
+  },
+  "usage": {
+    "total_tokens": 5347,
+    "prompt_tokens": 5219,
+    "completion_tokens": 128
+  },
+  "parse_error": false
+}

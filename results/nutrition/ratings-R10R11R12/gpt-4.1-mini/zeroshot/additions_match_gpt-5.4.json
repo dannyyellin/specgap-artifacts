@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Accepting tokens from multiple headers or formats does not correspond to removing the requirement that user_id comes from token validation."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Using a counters collection for rating IDs is unrelated to rating range, duplicate-rating constraints, or token-derived user_id removal."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "Storing ratings as rounded floats conflicts with the old integer-only rule, but it does not clearly show that the 1-to-5 range constraint itself was removed."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Returning 415 for non-JSON content types is unrelated to the removed constraints on rating values, duplicate ratings, or token-based user_id."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Allowing Authorization tokens without the Bearer prefix concerns header parsing, not removal of the requirement that user_id be sourced from token validation."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 959,
+    "prompt_tokens": 633,
+    "completion_tokens": 326
+  }
+}

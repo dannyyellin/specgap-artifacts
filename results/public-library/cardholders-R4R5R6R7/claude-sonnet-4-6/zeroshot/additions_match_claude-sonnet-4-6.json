@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 describes a filtering restriction on GET /cardholders that does not correspond to any of the listed spec requirements about removed field type declarations, error codes, fine computation, or cross-service calls."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A2 describes an id-mismatch validation on PUT /cardholders/{id} that does not correspond to any of the listed spec requirements."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A3 describes a missing-fields validation on PUT /cardholders/{id} that does not correspond to any of the listed spec requirements."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "A4 relates to the handling of unsupported media types (which R5 addresses by removing the 415 error code), but the code returns 400 instead of 415, making it only a partial match to R5's removal of the 415 status code."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1169,
+    "prompt_tokens": 820,
+    "completion_tokens": 349
+  }
+}

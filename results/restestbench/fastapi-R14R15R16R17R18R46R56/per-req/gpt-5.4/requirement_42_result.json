@@ -1,0 +1,22 @@
+{
+  "req_id": 42,
+  "requirement_vague": "Verify that attempting to delete a non-existing user gets rejected. Admin credentials: (admin@example.com / password123)",
+  "requirement_precise": "Authenticate as the existing superuser (username 'admin@example.com', password 'password123') to obtain an access token. Using the superuser access token in the request headers, attempt to delete a user by a newly generated random UUID (a user that does not exist). Verify the response status is 404. Verify the response JSON body contains a 'detail' field equal to 'User not found'.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": [
+      "POST /api/v1/login/access-token",
+      "DELETE /api/v1/users/{user_id}",
+      "init_db"
+    ],
+    "code_reference": "FIRST_SUPERUSER = \"admin@example.com\"\nFIRST_SUPERUSER_PASSWORD = \"password123\"\n...\nif not user:\n    raise HTTPException(status_code=404, detail=\"User not found\")",
+    "reasoning": "The code seeds an existing superuser with credentials admin@example.com/password123 in init_db, provides token-based authentication via POST /api/v1/login/access-token, and the admin-only DELETE /api/v1/users/{user_id} route returns HTTP 404 with JSON detail 'User not found' when the target UUID does not exist."
+  },
+  "usage": {
+    "total_tokens": 4869,
+    "prompt_tokens": 4713,
+    "completion_tokens": 156
+  },
+  "parse_error": false
+}

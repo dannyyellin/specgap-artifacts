@@ -1,0 +1,90 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O1 is exactly about the deleted constraint preventing deletion of a pet-type when pets of that type exist."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 concerns authentication/authorization status codes, which is unrelated to any reference requirement."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "O3 discusses extracting attributes from temperament/group_behavior, which is the behavior removed in R4."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "O4 is also about the removed attributes extraction rules for temperament/group_behavior."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "O5 describes birthdateGT/birthdateLT query filtering, which is exactly the removed behavior in R7."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 is about PUT returning 405, which does not correspond to any listed reference requirement."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O7 concerns POST ordering and 404 behavior for pet creation, unrelated to the reference removals."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O8 is about 404 behavior on GET /pet-types/{id}/pets, not any of the referenced removed requirements."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O9 concerns side effects before returning 404 on POST, which is unrelated to the reference requirements."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O10 is about duplicate pet name checks, not about any removed behavior in the references."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "O11 is about lifespan handling from the Ninja API, but it focuses on null/default behavior rather than the specific removed range-handling rules in R6."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O12 concerns duplicate-name error codes, which does not match any reference requirement."
+      },
+      {
+        "detection_id": "O13",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O13 is about MongoDB service naming in Docker configuration, unrelated to the reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2551,
+    "prompt_tokens": 1810,
+    "completion_tokens": 741
+  }
+}

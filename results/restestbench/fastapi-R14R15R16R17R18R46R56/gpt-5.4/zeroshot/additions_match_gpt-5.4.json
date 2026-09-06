@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements concern a private user-creation endpoint accepting caller-controlled is_active or is_superuser fields."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements describe updating users by id or changing is_active/is_superuser flags on existing users."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements specify that non-superusers can list their own items via GET /api/v1/items/."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1306,
+    "prompt_tokens": 1119,
+    "completion_tokens": 187
+  }
+}

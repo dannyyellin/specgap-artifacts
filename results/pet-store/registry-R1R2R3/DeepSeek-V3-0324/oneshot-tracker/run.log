@@ -1,0 +1,16 @@
+Timestamp: 2026-06-02 06:07:55
+Detector:  DeepSeek-V3-0324
+App/Variant/Service: pet-store/registry-R1R2R3/registry
+Method:    oneshot-tracker
+
+Tokens: prompt=8636, completion=572, total=9208
+Additions: 2
+Omissions: 4
+
+  A A1: Uses BCRYPT_ROUNDS=12 when the specification requires at least 10
+  A A2: Initializes the database with owner credentials on first request
+
+  O O1: Does not validate password complexity requirements (length, character types)
+  O O2: Does not return a JSON response with 'message' and 'username' fields for DELETE /users/{username} as specified
+  O O3: Does not return a JSON response with 'message' and 'username' fields for successful password change
+  O O4: Does not return the same 'Invalid credentials' message for both invalid username and invalid password cases in /verify

@@ -1,0 +1,109 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "Accepts 'Bearer <jwt>' in the Authorization header in addition to the specified 'Token <jwt>' format",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states authentication uses JWT tokens passed via the Authorization header as 'Token <jwt>'. The code's parse_token_header also accepts 'Bearer <jwt>', which is not positively required by the specification."
+      },
+      {
+        "id": "A2",
+        "description": "Includes an 'id' field in user objects returned by registration, login, current-user, and update-user responses",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification verifies username, email, and token in user responses, and separately decodes the JWT payload to inspect id. It does not require the HTTP user response body itself to include an 'id' field, but user_dict adds it."
+      },
+      {
+        "id": "A3",
+        "description": "Article responses include both camelCase timestamps ('createdAt', 'updatedAt') and duplicate alias fields ('created', 'updated')",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification checks 'created' and 'updated' timestamps in article responses for the timestamp test, but does not require duplicate camelCase fields in addition to those aliases. The code returns both sets."
+      },
+      {
+        "id": "A4",
+        "description": "Article responses include 'favorited' and 'favoritesCount' fields",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The provided specification for this service does not mention article favoriting behavior or require these fields in article payloads. The code always includes them."
+      },
+      {
+        "id": "A5",
+        "description": "Exposes GET /api/tags endpoint returning all tag names",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification does not define or require a tags-listing endpoint, but the code implements GET /api/tags."
+      },
+      {
+        "id": "A6",
+        "description": "Exposes GET / root endpoint returning {'status': 'ok'}",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification states the API is served under /api/ and does not require a root endpoint. The code adds GET /."
+      },
+      {
+        "id": "A7",
+        "description": "Allows article authors to delete comments on their articles even when they are not the comment author",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification only exercises deletion of a comment by the same user who created it and does not require article owners to have separate comment-deletion authority. The code explicitly permits either the comment author or the article author to delete the comment."
+      },
+      {
+        "id": "A8",
+        "description": "Supports updating user email, username, and password via PUT /api/user",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification requires updating bio and image and verifying persistence. It does not positively require PUT /api/user to support changing email, username, or password, but the code implements all three."
+      },
+      {
+        "id": "A9",
+        "description": "Provides DELETE /api/users/{email} endpoint for deleting users by email",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification uses this endpoint in one scenario, but it is not part of the stated API sections or implementation requirements for the Conduit API itself. The code exposes a nonstandard user-deletion endpoint by email."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "POST /api/profiles/{username}/follow returns 200 instead of the required 201",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly says following a user via POST /api/profiles/{username}/follow must return status 201. The code defines the route without status_code=201, so FastAPI returns 200."
+      },
+      {
+        "id": "O2",
+        "description": "Following yourself is not rejected with 400 on POST /api/profiles/{username}/follow",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification explicitly requires that attempting to follow yourself returns status 400 with a message containing 'cannot be equal'. The code simply skips creating the link when current_user.id == target.id and returns a normal profile response instead of rejecting the request."
+      },
+      {
+        "id": "O3",
+        "description": "Unfollowing yourself is not rejected with 400 on DELETE /api/profiles/{username}/follow",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification explicitly says a user cannot unfollow themselves and this should return 400. The code does not check for self-unfollow and returns a normal profile response."
+      },
+      {
+        "id": "O4",
+        "description": "PUT /api/articles/{slug} forbids non-owners from updating articles, but the specification requires that any authenticated user can update any article in this implementation",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification explicitly documents and tests the implementation behavior that a non-owner PUT by user2 succeeds and the article title changes, demonstrating a security vulnerability. The code instead enforces ownership with a 403 when article.author_id != current_user.id."
+      },
+      {
+        "id": "O5",
+        "description": "DELETE /api/articles/{slug} forbids non-owners from deleting articles, but the specification requires that any authenticated user can delete any article in this implementation",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification explicitly documents and tests that user2, who is not the owner, can successfully delete user1's article and that subsequent GET returns 200 with {}. The code instead enforces ownership and raises 403 for non-owners."
+      },
+      {
+        "id": "O6",
+        "description": "Article listing and feed ordering is by descending database id rather than explicitly by created timestamp descending",
+        "category": "COMPUTED_VALUES",
+        "reasoning": "The specification explicitly states GET /api/articles should be ordered by created timestamp descending and references the ORDER BY article.created DESC clause; feed pagination scenarios also rely on article recency ordering. The code sorts by article.id descending in both list_articles and feed_articles instead of by created_at."
+      },
+      {
+        "id": "O7",
+        "description": "DELETE /api/users/{email} may succeed instead of returning the required 500 foreign-key constraint error when the user has articles",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly requires deleting a user who still has articles to return status 500 due to FK constraint failure, demonstrating that articles block user deletion. The code attempts deletion, but because SQLite foreign-key enforcement is not enabled and no explicit guard is implemented, the required 500 behavior is not guaranteed or enforced."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 11532,
+    "prompt_tokens": 10248,
+    "completion_tokens": 1284
+  }
+}

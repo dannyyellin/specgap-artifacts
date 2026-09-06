@@ -1,0 +1,485 @@
+=== SYSTEM PROMPT ===
+
+You are an expert at analyzing microservice specifications and implementations.
+
+You will receive:
+1. A specification describing a multi-service application
+2. The name of one specific service to analyze
+3. The code for that service
+
+Your task: identify ALL gaps between the specification and the code.
+
+There are two types of gaps:
+- ADDITIONS: the code implements a property that the specification does not require.
+- OMISSIONS: the specification requires a property that the code does not implement.
+
+Categories (use exactly these names):
+
+1. ENDPOINTS: Route definitions, HTTP methods supported, URL patterns.
+   Example: Spec requires DELETE /items/{id} but no such route exists in the code.
+
+2. REQUEST_VALIDATION: Required fields, type checking, format validation,
+   media type validation, missing/invalid parameter handling.
+   Example: Spec requires "sku" as a required field on POST but the code does
+   not check for its presence.
+
+3. RESPONSE_FORMAT: Returned JSON fields, status codes for success and error cases,
+   response structure.
+   Example: Spec requires 404 when an item is not found but the code returns 500.
+
+4. BUSINESS_LOGIC: Domain rules, guards, constraints, conditional behavior,
+   access control decisions, state transitions.
+   Example: Spec requires dispatch to be rejected if quantity exceeds stock but
+   the code allows negative inventory.
+
+5. COMPUTED_VALUES: Derived or calculated fields, formulas, date arithmetic,
+   aggregations.
+   Example: Spec requires totalPrice = unitPrice * quantity but the code stores
+   totalPrice as a user-supplied value.
+
+6. EXTERNAL_INTERACTIONS: Outbound HTTP calls to other microservices or external
+   APIs, data fetched from or sent to other services, notifications.
+   Example: Spec requires notifying the purchasing service on low stock but the
+   code sends no such notification.
+
+7. DATA_PERSISTENCE: What is stored in the database, field mappings between
+   request/response and stored documents, ID generation.
+   Example: Spec requires storing last_restocked date on receipt but the code
+   never writes this field.
+
+
+For ADDITIONS: find code properties that have no basis in the specification.
+Be STRICT: the specification not contradicting a property is NOT enough — the
+specification must positively require it. For example, if the specification says
+"store user records" and the code encrypts passwords, encryption is an addition:
+the specification permits it but does not require it. Similarly, a vague statement
+like "return appropriate status codes" does NOT cover a specific property like
+"return 401 when the user is not found."
+Minor implementation details (variable naming, error message text) are NOT gaps.
+
+For OMISSIONS: find properties the specification requires but the code does not
+implement. Look for:
+- Explicit requirements stated in the specification that the code simply does
+  not implement — including requirements in other services' sections or in
+  general guidelines
+- Cross-service interactions described in other services' specifications
+- Data model fields that are never computed or populated
+- Requirements implied by combining multiple specification statements
+- Missing input validations, missing or incorrect error status codes
+Only flag omissions with clear basis in the specification text, not speculation.
+
+=== EXAMPLE ===
+
+Below is a partial specification for a "task-tracker" microservice in a project
+management application, followed by a code excerpt, and the expected gap analysis.
+
+SPECIFICATION EXCERPT:
+  The task-tracker service manages tasks. Each task has fields: id, title,
+  assignee_id, status (one of "open", "in_progress", "done"), created_date,
+  and due_date.
+
+  POST /tasks creates a new task. Required fields: title, assignee_id, due_date.
+  The status defaults to "open" and created_date is set to today's date.
+
+  GET /tasks returns all tasks. Supports query parameter "assignee_id" to filter.
+
+  PUT /tasks/{id} updates a task. The assignee_id can be changed.
+
+  The notification service should be informed whenever a task's assignee changes
+  so it can send an alert to the new assignee.
+
+  The user-directory service manages user accounts. Task-tracker should verify
+  that assignee_id refers to a valid user before creating or updating a task.
+
+CODE EXCERPT:
+  @app.route('/tasks', methods=['POST'])
+  def create_task():
+      data = request.get_json()
+      task = {
+          'title': data.get('title'),
+          'assignee_id': data.get('assignee_id'),
+          'due_date': data.get('due_date'),
+          'status': 'open',
+          'created_date': datetime.now().strftime('%Y-%m-%d'),
+          'priority': data.get('priority', 'medium')
+      }
+      result = db.tasks.insert_one(task)
+      task['id'] = str(result.inserted_id)
+      return jsonify(task), 201
+
+  @app.route('/tasks/<id>', methods=['PUT'])
+  def update_task(id):
+      data = request.get_json()
+      db.tasks.update_one({'_id': ObjectId(id)}, {'$set': data})
+      return jsonify(db.tasks.find_one({'_id': ObjectId(id)})), 200
+
+EXPECTED ANALYSIS:
+{
+  "additions": [
+    {
+      "id": "A1",
+      "description": "Stores a 'priority' field with default 'medium' on task creation",
+      "category": "DATA_PERSISTENCE",
+      "reasoning": "The specification defines task fields as id, title, assignee_id, status, created_date, and due_date. The 'priority' field is not mentioned in the specification."
+    }
+  ],
+  "omissions": [
+    {
+      "id": "O1",
+      "description": "POST /tasks does not validate that required fields (title, assignee_id, due_date) are present in the request body",
+      "category": "REQUEST_VALIDATION",
+      "reasoning": "The specification states 'Required fields: title, assignee_id, due_date' but the code uses data.get() with no presence check, silently storing None for missing fields."
+    },
+    {
+      "id": "O2",
+      "description": "GET /tasks endpoint is not implemented",
+      "category": "ENDPOINTS",
+      "reasoning": "The specification requires 'GET /tasks returns all tasks' with assignee_id filtering, but no such route exists in the code."
+    },
+    {
+      "id": "O3",
+      "description": "Does not verify assignee_id against the user-directory service before creating or updating a task",
+      "category": "EXTERNAL_INTERACTIONS",
+      "reasoning": "The specification states 'Task-tracker should verify that assignee_id refers to a valid user before creating or updating a task' but the code makes no outbound call to validate."
+    },
+    {
+      "id": "O4",
+      "description": "Does not notify the notification service when a task's assignee changes on PUT /tasks/{id}",
+      "category": "EXTERNAL_INTERACTIONS",
+      "reasoning": "The specification states 'The notification service should be informed whenever a task's assignee changes' but the code sends no notification."
+    },
+    {
+      "id": "O5",
+      "description": "Does not validate that 'status' field on update is one of the allowed values (open, in_progress, done)",
+      "category": "REQUEST_VALIDATION",
+      "reasoning": "The specification defines status as 'one of open, in_progress, done' but the code accepts any value on PUT."
+    }
+  ]
+}
+
+
+=== END EXAMPLE ===
+
+Output a JSON object with:
+- "additions": array of {"id": "A1", "description": "...", "category": "...", "reasoning": "..."}
+- "omissions": array of {"id": "O1", "description": "...", "category": "...", "reasoning": "..."}
+
+Output ONLY valid JSON, no other text.
+
+
+=== USER PROMPT ===
+
+=== SPECIFICATION ===
+
+SPECIFICATION: Todo List Application
+============================================================
+
+This application provides a REST API for managing personal todo
+lists. Users register and login to receive JWT access tokens.
+Each user manages their own set of todos via CRUD endpoints.
+
+Endpoints:
+  POST /users/register — register a new user
+  POST /users/login — login and receive access token
+  GET /todos — list todos
+  GET /todos/{id} — get a specific todo
+  POST /todos — create a new todo
+  PUT /todos/{id} — update a todo
+  DELETE /todos/{id} — delete a todo
+
+## Todo Operations
+
+- Register two users (userA and userB) and login with each. UserA creates a todo with title 'UserA Todo'. UserB creates a todo with title 'UserB Todo'. When userA calls GET /todos, verify the response contains exactly one todo with title 'UserA Todo'. UserB's todo should not be visible to userA.
+
+- Register a user and login to get an access token. Call POST /todos with an empty or missing title field. Verify that the response status code is 400 Bad Request and the response body contains a validation error indicating 'The Title field is required.'
+
+- Register a user and login. Create a todo with title 'My Test Todo'. Use the returned todo ID to call GET /todos/{id}. Verify the response status is 200 OK, the returned todo has the same ID and title 'My Test Todo', and isComplete is false.
+
+- Register a user and login to get an access token. Call GET /todos/99999 (an ID that does not exist). Verify the response status code is 404 Not Found.
+
+- Register two users (userA and userB) and login with each. UserA creates a todo and notes the returned ID. UserB calls GET /todos/{id} using userA's todo ID. Verify the response status is 404 Not Found (because userB doesn't own it and is not admin).
+
+- Register a user and login. Create a todo with title 'Todo to Delete' and note the ID. Call DELETE /todos/{id}. Verify the response status is 200 OK. Then call GET /todos/{id} and verify the response is 404 Not Found (todo no longer exists).
+
+- Register a user and login to get an access token. Call DELETE /todos/99999 (an ID that does not exist). Verify the response status code is 404 Not Found.
+
+- Register two users (userA and userB) and login with each. UserA creates a todo and notes the returned ID. UserB calls DELETE /todos/{id} using userA's todo ID. Verify the response status is 404 Not Found. Then userA verifies their todo still exists by calling GET /todos/{id} and confirming 200 OK.
+
+- Register a user and login. Create a todo with title 'Original Todo'. The todo should have isComplete=false. Call PUT /todos/{id} with isComplete=true and title 'Updated Todo'. Verify response is 200 OK. Then call GET /todos/{id} and verify isComplete is now true and title is 'Updated Todo'.
+
+- Register a user and login. Create a todo (returns ID=X). Call PUT /todos/X with a request body where id=Y (different from X). Verify the response status is 400 Bad Request.
+
+- Register a user and login. Call PUT /todos/99999 with a valid todo body (id=99999, title='Test', isComplete=false). Verify the response status is 404 Not Found.
+
+- Register two users (userA and userB) and login with each. UserA creates a todo with title 'UserA Todo' and notes the ID. UserB calls PUT /todos/{id} with userA's todo ID, attempting to change the title to 'Hacked'. Verify the response status is 404 Not Found. Then userA verifies the title is still 'UserA Todo' by calling GET /todos/{id}.
+
+- Call GET /todos without providing any Authorization header or token. Verify the response status is 401 Unauthorized.
+
+## User Authentication
+
+- Call POST /users/register with a valid email 'testuser@example.com' and password 'SecureP@ss123'. Verify the response status is 200 OK. Then call POST /users/login with the same credentials and verify a token is returned.
+
+
+## Implementation Requirements
+- Uses JWT tokens for authentication (PyJWT library)
+- Uses bcrypt for password hashing (passlib library)
+
+
+=== CODE (todoapp) ===
+
+from datetime import datetime, timedelta
+from typing import Optional, List
+
+import jwt
+from fastapi import FastAPI, Depends, HTTPException, status
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+from pydantic import EmailStr
+from passlib.context import CryptContext
+from sqlmodel import SQLModel, Field, Session, create_engine, select
+
+app = FastAPI(title="Todo List Application")
+
+DATABASE_URL = "sqlite:///./todos.db"
+engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
+
+SECRET_KEY = "super-secret-jwt-key-change-me"
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24
+
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+security = HTTPBearer(auto_error=False)
+
+
+class User(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    email: EmailStr = Field(index=True, unique=True)
+    password_hash: str
+
+
+class Todo(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    title: str
+    isComplete: bool = False
+    user_id: int = Field(foreign_key="user.id", index=True)
+
+
+class UserRegister(SQLModel):
+    email: EmailStr
+    password: str
+
+
+class UserLogin(SQLModel):
+    email: EmailStr
+    password: str
+
+
+class TokenResponse(SQLModel):
+    access_token: str
+    token_type: str = "bearer"
+
+
+class UserResponse(SQLModel):
+    id: int
+    email: EmailStr
+
+
+class TodoCreate(SQLModel):
+    title: str
+    isComplete: bool = False
+
+
+class TodoUpdate(SQLModel):
+    id: Optional[int] = None
+    title: str
+    isComplete: bool
+
+
+class TodoResponse(SQLModel):
+    id: int
+    title: str
+    isComplete: bool
+
+
+def create_db_and_tables():
+    SQLModel.metadata.create_all(engine)
+
+
+@app.on_event("startup")
+def on_startup():
+    create_db_and_tables()
+
+
+def get_session():
+    with Session(engine) as session:
+        yield session
+
+
+def hash_password(password: str) -> str:
+    return pwd_context.hash(password)
+
+
+def verify_password(password: str, password_hash: str) -> bool:
+    return pwd_context.verify(password, password_hash)
+
+
+def create_access_token(user_id: int, email: str) -> str:
+    expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    payload = {
+        "sub": str(user_id),
+        "email": email,
+        "exp": expire,
+    }
+    return jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
+
+
+def get_current_user(
+    credentials: Optional[HTTPAuthorizationCredentials] = Depends(security),
+    session: Session = Depends(get_session),
+) -> User:
+    if credentials is None:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Not authenticated",
+        )
+
+    token = credentials.credentials
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        user_id = payload.get("sub")
+        if user_id is None:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Invalid token",
+            )
+    except jwt.PyJWTError:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid token",
+        )
+
+    user = session.get(User, int(user_id))
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="User not found",
+        )
+    return user
+
+
+@app.post("/users/register", response_model=UserResponse)
+def register_user(user_in: UserRegister, session: Session = Depends(get_session)):
+    existing_user = session.exec(select(User).where(User.email == user_in.email)).first()
+    if existing_user:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Email already registered",
+        )
+
+    user = User(email=user_in.email, password_hash=hash_password(user_in.password))
+    session.add(user)
+    session.commit()
+    session.refresh(user)
+    return user
+
+
+@app.post("/users/login", response_model=TokenResponse)
+def login_user(user_in: UserLogin, session: Session = Depends(get_session)):
+    user = session.exec(select(User).where(User.email == user_in.email)).first()
+    if not user or not verify_password(user_in.password, user.password_hash):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid email or password",
+        )
+
+    token = create_access_token(user.id, user.email)
+    return TokenResponse(access_token=token)
+
+
+@app.get("/todos", response_model=List[TodoResponse])
+def list_todos(
+    current_user: User = Depends(get_current_user),
+    session: Session = Depends(get_session),
+):
+    todos = session.exec(select(Todo).where(Todo.user_id == current_user.id)).all()
+    return todos
+
+
+@app.get("/todos/{id}", response_model=TodoResponse)
+def get_todo(
+    id: int,
+    current_user: User = Depends(get_current_user),
+    session: Session = Depends(get_session),
+):
+    todo = session.exec(
+        select(Todo).where(Todo.id == id, Todo.user_id == current_user.id)
+    ).first()
+    if not todo:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Todo not found",
+        )
+    return todo
+
+
+@app.post("/todos", response_model=TodoResponse)
+def create_todo(
+    todo_in: TodoCreate,
+    current_user: User = Depends(get_current_user),
+    session: Session = Depends(get_session),
+):
+    todo = Todo(
+        title=todo_in.title,
+        isComplete=todo_in.isComplete,
+        user_id=current_user.id,
+    )
+    session.add(todo)
+    session.commit()
+    session.refresh(todo)
+    return todo
+
+
+@app.put("/todos/{id}", response_model=TodoResponse)
+def update_todo(
+    id: int,
+    todo_in: TodoUpdate,
+    current_user: User = Depends(get_current_user),
+    session: Session = Depends(get_session),
+):
+    todo = session.exec(
+        select(Todo).where(Todo.id == id, Todo.user_id == current_user.id)
+    ).first()
+    if not todo:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Todo not found",
+        )
+
+    todo.title = todo_in.title
+    todo.isComplete = todo_in.isComplete
+    session.add(todo)
+    session.commit()
+    session.refresh(todo)
+    return todo
+
+
+@app.delete("/todos/{id}")
+def delete_todo(
+    id: int,
+    current_user: User = Depends(get_current_user),
+    session: Session = Depends(get_session),
+):
+    todo = session.exec(
+        select(Todo).where(Todo.id == id, Todo.user_id == current_user.id)
+    ).first()
+    if not todo:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Todo not found",
+        )
+
+    session.delete(todo)
+    session.commit()
+    return {"message": "Todo deleted"}
+
+=== SERVICE TO ANALYZE ===
+todoapp

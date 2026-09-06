@@ -1,0 +1,19 @@
+Timestamp: 2026-06-02 09:43:26
+Detector:  claude-sonnet-4-6
+App/Variant/Service: nutrition/dishes-R4R5R6/dishes
+Method:    twoshot
+
+Tokens: prompt=9583, completion=1132, total=10715
+Additions: 3
+Omissions: 6
+
+  A A1: GET /dishes supports filtering by 'id' and 'name' query parameters in addition to nutritional fields and 'ingredient'
+  A A2: GET /dishes applies exact equality matching for nutritional fields instead of less-than-or-equal comparison
+  A A3: GET /dishes filters 'ingredient' using exact equality on the ingredients array rather than a contains check
+
+  O O1: POST /dishes does not enforce that only the restaurant Owner is allowed to create dishes
+  O O2: PUT /dishes/{id} does not enforce that only the restaurant Owner is allowed to update dishes
+  O O3: DELETE /dishes/{id} does not enforce that only the restaurant Owner is allowed to delete dishes
+  O O4: POST /dishes returns the newly created dish record but the specification requires it to include the id assigned by the service; the response format is correct, but the spec also says GET /dishes returns a JSON array — the code does not handle the case where Ninja API returns a non-numeric string value for a field gracefully (it may raise an exception instead of defaulting to 0.0)
+  O O5: GET /dishes does not apply less-than-or-equal filtering for nutritional query parameters
+  O O6: GET /dishes does not check that a dish contains the ingredient value when filtering by 'ingredient'

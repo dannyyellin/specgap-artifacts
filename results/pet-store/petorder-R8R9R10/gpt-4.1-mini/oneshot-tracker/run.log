@@ -1,0 +1,21 @@
+Timestamp: 2026-06-01 21:02:19
+Detector:  gpt-4.1-mini
+App/Variant/Service: pet-store/petorder-R8R9R10/pet-order
+Method:    oneshot-tracker
+
+Tokens: prompt=9457, completion=1114, total=10571
+Additions: 1
+Omissions: 10
+
+  A A1: Stores a 'transaction' document with an 'id' field as a string sequence number separate from the 'purchase-id' UUID
+
+  O O1: POST /purchases does not return the 'store' and 'pet-name' fields if they were not included in the request payload
+  O O2: POST /purchases does not return 415 Unsupported Media Type if Content-Type header is missing or invalid
+  O O3: POST /purchases does not return 403 Forbidden if the authenticated user is not the purchaser in the payload
+  O O4: GET /transactions and GET /transactions/{id} return 401 Unauthorized if the user is not privileged, but specification states 401 for unauthorized and 403 for forbidden
+  O O5: GET /transactions does not support conjunction of multiple query parameters as a conjunction of filters
+  O O6: POST /purchases does not delete the chosen pet from the appropriate pet-store after purchase
+  O O7: POST /purchases does not handle or return 503 Service Unavailable if the pet-store service is unable to handle the request
+  O O8: POST /purchases does not validate that the purchaser is a registered user by verifying credentials with the registry service
+  O O9: POST /purchases does not validate that the 'store' field is a valid store number corresponding to an existing pet-store
+  O O10: POST /purchases does not return 400 with message {"error": "No pet of this type is available"} if no pet meets criteria

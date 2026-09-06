@@ -1,0 +1,16 @@
+{
+  "app": "nutrition",
+  "variant": "auth-R1R2R3",
+  "service": "authentication",
+  "method": "zeroshot",
+  "detector_model": "DeepSeek-V3-0324",
+  "gen_model": "gpt-5.4",
+  "gen_usage": null,
+  "n_additions": 4,
+  "n_omissions": 3,
+  "usage": {
+    "total_tokens": 6040,
+    "prompt_tokens": 5459,
+    "completion_tokens": 581
+  }
+}

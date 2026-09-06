@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "A1 directly describes the removal of the anti-enumeration requirement for /verify, where the code now returns 401 instead of 200 with valid=false and privileged=false, matching R2's removal of the 'same error message' anti-enumeration security requirement."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "A2 relates to the /verify endpoint error handling and anti-enumeration behavior, but focuses on missing credentials rather than the core enumeration-prevention behavior described in R2."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A3 describes empty response bodies for errors, which does not correspond to any of the three spec requirements about password validation, anti-enumeration, or owner pre-registration."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A4 describes using bcrypt cost factor 12 instead of the minimum 10, which is an addition beyond the spec and does not correspond to any of the three listed spec requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1115,
+    "prompt_tokens": 754,
+    "completion_tokens": 361
+  }
+}

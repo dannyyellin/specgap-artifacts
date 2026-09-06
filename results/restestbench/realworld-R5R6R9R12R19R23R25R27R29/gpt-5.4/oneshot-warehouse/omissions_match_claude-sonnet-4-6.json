@@ -1,0 +1,96 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "O1 identifies the missing GET /api/articles/feed endpoint, which is required by R6 (and R23, R27), but O1 only notes the endpoint is missing rather than describing the specific follow-based filtering behavior."
+      },
+      {
+        "detection_id": "O1",
+        "requirement_id": "R23",
+        "label": "PARTIAL",
+        "reasoning": "O1 identifies the missing feed endpoint which is also required for the pagination behavior tested in R23."
+      },
+      {
+        "detection_id": "O1",
+        "requirement_id": "R27",
+        "label": "PARTIAL",
+        "reasoning": "O1 identifies the missing feed endpoint which is also required for the empty feed behavior tested in R27."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R29",
+        "label": "MATCH",
+        "reasoning": "O2 directly identifies the missing DELETE /api/users/{email} endpoint, which is the core mechanism tested in R29 to verify FK constraint errors prevent user deletion."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R12",
+        "label": "MATCH",
+        "reasoning": "O3 directly describes the missing tag filtering on GET /api/articles, which is exactly what R12 tests."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "O4 identifies that duplicate user registration returns 422 instead of the required 400, which is exactly what R9 verifies."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "O5 identifies that the error message for duplicate registration does not match 'Username and email must be unique', which is exactly what R9 verifies."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R25",
+        "label": "MATCH",
+        "reasoning": "O6 directly describes that the JWT payload lacks the required id, username, and email claims, which is exactly what R25 tests."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R19",
+        "label": "MATCH",
+        "reasoning": "O7 identifies that article responses use 'createdAt'/'updatedAt' instead of 'created'/'updated', which are the exact field names R19 relies on to verify timestamp behavior."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "O8 partially addresses R5's behavior around DELETE /api/articles/{slug} and the subsequent GET returning {}, but conflates the delete response with the post-delete GET behavior described in R5."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements specifically test comment deletion response body format."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements specify the use of PyJWT library specifically; R25 only tests JWT payload contents."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements test validation of missing article fields (title, description, body)."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements test validation of missing comment body fields."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 3682,
+    "prompt_tokens": 2666,
+    "completion_tokens": 1016
+  }
+}

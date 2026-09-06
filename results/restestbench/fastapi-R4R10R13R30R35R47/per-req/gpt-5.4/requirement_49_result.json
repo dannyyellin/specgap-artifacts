@@ -1,0 +1,21 @@
+{
+  "req_id": 49,
+  "requirement_vague": "User registration should reject full_name with exact 256 characters.",
+  "requirement_precise": "Attempt to register a new user via POST /api/v1/users/signup with email 'test49@example.com', password 'validpass123', and full_name of exactly 256 characters (256 'a' characters). Verify the response status is 422 (validation error).",
+  "removed": false,
+  "omissions": [
+    {
+      "id": "R49-O1",
+      "description": "POST /api/v1/users/signup does not reject a full_name of exactly 256 characters with a 422 validation error.",
+      "category": "REQUEST_VALIDATION",
+      "reasoning": "The signup endpoint uses the UserRegister/UserCreate model, whose validate_full_name validator only raises an error when len(full_name) > 255. A 256-character full_name therefore fails validation and FastAPI returns 422, satisfying the requirement."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 5856,
+    "prompt_tokens": 5751,
+    "completion_tokens": 105
+  },
+  "parse_error": false
+}

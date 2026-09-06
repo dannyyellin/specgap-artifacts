@@ -1,0 +1,24 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A specific success message for password update does not describe removal of password validation rules, removal of anti-enumeration behavior on /verify, or removal of owner pre-registration."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A specific success message for user deletion is unrelated to password validation rules, /verify error-message anti-enumeration, or owner pre-registration on initialization."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 678,
+    "prompt_tokens": 531,
+    "completion_tokens": 147
+  }
+}

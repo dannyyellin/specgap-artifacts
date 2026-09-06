@@ -1,0 +1,138 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "Both describe reading an item created by one user with a second user's token and the required permission denial behavior for GET /items/{item_id}."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns listing items for non-superusers, which is not covered by any reference requirement provided."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns authentication enforcement for item creation, which is not specifically described in any reference requirement."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R35",
+        "label": "MATCH",
+        "reasoning": "Both concern duplicate registration using admin@example.com and the exact required error detail message for signup."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about private user creation access control, which does not correspond to any listed reference requirement."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns rejecting password updates when the new password equals the current one, which is not part of the listed reference requirements."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns self-deletion behavior for users, which is not covered by any reference requirement shown."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns superuser-only deletion of users, which is not one of the provided reference requirements."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This addresses item update/delete permission checks generally, but no reference requirement here specifies that behavior."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": "R13",
+        "label": "MATCH",
+        "reasoning": "Both describe failed login with incorrect password returning 400 and detail 'Incorrect email or password'."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about invalid UUID validation errors, which are not among the listed reference requirements."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": "R47",
+        "label": "PARTIAL",
+        "reasoning": "It broadly mentions password validation being implemented, but does not specifically capture signup with a 7-character password returning 422."
+      },
+      {
+        "detection_id": "O13",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns password recovery for a non-existent user, which is not in the provided reference set."
+      },
+      {
+        "detection_id": "O14",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns reset-password token and password validation, which is not covered by the listed reference requirements."
+      },
+      {
+        "detection_id": "O15",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about unique email enforcement on user update endpoints, not any of the provided reference requirements."
+      },
+      {
+        "detection_id": "O16",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "It includes item deletion existence checks returning 404 as specified, but it is broader and does not specifically mention superuser auth and detail 'Item not found' for a non-existent item ID."
+      },
+      {
+        "detection_id": "O17",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns updating another user's profile, which is not among the listed reference requirements."
+      },
+      {
+        "detection_id": "O18",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns reading another user's profile, which is distinct from reading another user's item and is not covered by the references."
+      },
+      {
+        "detection_id": "O19",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about preventing password reuse during password update, which is not specified in the provided references."
+      },
+      {
+        "detection_id": "O20",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns forbidding superuser self-deletion, which is not one of the listed reference requirements."
+      },
+      {
+        "detection_id": "O21",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about superuser-only creation of users via a private endpoint, which does not correspond to any provided reference requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2760,
+    "prompt_tokens": 1560,
+    "completion_tokens": 1200
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This behavior adds an authenticated-user equality check for the purchaser field, which does not correspond to removing pet selection randomness, removing pet deletion after purchase, or removing purchase-id uniqueness."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Storing purchases in a separate MongoDB collection is unrelated to the removed pet selection algorithm, the removed delete-from-store step, and the removed purchase-id uniqueness requirement."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Capping the number of stores scanned when no store is specified does not describe removal of random pet selection, removal of deleting the pet after purchase, or removal of purchase-id uniqueness constraints."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 782,
+    "prompt_tokens": 559,
+    "completion_tokens": 223
+  }
+}

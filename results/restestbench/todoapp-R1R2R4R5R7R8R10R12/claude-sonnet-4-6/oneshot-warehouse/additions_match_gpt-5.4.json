@@ -1,0 +1,18 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This describes successful deletion behavior for DELETE /todos/{id} with a 200 response body, while the listed requirements only cover delete-not-found and unauthorized-delete cases, not successful deletion."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 984,
+    "prompt_tokens": 899,
+    "completion_tokens": 85
+  }
+}

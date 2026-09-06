@@ -1,0 +1,21 @@
+# MODIFIED SPEC: 3 elements removed for Ratings experiment
+# R10: Removed rating range constraint (integer between 1 and 5)
+#      - GPT-5.4: NOT INFERRED — rating cast to float with no range or integer-type
+#        validation; values outside [1, 5] accepted
+#      - Prior label: Highly inferrable — any developer knows ratings use a bounded
+#        scale; 1-5 is the universal standard for star ratings
+#      - Tests: 35
+# R11: Removed one-rating-per-user-per-dish constraint
+#      - GPT-5.4: INFERRED — code creates a unique compound index on (dish_id, user_id);
+#        duplicate inserts are rejected by MongoDB, preventing multiple ratings per user
+#        per dish
+#      - Prior label: Partially inferrable — preventing duplicate ratings is a common
+#        pattern, but the specific rule (one per user per dish) is not obvious
+#      - Tests: 35
+# R12: Removed that user_id comes from token validation
+#      - GPT-5.4: INFERRED — user_id set from int(auth_data["user_id"]) (token-
+#        validated), not from request body
+#      - Prior label: Partially inferrable — authentication exists and user context is
+#        available from tokens, but specific mechanism removed
+#      - Tests: 35
+

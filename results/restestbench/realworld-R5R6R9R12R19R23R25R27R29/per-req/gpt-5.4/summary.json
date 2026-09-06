@@ -1,0 +1,46 @@
+{
+  "service": "realworld",
+  "round": 1,
+  "variant": "realworld-R5R6R9R12R19R23R25R27R29",
+  "model": "gpt-5.4",
+  "timestamp": "2026-06-22 18:27:07",
+  "total_requirements": 29,
+  "removed_requirements": [
+    5,
+    6,
+    9,
+    12,
+    19,
+    23,
+    25,
+    27,
+    29
+  ],
+  "n_removed": 9,
+  "n_implemented": 19,
+  "n_not_implemented": 10,
+  "n_parse_errors": 0,
+  "total_omissions_reported": 14,
+  "total_tokens": 156079,
+  "removed_not_implemented": [
+    6,
+    9,
+    12,
+    23,
+    25,
+    27,
+    29
+  ],
+  "removed_implemented": [
+    5,
+    19
+  ],
+  "kept_not_implemented": [
+    4,
+    11,
+    18
+  ],
+  "om_recall": 0.7778,
+  "ad_recall": 0.2222,
+  "fp_rate_on_kept": 0.15
+}

@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O1 discusses the registration endpoint's implicit status code, which does not correspond to any of the reference requirements listed."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O2 correctly identifies that POST /todos with an empty title does not return 400 with the required validation error, matching R2's behavior, but notes 422 is returned instead and also mentions empty strings are accepted, partially capturing the full scope."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O3 directly describes the same behavior as R10: PUT /todos/{id} should return 400 Bad Request when the body id differs from the path id, but the code ignores the mismatch."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 discusses the DELETE endpoint's implicit 200 OK status code, which does not correspond to any of the reference requirements listed (R7 and R8 concern 404 responses, not the success case)."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O5 directly matches R2 by identifying that a missing title on POST /todos returns 422 instead of the required 400 Bad Request."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1762,
+    "prompt_tokens": 1330,
+    "completion_tokens": 432
+  }
+}

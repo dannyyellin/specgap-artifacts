@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "Using a counters collection to generate transaction IDs relates to purchase ID generation, but it does not clearly establish the removed uniqueness/non-reuse requirement itself."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A store scan range environment variable is an implementation detail and does not correspond to pet selection removal, delete-after-purchase removal, or purchase ID uniqueness removal."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Returning 500 for internal exceptions concerns error handling and does not match any of the listed removed behaviors."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 719,
+    "prompt_tokens": 518,
+    "completion_tokens": 201
+  }
+}

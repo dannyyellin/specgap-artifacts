@@ -1,0 +1,60 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the failure of the self-follow validation that R2 requires (POST to /api/profiles/follower1/follow should return 400 with 'cannot be equal')."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O2 directly describes the failure of the self-unfollow validation that R10 requires (DELETE should return 400 when user tries to unfollow themselves)."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O3 describes the follow endpoint returning 200 instead of 201, which directly contradicts R2's requirement to verify response status is 201."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements mention the /api/articles/feed endpoint or its routing behavior."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R24",
+        "label": "MATCH",
+        "reasoning": "O5 directly describes the failure to sort articles by created_at descending, which is exactly what R24 tests with its ORDER BY article.created DESC clause requirement."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements mention the feed endpoint's sorting behavior."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements specify the response structure of POST /api/articles/{slug}/comments in a way that matches this detected issue."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": "R26",
+        "label": "PARTIAL",
+        "reasoning": "O8 relates to comment creation response structure and id extraction, which partially overlaps with R26's requirement to verify comment ids are unique and comments are persisted, but R26 focuses on GET comments rather than the POST response structure."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2876,
+    "prompt_tokens": 2260,
+    "completion_tokens": 616
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "app": "public-library",
+  "variant": "books-R8R9R10R11",
+  "service": "books",
+  "req_id": "R10",
+  "requirement": "The service obtains a book's publisher and publishedDate by calling the Google Books API.",
+  "source_headline": "Removed Google Books API integration for publisher/publishedDate",
+  "model": "claude-sonnet-4-6",
+  "pass": 2,
+  "label": "GAP",
+  "evidence": "none",
+  "reasoning": "There is no code anywhere in the service that calls the Google Books API. The `create_book` function simply uses `data.get('publisher', '')` and `data.get('publishedDate', '')` from the request body directly, with no HTTP call to any external API. The requirement states the service must obtain publisher and publishedDate by calling the Google Books API, which is entirely absent.",
+  "usage": {
+    "total_tokens": 2291,
+    "prompt_tokens": 2178,
+    "completion_tokens": 113
+  },
+  "timestamp": "2026-07-16 14:54:43"
+}

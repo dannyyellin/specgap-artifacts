@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement addresses the ability to supply an isComplete value during todo creation."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement addresses duplicate email registration behavior."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement specifies JWT token payload fields, expiration claims, or a specific token lifetime."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1297,
+    "prompt_tokens": 1109,
+    "completion_tokens": 188
+  }
+}

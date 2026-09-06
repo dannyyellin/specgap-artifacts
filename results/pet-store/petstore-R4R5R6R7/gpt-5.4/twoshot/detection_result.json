@@ -1,0 +1,121 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "Uses additional Ninja API fields such as 'slogan', 'group', 'color', 'skin_type', 'top_speed', 'diet', and 'main_prey' to populate the pet-type 'attributes' array",
+        "category": "COMPUTED_VALUES",
+        "reasoning": "The specification requires 'attributes' to be derived only from the Ninja API field named either 'temperament' or 'group_behavior', preferring 'temperament' when both exist. The code instead aggregates values from several unrelated fields, which is behavior not required by the specification."
+      },
+      {
+        "id": "A2",
+        "description": "PUT /pet-types/{id}/pets/{name} accepts and applies a direct 'picture' field in the payload",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification for updating a pet says the payload is a pet object and only explicitly defines picture acquisition via 'picture-url' on creation; it does not positively require accepting a raw stored picture filename from clients on update. Allowing clients to set 'picture' directly is extra behavior beyond the specification."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "DELETE /pet-types/{id} does not reject deletion when the pet-type still has pets",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states 'A pet-type can only be deleted if there are no pets of that type. Otherwise, it returns 400.' The code deletes the pet-type unconditionally if it exists."
+      },
+      {
+        "id": "O2",
+        "description": "DELETE /pet-types/{id} does not return 400 when the pet-type has pets",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "Because the code never checks whether pets exist before deletion, it cannot produce the required 400 response for that case."
+      },
+      {
+        "id": "O3",
+        "description": "POST /pet-types/{id}/pets does not return 403 for authenticated but non-owner users",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly allows 403 when the user is authenticated but not authorized. In this code, verify_owner does return 403, so this is not an omission."
+      },
+      {
+        "id": "O3",
+        "description": "POST /pet-types/{id}/pets returns 404 when the pet-type does not exist, even though 404 is not a specified response for this operation",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification lists possible response codes for POST /pet-types/{id}/pets as 201, 400, 401, 403, 415. The code returns 404 when the pet-type id is missing, which does not match the specified response set."
+      },
+      {
+        "id": "O4",
+        "description": "POST /pet-types/{id}/pets does not validate that the payload contains only the allowed fields 'name', optional 'birthdate', and optional 'picture-url'",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification says the POST payload contains the 'name' field and optionally 'birthdate' and 'picture-url'. The code only checks that 'name' exists and accepts additional unspecified fields without rejection."
+      },
+      {
+        "id": "O5",
+        "description": "GET /pet-types/{id}/pets does not implement query-string filtering by birthdateGT and/or birthdateLT",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification requires GET /pet-types/{id}/pets to support query strings 'birthdateGT=<date>', 'birthdateLT=<date>', or both together. The code ignores query parameters and always returns all pets."
+      },
+      {
+        "id": "O6",
+        "description": "GET /pet-types/{id}/pets does not apply strict before/after birthdate filtering logic",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification requires returning only pets with birth dates strictly after or strictly before the supplied dates. The code performs no date comparison at all."
+      },
+      {
+        "id": "O7",
+        "description": "GET /pet-types/{id}/pets does not treat malformed or nonsensical query strings as an empty array",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The general code generation guidelines require malformed or nonsensical query strings to return an empty array. Since this endpoint ignores query strings entirely, malformed birthdate filters do not yield the required empty array behavior."
+      },
+      {
+        "id": "O8",
+        "description": "POST /pet-types does not derive 'attributes' from 'group_behavior' when 'temperament' is absent",
+        "category": "COMPUTED_VALUES",
+        "reasoning": "The specification says the attributes field is obtained from either 'temperament' or 'group_behavior', using 'group_behavior' if 'temperament' is absent. The code never reads 'group_behavior' and instead uses unrelated fields."
+      },
+      {
+        "id": "O9",
+        "description": "POST /pet-types does not prefer 'temperament' over 'group_behavior' when both are present",
+        "category": "COMPUTED_VALUES",
+        "reasoning": "The specification explicitly says 'If both are listed then just use temperament.' The code does not implement this precedence rule."
+      },
+      {
+        "id": "O10",
+        "description": "POST /pet-types does not split the selected Ninja API text on whitespace while removing punctuation except hyphens to build 'attributes'",
+        "category": "COMPUTED_VALUES",
+        "reasoning": "The specification defines exact tokenization for attributes: each word from 'temperament' or 'group_behavior' becomes one string, split on whitespace and excluding punctuation except hyphens. The code instead splits comma-separated values and preserves phrases, which does not implement the required computation."
+      },
+      {
+        "id": "O11",
+        "description": "POST /pet-types sets 'lifespan' to 0 instead of JSON null when the Ninja API does not provide lifespan",
+        "category": "COMPUTED_VALUES",
+        "reasoning": "The specification states 'If the lifespan field is not returned by the Ninja API, then its value is the JSON keyword null.' The code defaults lifespan to 0 and serializes missing lifespan as 0."
+      },
+      {
+        "id": "O12",
+        "description": "POST /pet-types does not extract family, genus, and lifespan from the top-level Ninja API object as specified",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The specification says that once the matching Ninja API object is obtained, the service extracts the family, genus, and lifespan fields from that object. The code instead looks for taxonomy.family, taxonomy.genus, and characteristics.lifespan, which does not implement the specified field mapping."
+      },
+      {
+        "id": "O13",
+        "description": "POST /pet-types does not return 500 when the registry verification service is unavailable",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The status code guidelines state that if a service uses an external API and it cannot handle the request, 503 is returned. For pet-store, owner authentication depends on the registry service. The code maps any registry request failure to 401 Unauthorized instead of an external-service failure status."
+      },
+      {
+        "id": "O14",
+        "description": "Owner-authenticated operations do not return 503 when the registry service cannot handle the request",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The pet-store must contact the registry service to verify owner credentials. Under the global guidelines, failure of an external service should result in 503. The code catches registry request exceptions and treats them as invalid credentials, returning 401 instead of signaling external service unavailability."
+      },
+      {
+        "id": "O15",
+        "description": "Uses MongoDB service name 'mongo' instead of the specified 'mongoPetSt'",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The deployment specification states that pet-store data is stored in a MongoDB service named 'mongoPetSt'. The code connects to 'mongodb://mongo:27017/...', which does not implement the specified deployment/data persistence configuration."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 13481,
+    "prompt_tokens": 11853,
+    "completion_tokens": 1628
+  }
+}

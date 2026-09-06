@@ -1,0 +1,23 @@
+{
+  "variant": "realworld-R5R6R9R12R19R23R25R27R29",
+  "req_id": 9,
+  "model": "gpt-5.4",
+  "pass": 2,
+  "verdict": "NOT_IMPLEMENTED",
+  "requirement_vague": "Verify user creation rejects duplicate username or email",
+  "omissions": [
+    {
+      "id": "O1",
+      "description": "User creation does not return status 400 with message 'Username and email must be unique' when a duplicate username or duplicate email is submitted.",
+      "category": "RESPONSE_FORMAT",
+      "reasoning": "The POST /api/users route checks for existing email and username, but raises HTTPException with status_code=422 instead of 400. It also returns field-specific error payloads ({\"errors\":{\"email\":[\"has already been taken\"]}} or {\"errors\":{\"username\":[\"has already been taken\"]}}) rather than a response containing the required message 'Username and email must be unique'."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 5349,
+    "prompt_tokens": 5208,
+    "completion_tokens": 141
+  },
+  "timestamp": "2026-07-12 10:39:59"
+}

@@ -1,0 +1,22 @@
+{
+  "req_id": 28,
+  "requirement_vague": "Verify any authenticated user can update and delete any article (no authorization check - security vulnerability)",
+  "requirement_precise": "Create user1 (username: 'owner1', email: 'owner1@test.com', password: 'pass123'). Create user2 (username: 'attacker1', email: 'attacker1@test.com', password: 'pass123'). User1 creates article with title 'Original Owner Article'. Verify article exists. User2 (NOT the owner) PUTs /api/articles/{slug} with title 'Hacked By User2'. Verify PUT response shows updated title. GET article and verify title changed. User1 creates second article 'Article To Delete'. User2 (NOT the owner) DELETEs /api/articles/{slug}. Verify DELETE succeeds with status 200. GET the deleted article and verify it returns 200 with empty object {} (implementation returns empty object for deleted articles). This demonstrates the security vulnerability that any user can update/delete any article.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": [
+      "PUT /api/articles/{slug} -> update_article",
+      "DELETE /api/articles/{slug} -> delete_article",
+      "GET /api/articles/{slug} -> get_article"
+    ],
+    "code_reference": "def update_article(..., current_user: User = Depends(get_current_user)):\n    article = session.exec(select(Article).where(Article.slug == slug)).first()\n    ...\n    return article_response(session, article, current_user)\n\ndef delete_article(..., current_user: User = Depends(get_current_user)):\n    article = session.exec(select(Article).where(Article.slug == slug)).first()\n    ...\n    session.delete(article)\n\ndef get_article(slug: str, ...):\n    article = session.exec(select(Article).where(Article.slug == slug)).first()\n    if not article:\n        return {}",
+    "reasoning": "Both update_article and delete_article require authentication but never compare current_user.id to article.author_id, so any authenticated user can modify or delete any article. After deletion, get_article returns 200 with an empty object when the article is missing, matching the described vulnerable behavior."
+  },
+  "usage": {
+    "total_tokens": 5516,
+    "prompt_tokens": 5267,
+    "completion_tokens": 249
+  },
+  "parse_error": false
+}

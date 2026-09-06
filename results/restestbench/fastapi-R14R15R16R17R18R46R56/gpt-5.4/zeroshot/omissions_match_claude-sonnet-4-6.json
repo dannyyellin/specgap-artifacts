@@ -1,0 +1,84 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R15",
+        "label": "PARTIAL",
+        "reasoning": "O1 identifies the missing POST /api/v1/password-recovery/{email} endpoint which is required by R15, but O1 also covers R16's 404 case and doesn't address the mailcatcher verification aspect of R15."
+      },
+      {
+        "detection_id": "O1",
+        "requirement_id": "R16",
+        "label": "PARTIAL",
+        "reasoning": "O1 mentions the 404 for nonexistent users which directly corresponds to R16's requirement, but bundles it with the general missing endpoint observation."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R18",
+        "label": "PARTIAL",
+        "reasoning": "O2 identifies the missing reset-password endpoint and mentions 400 for invalid token matching R18, but also covers R56 and R17 scenarios."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R56",
+        "label": "PARTIAL",
+        "reasoning": "O2 mentions 422 for invalid password length which directly corresponds to R56's requirement for a 7-character password returning 422."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R17",
+        "label": "PARTIAL",
+        "reasoning": "O2 mentions 200 on success for reset-password which is part of R17's requirement to verify the reset response returns 200 with the success message."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R14",
+        "label": "MATCH",
+        "reasoning": "O3 directly identifies the missing test token endpoint that R14 requires to verify the authenticated user's email is returned."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R15",
+        "label": "PARTIAL",
+        "reasoning": "O4 covers the missing email sending and mailcatcher verification aspect of R15, but also encompasses R17's recovery HTML content requirement."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R17",
+        "label": "PARTIAL",
+        "reasoning": "O4 mentions the missing password-recovery HTML content endpoint which is specifically required by R17 to extract the reset token."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R17",
+        "label": "PARTIAL",
+        "reasoning": "O5 covers the reset token generation and password update logic required by R17, including verifying login with new password succeeds."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R18",
+        "label": "PARTIAL",
+        "reasoning": "O5 mentions rejecting invalid tokens with 400 detail 'Invalid token' which directly matches R18's requirement."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 describes a mismatch in error detail text for reading a nonexistent user by ID, which does not correspond to any of the listed reference requirements."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R46",
+        "label": "PARTIAL",
+        "reasoning": "O7 identifies that deleted user's items may not become inaccessible (404), which is exactly what R46 requires to verify after deleting a user's account."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2491,
+    "prompt_tokens": 1567,
+    "completion_tokens": 924
+  }
+}

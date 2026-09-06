@@ -1,0 +1,18 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement specifies the response body of a successful DELETE /todos/{id} operation; the specs only check for 404 status codes in error scenarios."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1055,
+    "prompt_tokens": 961,
+    "completion_tokens": 94
+  }
+}

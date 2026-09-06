@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Filtering by 'id' and 'name' is not related to any of the three removed spec requirements about Ninja API field mapping, owner-only restrictions, or query string filtering semantics for nutrients/contains."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "R6 removed specific query string filtering semantics including 'contains' filtering, and the code's use of 'ingredients' (plural) vs the spec's 'ingredient' (singular) relates to the removed filtering semantics, though it's a naming discrepancy rather than a direct semantic match."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Returning 415 for unsupported media types on POST/PUT does not correspond to any of the three removed spec requirements about Ninja API field mapping, owner-only restrictions, or query string filtering semantics."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Implementing a 405 error handler for unsupported HTTP methods does not correspond to any of the three removed spec requirements about Ninja API field mapping, owner-only restrictions, or query string filtering semantics."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1045,
+    "prompt_tokens": 660,
+    "completion_tokens": 385
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 describes strict payload validation for POST /pet-types, which does not correspond to any of the four removed constraints listed in R4-R7."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "R4 states that temperament/group_behavior were removed from attributes extraction rules, and A2 describes the code extracting attributes from additional fields beyond what the spec requires, directly relating to the changed attributes extraction behavior."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "R6 concerns removed lifespan range handling, while A3 concerns a different lifespan behavior (defaulting to 0 instead of null), so they both involve lifespan but describe different aspects of the removed/changed handling."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A4 describes accepting an extra 'picture' field in PUT /pet-types/{id}/pets/{name}, which does not correspond to any of the removed constraints in R4-R7."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A5 describes a MongoDB hostname mismatch, which does not correspond to any of the removed constraints listed in R4-R7."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1362,
+    "prompt_tokens": 932,
+    "completion_tokens": 430
+  }
+}

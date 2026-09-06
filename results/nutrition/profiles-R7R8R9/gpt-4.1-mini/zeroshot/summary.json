@@ -1,0 +1,16 @@
+{
+  "app": "nutrition",
+  "variant": "profiles-R7R8R9",
+  "service": "profile",
+  "method": "zeroshot",
+  "detector_model": "gpt-4.1-mini",
+  "gen_model": "gpt-5.4",
+  "gen_usage": null,
+  "n_additions": 2,
+  "n_omissions": 7,
+  "usage": {
+    "total_tokens": 6602,
+    "prompt_tokens": 5733,
+    "completion_tokens": 869
+  }
+}

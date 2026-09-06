@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This describes supported token transport mechanisms, which does not correspond to removing protein exclusion, removing owner-only GET /profiles access, or removing user_id-from-token validation."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about preventing duplicate profile creation for the same user, which is unrelated to any of the listed removals in the spec requirements."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns defaulting missing nutritional fields to 0.00 on profile creation, which does not match any listed requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 779,
+    "prompt_tokens": 578,
+    "completion_tokens": 201
+  }
+}

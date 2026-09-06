@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of the returnDate = loanDate + 30 days computation from the Borrows service, matching R1 exactly."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O2 directly describes the removal of the overdue borrow constraint (2+ overdue books blocks checkout with 400) from the Borrows service, matching R2 exactly."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R3",
+        "label": "PARTIAL",
+        "reasoning": "O3 captures that Borrows no longer properly notifies Logs on checkout, but frames it as ignoring failures rather than the complete removal of the notification behavior described in R3, and does not mention the Logs spec side of the removal."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1003,
+    "prompt_tokens": 729,
+    "completion_tokens": 274
+  }
+}

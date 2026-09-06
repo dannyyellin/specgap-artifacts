@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R8",
+        "label": "MATCH",
+        "reasoning": "Both state that GET /profiles should not be restricted to the owner only."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This discusses filtering semantics on GET /profiles, which is unrelated to any reference requirement."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "It concerns the source of user_id, but says it comes from the authenticated token rather than the request body, which is the opposite of the reference change removing token-derived user_id."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "Both describe that protein should be excluded from the profileDishes calculation/filtering."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1046,
+    "prompt_tokens": 802,
+    "completion_tokens": 244
+  }
+}

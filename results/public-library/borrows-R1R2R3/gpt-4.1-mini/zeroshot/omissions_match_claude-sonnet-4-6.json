@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of the overdue borrow constraint (2+ overdue books blocks checkout, returns 400) from Borrows, matching R2 exactly."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O2 directly describes the removal of the return date computation (returnDate = loanDate + 30 days) from Borrows, matching R1 exactly."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 concerns validation of required fields and types, which does not correspond to any of the three reference requirements about removed behaviors."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concerns 405 Method Not Allowed handling, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R3",
+        "label": "PARTIAL",
+        "reasoning": "O5 partially captures R3 in that it notes the Borrows service does not properly inform the Logs service on checkout, but it frames it as a robustness/failure-handling issue rather than the complete removal of the notification behavior from both Borrows and Logs specs."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1299,
+    "prompt_tokens": 882,
+    "completion_tokens": 417
+  }
+}

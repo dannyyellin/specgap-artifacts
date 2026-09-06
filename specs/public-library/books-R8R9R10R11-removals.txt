@@ -1,0 +1,25 @@
+# MODIFIED SPEC: 4 elements removed for Books experiment
+# R8: Removed which fields POST requires (title, authors, ISBN, genre)
+#     - GPT-5.4: INFERRED — code defines POST_REQUIRED_FIELDS = ["title", "authors",
+#       "ISBN", "genre"] and validates all four are present
+#     - Prior label: Highly inferrable — data model shows publisher/publishedDate are
+#       computed and id is generated, so POST needs the remaining fields
+#     - Tests: 16, 27
+# R9: Removed ISBN format (13-digit ISBN_13)
+#     - GPT-5.4: NOT INFERRED — code validates only that ISBN is a string; no 13-digit
+#       format check implemented
+#     - Prior label: Highly inferrable — field is named 'ISBN', format is well-known
+#     - Tests: 16
+# R10: Removed Google Books API integration for publisher/publishedDate
+#      - GPT-5.4: NOT INFERRED — no Google Books API call anywhere; publisher and
+#        publishedDate are accepted as optional client-supplied input instead
+#      - Prior label: Partially inferrable — fields exist in data model but aren't in
+#        POST, must come from somewhere; ISBN provides a natural lookup key
+#      - Tests: 16
+# R11: Removed genre enumeration (valid genre list)
+#      - GPT-5.4: NOT INFERRED — code validates only that genre is a string; no
+#        enumeration check against a list of valid genres
+#      - Prior label: Domain knowledge — books have genres from a standard set, but
+#        specific valid values are not specified
+#      - Tests: 28
+

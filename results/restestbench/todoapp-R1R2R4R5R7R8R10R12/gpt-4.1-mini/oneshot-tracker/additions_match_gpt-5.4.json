@@ -1,0 +1,24 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement concerns the response body format of a successful DELETE /todos/{id}; the listed DELETE requirements are only about 404 cases for missing or unauthorized resources."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement specifies whether POST /todos may accept an isComplete field on creation, so this behavior does not correspond to any listed requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1098,
+    "prompt_tokens": 954,
+    "completion_tokens": 144
+  }
+}

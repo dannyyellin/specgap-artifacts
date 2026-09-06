@@ -1,0 +1,24 @@
+{
+  "req_id": 38,
+  "requirement_vague": "Verify an admin cannot change a user's email to an email already used by another user. Admin credentials: (admin@example.com / password123)",
+  "requirement_precise": "Register two distinct users via the public signup operation, each with a different email and password. Authenticate as the superuser (admin@example.com / password123) to obtain an access token. Using the superuser access token, attempt to update the first registered user's email (update by id) so that it becomes the second user's email. Verify the response status is 409. Verify the response body contains a \"detail\" field equal to \"User with this email already exists\".",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": [
+      "POST /api/v1/users/signup",
+      "POST /api/v1/login/access-token",
+      "PATCH /api/v1/users/{user_id}",
+      "get_current_active_superuser",
+      "init_db"
+    ],
+    "code_reference": "if user_in.email and user_in.email != user.email:\n    existing_user = get_user_by_email(session, user_in.email)\n    if existing_user:\n        raise HTTPException(status_code=409, detail=\"User with this email already exists\")",
+    "reasoning": "The admin update-by-id route is restricted to superusers, looks up any existing user by the requested email, and returns HTTP 409 with detail exactly \"User with this email already exists\" when the email is already in use by another user. The configured superuser credentials are admin@example.com / password123, signup exists for creating two distinct users, and login/access-token issues the bearer token needed for the admin-authenticated update attempt."
+  },
+  "usage": {
+    "total_tokens": 4930,
+    "prompt_tokens": 4732,
+    "completion_tokens": 198
+  },
+  "parse_error": false
+}

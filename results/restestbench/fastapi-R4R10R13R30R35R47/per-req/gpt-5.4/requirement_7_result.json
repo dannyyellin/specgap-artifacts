@@ -1,0 +1,18 @@
+{
+  "req_id": 7,
+  "requirement_vague": "Confirm updating a not existing item fails with an item-not-found error.",
+  "requirement_precise": "Authenticate as a superuser (admin@example.com / password123). Attempt to update an item with a non-existent item ID. Verify that the API responds with HTTP status code 404 and the response body contains a 'detail' field with the value 'Item not found'.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": "POST /api/v1/login/access-token and PATCH /api/v1/items/{item_id} (login_access_token, update_item)",
+    "code_reference": "@api_router.patch(\"/items/{item_id}\", response_model=ItemRead)\ndef update_item(item_id: UUID, item_in: ItemUpdate, session: Session = Depends(get_session), current_user: User = Depends(get_current_active_user)):\n    item = session.get(Item, item_id)\n    if not item:\n        raise HTTPException(status_code=404, detail=\"Item not found\")",
+    "reasoning": "The item update endpoint exists and, after authentication, looks up the item by ID. When the item does not exist, it raises an HTTPException with status code 404 and detail exactly equal to 'Item not found', which FastAPI returns in the response body as the 'detail' field."
+  },
+  "usage": {
+    "total_tokens": 5946,
+    "prompt_tokens": 5753,
+    "completion_tokens": 193
+  },
+  "parse_error": false
+}

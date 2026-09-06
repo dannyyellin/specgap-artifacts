@@ -1,0 +1,35 @@
+Timestamp: 2026-06-01 21:00:49
+Detector:  gpt-4.1-mini
+App/Variant/Service: pet-store/petstore-R4R5R6R7/pet-store
+Method:    oneshot-tracker
+
+Tokens: prompt=10512, completion=2368, total=12880
+Additions: 6
+Omissions: 19
+
+  A A1: The POST /pet-types endpoint uses multiple fields from the Ninja API response ('characteristics' keys like 'slogan', 'group', 'color', 'skin_type', 'top_speed', 'diet', 'main_prey') to build the 'attributes' array, beyond the 'temperament' or 'group_behavior' fields required by the specification.
+  A A2: The 'lifespan' field in pet-type documents defaults to 0 if not returned by the Ninja API, instead of null as required by the specification.
+  A A3: The DELETE /pet-types/{id} endpoint deletes the pet-type without checking if there are pets of that type, allowing deletion even if pets exist.
+  A A4: The GET /pet-types/{id}/pets endpoint does not support filtering pets by 'birthdateGT' or 'birthdateLT' query parameters as required.
+  A A5: The PUT /pet-types/{id}/pets/{name} endpoint supports a 'picture-url' field in the payload to update the pet's picture by fetching and saving an image, which is not specified.
+  A A6: The GET /pictures/{picture-name} endpoint validates the picture name to reject names containing slashes or backslashes, returning 400, which is not specified.
+
+  O O1: The POST /pet-types endpoint requires the request payload to contain only the 'type' field, but the code does not reject payloads with extra fields.
+  O O2: The POST /pet-types endpoint requires returning 400 if the Ninja API cannot find the pet with the given type, but the code returns 400 with empty body instead of a JSON error message.
+  O O3: The DELETE /pet-types/{id} endpoint does not return 400 if pets of that type exist, violating the specification.
+  O O4: The GET /pet-types/{id}/pets endpoint does not implement filtering by 'birthdateGT' and 'birthdateLT' query parameters as required.
+  O O5: The POST /pet-types/{id}/pets endpoint does not check for duplicate pet names within the same pet-type properly; it returns 400 but specification requires unique names and does not specify error code for duplicates.
+  O O6: The POST /pet-types/{id}/pets endpoint returns 404 if pet-type does not exist, which is not explicitly stated in the specification but is reasonable. No omission.
+  O O7: The PUT /pet-types/{id} endpoint is not allowed and must return 405, but the code does not implement this endpoint, so 405 is returned by default.
+  O O8: The POST /pet-types/{id}/pets endpoint requires validating that the 'birthdate' field is of form DD-MM-YYYY if supplied, which the code implements.
+  O O9: The POST /pet-types/{id}/pets endpoint requires validating that the 'picture-url' field points to a reachable .jpg or .png image, which the code implements.
+  O O10: The GET /pictures/{picture-name} endpoint returns 400 if the picture name is invalid or contains path separators, which is not specified but is a reasonable security measure.
+  O O11: The GET /pet-types endpoint returns 200 with empty array if query string is malformed or nonsensical, as required.
+  O O12: The DELETE /pet-types/{id}/pets/{name} endpoint requires 403 if the user is authenticated but not authorized, which the code implements by verifying owner and returning 403 if not privileged.
+  O O13: The PUT /pet-types/{id}/pets/{name} endpoint requires updating only provided fields and retaining omitted fields, which the code implements.
+  O O14: The PUT /pet-types/{id}/pets/{name} endpoint requires validating 'birthdate' and 'picture' fields if provided, which the code implements.
+  O O15: The PUT /pet-types/{id}/pets/{name} endpoint requires returning 400 if the new pet name duplicates another pet's name, which the code implements.
+  O O16: The POST /pet-types endpoint requires 401 if user cannot be authenticated and 403 if authenticated but not authorized, which the code implements.
+  O O17: The POST /pet-types/{id}/pets endpoint requires 401 if user cannot be authenticated and 403 if authenticated but not authorized, which the code implements.
+  O O18: The DELETE /pet-types/{id}/pets/{name} endpoint requires 401 if user cannot be authenticated and 403 if authenticated but not authorized, which the code implements.
+  O O19: The GET /pet-types/{id}/pets/{name} endpoint returns 404 if pet or pet-type not found, which the code implements.

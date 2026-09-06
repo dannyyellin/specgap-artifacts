@@ -1,0 +1,67 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "POST and PUT accept and store ratings as arbitrary floating-point values rounded to two decimals instead of restricting them to integers",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification defines 'rating' as 'an integer between 1 and 5'. The code parses rating with float(...), rounds it with round2, and stores values such as 4.50, which is behavior not required by the specification."
+      },
+      {
+        "id": "A2",
+        "description": "The service generates and stores an internal unique 'id' field for each rating document and maintains a counters collection for sequence generation",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The specification defines each rating resource by dish_id, user_id, and rating, and /ratings/{id} refers to the dish id. It does not require a separate persisted rating record id or a counters-based sequence mechanism."
+      },
+      {
+        "id": "A3",
+        "description": "The service accepts authentication tokens from either an Authorization header or a custom 'token' header, and also accepts a raw Authorization header value without the Bearer scheme",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification only requires that requests supply a valid token; it does not require support for multiple header conventions or raw Authorization header parsing."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "POST and PUT do not enforce that 'rating' is an integer between 1 and 5",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification explicitly requires 'rating' to be 'an integer between 1 and 5'. The code only checks that it can be converted to float and never enforces integrality or the 1..5 range."
+      },
+      {
+        "id": "O2",
+        "description": "POST /ratings returns only {'dish_id','avg_rating'} instead of creating and returning the newly created rating resource",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification states that POST /ratings 'creates a new rating for the dish from the user issuing the request.' The resource is defined as containing dish_id, user_id, and rating. Returning only the aggregate average omits the created resource representation required by the POST semantics described in the spec."
+      },
+      {
+        "id": "O3",
+        "description": "POST /ratings does not explicitly implement the rule that a user may rate a given dish only once and should reject a second POST for the same user and dish with an appropriate client error",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states 'The POST /ratings request is only allowed once for a given user for a given dish; a user cannot rate the same dish twice'. The code relies on a database unique index and converts any PyMongoError into a generic 400 response, rather than implementing this domain rule explicitly."
+      },
+      {
+        "id": "O4",
+        "description": "GET /ratings/{id} does not verify that the referenced dish exists in the dishes microservice before responding",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The general guideline says that if a microservice requires data another microservice is responsible for, it invokes a GET request on that microservice to retrieve that data when it needs it. Dish existence is owned by the dishes service. The code checks dish existence for POST and PUT, but GET /ratings/{id} computes an average solely from local ratings data."
+      },
+      {
+        "id": "O5",
+        "description": "DELETE /ratings/{id} does not verify that the referenced dish exists in the dishes microservice before attempting deletion",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "Dish data is owned by the dishes microservice, and the guidelines require retrieving needed cross-service data from the responsible service. The code deletes by local dish_id and user_id only, with no GET to the dishes service."
+      },
+      {
+        "id": "O6",
+        "description": "The code uses flask_pymongo, which is not in the allowed package list for this service",
+        "category": "ADDITIONS",
+        "reasoning": "The specification restricts this service to Python Standard Library plus flask, pymongo, and requests. The code imports and depends on flask_pymongo/PyMongo, which is outside the permitted set."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 7889,
+    "prompt_tokens": 7052,
+    "completion_tokens": 837
+  }
+}

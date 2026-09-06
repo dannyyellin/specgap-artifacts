@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the absence of returnDate computation as loanDate + 30 days, which matches R1 exactly."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O2 captures the overdue check part of R2 but does not mention the 400 status code response, which is also part of R2."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O3 captures the 400 status code part of R2 but does not mention the overdue check condition itself, so together with O2 they fully cover R2."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 describes missing ISBN_13 validation which does not correspond to any of the reference requirements R1, R2, or R3."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1039,
+    "prompt_tokens": 720,
+    "completion_tokens": 319
+  }
+}

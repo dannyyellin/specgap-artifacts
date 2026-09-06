@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the failure to return 400 with 'The Title field is required' for empty/missing title on POST /todos, which is exactly what R2 specifies."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O2 directly describes the missing validation that the request body id must match the URL path id on PUT /todos/{id}, returning 400 Bad Request when they differ, which is exactly what R10 specifies."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 concerns unauthenticated access returning 403 vs 401, which does not correspond to any of the listed reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1521,
+    "prompt_tokens": 1257,
+    "completion_tokens": 264
+  }
+}

@@ -1,0 +1,21 @@
+Timestamp: 2026-06-01 20:56:23
+Detector:  gpt-4.1-mini
+App/Variant/Service: nutrition/dishes-R4R5R6/dishes
+Method:    oneshot-tracker
+
+Tokens: prompt=6982, completion=994, total=7976
+Additions: 4
+Omissions: 7
+
+  A A1: Supports query parameter 'id' and 'name' for filtering dishes in GET /dishes
+  A A2: Supports filtering by 'ingredients' field in GET /dishes query parameters
+  A A3: Returns error 415 (Unsupported media type) if POST or PUT request payload is not JSON
+  A A4: Returns error 405 (Method Not Allowed) for unsupported HTTP methods via error handler
+
+  O O1: POST, PUT, and DELETE requests are not restricted to the restaurant Owner user
+  O O2: GET /dishes does not support filtering by 'ingredient' field as specified
+  O O3: Does not return 401 Unauthorized if authentication token is missing or invalid
+  O O4: Does not validate that nutritional fields returned by Ninja API are numeric before summing
+  O O5: Does not handle the case where the Ninja API returns no data for an ingredient by setting nutritional fields to 0.0
+  O O6: Does not return 400 Bad Request if the 'name' or 'ingredients' fields are missing or invalid in POST or PUT requests
+  O O7: Does not return 404 Not Found if a dish with the specified id does not exist on PUT or DELETE requests

@@ -1,0 +1,24 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "R4 removed temperament/group_behavior from attributes extraction, but A1 describes the opposite issue: the code includes extra fields beyond what the spec requires, suggesting the spec's removal of temperament/group_behavior rules is related but the behavior described is about adding fields rather than removing them."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements R4-R7 mention anything about ID generation or a counters_collection."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 800,
+    "prompt_tokens": 611,
+    "completion_tokens": 189
+  }
+}

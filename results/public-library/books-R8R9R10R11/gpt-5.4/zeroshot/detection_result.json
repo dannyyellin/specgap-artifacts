@@ -1,0 +1,73 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "POST /books accepts and stores client-supplied 'publisher' and 'publishedDate' fields.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification says the POST request provides title, authors, ISBN, and genre, and that publisher and publishedDate are obtained by the service from Google Books. The code allows these fields in the POST body and persists them instead of deriving them externally."
+      },
+      {
+        "id": "A2",
+        "description": "PUT /books rejects requests whose body contains an 'id' different from the path parameter.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification only says PUT provides a JSON payload of the resource's fields and returns the id of the updated resource. It does not require any special validation rule comparing a body 'id' to the path id."
+      },
+      {
+        "id": "A3",
+        "description": "The service creates a unique MongoDB index on the 'id' field.",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The specification requires persistent storage in Mongo and string ids, but does not positively require a unique database index implementation detail."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "POST /books does not invoke the Google Books API to obtain 'publisher' and 'publishedDate' from the supplied ISBN.",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The specification explicitly requires the Books service to obtain publisher and publishedDate using the 3rd party Google Books API by supplying the ISBN."
+      },
+      {
+        "id": "O2",
+        "description": "POST /books does not populate 'publisher' and 'publishedDate' from Google Books, nor default missing API fields to the empty string based on the API response.",
+        "category": "COMPUTED_VALUES",
+        "reasoning": "The specification requires these two fields to be derived from Google Books on creation, using the first returned entry and empty string when Google Books lacks one of the fields. The code simply takes client input or uses empty strings without any API-based derivation."
+      },
+      {
+        "id": "O3",
+        "description": "POST /books does not validate that 'ISBN' is a string representing a 13-digit ISBN_13 number.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The resource definition specifies ISBN as a string representing the 13 digit ISBN_13 number of the book. The code only checks that ISBN is a string, not that it is 13 digits."
+      },
+      {
+        "id": "O4",
+        "description": "POST /books does not validate that 'genre' is one of the allowed values: Fiction, Children, Biography, Science, Science Fiction, Fantasy, or Other.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification constrains genre to a fixed enumeration. The code accepts any string for genre."
+      },
+      {
+        "id": "O5",
+        "description": "PUT /books does not validate that an updated 'ISBN' value is a 13-digit ISBN_13 string.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "Because each book resource defines ISBN as a 13-digit ISBN_13 string, updates must preserve that constraint. The code only checks that ISBN is a string."
+      },
+      {
+        "id": "O6",
+        "description": "PUT /books does not validate that an updated 'genre' value is one of the allowed enumerated genres.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification defines genre as one of a specific set of values for book resources. The code allows any string during updates."
+      },
+      {
+        "id": "O7",
+        "description": "PUT /books allows clients to directly modify 'publisher' and 'publishedDate' instead of treating them as service-obtained fields.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states publisher and publishedDate are obtained by the service using Google Books rather than provided by the POST request. The code also makes them freely mutable via PUT, with no service-side retrieval or constraint tied to ISBN."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 4883,
+    "prompt_tokens": 4106,
+    "completion_tokens": 777
+  }
+}

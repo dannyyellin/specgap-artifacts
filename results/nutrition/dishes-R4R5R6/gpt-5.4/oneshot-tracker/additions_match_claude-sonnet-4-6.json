@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "R5 removed the owner-only restriction for POST/PUT/DELETE, and A1 describes additional authentication enforcement on GET endpoints not covered by R5, so it partially relates to the access-control changes but addresses a different scope (read vs. write operations)."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "R6 removed specific query string filtering semantics, and A2 describes the code supporting additional filter fields (id, name, ingredients) beyond what the spec defines, which partially relates to divergence in filtering semantics but is about added fields rather than removed semantics."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "R6 removed specific query string filtering semantics, and A3 describes behavior around unsupported query parameters being silently ignored, which is related to filtering semantics but addresses handling of unknown fields rather than the specific lte/contains semantics mentioned in R6."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 946,
+    "prompt_tokens": 629,
+    "completion_tokens": 317
+  }
+}

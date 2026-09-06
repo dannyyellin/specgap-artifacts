@@ -1,0 +1,66 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement here describes unauthorized users being able to update or delete any article regardless of ownership."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "This concerns duplicate username/email registration handling like R9, but the status code and error message differ from the requirement."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements cover missing required registration fields."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the provided requirements describe login failure behavior."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "R5 requires GET by slug after deletion to return 200 with {}, while this property includes that behavior but also generalizes it to any missing article."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No listed requirement is about comment deletion responses."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The requirements shown do not mention favorited or favoritesCount fields in article responses."
+      },
+      {
+        "detection_id": "A8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the provided requirements concern updating user email or username via PUT /api/user."
+      },
+      {
+        "detection_id": "A9",
+        "requirement_id": "R23",
+        "label": "MATCH",
+        "reasoning": "R23 explicitly tests feed pagination using limit and offset on /api/articles/feed, which this property describes."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2622,
+    "prompt_tokens": 2130,
+    "completion_tokens": 492
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R1",
+        "label": "PARTIAL",
+        "reasoning": "Allowing a client-supplied returnDate conflicts with the old computed-returnDate behavior, but it does not specifically show that return date computation was removed."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Permitting an id field in POST and PUT payloads is unrelated to removing return date computation, overdue constraints, or checkout log notifications."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Validating cardholder existence via the Cardholders service does not correspond to any of the listed removed Borrows behaviors."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Validating book existence via the Books service does not match any requirement about removing return date computation, overdue blocking, or log notifications."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rejecting unknown GET query parameters is unrelated to the removed Borrows behaviors in the spec."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1105,
+    "prompt_tokens": 789,
+    "completion_tokens": 316
+  }
+}

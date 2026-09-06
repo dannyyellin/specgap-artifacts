@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 describes an extra 'id' field in transaction documents, which does not correspond to any of the three spec requirements about pet selection, DELETE after purchase, or purchase-id uniqueness."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A2 describes behavior for unknown query parameters on GET /transactions, which does not correspond to any of the three spec requirements about pet selection, DELETE after purchase, or purchase-id uniqueness."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A3 describes behavior for malformed 'store' query parameters, which does not correspond to any of the three spec requirements about pet selection, DELETE after purchase, or purchase-id uniqueness."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 871,
+    "prompt_tokens": 606,
+    "completion_tokens": 265
+  }
+}

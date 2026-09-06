@@ -1,0 +1,54 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements concern accepting Bearer tokens versus Token tokens in the Authorization header."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements check for an id field in returned user objects."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The listed requirements do not specify article timestamp field naming or require duplicate created/updated timestamp fields."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Although several requirements involve article responses, none specifically require or describe these extra article fields as the behavior under test."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No listed requirement mentions a GET /api/tags endpoint."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No listed requirement mentions a root endpoint returning status ok."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements cover updating user fields via PUT /api/user."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2120,
+    "prompt_tokens": 1750,
+    "completion_tokens": 370
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "R10 is about rejecting a PUT when the body id differs from the route id, and A1 only notes that the update model has an optional id field without describing the mismatch validation behavior or 400 response."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No listed spec requirement is about an isComplete field being present in create/update models with a default of false."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1096,
+    "prompt_tokens": 946,
+    "completion_tokens": 150
+  }
+}

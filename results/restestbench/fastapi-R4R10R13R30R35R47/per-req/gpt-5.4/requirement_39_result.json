@@ -1,0 +1,18 @@
+{
+  "req_id": 39,
+  "requirement_vague": "Verify a registered user can delete their own account successfully.",
+  "requirement_precise": "Register a new user via the public signup endpoint using a random email and password. Authenticate by obtaining an access token using the login access-token endpoint with that user's credentials. Use the returned access token to delete the currently authenticated user via the authenticated delete user me endpoint. Verify the delete response status is 200. Verify the response body JSON contains a field \"message\" equal to \"User deleted successfully\". Then verify that login with the deleted user's credentials fails.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": "POST /api/v1/users/signup, POST /api/v1/login/access-token, DELETE /api/v1/users/me, get_current_user",
+    "code_reference": "@api_router.delete(\"/users/me\", response_model=Message)\ndef delete_user_me(session: Session = Depends(get_session), current_user: User = Depends(get_current_active_user)):\n    session.delete(current_user)\n...\n    return Message(message=\"User deleted successfully\")",
+    "reasoning": "The service provides the required signup, login access-token, and authenticated delete-me endpoints. Deleting the current authenticated non-superuser returns 200 with JSON containing message = \"User deleted successfully\", and subsequent login fails because authenticate() looks up the user by email and returns None once the deleted user no longer exists, causing the login endpoint to return HTTP 400."
+  },
+  "usage": {
+    "total_tokens": 5965,
+    "prompt_tokens": 5786,
+    "completion_tokens": 179
+  },
+  "parse_error": false
+}

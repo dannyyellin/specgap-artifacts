@@ -1,0 +1,23 @@
+Timestamp: 2026-06-01 21:02:36
+Detector:  gpt-4.1-mini
+App/Variant/Service: pet-store/petorder-R8R9R10/pet-order
+Method:    oneshot-warehouse
+
+Tokens: prompt=9855, completion=1183, total=11038
+Additions: 3
+Omissions: 10
+
+  A A1: The transactions documents include an 'id' field as a string sequence number separate from 'purchase-id'
+  A A2: The GET /transactions endpoint returns an empty array if any query parameter is not in the allowed fields
+  A A3: The GET /transactions endpoint returns an empty array if the 'store' query parameter cannot be converted to int
+
+  O O1: POST /purchases does not return 401 if the Authorization header is missing or invalid
+  O O2: POST /purchases does not return 403 if the purchaser field in the payload does not match the authenticated user
+  O O3: POST /purchases does not delete the chosen pet from the appropriate pet-store
+  O O4: POST /purchases does not return 415 if Content-Type header is missing or not application/json
+  O O5: GET /transactions and GET /transactions/{id} do not return 403 Forbidden if the user is authenticated but not privileged
+  O O6: GET /transactions/{id} does not return 400 if the id parameter is malformed or empty
+  O O7: POST /purchases does not return 400 with error message {"error": "No pet of this type is available"} if no pet meets criteria
+  O O8: POST /purchases does not return 500 if the registry service is unavailable or returns error
+  O O9: POST /purchases does not return 500 if the pet-store service is unreachable or returns error
+  O O10: POST /purchases does not validate that 'store' field is an integer if supplied

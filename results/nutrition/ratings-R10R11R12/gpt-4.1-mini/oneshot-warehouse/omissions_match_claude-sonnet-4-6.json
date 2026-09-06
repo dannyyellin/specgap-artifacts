@@ -1,0 +1,66 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R11",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of the one-rating-per-user-per-dish constraint, matching R11."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 describes a security issue with PUT/DELETE not verifying ownership, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O3 directly describes the removal of the integer 1-5 range constraint on rating for POST, matching R10."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O4 describes the same missing integer 1-5 range validation for PUT, also matching R10."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 describes missing validation of dish_id and field presence, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 concludes there is no omission regarding dish_id matching in PUT, so it does not match any reference requirement."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R11",
+        "label": "PARTIAL",
+        "reasoning": "O7 partially captures R11 by noting the missing 400 response for duplicate ratings, but focuses on the error response rather than the constraint removal itself."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O8 concludes there is no omission for token validation, so it does not match any reference requirement."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O9 concludes there is no omission for 404 handling, so it does not match any reference requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1642,
+    "prompt_tokens": 1008,
+    "completion_tokens": 634
+  }
+}

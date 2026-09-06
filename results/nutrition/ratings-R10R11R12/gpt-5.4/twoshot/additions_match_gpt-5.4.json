@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Using flask_pymongo concerns package choice and does not describe removal of rating constraints, one-rating-per-user-per-dish, or token-derived user_id."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Supporting multiple token header formats is about how authentication tokens are accepted, not about removing the requirement that user_id comes from token validation."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "Changing ratings to floats rounded to two decimals conflicts with the old integer 1-to-5 constraint, but it does not clearly state that the rating range constraint was removed entirely."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 778,
+    "prompt_tokens": 565,
+    "completion_tokens": 213
+  }
+}

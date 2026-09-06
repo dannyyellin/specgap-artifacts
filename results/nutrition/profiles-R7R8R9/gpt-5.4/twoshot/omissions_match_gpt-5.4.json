@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R8",
+        "label": "MATCH",
+        "reasoning": "Both state that GET /profiles should not be restricted to the owner and that the owner-only restriction was removed."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns owner access to /profiles/{id} endpoints, which is not described by any reference requirement."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "Both describe that protein should be excluded from the profileDishes calculation/filtering."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about disallowed package usage and does not correspond to any listed reference requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 905,
+    "prompt_tokens": 672,
+    "completion_tokens": 233
+  }
+}

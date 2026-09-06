@@ -1,0 +1,121 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "Article responses include unsupported favorite metadata fields 'favorited' and 'favoritesCount'",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification for this service only requires article fields such as slug, title, description, body, tagList, timestamps, author, and in one case embedded comments. It does not positively require favorites-related fields, but the code always returns 'favorited': false and 'favoritesCount': 0 in article responses."
+      },
+      {
+        "id": "A2",
+        "description": "PUT /api/user allows updating username, email, and password in addition to bio and image",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification only exercises and requires updating bio and image via PUT /api/user. The code additionally supports changing username, email, and password, which is not required by the specification."
+      },
+      {
+        "id": "A3",
+        "description": "GET /api/profiles/{username} is accessible without authentication and computes following=false for anonymous viewers",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification only requires profile retrieval behavior when called with an authenticated viewer token. It does not positively require anonymous profile access, but the code supports it through an optional current-user dependency."
+      },
+      {
+        "id": "A4",
+        "description": "Article update endpoint allows replacing tagList on PUT /api/articles/{slug}",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification requires updating title and description and verifying slug remains unchanged. It does not require tag updates during article modification, but the code implements tag replacement when 'tagList' is present."
+      },
+      {
+        "id": "A5",
+        "description": "DELETE /api/articles/{slug} deletes all comments associated with the article before deleting the article",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification requires article deletion and subsequent GET returning an empty object, but it does not positively require cascading deletion of comments. The code explicitly deletes related comments first."
+      },
+      {
+        "id": "A6",
+        "description": "CORS is enabled for all origins, methods, and headers",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "Cross-origin configuration is not mentioned anywhere in the specification. The code adds permissive CORS middleware, which is an implementation property not required by the spec."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "Missing GET /api/articles/feed endpoint",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification explicitly requires GET /api/articles/feed, including behavior for empty feeds, followed-author feeds, and pagination with limit and offset. The code defines no route for /api/articles/feed."
+      },
+      {
+        "id": "O2",
+        "description": "Missing DELETE /api/users/{email} endpoint",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification includes a test that deletes a user via DELETE /api/users/orphanauthor1@test.com and expects a 500 foreign-key constraint error while the article remains. The code has no DELETE /api/users/{email} route at all."
+      },
+      {
+        "id": "O3",
+        "description": "GET /api/articles does not support filtering by tag query parameter",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification explicitly requires GET /api/articles?tag=... to filter articles by tag and verify counts for matching and non-matching tags. The code only accepts author, limit, and offset query parameters and ignores tag filtering entirely."
+      },
+      {
+        "id": "O4",
+        "description": "User registration returns 422 instead of required 400 for duplicate username or email",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification requires that attempting to create a second user with an existing username or email returns status 400. The code returns 422 for duplicate email and duplicate username checks."
+      },
+      {
+        "id": "O5",
+        "description": "User registration does not return the required duplicate-user error message 'Username and email must be unique'",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly verifies that duplicate registration responses contain 'Username and email must be unique'. The code instead returns field-specific validation payloads like {'email': ['has already been taken']} or {'username': ['has already been taken']}."
+      },
+      {
+        "id": "O6",
+        "description": "JWT payload does not include required id, username, and email claims",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification requires decoding the JWT and verifying that the payload contains id matching the user id, username, and email. The code's create_token function only includes 'sub' and 'exp' claims."
+      },
+      {
+        "id": "O7",
+        "description": "Article responses use 'createdAt' and 'updatedAt' instead of the required 'created' and 'updated' timestamp fields",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly says to extract 'created' and 'updated' timestamps from article responses and verify update behavior using those field names. The code returns 'createdAt' and 'updatedAt' instead."
+      },
+      {
+        "id": "O8",
+        "description": "DELETE /api/articles/{slug} returns an empty object instead of the required 200 success response body semantics",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly verifies DELETE /api/articles/{slug} response status 200. While FastAPI defaults to 200 here, the implementation returns {} and does not provide any explicit success response contract; more importantly, the spec's notable behavior is that subsequent GET returns {}, not necessarily DELETE itself. The code does not clearly implement a distinct delete success payload required by the tested behavior."
+      },
+      {
+        "id": "O9",
+        "description": "DELETE /api/articles/{slug}/comments/{id} returns {'status':'ok'} instead of the required 200 deletion behavior with no specified status object",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification verifies only that deleting a comment returns status 200 and then the comment is gone. The code adds an extra response structure {'status':'ok'} that is not specified, and does not return the article/comments representation implied by the surrounding API style."
+      },
+      {
+        "id": "O10",
+        "description": "Registration/login implementation requirement specifies PyJWT, but the code uses the generic jwt module import without demonstrating PyJWT-specific usage",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The implementation requirements explicitly state 'Uses JWT tokens for authentication (PyJWT library)'. The code imports 'jwt' generically; from the code alone there is no positive evidence that the required PyJWT library is being used as opposed to another jwt package."
+      },
+      {
+        "id": "O11",
+        "description": "No explicit validation that article creation request includes required title, description, and body fields",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification's article creation scenarios always provide title, description, and body and verify those exact values are persisted. The code defaults missing title, description, and body to empty strings and creates the article anyway, rather than enforcing their presence."
+      },
+      {
+        "id": "O12",
+        "description": "No explicit validation that comment creation request includes a comment body",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification requires creating comments with a body and verifying that body is preserved. The code defaults missing comment body to an empty string and still creates the comment instead of validating presence."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 11572,
+    "prompt_tokens": 10140,
+    "completion_tokens": 1432
+  }
+}

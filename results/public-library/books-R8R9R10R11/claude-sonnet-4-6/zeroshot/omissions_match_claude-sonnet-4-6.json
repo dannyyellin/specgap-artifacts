@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the absence of Google Books API integration for retrieving publisher and publishedDate, which matches R10."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "O2 describes additional details about Google Books API usage (first entry selection, empty string fallback) that are part of the same removed integration described in R10, but covers behavior beyond what R10 explicitly states."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R11",
+        "label": "MATCH",
+        "reasoning": "O3 describes the absence of genre validation against the allowed list, which directly corresponds to R11's removal of genre enumeration."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R11",
+        "label": "PARTIAL",
+        "reasoning": "O4 describes missing genre validation in the PUT handler, which relates to R11's genre enumeration removal, but R11 does not specifically scope to PUT vs POST handlers."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "O5 directly describes the absence of 13-digit ISBN_13 format validation, which matches R9's removal of ISBN format requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1222,
+    "prompt_tokens": 822,
+    "completion_tokens": 400
+  }
+}

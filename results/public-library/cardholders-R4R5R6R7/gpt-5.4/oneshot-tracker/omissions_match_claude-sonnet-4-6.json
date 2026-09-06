@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "O1 captures the removal of 415 behavior on POST /cardholders, which relates to R5's removal of 415 from general error codes, but O1 focuses on a specific endpoint rather than the general removal."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "O2 captures the removal of 415 behavior on PUT /cardholders/{id}, which relates to R5's removal of 415 from general error codes, but O2 focuses on a specific endpoint rather than the general removal."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O3 directly describes the removal/absence of the fine computation formula ($0.50/day * days overdue), which is exactly what R6 specifies."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "O4 partially captures R6 by noting the absence of overdue-day calculation, which is a component of the fine formula, but does not fully describe the removal of the complete formula."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "O5 directly describes the removal of the float type declaration for fineAmount, which matches R5's specification of removing float type for fineAmount."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1313,
+    "prompt_tokens": 871,
+    "completion_tokens": 442
+  }
+}

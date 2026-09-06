@@ -1,0 +1,19 @@
+{
+  "app": "public-library",
+  "variant": "cardholders-R4R5R6R7",
+  "service": "cardholders",
+  "req_id": "R5",
+  "requirement": "Requests with an unsupported media type receive status code 415 (Unsupported Media Type).",
+  "source_headline": "Removed 415 (Unsupported media type) error code from general error codes",
+  "model": "claude-sonnet-4-6",
+  "pass": 1,
+  "label": "GAP",
+  "evidence": "none",
+  "reasoning": "The code never returns HTTP 415. When a POST or PUT request has an unsupported media type (i.e., `request.is_json` is False), the code returns 400 Bad Request, not 415 Unsupported Media Type. There is no 415 error handler or any path that produces a 415 response anywhere in the service.",
+  "usage": {
+    "total_tokens": 2744,
+    "prompt_tokens": 2636,
+    "completion_tokens": 108
+  },
+  "timestamp": "2026-07-16 14:53:21"
+}

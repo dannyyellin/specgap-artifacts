@@ -1,0 +1,17 @@
+Timestamp: 2026-06-01 20:53:39
+Detector:  gpt-4.1-mini
+App/Variant/Service: public-library/cardholders-R4R5R6R7/cardholders
+Method:    oneshot-tracker
+
+Tokens: prompt=5391, completion=681, total=6072
+Additions: 1
+Omissions: 6
+
+  A A1: Returns 400 Bad Request when the borrows microservice returns a 4XX error code in /cardholders/fines/{id}
+
+  O O1: The fine amount calculation sums 1 per overdue book instead of number-of-days-overdue * 0.50
+  O O2: POST /cardholders does not validate presence of required fields 'name' and 'email'
+  O O3: GET /cardholders supports filtering only by 'name' and 'email' but the specification allows filtering by any field
+  O O4: PUT /cardholders does not allow updating the 'id' field as per specification
+  O O5: GET /cardholders/fines/{id} does not compute fine amount by summing fines for all borrowed books correctly
+  O O6: GET /cardholders/fines/{id} does not handle the case where the borrows microservice returns an empty list or no borrows gracefully

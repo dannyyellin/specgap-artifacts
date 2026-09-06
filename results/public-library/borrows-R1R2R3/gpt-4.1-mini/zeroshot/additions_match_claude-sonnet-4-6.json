@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This property describes filtering capabilities on GET /borrows and does not relate to any of the three removed behaviors (return date computation, overdue constraint, or log notification)."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Validating that returnDate is not earlier than loanDate is an addition unrelated to the removed behaviors specified in R1, R2, or R3."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R1",
+        "label": "PARTIAL",
+        "reasoning": "R1 removed the automatic computation of returnDate (loanDate + 30 days), and allowing clients to update returnDate via PUT is related to how returnDate is managed, but A3 specifically concerns PUT updates rather than the removal of automatic computation on checkout."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Returning JSON error messages with an 'error' field is an implementation detail unrelated to the removed behaviors in R1, R2, or R3."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The strict validation of startDate/endDate query parameters is an addition unrelated to the removed return date computation, overdue constraint, or log notification behaviors."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1309,
+    "prompt_tokens": 892,
+    "completion_tokens": 417
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This describes an extra password recovery HTML endpoint that is not covered by any of the listed requirements about item access, deletion, login failure, password update, duplicate signup, or signup validation."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 930,
+    "prompt_tokens": 845,
+    "completion_tokens": 85
+  }
+}

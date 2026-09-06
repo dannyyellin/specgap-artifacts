@@ -1,0 +1,27 @@
+ judge_model:     LLM that did the matching (gpt-5.4 or claude-sonnet-4-6)
+ experiment_type: microservices or restestbench
+ app:             app name (nutrition, public-library, pet-store, or RESTestBench app)
+ variant:         specific variant, e.g. auth-R1R2R3
+ detector_model:  LLM that ran gap detection
+ method:          zeroshot / oneshot-tracker / oneshot-warehouse / twoshot
+
+n_removed:        How many requirements were removed for this variant (the delta)
+n_omissions:      How many omission items the gap detector flagged (its total output)
+n_additions:      How many addition items the gap detector flagged
+
+omissions_match:   Detector omissions the judge matched to a tracked requirement with full MATCH quality
+omissions_partial: Matched with PARTIAL quality (right area, imprecise description)
+omissions_none:    No match — the FP_extra items, unverifiable against tracked requirements
+
+reqs_found_via_omissions: Count of distinct removed requirements covered by at least one MATCH or PARTIAL omission item (broad; deduped)
+
+And the same four columns repeated for additions (additions_match, additions_partial, additions_none, reqs_found_via_additions).
+
+See precision_tracked.csv that uses the statistics in this file and in ground truth to compute precision
+and recall.
+
+In prevision_tracked.csv:
+judge_model,experiment_type,app,variant,detector_model,method,
+n_omissions,
+tp_strict,fp_tracked_strict,excluded_strict,unknown_strict,precision_tracked_strict,exclusion_rate_strict,
+tp_broad,fp_tracked_broad,excluded_broad,unknown_broad,precision_tracked_broad,exclusion_rate_broad

@@ -1,0 +1,20 @@
+{
+  "variant": "realworld-R2R10R13R15R24R26R28",
+  "req_id": 13,
+  "model": "claude-sonnet-4-6",
+  "pass": 1,
+  "verdict": "IMPLEMENTED",
+  "requirement_vague": "Verify article filtering by author works correctly",
+  "omissions": [],
+  "implementation": {
+    "location": "list_articles",
+    "code_reference": "if author:\n    author_user = session.exec(select(User).where(User.username == author)).first()\n    if author_user:\n        articles = [a for a in articles if a.author_id == author_user.id]\n    else:\n        articles = []",
+    "reasoning": "The list_articles endpoint at GET /api/articles accepts an optional 'author' query parameter, filters articles by matching the author's username, and returns the filtered list with the correct articlesCount. When no filter is provided, all articles are returned with the total count."
+  },
+  "usage": {
+    "total_tokens": 6967,
+    "prompt_tokens": 6791,
+    "completion_tokens": 176
+  },
+  "timestamp": "2026-07-12 10:43:13"
+}

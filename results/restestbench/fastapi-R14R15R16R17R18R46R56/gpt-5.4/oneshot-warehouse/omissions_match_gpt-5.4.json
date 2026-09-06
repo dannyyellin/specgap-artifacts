@@ -1,0 +1,78 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R14",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the missing test-token endpoint and expected authenticated response with admin@example.com required by R14."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R15",
+        "label": "MATCH",
+        "reasoning": "O2 exactly matches the required password recovery request endpoint POST /api/v1/password-recovery/{email} used in R15."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R16",
+        "label": "MATCH",
+        "reasoning": "R16 also depends on the same POST /api/v1/password-recovery/{email} endpoint, which O2 says is missing."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R15",
+        "label": "MATCH",
+        "reasoning": "O4 matches R15's requirement that a password recovery email be sent and verifiable through the mailcatcher service."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R17",
+        "label": "PARTIAL",
+        "reasoning": "O3 captures the missing reset-password endpoint used in R17 but not the broader flow involving token extraction, success payload, and login verification."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R18",
+        "label": "PARTIAL",
+        "reasoning": "O3 covers the missing reset-password endpoint needed by R18 but omits the specific invalid-token behavior and expected 400 detail response."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R56",
+        "label": "PARTIAL",
+        "reasoning": "O3 identifies the missing POST /api/v1/reset-password/ endpoint required by R56 but does not mention the specific 422 validation behavior for a 7-character password."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R17",
+        "label": "MATCH",
+        "reasoning": "O5 directly describes the missing token generation, recovery HTML retrieval, token-based reset, and success response required by R17."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R18",
+        "label": "MATCH",
+        "reasoning": "O5 explicitly includes the missing invalid-token reset behavior with 400 and detail 'Invalid token' required by R18."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R15",
+        "label": "PARTIAL",
+        "reasoning": "O5 overlaps with R15 only insofar as password recovery implies token generation, but it does not cover the required recovery-email request endpoint response and mailcatcher verification."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R56",
+        "label": "PARTIAL",
+        "reasoning": "O5 concerns token-based reset logic related to the same endpoint as R56, but it does not capture the specific 422 validation-on-password-length behavior."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1936,
+    "prompt_tokens": 1208,
+    "completion_tokens": 728
+  }
+}

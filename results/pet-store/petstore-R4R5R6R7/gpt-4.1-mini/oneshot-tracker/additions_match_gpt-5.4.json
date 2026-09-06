@@ -1,0 +1,48 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "A1 describes attributes extraction using fields beyond temperament/group_behavior, which is the same behavior area that R4 says was removed."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "A2 concerns lifespan handling, but R6 specifically removes lifespan range parsing rules rather than the default-null behavior described in A2."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "A3 says deletion is allowed even when pets of that type exist, which directly corresponds to R5 removing the cannot-delete-if-it-has-pets constraint."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "A4 is about birthdateGT/birthdateLT filtering on the pets query endpoint, exactly the behavior R7 says was removed."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A5 describes support for picture-url updates, which does not correspond to any of R4\u2013R7."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A6 concerns picture-name validation on the pictures endpoint, which is unrelated to any listed requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1358,
+    "prompt_tokens": 975,
+    "completion_tokens": 383
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "method": "zeroshot",
+  "round": 1,
+  "removals": [
+    4,
+    10,
+    13,
+    30,
+    35,
+    47
+  ],
+  "model": "gpt-5.4",
+  "gen_usage": {
+    "total_tokens": 9691,
+    "prompt_tokens": 4848,
+    "completion_tokens": 4843
+  },
+  "detect_usage": {
+    "total_tokens": 11517,
+    "prompt_tokens": 10794,
+    "completion_tokens": 723
+  },
+  "n_additions": 4,
+  "n_omissions": 4
+}

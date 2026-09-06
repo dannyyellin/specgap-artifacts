@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "A1 notes that the code does not enforce owner-only restriction for POST/PUT/DELETE, which directly relates to R5's removal of that owner-only restriction, but A1 also discusses GET authentication which is unrelated to R5."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "A2 describes additional filtering fields (id, name, ingredients) beyond what the spec defines, which partially relates to R6's removal of specific query string filtering semantics, but R6 focuses on the lte and contains semantics rather than the addition of new filter fields."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "A3 directly describes that the code uses exact match instead of less-than-or-equal for nutritional fields, which corresponds to R6's removal of the specific lte filtering semantics for nutrients."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1227,
+    "prompt_tokens": 925,
+    "completion_tokens": 302
+  }
+}

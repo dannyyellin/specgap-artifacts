@@ -1,0 +1,48 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "O1 describes the behavioral consequence of removing 415 from error codes for POST /cardholders specifically, while R5 refers to the general removal of 415 from the error codes specification."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "O2 describes the behavioral consequence of removing 415 from error codes for PUT /cardholders/{id} specifically, while R5 refers to the general removal of 415 from the error codes specification."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "O3 notes that filtering by 'id' is not supported, which is related to the removal of the 'id' field type declaration in R4, but O3 is about filtering behavior rather than field type declarations."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O4 directly describes the absence of the fine computation formula ($0.50/day * days overdue), which is exactly what R6 states was removed."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "O5 describes that fineAmount is returned as an integer rather than a float, directly corresponding to R4's removal of the float type declaration for fineAmount."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "O5 also partially captures R6 since the incorrect integer result is a consequence of not applying the $0.50/day formula, though O5 focuses on the type rather than the formula itself."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1415,
+    "prompt_tokens": 890,
+    "completion_tokens": 525
+  }
+}

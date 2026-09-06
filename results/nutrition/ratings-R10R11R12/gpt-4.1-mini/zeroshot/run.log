@@ -1,0 +1,21 @@
+Timestamp: 2026-06-01 20:57:52
+Detector:  gpt-4.1-mini
+App/Variant/Service: nutrition/ratings-R10R11R12/ratings
+Method:    zeroshot
+
+Tokens: prompt=5719, completion=940, total=6659
+Additions: 5
+Omissions: 6
+
+  A A1: The code accepts the token from either the 'Authorization' header with 'Bearer' scheme or from a 'token' header.
+  A A2: The code uses a MongoDB 'counters' collection to generate unique sequential IDs for ratings.
+  A A3: The code rounds the rating values to two decimal places before storing and returning them.
+  A A4: The code returns 415 (Unsupported Media Type) if the request content type is not JSON.
+  A A5: The code allows the token to be provided in the 'Authorization' header without the 'Bearer' prefix.
+
+  O O1: The code does not enforce that the 'rating' field must be an integer between 1 and 5.
+  O O2: The code does not check if a user has already rated a dish before allowing a POST to /ratings.
+  O O3: The code does not return 204 (No Content) for successful DELETE requests; it returns an empty response with status 204 but no explicit message.
+  O O4: The code does not validate that the 'dish_id' in the PUT request body matches the 'dish_id' in the URL for /ratings/{id}.
+  O O5: The code does not handle the case where the dish does not exist in the GET /ratings/{id} request by returning 404.
+  O O6: The code does not explicitly check for the presence of the token in all requests except POST /register and /login.

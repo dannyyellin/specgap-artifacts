@@ -1,0 +1,54 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R8",
+        "label": "MATCH",
+        "reasoning": "Both state that GET /profiles should not be restricted to the restaurant owner."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns a singular versus plural route mismatch for /profile(s)/{id}, which is unrelated to any reference requirement."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "Both describe that protein should be excluded from the profileDishes diet/filter calculation."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about rejecting unknown fields in POST /profiles, which is not covered by the reference requirements."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about rejecting unknown fields in PUT /profiles/{id}, which is not covered by the reference requirements."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns numeric validation behavior, which does not correspond to any listed reference requirement."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "It describes the same underlying issue as R7: protein was not supposed to be included in the profileDishes calculation/request."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1314,
+    "prompt_tokens": 912,
+    "completion_tokens": 402
+  }
+}

@@ -1,0 +1,36 @@
+Timestamp: 2026-06-01 21:41:56
+Detector:  gpt-4.1-mini
+Service:   nestjs-realworld  Round: 1  Removals: [5, 6, 9, 12, 19, 23, 25, 27, 29]
+Method:    twoshot
+
+Tokens: prompt=11085, completion=2065, total=13150
+Additions: 8
+Omissions: 18
+
+  A A1: GET /api/articles supports filtering by 'author' query parameter but does not support filtering by 'tag' or 'favorited' parameters
+  A A2: GET /api/articles supports 'offset' query parameter for pagination
+  A A3: The code returns 422 status code with detailed error messages for user registration uniqueness violations instead of 400 with 'Username and email must be unique' message
+  A A4: The code returns 422 status code with 'Missing fields' error on incomplete user registration payload instead of 400
+  A A5: The code returns 401 with error detail {'errors': {'body': ['email or password is invalid']}} on login failure instead of 401 with no specific message format required by specification
+  A A6: The code allows any authenticated user to update or delete any article regardless of ownership
+  A A7: The code returns 200 with empty object {} on GET /api/articles/{slug} for deleted articles instead of 404
+  A A8: The code returns 200 with {'status': 'ok'} on DELETE /api/articles/{slug}/comments/{id} instead of 200 with empty object or no content
+
+  O O1: POST /api/articles does not validate presence of required fields title, description, body
+  O O2: GET /api/articles does not support filtering by 'tag' query parameter
+  O O3: GET /api/articles does not support filtering by 'favorited' query parameter
+  O O4: PUT /api/articles/{slug} does not preserve slug when title is updated
+  O O5: PUT /api/articles/{slug} does not validate that only the article owner can update the article
+  O O6: DELETE /api/articles/{slug} does not validate that only the article owner can delete the article
+  O O7: DELETE /api/articles/{slug} does not return 200 with empty object {} on success but returns empty object without status code explicitly set
+  O O8: POST /api/articles/{slug}/comments does not validate presence of comment body
+  O O9: DELETE /api/articles/{slug}/comments/{id} does not validate that only the comment author can delete the comment
+  O O10: GET /api/articles/feed endpoint is not implemented
+  O O11: POST /api/profiles/{username}/follow does not prevent following a non-existent user with proper error
+  O O12: DELETE /api/profiles/{username}/follow does not prevent unfollowing oneself with proper error
+  O O13: User deletion endpoint /api/users/{email} is not implemented
+  O O14: GET /api/articles/{slug} returns 200 with empty object {} for non-existent articles instead of 404
+  O O15: POST /api/users does not enforce uniqueness of username and email with combined error message 'Username and email must be unique'
+  O O16: PUT /api/user does not validate uniqueness of updated username or email
+  O O17: GET /api/profiles/{username} does not return 404 if profile not found
+  O O18: GET /api/articles does not support filtering by multiple parameters simultaneously (e.g., author and tag)

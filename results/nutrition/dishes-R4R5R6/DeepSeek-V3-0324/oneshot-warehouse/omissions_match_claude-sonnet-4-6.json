@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the absence of owner-only restriction enforcement for POST, PUT, and DELETE operations, which matches R5."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "O2 relates to handling Ninja API return values (string values for nutritional elements), which partially overlaps with R4's removal of Ninja API field name mapping details, but focuses on a specific edge case rather than field name mapping."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 describes validation of the ingredients array minimum length, which does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 describes 404 status code handling for missing resources, which does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "O5 relates to Ninja API field handling with default values, which partially overlaps with R6's removal of specific query string filtering semantics, but focuses on default value behavior rather than filtering semantics."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1122,
+    "prompt_tokens": 728,
+    "completion_tokens": 394
+  }
+}

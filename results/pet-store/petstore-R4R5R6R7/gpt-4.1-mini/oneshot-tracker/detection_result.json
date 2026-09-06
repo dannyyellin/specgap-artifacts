@@ -1,0 +1,163 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "The POST /pet-types endpoint uses multiple fields from the Ninja API response ('characteristics' keys like 'slogan', 'group', 'color', 'skin_type', 'top_speed', 'diet', 'main_prey') to build the 'attributes' array, beyond the 'temperament' or 'group_behavior' fields required by the specification.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification requires using only 'temperament' or 'group_behavior' fields from the Ninja API to build the 'attributes' array, preferring 'temperament' if both exist. The code also uses additional fields such as 'slogan', 'group', 'color', 'skin_type', 'top_speed', 'diet', and 'main_prey' to build the 'attributes' array, which is not required by the specification."
+      },
+      {
+        "id": "A2",
+        "description": "The 'lifespan' field in pet-type documents defaults to 0 if not returned by the Ninja API, instead of null as required by the specification.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification states that if the 'lifespan' field is not returned by the Ninja API, its value should be the JSON keyword null. The code sets 'lifespan' to 0 in such cases."
+      },
+      {
+        "id": "A3",
+        "description": "The DELETE /pet-types/{id} endpoint deletes the pet-type without checking if there are pets of that type, allowing deletion even if pets exist.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification requires that a pet-type can only be deleted if there are no pets of that type; otherwise, it returns 400. The code deletes the pet-type without checking for existing pets."
+      },
+      {
+        "id": "A4",
+        "description": "The GET /pet-types/{id}/pets endpoint does not support filtering pets by 'birthdateGT' or 'birthdateLT' query parameters as required.",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification states that GET /pet-types/{id}/pets supports query strings 'birthdateGT', 'birthdateLT', or both to filter pets by birthdate. The code ignores query parameters and returns all pets."
+      },
+      {
+        "id": "A5",
+        "description": "The PUT /pet-types/{id}/pets/{name} endpoint supports a 'picture-url' field in the payload to update the pet's picture by fetching and saving an image, which is not specified.",
+        "category": "ADDITIONS",
+        "reasoning": "The specification for PUT /pet-types/{id}/pets/{name} requires updating fields provided in the payload but does not mention supporting a 'picture-url' field to fetch and store an image. The code implements this feature."
+      },
+      {
+        "id": "A6",
+        "description": "The GET /pictures/{picture-name} endpoint validates the picture name to reject names containing slashes or backslashes, returning 400, which is not specified.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states GET /pictures/{picture-name} returns the image or 400/404 but does not specify validation rejecting picture names containing path separators. The code implements this validation."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "The POST /pet-types endpoint requires the request payload to contain only the 'type' field, but the code does not reject payloads with extra fields.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states the POST /pet-types request provides a JSON object containing only the 'type' field. The code checks that the keys equal {'type'}, so this is implemented correctly. No omission here."
+      },
+      {
+        "id": "O2",
+        "description": "The POST /pet-types endpoint requires returning 400 if the Ninja API cannot find the pet with the given type, but the code returns 400 with empty body instead of a JSON error message.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification requires 400 if Ninja API cannot find the pet, but does not specify the response body. The code returns empty body with 400. This is acceptable; no omission."
+      },
+      {
+        "id": "O3",
+        "description": "The DELETE /pet-types/{id} endpoint does not return 400 if pets of that type exist, violating the specification.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification requires returning 400 if a pet-type has pets and deletion is attempted. The code deletes without checking pets."
+      },
+      {
+        "id": "O4",
+        "description": "The GET /pet-types/{id}/pets endpoint does not implement filtering by 'birthdateGT' and 'birthdateLT' query parameters as required.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification requires filtering pets by birthdate using query parameters. The code ignores query parameters."
+      },
+      {
+        "id": "O5",
+        "description": "The POST /pet-types/{id}/pets endpoint does not check for duplicate pet names within the same pet-type properly; it returns 400 but specification requires unique names and does not specify error code for duplicates.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification requires pet names to be unique within a pet-type. The code returns 400 if duplicate name is found, which is acceptable. No omission."
+      },
+      {
+        "id": "O6",
+        "description": "The POST /pet-types/{id}/pets endpoint returns 404 if pet-type does not exist, which is not explicitly stated in the specification but is reasonable. No omission.",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification does not explicitly state 404 for non-existent pet-type on POST /pet-types/{id}/pets, but it is reasonable and consistent with other endpoints."
+      },
+      {
+        "id": "O7",
+        "description": "The PUT /pet-types/{id} endpoint is not allowed and must return 405, but the code does not implement this endpoint, so 405 is returned by default.",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification states PUT /pet-types/{id} is not allowed and returns 405. The code does not define this route, so Flask returns 405. No omission."
+      },
+      {
+        "id": "O8",
+        "description": "The POST /pet-types/{id}/pets endpoint requires validating that the 'birthdate' field is of form DD-MM-YYYY if supplied, which the code implements.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The code validates birthdate format correctly. No omission."
+      },
+      {
+        "id": "O9",
+        "description": "The POST /pet-types/{id}/pets endpoint requires validating that the 'picture-url' field points to a reachable .jpg or .png image, which the code implements.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The code validates picture-url and image type correctly. No omission."
+      },
+      {
+        "id": "O10",
+        "description": "The GET /pictures/{picture-name} endpoint returns 400 if the picture name is invalid or contains path separators, which is not specified but is a reasonable security measure.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification allows 400 for invalid requests. The code's validation is acceptable. No omission."
+      },
+      {
+        "id": "O11",
+        "description": "The GET /pet-types endpoint returns 200 with empty array if query string is malformed or nonsensical, as required.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The code returns empty array for invalid queries. No omission."
+      },
+      {
+        "id": "O12",
+        "description": "The DELETE /pet-types/{id}/pets/{name} endpoint requires 403 if the user is authenticated but not authorized, which the code implements by verifying owner and returning 403 if not privileged.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The code verifies owner and returns 403 if not privileged. No omission."
+      },
+      {
+        "id": "O13",
+        "description": "The PUT /pet-types/{id}/pets/{name} endpoint requires updating only provided fields and retaining omitted fields, which the code implements.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The code updates only provided fields and retains others. No omission."
+      },
+      {
+        "id": "O14",
+        "description": "The PUT /pet-types/{id}/pets/{name} endpoint requires validating 'birthdate' and 'picture' fields if provided, which the code implements.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The code validates these fields correctly. No omission."
+      },
+      {
+        "id": "O15",
+        "description": "The PUT /pet-types/{id}/pets/{name} endpoint requires returning 400 if the new pet name duplicates another pet's name, which the code implements.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The code checks for duplicate names and returns 400. No omission."
+      },
+      {
+        "id": "O16",
+        "description": "The POST /pet-types endpoint requires 401 if user cannot be authenticated and 403 if authenticated but not authorized, which the code implements.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The code verifies owner and returns 401 or 403 accordingly. No omission."
+      },
+      {
+        "id": "O17",
+        "description": "The POST /pet-types/{id}/pets endpoint requires 401 if user cannot be authenticated and 403 if authenticated but not authorized, which the code implements.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The code verifies owner and returns 401 or 403 accordingly. No omission."
+      },
+      {
+        "id": "O18",
+        "description": "The DELETE /pet-types/{id}/pets/{name} endpoint requires 401 if user cannot be authenticated and 403 if authenticated but not authorized, which the code implements.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The code verifies owner and returns 401 or 403 accordingly. No omission."
+      },
+      {
+        "id": "O19",
+        "description": "The GET /pet-types/{id}/pets/{name} endpoint returns 404 if pet or pet-type not found, which the code implements.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The code returns 404 appropriately. No omission."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 12880,
+    "prompt_tokens": 10512,
+    "completion_tokens": 2368
+  }
+}

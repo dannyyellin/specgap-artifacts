@@ -1,0 +1,18 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O1 describes filtering behavior for GET /logs query parameters, which does not correspond to either R12 (date format removal) or R13 (notification removal between Borrows and Logs)."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 607,
+    "prompt_tokens": 503,
+    "completion_tokens": 104
+  }
+}

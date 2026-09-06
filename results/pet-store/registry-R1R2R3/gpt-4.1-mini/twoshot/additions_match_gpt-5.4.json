@@ -1,0 +1,18 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Using a bcrypt cost factor of 12 concerns password hashing strength and does not describe removal of password validation rules, removal of /verify anti-enumeration messaging, or removal of owner pre-registration."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 515,
+    "prompt_tokens": 428,
+    "completion_tokens": 87
+  }
+}

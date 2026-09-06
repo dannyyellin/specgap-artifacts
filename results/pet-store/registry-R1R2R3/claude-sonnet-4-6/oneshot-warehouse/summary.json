@@ -1,0 +1,16 @@
+{
+  "app": "pet-store",
+  "variant": "registry-R1R2R3",
+  "service": "registry",
+  "method": "oneshot-warehouse",
+  "detector_model": "claude-sonnet-4-6",
+  "gen_model": "gpt-5.4",
+  "gen_usage": null,
+  "n_additions": 5,
+  "n_omissions": 8,
+  "usage": {
+    "total_tokens": 11955,
+    "prompt_tokens": 10112,
+    "completion_tokens": 1843
+  }
+}

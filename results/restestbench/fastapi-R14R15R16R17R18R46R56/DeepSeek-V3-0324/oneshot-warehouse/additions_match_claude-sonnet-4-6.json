@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements mention or relate to a 'full_name' field for users."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements mention or relate to a 'description' field for items."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements mention PATCH endpoints for updating user information."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1365,
+    "prompt_tokens": 1170,
+    "completion_tokens": 195
+  }
+}

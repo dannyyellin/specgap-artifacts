@@ -1,0 +1,61 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "Implements cardholder IDs as MongoDB ObjectIds and rejects non-ObjectId path IDs",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The specification states that an id is of type string, but does not require any particular internal ID format or that valid IDs must conform to MongoDB ObjectId syntax. The code generates/stores IDs as ObjectIds and treats non-ObjectId strings as not found."
+      },
+      {
+        "id": "A2",
+        "description": "PUT /cardholders rejects request bodies whose 'id' field differs from the path parameter",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification says the PUT request provides a JSON payload of the updated resource's fields and returns the id of the updated resource, but it does not require any validation rule comparing a body 'id' field to the URL id. This check is extra behavior."
+      },
+      {
+        "id": "A3",
+        "description": "GET /cardholders only applies query filtering for the specific fields 'name' and 'email' and ignores other query parameters",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification allows a query string of the form 'field=value' and says matching records should be returned, but it does not restrict filtering to only name and email. Limiting recognized filter fields to those two is additional behavior not positively required by the specification."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "POST /cardholders does not return 415 Unsupported Media Type for non-JSON requests",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The general specification requires unsupported media types to return 415. The code checks request.is_json but returns 400 Bad request instead of 415 on POST."
+      },
+      {
+        "id": "O2",
+        "description": "PUT /cardholders/{id} does not return 415 Unsupported Media Type for non-JSON requests",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The general specification requires 415 for unsupported media type. The code returns 400 Bad request when PUT receives a non-JSON request body."
+      },
+      {
+        "id": "O3",
+        "description": "GET /cardholders/fines/{id} computes fines incorrectly by adding 1 per overdue book instead of number-of-days-overdue * 0.50 per overdue book",
+        "category": "COMPUTED_VALUES",
+        "reasoning": "The specification explicitly defines fine per overdue book as number-of-days-overdue multiplied by FINE_PER_DAY, where FINE_PER_DAY is $0.50, and total fine as the sum across all borrowed books. The code merely counts overdue books and increments fine_amount by 1 for each overdue borrow."
+      },
+      {
+        "id": "O4",
+        "description": "GET /cardholders/fines/{id} does not compute the number of overdue days for each borrowed book",
+        "category": "COMPUTED_VALUES",
+        "reasoning": "The required fine formula depends on the number of days overdue for each book. The code only checks whether returnDate is before today and never calculates the overdue-day difference."
+      },
+      {
+        "id": "O5",
+        "description": "GET /cardholders/fines/{id} returns fineAmount as an integer count rather than a float monetary amount",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification defines /cardholders/fines/{id} as a JSON document with field 'fineAmount' whose value is of type float. The code initializes fine_amount to 0 and increments by whole numbers, producing an integer-valued result rather than the specified float amount."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 6089,
+    "prompt_tokens": 5390,
+    "completion_tokens": 699
+  }
+}

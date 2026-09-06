@@ -1,0 +1,67 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "GET /cardholders filters query parameters against an allowed set (name, email only), silently ignoring any other query fields",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification says the GET request may specify a query string of the form 'field=value' with no restriction on which fields are allowed. The code explicitly restricts filtering to 'name' and 'email', which is stricter than the specification requires."
+      },
+      {
+        "id": "A2",
+        "description": "PUT /cardholders/{id} rejects the request with 400 if no updatable fields are provided and 'id' is also absent",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification does not state that a PUT request with no recognized fields should be rejected. This guard is an addition not required by the specification."
+      },
+      {
+        "id": "A3",
+        "description": "PUT /cardholders/{id} rejects the request with 400 if the 'id' field in the payload does not match the URL cardholder_id",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification does not mention any validation that the id in the payload must match the URL parameter. This is an addition."
+      },
+      {
+        "id": "A4",
+        "description": "POST /cardholders validates that 'name' and 'email' are present and are strings, returning 400 if not",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states the POST request provides a JSON document containing name and email, but does not explicitly require type validation (string check). The presence check is implied, but the strict isinstance string type check is an addition beyond what the specification positively requires."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "GET /cardholders does not support filtering by the 'id' field via query string",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states 'The GET request may specify a query string of the form field=value' with no restriction on which fields can be used. The code restricts filtering to only 'name' and 'email', omitting 'id' as a filterable field."
+      },
+      {
+        "id": "O2",
+        "description": "Fine calculation does not compute days overdue and multiply by FINE_PER_DAY ($0.50); instead it adds 1 per overdue book",
+        "category": "COMPUTED_VALUES",
+        "reasoning": "The specification states 'the fine per overdue book is equal to number-of-days-overdue * FINE_PER_DAY, where FINE_PER_DAY equals $.50'. The code adds a flat 1 per overdue book instead of computing (days_overdue * 0.50)."
+      },
+      {
+        "id": "O3",
+        "description": "Fine calculation does not use loanDate from borrow records; it only checks returnDate for overdue status without computing actual days overdue from today",
+        "category": "COMPUTED_VALUES",
+        "reasoning": "The specification requires computing number-of-days-overdue (i.e., today's date minus returnDate) and multiplying by $0.50. The code only checks whether returnDate is in the past (boolean) and adds 1, never computing the number of days overdue."
+      },
+      {
+        "id": "O4",
+        "description": "The service does not return 415 (Unsupported Media Type) when the Content-Type is not application/json on POST and PUT requests",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification states that 415 (Unsupported media type) should be returned for appropriate cases. The code returns 400 instead of 415 when the request is not JSON (checked via request.is_json)."
+      },
+      {
+        "id": "O5",
+        "description": "GET /cardholders/fines/{id} does not filter borrow records to only those that are actually overdue relative to today when computing fines \u2014 it does not account for books that have been returned (no distinction between active loans and returned loans)",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification says the cardholder owes fines for overdue books they borrowed. The borrow record has a returnDate that is the due date (loanDate + 30 days). The code checks if returnDate is in the past, but does not distinguish whether the book has actually been returned or is still outstanding. The spec implies fines apply to books not yet returned past their due date, but the borrow record has no 'actualReturnDate' field \u2014 this is an ambiguity, however the code's flat-count approach clearly fails to compute days-overdue * $0.50."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 7499,
+    "prompt_tokens": 6302,
+    "completion_tokens": 1197
+  }
+}

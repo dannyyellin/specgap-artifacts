@@ -1,0 +1,18 @@
+{
+  "req_id": 59,
+  "requirement_vague": "Getting user by ID should reject invalid UUID format. Test with 'not-a-uuid' string. Admin credentials: admin@example.com / password123",
+  "requirement_precise": "Login as superuser (admin@example.com / password123) to get token. Attempt to GET /api/v1/users/not-a-uuid (invalid UUID format). Verify the response status is 422 (validation error).",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": "GET /api/v1/users/{user_id} in read_user_by_id",
+    "code_reference": "@api_router.get(\"/users/{user_id}\", response_model=UserRead)\ndef read_user_by_id(user_id: UUID, session: Session = Depends(get_session), current_user: User = Depends(get_current_active_user)):\n    user = session.get(User, user_id)",
+    "reasoning": "The path parameter is typed as UUID, so FastAPI/Pydantic validates the path value before entering the handler. Supplying 'not-a-uuid' to GET /api/v1/users/not-a-uuid results in FastAPI's validation error response with status 422, and the endpoint is protected by authenticated user access, which an admin token satisfies."
+  },
+  "usage": {
+    "total_tokens": 5926,
+    "prompt_tokens": 5759,
+    "completion_tokens": 167
+  },
+  "parse_error": false
+}

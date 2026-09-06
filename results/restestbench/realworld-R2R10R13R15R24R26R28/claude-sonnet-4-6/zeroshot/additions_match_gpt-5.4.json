@@ -1,0 +1,54 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No listed requirement is about article timestamp field aliases being included in responses."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the provided requirements concern exposing an id field in user responses."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R28",
+        "label": "PARTIAL",
+        "reasoning": "It targets the same non-owner article update behavior as R28, but the code does the opposite by forbidding the update instead of allowing it."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R28",
+        "label": "PARTIAL",
+        "reasoning": "It addresses the same non-owner article deletion behavior in R28, but contradicts the requirement by returning 403 instead of allowing deletion."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No provided requirement mentions a GET /api/tags endpoint."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The listed requirements do not cover comment deletion permissions by article authors."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the provided requirements discuss accepted Authorization header prefix formats."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2277,
+    "prompt_tokens": 1892,
+    "completion_tokens": 385
+  }
+}

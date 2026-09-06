@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of the returnDate computation (loanDate + 30 days) from the Borrows service, matching R1 exactly."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R1",
+        "label": "PARTIAL",
+        "reasoning": "O2 describes a related consequence of removing the returnDate computation (now accepting client-supplied returnDate), which is a side effect of the same change captured in R1, but focuses on a different aspect."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O3 directly describes the removal of the overdue borrow constraint that blocks checkout when a cardholder has 2 or more overdue books, matching R2 exactly."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O4 describes the missing 400 status code response when checkout is blocked due to overdue books, which is the specific behavior called out in R2."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R3",
+        "label": "PARTIAL",
+        "reasoning": "O5 partially captures R3 in that it identifies missing reliable notification to Logs on checkout, but frames it as unreliable implementation rather than complete removal of the notification behavior."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1330,
+    "prompt_tokens": 908,
+    "completion_tokens": 422
+  }
+}

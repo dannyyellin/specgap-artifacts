@@ -1,0 +1,23 @@
+{
+  "variant": "realworld-R2R10R13R15R24R26R28",
+  "req_id": 24,
+  "model": "claude-sonnet-4-6",
+  "pass": 1,
+  "verdict": "NOT_IMPLEMENTED",
+  "requirement_vague": "Verify articles are returned in descending order by created date",
+  "omissions": [
+    {
+      "id": "O1",
+      "description": "Articles in GET /api/articles are sorted by 'id' in descending order instead of by 'created_at' (created date) in descending order.",
+      "category": "BUSINESS_LOGIC",
+      "reasoning": "The requirement specifies that articles must be ordered by created timestamp descending (newest first). The code uses 'key=lambda a: a.id or 0' instead of 'key=lambda a: a.created_at or \"\"'. Although auto-increment IDs often correlate with insertion order, the spec explicitly requires ordering by the created date field, not by ID."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 7132,
+    "prompt_tokens": 6764,
+    "completion_tokens": 368
+  },
+  "timestamp": "2026-07-12 10:43:49"
+}

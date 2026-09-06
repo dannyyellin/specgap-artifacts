@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Allowing updates to cardholderId and ISBN in PUT requests is unrelated to removing return date computation, removing the overdue-borrow checkout block, or removing checkout notifications to Logs."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R1",
+        "label": "PARTIAL",
+        "reasoning": "This concerns returnDate behavior and suggests code still treats returnDate as a constrained field, which partially relates to the spec removing automatic returnDate computation from Borrows."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R1",
+        "label": "PARTIAL",
+        "reasoning": "This references handling of returnDate based on the older notion that it was computed, so it partially overlaps with the spec change removing returnDate computation from Borrows."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 788,
+    "prompt_tokens": 565,
+    "completion_tokens": 223
+  }
+}

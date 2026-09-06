@@ -1,0 +1,72 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R15",
+        "label": "PARTIAL",
+        "reasoning": "It matches the required password-recovery endpoint in R15 but only captures endpoint absence, not the full success response and mailcatcher verification."
+      },
+      {
+        "detection_id": "O1",
+        "requirement_id": "R16",
+        "label": "PARTIAL",
+        "reasoning": "It refers to the same password-recovery endpoint involved in R16, but does not specifically capture the non-existent-user 404 behavior."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R17",
+        "label": "PARTIAL",
+        "reasoning": "It concerns the same reset-password endpoint used in R17, but only states the endpoint is missing rather than the full successful reset flow and login verification."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R18",
+        "label": "PARTIAL",
+        "reasoning": "It overlaps with R18 because both concern POST /api/v1/reset-password/ and invalid-token handling, but O2 is broader and does not mention the authenticated superuser context."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R56",
+        "label": "PARTIAL",
+        "reasoning": "It overlaps with R56 by mentioning the reset-password endpoint and 422 for short passwords, but it is broader than the specific 7-character validation case."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R14",
+        "label": "PARTIAL",
+        "reasoning": "It identifies the same test-token endpoint from R14, but omits the required superuser authentication setup and exact response verification."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R15",
+        "label": "PARTIAL",
+        "reasoning": "It matches the email-delivery verification aspect of R15, but does not include the endpoint response requirements or user registration setup."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R16",
+        "label": "MATCH",
+        "reasoning": "It describes the same behavior as R16: password recovery for a non-existent user must return HTTP 404."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R18",
+        "label": "MATCH",
+        "reasoning": "It describes the same invalid-token reset-password behavior required by R18, including HTTP 400 and detail 'Invalid token'."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R56",
+        "label": "MATCH",
+        "reasoning": "It describes the same requirement as R56: reset-password must reject passwords shorter than 8 characters with HTTP 422 before token validation."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2029,
+    "prompt_tokens": 1363,
+    "completion_tokens": 666
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "R6 explicitly requires GET /api/articles/feed and feed behavior based on followed authors, which O1 says is missing."
+      },
+      {
+        "detection_id": "O1",
+        "requirement_id": "R23",
+        "label": "MATCH",
+        "reasoning": "R23 requires the /api/articles/feed endpoint with pagination parameters limit and offset, exactly the endpoint O1 says is absent."
+      },
+      {
+        "detection_id": "O1",
+        "requirement_id": "R27",
+        "label": "MATCH",
+        "reasoning": "R27 requires GET /api/articles/feed to return an empty feed when the user follows nobody, which O1 directly covers."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R29",
+        "label": "MATCH",
+        "reasoning": "R29 specifically requires DELETE /api/users/{email}, and O2 states that endpoint is missing."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R12",
+        "label": "MATCH",
+        "reasoning": "R12 is exactly about filtering GET /api/articles by the tag query parameter, which O3 says is unsupported."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "R9 requires duplicate username or email registration attempts to return status 400, while O4 identifies the implementation returning 422 instead."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "R9 explicitly checks for the error message 'Username and email must be unique', which O5 says is not returned."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R25",
+        "label": "MATCH",
+        "reasoning": "R25 requires the JWT payload to contain id, username, and email, exactly the claims O6 says are missing."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R19",
+        "label": "PARTIAL",
+        "reasoning": "R19 is about verifying timestamp preservation and update behavior, and O7 only captures a field-name mismatch for those timestamps rather than the full behavior."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "R5 involves deleting an article and then verifying a subsequent GET returns an empty object, but O8 focuses on the DELETE response body semantics rather than the key post-delete retrieval behavior."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements concern deleting comments or the response body of DELETE /api/articles/{slug}/comments/{id}."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The reference requirements do not test or specify the JWT library implementation detail, only observable token payload behavior."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement checks validation failures for missing article title, description, or body fields."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement checks validation failures for missing comment body."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 3156,
+    "prompt_tokens": 2302,
+    "completion_tokens": 854
+  }
+}

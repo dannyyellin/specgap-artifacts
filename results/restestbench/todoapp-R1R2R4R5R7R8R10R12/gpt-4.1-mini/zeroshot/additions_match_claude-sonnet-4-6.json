@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The spec requirements do not specify any response body for DELETE /todos/{id} success; they only test 404 scenarios or verify the todo still exists after a failed delete."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements specify what the POST /users/register endpoint should return in its response body."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements specify the structure of the login response beyond obtaining an access token to use in subsequent calls."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1309,
+    "prompt_tokens": 1086,
+    "completion_tokens": 223
+  }
+}

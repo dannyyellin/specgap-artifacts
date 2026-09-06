@@ -1,0 +1,61 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "Private user creation endpoint accepts and applies client-supplied is_active and is_superuser fields.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification requires a private create-user operation and verifies returned email/id/is_active, but it does not positively require that callers may provide is_active or is_superuser in the request body. The code exposes these writable fields via UserCreatePrivate and persists them."
+      },
+      {
+        "id": "A2",
+        "description": "Superuser update-by-id endpoint allows changing password, is_active, and is_superuser for arbitrary users.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification only requires updating a user by id for fields such as full_name and email conflict handling. It does not require administrative mutation of password, activation status, or superuser status through this endpoint, but the code implements all three."
+      },
+      {
+        "id": "A3",
+        "description": "Password recovery HTML endpoint returns HTML wrapped inside a JSON message field rather than raw HTML content.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification requires requesting password-recovery HTML content and extracting the reset token from it, but does not require a JSON envelope with a message field. Returning the HTML as Message(message=html) is an implementation property not positively required by the spec."
+      },
+      {
+        "id": "A4",
+        "description": "Items list endpoint returns a top-level count field in addition to data.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification for listing items only requires that the returned data contain at least the created items. It does not require a count field, but the code includes one via ItemsRead."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "Reading an item by ID does not enforce ownership/permission checks for non-superusers.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification explicitly requires that when a second normal user attempts to read another user's item, the API returns 400 with detail 'Not enough permissions'. In the code, GET /items/{item_id} returns the item to any authenticated active user if it exists, with no owner/superuser authorization check."
+      },
+      {
+        "id": "O2",
+        "description": "Public signup duplicate-email error message does not match the required detail text.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification requires POST /api/v1/users/signup with existing email admin@example.com to return 400 with detail 'The user with this email already exists in the system'. The code returns 400 with detail 'User with this email already exists'."
+      },
+      {
+        "id": "O3",
+        "description": "Private create-user duplicate-email response is missing the specified guarantee that the body not contain an '_id' field.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly asserts that on duplicate creation via the create-user API, the response status is 400 and the response body does not contain '_id'. The code raises an HTTPException with only a detail field and does not define this response shape requirement explicitly; it does not implement any response contract addressing the '_id' absence."
+      },
+      {
+        "id": "O4",
+        "description": "Password recovery email is sent to the wrong Mailcatcher endpoint/method for the required verification flow.",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The specification says password recovery should send an email that can be verified via GET http://localhost:1080/messages. The code attempts to POST JSON directly to http://localhost:1080/messages, which is the same endpoint the spec uses for retrieval, and does not implement the specified mail delivery interaction needed for that verification flow."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 11517,
+    "prompt_tokens": 10794,
+    "completion_tokens": 723
+  }
+}

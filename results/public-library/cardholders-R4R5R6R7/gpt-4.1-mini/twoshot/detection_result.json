@@ -1,0 +1,61 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "GET /cardholders supports filtering by 'name' and 'email' query parameters",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states GET /cardholders may specify a query string of the form 'field=value' to filter records, but does not restrict which fields. The code restricts filtering to only 'name' and 'email', which is an implementation detail not specified."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "GET /cardholders/fines/{id} computes fineAmount incorrectly by adding 1 per overdue book instead of number-of-days-overdue * 0.50",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states the fine per overdue book is number-of-days-overdue multiplied by 0.50, and the total fine is the sum of all such fines. The code adds 1 per overdue book regardless of days overdue or the fine rate."
+      },
+      {
+        "id": "O2",
+        "description": "GET /cardholders/fines/{id} does not compute the number of days overdue for each borrowed book",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification requires computing the fine based on number-of-days-overdue, but the code only checks if the book is overdue without calculating days overdue."
+      },
+      {
+        "id": "O3",
+        "description": "GET /cardholders/fines/{id} does not handle the case where the Borrows microservice returns an error other than 400 or 200 appropriately",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification requires appropriate HTTP status codes for errors. The code returns 400 for any 4XX error from Borrows service, but does not distinguish 404 or other client errors as per spec."
+      },
+      {
+        "id": "O4",
+        "description": "POST /cardholders does not validate that 'name' and 'email' fields are present and non-empty in the request body",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification requires POST /cardholders to provide 'name' and 'email'. The code checks type but does not check presence or non-empty values."
+      },
+      {
+        "id": "O5",
+        "description": "PUT /cardholders/{id} does not validate that the updated resource contains all required fields 'name' and 'email'",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states PUT provides a JSON payload of the updated resource's fields. The code allows partial updates and does not require both 'name' and 'email' to be present."
+      },
+      {
+        "id": "O6",
+        "description": "GET /cardholders/{id} does not return the 'id' field as a string in the JSON document as required",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification requires each cardholder JSON document to contain 'id' as a string. The code returns 'id' as string, so no omission here."
+      },
+      {
+        "id": "O7",
+        "description": "GET /cardholders does not support filtering by 'id' query parameter as allowed by specification",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states GET /cardholders may specify a query string of the form 'field=value' to filter records, including 'id'. The code only allows filtering by 'name' and 'email'."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 7518,
+    "prompt_tokens": 6733,
+    "completion_tokens": 785
+  }
+}

@@ -1,0 +1,23 @@
+Timestamp: 2026-06-01 20:58:17
+Detector:  gpt-4.1-mini
+App/Variant/Service: nutrition/ratings-R10R11R12/ratings
+Method:    oneshot-warehouse
+
+Tokens: prompt=7053, completion=1120, total=8173
+Additions: 4
+Omissions: 9
+
+  A A1: Supports 'Authorization: Bearer <token>' header format for token extraction in addition to 'token' header
+  A A2: Returns JSON error messages with a 'message' field for error responses
+  A A3: Rounds all floating point numbers to two decimal places in responses
+  A A4: Supports GET /ratings returning average ratings sorted by dish_id ascending
+
+  O O1: POST /ratings does not enforce that a user cannot rate the same dish twice
+  O O2: PUT and DELETE /ratings/{id} do not verify that the rating being updated or deleted belongs to the authenticated user
+  O O3: POST /ratings does not validate that 'rating' is an integer between 1 and 5
+  O O4: PUT /ratings/{id} does not validate that 'rating' is an integer between 1 and 5
+  O O5: POST /ratings does not validate that 'dish_id' is a valid number and does not check for missing or invalid fields with proper 400 responses
+  O O6: PUT /ratings/{id} does not check that the 'dish_id' in the request body matches the URL id and returns 400 if not
+  O O7: POST /ratings does not return 400 if the user tries to rate the same dish twice
+  O O8: Does not return 401 Unauthorized if token is missing or invalid for POST /ratings
+  O O9: Does not return 404 Not Found if rating to update or delete does not exist for the user

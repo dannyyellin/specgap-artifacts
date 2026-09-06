@@ -1,0 +1,16 @@
+Timestamp: 2026-06-02 07:32:05
+Detector:  claude-sonnet-4-6
+Service:   todoapp  Removals: [1, 2, 4, 5, 7, 8, 10, 12]
+Method:    oneshot-tracker
+
+Tokens: prompt=4975, completion=770, total=5745
+Additions: 3
+Omissions: 3
+
+  A A1: POST /users/register returns a UserResponse (id, email) with status 200 OK instead of just confirming registration
+  A A2: POST /users/register checks for duplicate email and returns 400 Bad Request if already registered
+  A A3: DELETE /todos/{id} returns a JSON body {"message": "Todo deleted"} on success
+
+  O O1: POST /todos does not validate that the title field is non-empty and return 400 with a message indicating 'The Title field is required' when title is empty or missing
+  O O2: PUT /todos/{id} does not validate that the id in the request body matches the id in the URL path and return 400 Bad Request when they differ
+  O O3: GET /todos without an Authorization header returns 403 Forbidden instead of 401 Unauthorized

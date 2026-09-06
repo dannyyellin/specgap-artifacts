@@ -1,0 +1,17 @@
+Timestamp: 2026-06-01 20:56:47
+Detector:  gpt-4.1-mini
+App/Variant/Service: nutrition/dishes-R4R5R6/dishes
+Method:    twoshot
+
+Tokens: prompt=8324, completion=665, total=8989
+Additions: 2
+Omissions: 5
+
+  A A1: Supports filtering dishes by 'id', 'name', and 'ingredients' query parameters in GET /dishes
+  A A2: Filters by 'ingredients' field in GET /dishes query parameters
+
+  O O1: POST, PUT, and DELETE requests on /dishes and /dishes/{id} do not restrict access to only the restaurant Owner
+  O O2: GET /dishes filtering does not support filtering by 'ingredient' query parameter as specified
+  O O3: Does not return 400 Bad Request when query parameter values for nutritional fields are invalid
+  O O4: Does not validate that the request Content-Type is application/json for POST and PUT requests
+  O O5: Does not handle the case where the Ninja API returns a string value 'Only available for premium subscribers.' for some nutritional fields

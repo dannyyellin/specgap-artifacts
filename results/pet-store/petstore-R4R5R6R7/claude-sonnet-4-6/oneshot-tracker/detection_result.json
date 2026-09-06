@@ -1,0 +1,109 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "POST /pet-types rejects payloads that contain any fields other than 'type' (enforces exact key set {'type'})",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification says the POST request 'provides a JSON object payload that contains only the field named type', but does not require the server to reject payloads with extra fields. The code does `set(data.keys()) != {'type'}` and returns 400 for any extra fields, which is stricter than the spec requires."
+      },
+      {
+        "id": "A2",
+        "description": "fetch_pet_type_from_ninja builds 'attributes' from multiple Ninja API fields (slogan, group, color, skin_type, top_speed, diet, main_prey) beyond what the spec requires",
+        "category": "COMPUTED_VALUES",
+        "reasoning": "The specification states attributes should come from 'temperament' or 'group_behavior' fields only. The code also reads 'slogan', 'group', 'color', 'skin_type', 'top_speed', 'diet', 'main_prey' from the characteristics object, which has no basis in the specification."
+      },
+      {
+        "id": "A3",
+        "description": "PUT /pet-types/{id}/pets/{name} accepts a 'picture' field directly in the payload to update the picture filename",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification for PUT on pets only mentions 'name', 'birthdate', and 'picture-url' as updatable fields. The code also accepts a raw 'picture' field to directly set the stored filename, which is not described in the specification."
+      },
+      {
+        "id": "A4",
+        "description": "lifespan defaults to 0 when not returned by the Ninja API instead of null",
+        "category": "COMPUTED_VALUES",
+        "reasoning": "The specification states 'If the lifespan field is not returned by the Ninja API, then its value is the JSON keyword null.' The code defaults lifespan to 0 in both fetch_pet_type_from_ninja and serialize_pet_type."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "DELETE /pet-types/{id} does not check whether there are pets of that type before deleting; it should return 400 if pets exist",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states 'A pet-type can only be deleted if there are no pets of that type. Otherwise, it returns 400.' The code performs the delete unconditionally without checking for existing pets."
+      },
+      {
+        "id": "O2",
+        "description": "DELETE /pet-types/{id} does not require owner authentication \u2014 it is missing the 403 response for authenticated non-owners",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification lists possible response codes for DELETE /pet-types/{id} as '204, 401, 404' and states 'Only the store owner can issue a DELETE request.' While verify_owner() is called, the spec also implies 403 for non-owner authenticated users; however more critically the spec lists 401 as a possible code but not 403 for this endpoint \u2014 the code does return 403 via verify_owner which is an addition, but the missing 400 for pets-exist is the main omission."
+      },
+      {
+        "id": "O3",
+        "description": "GET /pet-types/{id}/pets does not return 404 when the pet-type id does not exist; it returns 404 only based on the document lookup but the list_pets function checks doc existence correctly \u2014 however the birthdate query filtering is not implemented",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states GET /pet-types/{id}/pets supports query strings 'birthdateGT=<date>', 'birthdateLT=<date>', and combined 'birthdateGT=<date>&birthdateLT=<date>'. The code returns all pets without any date filtering logic."
+      },
+      {
+        "id": "O4",
+        "description": "attributes field is built by splitting on commas rather than whitespace, and punctuation (other than hyphens) is not stripped",
+        "category": "COMPUTED_VALUES",
+        "reasoning": "The specification states: 'Each word in the temperament or group_behavior field returned by Ninja API becomes one string in the attributes field array... Split on whitespace but do not include punctuation except hyphens.' The code splits on commas instead of whitespace and does not strip punctuation from tokens."
+      },
+      {
+        "id": "O5",
+        "description": "The code reads 'temperament' and 'group_behavior' from characteristics but gives 'temperament' priority over 'group_behavior' incorrectly \u2014 it uses both instead of one",
+        "category": "COMPUTED_VALUES",
+        "reasoning": "The specification states 'If both are listed then just use temperament.' The code does not implement this mutual exclusion; it reads from multiple fields and combines them rather than using temperament exclusively when present."
+      },
+      {
+        "id": "O6",
+        "description": "MongoDB connection URI uses 'mongo' as the hostname instead of 'mongoPetSt'",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The specification states 'In the Docker-compose.yml file, this MongoDB is given the service name mongoPetSt'. The code uses MONGO_URI = f'mongodb://mongo:27017/{SERVICE_NAME}db', connecting to 'mongo' instead of 'mongoPetSt'."
+      },
+      {
+        "id": "O7",
+        "description": "POST /pet-types/{id}/pets does not return 404 when the pet-type id does not exist before checking for duplicate pet names \u2014 the order is wrong (duplicate name check happens before existence check)",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The code checks for duplicate pet names before checking if the pet-type document exists. If the pet-type does not exist, the code should return 404, but the duplicate-name loop runs on an empty list and passes silently. The existence check comes after. While the end result may be correct (doc is None \u2192 404), the spec implies 404 should be the primary check. More importantly, the spec lists 404 as a possible response for POST /pet-types/{id}/pets implicitly (pet-type not found), and the code does handle it, so this is minor."
+      },
+      {
+        "id": "O8",
+        "description": "GET /pet-types/{id}/pets/{name} does not return 404 when the pet-type id does not exist (only returns 404 for missing pet name within an existing type)",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The code returns 404 if the pet-type document is not found (doc is None check), so this is actually handled. Re-examining: the code does check `if not doc: return '', 404`. This is correct."
+      },
+      {
+        "id": "O9",
+        "description": "POST /pet-types/{id}/pets does not check for duplicate pet names returning a specific error \u2014 it returns 400 with no message, which may be acceptable, but the spec does not list 409 for duplicate pet names",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification does not explicitly state what to return for duplicate pet names within a type. The code returns 400, which is reasonable but not explicitly specified. This is not a clear omission."
+      },
+      {
+        "id": "O10",
+        "description": "The /verify endpoint call in verify_owner does not handle the case where the registry returns 503 (service unavailable), mapping it to an appropriate error",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The specification states 'If a service uses an external API, and it cannot handle the request, then 503 is returned.' When the registry service itself is unavailable or returns an error, the code returns 401 rather than propagating a 503."
+      },
+      {
+        "id": "O11",
+        "description": "PUT /pet-types/{id} is not explicitly returning 405 \u2014 the route is not defined, relying on Flask's default 405 handler",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification explicitly states 'PUT request on /pet-types/{id} is not allowed by anyone and returns 405.' The code relies on Flask's generic 405 handler rather than explicitly defining this. The @app.errorhandler(405) returns empty string with 405, which may work but the route is not explicitly registered to enforce this."
+      },
+      {
+        "id": "O12",
+        "description": "lifespan field in serialize_pet_type defaults to 0 instead of null when not present",
+        "category": "COMPUTED_VALUES",
+        "reasoning": "The specification states 'If the lifespan field is not returned by the Ninja API, then its value is the JSON keyword null.' serialize_pet_type uses doc.get('lifespan', 0) which returns 0 instead of None/null."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 14486,
+    "prompt_tokens": 12215,
+    "completion_tokens": 2271
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "app": "public-library",
+  "variant": "borrows-R1R2R3",
+  "service": "borrows",
+  "req_id": "R3",
+  "requirement": "On each checkout, the Borrows service notifies the Logs service so that a log entry is created for the borrow.",
+  "source_headline": "Removed \"Borrows notifies Logs on checkout\" from BOTH Borrows and Logs specs",
+  "model": "claude-sonnet-4-6",
+  "pass": 2,
+  "label": "INFERRED",
+  "evidence": "create_log_for_borrow() function posts to LOGS_URL with borrow details; called in POST /borrows after insert_one: `borrows_collection().insert_one(borrow_doc)` then `create_log_for_borrow(borrow_doc)`",
+  "reasoning": "The code defines a `create_log_for_borrow` function that sends a POST request to the Logs service (LOGS_URL = 'http://logs:5004/logs') with the borrow's cardholderId, borrowId, ISBN, and loanDate. This function is called immediately after every successful checkout (insert_one) in the POST /borrows handler. A test verifying that a checkout triggers a log creation request to the Logs service would pass.",
+  "usage": {
+    "total_tokens": 3726,
+    "prompt_tokens": 3529,
+    "completion_tokens": 197
+  },
+  "timestamp": "2026-07-16 14:52:40"
+}

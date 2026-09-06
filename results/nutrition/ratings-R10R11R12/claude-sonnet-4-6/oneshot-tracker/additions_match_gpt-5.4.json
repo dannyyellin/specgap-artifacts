@@ -1,0 +1,24 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Validating dish existence via another microservice is unrelated to removing the rating range, one-rating-per-user-per-dish, or token-derived user_id constraints."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "Using a float instead of an integer aligns with removing the integer-only part of the rating constraint, but it does not by itself clearly capture removal of the 1-to-5 range constraint."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 669,
+    "prompt_tokens": 514,
+    "completion_tokens": 155
+  }
+}

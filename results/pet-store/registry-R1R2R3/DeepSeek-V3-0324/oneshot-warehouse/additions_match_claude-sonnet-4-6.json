@@ -1,0 +1,24 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Using BCRYPT_ROUNDS=12 exceeding the minimum requirement does not correspond to any of the three spec requirements about password validation rules, anti-enumeration, or owner pre-registration."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Updating privileged status when changing the owner's password is unrelated to the removed password validation rules, anti-enumeration security requirement, or owner pre-registration behaviors described in the spec requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 731,
+    "prompt_tokens": 548,
+    "completion_tokens": 183
+  }
+}

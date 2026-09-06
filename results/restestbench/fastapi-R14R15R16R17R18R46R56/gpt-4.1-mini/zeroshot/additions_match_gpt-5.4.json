@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This describes an authenticated current-user password change endpoint, while the listed requirements only cover password recovery/reset flows and not PATCH /users/me/password."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R46",
+        "label": "PARTIAL",
+        "reasoning": "R46 requires deleting the authenticated user's own account via DELETE /api/v1/users/me, but A2 only states the endpoint exists and adds a superuser self-delete restriction without covering the required response or downstream item-not-found verification."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R46",
+        "label": "PARTIAL",
+        "reasoning": "Cascade deletion of items owned by users partially relates to R46's expectation that a deleted user's item is no longer retrievable, but it does not describe the required API flow or exact 404 response."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements mention password hashing implementation details such as bcrypt via passlib."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": "R56",
+        "label": "PARTIAL",
+        "reasoning": "R56 depends on password length validation causing a 422 before token validation, and A5 mentions password length validators, but it does not specify the reset-password endpoint, the 7-character case, or the 422 outcome."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1566,
+    "prompt_tokens": 1193,
+    "completion_tokens": 373
+  }
+}

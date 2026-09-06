@@ -1,0 +1,20 @@
+Timestamp: 2026-06-02 09:46:22
+Detector:  claude-sonnet-4-6
+App/Variant/Service: nutrition/ratings-R10R11R12/ratings
+Method:    oneshot-warehouse
+
+Tokens: prompt=8137, completion=1231, total=9368
+Additions: 4
+Omissions: 6
+
+  A A1: The code checks whether a dish exists by calling the dishes microservice before creating or updating a rating
+  A A2: POST /ratings returns a JSON structure with 'dish_id' and 'avg_rating' on success
+  A A3: The rating value is stored as a float (rounded to 2 decimal places) rather than as an integer
+  A A4: PUT /ratings/{id} validates that the dish_id in the request body matches the dish_id in the URL path
+
+  O O1: POST /ratings does not enforce that 'rating' is an integer between 1 and 5
+  O O2: PUT /ratings/{id} does not enforce that 'rating' is an integer between 1 and 5
+  O O3: POST /ratings does not prevent a user from rating the same dish twice
+  O O4: GET /ratings/{id} is described as returning the avg_rating for the dish of that id, but the spec says the id in /ratings/{id} refers to a rating document id, not a dish_id — the code treats the URL parameter as dish_id
+  O O5: PUT /ratings/{id} and DELETE /ratings/{id} use dish_id as the URL parameter instead of the rating document id
+  O O6: The service does not listen on port 5004 as specified; it listens on 5004 but the deployment URL in the spec is http://ratings:5004/ratings — the service correctly uses port 5004

@@ -1,0 +1,72 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the failure of R9's requirements: wrong status code (422 vs 400) and missing 'Username and email must be unique' message."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R25",
+        "label": "MATCH",
+        "reasoning": "O2 directly describes the failure of R25's requirement that the JWT payload contains id, username, and email fields."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R12",
+        "label": "MATCH",
+        "reasoning": "O3 directly describes the failure of R12's requirement to filter articles by tag query parameter."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O4 describes the missing /api/articles/feed endpoint, which is required by R6 (and also R23 and R27)."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R23",
+        "label": "MATCH",
+        "reasoning": "O4 describes the missing /api/articles/feed endpoint, which is also required by R23 for feed pagination testing."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R27",
+        "label": "MATCH",
+        "reasoning": "O4 describes the missing /api/articles/feed endpoint, which is also required by R27 for empty feed testing."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R29",
+        "label": "MATCH",
+        "reasoning": "O5 directly describes the missing DELETE /api/users/{email} endpoint required by R29."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 discusses comment endpoint response format which does not correspond to any of the listed reference requirements."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O7 self-identifies as covered by another detection and does not correspond to any distinct reference requirement."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "O8 partially captures R9's requirement about the error message for duplicate username/email, but focuses on the message content rather than also noting the wrong status code."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 3167,
+    "prompt_tokens": 2458,
+    "completion_tokens": 709
+  }
+}

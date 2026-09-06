@@ -1,0 +1,23 @@
+{
+  "variant": "todoapp-R1R2R4R5R7R8R10R12",
+  "req_id": 2,
+  "model": "gpt-5.4",
+  "pass": 2,
+  "verdict": "NOT_IMPLEMENTED",
+  "requirement_vague": "Creating a todo without a title returns a validation error",
+  "omissions": [
+    {
+      "id": "O1",
+      "description": "POST /todos does not return the specified 400 Bad Request with a validation error indicating 'The Title field is required.' when title is missing or empty.",
+      "category": "RESPONSE_FORMAT",
+      "reasoning": "The create_todo endpoint accepts TodoCreate where title is declared as a required str, so a missing title will be rejected by FastAPI/Pydantic validation before entering the handler. However, FastAPI returns 422 Unprocessable Entity by default for request body validation errors, not 400. There is also no custom validator or error handler to produce the exact message 'The Title field is required.' For an empty string title, there is no validation constraint such as min_length=1, so an empty title would be accepted rather than rejected."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 2589,
+    "prompt_tokens": 2419,
+    "completion_tokens": 170
+  },
+  "timestamp": "2026-07-12 10:32:49"
+}

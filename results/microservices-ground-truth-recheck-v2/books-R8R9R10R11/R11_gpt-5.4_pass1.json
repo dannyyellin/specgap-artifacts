@@ -1,0 +1,19 @@
+{
+  "app": "public-library",
+  "variant": "books-R8R9R10R11",
+  "service": "books",
+  "req_id": "R11",
+  "requirement": "The genre field must be one of a fixed enumerated list of valid genres; other values are rejected.",
+  "source_headline": "Removed genre enumeration (valid genre list)",
+  "model": "gpt-5.4",
+  "pass": 1,
+  "label": "GAP",
+  "evidence": "none",
+  "reasoning": "The code validates that `genre` exists and is a string in `create_book()` via `validate_string_field`, and that any updated `genre` is a string in `update_book()`. However, there is no fixed enumerated list of allowed genres and no check rejecting values outside such a list, so there is no code addressing the requirement as stated. Per the decision guide, absence of any enum-validation behavior is a GAP.",
+  "usage": {
+    "total_tokens": 1890,
+    "prompt_tokens": 1775,
+    "completion_tokens": 115
+  },
+  "timestamp": "2026-07-16 14:54:45"
+}

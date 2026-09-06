@@ -1,0 +1,54 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 describes validation against the Cardholders microservice, which does not correspond to any of the three removed behaviors (returnDate computation, overdue constraint, or Logs notification)."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A2 describes ISBN validation against the Books microservice, which is unrelated to the three spec requirements about removed behaviors."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A3 describes external validation on PUT, which does not correspond to any of the three removed behaviors specified in R1, R2, or R3."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A4 describes rejection of unknown query parameters, which is unrelated to the removed returnDate computation, overdue constraint, or Logs notification behaviors."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A5 describes partial update semantics on PUT, which does not correspond to any of the three removed behaviors in R1, R2, or R3."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A6 describes rejection of unknown JSON fields, which is unrelated to the removed returnDate computation, overdue constraint, or Logs notification behaviors."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": "R1",
+        "label": "PARTIAL",
+        "reasoning": "A7 relates to returnDate validation logic (chronological ordering), which is in the same domain as R1's removal of returnDate computation, but A7 describes a guard on client-supplied dates rather than the removal of automatic returnDate = loanDate + 30 days computation."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1583,
+    "prompt_tokens": 1021,
+    "completion_tokens": 562
+  }
+}

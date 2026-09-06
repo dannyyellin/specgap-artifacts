@@ -1,0 +1,19 @@
+{
+  "app": "public-library",
+  "variant": "logs-R12R13",
+  "service": "logs",
+  "req_id": "R12",
+  "requirement": "The loanDate field of a log entry is in the date format 'DD-MM-YYYY'.",
+  "source_headline": "Removed date format ('DD-MM-YYYY') for loanDate in Logs",
+  "model": "gpt-5.4",
+  "pass": 2,
+  "label": "GAP",
+  "evidence": "POST /logs in logs() only checks required_fields = [\"cardholderId\", \"borrowId\", \"ISBN\", \"loanDate\"] and validates each is present and isinstance(data[field], str); it then stores \"loanDate\": data[\"loanDate\"] with no date-format validation.",
+  "reasoning": "There is no code addressing the specific requirement that loanDate must be in 'DD-MM-YYYY' format. The service only enforces that loanDate exists and is a string, so a test submitting an incorrectly formatted string would still be accepted. Per the decision guide, absence of any behavior enforcing the stated format is a GAP.",
+  "usage": {
+    "total_tokens": 1474,
+    "prompt_tokens": 1323,
+    "completion_tokens": 151
+  },
+  "timestamp": "2026-07-16 14:55:04"
+}

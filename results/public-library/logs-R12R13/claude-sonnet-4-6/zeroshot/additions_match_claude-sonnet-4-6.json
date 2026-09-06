@@ -1,0 +1,24 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 describes type validation logic for POST fields, which does not correspond to either R12 (removing date format) or R13 (removing Borrows-to-Logs notification)."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A2 describes GET query parameter filtering logic, which does not correspond to either R12 (removing date format) or R13 (removing Borrows-to-Logs notification)."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 773,
+    "prompt_tokens": 588,
+    "completion_tokens": 185
+  }
+}

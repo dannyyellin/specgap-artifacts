@@ -1,0 +1,17 @@
+Timestamp: 2026-06-02 06:04:19
+Detector:  DeepSeek-V3-0324
+App/Variant/Service: public-library/borrows-R1R2R3/borrows
+Method:    oneshot-tracker
+
+Tokens: prompt=6329, completion=598, total=6927
+Additions: 2
+Omissions: 5
+
+  A A1: Stores and validates 'returnDate' field in borrow records
+  A A2: Validates that returnDate is not before loanDate
+
+  O O1: Does not compute returnDate as loanDate + LOAN_PERIOD (30 days)
+  O O2: Does not check if cardholder has 2+ overdue books before allowing new borrow
+  O O3: Does not return 400 status when cardholder has 2+ overdue books
+  O O4: Does not validate that ISBN is in ISBN_13 format
+  O O5: Does not validate that loanDate is in 'DD-MM-YYYY' format

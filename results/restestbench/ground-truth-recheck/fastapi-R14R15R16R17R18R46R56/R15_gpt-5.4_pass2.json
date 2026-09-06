@@ -1,0 +1,41 @@
+{
+  "variant": "fastapi-R14R15R16R17R18R46R56",
+  "req_id": 15,
+  "model": "gpt-5.4",
+  "pass": 2,
+  "verdict": "NOT_IMPLEMENTED",
+  "requirement_vague": "Ensure requesting password recovery works and an email is actually sent to the correct recipient (verify via mailcatcher at localhost:1080).",
+  "omissions": [
+    {
+      "id": "O1",
+      "description": "Missing password recovery endpoint POST /api/v1/password-recovery/{email}.",
+      "category": "ENDPOINTS",
+      "reasoning": "The code defines routes for signup, login, user management, and items, but there is no route matching POST /api/v1/password-recovery/{email} or any password recovery endpoint at all."
+    },
+    {
+      "id": "O2",
+      "description": "No implementation returning HTTP 200 with JSON message 'Password recovery email sent' for password recovery requests.",
+      "category": "RESPONSE_FORMAT",
+      "reasoning": "Because the password recovery endpoint is absent, the required success response cannot be produced. The only similar response model is a generic Message model, but it is not used for any password recovery flow."
+    },
+    {
+      "id": "O3",
+      "description": "No logic to send a password recovery email to the requested recipient.",
+      "category": "EXTERNAL_INTERACTIONS",
+      "reasoning": "There is no email-sending code, no SMTP/mail client integration, and no outbound interaction with a mail service or Mailcatcher. Therefore no recovery email can be sent to test15@example.com or any other recipient."
+    },
+    {
+      "id": "O4",
+      "description": "No implementation enabling verification that an email was sent via Mailcatcher at localhost:1080/messages.",
+      "category": "EXTERNAL_INTERACTIONS",
+      "reasoning": "The service contains no code that sends mail through a Mailcatcher-compatible SMTP setup, so the required observable side effect of a message appearing in Mailcatcher cannot occur."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 5035,
+    "prompt_tokens": 4724,
+    "completion_tokens": 311
+  },
+  "timestamp": "2026-07-12 10:37:22"
+}

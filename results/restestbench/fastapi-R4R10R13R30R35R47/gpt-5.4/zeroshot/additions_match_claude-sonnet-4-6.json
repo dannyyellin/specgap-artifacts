@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements address the ability to supply is_active or is_superuser fields during user creation."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements address administrative mutation of password, activation status, or superuser status via an update-by-id endpoint."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements mention a password recovery HTML endpoint or its response format."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements mention a count field in the items list response."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1443,
+    "prompt_tokens": 1178,
+    "completion_tokens": 265
+  }
+}

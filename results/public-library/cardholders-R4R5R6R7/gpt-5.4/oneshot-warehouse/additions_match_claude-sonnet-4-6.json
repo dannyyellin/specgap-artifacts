@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Restricting query filtering to 'name' and 'email' fields does not correspond to any of the listed spec requirements about type declarations, error codes, fine formulas, or cross-service calls."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rejecting mismatched body 'id' vs path id is not related to any of the listed spec requirements."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Requiring at least one of 'name' or 'email' to be updated does not correspond to any of the listed spec requirements."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "R4 removed the string type declaration for 'id', and A4 describes the code using Mongo ObjectIds (a more specific type than string) for ids, which partially relates to the removal of the string type constraint but goes beyond it by adding ObjectId-format validation."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1139,
+    "prompt_tokens": 797,
+    "completion_tokens": 342
+  }
+}

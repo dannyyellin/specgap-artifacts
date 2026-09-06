@@ -1,0 +1,18 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 concerns supported query-parameter filtering on GET /cardholders, which does not correspond to removed field type declarations, removal of 415 errors, removal of the fine formula, or removal of the Borrows cross-service call."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 585,
+    "prompt_tokens": 491,
+    "completion_tokens": 94
+  }
+}

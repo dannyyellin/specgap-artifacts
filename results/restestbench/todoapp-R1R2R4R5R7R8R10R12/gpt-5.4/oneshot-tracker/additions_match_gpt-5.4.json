@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Allowing clients to set isComplete during todo creation is not required or described by any listed spec requirement."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rejecting duplicate email registration is not covered by any of the provided requirements, which only assume successful registration/login flows."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Specific JWT claims and a 24-hour expiration are not specified in any of the listed requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1207,
+    "prompt_tokens": 1026,
+    "completion_tokens": 181
+  }
+}

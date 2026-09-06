@@ -1,0 +1,138 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R15",
+        "label": "MATCH",
+        "reasoning": "R15 requires GET /api/articles to support limit and offset pagination, which A1 explicitly describes."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R24",
+        "label": "PARTIAL",
+        "reasoning": "R24 requires descending order by created timestamp, while A2 describes descending order by article.id, which may overlap in effect but is not the same specified behavior."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements concern duplicate created/updated timestamp fields in article responses."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements specify that user objects in responses must include an id field."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "R2 includes the requirement that following oneself returns 400, but A5 states the code allows self-follow without that error."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "R10 includes the requirement that unfollowing oneself returns 400, but A5 states the code allows self-unfollow without that error."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements specify comment cascade deletion behavior when deleting an article."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": "R28",
+        "label": "PARTIAL",
+        "reasoning": "R28 expects GET after deletion to return 200 with empty object, while A7 describes that behavior more broadly for any missing article."
+      },
+      {
+        "detection_id": "A8",
+        "requirement_id": "R28",
+        "label": "PARTIAL",
+        "reasoning": "R28 expects a vulnerability allowing non-owners to update articles, whereas A8 describes the opposite behavior with a 403 ownership check."
+      },
+      {
+        "detection_id": "A9",
+        "requirement_id": "R28",
+        "label": "PARTIAL",
+        "reasoning": "R28 expects a vulnerability allowing non-owners to delete articles, whereas A9 describes the opposite behavior with a 403 ownership check."
+      },
+      {
+        "detection_id": "A10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements address authorization rules for deleting comments."
+      },
+      {
+        "detection_id": "A11",
+        "requirement_id": "R13",
+        "label": "PARTIAL",
+        "reasoning": "R13 requires filtering articles by author, and A11 includes author filtering but also mentions tag filtering not covered by R13."
+      },
+      {
+        "detection_id": "A12",
+        "requirement_id": "R13",
+        "label": "MATCH",
+        "reasoning": "R13 verifies articlesCount in article listing responses, which A12 explicitly describes."
+      },
+      {
+        "detection_id": "A12",
+        "requirement_id": "R15",
+        "label": "MATCH",
+        "reasoning": "R15 specifically requires articlesCount to reflect the total matching articles regardless of pagination, exactly as A12 states."
+      },
+      {
+        "detection_id": "A13",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements concern the feed endpoint returning an empty list when the user follows no one."
+      },
+      {
+        "detection_id": "A14",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements address duplicate username/email handling during user creation."
+      },
+      {
+        "detection_id": "A15",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements concern login failure behavior."
+      },
+      {
+        "detection_id": "A16",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements describe user profile update behavior."
+      },
+      {
+        "detection_id": "A17",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements specify slug generation details such as random hex suffixes."
+      },
+      {
+        "detection_id": "A18",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements concern the tags listing endpoint."
+      },
+      {
+        "detection_id": "A19",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements describe deleting users by email or FK constraint failures."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 3420,
+    "prompt_tokens": 2239,
+    "completion_tokens": 1181
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O1 addresses the same endpoint and validation requirement as R2 (empty title should return 400 with 'The Title field is required'), but frames it as a missing/failing behavior rather than a test verification, and focuses only on empty string rather than also missing title."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O2 directly describes the same behavior as R10: PUT /todos/X with a body where id=Y (different from X) should return 400 Bad Request, and the code fails to implement this check."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1324,
+    "prompt_tokens": 1119,
+    "completion_tokens": 205
+  }
+}

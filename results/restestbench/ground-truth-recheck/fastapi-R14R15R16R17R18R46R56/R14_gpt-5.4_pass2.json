@@ -1,0 +1,23 @@
+{
+  "variant": "fastapi-R14R15R16R17R18R46R56",
+  "req_id": 14,
+  "model": "gpt-5.4",
+  "pass": 2,
+  "verdict": "NOT_IMPLEMENTED",
+  "requirement_vague": "Verify the test token endpoint works and its response includes the user's email.",
+  "omissions": [
+    {
+      "id": "O1",
+      "description": "The code does not implement a test token endpoint that can be called with an access token to return the authenticated user's data including email.",
+      "category": "ENDPOINTS",
+      "reasoning": "The requirement explicitly refers to a 'test token endpoint' to verify a token after authenticating. The code defines POST /api/v1/login/access-token and GET /api/v1/users/me, but there is no dedicated route such as /login/test-token or equivalent test-token endpoint."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 4798,
+    "prompt_tokens": 4684,
+    "completion_tokens": 114
+  },
+  "timestamp": "2026-07-12 10:36:48"
+}

@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Using bcrypt cost factor 12 concerns password hashing strength and does not describe removal of password rules, anti-enumeration behavior on /verify, or owner pre-registration."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A success message for password change does not correspond to any removed requirement about password validation rules, /verify error-message anti-enumeration, or owner pre-registration."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A success message for user deletion is unrelated to the removed requirements listed in the specification."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 714,
+    "prompt_tokens": 514,
+    "completion_tokens": 200
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R15",
+        "label": "PARTIAL",
+        "reasoning": "O1 identifies the missing POST /api/v1/password-recovery/{email} endpoint, which is required by R15 (and R16), but only partially captures the full behavior described in those requirements."
+      },
+      {
+        "detection_id": "O1",
+        "requirement_id": "R16",
+        "label": "PARTIAL",
+        "reasoning": "O1 also relates to R16 since the missing endpoint is needed to return HTTP 404 for non-existent users, but O1 only notes the endpoint is absent rather than specifying the 404 behavior."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R17",
+        "label": "PARTIAL",
+        "reasoning": "O2 identifies the missing POST /api/v1/reset-password/ endpoint which is required by R17 for the password reset flow, but O2 covers multiple behaviors across R17, R18, and R56."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R18",
+        "label": "PARTIAL",
+        "reasoning": "O2 mentions the endpoint returning HTTP 400 with 'Invalid token' for invalid tokens, which matches R18's requirement, but only partially since O2 bundles multiple behaviors together."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R56",
+        "label": "PARTIAL",
+        "reasoning": "O2 mentions the endpoint returning HTTP 422 for passwords shorter than 8 characters, which matches R56, but only partially since it bundles this with other behaviors."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R14",
+        "label": "MATCH",
+        "reasoning": "O3 directly identifies the missing GET /api/v1/login/test-token endpoint that R14 requires to return HTTP 200 with a JSON body containing the 'email' field."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R15",
+        "label": "MATCH",
+        "reasoning": "O4 directly captures R15's requirement that a password recovery email is actually sent and verifiable via the mailcatcher service."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R16",
+        "label": "MATCH",
+        "reasoning": "O5 directly describes the missing HTTP 404 response for non-existent users in the password recovery endpoint, which is exactly what R16 requires."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R18",
+        "label": "MATCH",
+        "reasoning": "O6 directly describes the missing HTTP 400 response with detail 'Invalid token' for invalid tokens in the reset-password endpoint, which is exactly what R18 requires."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R56",
+        "label": "MATCH",
+        "reasoning": "O7 directly describes the missing HTTP 422 validation response for passwords shorter than 8 characters in the reset-password endpoint, which is exactly what R56 requires."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2372,
+    "prompt_tokens": 1524,
+    "completion_tokens": 848
+  }
+}

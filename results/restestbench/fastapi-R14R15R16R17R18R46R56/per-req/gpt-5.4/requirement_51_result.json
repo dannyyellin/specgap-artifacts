@@ -1,0 +1,18 @@
+{
+  "req_id": 51,
+  "requirement_vague": "Password update should reject new_password longer than 128 characters. Test with exactly 129 characters.",
+  "requirement_precise": "Register a new user via POST /api/v1/users/signup with email 'test51@example.com' and password 'oldpass123'. Login to get token. Attempt to update password via PATCH /api/v1/users/me/password with current_password 'oldpass123' and new_password of exactly 129 characters (129 'a' characters). Verify the response status is 422 (validation error).",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": "UpdatePassword.validate_new_password and PATCH /api/v1/users/me/password",
+    "code_reference": "@field_validator(\"new_password\")\ndef validate_new_password(cls, v: str):\n    if v is None or len(v) < 8 or len(v) > 128:\n        raise ValueError(\"Password must be between 8 and 128 characters\")",
+    "reasoning": "The password update request model enforces that new_password must be at most 128 characters. Since the PATCH /api/v1/users/me/password endpoint accepts this model as the request body, a 129-character new_password is rejected by FastAPI/Pydantic validation, which results in a 422 validation error before the handler logic runs."
+  },
+  "usage": {
+    "total_tokens": 4868,
+    "prompt_tokens": 4708,
+    "completion_tokens": 160
+  },
+  "parse_error": false
+}

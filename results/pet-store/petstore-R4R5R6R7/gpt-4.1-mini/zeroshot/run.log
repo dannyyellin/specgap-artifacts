@@ -1,0 +1,40 @@
+Timestamp: 2026-06-01 21:00:16
+Detector:  gpt-4.1-mini
+App/Variant/Service: pet-store/petstore-R4R5R6R7/pet-store
+Method:    zeroshot
+
+Tokens: prompt=9576, completion=2744, total=12320
+Additions: 10
+Omissions: 20
+
+  A A1: The code supports updating the pet's picture via a 'picture-url' field in the PUT /pet-types/{id}/pets/{name} endpoint, allowing uploading a new picture during update.
+  A A2: The code supports a 'slogan', 'group', 'color', 'skin_type', 'top_speed', 'diet', and 'main_prey' fields from the Ninja API to build the 'attributes' array for pet-types.
+  A A3: The code returns lifespan as 0 if the Ninja API does not provide a lifespan, instead of null.
+  A A4: The code allows querying pet-types by 'id' and 'lifespan' fields as integers, converting query string values to int, and returns empty array on conversion failure.
+  A A5: The code supports a 'birthdate' field validation with regex and returns 400 on invalid format for pet creation and update.
+  A A6: The code supports a 'picture-url' field in the POST /pet-types/{id}/pets endpoint to fetch and store pet pictures from URLs.
+  A A7: The code returns 400 if a pet with the same name already exists when creating a pet, but the specification does not explicitly specify the status code for this case.
+  A A8: The code returns 400 if the DELETE /pet-types/{id} is attempted when pets exist for that pet-type, but the specification requires 400 in this case.
+  A A9: The code returns 400 if the PUT /pet-types/{id}/pets/{name} payload is missing the 'name' field or if the new name conflicts with another pet's name.
+  A A10: The code returns 400 on malformed or nonsensical query strings for GET /pet-types and GET /pet-types/{id}/pets, returning empty arrays.
+
+  O O1: DELETE /pet-types/{id} does not check if there are pets of that type before deletion and allows deletion regardless.
+  O O2: DELETE /pet-types/{id} does not return 401 or 403 when the user is not authenticated or not authorized as owner.
+  O O3: POST /pet-types does not return 400 if the Ninja API cannot find the pet with the given type (returns 400 but no message).
+  O O4: POST /pet-types/{id}/pets does not return 404 if the pet-type id does not exist.
+  O O5: POST /pet-types/{id}/pets does not return 401 or 403 if the user is not authenticated or not authorized as owner.
+  O O6: GET /pet-types/{id}/pets supports query strings 'birthdateGT' and 'birthdateLT' to filter pets by birthdate, but the code does not implement filtering by these query parameters.
+  O O7: GET /pet-types/{id}/pets/{name} returns 404 if pet not found, which is implemented correctly.
+  O O8: DELETE /pet-types/{id}/pets/{name} does not return 403 if the user is authenticated but not authorized as owner.
+  O O9: PUT /pet-types/{id}/pets/{name} does not return 403 if the user is authenticated but not authorized as owner.
+  O O10: PUT /pet-types/{id}/pets/{name} does not validate that the 'birthdate' field, if provided, is in the correct DD-MM-YYYY format.
+  O O11: GET /pictures/{picture-name} does not return 400 if the picture-name contains invalid characters or is empty.
+  O O12: GET /pictures/{picture-name} returns 404 if the picture file does not exist, which is implemented.
+  O O13: POST /pet-types/{id}/pets does not check for duplicate pet names case-sensitively.
+  O O14: POST /pet-types/{id}/pets does not return 400 if the picture-url is not reachable or does not contain a .jpg or .png image.
+  O O15: POST /pet-types does not return 401 if the user is not authenticated as owner.
+  O O16: POST /pet-types does not return 403 if the user is authenticated but not authorized as owner.
+  O O17: POST /pet-types does not return 415 if Content-Type is not application/json.
+  O O18: POST /pet-types/{id}/pets does not return 415 if Content-Type is not application/json.
+  O O19: PUT /pet-types/{id}/pets/{name} does not return 415 if Content-Type is not application/json.
+  O O20: GET /pet-types supports query string 'hasAttribute' to filter pet-types by attribute, which is implemented.

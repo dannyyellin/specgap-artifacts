@@ -1,0 +1,54 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R8",
+        "label": "MATCH",
+        "reasoning": "Both state that GET /profiles should not be restricted to the Owner only."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns Owner access to GET /profiles/{id}, which is not described by any reference requirement."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns Owner access to DELETE /profiles/{id}, which is not described by any reference requirement."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns Owner access to PUT /profiles/{id}, which is not described by any reference requirement."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "Both describe that protein should be excluded from the profileDishes calculation/filtering."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about cross-service retrieval of profile data, which does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about disallowed packages, which is unrelated to the listed reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1316,
+    "prompt_tokens": 928,
+    "completion_tokens": 388
+  }
+}

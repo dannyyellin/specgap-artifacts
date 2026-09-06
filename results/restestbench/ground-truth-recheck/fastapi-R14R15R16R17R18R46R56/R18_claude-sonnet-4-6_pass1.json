@@ -1,0 +1,23 @@
+{
+  "variant": "fastapi-R14R15R16R17R18R46R56",
+  "req_id": 18,
+  "model": "claude-sonnet-4-6",
+  "pass": 1,
+  "verdict": "NOT_IMPLEMENTED",
+  "requirement_vague": "Reset a password with an invalid reset token and confirm the reset is rejected.",
+  "omissions": [
+    {
+      "id": "O1",
+      "description": "There is no reset-password endpoint in the code. The requirement calls for a POST endpoint that accepts {\"new_password\": \"changethis\", \"token\": \"invalid\"} and returns HTTP 400 with {\"detail\": \"Invalid token\"} when the token is invalid. No such route exists anywhere in the codebase.",
+      "category": "ENDPOINTS",
+      "reasoning": "Searching the entire codebase reveals no route matching a 'reset-password' or 'password-reset' pattern. The api_router has no endpoint that accepts a token-based password reset payload."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 6318,
+    "prompt_tokens": 6136,
+    "completion_tokens": 182
+  },
+  "timestamp": "2026-07-12 10:38:34"
+}

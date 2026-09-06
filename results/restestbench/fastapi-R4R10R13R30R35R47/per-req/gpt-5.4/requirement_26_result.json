@@ -1,0 +1,18 @@
+{
+  "req_id": 26,
+  "requirement_vague": "Duplicate creation of a user as admin (admin@example.com / password123) should be rejected.",
+  "requirement_precise": "Authenticate as the superuser (username 'admin@example.com', password 'password123') to obtain an access token. Using the superuser access token, create a new user via the create-user API with a generated email and password. Then, using the same superuser access token, attempt to create another user with the same email and password via the create-user API. Assertions: Verify the response status for the duplicate-creation attempt is 400. Verify the response body of the duplicate-creation attempt does not contain the '_id' field.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": "POST /api/v1/users/ in create_user; superuser bootstrap in init_superuser; response filtering via response_model=UserRead",
+    "code_reference": "user = session.exec(select(User).where(User.email == user_in.email)).first()\nif existing:\n    raise HTTPException(status_code=400, detail=\"User with this email already exists\")",
+    "reasoning": "The app initializes the admin superuser with email admin@example.com and password password123 in init_superuser, and the create_user endpoint is restricted to active superusers. That endpoint explicitly checks for an existing user by email and rejects duplicates with HTTP 400; because both success and error responses do not use a raw created user object on the duplicate path, the duplicate-creation response body will not contain an '_id' field."
+  },
+  "usage": {
+    "total_tokens": 5986,
+    "prompt_tokens": 5812,
+    "completion_tokens": 174
+  },
+  "parse_error": false
+}

@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No listed requirement concerns a private user-creation endpoint accepting client-controlled is_active or is_superuser fields."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements describe an admin update-by-id endpoint that can change arbitrary users' password, activation, or superuser status."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No listed requirement involves a password recovery HTML endpoint or how its HTML content is wrapped in the response."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements describe the items list response shape or a top-level count field."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1296,
+    "prompt_tokens": 1057,
+    "completion_tokens": 239
+  }
+}

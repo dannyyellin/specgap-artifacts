@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement addresses the status code contract for POST /users/register."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O2 addresses the missing validation error message for empty title, which is part of R2, but does not cover the full R2 scenario including the 400 status code requirement."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O3 addresses the 400 Bad Request status code requirement from R2 but notes the actual behavior returns 422, partially capturing the requirement without addressing the validation error message."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O4 directly describes the same behavior as R10: PUT /todos/{id} should return 400 Bad Request when the body id differs from the path id, but the code does not implement this check."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1559,
+    "prompt_tokens": 1234,
+    "completion_tokens": 325
+  }
+}

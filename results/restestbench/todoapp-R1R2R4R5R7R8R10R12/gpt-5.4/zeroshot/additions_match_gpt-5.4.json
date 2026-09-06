@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Returning id and email from POST /users/register is not required by any listed spec requirement, which only uses registration as setup."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Allowing an optional isComplete field on todo creation is not described by any listed requirement."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A specific JSON response body for successful DELETE /todos/{id} is not required by any listed spec requirement."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rejecting duplicate registration emails is not covered by any of the listed requirements."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Specific JWT claims and token expiration are not specified in any listed requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1382,
+    "prompt_tokens": 1100,
+    "completion_tokens": 282
+  }
+}

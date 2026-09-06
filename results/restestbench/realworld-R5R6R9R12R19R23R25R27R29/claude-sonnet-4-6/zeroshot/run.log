@@ -1,0 +1,22 @@
+Timestamp: 2026-06-02 09:10:56
+Detector:  claude-sonnet-4-6
+Service:   nestjs-realworld  Round: 1  Removals: [5, 6, 9, 12, 19, 23, 25, 27, 29]
+Method:    zeroshot
+
+Tokens: prompt=11023, completion=1508, total=12531
+Additions: 4
+Omissions: 8
+
+  A A1: The register endpoint returns 422 with a specific error structure when username or email is already taken, but the spec requires 400 with message 'Username and email must be unique'.
+  A A2: The delete_comment endpoint returns {"status": "ok"} instead of an empty object {}.
+  A A3: The list_articles endpoint filters by 'author' query parameter but does not filter by 'tag' query parameter in the route signature — wait, actually tag filtering is missing (see omissions). The code adds secondary sort by Article.id.desc() in addition to created_at.desc().
+  A A4: The JWT token payload uses 'sub' as the key for user_id, but the spec requires the payload to contain 'id', 'username', and 'email' fields.
+
+  O O1: The register endpoint returns 422 instead of 400 when username or email is already taken, and the error message does not contain 'Username and email must be unique'.
+  O O2: The JWT token payload does not include 'id', 'username', or 'email' fields.
+  O O3: The list_articles endpoint does not support filtering by 'tag' query parameter.
+  O O4: The GET /api/articles/feed endpoint is not implemented.
+  O O5: The DELETE /api/users/{email} endpoint is not implemented.
+  O O6: The add_comment endpoint returns the full article with comments instead of just the comment object.
+  O O7: The delete_comment endpoint returns {"status": "ok"} but the spec requires status 200 with no specific body requirement — however the spec says 'Verify response status is 200' which the code satisfies. The response body is an addition (see A2).
+  O O8: The register endpoint checks email uniqueness before username uniqueness, but when either is duplicate it returns separate error messages rather than the combined 'Username and email must be unique' message required by the spec.

@@ -1,0 +1,41 @@
+{
+  "variant": "fastapi-R14R15R16R17R18R46R56",
+  "req_id": 15,
+  "model": "gpt-5.4",
+  "pass": 1,
+  "verdict": "NOT_IMPLEMENTED",
+  "requirement_vague": "Ensure requesting password recovery works and an email is actually sent to the correct recipient (verify via mailcatcher at localhost:1080).",
+  "omissions": [
+    {
+      "id": "O1",
+      "description": "Missing password recovery endpoint POST /api/v1/password-recovery/{email}.",
+      "category": "ENDPOINTS",
+      "reasoning": "The code defines routes for signup, login, user management, and items, but there is no route matching POST /api/v1/password-recovery/{email} or any password recovery endpoint at all."
+    },
+    {
+      "id": "O2",
+      "description": "No implementation returning HTTP 200 with JSON message 'Password recovery email sent' for password recovery requests.",
+      "category": "RESPONSE_FORMAT",
+      "reasoning": "Because the password recovery endpoint is absent, there is no code that produces the required success response body with message 'Password recovery email sent' and status 200."
+    },
+    {
+      "id": "O3",
+      "description": "No logic to send a password recovery email to the requested recipient.",
+      "category": "EXTERNAL_INTERACTIONS",
+      "reasoning": "The service contains no email-sending code, no SMTP/mail client integration, and no outbound interaction related to password recovery emails."
+    },
+    {
+      "id": "O4",
+      "description": "No interaction with or verification against the mailcatcher service at localhost:1080/messages.",
+      "category": "EXTERNAL_INTERACTIONS",
+      "reasoning": "There is no code that sends mail in a way that would be observable in MailCatcher, nor any code referencing localhost:1080 or retrieving/surfacing mail delivery information."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 5010,
+    "prompt_tokens": 4724,
+    "completion_tokens": 286
+  },
+  "timestamp": "2026-07-12 10:37:18"
+}

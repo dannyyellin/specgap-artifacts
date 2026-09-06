@@ -1,0 +1,54 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "It describes that POST/PUT/DELETE are not owner-restricted, which is exactly the removed owner-only restriction."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "It concerns query-string filtering behavior, but focuses on the ingredient parameter name mismatch rather than the removed specific filtering semantics called out in the reference."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "It directly describes the removed less-than-or-equal nutrient filtering semantics."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "It directly describes the removed ingredient contains filtering semantics."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The reference requirements do not mention the nutrition endpoint URL."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "It relates to API Ninjas field handling/mapping details, but focuses on numeric conversion defaults rather than specifically field name mapping removal."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The reference requirements do not mention allowed packages or dependency constraints."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1265,
+    "prompt_tokens": 871,
+    "completion_tokens": 394
+  }
+}

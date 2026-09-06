@@ -1,0 +1,21 @@
+Timestamp: 2026-06-01 20:55:53
+Detector:  gpt-4.1-mini
+App/Variant/Service: nutrition/auth-R1R2R3/authentication
+Method:    twoshot
+
+Tokens: prompt=7543, completion=933, total=8476
+Additions: 3
+Omissions: 8
+
+  A A1: Stores the password in plaintext instead of encrypting it
+  A A2: Allows registration of a user with the name 'owner' instead of 'Owner' and password 'owner' instead of 'owner#pw'
+  A A3: Uses JWT tokens with expiration and issued-at claims
+
+  O O1: Does not encrypt passwords when storing user documents
+  O O2: Does not enforce that only one user can register with the name 'Owner' and that the password for this user must be 'owner#pw'
+  O O3: Does not return JSON messages with error explanations for unsuccessful requests
+  O O4: Does not validate that the 'name' and 'password' fields are strings with non-empty trimmed values on /register and /login
+  O O5: Does not return 400 (Bad request) when username is already registered on /register
+  O O6: Does not return 401 (Unauthorized) when token is invalid or not provided on /validate
+  O O7: Does not return 201 with JSON document containing 'valid', 'privileged', and 'user_id' fields on successful /validate
+  O O8: Does not reject requests with unsupported media types with 415 status code and JSON error message

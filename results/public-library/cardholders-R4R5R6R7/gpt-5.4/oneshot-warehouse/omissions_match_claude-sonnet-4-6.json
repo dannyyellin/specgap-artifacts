@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "O1 captures the removal of 415 behavior for POST /cardholders specifically, while R5 refers to removing 415 from general error codes broadly; the behavior is the same but O1 is scoped to one endpoint."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "O2 captures the removal of 415 behavior for PUT /cardholders/{id} specifically, while R5 refers to removing 415 from general error codes broadly; same behavior but narrower scope."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 describes a filtering limitation on GET /cardholders that does not correspond to any of the reference requirements R4-R7."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O4 directly describes the removal of the fine computation formula ($0.50/day * days overdue), matching R6 exactly."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "O5 describes that fineAmount is not returned as a float, which matches R4's removal of the float type declaration for fineAmount."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1276,
+    "prompt_tokens": 858,
+    "completion_tokens": 418
+  }
+}

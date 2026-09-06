@@ -1,0 +1,24 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "A1 describes the code storing/validating a user-provided returnDate field, which directly contradicts R1's removal of the returnDate computation (loanDate + 30 days) from Borrows."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R1",
+        "label": "PARTIAL",
+        "reasoning": "A2 describes a validation on returnDate relative to loanDate, which is related to R1's removal of returnDate computation, but the specific behavior (date ordering validation) is not the same as removing the computed returnDate field."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 756,
+    "prompt_tokens": 555,
+    "completion_tokens": 201
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O1 describes the absence of validation for missing/empty title on POST /todos and the failure to return 400 with 'The Title field is required.', which is exactly what R2 specifies."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O2 describes the failure to return 400 Bad Request when the id in the PUT request body differs from the URL id, which is exactly the behavior R10 requires."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 states the code correctly returns 404 when a todo does not exist on PUT, so it does not describe a missing or incorrect behavior matching any reference requirement."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 states the code correctly returns 404 for GET /todos/{id} when the todo doesn't exist or doesn't belong to the user, indicating correct behavior rather than a defect."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 states the code correctly returns 404 for DELETE /todos/{id}, indicating correct behavior rather than a defect."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 describes correct behavior (401 on missing auth) that is not among the reference requirements listed."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O7 describes correct registration behavior not covered by any of the listed reference requirements."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O8 describes correct login/token behavior not covered by any of the listed reference requirements."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O9 is a duplicate of O1, describing the same missing validation for empty/missing title on POST /todos that R2 requires."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O10 is a duplicate of O2, describing the same missing id-mismatch validation on PUT /todos/{id} that R10 requires."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2191,
+    "prompt_tokens": 1447,
+    "completion_tokens": 744
+  }
+}

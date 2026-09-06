@@ -1,0 +1,66 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "Both concern GET /api/articles/feed for followed users, but O1 only states the endpoint is missing and does not capture the specific follow/no-follow content assertions in R6."
+      },
+      {
+        "detection_id": "O1",
+        "requirement_id": "R23",
+        "label": "PARTIAL",
+        "reasoning": "O1 overlaps with R23 because both involve the feed endpoint, but O1 only generally mentions pagination support rather than the concrete limit/offset and count behavior tested in R23."
+      },
+      {
+        "detection_id": "O1",
+        "requirement_id": "R27",
+        "label": "PARTIAL",
+        "reasoning": "O1 relates to the same feed endpoint as R27, but it does not specifically describe the empty-feed behavior when the user follows nobody."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R12",
+        "label": "MATCH",
+        "reasoning": "Both describe filtering articles in GET /api/articles using the tag query parameter."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements test authorization preventing non-owners from updating or deleting articles."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed reference requirements concern self-follow attempts or their error messages."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements test required-field validation during article creation."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements mention validating article slug uniqueness."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "Both concern duplicate username/email registration returning a 400 response with the specific message 'Username and email must be unique'."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2273,
+    "prompt_tokens": 1738,
+    "completion_tokens": 535
+  }
+}

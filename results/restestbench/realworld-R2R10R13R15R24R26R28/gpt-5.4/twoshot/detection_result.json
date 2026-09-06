@@ -1,0 +1,91 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "Accepts 'Bearer <jwt>' Authorization headers in addition to the specified 'Token <jwt>' format",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states authentication uses JWT tokens passed via the Authorization header in the form 'Token <jwt>'. The code's parse_token_header also accepts headers starting with 'Bearer ', which is not positively required by the specification."
+      },
+      {
+        "id": "A2",
+        "description": "Includes extra article response fields 'createdAt', 'updatedAt', 'favorited', 'favoritesCount', and nested author fields beyond what the specification verifies",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification checks article fields such as title, description, tagList, slug, created, updated, and author username/following in some scenarios, but it does not require the additional fields 'createdAt', 'updatedAt', 'favorited', or 'favoritesCount'. The code always returns them."
+      },
+      {
+        "id": "A3",
+        "description": "Includes an 'id' field in user responses",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification requires returned user objects to contain username, email, token, and in one test that the JWT payload id matches the user's id, but it does not require the API response body itself to include a user 'id' field. The code includes 'id' in user_dict responses."
+      },
+      {
+        "id": "A4",
+        "description": "Implements GET /api/tags endpoint",
+        "category": "ENDPOINTS",
+        "reasoning": "The provided specification does not mention any /api/tags endpoint. The code defines GET /api/tags returning all tag names."
+      },
+      {
+        "id": "A5",
+        "description": "Implements GET / root endpoint",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification defines the API under /api/ and does not require a root '/' endpoint. The code adds GET / returning {'status': 'ok'}."
+      },
+      {
+        "id": "A6",
+        "description": "Allows article authors to delete comments on their articles even when they are not the comment author",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification only requires that deleting a comment via DELETE /api/articles/{slug}/comments/{id} succeeds in the tested owner-created-comment scenario. It does not positively require the broader permission rule that article owners may delete other users' comments. The code implements that extra authorization behavior."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "PUT /api/articles/{slug} forbids non-owners from updating articles, but the specification explicitly requires that any authenticated user can update any article",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification includes a scenario demonstrating the implementation vulnerability: user2 (not the owner) updates user1's article and the update must succeed, with the subsequent GET showing the changed title. The code checks 'if article.author_id != current_user.id: raise HTTPException(status_code=403, detail=\"Forbidden\")', so it does not implement the required behavior."
+      },
+      {
+        "id": "O2",
+        "description": "DELETE /api/articles/{slug} forbids non-owners from deleting articles, but the specification explicitly requires that any authenticated user can delete any article",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification explicitly tests that user2 (not the owner) can delete user1's article and that DELETE returns 200, after which GET returns 200 with an empty object. The code raises 403 when the current user is not the article author, so this required behavior is missing."
+      },
+      {
+        "id": "O3",
+        "description": "POST /api/profiles/{username}/follow does not return status 201 on successful follow",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification states that following a user via POST /api/profiles/{username}/follow must return response status 201. The code defines the route without status_code=201, so FastAPI returns 200 by default."
+      },
+      {
+        "id": "O4",
+        "description": "POST /api/profiles/{username}/follow does not reject self-follow attempts with status 400",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification requires that attempting to follow oneself returns status 400 with a message containing 'cannot be equal'. The code simply skips creating a FollowLink when current_user.id == target.id and returns the profile successfully instead of rejecting the request."
+      },
+      {
+        "id": "O5",
+        "description": "DELETE /api/profiles/{username}/follow does not reject self-unfollow attempts with status 400",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification requires that a user cannot unfollow themselves and that this should return 400. The code looks up the target and, even when the target is the current user, returns the profile response without any 400 error."
+      },
+      {
+        "id": "O6",
+        "description": "Self-follow/self-unfollow error responses do not include a message containing 'cannot be equal'",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly verifies that the self-follow failure message contains 'cannot be equal'. Since the code does not reject self-follow or self-unfollow at all, it also fails to produce the required error message content."
+      },
+      {
+        "id": "O7",
+        "description": "GET /api/articles does not support filtering by 'favorited' query parameter",
+        "category": "ENDPOINTS",
+        "reasoning": "The RealWorld article listing API behavior in the specification includes article management features and query-based filtering; however, the code only supports 'tag', 'author', 'limit', and 'offset'. There is no support for a 'favorited' filter parameter."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 12318,
+    "prompt_tokens": 11192,
+    "completion_tokens": 1126
+  }
+}

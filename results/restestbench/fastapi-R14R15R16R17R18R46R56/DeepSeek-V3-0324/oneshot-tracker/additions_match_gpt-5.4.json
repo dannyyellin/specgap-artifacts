@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No listed requirement mentions or depends on a full_name field for users."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The listed requirements do not concern an item description field or any behavior tied to it."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements describe a PATCH endpoint for updating user information."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1219,
+    "prompt_tokens": 1056,
+    "completion_tokens": 163
+  }
+}

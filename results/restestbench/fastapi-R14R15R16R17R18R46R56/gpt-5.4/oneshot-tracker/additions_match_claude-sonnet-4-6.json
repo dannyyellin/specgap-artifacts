@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements (R14-R18, R46, R56) address the ability to set is_superuser during user creation."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements address the ability to set is_active during user creation via the private endpoint."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements (R14-R18, R46, R56) address item-list filtering behavior for normal users."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements address runtime access-control behavior for inactive users returning 400 'Inactive user'."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1593,
+    "prompt_tokens": 1305,
+    "completion_tokens": 288
+  }
+}

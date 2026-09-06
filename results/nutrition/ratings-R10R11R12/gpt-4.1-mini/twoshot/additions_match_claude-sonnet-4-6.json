@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R12",
+        "label": "PARTIAL",
+        "reasoning": "R12 removes the requirement that user_id comes from token validation, and A1 describes how the code handles tokens via Authorization/Bearer or 'token' header, which is related to token handling but focuses on format rather than whether user_id is derived from it."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A2 describes an implementation detail about ID generation using a MongoDB counter collection, which does not correspond to any of the three spec requirements about rating range, per-user constraint, or user_id source."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "R10 removes the integer-between-1-and-5 constraint on ratings, and A3 shows the code treats ratings as floats rounded to two decimals rather than integers, which partially reflects the removal of the integer constraint but does not address the range constraint removal."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 916,
+    "prompt_tokens": 612,
+    "completion_tokens": 304
+  }
+}

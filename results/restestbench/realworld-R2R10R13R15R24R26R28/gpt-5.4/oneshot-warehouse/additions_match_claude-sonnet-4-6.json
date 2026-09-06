@@ -1,0 +1,66 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement mentions or requires support for 'Bearer' token format in the Authorization header."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement specifies that user response bodies must include an 'id' field."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement mandates both camelCase and alias timestamp fields simultaneously in article responses."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed spec requirements mention favoriting behavior or require 'favorited'/'favoritesCount' fields in article responses."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement defines or requires a GET /api/tags endpoint."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement defines or requires a root GET / endpoint."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement addresses article authors having permission to delete comments they did not author."
+      },
+      {
+        "detection_id": "A8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement explicitly requires PUT /api/user to support updating email, username, or password."
+      },
+      {
+        "detection_id": "A9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement defines a DELETE /api/users/{email} endpoint as part of the required API."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2696,
+    "prompt_tokens": 2141,
+    "completion_tokens": 555
+  }
+}

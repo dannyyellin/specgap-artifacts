@@ -1,0 +1,23 @@
+{
+  "req_id": 2,
+  "requirement_vague": "Verify following a user updates the profile following status correctly and prevents self-following",
+  "requirement_precise": "Create two users: user1 (username: 'follower1', email: 'follower1@test.com', password: 'pass123') and user2 (username: 'followee1', email: 'followee1@test.com', password: 'pass123'). Using user1's token, follow user2 by POST to /api/profiles/followee1/follow. Verify the response status is 201. Verify the response body profile has 'following' equal to true and 'username' equal to 'followee1'. Then GET the profile /api/profiles/followee1 with user1's token and verify 'following' is true. Next, using user1's token, attempt to follow themselves by POST to /api/profiles/follower1/follow. Verify this returns status 400 with message containing 'cannot be equal'.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": [
+      "POST /api/profiles/{username}/follow -> follow_profile",
+      "GET /api/profiles/{username} -> get_profile",
+      "profile_response",
+      "is_following"
+    ],
+    "code_reference": "@app.post(\"/api/profiles/{username}/follow\", status_code=201)\ndef follow_profile(username: str, session: Session = Depends(get_session), viewer: User = Depends(get_current_user)):\n    ...\n    if viewer.id == target.id:\n        raise HTTPException(status_code=400, detail={\"errors\": {\"body\": [\"followerId and followingId cannot be equal\"]}})\n...\ndef profile_response(session: Session, target: User, viewer: Optional[User]):\n    return {\"profile\": {\"username\": target.username, ... , \"following\": is_following(session, viewer, target)}}",
+    "reasoning": "The follow endpoint exists at POST /api/profiles/{username}/follow and returns 201 on success. It prevents self-following with a 400 error whose message contains 'cannot be equal', and both the follow response and subsequent GET /api/profiles/{username} compute 'following' via the stored FollowLink so the followed user's profile shows username 'followee1' and following=true for the authenticated follower."
+  },
+  "usage": {
+    "total_tokens": 5539,
+    "prompt_tokens": 5265,
+    "completion_tokens": 274
+  },
+  "parse_error": false
+}

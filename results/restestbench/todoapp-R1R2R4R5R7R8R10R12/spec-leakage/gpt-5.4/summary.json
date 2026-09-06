@@ -1,0 +1,137 @@
+{
+  "variant": "todoapp-R1R2R4R5R7R8R10R12",
+  "model": "gpt-5.4",
+  "timestamp": "2026-06-28 19:15:47",
+  "n_removed": 8,
+  "n_spec_leaked": 1,
+  "n_not_leaked": 7,
+  "n_uncertain": 0,
+  "n_parse_errors": 0,
+  "spec_leaked_ids": [
+    4
+  ],
+  "not_leaked_ids": [
+    1,
+    2,
+    5,
+    7,
+    8,
+    10,
+    12
+  ],
+  "uncertain_ids": [],
+  "per_requirement": [
+    {
+      "req_id": 1,
+      "requirement_vague": "Getting all todos returns only the current user's todos",
+      "requirement_precise": "Register two users (userA and userB) and login with each. UserA creates a todo with title 'UserA Todo'. UserB creates a todo with title 'UserB Todo'. When userA calls GET /todos, verify the response contains exactly one todo with title 'UserA Todo'. UserB's todo should not be visible to userA.",
+      "verdict": "NOT_LEAKED",
+      "spec_evidence": "\"Each user manages their own set of todos via CRUD endpoints.\"",
+      "reasoning": "The reduced spec states ownership in a general way, but it never explicitly says that GET /todos filters results to only the authenticated user's todos or that one user's todos must be hidden from another user. Concluding that behavior would require additional assumptions beyond the concrete requirements listed.",
+      "parse_error": false,
+      "usage": {
+        "total_tokens": 1012,
+        "prompt_tokens": 924,
+        "completion_tokens": 88
+      }
+    },
+    {
+      "req_id": 2,
+      "requirement_vague": "Creating a todo without a title returns a validation error",
+      "requirement_precise": "Register a user and login to get an access token. Call POST /todos with an empty or missing title field. Verify that the response status code is 400 Bad Request and the response body contains a validation error indicating 'The Title field is required.'",
+      "verdict": "NOT_LEAKED",
+      "spec_evidence": null,
+      "reasoning": "The reduced specification shows successful todo creation with a title and various retrieval/update/delete/authentication behaviors, but it never states that title is required or that missing fields cause validation errors. Concluding a 400 error for an empty or missing title would require outside assumptions not expressed in the text.",
+      "parse_error": false,
+      "usage": {
+        "total_tokens": 982,
+        "prompt_tokens": 902,
+        "completion_tokens": 80
+      }
+    },
+    {
+      "req_id": 4,
+      "requirement_vague": "Getting a non-existent todo returns 404 Not Found",
+      "requirement_precise": "Register a user and login to get an access token. Call GET /todos/99999 (an ID that does not exist). Verify the response status code is 404 Not Found.",
+      "verdict": "SPEC_LEAKED",
+      "spec_evidence": "- \"Then call GET /todos/{id} and verify the response is 404 Not Found (todo no longer exists).\"\n- \"Call PUT /todos/99999 with a valid todo body (id=99999, title='Test', isComplete=false). Verify the response status is 404 Not Found.\"",
+      "reasoning": "The spec explicitly states that GET /todos/{id} returns 404 when the todo no longer exists after deletion, which directly implies that requesting a non-existent todo by ID yields 404. The separate 404 behavior for PUT on ID 99999 further reinforces that missing todo IDs are treated as not found.",
+      "parse_error": false,
+      "usage": {
+        "total_tokens": 1046,
+        "prompt_tokens": 889,
+        "completion_tokens": 157
+      }
+    },
+    {
+      "req_id": 5,
+      "requirement_vague": "Users cannot access another user's todo",
+      "requirement_precise": "Register two users (userA and userB) and login with each. UserA creates a todo and notes the returned ID. UserB calls GET /todos/{id} using userA's todo ID. Verify the response status is 404 Not Found (because userB doesn't own it and is not admin).",
+      "verdict": "NOT_LEAKED",
+      "spec_evidence": "\"Each user manages their own set of todos via CRUD endpoints.\"",
+      "reasoning": "The spec says users manage their own todos, but it never explicitly states what must happen if one user requests another user's todo or that cross-user access is forbidden with a 404 response. Concluding the removed requirement would require external assumptions about authorization behavior beyond the text provided.",
+      "parse_error": false,
+      "usage": {
+        "total_tokens": 1000,
+        "prompt_tokens": 911,
+        "completion_tokens": 89
+      }
+    },
+    {
+      "req_id": 7,
+      "requirement_vague": "Deleting a non-existent todo returns a failing response",
+      "requirement_precise": "Register a user and login to get an access token. Call DELETE /todos/99999 (an ID that does not exist). Verify the response status code is 404 Not Found.",
+      "verdict": "NOT_LEAKED",
+      "spec_evidence": "- Register a user and login. Create a todo with title 'Todo to Delete' and note the ID. Call DELETE /todos/{id}. Verify the response status is 200 OK. Then call GET /todos/{id} and verify the response is 404 Not Found (todo no longer exists).\n- Register a user and login. Call PUT /todos/99999 with a valid todo body (id=99999, title='Test', isComplete=false). Verify the response status is 404 Not Found.",
+      "reasoning": "The spec states that GET on a deleted todo returns 404 and that PUT on a non-existent todo returns 404, but it never states what DELETE should return when the target todo does not exist. Concluding that DELETE /todos/99999 must also return 404 would require extrapolation beyond the explicit text.",
+      "parse_error": false,
+      "usage": {
+        "total_tokens": 1086,
+        "prompt_tokens": 889,
+        "completion_tokens": 197
+      }
+    },
+    {
+      "req_id": 8,
+      "requirement_vague": "Users cannot delete another user's todo",
+      "requirement_precise": "Register two users (userA and userB) and login with each. UserA creates a todo and notes the returned ID. UserB calls DELETE /todos/{id} using userA's todo ID. Verify the response status is 404 Not Found. Then userA verifies their todo still exists by calling GET /todos/{id} and confirming 200 OK.",
+      "verdict": "NOT_LEAKED",
+      "spec_evidence": "- \"Each user manages their own set of todos via CRUD endpoints.\"\n- \"Call GET /todos without providing any Authorization header or token. Verify the response status is 401 Unauthorized.\"\n- \"Register a user and login. Create a todo with title 'Todo to Delete' and note the ID. Call DELETE /todos/{id}. Verify the response status is 200 OK. Then call GET /todos/{id} and verify the response is 404 Not Found (todo no longer exists).\"",
+      "reasoning": "The spec says users have their own todos and that authentication is required, but it never explicitly states what must happen if one authenticated user tries to access or delete another user's todo. Concluding cross-user deletion must return 404 and leave the todo intact would require outside knowledge about per-user authorization behavior.",
+      "parse_error": false,
+      "usage": {
+        "total_tokens": 1107,
+        "prompt_tokens": 922,
+        "completion_tokens": 185
+      }
+    },
+    {
+      "req_id": 10,
+      "requirement_vague": "Updating a todo with mismatched ID returns bad request",
+      "requirement_precise": "Register a user and login. Create a todo (returns ID=X). Call PUT /todos/X with a request body where id=Y (different from X). Verify the response status is 400 Bad Request.",
+      "verdict": "NOT_LEAKED",
+      "spec_evidence": "- Register a user and login. Create a todo with title 'Original Todo'. The todo should have isComplete=false. Call PUT /todos/{id} with isComplete=true and title 'Updated Todo'. Verify response is 200 OK.\n- Register a user and login. Call PUT /todos/99999 with a valid todo body (id=99999, title='Test', isComplete=false). Verify the response status is 404 Not Found.",
+      "reasoning": "The spec shows successful updates when using the same todo identifier and a 404 when the targeted todo does not exist, but it never states any rule about the path ID needing to match a body ID or what should happen if they differ. Concluding a 400 Bad Request for mismatched IDs would require outside assumptions not explicitly given in the text.",
+      "parse_error": false,
+      "usage": {
+        "total_tokens": 1076,
+        "prompt_tokens": 894,
+        "completion_tokens": 182
+      }
+    },
+    {
+      "req_id": 12,
+      "requirement_vague": "Users cannot update another user's todo",
+      "requirement_precise": "Register two users (userA and userB) and login with each. UserA creates a todo with title 'UserA Todo' and notes the ID. UserB calls PUT /todos/{id} with userA's todo ID, attempting to change the title to 'Hacked'. Verify the response status is 404 Not Found. Then userA verifies the title is still 'UserA Todo' by calling GET /todos/{id}.",
+      "verdict": "NOT_LEAKED",
+      "spec_evidence": "- \"Each user manages their own set of todos via CRUD endpoints.\"\n- \"Call GET /todos without providing any Authorization header or token. Verify the response status is 401 Unauthorized.\"",
+      "reasoning": "The reduced spec states that users have their own todos and that authentication is required, but it never explicitly says that one authenticated user cannot access or update another authenticated user's todo. Concluding that cross-user updates must return 404 would require outside assumptions about ownership enforcement that the spec does not directly state.",
+      "parse_error": false,
+      "usage": {
+        "total_tokens": 1058,
+        "prompt_tokens": 938,
+        "completion_tokens": 120
+      }
+    }
+  ]
+}

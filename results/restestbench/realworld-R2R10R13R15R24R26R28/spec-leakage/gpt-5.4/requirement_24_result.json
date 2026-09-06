@@ -1,0 +1,14 @@
+{
+  "req_id": 24,
+  "requirement_vague": "Verify articles are returned in descending order by created date",
+  "requirement_precise": "Create user1 (username: 'orderuser1', email: 'orderuser1@test.com', password: 'pass123'). User1 creates article1 'First Article', wait at least 1 second, then creates article2 'Second Article', wait at least 1 second, then creates article3 'Third Article'. GET /api/articles. Verify the articles array is ordered by created timestamp in descending order (newest first). Articles with identical timestamps (to the second) may have undefined relative ordering due to database timestamp precision being in seconds. This tests the ORDER BY article.created DESC clause.",
+  "verdict": "NOT_LEAKED",
+  "spec_evidence": "- \"Create user1 (username: 'feedpageuser1', email: 'feedpageuser1@test.com', password: 'pass123'). Create user2 (username: 'feedpageauthor1', email: 'feedpageauthor1@test.com', password: 'pass123'). User1 follows user2. User2 creates 5 articles: 'Article 1', 'Article 2', 'Article 3', 'Article 4', 'Article 5'. User1 GETs /api/articles/feed?limit=2. Verify articlesCount is 5 (total) but only 2 articles returned. User1 GETs /api/articles/feed?limit=2&offset=2. Verify 2 different articles returned. This tests feed pagination.\"\n- \"Create a user (username: 'timestampuser1', email: 'timestampuser1@test.com', password: 'pass123'). Create an article with title 'Timestamp Test Article'. Extract slug, created, and updated timestamps from response. Wait briefly, then PUT /api/articles/{slug} with updated title 'Updated Timestamp Article'. GET /api/articles/{slug}. Verify the 'created' timestamp is unchanged from original. Verify the 'updated' timestamp is different (newer) than the original.\"",
+  "reasoning": "The spec mentions timestamps existing and pagination over feed results, but nowhere explicitly states that article listings must be sorted by created date, either for GET /api/articles or by analogy elsewhere. Concluding descending creation-time order would require outside assumptions about typical API behavior rather than direct entailment from the text.",
+  "parse_error": false,
+  "usage": {
+    "total_tokens": 3662,
+    "prompt_tokens": 3323,
+    "completion_tokens": 339
+  }
+}

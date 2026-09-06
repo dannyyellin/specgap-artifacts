@@ -1,0 +1,126 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O1 discusses extra field rejection in POST /pet-types payload, which does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 discusses the response body format for 400 errors from the Ninja API, which does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O3 directly describes the removal of the 'cannot delete pet-type if it has pets' constraint, matching R5 exactly."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "O4 directly describes the removal of birthdate query filtering (birthdateGT/birthdateLT), matching R7 exactly."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 discusses duplicate pet name validation behavior, which does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 discusses 404 handling for non-existent pet-type, which does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O7 discusses 405 response for PUT /pet-types/{id}, which does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O8 discusses birthdate format validation, which does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O9 discusses picture-url validation, which does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O10 discusses path separator validation in GET /pictures/{picture-name}, which does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O11 discusses GET /pet-types returning empty array for malformed queries, which does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O12 discusses 403 authorization handling for DELETE /pet-types/{id}/pets/{name}, which does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O13",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O13 discusses partial field updates in PUT /pet-types/{id}/pets/{name}, which does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O14",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O14 discusses field validation in PUT /pet-types/{id}/pets/{name}, which does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O15",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O15 discusses duplicate name validation in PUT /pet-types/{id}/pets/{name}, which does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O16",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O16 discusses 401/403 authentication/authorization for POST /pet-types, which does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O17",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O17 discusses 401/403 authentication/authorization for POST /pet-types/{id}/pets, which does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O18",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O18 discusses 401/403 authentication/authorization for DELETE /pet-types/{id}/pets/{name}, which does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O19",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O19 discusses 404 handling for GET /pet-types/{id}/pets/{name}, which does not correspond to any reference requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 3041,
+    "prompt_tokens": 1725,
+    "completion_tokens": 1316
+  }
+}

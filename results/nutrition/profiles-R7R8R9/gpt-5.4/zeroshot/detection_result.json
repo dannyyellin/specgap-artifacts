@@ -1,0 +1,73 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "POST /profiles rejects creation when a profile for the authenticated user already exists.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification says POST /profiles creates a profile using the authenticated user's user_id, but it does not state that each user may have at most one profile or that duplicate profile creation must be rejected. The code adds this uniqueness rule by checking for an existing profile and returning 400."
+      },
+      {
+        "id": "A2",
+        "description": "The service accepts authentication tokens from multiple locations: Authorization: Bearer header, token header, or JSON body.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification only requires that requests supply a valid token and that the service validate it. It does not require support for these multiple token input locations. Supporting all of them is extra behavior."
+      },
+      {
+        "id": "A3",
+        "description": "GET /profiles supports filtering by user_id in addition to arbitrary field=value constraints.",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification says GET /profiles may specify a query string of the form field=value and return matching profiles, but the profile resource definition does not include id in the path-independent query semantics explicitly. The code specifically implements user_id filtering as a recognized query parameter. This is extra explicit behavior not positively required."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "GET /profiles is not restricted to the restaurant Owner.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification explicitly states: 'The GET /profiles request is only allowed by the restaurant Owner.' The code validates the token but never checks auth_data['privileged'] for GET /profiles, so any authenticated user can list profiles."
+      },
+      {
+        "id": "O2",
+        "description": "GET /profiles/{id}, PUT /profiles/{id}, and DELETE /profiles/{id} are implemented on /profiles/{id}, but the specification requires access-control rules for /profile/{id}.",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification's implementation section explicitly refers to GET, DELETE and PUT on /profile/{id}. The code only defines /profiles/<int:profile_id>. Therefore the specified singular route is missing."
+      },
+      {
+        "id": "O3",
+        "description": "GET /profileDishes incorrectly includes protein in the diet comparison sent to the dishes service.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification says a dish satisfies the diet if each field except protein is less than or equal to the profile values, and explicitly says protein is not considered. The code builds query parameters from all NUTRITION_FIELDS, including protein, making the filtering stricter than required."
+      },
+      {
+        "id": "O4",
+        "description": "POST /profiles does not ensure that the request body contains only the allowed subset of nutritional fields; unknown fields are silently ignored.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification says POST provides a JSON document containing a subset of the listed nutritional fields. A valid payload is therefore constrained to those fields. The code accepts any JSON object and ignores unrecognized keys instead of rejecting malformed input."
+      },
+      {
+        "id": "O5",
+        "description": "PUT /profiles/{id} does not ensure that the request body contains only the allowed subset of nutritional fields; unknown fields are silently ignored.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification says PUT provides a valid JSON payload as in a POST request. The code accepts extra keys and ignores them rather than treating them as invalid input."
+      },
+      {
+        "id": "O6",
+        "description": "Numeric field validation is incomplete because invalid numeric values can be converted to 0.00 instead of causing a 400 error.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The nutritional fields are specified as floats. In parse_profile_payload, conversion uses round2(), and round2() returns 0.00 on conversion failure. As a result, non-numeric values for nutritional fields are accepted and stored as 0.00 instead of being rejected as bad requests."
+      },
+      {
+        "id": "O7",
+        "description": "GET /profileDishes does not invoke the dishes microservice according to the specified diet rule because it forwards all nutritional fields rather than only the applicable ones.",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The profile service is required to return dishes satisfying the user's diet, where protein is excluded from the calculation. The code calls the dishes service with protein included in the query parameters, so the outbound request does not match the specified cross-service interaction."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 6629,
+    "prompt_tokens": 5732,
+    "completion_tokens": 897
+  }
+}

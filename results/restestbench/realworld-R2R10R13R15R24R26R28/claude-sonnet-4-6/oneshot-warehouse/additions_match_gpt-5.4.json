@@ -1,0 +1,54 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R28",
+        "label": "PARTIAL",
+        "reasoning": "It refers to the same non-owner article update scenario in R28, but the code behavior contradicts the required successful update by returning 403."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R28",
+        "label": "PARTIAL",
+        "reasoning": "It refers to the same non-owner article delete scenario in R28, but the code behavior contradicts the required successful deletion by returning 403."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements check article timestamp field names or the presence of extra created/updated fields."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements concern the exact fields returned in the user response."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No listed requirement mentions a tags endpoint."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements cover comment deletion permissions."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements test or specify accepted authorization header prefixes."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2117,
+    "prompt_tokens": 1729,
+    "completion_tokens": 388
+  }
+}

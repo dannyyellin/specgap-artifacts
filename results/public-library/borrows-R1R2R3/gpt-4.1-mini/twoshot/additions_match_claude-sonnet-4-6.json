@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Filtering borrows by query parameters does not correspond to any of the three spec requirements about removed features."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Validating that returnDate is not earlier than loanDate is unrelated to the removed return date computation, overdue constraint, or log notification requirements."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rejecting unknown fields in the payload does not correspond to any of the three removed spec requirements."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Checking existence of cardholder and book resources does not correspond to any of the three removed spec requirements about return date computation, overdue constraint, or log notification."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1029,
+    "prompt_tokens": 738,
+    "completion_tokens": 291
+  }
+}

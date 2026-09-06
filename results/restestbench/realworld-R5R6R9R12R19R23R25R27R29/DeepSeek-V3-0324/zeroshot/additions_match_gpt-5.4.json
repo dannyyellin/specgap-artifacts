@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Extra article response fields about favoriting do not correspond to any listed requirement, which focus on deletion, feeds, uniqueness, tags, timestamps, JWT payload, and FK behavior."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Allowing email and password updates via PUT /api/user is not described by any of the provided requirements."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Password hashing with bcrypt is an implementation detail not covered by any of the listed requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1800,
+    "prompt_tokens": 1609,
+    "completion_tokens": 191
+  }
+}

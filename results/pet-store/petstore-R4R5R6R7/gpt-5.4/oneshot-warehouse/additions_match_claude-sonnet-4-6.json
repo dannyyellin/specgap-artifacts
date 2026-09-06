@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Embedding pets inside pet-type documents is a persistence model detail unrelated to any of the four spec requirements listed."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Path-traversal validation for picture names does not correspond to any of the four spec requirements about temperament/group_behavior, delete constraints, lifespan, or birthdate filtering."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "R4 removed temperament/group_behavior as the source for attributes extraction, and A3 describes using additional fields (slogan, group, color, etc.) instead of temperament/group_behavior to populate attributes, which is the complementary behavior to that removal."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 942,
+    "prompt_tokens": 678,
+    "completion_tokens": 264
+  }
+}

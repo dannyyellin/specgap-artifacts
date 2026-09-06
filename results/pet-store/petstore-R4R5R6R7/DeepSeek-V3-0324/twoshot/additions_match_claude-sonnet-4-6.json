@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Storing pets array within pet-type documents is unrelated to the removed constraints listed in R4-R7; R5 concerns deletion constraints, not storage structure."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "R4 removed temperament/group_behavior from attributes extraction, and A2 describes using different fields instead, but A2 focuses on what fields are used rather than confirming the removal of temperament/group_behavior."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "R6 removed lifespan range handling rules, and A3 describes an incorrect default lifespan value (0 instead of null), which relates to lifespan handling but is a different aspect than the removed range/minimum extraction logic."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 903,
+    "prompt_tokens": 622,
+    "completion_tokens": 281
+  }
+}

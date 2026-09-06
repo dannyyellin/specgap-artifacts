@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "A1 relates to query string filtering behavior, and R6 removed specific query string filtering semantics, but A1 describes additional unsupported filter fields (id, name, ingredients) rather than the specific lte/contains semantics removed in R6."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements address token validation or Authorization header format handling."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements mention CORS behavior or cross-origin resource sharing."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 849,
+    "prompt_tokens": 619,
+    "completion_tokens": 230
+  }
+}

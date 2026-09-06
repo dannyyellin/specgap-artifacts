@@ -1,0 +1,23 @@
+{
+  "variant": "todoapp-R1R2R4R5R7R8R10R12",
+  "req_id": 10,
+  "model": "claude-sonnet-4-6",
+  "pass": 1,
+  "verdict": "NOT_IMPLEMENTED",
+  "requirement_vague": "Updating a todo with mismatched ID returns bad request",
+  "omissions": [
+    {
+      "id": "O1",
+      "description": "The PUT /todos/{id} endpoint does not check whether the id in the request body (todo_in.id) matches the path parameter id. When they differ, no 400 Bad Request is returned.",
+      "category": "BUSINESS_LOGIC",
+      "reasoning": "The update_todo function retrieves the todo and updates it without ever comparing todo_in.id to the path id. The TodoUpdate model includes an optional id field, but the handler ignores it entirely, so a mismatch between the body id and the URL id is never detected or rejected."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 3181,
+    "prompt_tokens": 3009,
+    "completion_tokens": 172
+  },
+  "timestamp": "2026-07-12 10:34:16"
+}

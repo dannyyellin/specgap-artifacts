@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of bcrypt password encryption, matching R1 which states bcrypt encryption was removed."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O2 partially relates to R2 (Owner special case) but focuses narrowly on case-insensitive name matching rather than the full removal of the Owner special case including fixed password and privileged status."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O3 relates to the Owner privileged status behavior from R2 but focuses on validation-time checking rather than the removal of the Owner special case at registration."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O4 partially captures R2 by noting the Owner's fixed password 'owner#pw' is not enforced, which is part of the Owner special case removed per R2."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O5 partially relates to R2 in that the ensure_owner_user() function (part of the Owner special case) is not properly invoked, but focuses on deployment context rather than the removal of the Owner special case itself."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1317,
+    "prompt_tokens": 891,
+    "completion_tokens": 426
+  }
+}

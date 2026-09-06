@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O1 describes the missing computation of returnDate as loanDate + 30 days, which is the same behavior referenced in R1."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O2 describes the missing check that blocks checkout when a cardholder has 2+ overdue books, matching R2."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 concerns GET /borrows date range filtering, which is unrelated to any reference requirement."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 is about ISBN-13 validation and does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O5 describes the overdue-books pre-check before creating a borrow, which is the same constraint removed in R2."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 963,
+    "prompt_tokens": 659,
+    "completion_tokens": 304
+  }
+}

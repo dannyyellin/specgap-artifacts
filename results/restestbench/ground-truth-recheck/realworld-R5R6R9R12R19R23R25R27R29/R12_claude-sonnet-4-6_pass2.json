@@ -1,0 +1,23 @@
+{
+  "variant": "realworld-R5R6R9R12R19R23R25R27R29",
+  "req_id": 12,
+  "model": "claude-sonnet-4-6",
+  "pass": 2,
+  "verdict": "NOT_IMPLEMENTED",
+  "requirement_vague": "Verify article filtering by tag works correctly",
+  "omissions": [
+    {
+      "id": "O1",
+      "description": "The GET /api/articles endpoint does not support filtering by tag. The 'tag' query parameter is not defined or handled in the list_articles function.",
+      "category": "ENDPOINTS",
+      "reasoning": "The list_articles function only accepts 'author', 'limit', and 'offset' query parameters. There is no 'tag' parameter defined, and no logic to filter articles by tag using a join on ArticleTagLink and Tag tables."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 6857,
+    "prompt_tokens": 6708,
+    "completion_tokens": 149
+  },
+  "timestamp": "2026-07-12 10:40:29"
+}

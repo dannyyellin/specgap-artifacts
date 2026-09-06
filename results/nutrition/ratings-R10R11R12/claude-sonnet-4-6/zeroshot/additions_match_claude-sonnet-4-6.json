@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements R10, R11, or R12 relate to checking dish existence via a microservice."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements R10, R11, or R12 relate to the POST /ratings response body format."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements R10, R11, or R12 relate to validating that dish_id in the PUT body matches the URL path parameter."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements R10, R11, or R12 relate to storing a unique auto-incremented id field or maintaining a counters collection."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "R10 removed the integer constraint on rating (integer between 1 and 5), and A5 describes storing the rating as a float rather than an integer, which partially relates to removing the integer type constraint, though R10 also removed the 1-5 range constraint which A5 does not address."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1207,
+    "prompt_tokens": 797,
+    "completion_tokens": 410
+  }
+}

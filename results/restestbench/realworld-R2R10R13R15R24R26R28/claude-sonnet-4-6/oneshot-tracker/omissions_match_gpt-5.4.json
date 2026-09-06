@@ -1,0 +1,60 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "It matches the self-follow prohibition in R2, but O1 also focuses on the returned status behavior and mentions 200 while R2 additionally requires the successful follow case and specific response body checks."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "It corresponds to R10's requirement that a user cannot unfollow themselves and should get 400, but it covers only that sub-case rather than the full unfollow flow and profile verification."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "It matches the successful follow endpoint status requirement in R2, but only captures the status code mismatch and not the response body or subsequent GET verification."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement concerns the response shape or status of POST /api/articles/{slug}/comments in this way."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R24",
+        "label": "MATCH",
+        "reasoning": "It directly describes the same ordering behavior tested by R24: GET /api/articles must be sorted by created timestamp descending rather than another field."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The reference requirements provided do not include any requirement about GET /api/articles/feed ordering."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements mention the /api/articles/feed route or route registration behavior."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns JWT/password hashing implementation details that are not part of any listed reference requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2448,
+    "prompt_tokens": 1937,
+    "completion_tokens": 511
+  }
+}

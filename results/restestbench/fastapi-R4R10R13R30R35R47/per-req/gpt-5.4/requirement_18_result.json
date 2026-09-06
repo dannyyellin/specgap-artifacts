@@ -1,0 +1,21 @@
+{
+  "req_id": 18,
+  "requirement_vague": "Reset a password with an invalid reset token and confirm the reset is rejected.",
+  "requirement_precise": "Authenticate as the superuser (admin@example.com / password123) to obtain an access token, then attempt to reset a password using an invalid token. Using the superuser's access token in the Authorization header, call the reset-password operation with JSON body {\"new_password\": \"changethis\", \"token\": \"invalid\"}. Verify the response has HTTP status 400, the JSON body contains a \"detail\" field, and the value of \"detail\" is exactly \"Invalid token\".",
+  "removed": false,
+  "omissions": [
+    {
+      "id": "R18-O1",
+      "description": "The reset-password operation is not protected by authentication, so using the superuser access token in the Authorization header is neither required nor checked.",
+      "category": "BUSINESS_LOGIC",
+      "reasoning": "The requirement specifies calling reset-password with the superuser's access token in the Authorization header. However, the route `@api_router.post(\"/reset-password/\")` has no dependency on `get_current_active_user` or any auth mechanism, so the Authorization header is ignored."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 5913,
+    "prompt_tokens": 5798,
+    "completion_tokens": 115
+  },
+  "parse_error": false
+}

@@ -1,0 +1,21 @@
+{
+  "method": "twoshot",
+  "round": 1,
+  "removals": [
+    4,
+    10,
+    13,
+    30,
+    35,
+    47
+  ],
+  "detector_model": "DeepSeek-V3-0324",
+  "gen_usage": null,
+  "detect_usage": {
+    "total_tokens": 14346,
+    "prompt_tokens": 13698,
+    "completion_tokens": 648
+  },
+  "n_additions": 3,
+  "n_omissions": 5
+}

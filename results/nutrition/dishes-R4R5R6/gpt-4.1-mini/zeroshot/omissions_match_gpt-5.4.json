@@ -1,0 +1,48 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O1 describes the owner-only restriction for POST/PUT/DELETE, which R5 says was removed."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 concerns Owner account registration and password rules, which are not covered by any reference requirement."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 is about handling premium-subscriber placeholder nutrition values, not Ninja API field name mapping details or query filtering semantics."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concerns request validation and 400 responses, which do not correspond to any listed reference requirement."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 is about 405 responses for unsupported methods, which is unrelated to the removed requirements in R4-R6."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 concerns 415 media type handling and does not match any reference requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1182,
+    "prompt_tokens": 833,
+    "completion_tokens": 349
+  }
+}

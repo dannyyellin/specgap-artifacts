@@ -1,0 +1,86 @@
+Below is a partial specification for a "task-tracker" microservice in a project
+management application, followed by a code excerpt, and the expected gap analysis.
+
+SPECIFICATION EXCERPT:
+  The task-tracker service manages tasks. Each task has fields: id, title,
+  assignee_id, status (one of "open", "in_progress", "done"), created_date,
+  and due_date.
+
+  POST /tasks creates a new task. Required fields: title, assignee_id, due_date.
+  The status defaults to "open" and created_date is set to today's date.
+
+  GET /tasks returns all tasks. Supports query parameter "assignee_id" to filter.
+
+  PUT /tasks/{id} updates a task. The assignee_id can be changed.
+
+  The notification service should be informed whenever a task's assignee changes
+  so it can send an alert to the new assignee.
+
+  The user-directory service manages user accounts. Task-tracker should verify
+  that assignee_id refers to a valid user before creating or updating a task.
+
+CODE EXCERPT:
+  @app.route('/tasks', methods=['POST'])
+  def create_task():
+      data = request.get_json()
+      task = {
+          'title': data.get('title'),
+          'assignee_id': data.get('assignee_id'),
+          'due_date': data.get('due_date'),
+          'status': 'open',
+          'created_date': datetime.now().strftime('%Y-%m-%d'),
+          'priority': data.get('priority', 'medium')
+      }
+      result = db.tasks.insert_one(task)
+      task['id'] = str(result.inserted_id)
+      return jsonify(task), 201
+
+  @app.route('/tasks/<id>', methods=['PUT'])
+  def update_task(id):
+      data = request.get_json()
+      db.tasks.update_one({'_id': ObjectId(id)}, {'$set': data})
+      return jsonify(db.tasks.find_one({'_id': ObjectId(id)})), 200
+
+EXPECTED ANALYSIS:
+{
+  "additions": [
+    {
+      "id": "A1",
+      "description": "Stores a 'priority' field with default 'medium' on task creation",
+      "category": "DATA_PERSISTENCE",
+      "reasoning": "The specification defines task fields as id, title, assignee_id, status, created_date, and due_date. The 'priority' field is not mentioned in the specification."
+    }
+  ],
+  "omissions": [
+    {
+      "id": "O1",
+      "description": "POST /tasks does not validate that required fields (title, assignee_id, due_date) are present in the request body",
+      "category": "REQUEST_VALIDATION",
+      "reasoning": "The specification states 'Required fields: title, assignee_id, due_date' but the code uses data.get() with no presence check, silently storing None for missing fields."
+    },
+    {
+      "id": "O2",
+      "description": "GET /tasks endpoint is not implemented",
+      "category": "ENDPOINTS",
+      "reasoning": "The specification requires 'GET /tasks returns all tasks' with assignee_id filtering, but no such route exists in the code."
+    },
+    {
+      "id": "O3",
+      "description": "Does not verify assignee_id against the user-directory service before creating or updating a task",
+      "category": "EXTERNAL_INTERACTIONS",
+      "reasoning": "The specification states 'Task-tracker should verify that assignee_id refers to a valid user before creating or updating a task' but the code makes no outbound call to validate."
+    },
+    {
+      "id": "O4",
+      "description": "Does not notify the notification service when a task's assignee changes on PUT /tasks/{id}",
+      "category": "EXTERNAL_INTERACTIONS",
+      "reasoning": "The specification states 'The notification service should be informed whenever a task's assignee changes' but the code sends no notification."
+    },
+    {
+      "id": "O5",
+      "description": "Does not validate that 'status' field on update is one of the allowed values (open, in_progress, done)",
+      "category": "REQUEST_VALIDATION",
+      "reasoning": "The specification defines status as 'one of open, in_progress, done' but the code accepts any value on PUT."
+    }
+  ]
+}

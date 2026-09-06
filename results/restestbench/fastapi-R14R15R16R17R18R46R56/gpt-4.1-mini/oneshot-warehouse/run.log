@@ -1,0 +1,47 @@
+Timestamp: 2026-06-01 21:07:14
+Detector:  gpt-4.1-mini
+Service:   fastapi  Round: 2  Removals: [14, 15, 16, 17, 18, 46, 56]
+Method:    oneshot-warehouse
+
+Tokens: prompt=11054, completion=3025, total=14079
+Additions: 10
+Omissions: 27
+
+  A A1: DELETE /api/v1/users/me endpoint forbids superusers from deleting themselves with a 403 error and specific detail message
+  A A2: PATCH /api/v1/users/me/password endpoint forbids setting new password equal to current password with 400 error and specific detail message
+  A A3: PATCH /api/v1/users/me/password endpoint returns a message field with 'Password updated successfully' on success
+  A A4: POST /api/v1/users/ (create user) endpoint requires superuser authentication
+  A A5: GET /api/v1/users/ returns a JSON object with 'data' and 'count' fields containing the list of users and count
+  A A6: GET /api/v1/items/ returns a JSON object with 'data' and 'count' fields containing the list of items and count
+  A A7: Password fields in user creation and update models are validated to be between 8 and 128 characters
+  A A8: Email fields are validated using EmailStr type for proper email format
+  A A9: Title fields for items are validated to be between 1 and 255 characters
+  A A10: Description fields for items and full_name fields for users have maximum length constraints of 255 characters
+
+  O O1: POST /api/v1/users/signup does not reject registration attempts with password length less than 8 or greater than 128 characters with 422 status
+  O O2: POST /api/v1/users/signup does not reject registration attempts with invalid email format with 422 status
+  O O3: POST /api/v1/users/signup does not reject registration attempts with full_name longer than 255 characters with 422 status
+  O O4: POST /api/v1/items/ does not reject item creation with title length less than 1 or greater than 255 characters with 422 status
+  O O5: POST /api/v1/items/ does not reject item creation with description longer than 255 characters with 422 status
+  O O6: GET /api/v1/items/{item_id} returns 400 status code with detail 'Not enough permissions' when a non-owner normal user attempts to read an item
+  O O7: GET /api/v1/items/{item_id} returns 404 status code with detail 'Item not found' when item does not exist
+  O O8: PATCH /api/v1/items/{item_id} returns 400 status code with detail 'Not enough permissions' when a non-owner normal user attempts to update an item
+  O O9: PATCH /api/v1/items/{item_id} returns 404 status code with detail 'Item not found' when item does not exist
+  O O10: DELETE /api/v1/items/{item_id} returns 400 status code with detail 'Not enough permissions' when a non-owner normal user attempts to delete an item
+  O O11: DELETE /api/v1/items/{item_id} returns 404 status code with detail 'Item not found' when item does not exist
+  O O12: GET /api/v1/users/{user_id} returns 403 status code with detail 'The user doesn't have enough privileges' when a normal user attempts to read another user's data
+  O O13: GET /api/v1/users/{user_id} returns 404 status code with detail 'User not found' when user does not exist
+  O O14: PATCH /api/v1/users/{user_id} returns 404 status code with detail 'The user with this id does not exist in the system' when user does not exist
+  O O15: PATCH /api/v1/users/{user_id} returns 409 status code with detail 'User with this email already exists' when updating email to an existing user's email
+  O O16: DELETE /api/v1/users/{user_id} returns 404 status code with detail 'User not found' when user does not exist
+  O O17: DELETE /api/v1/users/{user_id} returns 403 status code with detail 'Super users are not allowed to delete themselves' when superuser attempts to delete own account
+  O O18: DELETE /api/v1/users/{user_id} returns 200 status code with message 'User deleted successfully' on successful deletion
+  O O19: POST /api/v1/login/access-token returns 400 status code with detail 'Incorrect email or password' on failed authentication
+  O O20: POST /api/v1/login/access-token returns 200 status code with token_type 'bearer' and non-empty access_token on success
+  O O21: GET /api/v1/users/me returns the current authenticated user's profile with is_active and is_superuser fields
+  O O22: POST /api/v1/users/signup rejects duplicate email registrations with 400 status and appropriate detail message
+  O O23: PATCH /api/v1/users/me rejects email updates to an existing email with 409 status and appropriate detail message
+  O O24: PATCH /api/v1/users/me/password rejects incorrect current password with 400 status and detail 'Incorrect password'
+  O O25: DELETE /api/v1/users/me returns 200 status with message 'User deleted successfully' on successful deletion
+  O O26: GET /api/v1/items/{item_id} returns 422 status code on invalid UUID format
+  O O27: GET /api/v1/users/{user_id} returns 422 status code on invalid UUID format

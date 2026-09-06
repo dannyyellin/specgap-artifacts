@@ -1,0 +1,16 @@
+Timestamp: 2026-06-02 06:07:27
+Detector:  DeepSeek-V3-0324
+App/Variant/Service: nutrition/ratings-R10R11R12/ratings
+Method:    oneshot-tracker
+
+Tokens: prompt=6871, completion=493, total=7364
+Additions: 2
+Omissions: 4
+
+  A A1: Stores a 'privileged' field in the auth data from token validation
+  A A2: Implements a 'round2' function to round numbers to 2 decimal places
+
+  O O1: Does not validate that rating is an integer between 1 and 5
+  O O2: Does not prevent users from rating the same dish multiple times via POST
+  O O3: Does not return 405 for unsupported methods on endpoints
+  O O4: Does not validate that dish_id in PUT request body matches URL parameter

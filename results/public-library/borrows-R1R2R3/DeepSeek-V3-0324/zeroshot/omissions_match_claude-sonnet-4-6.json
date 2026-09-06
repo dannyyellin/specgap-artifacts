@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the absence of returnDate computation as loanDate + 30 days, which matches R1 exactly."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O2 directly describes the missing check for 2+ overdue books blocking checkout with a 400 response, matching R2 exactly."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 describes a date range query issue for GET /borrows, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 describes missing ISBN-13 format validation, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O5 partially captures R2 by noting the missing overdue books check via the Cardholders service, but focuses on the service interaction aspect rather than the specific constraint of 2+ overdue books returning a 400 status."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1121,
+    "prompt_tokens": 731,
+    "completion_tokens": 390
+  }
+}

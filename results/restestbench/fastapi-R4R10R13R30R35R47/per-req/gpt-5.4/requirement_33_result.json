@@ -1,0 +1,18 @@
+{
+  "req_id": 33,
+  "requirement_vague": "Verify a superuser (admin@example.com / password123) cannot change their own password to the current password.",
+  "requirement_precise": "Authenticate as the superuser (use superuser credentials admin@example.com / password123) to obtain an access token. Using that access token, invoke the update own password operation for the authenticated user with a payload where 'current_password' and 'new_password' are both set to the configured first superuser password. Verify the response status is 400. Verify the response JSON body contains a 'detail' field equal to 'New password cannot be the same as the current one'.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": "POST /api/v1/login/access-token and PATCH /api/v1/users/me/password (update_password_me)",
+    "code_reference": "user = authenticate(session, form_data.username, form_data.password)\n...\nif password_in.current_password == password_in.new_password:\n    raise HTTPException(status_code=400, detail=\"New password cannot be the same as the current one\")",
+    "reasoning": "The service defines the superuser credentials via FIRST_SUPERUSER/FIRST_SUPERUSER_PASSWORD and allows obtaining an access token through the login endpoint. The authenticated self-password update endpoint explicitly rejects requests where current_password and new_password are identical, returning HTTP 400 with detail exactly 'New password cannot be the same as the current one'."
+  },
+  "usage": {
+    "total_tokens": 5963,
+    "prompt_tokens": 5802,
+    "completion_tokens": 161
+  },
+  "parse_error": false
+}

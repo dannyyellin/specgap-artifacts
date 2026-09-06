@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Supporting filtering by 'id' and 'name' does not correspond to removing Ninja API field name mapping details or removing owner-only restrictions or the specific query string filtering semantics described."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "This concerns query filtering semantics, but it mismatches the specified field name change because it uses 'ingredients' instead of the spec's 'ingredient' and does not address the removed lte/contains semantics."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Returning 415 for non-JSON POST or PUT payloads is unrelated to removed field name mapping details, owner-only restrictions, or removed query string filtering semantics."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Handling 405 for unsupported methods does not describe any of the listed removals in the spec requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 881,
+    "prompt_tokens": 597,
+    "completion_tokens": 284
+  }
+}

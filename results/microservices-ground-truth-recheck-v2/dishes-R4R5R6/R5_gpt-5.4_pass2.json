@@ -1,0 +1,19 @@
+{
+  "app": "nutrition",
+  "variant": "dishes-R4R5R6",
+  "service": "dishes",
+  "req_id": "R5",
+  "requirement": "POST, PUT, and DELETE operations on a dish are restricted to the dish's owner; other authenticated users are denied (any user may GET).",
+  "source_headline": "Removed owner-only restriction for POST/PUT/DELETE",
+  "model": "gpt-5.4",
+  "pass": 2,
+  "label": "GAP",
+  "evidence": "Authentication is enforced globally in require_authentication()/validate_token(), but POST /dishes in dishes_collection() creates dishes without storing any owner field, and PUT/DELETE in dish_resource() perform update/delete after only checking existence. There is no code comparing request.auth_data to a dish owner, and GET is not exempted from authentication.",
+  "reasoning": "The requirement is specifically that POST, PUT, and DELETE on a dish are restricted to the dish's owner, while any user may GET. The code has no ownership model at all: dishes do not store an owner and modifying routes do not authorize against one, so there is no behavior addressing owner-only access control. Per the decision guide, because the required behavior is absent entirely rather than merely incorrect in detail, the label is GAP.",
+  "usage": {
+    "total_tokens": 2869,
+    "prompt_tokens": 2689,
+    "completion_tokens": 180
+  },
+  "timestamp": "2026-07-16 14:57:14"
+}

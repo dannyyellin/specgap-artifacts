@@ -1,0 +1,54 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O1 directly identifies that POST /api/profiles/{username}/follow does not return status 201, which is exactly what R2 requires to verify."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O2 identifies that following yourself is not rejected with status 400, which matches R2's requirement that self-follow returns 400 with 'cannot be equal'."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O3 identifies that self-unfollow is not rejected with status 400, which matches R10's requirement that user1 cannot unfollow themselves and should return 400."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R28",
+        "label": "MATCH",
+        "reasoning": "O4 identifies that the code enforces ownership on PUT /api/articles/{slug} with a 403, while R28 explicitly tests the security vulnerability where any user can update any article."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R28",
+        "label": "MATCH",
+        "reasoning": "O5 identifies that the code enforces ownership on DELETE /api/articles/{slug} with a 403, while R28 explicitly tests the vulnerability where a non-owner can delete another user's article."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R24",
+        "label": "MATCH",
+        "reasoning": "O6 identifies that articles are ordered by id rather than created timestamp descending, which directly contradicts R24's requirement to verify descending created timestamp ordering."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements describe deleting a user who has articles or foreign key constraint behavior."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2700,
+    "prompt_tokens": 2135,
+    "completion_tokens": 565
+  }
+}

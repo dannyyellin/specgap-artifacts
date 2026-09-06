@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Favorited and favoritesCount fields in article responses are not described in any of the listed requirements, which focus on follow/unfollow, article filtering/pagination/order, comments, and unauthorized article modification."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A DELETE /api/users/{email} endpoint is not mentioned in any listed requirement."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A GET /api/tags endpoint does not correspond to any of the provided requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1633,
+    "prompt_tokens": 1442,
+    "completion_tokens": 191
+  }
+}

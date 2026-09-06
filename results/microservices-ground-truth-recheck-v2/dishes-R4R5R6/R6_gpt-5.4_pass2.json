@@ -1,0 +1,19 @@
+{
+  "app": "nutrition",
+  "variant": "dishes-R4R5R6",
+  "service": "dishes",
+  "req_id": "R6",
+  "requirement": "GET on dishes supports query-string filtering in which nutrient parameters filter by less-than-or-equal (lte) semantics and ingredient parameters filter by substring containment.",
+  "source_headline": "Removed specific query string filtering semantics (lte for nutrients, contains for ingredients)",
+  "model": "gpt-5.4",
+  "pass": 2,
+  "label": "PARTIAL",
+  "evidence": "GET /dishes in dishes_collection() calls build_query_from_args(request.args) and then mongo.db.dishes.find(query, {\"_id\": 0}). In build_query_from_args(), nutrient fields are parsed numerically but assigned as exact matches (query[field] = parse_numeric_query_value(field, value)) rather than $lte, and ingredients are assigned as exact matches (query[\"ingredients\"] = value) rather than substring containment.",
+  "reasoning": "The code clearly implements query-string filtering for GET /dishes, so this is not a GAP. However, the required semantics are materially different: nutrient filters must be less-than-or-equal and ingredient filters must use substring containment, while the code uses exact equality for both. Therefore a test of the requirement as stated would fail on those observable details, making this PARTIAL.",
+  "usage": {
+    "total_tokens": 2880,
+    "prompt_tokens": 2690,
+    "completion_tokens": 190
+  },
+  "timestamp": "2026-07-16 14:57:45"
+}

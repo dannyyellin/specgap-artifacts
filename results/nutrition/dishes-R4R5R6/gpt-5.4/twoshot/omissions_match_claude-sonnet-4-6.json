@@ -1,0 +1,54 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the missing owner-only restriction for POST/PUT/DELETE operations, which is exactly what R5 references."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "O2 describes missing 'ingredient' (contains) filtering semantics, which partially overlaps with R6's mention of 'contains' filtering, but R6 also covers lte for nutrients which O2 does not address."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "O3 describes missing less-than-or-equal filtering for nutritional fields, which corresponds to the 'lte for nutrients' part of R6, though R6 also covers contains filtering not mentioned in O3."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 describes behavior around unsupported query fields returning client errors, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 describes decimal formatting of floating point numbers in responses, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "O6 references Ninja API field handling and fallback behavior, which is loosely related to R4's removal of Ninja API field name mapping details, but O6 focuses on error handling for non-numeric values rather than field name mapping."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O7 describes use of flask-pymongo outside the allowed package set, which does not correspond to any of the three reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1580,
+    "prompt_tokens": 1007,
+    "completion_tokens": 573
+  }
+}

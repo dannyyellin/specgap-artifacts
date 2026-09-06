@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 describes strict payload validation for POST /pet-types, which does not correspond to any of the four spec requirements about removed constraints or behaviors."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A2 describes path-separator validation on picture names, which does not correspond to any of the four spec requirements."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A3 describes accepting a raw 'picture' field on pet update, which does not correspond to any of the four spec requirements about removed behaviors."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A4 describes an internal persistence model choice (embedding pets in pet-type documents), which does not correspond to any of the four spec requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1058,
+    "prompt_tokens": 758,
+    "completion_tokens": 300
+  }
+}

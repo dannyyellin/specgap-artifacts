@@ -1,0 +1,54 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the missing validation for the title field on POST /todos, matching R2's requirement for a 400 Bad Request with 'The Title field is required' validation error."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O2 directly describes the missing check on PUT /todos/{id} where the request body id differs from the URL path id, matching R10's requirement for a 400 Bad Request in that case."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "O3 mentions cross-user access returning 404 for both DELETE and GET, which partially covers R5 (GET by another user) and R8 (DELETE by another user), but the reasoning incorrectly states the behavior is implemented correctly when the detection claims it is not."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R8",
+        "label": "PARTIAL",
+        "reasoning": "O3 covers the DELETE /todos/{id} cross-user scenario described in R8, but the reasoning contradicts the detection statement, creating ambiguity about whether this is actually an omission."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 describes authentication enforcement on GET /todos without a token, which does not correspond to any of the listed reference requirements."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 describes email uniqueness validation on registration, which does not correspond to any of the listed reference requirements."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 describes login returning 401 on invalid credentials, which does not correspond to any of the listed reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1898,
+    "prompt_tokens": 1323,
+    "completion_tokens": 575
+  }
+}

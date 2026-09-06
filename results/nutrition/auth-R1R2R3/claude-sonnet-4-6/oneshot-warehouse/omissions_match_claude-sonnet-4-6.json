@@ -1,0 +1,48 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O1 describes incorrect Owner credentials rather than the complete removal of the Owner special case, but it relates to the same R2 behavior about the Owner user's special handling."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O2 directly describes that passwords are stored in plaintext without encryption/hashing, matching R1's removal of bcrypt password encryption."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O3 describes that the Owner special case is not enforced during registration, which partially captures R2's removal of the Owner special case, though it focuses on registration enforcement rather than complete removal."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O4 relates to the Owner privileged status not being properly verified, which is part of the Owner special case described in R2, but focuses on validation behavior rather than the core removal."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 discusses status code behavior for login failures which does not correspond to any of the three reference requirements about bcrypt removal, Owner special case removal, or username uniqueness constraint removal."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O6 describes a deployment issue where the Owner user may not be created, which relates to R2's Owner special case but focuses on initialization mechanics rather than the removal of the special case itself."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1530,
+    "prompt_tokens": 1032,
+    "completion_tokens": 498
+  }
+}

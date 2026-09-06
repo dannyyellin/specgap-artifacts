@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements (R14-R18, R46, R56) describe or test the behavior of a private user creation endpoint accepting is_active or is_superuser fields."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements describe or test updating is_active or is_superuser fields on existing users via a superuser endpoint."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements (R14-R18, R46, R56) describe or test non-superusers listing their own items via GET /api/v1/items/."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1512,
+    "prompt_tokens": 1261,
+    "completion_tokens": 251
+  }
+}

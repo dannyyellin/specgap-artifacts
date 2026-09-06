@@ -1,0 +1,48 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This property describes an extra validation not related to any of the three removed spec requirements."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This property describes an extra book-existence validation not related to any of the three removed spec requirements."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This property describes extra PUT validations not related to any of the three removed spec requirements."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This property describes query parameter rejection behavior not related to any of the three removed spec requirements."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This property describes a returnDate/loanDate ordering constraint on PUT, which does not correspond to any of the three removed spec requirements."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": "R1",
+        "label": "PARTIAL",
+        "reasoning": "R1 removes the server-side computation of returnDate (loanDate + 30 days), and A6 describes the code accepting returnDate from the client instead; this is related to the same returnDate behavior but captures only part of the change (accepting client-supplied value rather than removing the computation)."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1236,
+    "prompt_tokens": 801,
+    "completion_tokens": 435
+  }
+}

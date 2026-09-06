@@ -1,0 +1,19 @@
+{
+  "app": "nutrition",
+  "variant": "ratings-R10R11R12",
+  "service": "ratings",
+  "req_id": "R10",
+  "requirement": "A rating must be an integer between 1 and 5; values outside this range or non-integer values are rejected.",
+  "source_headline": "Removed rating range constraint (integer between 1 and 5)",
+  "model": "claude-sonnet-4-6",
+  "pass": 1,
+  "label": "GAP",
+  "evidence": "In ratings_collection (POST): `rating = round2(float(data[\"rating\"]))` and in rating_item (PUT): `rating = round2(float(data[\"rating\"]))`. No range check or integer check is performed anywhere.",
+  "reasoning": "The code converts the rating value to a float and rounds it to 2 decimal places, but never validates that it is an integer (e.g., rejects 3.5) or that it falls within the range 1\u20135. A test submitting a rating of 0, 6, or 3.5 would be accepted without error, directly contradicting the requirement. There is no conditional or validation logic anywhere in the codebase that enforces these constraints.",
+  "usage": {
+    "total_tokens": 3061,
+    "prompt_tokens": 2878,
+    "completion_tokens": 183
+  },
+  "timestamp": "2026-07-16 14:59:16"
+}

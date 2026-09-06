@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns unsupported DELETE handling for /logs/{id}, which does not relate to removing the loanDate format or removing Borrows-to-Logs notifications from descriptions."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns unsupported PUT handling for /logs/{id}, which does not correspond to either specified removal in the Logs documentation."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns unsupported DELETE handling for /logs, not the removal of a date format or the removal of Borrows-to-Logs notification text."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns unsupported PUT handling for /logs, which is unrelated to either spec requirement about removed date format or removed notifications."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 882,
+    "prompt_tokens": 621,
+    "completion_tokens": 261
+  }
+}

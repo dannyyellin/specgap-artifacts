@@ -1,0 +1,15 @@
+Timestamp: 2026-06-02 09:38:25
+Detector:  claude-sonnet-4-6
+App/Variant/Service: public-library/books-R8R9R10R11/books
+Method:    oneshot-tracker
+
+Tokens: prompt=5846, completion=670, total=6516
+Additions: 2
+Omissions: 3
+
+  A A1: POST /books accepts and uses 'publisher' and 'publishedDate' fields if provided in the request body, rather than always fetching them from Google Books API
+  A A2: PUT /books/{id} rejects the request with 400 if 'id' in the payload does not match the URL path id
+
+  O O1: POST /books does not call the Google Books API to retrieve 'publisher' and 'publishedDate' using the provided ISBN
+  O O2: POST /books does not use the first entry when Google Books returns more than one result, and does not set fields to empty string when Google Books has no entry for a field
+  O O3: POST /books does not validate that 'genre' is one of the allowed values: 'Fiction', 'Children', 'Biography', 'Science', 'Science Fiction', 'Fantasy', or 'Other'

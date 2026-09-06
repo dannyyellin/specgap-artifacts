@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "A1 describes a mechanism for generating unique transaction/purchase IDs using an incrementing counter, which is related to R10's removal of the uniqueness constraint on purchase-ids, but A1 describes the presence of a counter system rather than its removal."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The DEFAULT_STORE_SCAN_RANGE environment variable for limiting store scanning range does not correspond to any of the three spec requirements about pet selection algorithm, DELETE pet step, or purchase-id uniqueness."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Returning 500 errors for MongoDB failures does not correspond to any of the three spec requirements about pet selection algorithm removal, DELETE pet step removal, or purchase-id uniqueness removal."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 864,
+    "prompt_tokens": 583,
+    "completion_tokens": 281
+  }
+}

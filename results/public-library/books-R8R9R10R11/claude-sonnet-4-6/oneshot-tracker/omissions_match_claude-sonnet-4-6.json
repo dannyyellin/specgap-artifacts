@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the absence of Google Books API integration for retrieving publisher and publishedDate, which matches R10."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "O2 describes additional details about Google Books API behavior (first entry selection, empty string fallback) that are part of the same removed integration described in R10, but these are sub-behaviors not explicitly called out in R10."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R11",
+        "label": "MATCH",
+        "reasoning": "O3 directly describes the absence of genre enumeration validation against the allowed values list, which matches R11."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 970,
+    "prompt_tokens": 724,
+    "completion_tokens": 246
+  }
+}

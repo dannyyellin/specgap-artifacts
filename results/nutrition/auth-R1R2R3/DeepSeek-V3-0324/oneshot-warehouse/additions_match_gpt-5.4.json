@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Floating-point rounding functionality is unrelated to removing password encryption, the Owner special case, or username uniqueness constraints."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Tracking numeric ID fields does not correspond to any of the specified removals in authentication behavior."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A user-to-response formatting function does not describe removal of bcrypt, the Owner special case, or username uniqueness enforcement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 683,
+    "prompt_tokens": 503,
+    "completion_tokens": 180
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "Both state that the integer rating range constraint of 1 to 5 is no longer enforced."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns the POST response shape and created resource return value, which is unrelated to any listed reference requirement."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about DELETE verifying dish existence, which does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns use of an unauthorized package and does not match any reference requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 932,
+    "prompt_tokens": 703,
+    "completion_tokens": 229
+  }
+}

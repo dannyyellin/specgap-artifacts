@@ -1,0 +1,24 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "It concerns publisher and publishedDate coming from Google Books API, but it describes code still accepting those fields directly rather than the spec change removing the integration itself."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Default empty-string serialization behavior does not correspond to removing POST required fields, ISBN format, Google Books API integration, or genre enumeration."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 679,
+    "prompt_tokens": 536,
+    "completion_tokens": 143
+  }
+}

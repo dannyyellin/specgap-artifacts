@@ -1,0 +1,67 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "POST /books accepts and stores client-supplied 'publisher' and 'publishedDate' fields",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The specification states that 'publisher' and 'publishedDate' are not provided in the POST request and are instead obtained by the service from the Google Books API using the ISBN. The code allows these fields in the POST body and persists them via data.get('publisher', '') and data.get('publishedDate', '')."
+      },
+      {
+        "id": "A2",
+        "description": "PUT /books/{id} allows updating 'publisher' and 'publishedDate' directly from the client payload",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification says these fields are obtained by the service from the Google Books API based on ISBN. It does not require or authorize client-driven updates of these externally sourced fields, but the code includes both fields in ALL_MUTABLE_FIELDS and writes supplied values to the database."
+      },
+      {
+        "id": "A3",
+        "description": "PUT /books/{id} rejects requests whose body contains an 'id' different from the path parameter",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification only says the PUT request provides a JSON payload of the resource's fields and returns the id of the updated resource. It does not require any validation rule about an 'id' field in the payload matching the path id, but the code enforces this with a 400 response."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "POST /books does not invoke the Google Books API to obtain 'publisher' and 'publishedDate' from the supplied ISBN",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The specification explicitly requires that 'publisher' and 'publishedDate' are obtained by the service using the 3rd party Google Books API by supplying the ISBN number. The code imports requests but never makes any outbound HTTP call."
+      },
+      {
+        "id": "O2",
+        "description": "POST /books does not populate 'publisher' and 'publishedDate' from the first Google Books result when multiple entries are returned",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states that if Google Books returns more than one entry, the first entry is used. Since the code never queries Google Books, this required selection behavior is not implemented."
+      },
+      {
+        "id": "O3",
+        "description": "POST /books does not set missing Google Books fields to the empty string based on the API response",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification requires that if Google Books does not contain an entry for one of the fields, that field has value ''. The code defaults these fields from client input rather than from Google Books lookup results, so the specified behavior is not implemented."
+      },
+      {
+        "id": "O4",
+        "description": "The service does not validate that 'genre' is one of the allowed values: Fiction, Children, Biography, Science, Science Fiction, Fantasy, or Other",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification defines 'genre' as a string that is one of a fixed set of allowed values. The code only checks that genre is a string on POST and PUT, accepting any string."
+      },
+      {
+        "id": "O5",
+        "description": "The service does not validate that 'ISBN' is a string representing a 13-digit ISBN_13 number",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification defines ISBN as 'a string representing the 13 digit ISBN_13 number of the book'. The code checks only that ISBN is a string, not that it is 13 digits."
+      },
+      {
+        "id": "O6",
+        "description": "The service does not validate that 'publishedDate' has the format 'DD-MM-YYYY'",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification defines 'publishedDate' as a string of the form 'DD-MM-YYYY'. The code only checks that publishedDate is a string when present and performs no format validation."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 7180,
+    "prompt_tokens": 6384,
+    "completion_tokens": 796
+  }
+}

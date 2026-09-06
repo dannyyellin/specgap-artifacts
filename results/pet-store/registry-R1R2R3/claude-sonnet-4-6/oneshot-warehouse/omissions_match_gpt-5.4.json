@@ -1,0 +1,60 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "It describes the removed /verify anti-enumeration requirement about returning the same invalid-credentials response behavior."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "It concerns the removed requirement that /verify return the same response for nonexistent usernames and wrong passwords."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "It directly describes password complexity validation rules that were removed."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "It also describes enforcing the removed password validation rules, here on password update."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about MongoDB hostname configuration, which is unrelated to any reference requirement."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This discusses DELETE status codes and explicitly says it is not an omission, unrelated to the reference requirements."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R1",
+        "label": "PARTIAL",
+        "reasoning": "It is adjacent to password validation on POST /users but focuses on password type checking rather than the removed complexity rules themselves."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "It concerns /verify response-body behavior, but for missing credentials rather than the removed same-error-message anti-enumeration rule for invalid credentials."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1684,
+    "prompt_tokens": 1223,
+    "completion_tokens": 461
+  }
+}

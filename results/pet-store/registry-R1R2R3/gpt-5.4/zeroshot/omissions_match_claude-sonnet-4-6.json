@@ -1,0 +1,66 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about MongoDB connection configuration, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O2 directly describes the absence of password validation rules (length, uppercase, lowercase, digit) for POST /users, matching R1's removal of those rules."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O3 partially captures R2 by noting the missing uniform invalid-credentials message, but also adds details about missing JSON response body structure that go beyond the anti-enumeration security requirement described in R2."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O4 directly describes the removal of the same-error-message anti-enumeration requirement for /verify, matching R2."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O5 describes the absence of password validation rules for the password change endpoint, which is part of the same password validation rules removal described in R1."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about owner privilege persistence after password change, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R3",
+        "label": "PARTIAL",
+        "reasoning": "O7 relates to owner account preservation but focuses on deletion protection rather than the pre-registration on initialization described in R3, making it only a partial match."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O8 partially overlaps with R2 by noting the missing uniform response format for invalid credentials, but focuses on JSON structure rather than the anti-enumeration security aspect."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about missing package comments in code, which does not correspond to any of the three reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1813,
+    "prompt_tokens": 1146,
+    "completion_tokens": 667
+  }
+}

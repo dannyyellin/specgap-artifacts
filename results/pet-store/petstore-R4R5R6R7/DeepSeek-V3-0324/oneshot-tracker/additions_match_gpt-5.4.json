@@ -1,0 +1,24 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "A1 concerns attribute extraction rules and notes fields beyond those mentioned in the spec, but R4 specifically says temperament/group_behavior extraction rules were removed rather than addressing extra attributes generally."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "ID generation via a counters collection is unrelated to removing deletion constraints, lifespan handling, birthdate filtering, or temperament/group_behavior extraction rules."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 668,
+    "prompt_tokens": 520,
+    "completion_tokens": 148
+  }
+}

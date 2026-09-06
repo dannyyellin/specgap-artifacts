@@ -1,0 +1,66 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements concern accepting Bearer tokens versus Token tokens in the Authorization header."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements verify an id field in user response bodies."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R24",
+        "label": "PARTIAL",
+        "reasoning": "R24 is about ordering articles by creation time, while A3 only overlaps by mentioning timestamp fields returned in article responses rather than the required sort behavior."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements involve article favoriting fields or behavior."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements mention a tags endpoint."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements mention a root endpoint returning status ok."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements concern comment deletion permissions by article owners."
+      },
+      {
+        "detection_id": "A8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements cover updating user fields via PUT /api/user."
+      },
+      {
+        "detection_id": "A9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements mention deleting users by email via DELETE /api/users/{email}."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2352,
+    "prompt_tokens": 1876,
+    "completion_tokens": 476
+  }
+}

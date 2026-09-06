@@ -1,0 +1,96 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R15",
+        "label": "MATCH",
+        "reasoning": "R15 explicitly requires POST /api/v1/password-recovery/{email} for an existing user, which O1 says does not exist."
+      },
+      {
+        "detection_id": "O1",
+        "requirement_id": "R16",
+        "label": "MATCH",
+        "reasoning": "R16 also depends on POST /api/v1/password-recovery/{email}, and O1 states that endpoint is missing."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R17",
+        "label": "MATCH",
+        "reasoning": "R17 requires a POST /api/v1/reset-password/ endpoint to submit the reset token and new password, which O2 says does not exist."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R18",
+        "label": "MATCH",
+        "reasoning": "R18 requires calling POST /api/v1/reset-password/ with an invalid token, and O2 states that endpoint is missing."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R56",
+        "label": "MATCH",
+        "reasoning": "R56 explicitly requires POST /api/v1/reset-password/, which O2 says does not exist."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R14",
+        "label": "MATCH",
+        "reasoning": "R14 requires a test token endpoint returning the authenticated user's email, and O3 states GET /api/v1/login/test-token does not exist."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R15",
+        "label": "MATCH",
+        "reasoning": "R15 requires that a password recovery email is actually sent and verifiable via mailcatcher, which O4 says is not implemented."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R16",
+        "label": "MATCH",
+        "reasoning": "O5 directly describes the R16 behavior that password recovery for a non-existent user should return 404."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R17",
+        "label": "MATCH",
+        "reasoning": "R17 requires the reset-password success response to be exactly {\"message\": \"Password updated successfully\"}, which O6 states is missing."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R18",
+        "label": "MATCH",
+        "reasoning": "O7 directly describes the R18 requirement for HTTP 400 with detail 'Invalid token' on reset-password with an invalid token."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": "R56",
+        "label": "MATCH",
+        "reasoning": "O8 directly captures R56's requirement that a 7-character new_password should trigger a 422 validation error."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement concerns signup with a null email field."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement here specifies pagination for GET /api/v1/users/."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": "R17",
+        "label": "MATCH",
+        "reasoning": "R17 requires retrieving password-recovery HTML content to extract a reset token, which O11 identifies as missing."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2555,
+    "prompt_tokens": 1697,
+    "completion_tokens": 858
+  }
+}

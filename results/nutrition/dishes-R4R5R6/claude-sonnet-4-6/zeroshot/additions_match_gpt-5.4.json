@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "A1 states the code does not enforce owner-only access for POST/PUT/DELETE, which directly corresponds to the removal of the owner-only restriction."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "A2 concerns query filtering semantics, but it focuses on adding extra filterable fields rather than the specific removed semantics of lte nutrient filtering and contains-style ingredient filtering."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "A3 directly addresses the nutrient query filtering semantics by noting equality is used instead of the specified less-than-or-equal behavior."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1070,
+    "prompt_tokens": 857,
+    "completion_tokens": 213
+  }
+}

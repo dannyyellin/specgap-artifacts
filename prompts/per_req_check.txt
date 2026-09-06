@@ -1,0 +1,45 @@
+You are an expert at analyzing microservice specifications and implementations.
+
+You will receive:
+1. The code for a service
+2. A single requirement to check
+
+Your task: determine whether the code implements the given requirement.
+
+{{CATEGORIES}}
+
+For OMISSIONS: report the given requirement as an omission only if the code does not
+implement the behavior it describes. Requirements can involve any of the categories
+above — before checking, identify which category the requirement belongs to, then
+look for the corresponding evidence in the code:
+
+- ENDPOINTS: does the route exist with the right HTTP method and URL pattern?
+- REQUEST_VALIDATION: are required fields, types, and formats enforced?
+- RESPONSE_FORMAT: does the code return the right status code and response fields
+  for both success and error cases?
+- BUSINESS_LOGIC: is the domain rule, guard, constraint, or access control decision
+  present and correct?
+- COMPUTED_VALUES: is the derived or calculated field produced correctly?
+- EXTERNAL_INTERACTIONS: does the code make the required outbound call or
+  notify the required external service?
+- DATA_PERSISTENCE: is the required data written to or read from storage correctly?
+
+Only flag an omission when you have confirmed the required behavior is absent from
+the code — do not flag based on what seems likely to be missing.
+If the requirement is implemented but incompletely (e.g., correct endpoint but
+wrong status code, or correct behavior for one case but not another), still flag
+it as an omission and describe what is missing.
+
+Output a JSON object with two fields, "omissions" and "implementation":
+
+"omissions": array of {"id": "O1", "description": "...", "category": "...", "reasoning": "..."}
+  List every aspect of the requirement that is missing or incorrect.
+  If the requirement is fully implemented, this array must be empty.
+
+"implementation": if the requirement IS implemented (omissions is empty), an object with:
+  - "location": the function name(s) or route(s) in the code where the requirement is implemented
+  - "code_reference": a brief excerpt (1-3 lines) of the key code that satisfies the requirement
+  - "reasoning": 1-2 sentences explaining how the code satisfies the requirement
+  If the requirement is NOT implemented, set "implementation" to null.
+
+Output ONLY valid JSON, no other text.

@@ -1,0 +1,20 @@
+Timestamp: 2026-06-02 09:32:56
+Detector:  claude-sonnet-4-6
+Service:   fastapi  Round: 2  Removals: [14, 15, 16, 17, 18, 46, 56]
+Method:    zeroshot
+
+Tokens: prompt=11867, completion=1252, total=13119
+Additions: 0
+Omissions: 11
+
+  O O1: No POST /api/v1/password-recovery/{email} endpoint exists
+  O O2: No POST /api/v1/reset-password/ endpoint exists
+  O O3: No GET /api/v1/login/test-token endpoint exists
+  O O4: Password recovery endpoint does not send an email to the user
+  O O5: Password recovery for non-existent user should return 404
+  O O6: Reset password endpoint must return exactly {"message": "Password updated successfully"} on success
+  O O7: Reset password endpoint must return HTTP 400 with detail 'Invalid token' for invalid tokens
+  O O8: Reset password new_password must be validated for minimum length (8 chars), returning 422 for passwords shorter than 8 characters
+  O O9: UserCreate/UserRegister does not validate that email field is not null at the schema level with a 422 response
+  O O10: GET /api/v1/users/ (read_users) does not support pagination (skip/limit parameters)
+  O O11: The password-recovery endpoint should also provide an HTML endpoint for retrieving the reset token (used by superuser to get the reset token for a user)

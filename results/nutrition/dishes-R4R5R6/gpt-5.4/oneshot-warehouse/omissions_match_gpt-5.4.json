@@ -1,0 +1,48 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O1 states that POST/PUT/DELETE are not restricted to the restaurant owner, which is the same behavior described by R5."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "O2 concerns removed query-string filtering semantics, but it focuses on the ingredient field name rather than the specific lte-for-nutrients or contains semantics called out in R6."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O3 directly describes missing less-than-or-equal filtering for nutritional query clauses, which matches the lte-for-nutrients part of R6."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "O4 is about combining multiple query clauses correctly, which is related to query filtering behavior but not the specific filtering semantics removed in R6."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 is about disallowed package usage and does not correspond to any of R4, R5, or R6."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "O6 discusses Ninja API field handling and mapped values, which overlaps with Ninja API field mapping details in R4, but it is about numeric conversion behavior rather than removal of field name mapping details themselves."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1288,
+    "prompt_tokens": 868,
+    "completion_tokens": 420
+  }
+}

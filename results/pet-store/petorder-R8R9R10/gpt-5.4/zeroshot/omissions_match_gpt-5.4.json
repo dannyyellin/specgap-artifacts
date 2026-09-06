@@ -1,0 +1,48 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "O1 states the purchase flow does not delete the chosen pet after selection, which is the same behavior described by R9."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 concerns error handling for pet-store interaction failures, which is unrelated to any of R8, R9, or R10."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R8",
+        "label": "MATCH",
+        "reasoning": "O3 explicitly says random pet selection is not implemented when multiple pets are available, matching R8."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 is about transaction review and malformed transaction ids, not about pet selection, pet deletion after purchase, or purchase-id uniqueness."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 addresses MongoDB host configuration, which does not correspond to any reference requirement listed."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 concerns deployment/service naming and does not match any of the reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1257,
+    "prompt_tokens": 898,
+    "completion_tokens": 359
+  }
+}

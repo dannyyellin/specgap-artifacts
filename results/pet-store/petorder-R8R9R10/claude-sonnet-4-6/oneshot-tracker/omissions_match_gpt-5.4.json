@@ -1,0 +1,102 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns an incorrect MongoDB service hostname, which is unrelated to any of R8, R9, or R10."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R8",
+        "label": "MATCH",
+        "reasoning": "Both describe the removed behavior that a pet should be selected randomly when multiple pets are available."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "Both describe the removed step requiring deletion of the purchased pet from the pet store after a successful purchase."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about limiting store scanning when no store is specified, which does not correspond to random selection, deleting pets after purchase, or purchase-id uniqueness."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns authorization status codes for GET /transactions and is unrelated to any reference requirement."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns authorization status codes for GET /transactions/{id} and is unrelated to any reference requirement."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This discusses transaction document fields, which does not match any of the three reference removals."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about an extra stored transaction field and does not correspond to R8, R9, or R10."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns lookup by internal id versus purchase-id, not the removed uniqueness/non-reuse requirement itself."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about validating pet-name usage with store and is unrelated to the reference requirements."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns bounded store searching and does not match random pet selection, deletion after purchase, or purchase-id uniqueness."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about case sensitivity in pet-type matching and is unrelated to the listed reference removals."
+      },
+      {
+        "detection_id": "O13",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns query-string conjunction support for GET /transactions, which does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O14",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about purchase authorization rules and does not match any of R8, R9, or R10."
+      },
+      {
+        "detection_id": "O15",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "Both refer to the purchase-id uniqueness and non-reuse requirement that was removed."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2561,
+    "prompt_tokens": 1710,
+    "completion_tokens": 851
+  }
+}

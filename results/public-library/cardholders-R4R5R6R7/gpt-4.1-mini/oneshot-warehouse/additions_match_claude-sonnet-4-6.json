@@ -1,0 +1,18 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 describes filtering behavior on GET /cardholders, which does not correspond to any of the spec requirements about removed field type declarations, error codes, fine computation formulas, or cross-service calls."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 650,
+    "prompt_tokens": 546,
+    "completion_tokens": 104
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "req_id": 10,
+  "requirement_vague": "Verify unfollow removes follow relationship and updates profile following status",
+  "requirement_precise": "Create user1 (username: 'unfollower1', email: 'unfollower1@test.com', password: 'pass123') and user2 (username: 'unfollowee1', email: 'unfollowee1@test.com', password: 'pass123'). User1 follows user2. Verify following is true. User1 unfollows user2 via DELETE /api/profiles/unfollowee1/follow. Verify response status is 200. Verify response profile has 'following' equal to false. GET profile of user2 using user1's token. Verify 'following' is false. Verify user1 cannot unfollow themselves (should return 400).",
+  "removed": true,
+  "omissions": [
+    {
+      "id": "R10-O1",
+      "description": "The service does not prevent a user from unfollowing themselves with a 400 response.",
+      "category": "BUSINESS_LOGIC",
+      "reasoning": "The requirement states that user1 cannot unfollow themselves and the API should return 400. In `unfollow_user`, the code looks up the target user, deletes any follow link if present, and always returns the profile response. There is no check for `current_user.id == target.id`, so self-unfollow is allowed and returns 200 instead of 400."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 5455,
+    "prompt_tokens": 5331,
+    "completion_tokens": 124
+  },
+  "parse_error": false
+}

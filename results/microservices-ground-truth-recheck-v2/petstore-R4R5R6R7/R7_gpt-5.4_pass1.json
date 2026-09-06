@@ -1,0 +1,19 @@
+{
+  "app": "pet-store",
+  "variant": "petstore-R4R5R6R7",
+  "service": "pet-store",
+  "req_id": "R7",
+  "requirement": "GET on pets supports filtering by birthdate via the query parameters birthdateGT and birthdateLT.",
+  "source_headline": "Removed birthdate query filtering (birthdateGT/birthdateLT)",
+  "model": "gpt-5.4",
+  "pass": 1,
+  "label": "GAP",
+  "evidence": "list_pets() at route /pet-types/<int:pet_id>/pets ignores request.args entirely and always returns all pets for the pet type; the only birthdate-related logic is valid_birthdate() plus create/update validation, not GET filtering.",
+  "reasoning": "There is no code addressing GET filtering of pets by birthdateGT or birthdateLT, so the first decision-guide question is answered 'No'. A test sending those query parameters to the pets GET endpoint would still receive the unfiltered full list, meaning the required behavior is absent entirely.",
+  "usage": {
+    "total_tokens": 4152,
+    "prompt_tokens": 4028,
+    "completion_tokens": 124
+  },
+  "timestamp": "2026-07-16 15:01:55"
+}

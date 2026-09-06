@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of computing returnDate as loanDate plus 30 days."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O2 matches the removed constraint that borrowers with 2 or more overdue books are blocked from checkout."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O3 matches the removed behavior that checkout should return 400 when blocked due to 2 or more overdue books."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concerns ISBN format validation, which is unrelated to any reference requirement."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 concerns loanDate string format validation, which is unrelated to any reference requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 960,
+    "prompt_tokens": 673,
+    "completion_tokens": 287
+  }
+}

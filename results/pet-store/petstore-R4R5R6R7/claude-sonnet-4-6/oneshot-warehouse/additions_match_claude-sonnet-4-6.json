@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 describes strict key validation on POST /pet-types payloads, which does not correspond to any of the four spec requirements listed."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "R4 states that temperament/group_behavior were removed from attributes extraction rules, while A2 describes the code building attributes from additional fields (slogan, group, color, etc.) beyond what the spec requires, directly reflecting the removal of the original temperament/group_behavior-based rule."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A3 describes an undocumented 'picture' field accepted by PUT /pet-types/{id}/pets/{name}, which does not correspond to any of the four spec requirements listed."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "R6 removed lifespan range handling (choose minimum, extract first integer), and A4 describes a different lifespan deviation (defaulting to 0 instead of null), so they both concern lifespan handling but address different aspects of it."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A5 describes a MongoDB hostname mismatch in the URI, which does not correspond to any of the four spec requirements listed."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1374,
+    "prompt_tokens": 930,
+    "completion_tokens": 444
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "variant": "realworld-R2R10R13R15R24R26R28",
+  "req_id": 26,
+  "model": "gpt-5.4",
+  "pass": 1,
+  "verdict": "IMPLEMENTED",
+  "requirement_vague": "Verify multiple comments can be added to the same article with unique IDs",
+  "omissions": [],
+  "implementation": {
+    "location": [
+      "Comment SQLModel definition",
+      "POST /api/articles/{slug}/comments (add_comment)",
+      "GET /api/articles/{slug}/comments (get_comments)",
+      "comment_dict"
+    ],
+    "code_reference": "class Comment(SQLModel, table=True):\n    id: Optional[int] = Field(default=None, primary_key=True)\n...\ncomment = Comment(body=body, created_at=ts, updated_at=ts, author_id=current_user.id, article_id=article.id)\n...\ncomments = sorted(article.comments, key=lambda c: c.id or 0)\nreturn {\"comments\": [comment_dict(c, viewer, session) for c in comments]}",
+    "reasoning": "The code allows creating multiple Comment rows for the same article because each new comment is inserted with the same article_id and no uniqueness constraint prevents multiple comments per article. Each comment gets a database primary-key id, and GET /api/articles/{slug}/comments returns all persisted comments with their id and body, so three added comments would be returned with distinct ids and preserved bodies."
+  },
+  "usage": {
+    "total_tokens": 5533,
+    "prompt_tokens": 5307,
+    "completion_tokens": 226
+  },
+  "timestamp": "2026-07-12 10:44:04"
+}

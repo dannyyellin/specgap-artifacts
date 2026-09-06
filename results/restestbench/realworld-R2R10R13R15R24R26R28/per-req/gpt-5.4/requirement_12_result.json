@@ -1,0 +1,18 @@
+{
+  "req_id": 12,
+  "requirement_vague": "Verify article filtering by tag works correctly",
+  "requirement_precise": "Create a user. Create article1 with title 'First Tagged Article' and tagList ['javascript', 'testing']. Create article2 with title 'Second Tagged Article' and tagList ['python', 'testing']. Create article3 with title 'No Match Article' and tagList ['ruby']. GET /api/articles?tag=javascript. Verify articlesCount is 1 and articles array contains only 'First Tagged Article'. GET /api/articles?tag=testing. Verify articlesCount is 2 and articles array contains both 'First Tagged Article' and 'Second Tagged Article'. GET /api/articles?tag=nonexistent. Verify articlesCount is 0.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": "GET /api/articles in list_articles; POST /api/articles in create_article; attach_tags",
+    "code_reference": "if tag is not None:\n    articles = [a for a in articles if tag in [t.name for t in a.tags]]\n...\nreturn {\"articles\": [article_dict(a, viewer, session) for a in articles], \"articlesCount\": total}",
+    "reasoning": "The service stores article tags via attach_tags when articles are created, and the list_articles endpoint filters articles by exact tag membership in each article's tag list. It also returns the filtered total in articlesCount and only the matching articles in the articles array, which satisfies the described tag-filtering scenarios."
+  },
+  "usage": {
+    "total_tokens": 5479,
+    "prompt_tokens": 5323,
+    "completion_tokens": 156
+  },
+  "parse_error": false
+}

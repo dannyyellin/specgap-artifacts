@@ -1,0 +1,151 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "The fetch_pet_type_from_ninja function extracts multiple fields (temperament, slogan, group, color, skin_type, top_speed, diet, main_prey) from the Ninja API response to build the 'attributes' array, instead of only 'temperament' or 'group_behavior' as specified.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states that the 'attributes' field is obtained from either 'temperament' or 'group_behavior' fields from the Ninja API, preferring 'temperament' if both exist. The code extracts additional fields beyond these two, which is not required by the specification."
+      },
+      {
+        "id": "A2",
+        "description": "The lifespan field defaults to 0 if not returned by the Ninja API, instead of null as specified.",
+        "category": "COMPUTED_VALUES",
+        "reasoning": "The specification states that if the 'lifespan' field is not returned by the Ninja API, its value should be the JSON keyword null. The code sets lifespan to 0 in such cases."
+      },
+      {
+        "id": "A3",
+        "description": "The GET /pet-types endpoint supports filtering by 'id' as an integer, but returns empty array if the query parameter value cannot be converted to int, instead of ignoring or erroring.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states that malformed or nonsensical query strings return empty array. The code implements this behavior specifically for integer fields, which is an implementation detail not explicitly required."
+      },
+      {
+        "id": "A4",
+        "description": "The GET /pet-types endpoint returns empty array for any query parameter other than the specified fields, instead of returning 400 or error.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification does not specify behavior for unsupported query parameters. The code returns empty array, which is an addition."
+      },
+      {
+        "id": "A5",
+        "description": "The DELETE /pet-types/{id} endpoint deletes the pet-type without checking if there are pets of that type, contrary to specification.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states that a pet-type can only be deleted if there are no pets of that type, otherwise 400 is returned. The code deletes unconditionally without this check."
+      },
+      {
+        "id": "A6",
+        "description": "The POST /pet-types/{id}/pets endpoint returns 400 if a pet with the same name already exists, instead of 409.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification does not explicitly state the status code for duplicate pet names, but 409 is the standard for conflicts. The code returns 400, which is a deviation."
+      },
+      {
+        "id": "A7",
+        "description": "The PUT /pet-types/{id}/pets/{name} endpoint supports a 'picture-url' field to update the picture by fetching a new image, which is not specified.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states that the PUT request updates fields provided in the payload, but does not mention supporting a 'picture-url' field to fetch and store a new picture."
+      },
+      {
+        "id": "A8",
+        "description": "The GET /pictures/{picture-name} endpoint returns 400 if the picture name contains slashes or is empty, which is not specified.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states possible response codes 200, 400, 404 but does not specify validation on picture-name format. The code implements additional validation rejecting names with slashes."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "POST /pet-types does not validate that the JSON payload contains only the 'type' field and no others.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states the POST request provides a JSON object containing only the field named 'type'. The code checks that keys equal {'type'}, so this is implemented correctly. No omission."
+      },
+      {
+        "id": "O2",
+        "description": "DELETE /pet-types/{id} does not check if there are pets of that type before deletion and does not return 400 if pets exist.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states a pet-type can only be deleted if there are no pets of that type, otherwise 400 is returned. The code deletes unconditionally without this check."
+      },
+      {
+        "id": "O3",
+        "description": "POST /pet-types/{id}/pets does not check for duplicate pet names case-sensitively and returns 400 instead of 409 for duplicates.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification states no two pets of the same type in the same store can have the same name (case-sensitive). The code checks for exact match but returns 400 instead of 409 for duplicates."
+      },
+      {
+        "id": "O4",
+        "description": "POST /pet-types/{id}/pets does not validate that 'birthdate' is in DD-MM-YYYY format if provided.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification requires 'birthdate' to be of the form DD-MM-YYYY. The code validates this format using regex, so no omission."
+      },
+      {
+        "id": "O5",
+        "description": "PUT /pet-types/{id}/pets/{name} does not validate that the updated 'name' is unique among pets of the same type.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification requires pet names to be unique within a pet-type. The code checks for duplicate names excluding the pet being updated, so no omission."
+      },
+      {
+        "id": "O6",
+        "description": "PUT /pet-types/{id} is not implemented and returns 405 as required.",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification states PUT on /pet-types/{id} is not allowed and returns 405. The code has a global 405 handler for unsupported methods, so this is implemented."
+      },
+      {
+        "id": "O7",
+        "description": "POST /pet-types/{id}/pets returns 400 if the picture-url is not reachable or does not contain a .jpg or .png image.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The code implements this validation correctly."
+      },
+      {
+        "id": "O8",
+        "description": "All endpoints requiring owner authentication verify credentials by contacting the registry service and enforce authorization.",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The code calls the registry /verify endpoint and enforces owner privileges as required."
+      },
+      {
+        "id": "O9",
+        "description": "GET /pet-types supports filtering by 'hasAttribute' query parameter as specified.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The code implements filtering by 'hasAttribute' correctly."
+      },
+      {
+        "id": "O10",
+        "description": "GET /pet-types/{id}/pets supports query parameters 'birthdateGT' and 'birthdateLT' to filter pets by birthdate.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification requires support for these query parameters. The code does not implement filtering by birthdate in GET /pet-types/{id}/pets, returning all pets unfiltered."
+      },
+      {
+        "id": "O11",
+        "description": "GET /pet-types/{id}/pets returns 404 if the pet-type does not exist.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The code returns 404 if pet-type not found, as required."
+      },
+      {
+        "id": "O12",
+        "description": "GET /pet-types/{id}/pets/{name} returns 404 if the pet or pet-type does not exist.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The code returns 404 if pet-type or pet not found, as required."
+      },
+      {
+        "id": "O13",
+        "description": "DELETE /pet-types/{id}/pets/{name} requires owner authentication and returns appropriate status codes.",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The code enforces owner authentication and returns 204 on success, 401/403/404 as appropriate."
+      },
+      {
+        "id": "O14",
+        "description": "PUT /pet-types/{id}/pets/{name} requires owner authentication and returns appropriate status codes.",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The code enforces owner authentication and returns 200 on success, 400/401/403/404/415 as appropriate."
+      },
+      {
+        "id": "O15",
+        "description": "GET /pictures/{picture-name} returns 200 with the image if found, 404 if not found, and 400 for invalid picture names.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The code implements these response codes as required."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 13891,
+    "prompt_tokens": 11854,
+    "completion_tokens": 2037
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O1 describes the removed constraint preventing deletion of a pet-type when pets of that type exist, which is exactly R5."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "O2 describes missing birthdateGT/birthdateLT filtering on the pets query endpoint, which is exactly the behavior removed in R7."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 concerns PUT /pet-types/{id} returning 405, which is unrelated to any of R4\u2013R7."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O4 describes handling lifespan ranges by choosing the minimum value, which is explicitly the removed behavior in R6."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 is about null handling for missing lifespan values, which is not covered by the removed lifespan range behavior in R6."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "O6 refers to attribute extraction tokenization rules, which overlaps with R4's removal of temperament/group_behavior to attributes extraction rules, but it does not specifically mention temperament/group_behavior."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1125,
+    "prompt_tokens": 731,
+    "completion_tokens": 394
+  }
+}

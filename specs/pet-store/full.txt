@@ -1,0 +1,291 @@
+(I) This file contains requirements for an application called pet-store-app.
+This app consists of 3 microservices described below: registry, pet-store, and pet-order.
+Note: All of these microservices run in a Docker containers built from a Dockerfile.  The entire application is
+set up and run using docker-compose.yml.  For testing purposes, the services run on host 0.0.0.0 and are sent requests
+using http (not https).  For those services requiring authentication, HTTP Basic Authentication is used.
+
+In the following microservice descriptions, we assume the following Status Code Guidelines whether stated explicitly in
+the request descriptions or not:
+200 - OK (successful GET, PUT, or other operation)
+201 - Created (successful POST creating a resource)
+204 - No Content (successful DELETE)
+400 - Bad Request (invalid input, validation error)
+401 - Unauthorized (invalid username or password)
+403 - Forbidden (does not have privileges to perform this operation)
+404 - Not Found (resource does not exist)
+405 - Method Not Allowed (method is not supported for requested resource)
+409 - Conflict (resource already exists)
+415 - Unsupported Media Type (missing or invalid Content-Type header)
+500 - Internal Server Error (database or server error)
+503 - Service Unavailable (external service is unable to handle request)
+- All resource ids must be unique and cannot be reused.
+- If a service uses an external API, and it cannot handle the request, then 503 is returned.
+- Other server errors (database crashing,...) return 500
+- All methods (POST and PUT) requiring a JSON payload can return 415.
+- When a user is registering, then a missing username or password returns 400. If a user is verifying (via Header in
+  the message), then a missing or incorrect username or password returns 401 (Unauthorized).
+- All methods can return a 500 response as there always may be a server issue.
+- Note that if a REST operation is not listed below, then a 405 will be returned.
+- The code does not need to address race conditions.
+
+{"Name": "registry",
+"Description": "Responsible for user registration and password management. Users can register with a username and
+password. Other microservices can verify user credentials by contacting the registry.
+The service also verifies whether the username/password is owner of the pet-store, who has special privileges.
+Users, including the owner, can reset their passwords.",
+
+"Resources": "/users, /users/{username}, /users/{username}/password, /verify.
+
+/users is a collection of user documents.  Each user document contains the fields 'username' and 'password' and
+'privileged'.
+A username is a unique string between 3 and 50 characters, containing only letters, numbers, underscores, and hyphens.
+Usernames are case-sensitive. No two users can have the same username. The 'privileged' field is a boolean.  It is True
+only if the user has special privileges, specifically the owner of the store.
+A password must be at least 8 characters, no more than 128 characters, and must contain at least one uppercase letter,
+one lowercase letter,and one digit.
+/verify verifies whether a given username and password is a registered user.  The username 'OwnerOfStore_1_9'
+with the password 'X566Yef22Nm' is the only username/password with special privileges."
+
+"REST requests":
+"All REST requests will return the appropriate status codes given above in Status Code Guidelines. Additional details
+are provided in the request descriptions below.
+
+(1) POST request on /users. The POST request provides a JSON object payload containing the fields 'username' and
+'password'. If successful the server returns the JSON object containing the field 'username'.
+Possible return codes: 201, 400, 409, 415, 500. If the username does not meet username requirements (provided above),
+400 is returned. If the password does not meet validation requirements or the payload is malformed 400 is returned. If
+a user with the given username already exists, 409 is returned.
+(2) POST request on /verify. This endpoint is used by other microservices to verify user credentials. The POST
+request provides a JSON object payload containing 'username' and 'password' fields. The response is a JSON object with
+the fields 'username', 'valid' (boolean), and 'privileged' (boolean). The 'valid' field is True if the username with the
+given password is a registered user.  Otherwise, if the username does not exist or the password is incorrect, the 'valid'
+is False.  If the username is privileged (e.g., the owner) and the password is correct, the 'privileged' field is True.
+Otherwise, it is false.  Possible return codes: 200 (on success), 401, 415, 500.  If username or password are
+missing from the request, 401 is returned. If the username or password is incorrect, 401 is returned.
+(3) PUT request on /users/{username}/password. This endpoint allows a user to reset/change their password. The PUT
+request provides a JSON object payload containing 'oldPassword' and 'newPassword' fields. Both fields are required. The
+server verifies the oldPassword matches the stored password for the user, and if so, updates to the newPassword. If
+successful, returns 200 with a JSON object containing 'message' and 'username' fields. Possible return codes: 200, 400,
+401, 404, 415. If either password field is missing or newPassword does not meet validation requirements, 400 is
+returned. If oldPassword and newPassword are identical, 400 is returned with message 'New password
+must be different from old password'. If the oldPassword is incorrect, 401 is returned. If the username does not exist,
+404 is returned.
+(4) DELETE request on /users/{username}. Deletes the user account. The DELETE request provides a JSON object payload
+containing the 'password' field. It returns a JSON object with 'message' and 'username' fields. Possible return codes:
+200, 401, 404, 415, 500. If username or password field is missing or is incorrect, 401 is returned. If the username
+does not exist, 404 is returned.",
+
+"Implementation details": "All passwords must be hashed using bcrypt before storage. The bcrypt cost factor should be at
+least 10. Passwords are never returned in any API response. When verifying credentials by /verify, the response
+should not reveal whether the username exists or the password is wrong - both cases return the 'valid' field with the
+value False and give the same
+message 'Invalid credentials'. This prevents username enumeration attacks.  It stores its data in a MongoDB running as
+a separate service.  See 'Deployment' below for details.
+
+All JSON request payloads must have Content-Type: application/json header, otherwise 415 is returned.",
+
+"Deployment": "The registry microservice runs in a Docker container. For development/testing, it runs on host
+0.0.0.0 and listens on container port 8080. External requests will be forwarded from host port 80.   It stores data
+(usernames and passwords) in a MongoDB which is named 'mongoReg' in the docker-compose.yml. That MongoDB listens on port
+27017.  The owner's username and password hash (given above) must be stored in the database upon initialization.
+However, the owner may subsequently change his password.  Other
+microservices can contact this registry service at http://registry:8080/<resource> when running in Docker.
+The service should be named 'registry' in docker-compose.yml."
+}
+
+{"Name": "pet-store",
+"Description": "Responsible for pet-store inventory. The pet-store owner can perform CRUD operations on pet-types
+(e.g., the type of pet, such as poodles, goldfish, siamese cats,…) and can perform CRUD operations on individual pets
+of a given pet-type. All other users (need not be registered users) can only perform GET operations on pet-types and
+pets. Each pet-type and individual pet has fields specifying information about the pet-type or individual pet.
+There may be multiple pet-stores with the same owner. They function independently and maintain separate inventories. The
+code for each store is the same but are differentiated by their STORE_NUM.  See 'Deployment' below for additional
+details.",
+
+"Resources": "/pet-types, /pet-types/{id}, /pet-types/{id}/pets, /pet-types/{id}/pets/{name}, /pictures/{picture-name}.
+
+An {id} is a unique number. An id cannot be reused, even if the pet-type is deleted.  Each pet-type (/pet-types/{id})
+is a JSON object containing the fields: 'id': number, 'type': string, 'family': string, 'genus': string,
+'attributes': array (of string), and 'lifespan': int. No two pet-types can have the same 'type'. Attempting to create a
+duplicate returns 409
+A {name} is a unique string, providing the name of a specific pet of a specific type. No two pets of the same type in the
+same store can have the same name (they are case-sensitive). Each pet (/pet-types/{id}/pets/{name}) consists of a JSON
+document containing the fields: 'name':string, 'birthdate':string, and 'picture':string. A birthdate is of the form:
+DD-MM-YYYY.
+Each picture (/pictures/{picture-name}) is a string referring the file name which stores the image."
+
+"REST requests":
+"All REST requests will return the appropriate status codes given above in Status Code Guidelines. Additional details
+are provided in the request descriptions below.
+
+(1) POST request on /pet-types.  Only the store owner can issue a POST request (see below Implementation Details). The
+POST request provides a JSON object payload that contains only the field named 'type'.  If successful the server returns
+the JSON pet-type object containing all the fields. The values of the fields other than 'id' &
+'type' will be obtained from the Ninja-API (see below Implementation details). Possible return codes: 201,400,401,403,409,
+415,500,503. If the Ninja API cannot find the pet with the given type, 400 is returned. If the user cannot be authenticated
+or if he is authenticated but not authorized to perform the request, 401 or 403 respectively is returned. If the POST
+request is for a pet-type that already exists,then 409 is returned. If Ninja API has an error then 503 is
+returned. For other server errors 500 is returned.
+The attributes field is obtained from the field named either 'temperament' or 'group_behavior'
+returned by the Ninja API.  If none of these fields are returned by the Ninja API, then the 'attributes' field is the
+empty array. If both are listed then just use 'temperament'. Each word in the 'temperament' or 'group_behavior' field
+returned by Ninja API becomes one string in the 'attributes' field array. For example, if the returned 'temperament' is
+'Gentle and smart, but stubborn', then 'attributes' would be the array ['Gentle', 'and', 'smart', 'but', 'stubborn'].
+Split on whitespace but do not include punctuation except hyphens.  If the
+'lifespan' field is not returned by the Ninja API, then its value is the JSON keyword null.
+
+(2) GET request on /pet-types. All users can issue this request.  A query string may be given. It will be one of two
+forms.  One form is '<field>=<value>', where field is one of {'id', 'type', 'family', 'genus', 'lifespan'}.  It may
+also be of the form 'hasAttribute=<attribute>', where <attribute> refers to a string in the 'attributes' array of
+the pet-type.   Examples of query strings include 'family=Canidae' or 'hasAttribute=active'.  It returns
+a JSON array of pet-types.  Possible response codes: 200.
+
+(3) GET on /pet-types/{id}. If successful it returns the JSON representation of the pet-type of the given id.
+Possible response codes: 200, 404.
+
+(4) DELETE on /pet-types/{id}. Only the store owner can issue a DELETE request.  If successful it returns with no
+content.  A pet-type can only be deleted if there are no pets of that type. Otherwise, it returns 400.
+Possible response codes: 204, 401, 404.
+
+(5) PUT request on /pet-types/{id} is not allowed by anyone and returns 405 (Method Not Allowed).
+
+(6) POST request on /pet-types/{id}/pets. Only the store owner can issue a POST request. The POST request provides a
+JSON object payload that contains the 'name' field. Optionally it contains 'birthdate' and 'picture-url' fields. The
+'birthdate' is of the form DD-MM-YYYY.  The 'picture-url' field gives an url containing a .jpg or .png image of the pet.
+If successful it returns the JSON pet object containing the 'name', 'birthdate' and 'picture' fields. The
+birthdate field will be 'NA' if it was not supplied. The 'picture' field will be 'NA' if the 'picture-url' field was not
+supplied.  Otherwise, the server code will fetch the picture at the given url and store the image in a file. The server
+can choose the name of the file (as long as it does not conflict with an existing file).   The 'picture'
+field will be the name of that file on the server where the picture is stored. If the given url is not reachable or does
+not contain a .jpg or .png image, then 400 is returned.  Possible response codes: 201, 400, 401, 403, 415.
+
+(7) GET request on /pet-types/{id}/pets.  If successful, it returns a JSON array of pets of this pet-type.
+The request supports query strings of the form 'birthdateGT=<date>' or 'birthdateLT=<date>' which returns only those
+pets with specified birth dates strictly after or strictly before the given date. <date> is of the form
+DD-MM-YYYY. A query string can also be of the form 'birthdateGT=<date>&birthdateLT=<date>'.  Example query strings
+include: 'birthdateGT=27-05-2021' and 'birthdateLT=05-10-2023' and 'birthdateGT=27-05-2021&birthdateLT=05-10-2023'.
+Possible response codes: 200, 404.
+
+(8) GET request on /pet-types/{id}/pets/{name}. The server returns the JSON for the pet object with the given name.
+Possible response codes: 200, 404.
+
+(9) DELETE request on /pet-types/{id}/pets/{name}. Only the store owner can issue a DELETE request. The server deletes the
+pet with the given name from the collection and returns with no content (the empty string). Possible response codes:
+204,401,403,404.
+
+(10) PUT request on /pet-types/{id}/pets/{name}. Only the store owner can issue a PUT request. The server updates the pet
+resource with the new pet object provided in the payload. The payload must include the name field of the pet object
+(the name field can also be updated). The PUT request updates only the fields provided in the payload. Omitted fields
+(except name) retain their current values. Possible response codes: 200,400,401,403,404,415.
+
+(11) GET request on /pictures/{picture-name} resource. The server returns the image associated with that picture-name.
+Possible response codes: 200,400,404. All users can send this request."
+
+"Implementation details": "For purposes of testing and this implementation, we assume that HTTP will be used (not HTTPS).
+Any request requiring
+owner credentials must include a header of the form 'Authorization: Basic base64(<username>:<password>)' where <username>
+and <password> are the owner's username and password. The service will send a request to the registry service to
+verify the owner's username and password.
+
+Upon receiving a POST request of a given pet-type, the service must invoke the API at 'https://api.api-ninjas.com/v1/animals'
+supplying it with the pet-type: 'https://api.api-ninjas.com/v1/animals?name=<pet-type>'. The response is an array
+of JSON objects. The service needs to pick the one whose 'name' field matches the pet-type (case-insensitive). Once the
+service obtains the
+JSON object, it extracts the family, genus, and lifespan (if supplied) fields. If the lifespan returned from Ninja API
+is a range (e.g., 4-7 years) choose the minimum (e.g., 4). Always extract the first integer. It also uses the
+'group_behavior' field (if supplied) to build 'attributes' field of the pet-type object, as described above.
+The API key for Ninja is given in the environment variable 'NINJA_API_Key'.",
+
+"Deployment": "The pet-store microservice runs in a Docker container. There are one or more pet-stores, each running in a
+separate container.  They all store their data in the same MongoDB.  In the Docker-compose.yml file, this MongoDB
+is given the service name 'mongoPetSt' and listens at container port 27017. The different pet stores save their data in
+different collections in the MongoDB. The docker-compose file will pass each one an environment variable on starting up.
+The variable is 'STORE_NUM' and its value will be an integer, such as '1' or '2', etc. They use this environment variable to
+name their collections differently.   Each pet store runs the same code except storing its data in a different collection.
+
+Each pet-store microservice runs in a Docker container. For development/testing, it runs on host
+0.0.0.0 and listens on container port 8000. External requests will be forwarded from host port 500<X>, where <X> is
+STORE_NUM of the store.   In the Docker-compose.yml file, each pet-store is given the service name pet-store<X> and
+other microservices can contact pet-store numbered <X> at http://pet-store<X>:8000/<resource>.
+The service should be named 'pet-store<X>' in docker-compose.yml."
+}
+
+{"Name": "pet-order",
+"Description": "Allows registered users only to purchase pets, and allows the owner to review all purchases.  This
+service is not complete production-ready as it does provide payment details or payment processing. But it provides
+many other of the main functions of a real pet-store purchase service."
+
+"Resources": " /purchases, /transactions, /transactions/{id}.
+/purchases is a collection of purchase JSON documents. Each purchase document contains the fields 'purchaser': string
+(the name of the purchaser),
+'pet-type': string, 'store': number, 'pet-name': string,'purchase-id': string.  The 'store' field, which is an integer,
+and the 'pet-name' fields are optional.  The 'pet-name' field can only be supplied if the 'store'
+field is supplied. The 'purchase-id' is a unique string and cannot be reused.
+/transactions is a collection of transaction JSON documents. Each transaction document contains the fields 'purchaser':
+string (the name of the purchaser), 'pet-type': string, 'store': number, and 'purchase-id': string."
+
+"REST requests":
+"All REST requests will return the appropriate status codes given below in Status Code Guidelines. Additional details
+are provided in the request descriptions below.
+
+(1) POST request on /purchases. Only registered users, providing their username and password,can issue a POST request
+(see Implementation Details below).  The POST request provides a JSON purchase object as the  payload.  It does not contain
+the “purchase-id” field but must contain “purchaser” & “pet-type” fields. If successful the server returns
+the status code 201 with the JSON purchase object including the “purchase-id” field.  The “store” and “pet-name” fields
+are returned even if they were not included in the request. Possible error status codes returned: 400, 401, 403,415 and
+500.   If
+there does not exist a pet-type of that type then 400 is returned with the message {“error”: “No pet of this type is
+available”}. Details on how a pet is chosen when there are multiple options is given below in Implementation details.
+For every successful POST request the service stores a transaction corresponding to this purchase in a MongoDB.
+In the Docker-compose.yml file, this MongoDB is given the service name 'mongoOrd' and listens at container port 27017.
+
+No other requests are allowed on /purchases.
+
+(2) GET request on /transactions. Only the store owner can issue a GET request.  The service returns a JSON array of
+transactions with status code 200.  The only error status code is 401 'unauthorized'.
+A query string may be given. It will be of the form '<field>=<value>', where field is one of fields of the
+transaction JSON objects.  It may also be a conjunction of such strings.
+
+No other requests are allowed on /transactions.
+
+(3) GET request on /transactions/{id}. Only the store owner can issue a GET request.  The service returns a JSON Object
+of the specified transaction with status code 200.  Possible error status codes returned: 400, 401 and 404.",
+
+"Implementation details": "Authenticating the owner is the same as described above for the pet-store requests.
+Authenticating a non-owner user is similar: Any request requiring user
+credentials must include a header of the form 'Authorization: Basic base64(<username>:<password>)' where <username>
+and <password> are the user's username and password. The service will send a request to the registry service to
+verify the user's username and password.
+
+When a POST request is received, the server must: (1) Check if a pet is available according to the request (see below).
+(2) If not, then return 400 with an error message. Otherwise, record the pet chosen. (3) DELETE the chosen pet from the
+appropriate pet-store. (4) Store the transaction JSON in the transactions MongoDB collection with all fields. (5) Return
+the purchase JSON object to the customer.
+For step (1), a pet is selected according to the following rules:  If the store and pet-name are indicated in the
+request, then the pet of that name must exist in the given store, and that pet is chosen.
+If a store is indicated in the request but no pet-name is given, then there must be at least one pet of the given
+pet-type in the store.  Choose a random pet from the ones available. If no store is indicated in the request, then
+there must be at least one pet of that type in one of the stores. Choose a random pet from the ones available.
+If no pet meets these criteria then return 400."
+
+"Deployment": "The pet-order microservice runs in a Docker container.  It stores data in a MongoDB. In the
+Docker-compose.yml file, this MongoDB is given the service name 'mongoOrd' and listens at container port 27017.
+For development/testing, it runs on host 0.0.0.0 and listens on container port 80. External requests will be forwarded
+from host port 6000.   In the Docker-compose.yml file, this microservice is given the service name 'Order' and other
+microservices can contact the Order service at http://pet-order:80/<resource>."
+}
+
+(II) Code Generation Guidelines:
+Code Generation Guidelines
+•	Each microservice is to be written in Python.
+•	Besides generating the code, the Python packages that need to be installed must be listed in a comment at the
+    beginning of the code
+•	If a query string is mal-formed or nonsensical, then the empty array is returned (no objects satisfy the query string).
+•	If a microservice requires data that another microservice is responsible for, it invokes a GET request on that
+    microservice to retrieve that data when it needs it.  It does not replicate and store the data locally.
+•	The generated code handles REST API exceptions and returns the appropriate REST (HTTP) status code as described above.
+•	Each microservice will run in its own Docker container.
+•	The code you generate should be complete and executable. The generated code should not include any text other than
+    comments.  In other words, the generated code should be executable without having to strip any extraneous text from
+    the beginning or end of the code.
+•	The Content-Type headers will be 'application/json' for JSON objects and 'image/jpeg' or 'image/png' for images.

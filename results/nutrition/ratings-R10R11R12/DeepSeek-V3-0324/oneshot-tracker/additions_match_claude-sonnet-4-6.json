@@ -1,0 +1,24 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Storing a 'privileged' field from token validation does not correspond to any of the three spec requirements about removed constraints."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Implementing a rounding function for 2 decimal places does not correspond to any of the three spec requirements about removed constraints."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 669,
+    "prompt_tokens": 515,
+    "completion_tokens": 154
+  }
+}

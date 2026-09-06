@@ -1,0 +1,23 @@
+{
+  "req_id": 28,
+  "requirement_vague": "A superuser (admin@example.com / password123) creates 2 random users and retrieves all. Verify the response.",
+  "requirement_precise": "Authenticate as the superuser (use admin@example.com / password123) to obtain an access token. Using that superuser access token, create two distinct users via the public create-user API (each with a unique email and password). Store the returned user IDs and emails. Then, using the same superuser access token, retrieve the list of all users. Verify the response status is 200. Verify the response JSON contains a top-level 'data' collection and a top-level 'count' key. Verify that both created users appear in the 'data' collection by checking that their emails are present. Verify that for each created user, the email in the list matches the email used during creation.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": [
+      "POST /api/v1/login/access-token",
+      "POST /api/v1/users/",
+      "GET /api/v1/users/",
+      "startup init_superuser()"
+    ],
+    "code_reference": "FIRST_SUPERUSER = \"admin@example.com\"\nFIRST_SUPERUSER_PASSWORD = \"password123\"\n...\n@api_router.post(\"/users/\", response_model=UserRead)\ndef create_user(..., current_user: User = Depends(get_current_active_superuser)):\n...\n@api_router.get(\"/users/\", response_model=UsersRead)\ndef read_users(..., current_user: User = Depends(get_current_active_superuser)):\n    users = session.exec(select(User)).all()\n    return UsersRead(data=users, count=len(users))",
+    "reasoning": "The code initializes the superuser with the required credentials, provides token-based authentication, restricts user creation and user listing to active superusers, and returns the user list with top-level 'data' and 'count'. Created users are persisted and listed via GET /api/v1/users/, where each entry includes the user's email, allowing verification that both created users appear with matching emails."
+  },
+  "usage": {
+    "total_tokens": 6094,
+    "prompt_tokens": 5848,
+    "completion_tokens": 246
+  },
+  "parse_error": false
+}

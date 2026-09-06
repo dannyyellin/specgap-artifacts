@@ -1,0 +1,14 @@
+Timestamp: 2026-06-02 09:30:25
+Detector:  claude-sonnet-4-6
+Service:   fastapi  Round: 1  Removals: [4, 10, 13, 30, 35, 47]
+Method:    oneshot-warehouse
+
+Tokens: prompt=14778, completion=1442, total=16220
+Additions: 1
+Omissions: 3
+
+  A A1: GET /api/v1/password-recovery-html/{email} endpoint is implemented as a formal route
+
+  O O1: GET /api/v1/items/{item_id} does not enforce ownership-based access control: a non-superuser can read items they do not own without receiving 400 'Not enough permissions'
+  O O2: POST /api/v1/users/signup returns detail 'User with this email already exists' instead of 'The user with this email already exists in the system'
+  O O3: The password recovery email is not actually delivered to the mailcatcher service via SMTP; the code incorrectly POSTs a JSON payload to the mailcatcher HTTP API

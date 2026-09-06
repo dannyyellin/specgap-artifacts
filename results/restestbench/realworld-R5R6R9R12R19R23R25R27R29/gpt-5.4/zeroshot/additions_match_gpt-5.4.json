@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R12",
+        "label": "PARTIAL",
+        "reasoning": "It concerns GET /api/articles filtering and pagination, but it explicitly lacks the required tag filter behavior that R12 tests."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No listed requirement checks favorited or favoritesCount fields in article or comment responses."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the requirements mention any CORS behavior."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements cover updating user fields beyond creation, JWT contents, feed behavior, article deletion, or uniqueness checks."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "It discusses missing article retrieval behavior, but R5 specifically requires deleted articles to return 200 with an empty object rather than a 404."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2105,
+    "prompt_tokens": 1808,
+    "completion_tokens": 297
+  }
+}

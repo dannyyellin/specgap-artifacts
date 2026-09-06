@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns bcrypt cost factor, which does not correspond to any of the listed removed requirements."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This describes password-change side effects on a privileged flag, which is unrelated to removed password validation rules, /verify error-message behavior, or owner pre-registration removal."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R3",
+        "label": "PARTIAL",
+        "reasoning": "It relates to owner privilege/account creation behavior during registration rather than initialization, so it only partially overlaps with removal of owner pre-registration on initialization."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R3",
+        "label": "PARTIAL",
+        "reasoning": "It concerns initialization-time owner seeding/reset behavior, but focuses on resetting an existing owner rather than specifically pre-registering the owner."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 954,
+    "prompt_tokens": 691,
+    "completion_tokens": 263
+  }
+}

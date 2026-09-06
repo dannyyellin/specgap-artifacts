@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "Automatically creating an Owner account relates to the removed Owner special case, but it is not the same behavior as removing that special-case logic."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Token expiration and iat/exp claim handling do not correspond to removing bcrypt, removing the Owner special case, or removing username uniqueness."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "Making Owner credentials configurable still concerns the Owner special case, but it does not describe removing that special case."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Returning stored password fields in a helper output does not match any of the listed removals in the specification."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 874,
+    "prompt_tokens": 619,
+    "completion_tokens": 255
+  }
+}

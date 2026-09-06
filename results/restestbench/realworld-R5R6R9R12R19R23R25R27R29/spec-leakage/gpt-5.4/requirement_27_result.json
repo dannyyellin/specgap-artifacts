@@ -1,0 +1,14 @@
+{
+  "req_id": 27,
+  "requirement_vague": "Verify empty feed is returned when user follows nobody",
+  "requirement_precise": "Create user1 (username: 'emptyfeeduser1', email: 'emptyfeeduser1@test.com', password: 'pass123'). Create user2 (username: 'emptyfeedauthor1', email: 'emptyfeedauthor1@test.com', password: 'pass123'). User2 creates an article 'Article by User2'. User1 (who follows nobody) GETs /api/articles/feed. Verify articlesCount is 0 and articles array is empty. This tests the empty follows check that returns empty result when user has no follows.",
+  "verdict": "NOT_LEAKED",
+  "spec_evidence": null,
+  "reasoning": "The reduced specification never mentions the /api/articles/feed endpoint or any behavior for feeds based on followed users. Although it specifies follow/unfollow behavior and article listing/filtering, it does not state that a personalized feed exists or that it should be empty when a user follows nobody.",
+  "parse_error": false,
+  "usage": {
+    "total_tokens": 3252,
+    "prompt_tokens": 3174,
+    "completion_tokens": 78
+  }
+}

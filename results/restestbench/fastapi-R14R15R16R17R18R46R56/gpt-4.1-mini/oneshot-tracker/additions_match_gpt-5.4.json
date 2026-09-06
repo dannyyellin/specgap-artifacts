@@ -1,0 +1,72 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns item permission errors for other users, while none of the listed requirements describe that behavior."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about insufficient privileges when accessing another user's data, which is not covered by any listed requirement."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This describes preventing a superuser from deleting themselves, which none of the listed requirements specify."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R56",
+        "label": "PARTIAL",
+        "reasoning": "It matches the password length validation aspect behind the 422 response, but does not mention the specific reset request with token 'fake-token' and password '1234567'."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about item title length validation, which none of the listed requirements mention."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Although authentication appears in several requirements, none specifically require verifying bcrypt hashing or JWT implementation details."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": "R14",
+        "label": "PARTIAL",
+        "reasoning": "It supports the required superuser login credentials, but does not cover obtaining a token, calling the test token endpoint, or verifying the response."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": "R17",
+        "label": "PARTIAL",
+        "reasoning": "It matches the existence of the specified superuser credentials used in the flow, but not the password recovery HTML retrieval, reset, and login verification steps."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": "R18",
+        "label": "PARTIAL",
+        "reasoning": "It aligns with the required superuser credentials for authentication, but not the invalid-token reset-password behavior and expected 400 response."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": "R46",
+        "label": "PARTIAL",
+        "reasoning": "It matches the presence of the superuser credentials needed later in the scenario, but not the user deletion and item-not-found verification behavior."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1888,
+    "prompt_tokens": 1274,
+    "completion_tokens": 614
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 discusses a DELETE method handler for /logs/{id}, which is unrelated to the date format removal or notification removal described in R12 and R13."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A2 discusses a PUT method handler for /logs/{id}, which does not correspond to removing a date format or removing a notification reference as described in R12 and R13."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A3 discusses a DELETE method handler for /logs, which is unrelated to the date format removal or notification removal described in R12 and R13."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A4 discusses a PUT method handler for /logs, which does not correspond to removing a date format or removing a notification reference as described in R12 and R13."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1002,
+    "prompt_tokens": 676,
+    "completion_tokens": 326
+  }
+}

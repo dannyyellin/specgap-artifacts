@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "ObjectId format validation is unrelated to any of the four spec requirements about removed field types, error codes, fine computation formula, or cross-service calls."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "The presence of date parsing and overdue checking in the code partially relates to R6 (removed fine computation formula involving days overdue), but A2 describes retained functionality rather than removed formula logic."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R7",
+        "label": "PARTIAL",
+        "reasoning": "Date parsing and overdue checks could be remnants of cross-service fine computation logic that R7 says should be removed, but A2 does not directly describe a cross-service call to Borrows."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "A3 mentions error handlers including 405 and 500 but not 415, while R5 specifically concerns the removal of the 415 Unsupported Media Type error code; the overlap is only partial since 415 is not among the handlers described."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 982,
+    "prompt_tokens": 618,
+    "completion_tokens": 364
+  }
+}

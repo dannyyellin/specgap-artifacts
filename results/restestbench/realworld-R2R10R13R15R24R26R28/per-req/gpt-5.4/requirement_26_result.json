@@ -1,0 +1,22 @@
+{
+  "req_id": 26,
+  "requirement_vague": "Verify multiple comments can be added to the same article with unique IDs",
+  "requirement_precise": "Create user1 (username: 'multicommentuser1', email: 'multicommentuser1@test.com', password: 'pass123'). User1 creates an article 'Multi Comment Article'. User1 adds comment 'First comment'. User1 adds comment 'Second comment'. User1 adds comment 'Third comment'. GET /api/articles/{slug}/comments. Verify 3 comments are returned. Verify each comment has a unique id (no duplicates). Verify the comment bodies are preserved correctly. This tests comment creation and persistence with multiple comments.",
+  "removed": true,
+  "omissions": [],
+  "implementation": {
+    "location": [
+      "POST /api/articles/{slug}/comments (add_comment)",
+      "GET /api/articles/{slug}/comments (get_comments)",
+      "Comment SQLModel definition"
+    ],
+    "code_reference": "class Comment(SQLModel, table=True):\n    id: Optional[int] = Field(default=None, primary_key=True)\n...\ncomment = Comment(body=body, created_at=ts, updated_at=ts, author_id=current_user.id, article_id=article.id)\nsession.add(comment)\nsession.commit()\n...\ncomments = sorted(article.comments, key=lambda c: c.id or 0)\nreturn {\"comments\": [comment_dict(c, viewer, session) for c in comments]}",
+    "reasoning": "The service persists each new comment as a separate Comment row linked by article_id, so multiple comments can be added to the same article. Because Comment.id is an auto-generated primary key and GET /api/articles/{slug}/comments returns all article.comments with each comment's id and body, three added comments will be returned with distinct IDs and preserved bodies."
+  },
+  "usage": {
+    "total_tokens": 5535,
+    "prompt_tokens": 5307,
+    "completion_tokens": 228
+  },
+  "parse_error": false
+}

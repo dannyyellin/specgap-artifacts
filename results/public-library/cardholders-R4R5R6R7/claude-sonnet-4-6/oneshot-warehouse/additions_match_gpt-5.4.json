@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 concerns restricting GET /cardholders query filtering fields, which does not correspond to removed field type declarations, removal of 415, removal of a fine formula, or removal of a Borrows cross-service call."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A2 is about validating consistency between the URL id and payload id on PUT /cardholders/{id}, which is unrelated to any of the listed removals in the specification."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A3 describes returning 400 when no updatable fields are provided in a PUT payload, which does not match any spec requirement about removed types, removed 415, removed fine computation formula, or removed Borrows calls."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 860,
+    "prompt_tokens": 620,
+    "completion_tokens": 240
+  }
+}

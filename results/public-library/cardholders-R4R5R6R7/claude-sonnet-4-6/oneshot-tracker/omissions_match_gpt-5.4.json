@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O1 concerns query filtering by id on GET /cardholders, which is unrelated to any reference requirement."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O2 directly discusses the removed fine computation formula of days overdue multiplied by $0.50."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O3 also describes the missing days-overdue times $0.50 fine formula specified in the reference."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O4 directly concerns support for returning 415 Unsupported Media Type, which the reference says was removed."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "O5 partly overlaps with the removed fine formula because it critiques overdue fine computation, but it adds extra assumptions about returned books not stated in the reference."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1197,
+    "prompt_tokens": 889,
+    "completion_tokens": 308
+  }
+}

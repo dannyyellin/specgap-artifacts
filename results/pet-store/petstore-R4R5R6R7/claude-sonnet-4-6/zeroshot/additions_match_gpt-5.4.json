@@ -1,0 +1,54 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns POST /pet-types payload validation for extra fields, which is unrelated to any of the listed removed behaviors."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "It directly concerns attributes extraction logic and contrasts the code's custom multi-field extraction with the removed temperament/group_behavior-based extraction rules."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "It is about attributes construction behavior, but deduplication is an extra detail rather than the core removed temperament/group_behavior extraction rule itself."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "It concerns lifespan handling, but specifically missing-value defaulting to 0 versus null rather than the removed lifespan range parsing rules."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "It also concerns lifespan handling, but only indirectly overlaps because it is about serialization defaulting missing lifespan to 0, not the removed range extraction behavior."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about PUT pet payload fields and has no connection to attributes extraction, pet-type deletion constraints, lifespan range handling, or birthdate query filtering."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is a deployment hostname mismatch and does not correspond to any of the listed removed spec requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1442,
+    "prompt_tokens": 994,
+    "completion_tokens": 448
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "req_id": 23,
+  "requirement_vague": "Retrieving a registered user by id should work. Admin credentials: (admin@example.com / password123)",
+  "requirement_precise": "Register a new normal user. Authenticate as the superuser (admin@example.com / password123) to obtain an access token. Then retrieve that registered user by its ID using the superuser access token. Verify the HTTP response status is a success (status code in the 200-299 range). Verify the response body contains an 'email' field equal to the email of the user that was created, the 'id' matches the created user's id, and 'is_active' is true.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": [
+      "POST /api/v1/users/signup",
+      "POST /api/v1/login/access-token",
+      "GET /api/v1/users/{user_id}",
+      "init_db"
+    ],
+    "code_reference": "FIRST_SUPERUSER = \"admin@example.com\"\nFIRST_SUPERUSER_PASSWORD = \"password123\"\n...\n@api_router.get(\"/users/{user_id}\", response_model=UserPublic)\ndef read_user_by_id(...):\n    user = session.get(User, user_id)\n    ...\n    if not current_user.is_superuser and current_user.id != user_id:\n        raise HTTPException(status_code=403, detail=\"The user doesn't have enough privileges\")\n    return user",
+    "reasoning": "The code supports registering a normal user, authenticating with the configured admin credentials to obtain a bearer token, and retrieving a user by ID via GET /api/v1/users/{user_id}. The response model includes id, email, and is_active, and for an existing registered user fetched by a superuser the endpoint returns the user object with a successful 200 response and is_active set to true from signup."
+  },
+  "usage": {
+    "total_tokens": 4970,
+    "prompt_tokens": 4729,
+    "completion_tokens": 241
+  },
+  "parse_error": false
+}

@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Filtering by nutritional fields does not correspond to any of the three spec requirements about protein exclusion, owner-only restriction removal, or user_id token validation."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Sorting by user_id is not related to any of the three spec requirements listed."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Allowing partial nutritional fields in POST /profiles does not correspond to any of the three spec requirements about protein exclusion, owner-only restriction, or user_id from token."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 805,
+    "prompt_tokens": 573,
+    "completion_tokens": 232
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Using bcrypt rounds of 12 versus a minimum of 10 is unrelated to removed password validation rules, removed /verify anti-enumeration messaging, or removed owner pre-registration."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Updating privileged status during owner password changes does not correspond to removing password rules, removing same-error-message behavior on /verify, or removing owner pre-registration on initialization."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 649,
+    "prompt_tokens": 499,
+    "completion_tokens": 150
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R28",
+        "label": "MATCH",
+        "reasoning": "R28 explicitly requires that after a non-owner deletes an article, a GET returns status 200 with an empty object {}, which O1 describes."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R28",
+        "label": "MATCH",
+        "reasoning": "R28 explicitly specifies the vulnerability that any user can update or delete any article, which O2 directly references."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement mentions deleting a user with articles or FK constraint behavior."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "R2 requires that attempting to follow oneself returns status 400 with a message containing 'cannot be equal', which O4 refers to."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "R10 requires that a user cannot unfollow themselves and should receive a 400 response, matching O5."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1822,
+    "prompt_tokens": 1512,
+    "completion_tokens": 310
+  }
+}

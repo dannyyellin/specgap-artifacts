@@ -1,0 +1,19 @@
+{
+  "app": "pet-store",
+  "variant": "petorder-R8R9R10",
+  "service": "pet-order",
+  "req_id": "R10",
+  "requirement": "Each purchase-id is unique and is never reused for another purchase.",
+  "source_headline": "Removed that purchase-id must be unique and cannot be reused",
+  "model": "gpt-5.4",
+  "pass": 2,
+  "label": "PARTIAL",
+  "evidence": "create_purchase() generates `purchase_id = str(uuid.uuid4())` and stores it in both `purchase_doc` and `transaction_doc`, but there is no unique index, duplicate check, or other persistence-level enforcement on `purchase-id`; collections are written via plain `insert_one(...)`.",
+  "reasoning": "The code clearly addresses purchase-id creation by assigning a fresh UUID for each new purchase, which supports the 'never reused' intent in normal operation. However, the requirement as stated is stronger: each purchase-id must be unique and never reused, and the service has no explicit mechanism enforcing uniqueness in storage or preventing accidental reuse if a collision or duplicate write occurred. Per the decision guide, because the machinery exists but misses a material enforcement detail, this is PARTIAL.",
+  "usage": {
+    "total_tokens": 3143,
+    "prompt_tokens": 2966,
+    "completion_tokens": 177
+  },
+  "timestamp": "2026-07-16 15:02:49"
+}

@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This describes the success response body for DELETE /todos/{id}, while the listed requirements only cover delete-not-found and unauthorized-delete behaviors, not successful delete response content."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The requirements use registration as setup but do not specify returning the created user object with id and email."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Although several requirements mention login to obtain an access token, none specify the login response structure or the presence of a token_type field."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1199,
+    "prompt_tokens": 1002,
+    "completion_tokens": 197
+  }
+}

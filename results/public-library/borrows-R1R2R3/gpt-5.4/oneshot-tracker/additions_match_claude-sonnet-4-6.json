@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "A1 describes that returnDate is no longer computed internally (loanDate + 30 days) but instead accepted as a client-supplied optional field, directly corresponding to R1's removal of the returnDate computation from Borrows."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Allowing an id field in POST/PUT request payloads does not correspond to any of the three spec requirements about returnDate computation, overdue constraints, or log notifications."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Verifying cardholder existence via the Cardholders microservice is unrelated to the removed returnDate computation, overdue borrow constraint, or log notification behaviors."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Verifying book existence via the Books microservice is unrelated to the removed returnDate computation, overdue borrow constraint, or log notification behaviors."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rejecting unknown query parameters on GET /borrows does not correspond to any of the three spec requirements about returnDate computation, overdue constraints, or log notifications."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1281,
+    "prompt_tokens": 867,
+    "completion_tokens": 414
+  }
+}

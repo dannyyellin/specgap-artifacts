@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "R5 removes the owner-only restriction for POST/PUT/DELETE, while A1 instead describes authentication being required on GET endpoints, which is related to access control but not the same scope or rule."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "R6 removes specific query-string filtering semantics for GET /dishes, and A2 also concerns filtering behavior on that endpoint, but it describes support for different fields rather than the removed lte/contains semantics."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "R6 is about removing defined query filtering semantics, and A3 concerns handling of unsupported query parameters on the same filtering interface, making it related but not the same specific behavior."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 825,
+    "prompt_tokens": 581,
+    "completion_tokens": 244
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "app": "pet-store",
+  "variant": "registry-R1R2R3",
+  "service": "registry",
+  "req_id": "R1",
+  "requirement": "Passwords must be at least 8 characters long and contain an uppercase letter, a lowercase letter, and a digit; passwords violating these rules are rejected.",
+  "source_headline": "Removed password validation rules (8+ chars, uppercase, lowercase, digit)",
+  "model": "claude-sonnet-4-6",
+  "pass": 1,
+  "label": "GAP",
+  "evidence": "create_user() and change_password() routes handle password fields but contain no validation logic for password length, uppercase letters, lowercase letters, or digits.",
+  "reasoning": "The requirement states passwords must be at least 8 characters, contain an uppercase letter, a lowercase letter, and a digit. Searching the entire codebase, there is no regex, length check, or any other validation applied to passwords in any route. The code accepts any string as a password and hashes it directly. A test submitting a password like 'abc' (too short, no uppercase, no digit) would succeed with a 201 response rather than being rejected.",
+  "usage": {
+    "total_tokens": 2497,
+    "prompt_tokens": 2338,
+    "completion_tokens": 159
+  },
+  "timestamp": "2026-07-16 15:00:06"
+}

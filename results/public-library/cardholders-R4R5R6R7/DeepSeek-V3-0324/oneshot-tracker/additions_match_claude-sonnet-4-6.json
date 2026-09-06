@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "The is_overdue function and date parsing logic relates to fine computation (overdue calculation), which corresponds to the removed fine computation formula in R6, though A1 focuses on the cardholder service context rather than the formula itself."
+      },
+      {
+        "detection_id": "A1",
+        "requirement_id": "R7",
+        "label": "PARTIAL",
+        "reasoning": "The presence of overdue/fine logic in the cardholders service suggests cross-service concern that should belong in the borrows service, partially aligning with R7's removal of cross-service calls for fine computation."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Validating that the 'id' in PUT requests matches the URL parameter does not correspond to any of the listed spec requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 819,
+    "prompt_tokens": 551,
+    "completion_tokens": 268
+  }
+}

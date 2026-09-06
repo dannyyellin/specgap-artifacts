@@ -1,0 +1,14 @@
+{
+  "req_id": 25,
+  "requirement_vague": "Verify JWT token contains correct user ID and username in payload",
+  "requirement_precise": "Create user1 (username: 'jwtuser1', email: 'jwtuser1@test.com', password: 'pass123'). Extract the JWT token from the response. Decode the JWT token payload (base64 decode the middle segment). Verify the payload contains: id matching the user's id, username equal to 'jwtuser1', email equal to 'jwtuser1@test.com'. Use the token to GET /api/user and verify the returned user matches. This tests the JWT payload generation in generateJWT method.",
+  "verdict": "NOT_LEAKED",
+  "spec_evidence": "- \"Create a new user ... verify that the returned user object contains 'username' equal to 'testuser123', 'email' equal to 'test@example.com', and 'token' field is not empty. Extract the token from the response. Use the token to retrieve the current user information via the GET /api/user endpoint ... Verify the retrieved user's 'username' is 'testuser123' and 'email' is 'test@example.com'.\"\n- \"Then POST /users/login ... Verify response status is 201 and response contains 'user' object with matching email and username, and a valid token.\"",
+  "reasoning": "The reduced spec requires that a token be returned and that it works for authenticated requests, but it never states anything about decoding the token or what fields must appear inside its payload. Concluding that the JWT must contain id, username, and email would require outside knowledge about JWT contents rather than direct implication from the text.",
+  "parse_error": false,
+  "usage": {
+    "total_tokens": 3378,
+    "prompt_tokens": 3169,
+    "completion_tokens": 209
+  }
+}

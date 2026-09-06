@@ -1,0 +1,19 @@
+{
+  "app": "nutrition",
+  "variant": "auth-R1R2R3",
+  "service": "authentication",
+  "req_id": "R1",
+  "requirement": "User passwords are encrypted with bcrypt before being stored; passwords are never stored in plaintext.",
+  "source_headline": "Removed password encryption (bcrypt)",
+  "model": "gpt-5.4",
+  "pass": 2,
+  "label": "GAP",
+  "evidence": "register() inserts {\"password\": password} directly into mongo.db.users; ensure_owner_user() inserts {\"password\": OWNER_PASSWORD} directly; login() queries mongo.db.users.find_one({\"name\": name, \"password\": password}), which relies on plaintext password storage/comparison.",
+  "reasoning": "There is code handling password storage and authentication, but none of it uses bcrypt or any hashing/encryption step before persistence. The stored password field is the raw input/environment value, and login compares plaintext directly against the database, so a test requiring bcrypt-stored non-plaintext passwords would fail. Per the decision guide, because there is no behavior addressing bcrypt storage at all, this is GAP.",
+  "usage": {
+    "total_tokens": 2058,
+    "prompt_tokens": 1897,
+    "completion_tokens": 161
+  },
+  "timestamp": "2026-07-16 14:55:42"
+}

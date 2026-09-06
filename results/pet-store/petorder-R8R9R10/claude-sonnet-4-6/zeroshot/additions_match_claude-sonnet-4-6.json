@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of R8, R9, or R10 relate to enforcing that the 'purchaser' field matches the authenticated username."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of R8, R9, or R10 relate to storing purchase documents in a separate MongoDB collection."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of R8, R9, or R10 relate to capping the number of stores scanned via an environment variable."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 827,
+    "prompt_tokens": 605,
+    "completion_tokens": 222
+  }
+}

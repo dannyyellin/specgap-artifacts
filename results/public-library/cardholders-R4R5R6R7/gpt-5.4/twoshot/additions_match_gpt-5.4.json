@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "A1 concerns stricter ID typing/validation than a generic string, which relates to the removed string type declaration for id but does not describe that removal itself."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A2 is about query filtering behavior and does not correspond to removed field types, error codes, fine formula, or cross-service fine computation."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A3 is about PUT body/path ID consistency validation and does not match any listed removed specification requirement."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A4 is about requiring at least one updatable field in PUT and does not correspond to any of the removed requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 936,
+    "prompt_tokens": 676,
+    "completion_tokens": 260
+  }
+}

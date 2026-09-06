@@ -1,0 +1,48 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "R5 removed the owner-only restriction for POST/PUT/DELETE, but A1 is about requiring tokens for GET requests, which is related to access control changes but not exactly the same behavior as removing owner-only restrictions."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "R6 removed specific query string filtering semantics, and A2 describes additional filtering fields beyond what the spec mentions, partially relating to the removal of specific filtering semantics."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "R6 removed specific query string filtering semantics including 'contains', and A3 describes a discrepancy in the query parameter name ('ingredients' vs 'ingredient'), which relates to the removed filtering semantics."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "R5 removed owner-only restrictions for POST/PUT/DELETE, but A4 is about token enforcement on GET requests, which is a related but distinct access control behavior not directly described by R5."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements R4, R5, or R6 relate to ID generation mechanisms or MongoDB counter collections."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements mention CORS support or the flask-cors package."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1402,
+    "prompt_tokens": 914,
+    "completion_tokens": 488
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the absence of Google Books API integration for obtaining publisher and publishedDate, which matches R10."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R11",
+        "label": "MATCH",
+        "reasoning": "O2 describes the absence of genre enumeration validation against the specified list, which matches R11."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "O3 describes the absence of ISBN format validation as a 13-digit ISBN_13 number, which matches R9."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 describes missing validation of publishedDate format as 'DD-MM-YYYY', which does not correspond to any of the reference requirements R8-R11."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1008,
+    "prompt_tokens": 708,
+    "completion_tokens": 300
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "variant": "fastapi-R14R15R16R17R18R46R56",
+  "req_id": 17,
+  "model": "claude-sonnet-4-6",
+  "pass": 1,
+  "verdict": "NOT_IMPLEMENTED",
+  "requirement_vague": "Test the password recovery flow of a new user. Superuser credentials: (admin@example.com / password123)",
+  "omissions": [
+    {
+      "id": "O1",
+      "description": "The password recovery flow is entirely missing. There is no endpoint to retrieve password-recovery HTML content for a user's email (e.g., GET /api/v1/password-recovery/{email} or similar), no endpoint to submit a password reset using a reset token (e.g., POST /api/v1/reset-password), and no mechanism to generate or validate password reset tokens.",
+      "category": "ENDPOINTS",
+      "reasoning": "The requirement describes a flow involving: (1) requesting password-recovery HTML content for a user's email using a superuser token, (2) extracting a reset token from that content, and (3) submitting a password reset with the token and new password. None of these endpoints exist in the code. The only password-related endpoint is PATCH /api/v1/users/me/password, which requires the current password rather than a reset token."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 6391,
+    "prompt_tokens": 6149,
+    "completion_tokens": 242
+  },
+  "timestamp": "2026-07-12 10:38:15"
+}

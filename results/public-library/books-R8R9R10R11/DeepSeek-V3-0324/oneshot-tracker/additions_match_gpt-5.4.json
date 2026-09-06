@@ -1,0 +1,24 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "It concerns publisher and publishedDate fields tied to Google Books API, but only says the code validates them if present rather than directly addressing removal of the integration itself."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "It involves publisher and publishedDate fields that were previously sourced from Google Books API, but focuses on PUT updates rather than the spec change removing the integration."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 663,
+    "prompt_tokens": 512,
+    "completion_tokens": 151
+  }
+}

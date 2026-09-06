@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "It concerns the removal of 415 Unsupported Media Type, but only for one specific endpoint rather than the general error-code specification."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "It describes absence of 415 Unsupported Media Type on a specific endpoint, which only partially reflects the general removal of 415 from error codes."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about query filtering support and does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "It directly refers to the removed fine computation formula of $0.50 per day overdue summed across overdue books."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "It directly concerns the fineAmount field having a float type, which matches the removed field type declaration for fineAmount."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1057,
+    "prompt_tokens": 746,
+    "completion_tokens": 311
+  }
+}

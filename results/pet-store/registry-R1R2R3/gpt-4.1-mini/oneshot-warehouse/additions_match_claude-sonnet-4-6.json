@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The bcrypt cost factor of 12 is an implementation detail unrelated to any of the three spec requirements about password validation rules, anti-enumeration, or owner pre-registration."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The specific success message text for password change does not correspond to any of the three spec requirements listed."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The specific success message text for user deletion does not correspond to any of the three spec requirements listed."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 823,
+    "prompt_tokens": 602,
+    "completion_tokens": 221
+  }
+}

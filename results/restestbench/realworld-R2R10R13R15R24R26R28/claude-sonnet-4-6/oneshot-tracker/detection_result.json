@@ -1,0 +1,103 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "The article response includes both 'created'/'updated' aliases alongside 'createdAt'/'updatedAt' fields",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification does not require 'created' and 'updated' fields in the article response; only 'createdAt' and 'updatedAt' are standard RealWorld fields. The code adds both sets of keys."
+      },
+      {
+        "id": "A2",
+        "description": "The user response includes an 'id' field",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification describes the user response as containing username, email, and token. The code also returns 'id' in user_dict(), which is not required by the specification."
+      },
+      {
+        "id": "A3",
+        "description": "DELETE /api/users/{email} endpoint is implemented",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification mentions this endpoint only in the context of testing FK constraint behavior (expecting a 500 error), but does not positively require the service to implement a user deletion endpoint. The code implements it as a full endpoint."
+      },
+      {
+        "id": "A4",
+        "description": "GET /api/tags endpoint is implemented",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification does not mention a tags listing endpoint anywhere in the requirements."
+      },
+      {
+        "id": "A5",
+        "description": "DELETE /api/articles/{slug} returns 403 Forbidden when the requester is not the article owner",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly states 'any user can update/delete any article' as a security vulnerability (no ownership check on delete). The code raises 403 when the deleting user is not the owner, contradicting the spec."
+      },
+      {
+        "id": "A6",
+        "description": "PUT /api/articles/{slug} returns 403 Forbidden when the requester is not the article owner",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification explicitly demonstrates that any user (including non-owners) can update any article, calling it a security vulnerability. The code enforces ownership and raises 403 for non-owners."
+      },
+      {
+        "id": "A7",
+        "description": "DELETE /api/articles/{slug}/comments/{id} returns 403 when neither the comment author nor the article owner",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification does not describe any ownership restriction on comment deletion; it only tests that the comment author can delete their own comment."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "POST /api/profiles/{username}/follow returns 201 but does not return 400 when a user tries to follow themselves",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states 'attempt to follow themselves by POST to /api/profiles/follower1/follow. Verify this returns status 400 with message containing cannot be equal'. The code silently does nothing (no follow link created) but returns 200 with no error."
+      },
+      {
+        "id": "O2",
+        "description": "DELETE /api/profiles/{username}/follow does not return 400 when a user tries to unfollow themselves",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states 'Verify user1 cannot unfollow themselves (should return 400)'. The code performs no self-unfollow check and returns 200."
+      },
+      {
+        "id": "O3",
+        "description": "POST /api/profiles/{username}/follow returns 200 instead of 201",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification states 'Verify the response status is 201' for the follow endpoint. The code uses the default status code of 200."
+      },
+      {
+        "id": "O4",
+        "description": "POST /api/articles/{slug}/comments returns 200 instead of the expected status and returns the full article with comments rather than just the comment",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification says 'Verify response status is 200' and 'Verify the response article has comments array with length >= 1', which the code satisfies for status. However, the standard RealWorld spec for this endpoint returns {comment: {...}} not {article: {...}}. The spec test checks 'response article has comments array', suggesting the implementation's article-wrapping response is what the spec expects here \u2014 this is consistent."
+      },
+      {
+        "id": "O5",
+        "description": "GET /api/articles does not sort by created_at timestamp but by id, which may differ from creation order in edge cases",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states 'Verify the articles array is ordered by created timestamp in descending order (newest first)' and references 'ORDER BY article.created DESC'. The code sorts by id instead of created_at."
+      },
+      {
+        "id": "O6",
+        "description": "GET /api/articles/feed does not sort by created_at timestamp but by id",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification tests feed pagination and ordering. The code sorts feed articles by id rather than created_at, which may not match the expected newest-first ordering by timestamp."
+      },
+      {
+        "id": "O7",
+        "description": "The /api/articles/feed route is registered after /api/articles/{slug}, causing the feed path to be matched as a slug lookup",
+        "category": "ENDPOINTS",
+        "reasoning": "In FastAPI, routes are matched in registration order. GET /api/articles/feed is registered after GET /api/articles/{slug}, so requests to /api/articles/feed will be handled by get_article with slug='feed' instead of feed_articles. The specification requires a working feed endpoint."
+      },
+      {
+        "id": "O8",
+        "description": "The specification requires using PyJWT for JWT but the implementation requirement also mentions bcrypt via passlib \u2014 the code uses bcrypt correctly, but the spec says 'Uses bcrypt for password hashing (passlib library)' while the code uses argon2-compatible CryptContext with bcrypt scheme, which is correct. No gap here.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "Not a real gap \u2014 noting for completeness that bcrypt via passlib is correctly used."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 13805,
+    "prompt_tokens": 12182,
+    "completion_tokens": 1623
+  }
+}

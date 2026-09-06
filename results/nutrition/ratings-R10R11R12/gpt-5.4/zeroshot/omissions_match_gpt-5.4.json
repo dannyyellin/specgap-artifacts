@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O1 states that non-integer ratings such as 4.5 are accepted and not enforced as integers between 1 and 5, which is the same removed rating constraint described by R10."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O2 says the code does not enforce the 1 through 5 rating range, directly matching the removal of the integer-between-1-and-5 rating constraint in R10."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 concerns GET /ratings/{id} behavior for unrated dishes, which is unrelated to rating constraints, one-rating-per-user-per-dish, or token-derived user_id."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 is about validating dish existence on GET /ratings/{id}, which does not correspond to any of the listed reference requirements."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 is about use of an unauthorized package and does not match any reference requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1123,
+    "prompt_tokens": 776,
+    "completion_tokens": 347
+  }
+}

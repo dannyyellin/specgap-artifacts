@@ -1,0 +1,78 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R15",
+        "label": "PARTIAL",
+        "reasoning": "O1 identifies the password recovery endpoint as missing, which is required by R15, but R15 also covers email sending and mailcatcher verification which O1 does not address."
+      },
+      {
+        "detection_id": "O1",
+        "requirement_id": "R16",
+        "label": "PARTIAL",
+        "reasoning": "O1 identifies the missing POST /api/v1/password-recovery/{email} endpoint, which is also required by R16 for the 404 non-existent user scenario."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R18",
+        "label": "PARTIAL",
+        "reasoning": "O2 identifies the missing reset-password endpoint, which R18 tests with an invalid token expecting 400 with 'Invalid token' detail, but O2 does not capture the specific invalid token behavior."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R56",
+        "label": "PARTIAL",
+        "reasoning": "O2 identifies the missing POST /api/v1/reset-password/ endpoint, which R56 tests for 422 validation error on short password, but O2 does not capture the specific validation behavior."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R17",
+        "label": "PARTIAL",
+        "reasoning": "O2 identifies the missing reset-password endpoint, which is part of the password reset flow tested in R17, but O2 does not capture the full flow."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R14",
+        "label": "MATCH",
+        "reasoning": "O3 directly identifies that the test token endpoint is not implemented, which is exactly what R14 requires to verify authentication and email in the response."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R17",
+        "label": "PARTIAL",
+        "reasoning": "O4 identifies the missing password-recovery HTML content endpoint, which is a step in R17's flow for extracting the reset token, but R17 covers the full reset flow beyond just this endpoint."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 describes a wrong error detail for reading a non-existent user by ID, which does not correspond to any of the reference requirements listed."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R15",
+        "label": "PARTIAL",
+        "reasoning": "O6 identifies the missing email sending behavior observable via mailcatcher, which is part of R15's verification requirements, but R15 also covers the endpoint response and signup steps."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R17",
+        "label": "PARTIAL",
+        "reasoning": "O7 identifies missing reset token generation, validation, and invalid-token handling, which partially covers R17's password reset flow, but R17 also includes login verification steps."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R18",
+        "label": "MATCH",
+        "reasoning": "O7 explicitly identifies that invalid token handling returning 400 with 'Invalid token' is not implemented, which is exactly what R18 requires."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2361,
+    "prompt_tokens": 1452,
+    "completion_tokens": 909
+  }
+}

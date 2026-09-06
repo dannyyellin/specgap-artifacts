@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of owner-only restriction for POST/PUT/DELETE requests, matching R5 exactly."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "O2 relates to filtering semantics for query parameters, which partially overlaps with R6's removal of specific query string filtering semantics, but focuses on ingredient filtering rather than the 'contains' or 'lte' semantics mentioned in R6."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 concerns error handling for invalid query parameter values, which does not correspond to any of the reference requirements about removed behaviors."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concerns Content-Type validation and 415 status code handling, which does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "O5 relates to handling of Ninja API field values (premium subscriber strings), which partially relates to R4's removal of Ninja API field name mapping details, though R4 focuses on field name mapping rather than value handling."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1181,
+    "prompt_tokens": 774,
+    "completion_tokens": 407
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O1 describes the same removed behavior as R1: computing returnDate automatically as loanDate plus 30 days in Borrows."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O2 matches R2 because both concern the removed rule that borrowers with 2 or more overdue books are blocked from checkout and should receive a 400."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R3",
+        "label": "PARTIAL",
+        "reasoning": "O3 covers the Borrows-to-Logs checkout notification behavior from R3, but R3 explicitly removes it from both Borrows and Logs specs while O3 only addresses Borrows-side success depending on log creation."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 875,
+    "prompt_tokens": 650,
+    "completion_tokens": 225
+  }
+}

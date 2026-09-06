@@ -1,0 +1,60 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the absence of the DELETE pet from store step after purchase, which is exactly what R9 states was removed."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 does not correspond to any of the three reference requirements about pet selection algorithm, DELETE step removal, or purchase-id uniqueness."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 concerns unreachable 400 error handling in GET /transactions/{id}, which does not match any of the three reference requirements."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concerns incorrect 403 blocking of registered users with differing purchaser names, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 concerns conflation of unreachable stores with no-pet-available conditions, which does not match any of the three reference requirements."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 was withdrawn by the detector itself and does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O7 concerns Content-Type check ordering and was determined to be correctly implemented, not matching any reference requirement."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O8 concerns case-insensitive pet-type matching, which does not correspond to any of the three reference requirements about pet selection algorithm, DELETE step, or purchase-id uniqueness."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1889,
+    "prompt_tokens": 1310,
+    "completion_tokens": 579
+  }
+}

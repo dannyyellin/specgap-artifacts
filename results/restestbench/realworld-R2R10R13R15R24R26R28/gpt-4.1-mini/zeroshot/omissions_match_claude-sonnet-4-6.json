@@ -1,0 +1,78 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R28",
+        "label": "PARTIAL",
+        "reasoning": "O1 describes the absence of the security vulnerability that R28 explicitly tests (any user can update/delete any article), so they address the same behavior but from opposite perspectives."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R28",
+        "label": "PARTIAL",
+        "reasoning": "O2 addresses the behavior after deleting an article (GET returning 200 with empty object {}), which is part of R28's verification steps, but O2 only covers the GET response behavior, not the full scenario."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R24",
+        "label": "PARTIAL",
+        "reasoning": "O3 describes ordering by id descending instead of created timestamp descending, which directly relates to R24's requirement that articles be ordered by created timestamp in descending order."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements describe behavior related to deleting users with articles or FK constraint errors."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements describe validation of required fields in article creation or update payloads."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements describe validation of comment body presence or non-empty checks."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O7 describes the missing 400 error when a user tries to follow themselves, which matches R2's requirement that following oneself returns status 400 with a message containing 'cannot be equal'."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O7 also covers the unfollow self case, which matches R10's requirement that user1 cannot unfollow themselves and should return 400."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements describe slug uniqueness testing or random suffix collision handling."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements describe the favorites feature."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": "R24",
+        "label": "PARTIAL",
+        "reasoning": "O10 mentions ordering by id instead of created timestamp descending for the feed endpoint, which partially relates to R24's requirement about ordering by created timestamp descending, though R24 specifically tests the articles endpoint not the feed."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2974,
+    "prompt_tokens": 2165,
+    "completion_tokens": 809
+  }
+}

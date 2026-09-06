@@ -1,0 +1,24 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R12",
+        "label": "PARTIAL",
+        "reasoning": "A1 involves storing data from token validation, which overlaps with user_id sourcing from token validation, but it refers to a different field ('privileged') rather than user_id."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rounding numbers to two decimal places does not correspond to removing rating range, one-rating-per-user-per-dish, or token-derived user_id constraints."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 631,
+    "prompt_tokens": 480,
+    "completion_tokens": 151
+  }
+}

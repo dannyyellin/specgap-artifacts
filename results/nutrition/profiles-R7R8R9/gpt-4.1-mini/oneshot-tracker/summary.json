@@ -1,0 +1,16 @@
+{
+  "app": "nutrition",
+  "variant": "profiles-R7R8R9",
+  "service": "profile",
+  "method": "oneshot-tracker",
+  "detector_model": "gpt-4.1-mini",
+  "gen_model": "gpt-5.4",
+  "gen_usage": null,
+  "n_additions": 4,
+  "n_omissions": 7,
+  "usage": {
+    "total_tokens": 7702,
+    "prompt_tokens": 6669,
+    "completion_tokens": 1033
+  }
+}

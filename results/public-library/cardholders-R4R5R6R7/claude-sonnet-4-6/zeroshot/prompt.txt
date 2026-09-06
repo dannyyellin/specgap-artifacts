@@ -1,0 +1,387 @@
+=== SYSTEM PROMPT ===
+
+You are an expert at analyzing microservice specifications and implementations.
+
+You will receive:
+1. A specification describing a multi-service application
+2. The name of one specific service to analyze
+3. The code for that service
+
+Your task: identify ALL gaps between the specification and the code.
+
+There are two types of gaps:
+- ADDITIONS: the code implements a property that the specification does not require.
+- OMISSIONS: the specification requires a property that the code does not implement.
+
+Categories (use exactly these names):
+
+1. ENDPOINTS: Route definitions, HTTP methods supported, URL patterns.
+   Example: Spec requires DELETE /items/{id} but no such route exists in the code.
+
+2. REQUEST_VALIDATION: Required fields, type checking, format validation,
+   media type validation, missing/invalid parameter handling.
+   Example: Spec requires "sku" as a required field on POST but the code does
+   not check for its presence.
+
+3. RESPONSE_FORMAT: Returned JSON fields, status codes for success and error cases,
+   response structure.
+   Example: Spec requires 404 when an item is not found but the code returns 500.
+
+4. BUSINESS_LOGIC: Domain rules, guards, constraints, conditional behavior,
+   access control decisions, state transitions.
+   Example: Spec requires dispatch to be rejected if quantity exceeds stock but
+   the code allows negative inventory.
+
+5. COMPUTED_VALUES: Derived or calculated fields, formulas, date arithmetic,
+   aggregations.
+   Example: Spec requires totalPrice = unitPrice * quantity but the code stores
+   totalPrice as a user-supplied value.
+
+6. EXTERNAL_INTERACTIONS: Outbound HTTP calls to other microservices or external
+   APIs, data fetched from or sent to other services, notifications.
+   Example: Spec requires notifying the purchasing service on low stock but the
+   code sends no such notification.
+
+7. DATA_PERSISTENCE: What is stored in the database, field mappings between
+   request/response and stored documents, ID generation.
+   Example: Spec requires storing last_restocked date on receipt but the code
+   never writes this field.
+
+
+For ADDITIONS: find code properties that have no basis in the specification.
+Be STRICT: the specification not contradicting a property is NOT enough — the
+specification must positively require it. For example, if the specification says
+"store user records" and the code encrypts passwords, encryption is an addition:
+the specification permits it but does not require it. Similarly, a vague statement
+like "return appropriate status codes" does NOT cover a specific property like
+"return 401 when the user is not found."
+Minor implementation details (variable naming, error message text) are NOT gaps.
+
+For OMISSIONS: find properties the specification requires but the code does not
+implement. Look for:
+- Explicit requirements stated in the specification that the code simply does
+  not implement — including requirements in other services' sections or in
+  general guidelines
+- Cross-service interactions described in other services' specifications
+- Data model fields that are never computed or populated
+- Requirements implied by combining multiple specification statements
+- Missing input validations, missing or incorrect error status codes
+Only flag omissions with clear basis in the specification text, not speculation.
+
+Output a JSON object with:
+- "additions": array of {"id": "A1", "description": "...", "category": "...", "reasoning": "..."}
+- "omissions": array of {"id": "O1", "description": "...", "category": "...", "reasoning": "..."}
+
+Output ONLY valid JSON, no other text.
+
+
+=== USER PROMPT ===
+
+=== SPECIFICATION ===
+
+(I) Description of Public library microservices:
+{“Name”: “Cardholders microservice”,
+“Description”: “Responsible for creating, retrieving, updating, and deleting cardholder accounts.  This service also provides the ability to retrieve how much money in fines is owed by a specific cardholder.”
+
+“Resources”: “/cardholders, /cardholders/{id}, /cardholders/fines/{id}.
+An id is of type string.  Each cardholder (/cardholders/{id}) consists of a JSON document containing the field names ‘name’, ‘email’, and ‘id’.  The values of each of these is a JSON string.  The resource /cardholders/fines/{id} consists of a JSON document with a field ‘fineAmount’, whose value is of type float, and a field ‘id’, of type string.”,
+
+“REST requests”: “GET and POST request on /cardholders.  GET returns a JSON array of all records in the resource.   The GET request may specify a query string of the form ‘field=value’.  In this case, only those cardholder records satisfying that constraint should be returned. The POST request provides a JSON document containing the name and email and returns the id for the newly created string record.
+GET, PUT and DELETE requests on /cardholders/{id}.   The GET request returns a JSON record of the requested resource.  The PUT request provides a JSON payload of the updated resource’s fields and returns the id of the updated resource.  The DELETE request returns the status of the request with no content.
+GET request on cardholders/fines/{id}.  The request returns the JSON document representing this resource.”,
+
+“Additional details”: “The fine amount owed is computed as follows: the fine per overdue book is equal to number-of-days-overdue * FINE_PER_DAY, where FINE_PER_DAY equals $.50.   The cardholder owes the sum of all fines for all books he borrowed.   To compute this amount, this service needs to invoke the Borrows microservice to retrieve information on books borrowed by this cardholder.”,
+
+“Deployment”: “The Cardholders microservice runs in a Docker container and listens on external port 5001. Another microservice can send it requests using the URL http://cardholders:5001/cardholders.”
+}
+
+
+{“Name”: “Books microservice”,
+“Description”: “Responsible for creating, retrieving, updating, and deleting books in the library’s inventory.”,
+
+“Resources”: “/books, /books/{id}.
+An id is of type string.  Each book (/books/{id}) consists of a JSON document containing the fields ‘title’ (a string), ‘authors’ (a string), ‘ISBN’ (a string representing the 13 digit ISBN_13 number of the book),  ‘publisher’ (a string), ‘publishedDate’ (a string of the form ‘DD-MM-YYYY’),  ‘genre’ (a string that is one of ‘Fiction’, ‘Children’, ‘Biography’, ‘Science’, ‘Science Fiction’, ‘Fantasy’, or ‘Other), and ‘id’ (a string)”,
+
+“REST requests”: “GET and POST request on /books.  GET returns a JSON array of all records in the resource.   The GET request may specify a query string of the form ‘field=value’.  In this case, only those book records satisfying that constraint should be returned.  The POST request provides a JSON document containing the title, authors, ISBN, and genre and returns the string id for the newly created book record.
+GET, PUT and DELETE requests on /books/{id}.  The GET request returns a JSON record of the requested resource.  The PUT request provides a JSON payload of the resource’s fields and returns the id of the updated resource.  The DELETE request returns the status of the request with no content.”,
+
+“Additional details”: “The‘publisher’and ‘publishedDate’ are not provided in the POST request but is obtained by the service using the 3rd party Google Books API service (see https://developers.google.com/books/docs/v1/using) by supplying the ISBN number of the book.  If Google Books returns more than one entry, the first entry is used. If Google Books does not contain an entry for one of the fields, then that field has the value ‘’ (the empty string).”,
+
+“Deployment”: “The Books microservice runs in a Docker container and listens on external port 5002.  Another microservice can send it requests using the URL http://books:5002/books.”
+}
+
+
+{“Name”: “Borrows microservice”,
+“Description”: “Responsible for creating, retrieving, updating, and deleting borrow records. A borrow record provides information on a specific book loaned to a cardholder”,
+
+“Resources”: “/borrows, /borrows/{id}.
+An id is of type string.  Each borrow record (/borrows/{id}) consists of a JSON document containing the fields ‘cardholderId’ (the id of the cardholder borrowing the book of type string), ‘ISBN’ (a string representing the ISBN_13 number of the borrowed book),  ‘loanDate’, ‘returnDate’ (where loanDate and returnDate are strings of the form ‘DD-MM-YYYY’), and ‘id’, a string.”,
+
+“REST requests”: “GET and POST requests on /borrows.  GET returns a JSON array of all records in the resource.   The GET request may specify a query string of the form ‘field=value’.  In this case, only those borrow records satisfying that constraint should be returned.  Alternatively, a GET request on the /borrows resource may specify a query string of the form ‘startDate=date1&endDate=date2’.  In this case, only borrow records that have a ‘loanDate’ between the specified startDate and endDate should be returned.  An example is the query string ‘startDate=10-12-2023&endDate=01-01-2024’. The POST request provides a JSON document containing the id of the cardholder borrowing the book, the ISBN_13 number of the book being borrowed, and the loan date.  It returns the id for the newly created borrow record.
+GET, PUT and DELETE requests on /borrows/{id}. The GET request returns a JSON record of the requested resource.  The PUT request provides a JSON payload of the resource’s fields and returns the id of the updated resource.  The DELETE request returns the status of the request with no content.”,
+
+“Additional details”: “The ‘returnDate’ is not provided in the POST request but is computed by the service as follows: returnDate = loanDate + LOAN_PERIOD, where LOAN_PERIOD is 30 days.     A book can only be borrowed by a cardholder who does not have 2 or more books overdue.  If a book cannot be checked out because 2 or more books are overdue, the POST request returns the status code 400.  Each time a book is checked out, the Borrows service informs the Logs service which creates a new log record”,
+
+“Deployment”: “The Borrows microservice runs in a Docker container and listens on external port 5003.  Another microservice can send it requests using the URL http://borrows:5003/borrows.”
+}
+
+
+{“Name”: “Logs microservice”,
+“Description”: “Responsible for log records of borrowed books.  Each time a book is checked out, the Borrows service informs the Logs service which creates a new log record.”,
+
+“Resources”: “/logs, /logs/{id}.
+An id is of type string.  Each log record (/logs/{id}) consists of a JSON document containing the fields ‘cardholderId’ (the id of a cardholder of type string), ‘borrowId’ (the id of a borrow record of type string), ‘ISBN’ (a string representing an ISBN_13 number), ‘loanDate’ (a string of the form ‘DD-MM-YYYY’), and ‘id’, a string.”,
+
+“REST requests”: “GET and POST request on /logs.  GET returns a JSON array of all records in the resource.   A GET request may specify a query string of the form ‘field=value’.  In this case, only those log records satisfying that constraint should be returned. The POST request provides a JSON document containing the cardholderId, the borrowId, the ISBN and the loanDate.  It returns the id for the newly created log record.
+GET request on /logs/{id}, returning a JSON record of the requested resource.”,
+
+“Deployment”: “The Logs microservice runs in a Docker container and listens on external port 5004.   Another microservice can send it requests using the URL http://logs:5004/logs.”
+}
+
+For all services, each REST request should return a status code in addition to the JSON payload if there is one.
+For successful requests, the appropriate 2XX code is returned:  201 (successful POST), 204 (successful DELETE) and 200 (success on other requests).
+For unsuccessful requests, the appropriate 4XX or 5XX code is returned: 400 (Bad request), 404 (Not Found), 405 (Method Not Allowed), 415 (Unsupported media type), and 500 (Internal Server Error).
+
+(II) Code Generation Guidelines:
+Code Generation Guidelines
+•	Each microservice should be written in Python.
+•	Besides generating the code, the Python packages that need to be installed must be listed in a comment at the beginning of the code
+•	The code must be executable.  Besides comments in the code, no other text in the response.
+•	Each microservice should store its persistent data in a Mongo database.   Assume that Mongo is available at 'mongodb://mongo:27017/'.
+•	If a microservice requires data that another microservice is responsible for, it invokes a GET request on that microservice to retrieve that data when it needs it.  It does not replicate and store the data locally.
+•	The generated code should handle REST API exceptions and return the appropriate REST (HTTP) status code as described above.
+•	Assume that each microservice will run in its own Docker container.
+
+
+
+=== CODE (cardholders) ===
+
+# Required packages:
+# pip install flask flask-pymongo requests
+
+from flask import Flask, request, jsonify, Response
+from flask_pymongo import PyMongo
+from bson.objectid import ObjectId
+import requests
+
+app = Flask(__name__)
+app.config["MONGO_URI"] = "mongodb://mongo:27017/cardholdersdb"
+mongo = PyMongo(app)
+
+CARDHOLDERS_COLLECTION = mongo.db.cardholders
+BORROWS_SERVICE_URL = "http://borrows:5003/borrows"
+
+
+def serialize_cardholder(doc):
+    return {
+        "id": str(doc["_id"]),
+        "name": doc.get("name", ""),
+        "email": doc.get("email", "")
+    }
+
+
+def is_valid_objectid(value):
+    try:
+        ObjectId(value)
+        return True
+    except Exception:
+        return False
+
+
+def get_cardholder_or_404(cardholder_id):
+    if not is_valid_objectid(cardholder_id):
+        return None
+    return CARDHOLDERS_COLLECTION.find_one({"_id": ObjectId(cardholder_id)})
+
+
+def parse_date_ddmmyyyy(date_str):
+    try:
+        day, month, year = date_str.split("-")
+        return int(year), int(month), int(day)
+    except Exception:
+        return None
+
+
+def is_overdue(return_date_str):
+    from datetime import datetime
+    parsed = parse_date_ddmmyyyy(return_date_str)
+    if not parsed:
+        return False
+    year, month, day = parsed
+    try:
+        due_date = datetime(year, month, day)
+        return due_date.date() < datetime.utcnow().date()
+    except Exception:
+        return False
+
+
+@app.errorhandler(404)
+def not_found(_e):
+    return jsonify({"error": "Not Found"}), 404
+
+
+@app.errorhandler(405)
+def method_not_allowed(_e):
+    return jsonify({"error": "Method Not Allowed"}), 405
+
+
+@app.errorhandler(500)
+def internal_error(_e):
+    return jsonify({"error": "Internal Server Error"}), 500
+
+
+@app.route("/cardholders", methods=["GET"])
+def get_cardholders():
+    try:
+        query_params = request.args.to_dict(flat=True)
+        mongo_query = {}
+
+        allowed_fields = {"name", "email"}
+        for key, value in query_params.items():
+            if key in allowed_fields:
+                mongo_query[key] = value
+
+        docs = CARDHOLDERS_COLLECTION.find(mongo_query)
+        result = [serialize_cardholder(doc) for doc in docs]
+        return jsonify(result), 200
+    except Exception:
+        return jsonify({"error": "Internal Server Error"}), 500
+
+
+@app.route("/cardholders", methods=["POST"])
+def create_cardholder():
+    try:
+        if not request.is_json:
+            return jsonify({"error": "Bad request"}), 400
+
+        data = request.get_json()
+        if not isinstance(data, dict):
+            return jsonify({"error": "Bad request"}), 400
+
+        name = data.get("name")
+        email = data.get("email")
+
+        if not isinstance(name, str) or not isinstance(email, str):
+            return jsonify({"error": "Bad request"}), 400
+
+        result = CARDHOLDERS_COLLECTION.insert_one({
+            "name": name,
+            "email": email
+        })
+
+        return jsonify({"id": str(result.inserted_id)}), 201
+    except Exception:
+        return jsonify({"error": "Internal Server Error"}), 500
+
+
+@app.route("/cardholders/<cardholder_id>", methods=["GET"])
+def get_cardholder(cardholder_id):
+    try:
+        doc = get_cardholder_or_404(cardholder_id)
+        if not doc:
+            return jsonify({"error": "Not Found"}), 404
+        return jsonify(serialize_cardholder(doc)), 200
+    except Exception:
+        return jsonify({"error": "Internal Server Error"}), 500
+
+
+@app.route("/cardholders/<cardholder_id>", methods=["PUT"])
+def update_cardholder(cardholder_id):
+    try:
+        if not request.is_json:
+            return jsonify({"error": "Bad request"}), 400
+
+        existing = get_cardholder_or_404(cardholder_id)
+        if not existing:
+            return jsonify({"error": "Not Found"}), 404
+
+        data = request.get_json()
+        if not isinstance(data, dict):
+            return jsonify({"error": "Bad request"}), 400
+
+        update_fields = {}
+        if "name" in data:
+            if not isinstance(data["name"], str):
+                return jsonify({"error": "Bad request"}), 400
+            update_fields["name"] = data["name"]
+
+        if "email" in data:
+            if not isinstance(data["email"], str):
+                return jsonify({"error": "Bad request"}), 400
+            update_fields["email"] = data["email"]
+
+        if "id" in data and str(data["id"]) != cardholder_id:
+            return jsonify({"error": "Bad request"}), 400
+
+        if not update_fields and "id" not in data:
+            return jsonify({"error": "Bad request"}), 400
+
+        CARDHOLDERS_COLLECTION.update_one(
+            {"_id": ObjectId(cardholder_id)},
+            {"$set": update_fields}
+        )
+
+        return jsonify({"id": cardholder_id}), 200
+    except Exception:
+        return jsonify({"error": "Internal Server Error"}), 500
+
+
+@app.route("/cardholders/<cardholder_id>", methods=["DELETE"])
+def delete_cardholder(cardholder_id):
+    try:
+        existing = get_cardholder_or_404(cardholder_id)
+        if not existing:
+            return jsonify({"error": "Not Found"}), 404
+
+        CARDHOLDERS_COLLECTION.delete_one({"_id": ObjectId(cardholder_id)})
+        return Response(status=204)
+    except Exception:
+        return jsonify({"error": "Internal Server Error"}), 500
+
+
+@app.route("/cardholders/fines/<cardholder_id>", methods=["GET"])
+def get_cardholder_fines(cardholder_id):
+    try:
+        existing = get_cardholder_or_404(cardholder_id)
+        if not existing:
+            return jsonify({"error": "Not Found"}), 404
+
+        try:
+            borrows_response = requests.get(
+                BORROWS_SERVICE_URL,
+                params={"cardholderId": cardholder_id},
+                timeout=5
+            )
+        except requests.RequestException:
+            return jsonify({"error": "Internal Server Error"}), 500
+
+        if borrows_response.status_code != 200:
+            if 400 <= borrows_response.status_code < 500:
+                return jsonify({"error": "Bad request"}), 400
+            return jsonify({"error": "Internal Server Error"}), 500
+
+        try:
+            borrows = borrows_response.json()
+        except Exception:
+            return jsonify({"error": "Internal Server Error"}), 500
+
+        if not isinstance(borrows, list):
+            return jsonify({"error": "Internal Server Error"}), 500
+
+        fine_amount = 0
+        for borrow in borrows:
+            if isinstance(borrow, dict):
+                return_date = borrow.get("returnDate")
+                if isinstance(return_date, str) and is_overdue(return_date):
+                    fine_amount += 1
+
+        return jsonify({"id": cardholder_id, "fineAmount": fine_amount}), 200
+    except Exception:
+        return jsonify({"error": "Internal Server Error"}), 500
+
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5001)
+
+=== SERVICE TO ANALYZE ===
+cardholders

@@ -1,0 +1,138 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R15",
+        "label": "MATCH",
+        "reasoning": "R15 explicitly tests limit and offset query parameters on GET /api/articles, which A1 describes as supported pagination parameters."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R24",
+        "label": "PARTIAL",
+        "reasoning": "R24 requires ordering by created timestamp descending, but A2 sorts by article.id descending, which is a different (though often equivalent) ordering mechanism."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement mentions returning duplicate timestamp fields with different naming conventions."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement mentions including an 'id' field in user response objects."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "R2 requires a 400 error when a user tries to follow themselves, but A5 states the code does NOT implement this check, contradicting the spec requirement."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "R10 requires a 400 error when a user tries to unfollow themselves, but A5 states the code does NOT implement this check, contradicting the spec requirement."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement explicitly requires deleting comments when an article is deleted."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": "R28",
+        "label": "PARTIAL",
+        "reasoning": "R28 specifies that GET after deletion returns 200 with empty object {}, which A7 implements, but A7 also applies this to any missing article beyond just deleted ones."
+      },
+      {
+        "detection_id": "A8",
+        "requirement_id": "R28",
+        "label": "PARTIAL",
+        "reasoning": "R28 expects any user can update any article (security vulnerability), but A8 states the code returns 403 if not the author, directly contradicting the spec requirement."
+      },
+      {
+        "detection_id": "A9",
+        "requirement_id": "R28",
+        "label": "PARTIAL",
+        "reasoning": "R28 expects any user can delete any article (security vulnerability), but A9 states the code returns 403 if not the author, directly contradicting the spec requirement."
+      },
+      {
+        "detection_id": "A10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement specifies who is authorized to delete comments."
+      },
+      {
+        "detection_id": "A11",
+        "requirement_id": "R13",
+        "label": "MATCH",
+        "reasoning": "R13 explicitly tests filtering GET /api/articles by author query parameter, which A11 describes as supported."
+      },
+      {
+        "detection_id": "A12",
+        "requirement_id": "R15",
+        "label": "MATCH",
+        "reasoning": "R15 verifies that articlesCount reflects the total number of articles ignoring pagination (e.g., articlesCount is 5 even when limit=2), which A12 describes."
+      },
+      {
+        "detection_id": "A12",
+        "requirement_id": "R13",
+        "label": "MATCH",
+        "reasoning": "R13 verifies articlesCount in the response matches the number of matching articles, which A12 describes."
+      },
+      {
+        "detection_id": "A13",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement among the listed ones tests the feed endpoint returning empty results for users with no follows."
+      },
+      {
+        "detection_id": "A14",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement among the listed ones tests duplicate username/email registration returning 400."
+      },
+      {
+        "detection_id": "A15",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement among the listed ones tests login failure returning 401."
+      },
+      {
+        "detection_id": "A16",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement among the listed ones tests the user update endpoint behavior."
+      },
+      {
+        "detection_id": "A17",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement among the listed ones specifies slug generation with random hex suffix."
+      },
+      {
+        "detection_id": "A18",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement among the listed ones tests the GET /api/tags endpoint."
+      },
+      {
+        "detection_id": "A19",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement among the listed ones tests user deletion returning 500 on FK constraint error."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 3958,
+    "prompt_tokens": 2546,
+    "completion_tokens": 1412
+  }
+}

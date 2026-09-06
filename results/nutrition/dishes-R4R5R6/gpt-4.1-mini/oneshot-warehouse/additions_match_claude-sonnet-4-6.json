@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "A1 describes filtering by 'id' and 'name' which are beyond the spec's filtering semantics, partially relating to R6's removal of specific query string filtering semantics."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "A2 describes filtering by 'ingredients' (contains semantics) which relates to R6's removal of specific query string filtering semantics including 'contains' for ingredients."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The 415 Unsupported Media Type validation does not correspond to any of the three spec requirements about removed field mappings, owner restrictions, or query filtering semantics."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rounding floating point nutritional values to two decimal places does not correspond to any of the three spec requirements listed."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "CORS support via flask-cors does not correspond to any of the three spec requirements about removed field mappings, owner restrictions, or query filtering semantics."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1096,
+    "prompt_tokens": 698,
+    "completion_tokens": 398
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R28",
+        "label": "MATCH",
+        "reasoning": "R28 explicitly requires that a non-owner can successfully update another user's article, which is exactly what O1 describes as missing."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R28",
+        "label": "MATCH",
+        "reasoning": "R28 explicitly requires that a non-owner can successfully delete another user's article, matching O2 exactly."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "R2 specifically requires POST /api/profiles/{username}/follow to return status 201 on successful follow, which O3 directly captures."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "R2 requires self-follow attempts to return status 400 with a message containing 'cannot be equal', and O4 describes the missing 400 rejection for self-follow."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "R10 requires that a user cannot unfollow themselves and that this returns 400, which O5 directly matches."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "R2 explicitly checks that the self-follow error message contains 'cannot be equal', but O6 combines self-follow and self-unfollow message behavior while only R2 states that message requirement."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements mention filtering articles by the 'favorited' query parameter."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2327,
+    "prompt_tokens": 1873,
+    "completion_tokens": 454
+  }
+}

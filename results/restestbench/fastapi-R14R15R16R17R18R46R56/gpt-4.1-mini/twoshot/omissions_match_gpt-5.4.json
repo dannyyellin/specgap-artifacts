@@ -1,0 +1,168 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about item title validation on item creation, which is unrelated to any of the listed reference requirements."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns item creation response status codes, not any behavior described in the reference requirements."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This addresses item read authorization behavior, which does not correspond to any listed reference requirement."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about item update validation and does not match any of the password recovery, token test, or user-deletion behaviors in the references."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This refers to verifying item deletion after deleting an item endpoint, whereas the references only cover item disappearance after deleting the owning user."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about signup validation rules generally and does not describe any of the specific referenced scenarios."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns duplicate signup handling, which is not part of the listed reference requirements."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is another general signup password-length validation issue, not one of the referenced behaviors."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns changing one's own password, which is distinct from the password recovery/reset flows in the references."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about authenticated password change validation, not the reset-password scenarios in the reference list."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This describes forbidding superuser self-deletion, which is not among the provided reference requirements."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about user read authorization and does not correspond to any listed reference requirement."
+      },
+      {
+        "detection_id": "O13",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns updating a user with an email conflict, unrelated to the referenced scenarios."
+      },
+      {
+        "detection_id": "O14",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about superuser self-deletion via admin endpoint, which is not covered by the references."
+      },
+      {
+        "detection_id": "O15",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This addresses invalid UUID validation on item/user endpoints, not any of the listed reference requirements."
+      },
+      {
+        "detection_id": "O16",
+        "requirement_id": "R15",
+        "label": "PARTIAL",
+        "reasoning": "It matches the core requirement that the password recovery endpoint exist, but omits the signup setup, 200 response details, and mailcatcher verification."
+      },
+      {
+        "detection_id": "O16",
+        "requirement_id": "R16",
+        "label": "PARTIAL",
+        "reasoning": "It overlaps because R16 requires the password recovery endpoint for a non-existent user, but O16 only states the endpoint is missing without the specific 404 behavior."
+      },
+      {
+        "detection_id": "O16",
+        "requirement_id": "R17",
+        "label": "PARTIAL",
+        "reasoning": "R17 depends on password recovery/reset functionality, and O16 captures that these endpoints are absent, but not the full token extraction, reset, and login verification flow."
+      },
+      {
+        "detection_id": "O16",
+        "requirement_id": "R18",
+        "label": "PARTIAL",
+        "reasoning": "It partially aligns because R18 requires the reset-password operation to exist, but O16 does not capture the invalid-token 400 response details."
+      },
+      {
+        "detection_id": "O16",
+        "requirement_id": "R56",
+        "label": "PARTIAL",
+        "reasoning": "It partially relates because R56 requires the reset-password endpoint, but O16 does not mention the specific 422 validation behavior for short passwords."
+      },
+      {
+        "detection_id": "O17",
+        "requirement_id": "R15",
+        "label": "PARTIAL",
+        "reasoning": "This matches the email-sending and mailcatcher portion of R15, but not the full password recovery request and response verification."
+      },
+      {
+        "detection_id": "O18",
+        "requirement_id": "R14",
+        "label": "PARTIAL",
+        "reasoning": "It captures the missing test token endpoint required by R14, but not the full authentication flow and exact expected 200 response with email."
+      },
+      {
+        "detection_id": "O19",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Logout or token revocation is not described in any of the reference requirements."
+      },
+      {
+        "detection_id": "O20",
+        "requirement_id": "R18",
+        "label": "PARTIAL",
+        "reasoning": "It aligns with the invalid reset token behavior in R18, but does not include the required superuser authentication context, Authorization header use, or exact 400/detail assertions."
+      },
+      {
+        "detection_id": "O21",
+        "requirement_id": "R46",
+        "label": "PARTIAL",
+        "reasoning": "It captures the implied cascade deletion of a user's items after deleting the user, but not the full flow of signup, authentication, item creation, user self-deletion, and 404 verification by superuser."
+      },
+      {
+        "detection_id": "O22",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is a generic statement about explicit status code declarations and does not specifically describe any one reference requirement's behavior."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 3628,
+    "prompt_tokens": 2076,
+    "completion_tokens": 1552
+  }
+}

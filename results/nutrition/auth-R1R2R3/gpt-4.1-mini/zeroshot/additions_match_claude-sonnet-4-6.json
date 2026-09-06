@@ -1,0 +1,48 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "A1 directly describes storing passwords in plaintext without encryption, which corresponds to R1's removal of bcrypt password encryption."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "JWT token expiration and issued-at timestamps do not correspond to any of the three spec requirements about bcrypt removal, Owner special case, or username uniqueness."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The use of a MongoDB counters collection for ID generation does not correspond to any of the three spec requirements listed."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Returning 401 Unauthorized for invalid login credentials does not correspond to any of the three spec requirements about bcrypt, Owner special case, or username uniqueness."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Returning 415 for unsupported media types does not correspond to any of the three spec requirements listed."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "A6 references OWNER_NAME and OWNER_PASSWORD environment variables which relate to the Owner special case in R2, but R2 is about removing the Owner special case entirely, while A6 describes configuring it via environment variables rather than removing it."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1205,
+    "prompt_tokens": 741,
+    "completion_tokens": 464
+  }
+}

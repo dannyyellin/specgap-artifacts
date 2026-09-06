@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the absence of Google Books API integration for fetching publisher and publishedDate, which matches R10."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R11",
+        "label": "MATCH",
+        "reasoning": "O2 describes the absence of genre enumeration validation against allowed values, which matches R11's removal of the valid genre list."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "O3 describes the absence of ISBN format validation for 13-digit ISBN_13, which directly matches R9."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "O4 relates to Google Books API fallback behavior (a sub-detail of the API integration), which partially overlaps with R10 but focuses on a specific edge case rather than the overall removal of the integration."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 952,
+    "prompt_tokens": 637,
+    "completion_tokens": 315
+  }
+}

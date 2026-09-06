@@ -1,0 +1,22 @@
+Timestamp: 2026-06-01 20:52:52
+Detector:  gpt-4.1-mini
+App/Variant/Service: public-library/borrows-R1R2R3/borrows
+Method:    oneshot-tracker
+
+Tokens: prompt=6112, completion=1222, total=7334
+Additions: 3
+Omissions: 9
+
+  A A1: Implements validation that 'returnDate' is not earlier than 'loanDate' on POST and PUT requests
+  A A2: Allows filtering GET /borrows by fields 'loanDate', 'returnDate', and 'id' in addition to 'cardholderId' and 'ISBN'
+  A A3: Returns JSON error messages with keys like 'error' and descriptive text for error responses
+
+  O O1: Does not enforce that a book can only be borrowed by a cardholder who does not have 2 or more books overdue; POST /borrows does not check this condition and does not return 400 if violated
+  O O2: Does not compute 'returnDate' as loanDate + LOAN_PERIOD (30 days) on POST; instead accepts 'returnDate' from client or defaults to empty string
+  O O3: Does not return 400 Bad Request if required POST fields are missing or invalid; uses generic 'Bad request' error message without specifying missing fields
+  O O4: Does not validate that 'loanDate' and 'returnDate' fields conform to the 'DD-MM-YYYY' format beyond basic parsing; no explicit error for invalid date format in query parameters except generic 400
+  O O5: Does not implement GET /borrows with query string 'startDate=date1&endDate=date2' to filter borrow records by loanDate between those dates with proper error handling for missing parameters
+  O O6: Does not handle unsupported HTTP methods with 405 Method Not Allowed for /borrows and /borrows/{id} endpoints
+  O O7: Does not handle or reject unsupported media types other than checking request.is_json; no explicit 415 response for non-JSON content types on PUT and POST
+  O O8: Does not verify that the 'cardholderId' and 'ISBN' exist before PUT updates; only verifies if those fields are present in the update payload
+  O O9: Does not implement pagination or limit on GET /borrows responses

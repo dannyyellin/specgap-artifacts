@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O1 describes the absence of password complexity validation rules, which is the same behavior referenced by R1 as having those rules removed."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O2 concerns the /verify endpoint no longer using the same response/message for invalid username and invalid password cases, matching R2's removal of that anti-enumeration requirement."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 is about missing JSON fields in failed /verify responses, which is not described by any reference requirement."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concerns MongoDB configuration naming, which does not correspond to any reference requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 901,
+    "prompt_tokens": 644,
+    "completion_tokens": 257
+  }
+}

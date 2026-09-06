@@ -1,0 +1,24 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 describes the use of a counters collection for transaction IDs, which does not directly correspond to R10's removal of the uniqueness requirement for purchase-id."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A2 describes a STORE_SCAN_MAX environment variable limiting store number range, which does not correspond to any of the three spec requirements about removed pet selection algorithm, DELETE pet step, or purchase-id uniqueness."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 742,
+    "prompt_tokens": 557,
+    "completion_tokens": 185
+  }
+}

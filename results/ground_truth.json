@@ -1,0 +1,847 @@
+{
+  "generated": "2026-07-17 08:47:50",
+  "script": "build_ground_truth.py",
+  "sources": {
+    "microservices": "results/inferability-consistency.txt (3-pass consensus, 2026-05-27)",
+    "restestbench": "results/restestbench/{variant}/per-req/gpt-5.4/summary.json (experiment_per_req.py, 2026-06-22/23)",
+    "validation_overlay": "results/restestbench/ground-truth-recheck/recheck_summary.json (2 models x 2 passes, 2026-07-12; informational only)"
+  },
+  "rules": [
+    "logs R13 (public-library/logs-R12R13) excluded from delta: invalid removal (2026-06-30)",
+    "petorder R10 (pet-store/petorder-R8R9R10) excluded from delta: full spec leak \u2014 general guideline 'All resource ids unique' subsumes removed sentence (approved 2026-07-17)",
+    "Microservice consensus PAR counts as true gap (conservative against detector)",
+    "RESTestBench NOT_IMPLEMENTED -> true gap; IMPLEMENTED -> inferred; realworld-R2 R15 and realworld-R1 R5 reclassified IMPLEMENTED (author adjudication 2026-07-17)"
+  ],
+  "label_definitions": {
+    "INFERRED": "Fully implemented in substance: the generated code contains behavior satisfying the requirement; a test exercising the required behavior would PASS. Behavior-preserving differences (naming, equivalent mechanisms) do not block this label.",
+    "GAP": "Not implemented: no code addresses the requirement; a test would fail because the required behavior is ABSENT entirely (not merely wrong in a detail).",
+    "PARTIAL": "Partially implemented: the mechanism/endpoint/logic for the requirement is present but deviates in a material observable detail (wrong constant, format, status code; missing sub-case; wrong scope); a test would fail ON THE DETAIL though the machinery exists.",
+    "NOT_IMPLEMENTED": "RESTestBench per-req verdict: the requirement's test scenario is not satisfied by the code (binary protocol; no PARTIAL label exists on this side).",
+    "IMPLEMENTED": "RESTestBench per-req verdict: the requirement's test scenario is satisfied by the code.",
+    "classification_true_gap": "GAP or PARTIAL (microservices) / NOT_IMPLEMENTED (RESTestBench) -> in Delta_minus",
+    "classification_inferred": "INFERRED (microservices) / IMPLEMENTED (RESTestBench) -> in I"
+  },
+  "requirement_text_pointers": {
+    "microservices": "specs/{app}/{variant}-removals.txt",
+    "restestbench": "RESTestBench/data/requirements/{service}/req_{id}.json"
+  },
+  "variants": {
+    "auth-R1R2R3": {
+      "dataset": "microservices",
+      "app": "nutrition",
+      "delta": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "true_gaps": [
+        "R1",
+        "R2"
+      ],
+      "inferred": [
+        "R3"
+      ],
+      "requirements": {
+        "R1": {
+          "classification": "true_gap",
+          "source_label": "GAP",
+          "consensus_unanimous": true
+        },
+        "R2": {
+          "classification": "true_gap",
+          "source_label": "GAP",
+          "consensus_unanimous": false
+        },
+        "R3": {
+          "classification": "inferred",
+          "source_label": "INF",
+          "consensus_unanimous": true
+        }
+      }
+    },
+    "dishes-R4R5R6": {
+      "dataset": "microservices",
+      "app": "nutrition",
+      "delta": [
+        "R4",
+        "R4b",
+        "R5",
+        "R6"
+      ],
+      "true_gaps": [
+        "R5",
+        "R6"
+      ],
+      "inferred": [
+        "R4",
+        "R4b"
+      ],
+      "requirements": {
+        "R4": {
+          "classification": "inferred",
+          "source_label": "INF",
+          "consensus_unanimous": true
+        },
+        "R4b": {
+          "classification": "inferred",
+          "source_label": "INF",
+          "consensus_unanimous": true
+        },
+        "R5": {
+          "classification": "true_gap",
+          "source_label": "GAP",
+          "consensus_unanimous": true
+        },
+        "R6": {
+          "classification": "true_gap",
+          "source_label": "GAP",
+          "consensus_unanimous": false
+        }
+      }
+    },
+    "profiles-R7R8R9": {
+      "dataset": "microservices",
+      "app": "nutrition",
+      "delta": [
+        "R7",
+        "R8",
+        "R9"
+      ],
+      "true_gaps": [
+        "R7",
+        "R8"
+      ],
+      "inferred": [
+        "R9"
+      ],
+      "requirements": {
+        "R7": {
+          "classification": "true_gap",
+          "source_label": "GAP",
+          "consensus_unanimous": true
+        },
+        "R8": {
+          "classification": "true_gap",
+          "source_label": "GAP",
+          "consensus_unanimous": true
+        },
+        "R9": {
+          "classification": "inferred",
+          "source_label": "INF",
+          "consensus_unanimous": true
+        }
+      }
+    },
+    "ratings-R10R11R12": {
+      "dataset": "microservices",
+      "app": "nutrition",
+      "delta": [
+        "R10",
+        "R11",
+        "R12"
+      ],
+      "true_gaps": [
+        "R10"
+      ],
+      "inferred": [
+        "R11",
+        "R12"
+      ],
+      "requirements": {
+        "R10": {
+          "classification": "true_gap",
+          "source_label": "GAP",
+          "consensus_unanimous": true
+        },
+        "R11": {
+          "classification": "inferred",
+          "source_label": "INF",
+          "consensus_unanimous": true
+        },
+        "R12": {
+          "classification": "inferred",
+          "source_label": "INF",
+          "consensus_unanimous": true
+        }
+      }
+    },
+    "borrows-R1R2R3": {
+      "dataset": "microservices",
+      "app": "public-library",
+      "delta": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "true_gaps": [
+        "R1",
+        "R2"
+      ],
+      "inferred": [
+        "R3"
+      ],
+      "requirements": {
+        "R1": {
+          "classification": "true_gap",
+          "source_label": "GAP",
+          "consensus_unanimous": true
+        },
+        "R2": {
+          "classification": "true_gap",
+          "source_label": "GAP",
+          "consensus_unanimous": true
+        },
+        "R3": {
+          "classification": "inferred",
+          "source_label": "INF",
+          "consensus_unanimous": true
+        }
+      }
+    },
+    "cardholders-R4R5R6R7": {
+      "dataset": "microservices",
+      "app": "public-library",
+      "delta": [
+        "R4",
+        "R5",
+        "R6",
+        "R7"
+      ],
+      "true_gaps": [
+        "R4",
+        "R5",
+        "R6"
+      ],
+      "inferred": [
+        "R7"
+      ],
+      "requirements": {
+        "R4": {
+          "classification": "true_gap",
+          "source_label": "PAR",
+          "consensus_unanimous": false
+        },
+        "R5": {
+          "classification": "true_gap",
+          "source_label": "GAP",
+          "consensus_unanimous": true
+        },
+        "R6": {
+          "classification": "true_gap",
+          "source_label": "GAP",
+          "consensus_unanimous": true
+        },
+        "R7": {
+          "classification": "inferred",
+          "source_label": "INF",
+          "consensus_unanimous": true
+        }
+      }
+    },
+    "books-R8R9R10R11": {
+      "dataset": "microservices",
+      "app": "public-library",
+      "delta": [
+        "R10",
+        "R11",
+        "R8",
+        "R9"
+      ],
+      "true_gaps": [
+        "R10",
+        "R11",
+        "R9"
+      ],
+      "inferred": [
+        "R8"
+      ],
+      "requirements": {
+        "R10": {
+          "classification": "true_gap",
+          "source_label": "GAP",
+          "consensus_unanimous": true
+        },
+        "R11": {
+          "classification": "true_gap",
+          "source_label": "GAP",
+          "consensus_unanimous": true
+        },
+        "R8": {
+          "classification": "inferred",
+          "source_label": "INF",
+          "consensus_unanimous": true
+        },
+        "R9": {
+          "classification": "true_gap",
+          "source_label": "GAP",
+          "consensus_unanimous": true
+        }
+      }
+    },
+    "logs-R12R13": {
+      "dataset": "microservices",
+      "app": "public-library",
+      "delta": [
+        "R12"
+      ],
+      "true_gaps": [
+        "R12"
+      ],
+      "inferred": [],
+      "requirements": {
+        "R12": {
+          "classification": "true_gap",
+          "source_label": "GAP",
+          "consensus_unanimous": true
+        },
+        "R13": {
+          "classification": "excluded",
+          "source_label": "INF",
+          "note": "invalid removal (R13 correction, 2026-06-30)"
+        }
+      }
+    },
+    "registry-R1R2R3": {
+      "dataset": "microservices",
+      "app": "pet-store",
+      "delta": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "true_gaps": [
+        "R1"
+      ],
+      "inferred": [
+        "R2",
+        "R3"
+      ],
+      "requirements": {
+        "R1": {
+          "classification": "true_gap",
+          "source_label": "GAP",
+          "consensus_unanimous": true
+        },
+        "R2": {
+          "classification": "inferred",
+          "source_label": "INF",
+          "consensus_unanimous": true
+        },
+        "R3": {
+          "classification": "inferred",
+          "source_label": "INF",
+          "consensus_unanimous": true
+        }
+      }
+    },
+    "petstore-R4R5R6R7": {
+      "dataset": "microservices",
+      "app": "pet-store",
+      "delta": [
+        "R4",
+        "R5",
+        "R6",
+        "R7"
+      ],
+      "true_gaps": [
+        "R4",
+        "R5",
+        "R6",
+        "R7"
+      ],
+      "inferred": [],
+      "requirements": {
+        "R4": {
+          "classification": "true_gap",
+          "source_label": "PAR",
+          "consensus_unanimous": true
+        },
+        "R5": {
+          "classification": "true_gap",
+          "source_label": "GAP",
+          "consensus_unanimous": true
+        },
+        "R6": {
+          "classification": "true_gap",
+          "source_label": "PAR",
+          "consensus_unanimous": false,
+          "note": "2026-06-25 manual pass judged present (regex extracts first integer from ranges)"
+        },
+        "R7": {
+          "classification": "true_gap",
+          "source_label": "GAP",
+          "consensus_unanimous": true
+        }
+      }
+    },
+    "petorder-R8R9R10": {
+      "dataset": "microservices",
+      "app": "pet-store",
+      "delta": [
+        "R8",
+        "R9"
+      ],
+      "true_gaps": [
+        "R8",
+        "R9"
+      ],
+      "inferred": [],
+      "requirements": {
+        "R10": {
+          "classification": "excluded",
+          "source_label": "PAR",
+          "note": "invalid removal (R13 correction, 2026-06-30)"
+        },
+        "R8": {
+          "classification": "true_gap",
+          "source_label": "GAP",
+          "consensus_unanimous": true
+        },
+        "R9": {
+          "classification": "true_gap",
+          "source_label": "GAP",
+          "consensus_unanimous": true
+        }
+      }
+    },
+    "todoapp-R1R2R4R5R7R8R10R12": {
+      "dataset": "restestbench",
+      "app": "todoapp",
+      "delta": [
+        "R1",
+        "R2",
+        "R4",
+        "R5",
+        "R7",
+        "R8",
+        "R10",
+        "R12"
+      ],
+      "true_gaps": [
+        "R2",
+        "R10"
+      ],
+      "inferred": [
+        "R1",
+        "R4",
+        "R5",
+        "R7",
+        "R8",
+        "R12"
+      ],
+      "requirements": {
+        "R1": {
+          "classification": "inferred",
+          "source_label": "IMPLEMENTED",
+          "recheck_2026_07_12": {
+            "unanimous": true,
+            "confirms_original": true
+          }
+        },
+        "R2": {
+          "classification": "true_gap",
+          "source_label": "NOT_IMPLEMENTED",
+          "recheck_2026_07_12": {
+            "unanimous": true,
+            "confirms_original": true
+          }
+        },
+        "R4": {
+          "classification": "inferred",
+          "source_label": "IMPLEMENTED",
+          "recheck_2026_07_12": {
+            "unanimous": true,
+            "confirms_original": true
+          }
+        },
+        "R5": {
+          "classification": "inferred",
+          "source_label": "IMPLEMENTED",
+          "recheck_2026_07_12": {
+            "unanimous": true,
+            "confirms_original": true
+          }
+        },
+        "R7": {
+          "classification": "inferred",
+          "source_label": "IMPLEMENTED",
+          "recheck_2026_07_12": {
+            "unanimous": true,
+            "confirms_original": true
+          }
+        },
+        "R8": {
+          "classification": "inferred",
+          "source_label": "IMPLEMENTED",
+          "recheck_2026_07_12": {
+            "unanimous": true,
+            "confirms_original": true
+          }
+        },
+        "R10": {
+          "classification": "true_gap",
+          "source_label": "NOT_IMPLEMENTED",
+          "recheck_2026_07_12": {
+            "unanimous": true,
+            "confirms_original": true
+          }
+        },
+        "R12": {
+          "classification": "inferred",
+          "source_label": "IMPLEMENTED",
+          "recheck_2026_07_12": {
+            "unanimous": true,
+            "confirms_original": true
+          }
+        }
+      }
+    },
+    "fastapi-R4R10R13R30R35R47": {
+      "dataset": "restestbench",
+      "app": "fastapi",
+      "delta": [
+        "R4",
+        "R10",
+        "R13",
+        "R30",
+        "R35",
+        "R47"
+      ],
+      "true_gaps": [
+        "R4",
+        "R35"
+      ],
+      "inferred": [
+        "R10",
+        "R13",
+        "R30",
+        "R47"
+      ],
+      "requirements": {
+        "R4": {
+          "classification": "true_gap",
+          "source_label": "NOT_IMPLEMENTED",
+          "recheck_2026_07_12": {
+            "unanimous": true,
+            "confirms_original": true
+          }
+        },
+        "R10": {
+          "classification": "inferred",
+          "source_label": "IMPLEMENTED",
+          "recheck_2026_07_12": {
+            "unanimous": true,
+            "confirms_original": true
+          }
+        },
+        "R13": {
+          "classification": "inferred",
+          "source_label": "IMPLEMENTED",
+          "recheck_2026_07_12": {
+            "unanimous": true,
+            "confirms_original": true
+          }
+        },
+        "R30": {
+          "classification": "inferred",
+          "source_label": "IMPLEMENTED",
+          "recheck_2026_07_12": {
+            "unanimous": true,
+            "confirms_original": true
+          }
+        },
+        "R35": {
+          "classification": "true_gap",
+          "source_label": "NOT_IMPLEMENTED",
+          "recheck_2026_07_12": {
+            "unanimous": true,
+            "confirms_original": true
+          }
+        },
+        "R47": {
+          "classification": "inferred",
+          "source_label": "IMPLEMENTED",
+          "recheck_2026_07_12": {
+            "unanimous": true,
+            "confirms_original": true
+          }
+        }
+      }
+    },
+    "fastapi-R14R15R16R17R18R46R56": {
+      "dataset": "restestbench",
+      "app": "fastapi",
+      "delta": [
+        "R14",
+        "R15",
+        "R16",
+        "R17",
+        "R18",
+        "R46",
+        "R56"
+      ],
+      "true_gaps": [
+        "R14",
+        "R15",
+        "R16",
+        "R17",
+        "R18",
+        "R56"
+      ],
+      "inferred": [
+        "R46"
+      ],
+      "requirements": {
+        "R14": {
+          "classification": "true_gap",
+          "source_label": "NOT_IMPLEMENTED",
+          "recheck_2026_07_12": {
+            "unanimous": true,
+            "confirms_original": true
+          }
+        },
+        "R15": {
+          "classification": "true_gap",
+          "source_label": "NOT_IMPLEMENTED",
+          "recheck_2026_07_12": {
+            "unanimous": true,
+            "confirms_original": true
+          }
+        },
+        "R16": {
+          "classification": "true_gap",
+          "source_label": "NOT_IMPLEMENTED",
+          "recheck_2026_07_12": {
+            "unanimous": true,
+            "confirms_original": true
+          }
+        },
+        "R17": {
+          "classification": "true_gap",
+          "source_label": "NOT_IMPLEMENTED",
+          "recheck_2026_07_12": {
+            "unanimous": true,
+            "confirms_original": true
+          }
+        },
+        "R18": {
+          "classification": "true_gap",
+          "source_label": "NOT_IMPLEMENTED",
+          "recheck_2026_07_12": {
+            "unanimous": true,
+            "confirms_original": true
+          }
+        },
+        "R46": {
+          "classification": "inferred",
+          "source_label": "IMPLEMENTED",
+          "recheck_2026_07_12": {
+            "unanimous": true,
+            "confirms_original": true
+          }
+        },
+        "R56": {
+          "classification": "true_gap",
+          "source_label": "NOT_IMPLEMENTED",
+          "recheck_2026_07_12": {
+            "unanimous": true,
+            "confirms_original": true
+          }
+        }
+      }
+    },
+    "realworld-R5R6R9R12R19R23R25R27R29": {
+      "dataset": "restestbench",
+      "app": "nestjs-realworld",
+      "delta": [
+        "R5",
+        "R6",
+        "R9",
+        "R12",
+        "R19",
+        "R23",
+        "R25",
+        "R27",
+        "R29"
+      ],
+      "true_gaps": [
+        "R6",
+        "R9",
+        "R12",
+        "R23",
+        "R25",
+        "R27",
+        "R29"
+      ],
+      "inferred": [
+        "R5",
+        "R19"
+      ],
+      "requirements": {
+        "R5": {
+          "classification": "inferred",
+          "source_label": "IMPLEMENTED",
+          "recheck_2026_07_12": {
+            "unanimous": false,
+            "confirms_original": false
+          },
+          "note": "DISPUTED by 4-verdict recheck; pending adjudication (TODO.md)"
+        },
+        "R6": {
+          "classification": "true_gap",
+          "source_label": "NOT_IMPLEMENTED",
+          "recheck_2026_07_12": {
+            "unanimous": true,
+            "confirms_original": true
+          }
+        },
+        "R9": {
+          "classification": "true_gap",
+          "source_label": "NOT_IMPLEMENTED",
+          "recheck_2026_07_12": {
+            "unanimous": true,
+            "confirms_original": true
+          }
+        },
+        "R12": {
+          "classification": "true_gap",
+          "source_label": "NOT_IMPLEMENTED",
+          "recheck_2026_07_12": {
+            "unanimous": true,
+            "confirms_original": true
+          }
+        },
+        "R19": {
+          "classification": "inferred",
+          "source_label": "IMPLEMENTED",
+          "recheck_2026_07_12": {
+            "unanimous": true,
+            "confirms_original": true
+          }
+        },
+        "R23": {
+          "classification": "true_gap",
+          "source_label": "NOT_IMPLEMENTED",
+          "recheck_2026_07_12": {
+            "unanimous": true,
+            "confirms_original": true
+          }
+        },
+        "R25": {
+          "classification": "true_gap",
+          "source_label": "NOT_IMPLEMENTED",
+          "recheck_2026_07_12": {
+            "unanimous": true,
+            "confirms_original": true
+          }
+        },
+        "R27": {
+          "classification": "true_gap",
+          "source_label": "NOT_IMPLEMENTED",
+          "recheck_2026_07_12": {
+            "unanimous": true,
+            "confirms_original": true
+          }
+        },
+        "R29": {
+          "classification": "true_gap",
+          "source_label": "NOT_IMPLEMENTED",
+          "recheck_2026_07_12": {
+            "unanimous": true,
+            "confirms_original": true
+          }
+        }
+      }
+    },
+    "realworld-R2R10R13R15R24R26R28": {
+      "dataset": "restestbench",
+      "app": "nestjs-realworld",
+      "delta": [
+        "R2",
+        "R10",
+        "R13",
+        "R15",
+        "R24",
+        "R26",
+        "R28"
+      ],
+      "true_gaps": [
+        "R2",
+        "R10",
+        "R24",
+        "R28"
+      ],
+      "inferred": [
+        "R13",
+        "R15",
+        "R26"
+      ],
+      "requirements": {
+        "R2": {
+          "classification": "true_gap",
+          "source_label": "NOT_IMPLEMENTED",
+          "recheck_2026_07_12": {
+            "unanimous": true,
+            "confirms_original": true
+          }
+        },
+        "R10": {
+          "classification": "true_gap",
+          "source_label": "NOT_IMPLEMENTED",
+          "recheck_2026_07_12": {
+            "unanimous": true,
+            "confirms_original": true
+          }
+        },
+        "R13": {
+          "classification": "inferred",
+          "source_label": "IMPLEMENTED",
+          "recheck_2026_07_12": {
+            "unanimous": true,
+            "confirms_original": true
+          }
+        },
+        "R15": {
+          "classification": "inferred",
+          "source_label": "IMPLEMENTED",
+          "recheck_2026_07_12": {
+            "unanimous": false,
+            "confirms_original": false
+          },
+          "note": "DISPUTED by 4-verdict recheck; pending adjudication (TODO.md)"
+        },
+        "R24": {
+          "classification": "true_gap",
+          "source_label": "NOT_IMPLEMENTED",
+          "recheck_2026_07_12": {
+            "unanimous": true,
+            "confirms_original": true
+          }
+        },
+        "R26": {
+          "classification": "inferred",
+          "source_label": "IMPLEMENTED",
+          "recheck_2026_07_12": {
+            "unanimous": true,
+            "confirms_original": true
+          }
+        },
+        "R28": {
+          "classification": "true_gap",
+          "source_label": "NOT_IMPLEMENTED",
+          "recheck_2026_07_12": {
+            "unanimous": true,
+            "confirms_original": true
+          }
+        }
+      }
+    }
+  },
+  "totals": {
+    "variants": 16,
+    "valid_removals": 71,
+    "true_gaps": 44,
+    "inferred": 27,
+    "excluded": 1
+  }
+}

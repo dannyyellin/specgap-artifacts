@@ -1,0 +1,24 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "R9 specifies that user_id should come from token validation rather than the request body, and A1 describes accepting tokens from multiple locations including the request body, which partially relates to how token/user_id sourcing is handled but focuses on token location rather than user_id extraction."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the three spec requirements (R7, R8, R9) address enforcing a one-profile-per-user constraint or rejecting duplicate profile creation."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 757,
+    "prompt_tokens": 557,
+    "completion_tokens": 200
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R7",
+        "label": "PARTIAL",
+        "reasoning": "It points out overdue/fine-related logic living in the cardholders service, which overlaps with removing cross-service fine computation concerns, but it does not specifically describe a cross-service call to Borrows."
+      },
+      {
+        "detection_id": "A1",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "It references overdue calculation logic that is related to fine computation, but it does not mention the removed $0.50/day formula itself."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "PUT id consistency validation is not described by any of the listed spec removals."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 706,
+    "prompt_tokens": 500,
+    "completion_tokens": 206
+  }
+}

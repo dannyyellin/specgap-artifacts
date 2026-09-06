@@ -1,0 +1,48 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement mentions or tests Bearer token format; all auth requirements use 'Token <jwt>' format."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed spec requirements test for extra fields like 'id', 'bio', or 'image' in registration/login/current-user responses."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed spec requirements specifically test for or require these extra RealWorld-style article response fields."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement mentions a GET /api/tags endpoint."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement mentions or tests a root GET / endpoint."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement tests or requires article authors to delete comments they did not create."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2328,
+    "prompt_tokens": 1944,
+    "completion_tokens": 384
+  }
+}

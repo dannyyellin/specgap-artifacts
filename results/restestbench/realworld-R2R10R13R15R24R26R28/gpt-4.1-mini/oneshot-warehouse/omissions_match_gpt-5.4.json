@@ -1,0 +1,108 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement concerns validation of required article creation fields."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R24",
+        "label": "PARTIAL",
+        "reasoning": "It targets the same article ordering behavior, but says ordering is by id instead of created timestamp, which may overlap with but does not exactly restate the timestamp-based descending requirement."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement is about slug preservation when updating an article title."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R28",
+        "label": "MATCH",
+        "reasoning": "It describes the same behavior that after deletion, GET on the deleted article returns 200 with an empty object."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R28",
+        "label": "MATCH",
+        "reasoning": "It directly corresponds to the requirement demonstrating that any user can update or delete any article."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "It matches the requirement that a user attempting to follow themselves must receive a 400 error."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "It matches the requirement that a user attempting to unfollow themselves must receive a 400 error."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R28",
+        "label": "MATCH",
+        "reasoning": "It refers to the same post-deletion GET behavior returning 200 with an empty object."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement concerns validation of comment body presence."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements address permissions for deleting comments."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": "R13",
+        "label": "PARTIAL",
+        "reasoning": "It overlaps with the author-filter behavior in R13, but adds tag filtering which is not part of that requirement and omits the expected article counts and titles."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement specifies email format validation during user creation."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement specifies email format validation during user update."
+      },
+      {
+        "detection_id": "O13",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement specifies password strength validation."
+      },
+      {
+        "detection_id": "O14",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The references only mention GET returning 200 with empty object after deletion, not generic not-found behavior."
+      },
+      {
+        "detection_id": "O15",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No provided reference requirement concerns deleting users or foreign key constraint errors."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2887,
+    "prompt_tokens": 2029,
+    "completion_tokens": 858
+  }
+}

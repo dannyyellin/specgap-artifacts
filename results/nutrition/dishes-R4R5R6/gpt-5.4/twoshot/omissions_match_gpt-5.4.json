@@ -1,0 +1,54 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "It describes that POST/PUT/DELETE are not restricted to the owner, which is the same behavior as removing the owner-only restriction."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "It concerns GET query filtering semantics, but R6 specifically mentions removing contains/lte semantics and this item is about an ingredient field-name/filter mismatch rather than those exact semantics."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "It directly describes missing less-than-or-equal nutritional filtering, which is explicitly covered by the removed lte query semantics."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about error handling for unsupported query fields, which is not described by any reference requirement."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns numeric formatting in responses, which does not correspond to any listed reference requirement."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "It references Ninja API field handling/mapping behavior, but focuses on malformed numeric fallback rather than the removal of field name mapping details itself."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about disallowed package usage and has no counterpart in the reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1366,
+    "prompt_tokens": 934,
+    "completion_tokens": 432
+  }
+}

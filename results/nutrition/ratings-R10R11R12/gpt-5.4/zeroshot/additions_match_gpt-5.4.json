@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This describes accepted token header formats, not removal of rating constraints or removal of deriving user_id from token validation."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns response formatting for avg_rating and does not address rating range, duplicate ratings per user and dish, or token-derived user_id."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about validating dish existence via another microservice, which is unrelated to the removed constraints in the listed requirements."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This describes internal storage and id generation details, not any of the specified removals of rating range, one-rating-per-user-per-dish, or token-based user_id sourcing."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 914,
+    "prompt_tokens": 654,
+    "completion_tokens": 260
+  }
+}

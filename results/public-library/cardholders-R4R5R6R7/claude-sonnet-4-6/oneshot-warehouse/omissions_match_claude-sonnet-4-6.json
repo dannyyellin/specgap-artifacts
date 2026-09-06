@@ -1,0 +1,48 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements mention filtering by 'id' in GET /cardholders."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements address validation of non-empty strings for name/email fields."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O3 describes the removal/absence of the fine computation formula ($0.50/day * days overdue), which directly corresponds to R6."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O4 describes the failure to compute days overdue as part of the fine formula, which is the same behavior captured by R6 (removed fine computation formula)."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O5 describes the absence of the 415 status code for unsupported media types, which matches R5's removal of the 415 error code."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O6 also describes the absence of the 415 status code for unsupported media types on a different endpoint, matching R5's removal of the 415 error code."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1412,
+    "prompt_tokens": 963,
+    "completion_tokens": 449
+  }
+}

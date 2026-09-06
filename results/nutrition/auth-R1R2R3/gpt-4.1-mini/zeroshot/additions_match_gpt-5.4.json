@@ -1,0 +1,48 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "Storing passwords in plaintext without hashing directly corresponds to removing bcrypt password encryption."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "JWT token structure and timestamps are unrelated to removing bcrypt, removing the Owner special case, or removing username uniqueness."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Using a counters collection for numeric IDs does not correspond to any of the listed requirements."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Returning 401 Unauthorized for invalid login credentials is not about password encryption, Owner special handling, or username uniqueness."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Unsupported media type handling is unrelated to any of the three listed requirements."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "Referencing OWNER_NAME and OWNER_PASSWORD relates to the Owner special case, but environment-based configuration does not itself establish or remove the full hardcoded Owner behavior including privileged=True."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1012,
+    "prompt_tokens": 660,
+    "completion_tokens": 352
+  }
+}

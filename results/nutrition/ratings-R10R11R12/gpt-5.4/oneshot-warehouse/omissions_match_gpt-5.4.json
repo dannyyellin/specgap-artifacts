@@ -1,0 +1,48 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O1 states that POST and PUT do not enforce rating being an integer between 1 and 5, which is exactly the removed rating range constraint in R10."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 concerns the response body/POST semantics, which is unrelated to any of R10, R11, or R12."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R11",
+        "label": "MATCH",
+        "reasoning": "O3 describes the one-rating-per-user-per-dish rule, which is exactly the constraint removed in R11."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 is about verifying dish existence via another microservice and does not correspond to R10, R11, or R12."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 is about dish existence checks on DELETE and does not match any of the listed reference requirements."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 concerns disallowed package usage, which is unrelated to the removed constraints in R10, R11, and R12."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1249,
+    "prompt_tokens": 868,
+    "completion_tokens": 381
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "method": "oneshot-warehouse",
+  "removals": [
+    1,
+    2,
+    4,
+    5,
+    7,
+    8,
+    10,
+    12
+  ],
+  "detector_model": "claude-sonnet-4-6",
+  "gen_usage": null,
+  "detect_usage": {
+    "total_tokens": 5927,
+    "prompt_tokens": 5501,
+    "completion_tokens": 426
+  },
+  "n_additions": 1,
+  "n_omissions": 2
+}

@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O1 describes the absence of Google Books API integration for obtaining publisher and publishedDate, which is the same behavior removed in R10."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "O2 concerns fallback handling for publisher and publishedDate when Google Books lacks data, which depends on the Google Books integration removed in R10 but is more specific than the reference."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 is about GET /books filtering behavior, which does not correspond to any of R8 through R11."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concerns 405 handling for unsupported HTTP methods, which is unrelated to the listed reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 966,
+    "prompt_tokens": 703,
+    "completion_tokens": 263
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R8",
+        "label": "PARTIAL",
+        "reasoning": "Both concern GET /profiles and access/filtering by user identity, but allowing a user_id query filter is not the same as removing the owner-only restriction."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 522,
+    "prompt_tokens": 440,
+    "completion_tokens": 82
+  }
+}

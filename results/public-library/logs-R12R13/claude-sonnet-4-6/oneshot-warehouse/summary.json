@@ -1,0 +1,16 @@
+{
+  "app": "public-library",
+  "variant": "logs-R12R13",
+  "service": "logs",
+  "method": "oneshot-warehouse",
+  "detector_model": "claude-sonnet-4-6",
+  "gen_model": "gpt-5.4",
+  "gen_usage": null,
+  "n_additions": 1,
+  "n_omissions": 0,
+  "usage": {
+    "total_tokens": 6876,
+    "prompt_tokens": 5780,
+    "completion_tokens": 1096
+  }
+}

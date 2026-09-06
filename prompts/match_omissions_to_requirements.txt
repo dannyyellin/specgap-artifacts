@@ -1,0 +1,44 @@
+## SYSTEM PROMPT
+
+You are an expert software engineer. You will be given two lists of requirements, reference requirements and
+detected requirements. Your task is to match those that describe the same behavior, even if worded differently.
+
+Be strict: a pair that is only vaguely related or overlaps in domain but not in the
+specific behavior should NOT be counted as a match.
+
+Be aware that multiple detected requirements may match the same reference requirement, and a
+single detected requirement may match multiple reference requirements. Some detected and
+reference requirements may have no match.
+
+
+## USER PROMPT
+
+## Reference requirements
+{removed_requirements}
+
+## Detected requirements
+{detected_omissions}
+
+For each detected requirement, determine whether it matches one of the reference requirements
+above. Use these labels:
+- MATCH: the detected requirement clearly describes the same behavior as a reference requirement
+- PARTIAL: the detected requirement partially captures the reference requirement (e.g., right endpoint,
+  wrong status code; or right behavior, wrong scope)
+- NONE: the detected requirement does not correspond to any reference requirement
+
+If a detected requirement matches multiple reference requirements, include one entry per match.
+If a detected requirement matches nothing, include one entry with requirement_id null and label NONE.
+requirement_id is always null when label is NONE.
+
+Return JSON only, no other text:
+{
+  "matches": [
+    {
+      "detection_id": "O1",
+      "requirement_id": "R5" | null,
+      "label": "MATCH" | "PARTIAL" | "NONE",
+      "reasoning": "one sentence"
+    },
+    ...
+  ]
+}

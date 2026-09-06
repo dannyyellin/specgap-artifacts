@@ -1,0 +1,79 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "Uses environment variables (OWNER_NAME, OWNER_PASSWORD) to configure the Owner's name and password, defaulting to 'owner'/'owner' instead of the required 'Owner'/'owner#pw'",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification explicitly states the Owner's name must be 'Owner' and password must be 'owner#pw'. Using environment variables with incorrect defaults is an addition that overrides the hard-coded requirement."
+      },
+      {
+        "id": "A2",
+        "description": "Stores the password in plaintext in the database",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The specification states the password field is 'an encrypted string', but the code stores passwords as plaintext without any encryption. While bcrypt is listed as an allowed package, the code does not use it."
+      },
+      {
+        "id": "A3",
+        "description": "Token expiration is configurable via TOKEN_EXPIRATION_HOURS environment variable",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification does not mention token expiration at all. Adding a configurable expiration is an addition not required by the specification."
+      },
+      {
+        "id": "A4",
+        "description": "The /validate endpoint checks that the user still exists in the database after decoding the token",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification only requires validating the token itself and returning valid/privileged/user_id. The additional database lookup to confirm user existence is not required by the specification."
+      },
+      {
+        "id": "A5",
+        "description": "The privileged field in the token payload is computed at token generation time and stored in the JWT, rather than being determined at validation time",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification says 'If the user_name is Owner and the password is correct, the privileged field is True', implying this should be evaluated at validation time. Embedding it in the token is an implementation addition."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "The Owner user is pre-created with plaintext password 'owner' instead of the required name 'Owner' and password 'owner#pw'",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states 'The service allows only one user to register with the name Owner. The password of this user must be owner#pw.' The code uses environment variable defaults of 'owner'/'owner' which do not match the required values."
+      },
+      {
+        "id": "O2",
+        "description": "Passwords are not encrypted/hashed before storage",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The specification defines the password field as 'an encrypted string' and lists bcrypt as an allowed package specifically for this purpose. The code stores passwords in plaintext."
+      },
+      {
+        "id": "O3",
+        "description": "POST /register does not prevent the name 'Owner' from being registered by a new user (only one Owner allowed)",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states 'The service allows only one user to register with the name Owner.' While the unique index prevents duplicates, the code allows any user to attempt to register as 'Owner' (with any password), rather than enforcing that 'Owner' can only exist with the specific required password 'owner#pw'."
+      },
+      {
+        "id": "O4",
+        "description": "The /validate endpoint does not verify the password when determining the 'privileged' field; it relies solely on the name stored in the token",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states 'If the user_name is Owner and the password is correct, the privileged field is True.' The code only checks the name embedded in the token payload, never verifying the password at validation time."
+      },
+      {
+        "id": "O5",
+        "description": "POST /login returns 401 when credentials are wrong, but the specification requires the 'appropriate response code' for failed login (which could be 401 or 400 depending on the failure mode); more critically, the spec does not explicitly define 401 for wrong credentials \u2014 however the code does not return 400 for missing name/password in login when the JSON body is missing those fields after parsing",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification states 'If a username or password is not supplied upon for requests to /register and /login, then 400 (Bad request) is returned.' The code does check for None name/password and returns 400, so this is partially covered. However, the spec requires 400 for missing info but the code returns 401 for wrong credentials \u2014 this is acceptable. No clear omission here beyond what is already noted."
+      },
+      {
+        "id": "O6",
+        "description": "The ensure_owner_user() function is only called inside 'if __name__ == __main__' block, so it is not executed when the app is run via a WSGI server (e.g., gunicorn), meaning the Owner user may never be created",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification requires that the Owner user exists with name 'Owner' and password 'owner#pw'. Running via a production WSGI server would skip the app_context block, so the Owner would never be initialized."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 8983,
+    "prompt_tokens": 7632,
+    "completion_tokens": 1351
+  }
+}

@@ -1,0 +1,31 @@
+SPECIFICATION: Todo List Application
+============================================================
+
+This application provides a REST API for managing personal todo
+lists. Users register and login to receive JWT access tokens.
+Each user manages their own set of todos via CRUD endpoints.
+
+Endpoints:
+  POST /users/register — register a new user
+  POST /users/login — login and receive access token
+  GET /todos — list todos
+  GET /todos/{id} — get a specific todo
+  POST /todos — create a new todo
+  PUT /todos/{id} — update a todo
+  DELETE /todos/{id} — delete a todo
+
+## Todo Operations
+
+- Register a user and login. Create a todo with title 'My Test Todo'. Use the returned todo ID to call GET /todos/{id}. Verify the response status is 200 OK, the returned todo has the same ID and title 'My Test Todo', and isComplete is false.
+
+- Register a user and login. Create a todo with title 'Todo to Delete' and note the ID. Call DELETE /todos/{id}. Verify the response status is 200 OK. Then call GET /todos/{id} and verify the response is 404 Not Found (todo no longer exists).
+
+- Register a user and login. Create a todo with title 'Original Todo'. The todo should have isComplete=false. Call PUT /todos/{id} with isComplete=true and title 'Updated Todo'. Verify response is 200 OK. Then call GET /todos/{id} and verify isComplete is now true and title is 'Updated Todo'.
+
+- Register a user and login. Call PUT /todos/99999 with a valid todo body (id=99999, title='Test', isComplete=false). Verify the response status is 404 Not Found.
+
+- Call GET /todos without providing any Authorization header or token. Verify the response status is 401 Unauthorized.
+
+## User Authentication
+
+- Call POST /users/register with a valid email 'testuser@example.com' and password 'SecureP@ss123'. Verify the response status is 200 OK. Then call POST /users/login with the same credentials and verify a token is returned.

@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "O1 describes the missing permission check that R4 requires: a second user attempting to read another user's item should get 400 with 'Not enough permissions', but the code does not enforce this."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R35",
+        "label": "PARTIAL",
+        "reasoning": "O2 addresses the same endpoint and scenario as R35 (duplicate email signup returning 400), but notes the detail message differs ('User with this email already exists' vs. the required 'The user with this email already exists in the system')."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements mention a constraint about the absence of an '_id' field in the duplicate-user creation response body."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements involve password recovery email verification via a Mailcatcher endpoint."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1547,
+    "prompt_tokens": 1218,
+    "completion_tokens": 329
+  }
+}

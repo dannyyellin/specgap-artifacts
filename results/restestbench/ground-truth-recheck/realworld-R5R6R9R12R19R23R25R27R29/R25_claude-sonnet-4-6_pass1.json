@@ -1,0 +1,23 @@
+{
+  "variant": "realworld-R5R6R9R12R19R23R25R27R29",
+  "req_id": 25,
+  "model": "claude-sonnet-4-6",
+  "pass": 1,
+  "verdict": "NOT_IMPLEMENTED",
+  "requirement_vague": "Verify JWT token contains correct user ID and username in payload",
+  "omissions": [
+    {
+      "id": "O1",
+      "description": "The JWT payload only contains 'sub' (user ID as string) and 'exp' fields. It does not include 'username' or 'email' fields in the token payload.",
+      "category": "COMPUTED_VALUES",
+      "reasoning": "The requirement specifies that the JWT payload must contain 'id' matching the user's id, 'username' equal to 'jwtuser1', and 'email' equal to 'jwtuser1@test.com'. The create_token function only encodes {'sub': str(user_id), 'exp': ...}, omitting username and email entirely."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 6865,
+    "prompt_tokens": 6678,
+    "completion_tokens": 187
+  },
+  "timestamp": "2026-07-12 10:41:17"
+}

@@ -1,0 +1,108 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers validation of required fields for article creation."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R24",
+        "label": "PARTIAL",
+        "reasoning": "R24 tests ordering by created timestamp descending, and O2 identifies that the code orders by id instead of created timestamp, which is the same behavioral concern but O2 frames it as an omission while R24 is a test scenario."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers slug preservation on article update."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R28",
+        "label": "PARTIAL",
+        "reasoning": "R28 includes verifying GET after deletion returns 200 with empty object, and O4 confirms this behavior is implemented correctly, but O4 does not capture the security vulnerability aspect of R28."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R28",
+        "label": "MATCH",
+        "reasoning": "R28 explicitly tests the security vulnerability where any user can update/delete any article, and O5 identifies that the code does NOT implement this vulnerability (enforces ownership checks), which is the same behavioral discrepancy."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "R2 requires that following oneself returns 400 with 'cannot be equal' message, and O6 identifies that the code does not implement this self-follow check."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "R10 requires that unfollowing oneself returns 400, and O6 identifies that the code does not implement this self-unfollow check."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R28",
+        "label": "PARTIAL",
+        "reasoning": "R28 includes verifying GET after deletion returns 200 with empty object, and O7 confirms this is implemented, partially overlapping with R28's deletion verification step."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers validation of comment body presence."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers comment deletion permissions."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": "R13",
+        "label": "PARTIAL",
+        "reasoning": "R13 tests filtering articles by author, and O10 confirms the author filter is implemented, but O10 does not capture the full test scenario of R13."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers email format validation on user creation."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers email format validation on user update."
+      },
+      {
+        "detection_id": "O13",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers password strength validation."
+      },
+      {
+        "detection_id": "O14",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement specifies the behavior for GET on a non-existent article."
+      },
+      {
+        "detection_id": "O15",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers DELETE /api/users/{email} returning 500 on FK constraint error."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 3380,
+    "prompt_tokens": 2298,
+    "completion_tokens": 1082
+  }
+}

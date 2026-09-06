@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns strict validation of POST /pet-types payload keys, which is unrelated to any listed removed behavior."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "R4 removes extraction rules tied to temperament/group_behavior, and A2 discusses attribute extraction rules, but it focuses on extracting additional fields rather than specifically reflecting removal of those original rules."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about defaulting missing lifespan to 0 versus null, not about the removed lifespan range parsing behavior."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns accepted fields for updating a pet, which does not correspond to any of the listed removed requirements."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about the MongoDB hostname configuration and has no relation to the removed spec behaviors."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1128,
+    "prompt_tokens": 819,
+    "completion_tokens": 309
+  }
+}

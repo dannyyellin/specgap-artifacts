@@ -1,0 +1,14 @@
+{
+  "req_id": 26,
+  "requirement_vague": "Verify multiple comments can be added to the same article with unique IDs",
+  "requirement_precise": "Create user1 (username: 'multicommentuser1', email: 'multicommentuser1@test.com', password: 'pass123'). User1 creates an article 'Multi Comment Article'. User1 adds comment 'First comment'. User1 adds comment 'Second comment'. User1 adds comment 'Third comment'. GET /api/articles/{slug}/comments. Verify 3 comments are returned. Verify each comment has a unique id (no duplicates). Verify the comment bodies are preserved correctly. This tests comment creation and persistence with multiple comments.",
+  "verdict": "NOT_LEAKED",
+  "spec_evidence": "- \"Create a comment on the article via POST /api/articles/{slug}/comments with body 'This is my test comment'. ... Verify the comments array contains a comment with body 'This is my test comment'. Verify the comment has an 'id' field that is a number.\"\n- \"Create a comment with body 'Comment to delete'. Extract the comment id from the response. Verify the article has 1 comment. Delete the comment via DELETE /api/articles/{slug}/comments/{id}.\"",
+  "reasoning": "The spec shows that a single comment has a numeric id and can be deleted by id, but it never explicitly states or directly entails that multiple comments on the same article must all have distinct ids or that several comments can be added and preserved together. Concluding uniqueness across multiple comments would require outside assumptions beyond the text.",
+  "parse_error": false,
+  "usage": {
+    "total_tokens": 3503,
+    "prompt_tokens": 3315,
+    "completion_tokens": 188
+  }
+}

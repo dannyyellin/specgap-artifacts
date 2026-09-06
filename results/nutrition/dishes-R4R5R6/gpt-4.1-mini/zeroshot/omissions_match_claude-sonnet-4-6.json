@@ -1,0 +1,48 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of owner-only restriction for POST, PUT, and DELETE requests, matching R5 exactly."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "O2 relates to owner access control which is part of R5's scope, but focuses on credential enforcement rather than the removal of owner-only restriction for HTTP methods."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "O3 relates to Ninja API field handling (premium subscriber string values), which is related to Ninja API field name mapping details in R4, but focuses on value conversion rather than field name mapping specifically."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 describes missing 400 Bad Request validation for malformed payloads, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 describes missing 405 Method Not Allowed handling, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 describes missing 415 Unsupported Media Type handling, which does not correspond to any of the three reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1370,
+    "prompt_tokens": 909,
+    "completion_tokens": 461
+  }
+}

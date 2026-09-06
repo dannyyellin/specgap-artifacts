@@ -1,0 +1,24 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This describes writable fields on the private user creation endpoint, which is unrelated to the listed requirements about authentication, password recovery/reset, and deleting a user then checking item access."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns the response shape of a superuser item listing endpoint, while none of the listed requirements involve listing items or asserting a data/count wrapper."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1194,
+    "prompt_tokens": 1048,
+    "completion_tokens": 146
+  }
+}

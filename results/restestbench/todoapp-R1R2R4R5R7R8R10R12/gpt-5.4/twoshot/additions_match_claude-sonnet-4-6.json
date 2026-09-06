@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement addresses accepting or persisting an optional isComplete field during todo creation."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement addresses duplicate email registration behavior."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement specifies the claims (expiration, email) that must be included in JWT tokens."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement specifies the response body content for a successful DELETE /todos/{id} operation."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1418,
+    "prompt_tokens": 1167,
+    "completion_tokens": 251
+  }
+}

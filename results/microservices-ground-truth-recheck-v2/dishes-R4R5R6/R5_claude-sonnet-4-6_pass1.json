@@ -1,0 +1,19 @@
+{
+  "app": "nutrition",
+  "variant": "dishes-R4R5R6",
+  "service": "dishes",
+  "req_id": "R5",
+  "requirement": "POST, PUT, and DELETE operations on a dish are restricted to the dish's owner; other authenticated users are denied (any user may GET).",
+  "source_headline": "Removed owner-only restriction for POST/PUT/DELETE",
+  "model": "claude-sonnet-4-6",
+  "pass": 1,
+  "label": "GAP",
+  "evidence": "none",
+  "reasoning": "The requirement states that POST, PUT, and DELETE operations are restricted to the dish's owner, with other authenticated users denied. The code has no concept of dish ownership at all \u2014 dishes are never associated with a creator/owner, and there is no ownership check in the POST, PUT, or DELETE handlers. Any authenticated user can perform any of these operations on any dish. The `before_request` hook only validates that a token is present and valid, but does not enforce ownership restrictions.",
+  "usage": {
+    "total_tokens": 3362,
+    "prompt_tokens": 3229,
+    "completion_tokens": 133
+  },
+  "timestamp": "2026-07-16 14:57:34"
+}

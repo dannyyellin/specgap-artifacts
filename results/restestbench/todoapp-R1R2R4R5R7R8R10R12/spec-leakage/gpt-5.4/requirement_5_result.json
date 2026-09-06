@@ -1,0 +1,14 @@
+{
+  "req_id": 5,
+  "requirement_vague": "Users cannot access another user's todo",
+  "requirement_precise": "Register two users (userA and userB) and login with each. UserA creates a todo and notes the returned ID. UserB calls GET /todos/{id} using userA's todo ID. Verify the response status is 404 Not Found (because userB doesn't own it and is not admin).",
+  "verdict": "NOT_LEAKED",
+  "spec_evidence": "\"Each user manages their own set of todos via CRUD endpoints.\"",
+  "reasoning": "The spec says users manage their own todos, but it never explicitly states what must happen if one user requests another user's todo or that cross-user access is forbidden with a 404 response. Concluding the removed requirement would require external assumptions about authorization behavior beyond the text provided.",
+  "parse_error": false,
+  "usage": {
+    "total_tokens": 1000,
+    "prompt_tokens": 911,
+    "completion_tokens": 89
+  }
+}

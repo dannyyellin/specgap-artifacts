@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "O1 captures that the integer constraint is removed (allowing floats), which aligns with R10's removal of the integer-between-1-and-5 constraint, but O1 focuses on the integer vs float aspect rather than the full range removal."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O2 directly describes the removal of the 1-5 range constraint on rating, which matches R10's removal of the rating range constraint."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 describes a behavior about returning 404 for unrated dishes in GET /ratings/{id}, which does not correspond to any of the three reference requirements about removed constraints."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 describes a missing dish existence check for GET /ratings/{id}, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 describes use of an unauthorized package (flask_pymongo), which does not correspond to any of the three reference requirements about removed constraints."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1251,
+    "prompt_tokens": 841,
+    "completion_tokens": 410
+  }
+}

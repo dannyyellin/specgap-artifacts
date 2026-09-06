@@ -1,0 +1,66 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "O1 identifies the same duplicate username/email scenario as R9 but notes the status code is 422 instead of 400 and the error message differs, capturing the discrepancy rather than the full requirement."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R12",
+        "label": "MATCH",
+        "reasoning": "O2 directly describes the missing tag filtering on GET /api/articles, which is the core behavior tested in R12."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O3 identifies the missing GET /api/articles/feed endpoint, which is required by R6 to return articles from followed authors."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R27",
+        "label": "MATCH",
+        "reasoning": "O3 also covers R27, which requires GET /api/articles/feed to return an empty result when the user follows nobody."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R29",
+        "label": "MATCH",
+        "reasoning": "O4 identifies the missing DELETE /api/users/{email} endpoint, which is exactly what R29 tests for FK constraint behavior."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R25",
+        "label": "MATCH",
+        "reasoning": "O5 directly describes the JWT payload missing 'username' and 'email' fields, which is what R25 verifies."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R23",
+        "label": "MATCH",
+        "reasoning": "O6 identifies the missing feed pagination (limit/offset) on GET /api/articles/feed, which is exactly what R23 tests."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R12",
+        "label": "MATCH",
+        "reasoning": "O7 restates the same missing tag filtering behavior on GET /api/articles as O2, matching R12."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": "R12",
+        "label": "PARTIAL",
+        "reasoning": "O8 describes the absence of the 'tag' query parameter declaration, which is a lower-level detail of the same missing tag filtering feature in R12."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 3018,
+    "prompt_tokens": 2334,
+    "completion_tokens": 684
+  }
+}

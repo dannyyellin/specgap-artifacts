@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 concerns restricting allowed query filter fields on GET /cardholders, which does not correspond to removed type declarations, error code 415, fine formula, or Borrows cross-service calls."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A2 is about rejecting PUT requests with no updatable fields, unrelated to any of the listed removals in the specification."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A3 describes payload id versus URL id validation for PUT /cardholders/{id}, which does not match any requirement about removed types, 415 errors, fine computation, or Borrows calls."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "A4 partially aligns with R4 because it adds string type validation for name and email, touching the removed field type declarations, but it only covers some fields and is about runtime validation rather than the spec declaration itself."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 994,
+    "prompt_tokens": 693,
+    "completion_tokens": 301
+  }
+}

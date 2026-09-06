@@ -1,0 +1,18 @@
+Timestamp: 2026-06-02 09:43:03
+Detector:  claude-sonnet-4-6
+App/Variant/Service: nutrition/dishes-R4R5R6/dishes
+Method:    oneshot-warehouse
+
+Tokens: prompt=8485, completion=1008, total=9493
+Additions: 4
+Omissions: 4
+
+  A A1: GET /dishes supports filtering by 'id', 'name', and 'ingredients' query parameters in addition to nutritional fields
+  A A2: Nutritional field query filtering uses exact equality rather than less-than-or-equal comparison
+  A A3: GET /dishes filters by 'ingredients' as an exact field match rather than a membership/contains check
+  A A4: All endpoints require authentication including GET /dishes and GET /dishes/{id}
+
+  O O1: POST /dishes and PUT/DELETE /dishes/{id} do not verify that the authenticated user is the restaurant Owner (privileged user)
+  O O2: GET /dishes does not support filtering by 'ingredient' query parameter as a membership/contains check
+  O O3: Nutritional field query filtering does not use less-than-or-equal comparison ($lte)
+  O O4: Ninja API field values that are strings (e.g., 'Only available for premium subscribers.') are not handled gracefully — they may cause errors

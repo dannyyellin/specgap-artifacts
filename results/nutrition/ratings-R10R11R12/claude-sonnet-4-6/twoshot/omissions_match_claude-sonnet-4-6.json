@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of the integer 1-5 range validation for the rating field on POST /ratings, matching R10."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O2 describes the same missing integer 1-5 range validation but on PUT /ratings/{id}, which also falls under the removed rating range constraint in R10."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R11",
+        "label": "PARTIAL",
+        "reasoning": "O3 identifies that the one-rating-per-user-per-dish constraint is not explicitly enforced with a clear error, but the code does rely on a DB unique index and returns a 400, so the constraint is partially present rather than fully removed as stated in R11."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 was self-identified as not an actual gap and does not correspond to any of the reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1107,
+    "prompt_tokens": 768,
+    "completion_tokens": 339
+  }
+}

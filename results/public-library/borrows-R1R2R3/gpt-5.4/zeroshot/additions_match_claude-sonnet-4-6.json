@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements R1-R3 concern validating cardholder existence via the Cardholders microservice."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements R1-R3 concern validating book existence via the Books microservice."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements R1-R3 concern partial update semantics for PUT."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "R1 states that returnDate computation (loanDate + 30 days) was removed from Borrows, and A4 describes the code accepting a client-supplied returnDate instead of computing it, which directly corresponds to that removal."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements R1-R3 concern validating that returnDate is not earlier than loanDate."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1226,
+    "prompt_tokens": 855,
+    "completion_tokens": 371
+  }
+}

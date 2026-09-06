@@ -1,0 +1,235 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "GET /items/ endpoint returns all items without filtering by owner or supporting query parameters",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification requires that retrieving items as a superuser returns at least the created items, implying support for listing items. The code implements GET /items/ returning all items unconditionally, which is more permissive than the specification that implies user-based access control or filtering."
+      },
+      {
+        "id": "A2",
+        "description": "GET /users/ endpoint returns all users with no pagination or filtering parameters",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification requires retrieving all users as a superuser but does not specify pagination or filtering. The code returns all users unconditionally, which is an addition as no pagination or filtering is required."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "POST /api/v1/items/ does not verify that the response status code is 200 as required by the specification",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification explicitly requires verifying that the response status code is 200 on item creation, but the code returns the default 200 without explicit status code setting or verification."
+      },
+      {
+        "id": "O2",
+        "description": "GET /api/v1/items/{item_id} does not check permissions to ensure only owner or superuser can read the item",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification requires that a user cannot read an item owned by another user (returns 400 with 'Not enough permissions'), but the code allows any authenticated user to read any item without permission checks."
+      },
+      {
+        "id": "O3",
+        "description": "GET /api/v1/items/{item_id} does not return 400 with 'Not enough permissions' when a non-owner normal user attempts to read an item",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification requires a 400 status with detail 'Not enough permissions' when a user tries to read an item they do not own, but the code returns the item without such a check."
+      },
+      {
+        "id": "O4",
+        "description": "GET /api/v1/items/{item_id} does not return 404 with 'Item not found' when the item does not exist",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The code returns 404 with 'Item not found' when the item is missing, which matches the specification, so no omission here."
+      },
+      {
+        "id": "O5",
+        "description": "PUT /api/v1/items/{item_id} (PATCH in code) does not return 400 with 'Not enough permissions' when a non-owner normal user attempts to update an item",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification requires a 400 status with detail 'Not enough permissions' when a user tries to update an item they do not own, but the code returns 400 with that detail, so no omission here."
+      },
+      {
+        "id": "O6",
+        "description": "PUT /api/v1/items/{item_id} (PATCH in code) does not return 404 with 'Item not found' when the item does not exist",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The code returns 404 with 'Item not found' when the item is missing, matching the specification."
+      },
+      {
+        "id": "O7",
+        "description": "DELETE /api/v1/items/{item_id} does not return 400 with 'Not enough permissions' when a non-owner normal user attempts to delete an item",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification requires a 400 status with detail 'Not enough permissions' when a user tries to delete an item they do not own, and the code implements this correctly."
+      },
+      {
+        "id": "O8",
+        "description": "DELETE /api/v1/items/{item_id} does not return 404 with 'Item not found' when the item does not exist",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The code returns 404 with 'Item not found' when the item is missing, matching the specification."
+      },
+      {
+        "id": "O9",
+        "description": "GET /api/v1/items/{item_id} does not validate UUID format and return 422 on invalid UUID",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification requires a 422 validation error when the item_id path parameter is not a valid UUID, but the code relies on FastAPI's automatic validation which returns 422, so no omission here."
+      },
+      {
+        "id": "O10",
+        "description": "POST /api/v1/items/ does not validate that title and description fields meet length constraints as required",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The code uses Pydantic validators enforcing title length 1-255 and description max 255, matching the specification."
+      },
+      {
+        "id": "O11",
+        "description": "POST /api/v1/users/signup does not return 400 with detail 'The user with this email already exists in the system' when duplicate email is used",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The code returns 400 with detail 'User with this email already exists' which differs in wording from the specification's required message."
+      },
+      {
+        "id": "O12",
+        "description": "POST /api/v1/users/signup does not validate password length between 8 and 128 characters",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The code uses Pydantic validators enforcing password length 8-128, matching the specification."
+      },
+      {
+        "id": "O13",
+        "description": "PATCH /api/v1/users/me/password does not reject when new password is same as current password",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The code raises HTTP 400 with detail 'New password cannot be the same as the current one' when new password equals current password, matching the specification."
+      },
+      {
+        "id": "O14",
+        "description": "PATCH /api/v1/users/me/password does not validate password length constraints",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The code uses Pydantic validators enforcing password length 8-128, matching the specification."
+      },
+      {
+        "id": "O15",
+        "description": "POST /api/v1/reset-password/ does not validate new_password length before token validation",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The code uses Pydantic validators enforcing new_password length 8-128, matching the specification."
+      },
+      {
+        "id": "O16",
+        "description": "POST /api/v1/reset-password/ returns 400 with detail 'Invalid token' when token is invalid or expired",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The code raises HTTP 400 with detail 'Invalid token' on invalid token, matching the specification."
+      },
+      {
+        "id": "O17",
+        "description": "POST /api/v1/password-recovery/{email} returns 404 when user does not exist",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The code raises HTTP 404 with detail 'The user with this email does not exist in the system' matching the specification."
+      },
+      {
+        "id": "O18",
+        "description": "POST /api/v1/password-recovery/{email} sends recovery email via mailcatcher service",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The code sends recovery email via HTTP POST to mailcatcher service as required."
+      },
+      {
+        "id": "O19",
+        "description": "DELETE /api/v1/users/me forbids superusers from deleting themselves with 403 and detail 'Super users are not allowed to delete themselves'",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The code raises HTTP 403 with the required detail when a superuser attempts to delete themselves, matching the specification."
+      },
+      {
+        "id": "O20",
+        "description": "DELETE /api/v1/users/{user_id} forbids non-superusers from deleting users with 403 and detail 'The user doesn't have enough privileges'",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The code raises HTTP 403 with the required detail when a non-superuser attempts to delete a user, matching the specification."
+      },
+      {
+        "id": "O21",
+        "description": "DELETE /api/v1/users/{user_id} forbids superusers from deleting themselves with 403 and detail 'Super users are not allowed to delete themselves'",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The code raises HTTP 403 with the required detail when a superuser attempts to delete themselves, matching the specification."
+      },
+      {
+        "id": "O22",
+        "description": "GET /api/v1/users/{user_id} forbids normal users from reading other users with 403 and detail 'The user doesn't have enough privileges'",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The code raises HTTP 403 with the required detail when a normal user attempts to read another user's data, matching the specification."
+      },
+      {
+        "id": "O23",
+        "description": "PATCH /api/v1/users/{user_id} returns 404 with detail 'The user with this id does not exist in the system' when user does not exist",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The code raises HTTP 404 with the required detail when updating a non-existent user, matching the specification."
+      },
+      {
+        "id": "O24",
+        "description": "PATCH /api/v1/users/{user_id} returns 409 with detail 'User with this email already exists' when updating email to an existing user's email",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The code raises HTTP 409 with the required detail when updating email to a duplicate, matching the specification."
+      },
+      {
+        "id": "O25",
+        "description": "POST /api/v1/users/signup returns 400 with detail 'User with this email already exists' when duplicate email is used",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The code returns 400 with detail 'User with this email already exists' but the specification requires 'The user with this email already exists in the system', so the message differs."
+      },
+      {
+        "id": "O26",
+        "description": "PATCH /api/v1/users/me returns 409 with detail 'User with this email already exists' when updating email to an existing user's email",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The code raises HTTP 409 with the required detail when updating email to a duplicate, matching the specification."
+      },
+      {
+        "id": "O27",
+        "description": "POST /api/v1/users/signup validates email format and password length, returning 422 on invalid input",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The code uses Pydantic validators enforcing email format and password length, matching the specification."
+      },
+      {
+        "id": "O28",
+        "description": "PATCH /api/v1/users/me validates email format and full_name length, returning 422 on invalid input",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The code uses Pydantic validators enforcing email format and full_name length, matching the specification."
+      },
+      {
+        "id": "O29",
+        "description": "POST /api/v1/users/signup and PATCH /api/v1/users/me reject null email or password with 422 validation error",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The code uses Pydantic validators that require email and password fields, matching the specification."
+      },
+      {
+        "id": "O30",
+        "description": "POST /api/v1/items/ validates title and description length, returning 422 on invalid input",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The code uses Pydantic validators enforcing title and description length, matching the specification."
+      },
+      {
+        "id": "O31",
+        "description": "POST /api/v1/users/signup does not allow creating a user with is_superuser true",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The public signup endpoint creates users with is_superuser false, matching the specification."
+      },
+      {
+        "id": "O32",
+        "description": "POST /api/v1/users/ (create user) requires superuser authentication",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The code requires superuser authentication to create users via the private endpoint, matching the specification."
+      },
+      {
+        "id": "O33",
+        "description": "POST /api/v1/login/access-token returns 400 with detail 'Incorrect email or password' on invalid credentials",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The code raises HTTP 400 with the required detail on authentication failure, matching the specification."
+      },
+      {
+        "id": "O34",
+        "description": "POST /api/v1/login/test-token returns current user info with email field",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The code returns current user info including email, matching the specification."
+      },
+      {
+        "id": "O35",
+        "description": "POST /api/v1/users/me/password rejects password change if current password is incorrect",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The code raises HTTP 400 with detail 'Incorrect password' when current password verification fails, matching the specification."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 16139,
+    "prompt_tokens": 13073,
+    "completion_tokens": 3066
+  }
+}

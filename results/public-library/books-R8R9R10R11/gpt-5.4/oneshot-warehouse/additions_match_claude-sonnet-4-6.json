@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "A1 describes that publisher and publishedDate are accepted from the client rather than fetched from Google Books API, which directly corresponds to R10's removal of Google Books API integration for those fields."
+      },
+      {
+        "detection_id": "A1",
+        "requirement_id": "R8",
+        "label": "PARTIAL",
+        "reasoning": "A1 partially relates to R8 in that accepting additional fields (publisher, publishedDate) in POST changes what the POST body contains beyond the required fields (title, authors, ISBN, genre), but R8 specifically concerns the required fields, not the optional ones."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "A2 relates to R10 in that allowing client-supplied publisher and publishedDate on PUT implies these are no longer sourced from Google Books API, but R10 specifically addresses the removal of Google Books API integration rather than PUT behavior."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 899,
+    "prompt_tokens": 601,
+    "completion_tokens": 298
+  }
+}

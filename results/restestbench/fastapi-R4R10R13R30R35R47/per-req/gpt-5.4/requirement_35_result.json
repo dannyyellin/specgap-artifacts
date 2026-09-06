@@ -1,0 +1,21 @@
+{
+  "req_id": 35,
+  "requirement_vague": "Ensure registering a user with an existing email gets rejected.",
+  "requirement_precise": "Attempt to register a user using the existing superuser email 'admin@example.com' with a random password and random full name by calling the user registration operation. Verify the response status is 400. Verify the response body field 'detail' equals 'The user with this email already exists in the system'.",
+  "removed": true,
+  "omissions": [
+    {
+      "id": "R35-O1",
+      "description": "Duplicate user registration is rejected with the wrong error detail message.",
+      "category": "RESPONSE_FORMAT",
+      "reasoning": "The registration endpoint `/api/v1/users/signup` does reject an existing email with status 400, but it returns `detail=\"User with this email already exists\"` instead of the required `detail=\"The user with this email already exists in the system\"`."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 5853,
+    "prompt_tokens": 5756,
+    "completion_tokens": 97
+  },
+  "parse_error": false
+}

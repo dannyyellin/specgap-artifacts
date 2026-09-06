@@ -1,0 +1,48 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "A1 describes the code using additional fields beyond 'temperament'/'group_behavior' for attributes extraction, which directly corresponds to R4's removal of the temperament/group_behavior extraction rules."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "A2 relates to lifespan handling (defaulting to 0 instead of null), which is in the domain of R6's removed lifespan range handling, but R6 specifically addresses range parsing ('choose minimum', 'extract first integer') rather than the null default behavior."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "A3 directly describes the code deleting pet-types without checking for existing pets, which matches R5's removal of the 'cannot delete pet-type if it has pets' constraint."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "A4 directly describes the code not supporting birthdateGT/birthdateLT query parameters, which matches R7's removal of birthdate query filtering."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The 'picture-url' field support in PUT /pet-types/{id}/pets/{name} does not correspond to any of the listed spec requirements."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The path separator validation in GET /pictures/{picture-name} does not correspond to any of the listed spec requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1614,
+    "prompt_tokens": 1104,
+    "completion_tokens": 510
+  }
+}

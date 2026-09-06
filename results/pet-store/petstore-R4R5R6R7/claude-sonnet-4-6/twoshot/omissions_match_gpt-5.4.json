@@ -1,0 +1,78 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "O1 is about temperament/group_behavior being used for attributes extraction, which is exactly the behavior removed by R4."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "O2 concerns detailed parsing of temperament/group_behavior into attributes, which is part of the same removed attributes-extraction area as R4 but is more specific than the reference."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O3 describes the constraint preventing deletion of a pet-type when pets exist, which is exactly the constraint removed by R5."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 is about authorization status codes for DELETE /pet-types/{id}, unrelated to any removed requirement listed."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "O5 describes birthdateGT/birthdateLT query filtering on pet listing, which is exactly the behavior removed by R7."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 is about PUT returning 405, which does not correspond to any of R4-R7."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O7 concerns POST /pet-types/{id}/pets existence-check ordering and 404 behavior, unrelated to the removed requirements."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O8 discusses 404 handling for GET /pet-types/{id}/pets and does not match any reference requirement."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "O9 is about extracting attributes from temperament/group_behavior fields, the same extraction rule removed by R4."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O10 is about duplicate pet-name conflict status codes, which is unrelated to R4-R7."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O11 concerns MongoDB service naming in deployment, which does not correspond to any listed reference requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2144,
+    "prompt_tokens": 1475,
+    "completion_tokens": 669
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "req_id": 7,
+  "requirement_vague": "Verify comment creation adds comment to article and can be retrieved",
+  "requirement_precise": "Create a user (username: 'commentuser1', email: 'commentuser1@test.com', password: 'pass123'). Create an article with title 'Comment Test Article'. Extract the slug. Create a comment on the article via POST /api/articles/{slug}/comments with body 'This is my test comment'. Verify response status is 200. Verify the response article has comments array with length >= 1. GET the comments for the article via GET /api/articles/{slug}/comments. Verify status 200. Verify the comments array contains a comment with body 'This is my test comment'. Verify the comment has an 'id' field that is a number.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": [
+      "POST /api/articles/{slug}/comments -> add_comment",
+      "GET /api/articles/{slug}/comments -> get_comments",
+      "article_response",
+      "comment_response"
+    ],
+    "code_reference": "@app.post(\"/api/articles/{slug}/comments\")\ndef add_comment(...):\n    comment = Comment(body=body, author_id=current_user.id, article_id=article.id, created_at=now_utc(), updated_at=now_utc())\n...\n    return article_response(session, article, current_user, include_comments=True)\n\n@app.get(\"/api/articles/{slug}/comments\")\ndef get_comments(...):\n    return {\"comments\": [comment_response(session, c, viewer) for c in comments]}",
+    "reasoning": "The POST comment endpoint persists a Comment linked to the target article via article_id and returns the article with include_comments=True, which adds a comments array containing each comment including numeric id and body. The GET comments endpoint retrieves comments for the article and returns them in a comments array, so the created comment body can be fetched afterward with HTTP 200."
+  },
+  "usage": {
+    "total_tokens": 5458,
+    "prompt_tokens": 5223,
+    "completion_tokens": 235
+  },
+  "parse_error": false
+}

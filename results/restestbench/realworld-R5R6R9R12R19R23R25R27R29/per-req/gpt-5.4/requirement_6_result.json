@@ -1,0 +1,21 @@
+{
+  "req_id": 6,
+  "requirement_vague": "Verify article feed only returns articles from followed users",
+  "requirement_precise": "Create user1 (username: 'feeduser1', email: 'feeduser1@test.com', password: 'pass123'), user2 (username: 'feedauthor1', email: 'feedauthor1@test.com', password: 'pass123'), and user3 (username: 'feedauthor2', email: 'feedauthor2@test.com', password: 'pass123'). User2 creates article 'Article By Followed'. User3 creates article 'Article By Not Followed'. Using user1's token, GET /api/articles/feed. Verify articlesCount is 0 (no follows yet). User1 follows user2. GET /api/articles/feed again. Verify articlesCount is 1. Verify the articles array contains 'Article By Followed' and does NOT contain 'Article By Not Followed'.",
+  "removed": true,
+  "omissions": [
+    {
+      "id": "R6-O1",
+      "description": "Missing GET /api/articles/feed endpoint to return a personalized feed of articles from followed users.",
+      "category": "ENDPOINTS",
+      "reasoning": "The code defines routes for /api/articles and /api/articles/{slug}, but there is no route handler for GET /api/articles/feed at all. Because the required endpoint does not exist, the scenario of returning 0 articles before following and only followed authors' articles after following cannot be implemented."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 5357,
+    "prompt_tokens": 5249,
+    "completion_tokens": 108
+  },
+  "parse_error": false
+}

@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O1 describes removal of the rating validation requiring an integer between 1 and 5, which is exactly R10."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O2 also describes missing enforcement of the integer 1-to-5 rating constraint, matching R10 despite being specific to PUT."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R11",
+        "label": "MATCH",
+        "reasoning": "O3 states that the system does not enforce one rating per user per dish, which is exactly the removed constraint in R11."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concerns filtering unrated dishes in GET /ratings, which is unrelated to any of R10, R11, or R12."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R12",
+        "label": "PARTIAL",
+        "reasoning": "O5 touches user ownership/identity enforcement on PUT/DELETE, which is related to user_id validation but does not specifically describe removal of deriving user_id from token validation."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1004,
+    "prompt_tokens": 669,
+    "completion_tokens": 335
+  }
+}

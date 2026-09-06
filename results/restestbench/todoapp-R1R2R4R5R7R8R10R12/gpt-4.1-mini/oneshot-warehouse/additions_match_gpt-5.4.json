@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement mentions allowing clients to set isComplete during todo creation."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No spec requirement specifies that POST /todos must return the created todo including an isComplete field."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The listed requirements cover delete-not-found and unauthorized delete cases, but none specify the success response body for DELETE /todos/{id}."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1174,
+    "prompt_tokens": 996,
+    "completion_tokens": 178
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements (R10, R11, R12) relate to validating dish existence via a cross-service call."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "R10 removes the integer-between-1-and-5 constraint, and storing as a float rather than an integer partially aligns with relaxing the integer constraint, but R10 specifically addresses removing the range constraint (1\u20135) and the integer type together, while A2 only addresses the type change to float."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 763,
+    "prompt_tokens": 562,
+    "completion_tokens": 201
+  }
+}

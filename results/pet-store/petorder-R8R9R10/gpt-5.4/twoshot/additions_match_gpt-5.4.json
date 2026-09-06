@@ -1,0 +1,24 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Storing purchase documents in MongoDB is unrelated to removed pet selection randomness, removing DELETE-after-purchase, or removing purchase-id uniqueness constraints."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Adding an id field to transactions and querying by it does not correspond to any of the listed removals about pet selection, deleting pets after purchase, or purchase-id uniqueness."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 698,
+    "prompt_tokens": 553,
+    "completion_tokens": 145
+  }
+}

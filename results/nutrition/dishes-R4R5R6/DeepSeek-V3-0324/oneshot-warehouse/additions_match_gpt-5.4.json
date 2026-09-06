@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "R4 concerns removed Ninja API field-name mapping, R5 concerns removing owner-only write restrictions, and R6 concerns removed query-string filtering semantics, none of which relate to rounding floats."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A serialization helper for dish formatting does not describe removed field-name mapping details, owner-only restrictions, or specific query filtering semantics."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "Both involve query parameters, but A3 only says the code builds queries from args and does not capture the specific removed filtering semantics like lte or contains."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Generating unique dish IDs is unrelated to removed Ninja API field mapping details, owner-only access restrictions, or query-string filtering semantics."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 860,
+    "prompt_tokens": 586,
+    "completion_tokens": 274
+  }
+}

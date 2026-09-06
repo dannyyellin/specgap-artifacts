@@ -1,0 +1,72 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R15",
+        "label": "PARTIAL",
+        "reasoning": "It matches the required password-recovery endpoint path and implies the success scenario is impossible, but it does not cover the signup step, exact 200 response body, or email verification details."
+      },
+      {
+        "detection_id": "O1",
+        "requirement_id": "R16",
+        "label": "PARTIAL",
+        "reasoning": "It matches the same password-recovery endpoint required for the non-existent-user case, but it does not specifically mention the 404 behavior for an unknown email."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R17",
+        "label": "PARTIAL",
+        "reasoning": "It refers to the reset-password endpoint needed for the successful password reset flow, but it omits the token extraction, exact success payload, and login verification."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R18",
+        "label": "PARTIAL",
+        "reasoning": "It matches the reset-password operation involved in the invalid-token scenario, but it does not specifically state the required 400 status and exact detail message."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R56",
+        "label": "PARTIAL",
+        "reasoning": "It matches the reset-password endpoint required for validation testing, but it does not specifically capture the 422 response for a 7-character password."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R14",
+        "label": "PARTIAL",
+        "reasoning": "It identifies the missing test-token endpoint from the superuser token scenario, but it does not include the authentication step or the exact expected email field/value."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R15",
+        "label": "PARTIAL",
+        "reasoning": "It captures the requirement that password recovery should send an email verifiable via mailcatcher, but it does not mention the endpoint response details or recipient verification specifics."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R17",
+        "label": "PARTIAL",
+        "reasoning": "It covers the missing reset-token workflow and HTML token retrieval needed for the successful password reset scenario, but not the full end-to-end flow and final login verification."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R18",
+        "label": "PARTIAL",
+        "reasoning": "It directly addresses missing token validation and the expected invalid-token behavior, but it does not mention the superuser authorization context or exact request body."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R46",
+        "label": "PARTIAL",
+        "reasoning": "It matches the post-user-deletion item inaccessibility behavior, but it focuses only on item deletion reliability and omits the signup, authentication, deletion response, and superuser retrieval steps."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1986,
+    "prompt_tokens": 1277,
+    "completion_tokens": 709
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The 'round_float' function has no relationship to any of the three spec requirements about bcrypt removal, Owner special case removal, or username uniqueness constraint removal."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The NUMERIC_ID_FIELDS constant has no relationship to any of the three spec requirements about bcrypt removal, Owner special case removal, or username uniqueness constraint removal."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The 'user_to_response' function has no relationship to any of the three spec requirements about bcrypt removal, Owner special case removal, or username uniqueness constraint removal."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 806,
+    "prompt_tokens": 555,
+    "completion_tokens": 251
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "It concerns GET query filtering semantics, but it describes unsupported filter fields and pluralization rather than the removed specific lte/contains semantics."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "It partially relates to query filtering semantics by discussing ingredient filtering, but it does not describe the removed specific lte/contains behavior."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 639,
+    "prompt_tokens": 497,
+    "completion_tokens": 142
+  }
+}

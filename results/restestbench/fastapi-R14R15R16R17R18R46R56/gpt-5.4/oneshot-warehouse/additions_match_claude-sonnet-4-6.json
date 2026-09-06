@@ -1,0 +1,24 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements describe or test the ability to set is_active or is_superuser fields during private user creation."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements describe or test the structure of the superuser item listing response wrapper."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1317,
+    "prompt_tokens": 1170,
+    "completion_tokens": 147
+  }
+}

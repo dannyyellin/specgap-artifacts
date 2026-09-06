@@ -1,0 +1,18 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Allowing ISBN updates on PUT concerns mutability of a field after creation, which does not correspond to removing POST required fields, removing ISBN format validation, removing Google Books integration, or removing genre enumeration."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 524,
+    "prompt_tokens": 436,
+    "completion_tokens": 88
+  }
+}

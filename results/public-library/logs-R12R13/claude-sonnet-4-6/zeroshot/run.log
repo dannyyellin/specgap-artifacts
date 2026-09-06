@@ -1,0 +1,15 @@
+Timestamp: 2026-06-02 09:39:08
+Detector:  claude-sonnet-4-6
+App/Variant/Service: public-library/logs-R12R13/logs
+Method:    zeroshot
+
+Tokens: prompt=4168, completion=742, total=4910
+Additions: 2
+Omissions: 3
+
+  A A1: The POST handler validates that each required field value is of type string (isinstance check), beyond just checking for presence.
+  A A2: The GET /logs handler filters query parameters to only known field names before building the MongoDB query.
+
+  O O1: The GET /logs endpoint does not handle unsupported/unknown query parameters gracefully per spec — specifically, the spec says 'field=value' filtering should work, but the code silently ignores unrecognized fields rather than returning an error (minor, but more importantly the spec implies any field can be queried, not just the whitelisted ones).
+  O O2: The /logs/{id} endpoint does not handle PUT or DELETE methods with a 405 Method Not Allowed response — it only supports GET.
+  O O3: The POST /logs endpoint does not validate the format of 'loanDate' (expected 'DD-MM-YYYY').

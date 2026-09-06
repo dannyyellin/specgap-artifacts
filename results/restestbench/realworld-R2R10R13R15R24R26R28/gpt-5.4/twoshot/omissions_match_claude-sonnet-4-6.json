@@ -1,0 +1,60 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R28",
+        "label": "MATCH",
+        "reasoning": "O1 describes the same behavior as R28 where any authenticated user (non-owner) can update any article via PUT /api/articles/{slug}."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R28",
+        "label": "MATCH",
+        "reasoning": "O2 describes the same behavior as R28 where any authenticated user (non-owner) can delete any article via DELETE /api/articles/{slug}."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O3 directly matches R2's requirement that POST /api/profiles/{username}/follow returns status 201 on successful follow."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O4 directly matches R2's requirement that self-follow attempts return status 400 with a message containing 'cannot be equal'."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O5 directly matches R10's requirement that self-unfollow attempts should return status 400."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O6 partially matches R2 (self-follow error message) and R10 (self-unfollow error message), covering the 'cannot be equal' message requirement for both, but is a combined statement rather than specific to one reference."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "O6 also partially matches R10's requirement that self-unfollow returns 400 with a message containing 'cannot be equal'."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements mention filtering articles by 'favorited' query parameter."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2754,
+    "prompt_tokens": 2143,
+    "completion_tokens": 611
+  }
+}

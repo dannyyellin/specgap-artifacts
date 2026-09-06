@@ -1,0 +1,18 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O1 concerns GET /logs query filtering behavior, while R12 and R13 are about removing a loanDate date format and removing Borrows-to-Logs notifications from descriptions."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 541,
+    "prompt_tokens": 458,
+    "completion_tokens": 83
+  }
+}

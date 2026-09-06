@@ -1,0 +1,48 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O1 states that the code does not enforce rating being an integer between 1 and 5, which is the same behavior as removing the rating range constraint."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R11",
+        "label": "MATCH",
+        "reasoning": "O2 states that the code allows a user to rate the same dish multiple times, matching the removal of the one-rating-per-user-per-dish constraint."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 discusses DELETE response behavior, which is unrelated to any of the reference requirements."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concerns PUT dish_id validation, which does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 is about GET /ratings/{id} returning 404 for missing dishes, unrelated to the listed reference requirements."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R12",
+        "label": "PARTIAL",
+        "reasoning": "O6 mentions token validation scope and notes POST /ratings is exempt, which partially overlaps with removing the requirement that user_id comes from token validation but does not clearly state the user_id source behavior."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1142,
+    "prompt_tokens": 752,
+    "completion_tokens": 390
+  }
+}

@@ -1,0 +1,192 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "O1 describes the same scenario as R4 (second user reading another user's item, expecting 400 with 'Not enough permissions'), but notes the code returns 403 with a different message instead."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 describes updating another user's item with 400 'Not enough permissions', which does not correspond to any of the reference requirements listed."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 describes deleting another user's item with 400 'Not enough permissions', which does not correspond to any of the reference requirements listed."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 describes a normal user attempting to delete another user expecting 400 'Not enough permissions', which does not correspond to any of the reference requirements listed."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 describes password reset with invalid token returning 400 'Invalid token', which does not correspond to any of the reference requirements listed."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 describes updating a non-existent user returning 404, which does not correspond to any of the reference requirements listed."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O7 describes updating a non-existent item returning 404 'Item not found', which does not correspond to any of the reference requirements listed."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "O8 describes deleting a non-existent item returning 404 'Item not found', which matches R10's expected behavior, but O8 does not specify superuser authentication or the specific credentials required by R10."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O9 describes deleting a non-existent user returning 404 'User not found', which does not correspond to any of the reference requirements listed."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O10 describes updating a user's email to an existing email returning 409, which does not correspond to any of the reference requirements listed."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O11 describes a superuser attempting to delete themselves returning 403, which does not correspond to any of the reference requirements listed."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O12 describes registration with invalid email format returning 422, which does not correspond to any of the reference requirements listed."
+      },
+      {
+        "detection_id": "O13",
+        "requirement_id": "R47",
+        "label": "MATCH",
+        "reasoning": "O13 describes registering a user with a password of exactly 7 characters returning 422, which matches R47's requirement of a 422 validation error for a 7-character password."
+      },
+      {
+        "detection_id": "O14",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O14 describes registration with a 129-character password returning 422, which does not correspond to any of the reference requirements listed."
+      },
+      {
+        "detection_id": "O15",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O15 describes registration with a 256-character full_name returning 422, which does not correspond to any of the reference requirements listed."
+      },
+      {
+        "detection_id": "O16",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O16 describes updating a password with a 7-character new_password returning 422, which does not correspond to any of the reference requirements listed."
+      },
+      {
+        "detection_id": "O17",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O17 describes updating a password with a 129-character new_password returning 422, which does not correspond to any of the reference requirements listed."
+      },
+      {
+        "detection_id": "O18",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O18 describes updating a password with a 7-character current_password returning 422, which does not correspond to any of the reference requirements listed."
+      },
+      {
+        "detection_id": "O19",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O19 describes creating an item with an empty string title returning 422, which does not correspond to any of the reference requirements listed."
+      },
+      {
+        "detection_id": "O20",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O20 describes creating an item with a 256-character title returning 422, which does not correspond to any of the reference requirements listed."
+      },
+      {
+        "detection_id": "O21",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O21 describes creating an item with a 256-character description returning 422, which does not correspond to any of the reference requirements listed."
+      },
+      {
+        "detection_id": "O22",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O22 describes resetting a password with a 7-character new_password returning 422, which does not correspond to any of the reference requirements listed."
+      },
+      {
+        "detection_id": "O23",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O23 describes registration with null email returning 422, which does not correspond to any of the reference requirements listed."
+      },
+      {
+        "detection_id": "O24",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O24 describes registration with null password returning 422, which does not correspond to any of the reference requirements listed."
+      },
+      {
+        "detection_id": "O25",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O25 describes creating an item with null title returning 422, which does not correspond to any of the reference requirements listed."
+      },
+      {
+        "detection_id": "O26",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O26 describes updating a profile with invalid email format returning 422, which does not correspond to any of the reference requirements listed."
+      },
+      {
+        "detection_id": "O27",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O27 describes password recovery email returning 200 'Password recovery email sent', which does not correspond to any of the reference requirements listed."
+      },
+      {
+        "detection_id": "O28",
+        "requirement_id": "R30",
+        "label": "PARTIAL",
+        "reasoning": "O28 describes a 200 response with 'Password updated successfully' when resetting a password, which partially matches R30's requirement for the same message, but O28 lacks the full context of R30 (superuser credentials, reverting password, verifying login)."
+      },
+      {
+        "detection_id": "O29",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O29 describes deleting a user returning 200 'User deleted successfully', which does not correspond to any of the reference requirements listed."
+      },
+      {
+        "detection_id": "O30",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O30 describes deleting an item returning 200 'Item deleted successfully', which does not correspond to any of the reference requirements listed."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 5390,
+    "prompt_tokens": 3178,
+    "completion_tokens": 2212
+  }
+}

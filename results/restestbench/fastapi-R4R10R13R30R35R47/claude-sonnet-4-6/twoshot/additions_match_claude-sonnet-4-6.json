@@ -1,0 +1,18 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 describes an endpoint that exists in code but not in the specification, which does not correspond to any of the listed spec requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1026,
+    "prompt_tokens": 937,
+    "completion_tokens": 89
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "The code checks whether a dish exists by calling the dishes microservice before creating or updating a rating",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The specification does not require the ratings service to verify that a dish exists before creating or updating a rating. The spec only says the POST request supplies a dish_id and rating, with no mention of cross-service dish validation."
+      },
+      {
+        "id": "A2",
+        "description": "POST /ratings returns the avg_rating JSON structure (dish_id and avg_rating) on success",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification does not explicitly state what the POST /ratings response body should contain beyond creating a new rating. The spec describes the GET /ratings/{id} and PUT /ratings/{id} responses as containing dish_id and avg_rating, but does not specify the POST response body format."
+      },
+      {
+        "id": "A3",
+        "description": "The rating value is stored as a float (rounded to 2 decimal places) rather than as an integer",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The specification defines 'rating' as an integer between 1 and 5. The code converts it via round2(float(data['rating'])), storing a float value instead of an integer."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "POST /ratings does not validate that 'rating' is an integer between 1 and 5",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states the rating field is 'an integer between 1 and 5'. The code converts the value to a float and does not check that it is an integer or that it falls within the range 1\u20135."
+      },
+      {
+        "id": "O2",
+        "description": "PUT /ratings/{id} does not validate that 'rating' is an integer between 1 and 5",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states the rating field is 'an integer between 1 and 5'. The PUT handler converts the value to a float without checking it is an integer or within the valid range."
+      },
+      {
+        "id": "O3",
+        "description": "POST /ratings does not enforce that a user cannot rate the same dish twice",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification states 'The POST /ratings request is only allowed once for a given user for a given dish; a user cannot rate the same dish twice'. The code relies on a MongoDB unique index on (dish_id, user_id) and catches the resulting PyMongoError with a generic 400 response, but does not explicitly check for a duplicate and return a meaningful 4XX error (e.g., 400 or 409) with a clear message distinguishing this case."
+      },
+      {
+        "id": "O4",
+        "description": "The service listens on port 5004 but the deployment URL in the spec uses path /ratings, yet the code does not enforce the base path constraint noted in the deployment section",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification deployment section states 'Another microservice can send it requests using the URL http://ratings:5004/ratings', which is consistent with the code. This is not actually a gap \u2014 removing this entry."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 10079,
+    "prompt_tokens": 9235,
+    "completion_tokens": 844
+  }
+}

@@ -1,0 +1,151 @@
+```json
+{
+  "additions": [
+    {
+      "id": "A1",
+      "description": "DELETE /api/articles/{slug}/comments/{comment_id} returns {\"status\": \"ok\"} instead of an empty object or standard response",
+      "category": "RESPONSE_FORMAT",
+      "reasoning": "The specification does not define a specific response body for comment deletion beyond status 200. The code returns {\"status\": \"ok\"} which has no basis in the specification."
+    },
+    {
+      "id": "A2",
+      "description": "POST /api/articles/{slug}/comments returns the full article object with comments array rather than just the created comment",
+      "category": "RESPONSE_FORMAT",
+      "reasoning": "The specification says 'Verify the response article has comments array with length >= 1', which implies the response wraps the article. However, the standard RealWorld spec returns just the comment object. The spec text here is ambiguous but the implementation returns the full article with comments rather than a single comment object."
+    },
+    {
+      "id": "A3",
+      "description": "The JWT token payload only contains 'sub' (user id) and 'exp' fields, not username and email",
+      "category": "COMPUTED_VALUES",
+      "reasoning": "The specification states 'Verify the payload contains: id matching the user's id, username equal to jwtuser1, email equal to jwtuser1@test.com' but the create_token function only encodes 'sub' (id) and 'exp'."
+    },
+    {
+      "id": "A4",
+      "description": "POST /api/users returns 422 with separate error messages for duplicate email vs duplicate username instead of a unified 400 with 'Username and email must be unique'",
+      "category": "RESPONSE_FORMAT",
+      "reasoning": "The specification states duplicate username/email should return status 400 with message 'Username and email must be unique', but the code returns 422 with field-specific messages like 'has already been taken'."
+    },
+    {
+      "id": "A5",
+      "description": "GET /api/articles does not support filtering by 'tag' query parameter in the code's list_articles function",
+      "category": "ENDPOINTS",
+      "reasoning": "This is an omission, not an addition — listed here by mistake. Disregard."
+    }
+  ],
+  "omissions": [
+    {
+      "id": "O1",
+      "description": "GET /api/articles does not support filtering by 'tag' query parameter",
+      "category": "REQUEST_VALIDATION",
+      "reasoning": "The specification requires 'GET /api/articles?tag=javascript' to filter articles by tag, but the list_articles endpoint only supports 'author', 'limit', and 'offset' query parameters. There is no tag filtering logic."
+    },
+    {
+      "id": "O2",
+      "description": "JWT token payload does not include 'username' and 'email' fields",
+      "category": "COMPUTED_VALUES",
+      "reasoning": "The specification states 'Verify the payload contains: id matching the user's id, username equal to jwtuser1, email equal to jwtuser1@test.com' but create_token only encodes 'sub' (user id) and 'exp'."
+    },
+    {
+      "id": "O3",
+      "description": "POST /api/users returns status 422 and field-specific error messages for duplicate username/email instead of status 400 with 'Username and email must be unique'",
+      "category": "RESPONSE_FORMAT",
+      "reasoning": "The specification requires status 400 and a response containing 'Username and email must be unique' for duplicate username or email, but the code returns 422 with messages like 'has already been taken'."
+    },
+    {
+      "id": "O4",
+      "description": "GET /api/articles/feed endpoint is not implemented",
+      "category": "ENDPOINTS",
+      "reasoning": "The specification requires 'GET /api/articles/feed' to return articles from followed authors with pagination support (limit/offset), but no such route exists in the code."
+    },
+    {
+      "id": "O5",
+      "description": "DELETE /api/users/{email} endpoint is not implemented",
+      "category": "ENDPOINTS",
+      "reasoning": "The specification references 'DELETE /api/users/orphanauthor1@test.com' and expects a 500 response due to FK constraint, implying this endpoint should exist (even if it fails). No such route is defined in the code."
+    },
+    {
+      "id": "O6",
+      "description": "The 'tag' query parameter for filtering articles in GET /api/articles is missing",
+      "category": "BUSINESS_LOGIC",
+      "reasoning": "The specification requires filtering articles by tag via GET /api/articles?tag=javascript, returning only articles that have that tag in their tagList. The code has no such filtering logic."
+    },
+    {
+      "id": "O7",
+      "description": "GET /api/articles/feed does not exist, so feed pagination (limit/offset) is also missing",
+      "category": "ENDPOINTS",
+      "reasoning": "The specification describes 'User1 GETs /api/articles/feed?limit=2' and 'GET /api/articles/feed?limit=2&offset=2' with articlesCount showing total followed-author articles. No feed endpoint is implemented."
+    },
+    {
+      "id": "O8",
+      "description": "POST /api/articles/{slug}/comments response format does not match specification — returns full article with comments instead of just the created comment",
+      "category": "RESPONSE_FORMAT",
+      "reasoning": "The specification says 'Verify response status is 200. Verify the response article has comments array with length >= 1' which is ambiguous, but the standard pattern and the GET comments endpoint suggest comments should be returned as a list. The add_comment endpoint returns the full article object wrapped in 'article' key with a 'comments' array, which is non-standard."
+    },
+    {
+      "id": "O9",
+      "description": "list_articles does not filter by 'favorited' query parameter",
+      "category": "REQUEST_VALIDATION",
+      "reasoning": "While the specification does not explicitly call out a 'favorited' filter test, the RealWorld spec implies standard article listing filters. However, since the specification text provided does not explicitly require it, this may not be a strict omission based solely on the given spec."
+    }
+  ]
+}
+```
+
+Wait, I need to remove A5 (which I flagged as a mistake) and O9 (which I noted is speculative), and clean up the JSON properly.
+
+```json
+{
+  "additions": [
+    {
+      "id": "A1",
+      "description": "DELETE /api/articles/{slug}/comments/{comment_id} returns {\"status\": \"ok\"} body",
+      "category": "RESPONSE_FORMAT",
+      "reasoning": "The specification only requires status 200 for comment deletion. Returning {\"status\": \"ok\"} is an implementation detail not required by the specification."
+    },
+    {
+      "id": "A2",
+      "description": "POST /api/articles/{slug}/comments returns the full article object (with embedded comments array) rather than just the created comment",
+      "category": "RESPONSE_FORMAT",
+      "reasoning": "The specification says the response should have a 'comments array with length >= 1', but the code returns the full article_response with include_comments=True, wrapping everything under an 'article' key. The specification does not require returning the full article on comment creation."
+    }
+  ],
+  "omissions": [
+    {
+      "id": "O1",
+      "description": "GET /api/articles does not support filtering by 'tag' query parameter",
+      "category": "REQUEST_VALIDATION",
+      "reasoning": "The specification requires 'GET /api/articles?tag=javascript' to filter articles by tag and 'GET /api/articles?tag=testing' to return articles containing that tag. The list_articles function has no 'tag' parameter and no tag-filtering logic."
+    },
+    {
+      "id": "O2",
+      "description": "GET /api/articles/feed endpoint is not implemented",
+      "category": "ENDPOINTS",
+      "reasoning": "The specification requires GET /api/articles/feed to return articles from authors the current user follows, with articlesCount and pagination (limit/offset). No such route exists in the code."
+    },
+    {
+      "id": "O3",
+      "description": "JWT token payload does not include 'username' and 'email' fields",
+      "category": "COMPUTED_VALUES",
+      "reasoning": "The specification states 'Verify the payload contains: id matching the user's id, username equal to jwtuser1, email equal to jwtuser1@test.com' but create_token only encodes 'sub' (user id) and 'exp', omitting username and email."
+    },
+    {
+      "id": "O4",
+      "description": "Duplicate username/email registration returns status 422 with field-specific errors instead of status 400 with 'Username and email must be unique'",
+      "category": "RESPONSE_FORMAT",
+      "reasoning": "The specification requires status 400 and a response containing 'Username and email must be unique' for duplicate username or email attempts. The code returns 422 with messages like 'has already been taken'."
+    },
+    {
+      "id": "O5",
+      "description": "DELETE /api/users/{email} endpoint is not implemented",
+      "category": "ENDPOINTS",
+      "reasoning": "The specification references 'DELETE /api/users/orphanauthor1@test.com' expecting a 500 response due to FK constraint violation, implying this endpoint must exist. No such route is defined in the code."
+    },
+    {
+      "id": "O6",
+      "description": "GET /api/articles/feed does not support limit and offset pagination parameters",
+      "category": "REQUEST_VALIDATION",
+      "reasoning": "The specification requires 'GET /api/articles/feed?limit=2' and 'GET /api/articles/feed?limit=2&offset=2' with correct pagination behavior. Since the feed endpoint is entirely missing, this pagination is also absent."
+    }
+  ]
+}
+```

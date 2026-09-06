@@ -1,0 +1,72 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 describes support for 'picture-url' in PUT endpoint, which does not correspond to any of the four spec requirements listed."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "R4 removed temperament/group_behavior from attributes extraction, but A2 describes the code using additional fields beyond those; the code behavior is related to attributes extraction rules but goes further than just removing temperament/group_behavior."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R6",
+        "label": "NONE",
+        "reasoning": "R6 is about removing lifespan range handling (minimum selection, first integer extraction), not about the default value when lifespan is absent; A3 describes a default value of 0 instead of null, which is unrelated to R6."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A4 describes integer conversion behavior for query parameters, which does not correspond to any of the four spec requirements."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A5 describes birthdate format validation, which does not correspond to any of the four spec requirements listed."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A6 describes picture-url support in POST endpoint, which does not correspond to any of the four spec requirements listed."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A7 describes a 400 response for duplicate pet names, which does not correspond to any of the four spec requirements listed."
+      },
+      {
+        "detection_id": "A8",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "R5 removed the 'cannot delete pet-type if it has pets' constraint, but A8 states the code still returns 400 in this case, directly contradicting R5 and thus matching it as the relevant spec requirement."
+      },
+      {
+        "detection_id": "A9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A9 describes name field validation in PUT endpoint, which does not correspond to any of the four spec requirements listed."
+      },
+      {
+        "detection_id": "A10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A10 describes behavior for malformed query strings, which does not correspond to any of the four spec requirements listed."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2150,
+    "prompt_tokens": 1386,
+    "completion_tokens": 764
+  }
+}

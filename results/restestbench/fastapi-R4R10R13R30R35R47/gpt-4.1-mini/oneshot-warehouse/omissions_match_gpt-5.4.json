@@ -1,0 +1,162 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R35",
+        "label": "MATCH",
+        "reasoning": "It describes duplicate-email signup returning 400 with the exact detail message required by the reference."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R47",
+        "label": "MATCH",
+        "reasoning": "It covers signup password length validation with 422, which includes the 7-character password case in the reference."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement concerns full_name maximum length validation."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement concerns invalid email format validation on signup."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "It describes the same behavior of preventing one user from reading another user's item and expecting a 400 permission error."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The reference set does not include item update permission checks."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The reference set does not include item delete permission checks for non-owners."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "It is another formulation of the same unauthorized item-read behavior and expected 400 'Not enough permissions' response."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": "R30",
+        "label": "PARTIAL",
+        "reasoning": "It concerns the same password-update endpoint but checks a different validation case than the successful password change and login flow in the reference."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": "R30",
+        "label": "PARTIAL",
+        "reasoning": "It relates to the same password-update operation but only covers incorrect current password handling, not the successful update and revert flow required."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement concerns superuser self-deletion."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement concerns deleting users by non-superusers."
+      },
+      {
+        "detection_id": "O13",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement concerns a superuser deleting themselves via the admin user-delete endpoint."
+      },
+      {
+        "detection_id": "O14",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement concerns null email or password on signup."
+      },
+      {
+        "detection_id": "O15",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement concerns item creation field-length validation."
+      },
+      {
+        "detection_id": "O16",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement concerns updating one's email to an existing email."
+      },
+      {
+        "detection_id": "O17",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement concerns admin updating a user's email to an existing email."
+      },
+      {
+        "detection_id": "O18",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement concerns reset-password invalid token handling."
+      },
+      {
+        "detection_id": "O19",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement concerns reset-password new password length validation."
+      },
+      {
+        "detection_id": "O20",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement concerns invalid UUID path parameter handling."
+      },
+      {
+        "detection_id": "O21",
+        "requirement_id": "R13",
+        "label": "MATCH",
+        "reasoning": "It describes login with invalid credentials returning 400 and 'Incorrect email or password', which is the core behavior in the reference."
+      },
+      {
+        "detection_id": "O22",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The reference set does not include reading another user's profile data."
+      },
+      {
+        "detection_id": "O23",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement concerns non-superuser access to the admin create-user endpoint."
+      },
+      {
+        "detection_id": "O24",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The reference duplicate-email case is specifically for signup with the superuser email, not the admin create-user endpoint."
+      },
+      {
+        "detection_id": "O25",
+        "requirement_id": "R35",
+        "label": "PARTIAL",
+        "reasoning": "It matches the duplicate-email signup behavior and status code, but the detail message differs from the exact reference wording."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 3476,
+    "prompt_tokens": 2177,
+    "completion_tokens": 1299
+  }
+}

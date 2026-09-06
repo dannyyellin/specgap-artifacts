@@ -1,0 +1,550 @@
+{
+  "records": [
+    {
+      "variant": "borrows-R1R2R3",
+      "req_id": "R1",
+      "consensus": "GAP",
+      "gpt-5.4_pass1": "GAP",
+      "gpt-5.4_pass2": "GAP",
+      "sonnet_pass1": "GAP",
+      "sonnet_pass2": "GAP",
+      "unanimous": true,
+      "matches_consensus": true
+    },
+    {
+      "variant": "borrows-R1R2R3",
+      "req_id": "R2",
+      "consensus": "GAP",
+      "gpt-5.4_pass1": "GAP",
+      "gpt-5.4_pass2": "GAP",
+      "sonnet_pass1": "GAP",
+      "sonnet_pass2": "GAP",
+      "unanimous": true,
+      "matches_consensus": true
+    },
+    {
+      "variant": "borrows-R1R2R3",
+      "req_id": "R3",
+      "consensus": "INF",
+      "gpt-5.4_pass1": "INF",
+      "gpt-5.4_pass2": "INF",
+      "sonnet_pass1": "INF",
+      "sonnet_pass2": "INF",
+      "unanimous": true,
+      "matches_consensus": true
+    },
+    {
+      "variant": "cardholders-R4R5R6R7",
+      "req_id": "R4",
+      "consensus": "PAR",
+      "gpt-5.4_pass1": "PAR",
+      "gpt-5.4_pass2": "PAR",
+      "sonnet_pass1": "PAR",
+      "sonnet_pass2": "PAR",
+      "unanimous": true,
+      "matches_consensus": true
+    },
+    {
+      "variant": "cardholders-R4R5R6R7",
+      "req_id": "R5",
+      "consensus": "GAP",
+      "gpt-5.4_pass1": "PAR",
+      "gpt-5.4_pass2": "PAR",
+      "sonnet_pass1": "GAP",
+      "sonnet_pass2": "GAP",
+      "unanimous": false,
+      "matches_consensus": false
+    },
+    {
+      "variant": "cardholders-R4R5R6R7",
+      "req_id": "R6",
+      "consensus": "GAP",
+      "gpt-5.4_pass1": "PAR",
+      "gpt-5.4_pass2": "PAR",
+      "sonnet_pass1": "PAR",
+      "sonnet_pass2": "PAR",
+      "unanimous": true,
+      "matches_consensus": false
+    },
+    {
+      "variant": "cardholders-R4R5R6R7",
+      "req_id": "R7",
+      "consensus": "INF",
+      "gpt-5.4_pass1": "INF",
+      "gpt-5.4_pass2": "INF",
+      "sonnet_pass1": "INF",
+      "sonnet_pass2": "INF",
+      "unanimous": true,
+      "matches_consensus": true
+    },
+    {
+      "variant": "books-R8R9R10R11",
+      "req_id": "R10",
+      "consensus": "GAP",
+      "gpt-5.4_pass1": "GAP",
+      "gpt-5.4_pass2": "GAP",
+      "sonnet_pass1": "GAP",
+      "sonnet_pass2": "GAP",
+      "unanimous": true,
+      "matches_consensus": true
+    },
+    {
+      "variant": "books-R8R9R10R11",
+      "req_id": "R11",
+      "consensus": "GAP",
+      "gpt-5.4_pass1": "GAP",
+      "gpt-5.4_pass2": "GAP",
+      "sonnet_pass1": "GAP",
+      "sonnet_pass2": "GAP",
+      "unanimous": true,
+      "matches_consensus": true
+    },
+    {
+      "variant": "books-R8R9R10R11",
+      "req_id": "R8",
+      "consensus": "INF",
+      "gpt-5.4_pass1": "INF",
+      "gpt-5.4_pass2": "INF",
+      "sonnet_pass1": "INF",
+      "sonnet_pass2": "INF",
+      "unanimous": true,
+      "matches_consensus": true
+    },
+    {
+      "variant": "books-R8R9R10R11",
+      "req_id": "R9",
+      "consensus": "GAP",
+      "gpt-5.4_pass1": "PAR",
+      "gpt-5.4_pass2": "PAR",
+      "sonnet_pass1": "GAP",
+      "sonnet_pass2": "GAP",
+      "unanimous": false,
+      "matches_consensus": false
+    },
+    {
+      "variant": "logs-R12R13",
+      "req_id": "R12",
+      "consensus": "GAP",
+      "gpt-5.4_pass1": "GAP",
+      "gpt-5.4_pass2": "GAP",
+      "sonnet_pass1": "GAP",
+      "sonnet_pass2": "GAP",
+      "unanimous": true,
+      "matches_consensus": true
+    },
+    {
+      "variant": "logs-R12R13",
+      "req_id": "R13",
+      "consensus": "INF",
+      "gpt-5.4_pass1": "PAR",
+      "gpt-5.4_pass2": "PAR",
+      "sonnet_pass1": "GAP",
+      "sonnet_pass2": "GAP",
+      "unanimous": false,
+      "matches_consensus": false
+    },
+    {
+      "variant": "auth-R1R2R3",
+      "req_id": "R1",
+      "consensus": "GAP",
+      "gpt-5.4_pass1": "GAP",
+      "gpt-5.4_pass2": "GAP",
+      "sonnet_pass1": "GAP",
+      "sonnet_pass2": "GAP",
+      "unanimous": true,
+      "matches_consensus": true
+    },
+    {
+      "variant": "auth-R1R2R3",
+      "req_id": "R2",
+      "consensus": "GAP",
+      "gpt-5.4_pass1": "PAR",
+      "gpt-5.4_pass2": "PAR",
+      "sonnet_pass1": "PAR",
+      "sonnet_pass2": "PAR",
+      "unanimous": true,
+      "matches_consensus": false
+    },
+    {
+      "variant": "auth-R1R2R3",
+      "req_id": "R3",
+      "consensus": "INF",
+      "gpt-5.4_pass1": "INF",
+      "gpt-5.4_pass2": "INF",
+      "sonnet_pass1": "INF",
+      "sonnet_pass2": "INF",
+      "unanimous": true,
+      "matches_consensus": true
+    },
+    {
+      "variant": "dishes-R4R5R6",
+      "req_id": "R4",
+      "consensus": "INF",
+      "gpt-5.4_pass1": "INF",
+      "gpt-5.4_pass2": "INF",
+      "sonnet_pass1": "INF",
+      "sonnet_pass2": "INF",
+      "unanimous": true,
+      "matches_consensus": true
+    },
+    {
+      "variant": "dishes-R4R5R6",
+      "req_id": "R4b",
+      "consensus": "INF",
+      "gpt-5.4_pass1": "INF",
+      "gpt-5.4_pass2": "INF",
+      "sonnet_pass1": "INF",
+      "sonnet_pass2": "INF",
+      "unanimous": true,
+      "matches_consensus": true
+    },
+    {
+      "variant": "dishes-R4R5R6",
+      "req_id": "R5",
+      "consensus": "GAP",
+      "gpt-5.4_pass1": "GAP",
+      "gpt-5.4_pass2": "GAP",
+      "sonnet_pass1": "GAP",
+      "sonnet_pass2": "GAP",
+      "unanimous": true,
+      "matches_consensus": true
+    },
+    {
+      "variant": "dishes-R4R5R6",
+      "req_id": "R6",
+      "consensus": "GAP",
+      "gpt-5.4_pass1": "PAR",
+      "gpt-5.4_pass2": "PAR",
+      "sonnet_pass1": "PAR",
+      "sonnet_pass2": "PAR",
+      "unanimous": true,
+      "matches_consensus": false
+    },
+    {
+      "variant": "profiles-R7R8R9",
+      "req_id": "R7",
+      "consensus": "GAP",
+      "gpt-5.4_pass1": "GAP",
+      "gpt-5.4_pass2": "GAP",
+      "sonnet_pass1": "GAP",
+      "sonnet_pass2": "GAP",
+      "unanimous": true,
+      "matches_consensus": true
+    },
+    {
+      "variant": "profiles-R7R8R9",
+      "req_id": "R8",
+      "consensus": "GAP",
+      "gpt-5.4_pass1": "PAR",
+      "gpt-5.4_pass2": "PAR",
+      "sonnet_pass1": "GAP",
+      "sonnet_pass2": "GAP",
+      "unanimous": false,
+      "matches_consensus": false
+    },
+    {
+      "variant": "profiles-R7R8R9",
+      "req_id": "R9",
+      "consensus": "INF",
+      "gpt-5.4_pass1": "INF",
+      "gpt-5.4_pass2": "INF",
+      "sonnet_pass1": "INF",
+      "sonnet_pass2": "INF",
+      "unanimous": true,
+      "matches_consensus": true
+    },
+    {
+      "variant": "ratings-R10R11R12",
+      "req_id": "R10",
+      "consensus": "GAP",
+      "gpt-5.4_pass1": "PAR",
+      "gpt-5.4_pass2": "PAR",
+      "sonnet_pass1": "GAP",
+      "sonnet_pass2": "GAP",
+      "unanimous": false,
+      "matches_consensus": false
+    },
+    {
+      "variant": "ratings-R10R11R12",
+      "req_id": "R11",
+      "consensus": "INF",
+      "gpt-5.4_pass1": "INF",
+      "gpt-5.4_pass2": "INF",
+      "sonnet_pass1": "INF",
+      "sonnet_pass2": "INF",
+      "unanimous": true,
+      "matches_consensus": true
+    },
+    {
+      "variant": "ratings-R10R11R12",
+      "req_id": "R12",
+      "consensus": "INF",
+      "gpt-5.4_pass1": "INF",
+      "gpt-5.4_pass2": "INF",
+      "sonnet_pass1": "INF",
+      "sonnet_pass2": "INF",
+      "unanimous": true,
+      "matches_consensus": true
+    },
+    {
+      "variant": "registry-R1R2R3",
+      "req_id": "R1",
+      "consensus": "GAP",
+      "gpt-5.4_pass1": "GAP",
+      "gpt-5.4_pass2": "GAP",
+      "sonnet_pass1": "GAP",
+      "sonnet_pass2": "GAP",
+      "unanimous": true,
+      "matches_consensus": true
+    },
+    {
+      "variant": "registry-R1R2R3",
+      "req_id": "R2",
+      "consensus": "INF",
+      "gpt-5.4_pass1": "INF",
+      "gpt-5.4_pass2": "INF",
+      "sonnet_pass1": "INF",
+      "sonnet_pass2": "INF",
+      "unanimous": true,
+      "matches_consensus": true
+    },
+    {
+      "variant": "registry-R1R2R3",
+      "req_id": "R3",
+      "consensus": "INF",
+      "gpt-5.4_pass1": "INF",
+      "gpt-5.4_pass2": "INF",
+      "sonnet_pass1": "INF",
+      "sonnet_pass2": "INF",
+      "unanimous": true,
+      "matches_consensus": true
+    },
+    {
+      "variant": "petstore-R4R5R6R7",
+      "req_id": "R4",
+      "consensus": "PAR",
+      "gpt-5.4_pass1": "PAR",
+      "gpt-5.4_pass2": "PAR",
+      "sonnet_pass1": "PAR",
+      "sonnet_pass2": "PAR",
+      "unanimous": true,
+      "matches_consensus": true
+    },
+    {
+      "variant": "petstore-R4R5R6R7",
+      "req_id": "R5",
+      "consensus": "GAP",
+      "gpt-5.4_pass1": "GAP",
+      "gpt-5.4_pass2": "PAR",
+      "sonnet_pass1": "GAP",
+      "sonnet_pass2": "GAP",
+      "unanimous": false,
+      "matches_consensus": false
+    },
+    {
+      "variant": "petstore-R4R5R6R7",
+      "req_id": "R6",
+      "consensus": "PAR",
+      "gpt-5.4_pass1": "INF",
+      "gpt-5.4_pass2": "INF",
+      "sonnet_pass1": "INF",
+      "sonnet_pass2": "INF",
+      "unanimous": true,
+      "matches_consensus": false
+    },
+    {
+      "variant": "petstore-R4R5R6R7",
+      "req_id": "R7",
+      "consensus": "GAP",
+      "gpt-5.4_pass1": "GAP",
+      "gpt-5.4_pass2": "GAP",
+      "sonnet_pass1": "GAP",
+      "sonnet_pass2": "GAP",
+      "unanimous": true,
+      "matches_consensus": true
+    },
+    {
+      "variant": "petorder-R8R9R10",
+      "req_id": "R10",
+      "consensus": "PAR",
+      "gpt-5.4_pass1": "PAR",
+      "gpt-5.4_pass2": "PAR",
+      "sonnet_pass1": "INF",
+      "sonnet_pass2": "INF",
+      "unanimous": false,
+      "matches_consensus": false
+    },
+    {
+      "variant": "petorder-R8R9R10",
+      "req_id": "R8",
+      "consensus": "GAP",
+      "gpt-5.4_pass1": "PAR",
+      "gpt-5.4_pass2": "PAR",
+      "sonnet_pass1": "GAP",
+      "sonnet_pass2": "GAP",
+      "unanimous": false,
+      "matches_consensus": false
+    },
+    {
+      "variant": "petorder-R8R9R10",
+      "req_id": "R9",
+      "consensus": "GAP",
+      "gpt-5.4_pass1": "GAP",
+      "gpt-5.4_pass2": "GAP",
+      "sonnet_pass1": "GAP",
+      "sonnet_pass2": "GAP",
+      "unanimous": true,
+      "matches_consensus": true
+    }
+  ],
+  "disagreements": [
+    {
+      "variant": "cardholders-R4R5R6R7",
+      "req_id": "R5",
+      "consensus": "GAP",
+      "gpt-5.4_pass1": "PAR",
+      "gpt-5.4_pass2": "PAR",
+      "sonnet_pass1": "GAP",
+      "sonnet_pass2": "GAP",
+      "unanimous": false,
+      "matches_consensus": false
+    },
+    {
+      "variant": "cardholders-R4R5R6R7",
+      "req_id": "R6",
+      "consensus": "GAP",
+      "gpt-5.4_pass1": "PAR",
+      "gpt-5.4_pass2": "PAR",
+      "sonnet_pass1": "PAR",
+      "sonnet_pass2": "PAR",
+      "unanimous": true,
+      "matches_consensus": false
+    },
+    {
+      "variant": "books-R8R9R10R11",
+      "req_id": "R9",
+      "consensus": "GAP",
+      "gpt-5.4_pass1": "PAR",
+      "gpt-5.4_pass2": "PAR",
+      "sonnet_pass1": "GAP",
+      "sonnet_pass2": "GAP",
+      "unanimous": false,
+      "matches_consensus": false
+    },
+    {
+      "variant": "logs-R12R13",
+      "req_id": "R13",
+      "consensus": "INF",
+      "gpt-5.4_pass1": "PAR",
+      "gpt-5.4_pass2": "PAR",
+      "sonnet_pass1": "GAP",
+      "sonnet_pass2": "GAP",
+      "unanimous": false,
+      "matches_consensus": false
+    },
+    {
+      "variant": "auth-R1R2R3",
+      "req_id": "R2",
+      "consensus": "GAP",
+      "gpt-5.4_pass1": "PAR",
+      "gpt-5.4_pass2": "PAR",
+      "sonnet_pass1": "PAR",
+      "sonnet_pass2": "PAR",
+      "unanimous": true,
+      "matches_consensus": false
+    },
+    {
+      "variant": "dishes-R4R5R6",
+      "req_id": "R6",
+      "consensus": "GAP",
+      "gpt-5.4_pass1": "PAR",
+      "gpt-5.4_pass2": "PAR",
+      "sonnet_pass1": "PAR",
+      "sonnet_pass2": "PAR",
+      "unanimous": true,
+      "matches_consensus": false
+    },
+    {
+      "variant": "profiles-R7R8R9",
+      "req_id": "R8",
+      "consensus": "GAP",
+      "gpt-5.4_pass1": "PAR",
+      "gpt-5.4_pass2": "PAR",
+      "sonnet_pass1": "GAP",
+      "sonnet_pass2": "GAP",
+      "unanimous": false,
+      "matches_consensus": false
+    },
+    {
+      "variant": "ratings-R10R11R12",
+      "req_id": "R10",
+      "consensus": "GAP",
+      "gpt-5.4_pass1": "PAR",
+      "gpt-5.4_pass2": "PAR",
+      "sonnet_pass1": "GAP",
+      "sonnet_pass2": "GAP",
+      "unanimous": false,
+      "matches_consensus": false
+    },
+    {
+      "variant": "petstore-R4R5R6R7",
+      "req_id": "R5",
+      "consensus": "GAP",
+      "gpt-5.4_pass1": "GAP",
+      "gpt-5.4_pass2": "PAR",
+      "sonnet_pass1": "GAP",
+      "sonnet_pass2": "GAP",
+      "unanimous": false,
+      "matches_consensus": false
+    },
+    {
+      "variant": "petstore-R4R5R6R7",
+      "req_id": "R6",
+      "consensus": "PAR",
+      "gpt-5.4_pass1": "INF",
+      "gpt-5.4_pass2": "INF",
+      "sonnet_pass1": "INF",
+      "sonnet_pass2": "INF",
+      "unanimous": true,
+      "matches_consensus": false
+    },
+    {
+      "variant": "petorder-R8R9R10",
+      "req_id": "R10",
+      "consensus": "PAR",
+      "gpt-5.4_pass1": "PAR",
+      "gpt-5.4_pass2": "PAR",
+      "sonnet_pass1": "INF",
+      "sonnet_pass2": "INF",
+      "unanimous": false,
+      "matches_consensus": false
+    },
+    {
+      "variant": "petorder-R8R9R10",
+      "req_id": "R8",
+      "consensus": "GAP",
+      "gpt-5.4_pass1": "PAR",
+      "gpt-5.4_pass2": "PAR",
+      "sonnet_pass1": "GAP",
+      "sonnet_pass2": "GAP",
+      "unanimous": false,
+      "matches_consensus": false
+    }
+  ],
+  "stats": {
+    "n_requirements": 36,
+    "n_unanimous": 28,
+    "n_match_consensus": 24,
+    "total_tokens": 419574,
+    "models": [
+      "gpt-5.4",
+      "claude-sonnet-4-6"
+    ],
+    "passes": [
+      1,
+      2
+    ],
+    "prompt": "prompts/microservice_ground_truth_check_v2.txt",
+    "requirements_file": "specs/removed-requirements-positive.json"
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R28",
+        "label": "PARTIAL",
+        "reasoning": "It concerns the same unauthorized article update/delete behavior as R28, but the code does the opposite by forbidding non-owners instead of allowing the vulnerability."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No listed requirement is about accepting Bearer tokens in addition to Token-prefixed authorization headers."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements specify a successful delete response body for articles or comments."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements concern exposing an internal user id field in user responses."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements are about duplicate timestamp fields in article or comment JSON."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements mention favorited or favoritesCount fields in article responses."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "It matches the self-follow portion of R2 but contradicts the required outcome by allowing self-follow instead of returning 400."
+      },
+      {
+        "detection_id": "A8",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "It matches the self-unfollow portion of R10 but contradicts the required outcome by allowing self-unfollow instead of returning 400."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2259,
+    "prompt_tokens": 1792,
+    "completion_tokens": 467
+  }
+}

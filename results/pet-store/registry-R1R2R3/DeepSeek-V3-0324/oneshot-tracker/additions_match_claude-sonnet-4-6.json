@@ -1,0 +1,24 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Using 12 BCRYPT rounds does not correspond to any of the three spec requirements about password validation rules, anti-enumeration, or owner pre-registration."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R3",
+        "label": "PARTIAL",
+        "reasoning": "R3 states that owner pre-registration on initialization was removed, but the code still initializes owner credentials (albeit on first request rather than at startup), partially capturing the same behavior of owner credential initialization."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 728,
+    "prompt_tokens": 548,
+    "completion_tokens": 180
+  }
+}

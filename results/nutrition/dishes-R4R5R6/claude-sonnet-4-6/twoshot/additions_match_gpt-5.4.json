@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This describes additional filtering by id and name, which does not correspond to removing Ninja API field mapping details, owner-only restrictions, or the specified lte/contains filtering semantics."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "It directly addresses the removed query string filtering semantics by discussing nutritional-field filtering using exact equality instead of the specified lte behavior."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "It directly matches the removed query string filtering semantics by describing ingredient filtering as exact equality rather than the specified contains behavior."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 805,
+    "prompt_tokens": 600,
+    "completion_tokens": 205
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the absence of the fine computation formula ($0.50/day * days overdue), which is exactly what R6 states was removed."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements address handling of borrow records without a returnDate field."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "O3 relates to the float type declaration for fineAmount, which is part of R4 (removed field type declarations including float for fineAmount), but O3 frames it as a validation/return issue rather than a removed declaration."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R7",
+        "label": "PARTIAL",
+        "reasoning": "O4 concerns error handling in the cross-service call to Borrows, which is related to R7's removal of the cross-service call to Borrows, but O4 focuses on error propagation behavior rather than the removal of the call itself."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1013,
+    "prompt_tokens": 666,
+    "completion_tokens": 347
+  }
+}

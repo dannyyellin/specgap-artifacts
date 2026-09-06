@@ -1,0 +1,14 @@
+{
+  "req_id": 19,
+  "requirement_vague": "Verify article updated timestamp changes on update but created timestamp remains unchanged",
+  "requirement_precise": "Create a user (username: 'timestampuser1', email: 'timestampuser1@test.com', password: 'pass123'). Create an article with title 'Timestamp Test Article'. Extract slug, created, and updated timestamps from response. Wait briefly, then PUT /api/articles/{slug} with updated title 'Updated Timestamp Article'. GET /api/articles/{slug}. Verify the 'created' timestamp is unchanged from original. Verify the 'updated' timestamp is different (newer) than the original. This tests the @BeforeUpdate hook that updates the timestamp.",
+  "verdict": "NOT_LEAKED",
+  "spec_evidence": null,
+  "reasoning": "The reduced specification discusses article creation, retrieval, ordering by created timestamp, and field updates, but it never states that article responses include both created and updated timestamps or that updating an article must change an updated timestamp while preserving the created timestamp. Concluding that behavior would require outside knowledge rather than direct entailment from the text.",
+  "parse_error": false,
+  "usage": {
+    "total_tokens": 3267,
+    "prompt_tokens": 3180,
+    "completion_tokens": 87
+  }
+}

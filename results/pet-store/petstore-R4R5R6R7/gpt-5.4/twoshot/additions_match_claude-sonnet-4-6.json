@@ -1,0 +1,24 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "R4 states that temperament/group_behavior extraction rules for attributes were removed, and A1 describes the code using entirely different fields (slogan, group, color, etc.) instead of temperament/group_behavior to populate attributes, confirming the removal of that specific extraction rule."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements R4-R7 relate to accepting a direct 'picture' field in PUT /pet-types/{id}/pets/{name} payloads."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 871,
+    "prompt_tokens": 668,
+    "completion_tokens": 203
+  }
+}

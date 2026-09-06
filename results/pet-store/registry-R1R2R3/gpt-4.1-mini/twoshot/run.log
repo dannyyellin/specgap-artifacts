@@ -1,0 +1,33 @@
+Timestamp: 2026-06-01 20:59:39
+Detector:  gpt-4.1-mini
+App/Variant/Service: pet-store/registry-R1R2R3/registry
+Method:    twoshot
+
+Tokens: prompt=9705, completion=1738, total=11443
+Additions: 1
+Omissions: 22
+
+  A A1: Uses a bcrypt cost factor of 12 for password hashing
+
+  O O1: Username validation regex incorrectly uses double dollar signs at end, causing all usernames to fail validation
+  O O2: POST /verify returns 401 Unauthorized if username or password is incorrect instead of returning 200 with valid=false
+  O O3: POST /verify returns 401 if username or password is missing instead of 401 with JSON error message
+  O O4: POST /verify response does not include a message field with 'Invalid credentials' when credentials are invalid
+  O O5: POST /users does not check password complexity requirements (at least one uppercase, one lowercase, and one digit)
+  O O6: POST /users does not check password length requirements (minimum 8, maximum 128 characters)
+  O O7: POST /users does not check for malformed JSON payload beyond checking if data is dict
+  O O8: POST /users does not reject usernames that are case-sensitive duplicates
+  O O9: POST /users does not reject usernames with invalid characters or length due to regex bug
+  O O10: POST /users does not return 415 if Content-Type header is missing or invalid
+  O O11: POST /users does not reject if username or password is missing with 400 and empty body
+  O O12: POST /users does not prevent reuse of usernames with different casing
+  O O13: POST /users does not return 409 if username already exists
+  O O14: PUT /users/{username}/password does not validate newPassword complexity requirements
+  O O15: PUT /users/{username}/password does not validate newPassword length requirements
+  O O16: PUT /users/{username}/password returns 400 with message if oldPassword and newPassword are identical
+  O O17: PUT /users/{username}/password returns 404 if username does not exist
+  O O18: PUT /users/{username}/password returns 401 if oldPassword is incorrect
+  O O19: DELETE /users/{username} returns 401 if password is missing or incorrect
+  O O20: DELETE /users/{username} returns 404 if username does not exist
+  O O21: DELETE /users/{username} returns 200 with JSON message and username on success
+  O O22: POST /verify does not prevent username enumeration by returning different status codes for invalid username vs invalid password

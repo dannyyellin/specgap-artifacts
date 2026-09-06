@@ -1,0 +1,18 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R12",
+        "label": "MATCH",
+        "reasoning": "O1 describes that the DD-MM-YYYY format requirement for loanDate is no longer enforced, which directly corresponds to R12 stating the date format ('DD-MM-YYYY') was removed for loanDate in Logs."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 581,
+    "prompt_tokens": 465,
+    "completion_tokens": 116
+  }
+}

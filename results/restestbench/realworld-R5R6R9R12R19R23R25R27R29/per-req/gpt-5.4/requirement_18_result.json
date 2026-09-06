@@ -1,0 +1,21 @@
+{
+  "req_id": 18,
+  "requirement_vague": "Verify article tagList is correctly stored and persisted as a simple-array",
+  "requirement_precise": "Create a user (username: 'taglistuser1', email: 'taglistuser1@test.com', password: 'pass123'). Create an article with title 'Multi Tag Article' and tagList ['tag1', 'tag2', 'tag3']. Extract the slug from response. GET /api/articles/{slug}. Verify the article's tagList contains exactly ['tag1', 'tag2', 'tag3'] in array format. Create another article with empty tagList []. GET that article. Verify tagList is an empty array []. This tests the simple-array column handling for tagList.",
+  "removed": false,
+  "omissions": [
+    {
+      "id": "R18-O1",
+      "description": "Article tagList is not stored and persisted as a simple-array column on the Article model.",
+      "category": "DATA_PERSISTENCE",
+      "reasoning": "The requirement specifically checks simple-array column handling for tagList persistence. In the code, the Article model has no tagList/simple-array field; instead it defines `tags: List[Tag] = Relationship(..., link_model=ArticleTagLink)`, which persists tags through separate `Tag` and `ArticleTagLink` tables."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 5327,
+    "prompt_tokens": 5211,
+    "completion_tokens": 116
+  },
+  "parse_error": false
+}

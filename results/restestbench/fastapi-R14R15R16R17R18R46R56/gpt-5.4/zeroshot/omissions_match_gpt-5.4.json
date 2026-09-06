@@ -1,0 +1,84 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R15",
+        "label": "MATCH",
+        "reasoning": "R15 explicitly requires POST /api/v1/password-recovery/{email} for an existing user with a 200 response and recovery email behavior, which O1 directly identifies as missing."
+      },
+      {
+        "detection_id": "O1",
+        "requirement_id": "R16",
+        "label": "MATCH",
+        "reasoning": "R16 explicitly requires POST /api/v1/password-recovery/{email} for a nonexistent user returning 404, which O1 directly covers."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R17",
+        "label": "PARTIAL",
+        "reasoning": "R17 includes submitting a password reset via POST /api/v1/reset-password/, but also requires prior token retrieval and successful login afterward, which O2 does not cover."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R18",
+        "label": "MATCH",
+        "reasoning": "R18 requires calling the reset-password operation with an invalid token and checking its error response, and O2 states that this endpoint is missing."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R56",
+        "label": "MATCH",
+        "reasoning": "R56 explicitly requires POST /api/v1/reset-password/ with invalid password length returning 422, which O2 directly identifies as unsupported due to the missing endpoint."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R14",
+        "label": "MATCH",
+        "reasoning": "R14 requires using an access token to call a test token endpoint and verify the returned email, which O3 directly says is missing."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R15",
+        "label": "MATCH",
+        "reasoning": "R15 requires sending a password recovery email and verifying it through mailcatcher, which O4 directly states is not implemented."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R17",
+        "label": "PARTIAL",
+        "reasoning": "R17 requires obtaining password-recovery HTML content before resetting the password, and O4 covers that missing recovery-content behavior but not the full reset and login verification flow."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R17",
+        "label": "MATCH",
+        "reasoning": "R17 requires reset token generation/use, password update success, and successful login with the new password, all of which O5 says are not implemented."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R18",
+        "label": "MATCH",
+        "reasoning": "R18 requires invalid reset tokens to be rejected with 400 detail 'Invalid token', which O5 explicitly mentions as missing behavior."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the provided reference requirements concern reading a user by ID or the exact not-found message for that operation."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R46",
+        "label": "MATCH",
+        "reasoning": "R46 explicitly requires that after a user deletes their own account, their previously created item becomes inaccessible with 404 'Item not found', which O7 directly addresses."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2206,
+    "prompt_tokens": 1392,
+    "completion_tokens": 814
+  }
+}

@@ -1,0 +1,11 @@
+Timestamp: 2026-06-02 09:39:47
+Detector:  claude-sonnet-4-6
+App/Variant/Service: public-library/logs-R12R13/logs
+Method:    oneshot-warehouse
+
+Tokens: prompt=5780, completion=1096, total=6876
+Additions: 1
+Omissions: 0
+
+  A A1: POST /logs validates that each required field value is of type string using isinstance(data[field], str)
+

@@ -1,0 +1,72 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R12",
+        "label": "MATCH",
+        "reasoning": "R12 specifically requires GET /api/articles to filter by the tag query parameter, which O1 directly states is unsupported."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "R6 requires the /api/articles/feed endpoint to return followed authors' articles, and O2 states that endpoint is not implemented."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R27",
+        "label": "MATCH",
+        "reasoning": "R27 depends on GET /api/articles/feed returning an empty feed for a user with no follows, which O2 says is missing entirely."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R23",
+        "label": "PARTIAL",
+        "reasoning": "R23 requires feed pagination behavior on /api/articles/feed, and O2 matches the missing endpoint but does not mention pagination details."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R29",
+        "label": "MATCH",
+        "reasoning": "R29 explicitly uses DELETE /api/users/{email}, and O3 states that exact endpoint is not implemented."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R25",
+        "label": "MATCH",
+        "reasoning": "R25 verifies that the JWT payload contains id, username, and email, which O4 directly says are missing."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "R9 requires duplicate user creation to return 400 with the message 'Username and email must be unique', and O5 identifies the wrong status and message."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R23",
+        "label": "MATCH",
+        "reasoning": "R23 specifically tests feed pagination with limit and offset, and O6 directly states that feed pagination is not implemented because /api/articles/feed is missing."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R12",
+        "label": "MATCH",
+        "reasoning": "R12 requires tag-based filtering on GET /api/articles, and O7 states that the tag query parameter is ignored."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements concern POST /api/articles/{slug}/comments response structure."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2641,
+    "prompt_tokens": 2008,
+    "completion_tokens": 633
+  }
+}

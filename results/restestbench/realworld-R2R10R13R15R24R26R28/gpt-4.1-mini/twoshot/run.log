@@ -1,0 +1,34 @@
+Timestamp: 2026-06-01 21:38:48
+Detector:  gpt-4.1-mini
+Service:   nestjs-realworld  Round: 2  Removals: [2, 10, 13, 15, 24, 26, 28]
+Method:    twoshot
+
+Tokens: prompt=11193, completion=1801, total=12994
+Additions: 10
+Omissions: 14
+
+  A A1: GET /api/articles supports filtering by 'author' query parameter
+  A A2: GET /api/articles supports filtering by 'tag' query parameter
+  A A3: GET /api/articles and /api/articles/feed endpoints support 'limit' and 'offset' query parameters for pagination
+  A A4: GET /api/articles and /api/articles/feed sort articles by article.id descending
+  A A5: GET /api/articles/{slug} returns empty object {} when article not found
+  A A6: DELETE /api/articles/{slug} deletes all comments of the article before deleting the article
+  A A7: DELETE /api/articles/{slug} clears article tags before deleting the article
+  A A8: GET /api/tags endpoint returns all tags as array of strings
+  A A9: DELETE /api/users/{email} endpoint attempts to delete user by email and returns 500 on FK constraint error
+  A A10: User dictionary includes 'id' field in response
+
+  O O1: POST /api/users does not validate email format or password strength
+  O O2: POST /api/articles does not validate required fields title, description, body presence
+  O O3: PUT /api/articles/{slug} does not allow updating slug or enforce slug immutability
+  O O4: PUT /api/articles/{slug} does not allow non-owner users to update articles (returns 403), but specification shows any user can update/delete any article
+  O O5: DELETE /api/articles/{slug} does not allow non-owner users to delete articles (returns 403), but specification shows any user can delete any article
+  O O6: GET /api/articles and /api/articles/feed do not order articles by created timestamp descending as required
+  O O7: GET /api/articles/feed returns articlesCount 0 and empty array if user follows no one, as required
+  O O8: POST /api/articles/{slug}/comments does not validate comment body presence or non-empty
+  O O9: DELETE /api/articles/{slug}/comments/{id} allows deletion only by comment author or article author, but specification does not specify this restriction
+  O O10: POST /api/profiles/{username}/follow does not prevent user from following themselves (no 400 error)
+  O O11: DELETE /api/profiles/{username}/follow does not prevent user from unfollowing themselves (no 400 error)
+  O O12: GET /api/articles does not return 'created' and 'updated' timestamps in response article object
+  O O13: PUT /api/user does not validate uniqueness of updated username or email against other users
+  O O14: No implementation of JWT token expiration handling or refresh

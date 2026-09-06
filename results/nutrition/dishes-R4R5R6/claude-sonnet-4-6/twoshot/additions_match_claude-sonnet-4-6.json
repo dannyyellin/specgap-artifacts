@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Filtering by 'id' and 'name' is not addressed by any of the three spec requirements, which cover API field mapping, owner-only restrictions, and query string filtering semantics for nutrients/ingredients."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "R6 removed the specific query string filtering semantics including 'lte for nutrients', and A2 describes the code using exact equality instead of less-than-or-equal comparison for nutritional fields, directly corresponding to that removed semantic."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "R6 removed the specific query string filtering semantics including 'contains' for ingredients, and A3 describes the code using exact equality instead of a contains check for the ingredient field, directly corresponding to that removed semantic."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 949,
+    "prompt_tokens": 660,
+    "completion_tokens": 289
+  }
+}

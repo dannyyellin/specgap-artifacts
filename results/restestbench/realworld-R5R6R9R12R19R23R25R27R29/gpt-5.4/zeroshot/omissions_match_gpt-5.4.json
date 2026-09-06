@@ -1,0 +1,108 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R12",
+        "label": "MATCH",
+        "reasoning": "It directly describes the missing tag query filtering on GET /api/articles that R12 requires."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "R6 explicitly requires the GET /api/articles/feed endpoint for followed-author feed behavior, and O2 states that endpoint is missing."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R23",
+        "label": "MATCH",
+        "reasoning": "R23 depends on GET /api/articles/feed for feed pagination, so an absent endpoint directly violates it."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R27",
+        "label": "MATCH",
+        "reasoning": "R27 explicitly tests GET /api/articles/feed returning an empty feed when no authors are followed, which O2 says is missing."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R29",
+        "label": "MATCH",
+        "reasoning": "R29 requires DELETE /api/users/{email}, and O3 states that exact endpoint is missing."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "It directly addresses the duplicate username/email registration behavior, status, and message required by R9."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R25",
+        "label": "MATCH",
+        "reasoning": "R25 requires JWT payload claims id, username, and email, which O5 says are absent."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R19",
+        "label": "PARTIAL",
+        "reasoning": "It matches the timestamp update scenario in R19 but focuses on wrong field names rather than the full created-stays-same and updated-changes behavior."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "It concerns the delete-article then GET-empty-object scenario from R5, but it disputes internal implementation details while acknowledging the observable GET result is reproduced."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed reference requirements test article creation validation for missing title, description, or body."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed reference requirements concern comment creation validation."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "R6 requires feed results to include only followed authors and exclude unfollowed authors, which O10 describes as missing."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": "R27",
+        "label": "MATCH",
+        "reasoning": "R27 requires an empty feed when the user follows nobody, which is part of the missing follow-based feed logic described in O10."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": "R23",
+        "label": "MATCH",
+        "reasoning": "R23 specifically tests feed pagination with limit and offset, which O11 says is not implemented."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": "R12",
+        "label": "MATCH",
+        "reasoning": "It directly states that tag-based article filtering logic required by R12 is not implemented."
+      },
+      {
+        "detection_id": "O13",
+        "requirement_id": "R29",
+        "label": "MATCH",
+        "reasoning": "R29 explicitly requires user deletion to fail with a 500 foreign-key constraint error when the user has articles, which O13 describes as absent."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 3237,
+    "prompt_tokens": 2278,
+    "completion_tokens": 959
+  }
+}

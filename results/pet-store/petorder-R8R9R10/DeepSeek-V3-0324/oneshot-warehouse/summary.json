@@ -1,0 +1,16 @@
+{
+  "app": "pet-store",
+  "variant": "petorder-R8R9R10",
+  "service": "pet-order",
+  "method": "oneshot-warehouse",
+  "detector_model": "DeepSeek-V3-0324",
+  "gen_model": "gpt-5.4",
+  "gen_usage": null,
+  "n_additions": 3,
+  "n_omissions": 6,
+  "usage": {
+    "total_tokens": 10920,
+    "prompt_tokens": 10218,
+    "completion_tokens": 702
+  }
+}

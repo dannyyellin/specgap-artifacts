@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "It concerns GET query filtering semantics, but it describes unsupported extra filter fields rather than the removed specific lte/contains semantics."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Authorization header Bearer-prefix handling does not correspond to removed Ninja field mapping, owner-only restrictions, or specific query filtering semantics."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "CORS support is unrelated to the listed spec changes."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "MongoDB counter-based id generation does not match any of the removed behaviors in the spec requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 804,
+    "prompt_tokens": 568,
+    "completion_tokens": 236
+  }
+}

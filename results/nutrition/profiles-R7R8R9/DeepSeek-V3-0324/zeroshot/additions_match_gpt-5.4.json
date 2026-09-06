@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "A1 discusses user_id sourcing from token validation, which overlaps with R9, but it incorrectly frames the spec as requiring token-derived user_id rather than the removal of taking user_id from token validation in favor of the request body."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A2 is about rounding floating-point numbers and does not correspond to any of R7, R8, or R9."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A3 concerns explicit error handlers for HTTP status codes and does not match any of the listed requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 769,
+    "prompt_tokens": 557,
+    "completion_tokens": 212
+  }
+}

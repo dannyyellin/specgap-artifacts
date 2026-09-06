@@ -1,0 +1,14 @@
+{
+  "req_id": 13,
+  "requirement_vague": "Verify article filtering by author works correctly",
+  "requirement_precise": "Create user1 (username: 'author1', email: 'author1@test.com', password: 'pass123') and user2 (username: 'author2', email: 'author2@test.com', password: 'pass123'). User1 creates article 'Article By Author1'. User2 creates article 'Article By Author2'. GET /api/articles?author=author1. Verify articlesCount is 1 and articles array contains only 'Article By Author1'. GET /api/articles?author=author2. Verify articlesCount is 1 and articles array contains only 'Article By Author2'. GET /api/articles (no filter). Verify articlesCount is 2.",
+  "verdict": "SPEC_LEAKED",
+  "spec_evidence": "- Create user1 (username: 'articleauthor1', email: 'articleauthor1@test.com', password: 'pass123') and user2 (username: 'articleauthor2', email: 'articleauthor2@test.com', password: 'pass123'). User1 creates article 'User1 Article'. User2 creates article 'User2 Article'. GET /api/articles?author=articleauthor1. Verify articlesCount is 1 and contains only 'User1 Article'. GET /api/articles?author=articleauthor2. Verify articlesCount is 1 and contains only 'User2 Article'. This tests the author-article relationship established during article creation.",
+  "reasoning": "The reduced spec already explicitly requires that filtering articles by the author query parameter returns only that author's article. The removed requirement is the same behavioral constraint with different usernames/article titles, plus an extra unfiltered count check not needed for the core constraint.",
+  "parse_error": false,
+  "usage": {
+    "total_tokens": 3539,
+    "prompt_tokens": 3337,
+    "completion_tokens": 202
+  }
+}

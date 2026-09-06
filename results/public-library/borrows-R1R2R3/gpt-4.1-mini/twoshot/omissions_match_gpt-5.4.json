@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O1 states that returnDate is not computed as loanDate + 30 days on borrow creation, which is the same behavior removed in R1."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O2 describes not rejecting checkout when a cardholder has 2 or more overdue books, matching the removed overdue-borrow constraint in R2."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 concerns HTTP 405 handling for unsupported methods, which is unrelated to any of R1\u2013R3."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 is about PUT field presence/type validation and does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 concerns POST handling of the id field, which is not described by any of the reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1050,
+    "prompt_tokens": 737,
+    "completion_tokens": 313
+  }
+}

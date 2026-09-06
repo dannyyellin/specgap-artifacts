@@ -1,0 +1,96 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the reference requirements concern email format or password strength validation during user creation."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The reference requirements do not specify validation of required article fields on creation."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement discusses slug mutability or updating the slug field."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R28",
+        "label": "MATCH",
+        "reasoning": "R28 explicitly expects a non-owner user to be able to update another user's article, which O4 directly addresses."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R28",
+        "label": "MATCH",
+        "reasoning": "R28 explicitly expects a non-owner user to be able to delete another user's article, which O5 directly addresses."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R24",
+        "label": "PARTIAL",
+        "reasoning": "R24 requires descending order by created timestamp for GET /api/articles, while O6 matches that behavior for /api/articles but also mentions /api/articles/feed and compares against ordering by id."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed reference requirements cover the feed endpoint returning an empty result when following no one."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The reference requirements include creating multiple comments but do not require validation of empty comment bodies."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement addresses authorization rules for deleting comments."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "R2 explicitly requires that following oneself returns 400, which O10 directly describes as missing."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "R10 explicitly requires that unfollowing oneself returns 400, which O11 directly describes as missing."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the provided reference requirements specify article response field names for timestamps."
+      },
+      {
+        "detection_id": "O13",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The reference requirements do not cover updating user profiles or uniqueness checks on updated username/email."
+      },
+      {
+        "detection_id": "O14",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement mentions JWT expiration handling or token refresh behavior."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2751,
+    "prompt_tokens": 1981,
+    "completion_tokens": 770
+  }
+}

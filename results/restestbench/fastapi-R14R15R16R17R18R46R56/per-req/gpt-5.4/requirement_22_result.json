@@ -1,0 +1,23 @@
+{
+  "req_id": 22,
+  "requirement_vague": "Verify a superuser can create a new user. Check values in the response. Superuser credentials: ('admin@example.com' / 'password123')",
+  "requirement_precise": "Authenticate using the superuser credentials (admin@example.com / password123) to obtain an access token. Using that superuser token, create a new user by supplying a randomly generated email and password. Verify the create-user request succeeds (response status is in the 200-299 range). Verify the response body contains an 'email' field equal to the generated email, an 'id' field is present, and 'is_active' is true.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": [
+      "POST /api/v1/login/access-token",
+      "POST /api/v1/users/",
+      "init_db",
+      "get_current_active_superuser"
+    ],
+    "code_reference": "FIRST_SUPERUSER = \"admin@example.com\"\nFIRST_SUPERUSER_PASSWORD = \"password123\"\n...\n@api_router.post(\"/users/\", response_model=UserPublic)\ndef create_user(..., current_user: User = Depends(get_current_active_superuser)):\n...\n    return user",
+    "reasoning": "The code initializes a superuser with email admin@example.com and password password123, provides a login endpoint that returns an access token for valid credentials, and restricts POST /api/v1/users/ to active superusers. The create-user endpoint returns a UserPublic response containing id, email, is_active, and is_superuser; with default input values, a newly created user has is_active=True, and successful creation returns a 2xx status (default 200)."
+  },
+  "usage": {
+    "total_tokens": 4934,
+    "prompt_tokens": 4729,
+    "completion_tokens": 205
+  },
+  "parse_error": false
+}

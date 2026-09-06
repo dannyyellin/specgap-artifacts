@@ -1,0 +1,18 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Filtering GET /profiles by a user_id query parameter does not describe removing the owner-only restriction, removing token-derived user_id, or changing protein exclusion in profileDishes calculation."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 517,
+    "prompt_tokens": 434,
+    "completion_tokens": 83
+  }
+}

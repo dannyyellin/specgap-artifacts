@@ -1,0 +1,54 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "O1 references the same behavior as R9 (user_id from token validation) but concludes no omission exists, while R9 states this requirement was removed."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R8",
+        "label": "MATCH",
+        "reasoning": "O2 directly describes that GET /profiles is not restricted to the restaurant Owner, which matches R8's removal of the owner-only restriction on GET /profiles."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 discusses restrictions on GET/PUT/DELETE /profiles/{id} which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "O4 directly describes that protein is not excluded from the diet comparison in profileDishes calculation, matching R7's removal of protein exclusion from profileDishes calculation."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 discusses validation of nutritional fields in POST /profiles, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 discusses duplicate profile prevention, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O7 discusses filtering semantics for GET /profiles, which does not correspond to any of the three reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1428,
+    "prompt_tokens": 911,
+    "completion_tokens": 517
+  }
+}

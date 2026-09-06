@@ -1,0 +1,21 @@
+{
+  "req_id": 8,
+  "requirement_vague": "Users cannot delete another user's todo",
+  "requirement_precise": "Register two users (userA and userB) and login with each. UserA creates a todo and notes the returned ID. UserB calls DELETE /todos/{id} using userA's todo ID. Verify the response status is 404 Not Found. Then userA verifies their todo still exists by calling GET /todos/{id} and confirming 200 OK.",
+  "removed": true,
+  "omissions": [],
+  "implementation": {
+    "location": [
+      "delete_todo",
+      "get_todo"
+    ],
+    "code_reference": "todo = session.exec(\n    select(Todo).where(Todo.id == id, Todo.user_id == current_user.id)\n).first()\nif not todo:\n    raise HTTPException(\n        status_code=status.HTTP_404_NOT_FOUND,\n        detail=\"Todo not found\",\n    )",
+    "reasoning": "Both DELETE /todos/{id} and GET /todos/{id} scope the todo lookup by both the requested id and the authenticated user's id. This means another user cannot delete someone else's todo and will receive 404, while the owner can still retrieve their own todo afterward."
+  },
+  "usage": {
+    "total_tokens": 2585,
+    "prompt_tokens": 2437,
+    "completion_tokens": 148
+  },
+  "parse_error": false
+}

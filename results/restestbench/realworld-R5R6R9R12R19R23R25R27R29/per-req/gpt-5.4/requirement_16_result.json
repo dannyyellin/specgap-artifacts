@@ -1,0 +1,24 @@
+{
+  "req_id": 16,
+  "requirement_vague": "Verify profile returns correct following status based on follow relationship",
+  "requirement_precise": "Create user1 (username: 'profileviewer1', email: 'profileviewer1@test.com', password: 'pass123') and user2 (username: 'profiletarget1', email: 'profiletarget1@test.com', password: 'pass123'). Using user1's token, GET /api/profiles/profiletarget1. Verify profile has 'following' equal to false (no relationship yet). User1 follows user2 via POST /api/profiles/profiletarget1/follow. GET /api/profiles/profiletarget1 again with user1's token. Verify profile has 'following' equal to true and username is 'profiletarget1'. User1 unfollows user2. GET /api/profiles/profiletarget1 again. Verify profile has 'following' equal to false again. This tests the follow status lookup in findProfile method.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": [
+      "is_following",
+      "profile_response",
+      "GET /api/profiles/{username}",
+      "POST /api/profiles/{username}/follow",
+      "DELETE /api/profiles/{username}/follow"
+    ],
+    "code_reference": "def is_following(session: Session, viewer: Optional[User], target: User) -> bool:\n    link = session.get(FollowLink, (viewer.id, target.id))\n    return link is not None",
+    "reasoning": "The profile response computes `following` from the `FollowLink` table for the authenticated viewer and target user. The follow endpoint inserts a `FollowLink`, the unfollow endpoint deletes it, and subsequent GET `/api/profiles/{username}` calls return `following` as false before follow, true after follow, and false again after unfollow, while preserving the target `username` in the response."
+  },
+  "usage": {
+    "total_tokens": 5440,
+    "prompt_tokens": 5256,
+    "completion_tokens": 184
+  },
+  "parse_error": false
+}

@@ -1,0 +1,19 @@
+{
+  "app": "public-library",
+  "variant": "cardholders-R4R5R6R7",
+  "service": "cardholders",
+  "req_id": "R7",
+  "requirement": "To compute a cardholder's fine, the Cardholders service calls the Borrows service to obtain that cardholder's borrows.",
+  "source_headline": "Removed cross-service call to Borrows for fine computation",
+  "model": "gpt-5.4",
+  "pass": 1,
+  "label": "INFERRED",
+  "evidence": "`get_cardholder_fines` route (`/cardholders/fines/<cardholder_id>`) calls `requests.get(BORROWS_SERVICE_URL, params={\"cardholderId\": cardholder_id}, timeout=5)` before computing `fine_amount` from the returned borrows list.",
+  "reasoning": "The requirement is specifically that the Cardholders service calls the Borrows service to obtain that cardholder's borrows when computing a fine. The code explicitly does this in the fines endpoint by making an HTTP request to the Borrows service with the cardholder ID as a query parameter, then using the returned borrows to calculate the fine. A test of the stated behavior would pass, so per the decision guide this is INFERRED.",
+  "usage": {
+    "total_tokens": 2290,
+    "prompt_tokens": 2127,
+    "completion_tokens": 163
+  },
+  "timestamp": "2026-07-16 14:53:46"
+}

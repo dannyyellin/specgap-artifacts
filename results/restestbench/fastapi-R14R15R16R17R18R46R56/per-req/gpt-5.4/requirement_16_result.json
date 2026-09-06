@@ -1,0 +1,21 @@
+{
+  "req_id": 16,
+  "requirement_vague": "Recovering a password for a non existing user gets rejected.",
+  "requirement_precise": "Attempt to recover the password for a non-existent user with the email 'jVgQr@example.com'. Verify that the password recovery request returns an HTTP 404 status code indicating the user does not exist.",
+  "removed": true,
+  "omissions": [
+    {
+      "id": "R16-O1",
+      "description": "No password recovery endpoint exists that rejects recovery attempts for non-existent users with HTTP 404.",
+      "category": "ENDPOINTS",
+      "reasoning": "The code defines login, signup, user management, password update for authenticated users, and item routes, but there is no route for password recovery (such as a forgot-password/recover-password endpoint). Because the endpoint itself is absent, the required behavior of returning 404 for a non-existing user email like 'jVgQr@example.com' is not implemented."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 4784,
+    "prompt_tokens": 4663,
+    "completion_tokens": 121
+  },
+  "parse_error": false
+}

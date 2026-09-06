@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 describes token extraction locations which does not correspond to any of the three spec requirements listed."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A2 describes duplicate profile rejection behavior which does not correspond to any of the three spec requirements listed."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R8",
+        "label": "PARTIAL",
+        "reasoning": "A3 relates to GET /profiles filtering behavior, and R8 removes the owner-only restriction on GET /profiles, but A3 focuses on field filtering and rejection of unknown parameters rather than the owner-only access restriction."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 856,
+    "prompt_tokens": 622,
+    "completion_tokens": 234
+  }
+}

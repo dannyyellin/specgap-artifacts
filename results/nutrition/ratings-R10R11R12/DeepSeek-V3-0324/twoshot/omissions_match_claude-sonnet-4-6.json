@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of the integer 1-5 range constraint for the rating field in POST /ratings, matching R10."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O2 describes the same missing 1-5 integer range validation but for PUT /ratings/{id}, which is also covered by R10's removal of the rating range constraint."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R11",
+        "label": "MATCH",
+        "reasoning": "O3 directly describes the absence of the one-rating-per-user-per-dish constraint in POST /ratings, matching R11."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 discusses filtering unrated dishes in GET /ratings, which does not correspond to any of the reference requirements R10, R11, or R12."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R12",
+        "label": "PARTIAL",
+        "reasoning": "O5 relates to user identity validation but focuses on matching user_id to the rating owner rather than specifically removing token-based user_id validation as described in R12."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1132,
+    "prompt_tokens": 732,
+    "completion_tokens": 400
+  }
+}

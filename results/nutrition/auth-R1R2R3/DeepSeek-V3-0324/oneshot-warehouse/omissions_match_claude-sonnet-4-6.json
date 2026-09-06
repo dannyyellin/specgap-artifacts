@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O1 captures part of R2 (the Owner name special case) but misses the privileged=True and owner#pw aspects of the removed Owner special case."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O2 captures the owner#pw password aspect of R2 but misses the broader context of the entire Owner special case being removed (name, privileged flag)."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O3 directly describes the removal of password encryption, which matches R1 about removing bcrypt password encryption."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R3",
+        "label": "PARTIAL",
+        "reasoning": "O4 is related to duplicate username handling but focuses on the HTTP status code rather than the removal of the uniqueness constraint itself, only partially capturing R3."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 941,
+    "prompt_tokens": 621,
+    "completion_tokens": 320
+  }
+}

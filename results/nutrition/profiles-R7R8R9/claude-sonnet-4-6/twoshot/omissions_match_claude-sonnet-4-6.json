@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R8",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of the owner-only restriction on GET /profiles, which is exactly what R8 states."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 discusses query filtering semantics for GET /profiles but does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 discusses PUT /profiles/{id} field update behavior, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R7",
+        "label": "PARTIAL",
+        "reasoning": "O4 identifies that /profileDishes does not forward a token when calling the dishes service, which is related to R7's removal of protein exclusion from profileDishes calculation, but O4 focuses on authentication/token forwarding rather than the protein exclusion behavior specifically."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1089,
+    "prompt_tokens": 766,
+    "completion_tokens": 323
+  }
+}

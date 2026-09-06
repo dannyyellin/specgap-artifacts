@@ -1,0 +1,18 @@
+{
+  "req_id": 27,
+  "requirement_vague": "Verify a normal user cannot create another user.",
+  "requirement_precise": "Register a new normal user and obtain an access token via the authentication endpoint. Using that normal-user access token, attempt to create a new user by calling the create user operation with a JSON body containing 'email' (a random email) and 'password' (a random lowercase string). Verify the response status is 403.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": "create_user route (/api/v1/users/) with get_current_active_superuser dependency",
+    "code_reference": "@api_router.post(\"/users/\", response_model=UserPublic)\ndef create_user(\n    ...\n    current_user: User = Depends(get_current_active_superuser),\n):",
+    "reasoning": "The create user operation is protected by get_current_active_superuser. That dependency raises HTTP 403 when the authenticated user is not a superuser, so a normal user who signs up, logs in, and calls POST /api/v1/users/ will receive 403."
+  },
+  "usage": {
+    "total_tokens": 4816,
+    "prompt_tokens": 4684,
+    "completion_tokens": 132
+  },
+  "parse_error": false
+}

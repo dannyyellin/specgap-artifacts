@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the absence of Google Books API integration for obtaining 'publisher' and 'publishedDate', which matches R10."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "O2 describes a specific behavior (empty string fallback) related to the Google Books API integration that was removed, partially overlapping with R10 but focusing on a detail of that integration rather than its removal."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 discusses GET filtering behavior which does not correspond to any of the reference requirements about removed POST fields, ISBN format, Google Books API integration, or genre enumeration."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 965,
+    "prompt_tokens": 709,
+    "completion_tokens": 256
+  }
+}

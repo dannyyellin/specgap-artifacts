@@ -1,0 +1,16 @@
+{
+  "app": "public-library",
+  "variant": "borrows-R1R2R3",
+  "service": "borrows",
+  "method": "oneshot-tracker",
+  "detector_model": "claude-sonnet-4-6",
+  "gen_model": "gpt-5.4",
+  "gen_usage": null,
+  "n_additions": 6,
+  "n_omissions": 2,
+  "usage": {
+    "total_tokens": 8066,
+    "prompt_tokens": 7190,
+    "completion_tokens": 876
+  }
+}

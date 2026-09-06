@@ -1,0 +1,47 @@
+Timestamp: 2026-06-01 21:29:50
+Detector:  gpt-4.1-mini
+Service:   fastapi  Round: 1  Removals: [4, 10, 13, 30, 35, 47]
+Method:    twoshot
+
+Tokens: prompt=13073, completion=3066, total=16139
+Additions: 2
+Omissions: 35
+
+  A A1: GET /items/ endpoint returns all items without filtering by owner or supporting query parameters
+  A A2: GET /users/ endpoint returns all users with no pagination or filtering parameters
+
+  O O1: POST /api/v1/items/ does not verify that the response status code is 200 as required by the specification
+  O O2: GET /api/v1/items/{item_id} does not check permissions to ensure only owner or superuser can read the item
+  O O3: GET /api/v1/items/{item_id} does not return 400 with 'Not enough permissions' when a non-owner normal user attempts to read an item
+  O O4: GET /api/v1/items/{item_id} does not return 404 with 'Item not found' when the item does not exist
+  O O5: PUT /api/v1/items/{item_id} (PATCH in code) does not return 400 with 'Not enough permissions' when a non-owner normal user attempts to update an item
+  O O6: PUT /api/v1/items/{item_id} (PATCH in code) does not return 404 with 'Item not found' when the item does not exist
+  O O7: DELETE /api/v1/items/{item_id} does not return 400 with 'Not enough permissions' when a non-owner normal user attempts to delete an item
+  O O8: DELETE /api/v1/items/{item_id} does not return 404 with 'Item not found' when the item does not exist
+  O O9: GET /api/v1/items/{item_id} does not validate UUID format and return 422 on invalid UUID
+  O O10: POST /api/v1/items/ does not validate that title and description fields meet length constraints as required
+  O O11: POST /api/v1/users/signup does not return 400 with detail 'The user with this email already exists in the system' when duplicate email is used
+  O O12: POST /api/v1/users/signup does not validate password length between 8 and 128 characters
+  O O13: PATCH /api/v1/users/me/password does not reject when new password is same as current password
+  O O14: PATCH /api/v1/users/me/password does not validate password length constraints
+  O O15: POST /api/v1/reset-password/ does not validate new_password length before token validation
+  O O16: POST /api/v1/reset-password/ returns 400 with detail 'Invalid token' when token is invalid or expired
+  O O17: POST /api/v1/password-recovery/{email} returns 404 when user does not exist
+  O O18: POST /api/v1/password-recovery/{email} sends recovery email via mailcatcher service
+  O O19: DELETE /api/v1/users/me forbids superusers from deleting themselves with 403 and detail 'Super users are not allowed to delete themselves'
+  O O20: DELETE /api/v1/users/{user_id} forbids non-superusers from deleting users with 403 and detail 'The user doesn't have enough privileges'
+  O O21: DELETE /api/v1/users/{user_id} forbids superusers from deleting themselves with 403 and detail 'Super users are not allowed to delete themselves'
+  O O22: GET /api/v1/users/{user_id} forbids normal users from reading other users with 403 and detail 'The user doesn't have enough privileges'
+  O O23: PATCH /api/v1/users/{user_id} returns 404 with detail 'The user with this id does not exist in the system' when user does not exist
+  O O24: PATCH /api/v1/users/{user_id} returns 409 with detail 'User with this email already exists' when updating email to an existing user's email
+  O O25: POST /api/v1/users/signup returns 400 with detail 'User with this email already exists' when duplicate email is used
+  O O26: PATCH /api/v1/users/me returns 409 with detail 'User with this email already exists' when updating email to an existing user's email
+  O O27: POST /api/v1/users/signup validates email format and password length, returning 422 on invalid input
+  O O28: PATCH /api/v1/users/me validates email format and full_name length, returning 422 on invalid input
+  O O29: POST /api/v1/users/signup and PATCH /api/v1/users/me reject null email or password with 422 validation error
+  O O30: POST /api/v1/items/ validates title and description length, returning 422 on invalid input
+  O O31: POST /api/v1/users/signup does not allow creating a user with is_superuser true
+  O O32: POST /api/v1/users/ (create user) requires superuser authentication
+  O O33: POST /api/v1/login/access-token returns 400 with detail 'Incorrect email or password' on invalid credentials
+  O O34: POST /api/v1/login/test-token returns current user info with email field
+  O O35: POST /api/v1/users/me/password rejects password change if current password is incorrect

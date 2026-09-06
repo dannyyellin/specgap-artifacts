@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Persisting purchase documents in MongoDB does not correspond to removing pet selection randomness, removing pet deletion after purchase, or removing purchase-id uniqueness."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Enforcing that the payload purchaser matches the authenticated username is unrelated to the removed pet selection, pet deletion, or purchase-id uniqueness requirements."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "Adding a separate transaction field named id overlaps with purchase identifier handling, but it does not specifically describe removing the uniqueness and non-reuse requirement for purchase-id."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R8",
+        "label": "MATCH",
+        "reasoning": "Choosing the first pet instead of a random one directly corresponds to the removed requirement that pet selection be random when multiple pets are available."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": "R8",
+        "label": "PARTIAL",
+        "reasoning": "Scanning a fixed range of stores when no store is specified is part of how pets are found among multiple options, but it does not itself express the removed random-selection behavior."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1137,
+    "prompt_tokens": 795,
+    "completion_tokens": 342
+  }
+}

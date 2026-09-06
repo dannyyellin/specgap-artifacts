@@ -1,0 +1,18 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The property concerns a password-recovery HTML route, which is unrelated to any of the listed requirements about item permissions, deletion, login failure, password update, duplicate registration, or signup validation."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 926,
+    "prompt_tokens": 840,
+    "completion_tokens": 86
+  }
+}

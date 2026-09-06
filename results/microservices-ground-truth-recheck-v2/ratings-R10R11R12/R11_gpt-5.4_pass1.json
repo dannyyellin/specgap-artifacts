@@ -1,0 +1,19 @@
+{
+  "app": "nutrition",
+  "variant": "ratings-R10R11R12",
+  "service": "ratings",
+  "req_id": "R11",
+  "requirement": "A user may have at most one rating per dish; a duplicate rating by the same user for the same dish is prevented.",
+  "source_headline": "Removed one-rating-per-user-per-dish constraint",
+  "model": "gpt-5.4",
+  "pass": 1,
+  "label": "INFERRED",
+  "evidence": "ensure_indexes() creates a unique compound index on ratings: mongo.db.ratings.create_index([(\"dish_id\", 1), (\"user_id\", 1)], unique=True). In POST /ratings, the inserted document includes both dish_id and user_id, and mongo.db.ratings.insert_one(doc) is wrapped in except PyMongoError: return error_response(\"Bad request\", 400), so a second rating by the same user for the same dish is rejected.",
+  "reasoning": "The code clearly contains behavior addressing the requirement: a database-level unique constraint on (dish_id, user_id) enforces at most one rating per user per dish. A duplicate POST for the same authenticated user and dish would violate that index and be prevented, causing the request to fail. Per the decision guide, equivalent enforcement via a unique index fully satisfies the requirement, so this is INFERRED.",
+  "usage": {
+    "total_tokens": 2560,
+    "prompt_tokens": 2359,
+    "completion_tokens": 201
+  },
+  "timestamp": "2026-07-16 14:59:25"
+}

@@ -1,0 +1,54 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "It describes that passwords are stored unencrypted/plaintext instead of using bcrypt encryption."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "It concerns the special Owner account credentials, which is the Owner special-case behavior referenced by R2."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "It addresses Owner-specific privileged handling, but focuses on incorrect privilege enforcement rather than simply the removal of the Owner special case."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "It refers to the literal Owner reservation behavior, which is part of the Owner special case, but only captures one consequence of that special handling."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R3",
+        "label": "PARTIAL",
+        "reasoning": "It mentions allowing multiple registrations with the name 'Owner', which overlaps with uniqueness, but only for a narrow Owner-specific scenario rather than general username uniqueness removal."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "It is about disallowed package usage, which is unrelated to any reference requirement."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "It states that bcrypt is not used for password hashing/verification, matching the removal of password encryption."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1196,
+    "prompt_tokens": 768,
+    "completion_tokens": 428
+  }
+}

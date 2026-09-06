@@ -1,0 +1,23 @@
+{
+  "variant": "todoapp-R1R2R4R5R7R8R10R12",
+  "req_id": 2,
+  "model": "claude-sonnet-4-6",
+  "pass": 1,
+  "verdict": "NOT_IMPLEMENTED",
+  "requirement_vague": "Creating a todo without a title returns a validation error",
+  "omissions": [
+    {
+      "id": "O1",
+      "description": "When creating a todo with a missing or empty title, the code does not return a 400 Bad Request with a message containing 'The Title field is required.' FastAPI/Pydantic returns a 422 Unprocessable Entity for missing required fields, and an empty string title passes validation entirely. There is no custom validation logic to enforce this requirement.",
+      "category": "REQUEST_VALIDATION",
+      "reasoning": "The TodoCreate model defines 'title: str' which causes Pydantic to return a 422 status code (not 400) when title is missing, and accepts empty strings without error. The requirement specifies a 400 status code and a specific error message 'The Title field is required.' which is never produced by the code."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 3543,
+    "prompt_tokens": 3014,
+    "completion_tokens": 529
+  },
+  "timestamp": "2026-07-12 10:33:01"
+}

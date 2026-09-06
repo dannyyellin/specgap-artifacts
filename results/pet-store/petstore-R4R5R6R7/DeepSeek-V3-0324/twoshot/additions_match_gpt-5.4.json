@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Storing a pets array inside pet-type documents is unrelated to removing the delete constraint, lifespan handling, birthdate filtering, or temperament/group_behavior extraction rules."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "It concerns attribute extraction from Ninja API fields, but it uses different fields rather than specifically reflecting removal of temperament/group_behavior extraction rules."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "It addresses lifespan handling behavior, but it describes an incorrect default value rather than the removed range parsing rules about choosing a minimum or first integer."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 758,
+    "prompt_tokens": 549,
+    "completion_tokens": 209
+  }
+}

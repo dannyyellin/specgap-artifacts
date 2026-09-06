@@ -1,0 +1,14 @@
+{
+  "req_id": 10,
+  "requirement_vague": "Verify unfollow removes follow relationship and updates profile following status",
+  "requirement_precise": "Create user1 (username: 'unfollower1', email: 'unfollower1@test.com', password: 'pass123') and user2 (username: 'unfollowee1', email: 'unfollowee1@test.com', password: 'pass123'). User1 follows user2. Verify following is true. User1 unfollows user2 via DELETE /api/profiles/unfollowee1/follow. Verify response status is 200. Verify response profile has 'following' equal to false. GET profile of user2 using user1's token. Verify 'following' is false. Verify user1 cannot unfollow themselves (should return 400).",
+  "verdict": "SPEC_LEAKED",
+  "spec_evidence": "Create user1 (username: 'profileviewer1', email: 'profileviewer1@test.com', password: 'pass123') and user2 (username: 'profiletarget1', email: 'profiletarget1@test.com', password: 'pass123'). Using user1's token, GET /api/profiles/profiletarget1. Verify profile has 'following' equal to false (no relationship yet). User1 follows user2 via POST /api/profiles/profiletarget1/follow. GET /api/profiles/profiletarget1 again with user1's token. Verify profile has 'following' equal to true and username is 'profiletarget1'. User1 unfollows user2. GET /api/profiles/profiletarget1 again. Verify profile has 'following' equal to false again.",
+  "reasoning": "The reduced spec explicitly states that after user1 unfollows user2, a subsequent profile GET must show 'following' equal to false again, which directly implies that unfollow removes the follow relationship and updates profile following status. However, the self-unfollow 400 behavior is not stated elsewhere in the spec.",
+  "parse_error": false,
+  "usage": {
+    "total_tokens": 3579,
+    "prompt_tokens": 3339,
+    "completion_tokens": 240
+  }
+}

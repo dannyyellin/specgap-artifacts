@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 describes strict payload validation for POST /pet-types, which does not correspond to any of the four spec requirements listed."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "R4 states that temperament/group_behavior were removed from attributes extraction rules, and A2 describes the code reading additional fields (slogan, group, color, etc.) beyond what the spec requires, directly relating to the attributes extraction behavior change."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A3 describes accepting a raw 'picture' field in PUT /pet-types/{id}/pets/{name}, which does not correspond to any of the four spec requirements listed."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "R6 mentions removed lifespan range handling including 'extract first integer', and A4 describes incorrect lifespan defaulting behavior (0 instead of null), which is related to lifespan handling but focuses on the default value rather than the range/extraction logic specifically removed."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1226,
+    "prompt_tokens": 860,
+    "completion_tokens": 366
+  }
+}

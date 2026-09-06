@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R8",
+        "label": "MATCH",
+        "reasoning": "Both describe that the owner-only restriction on GET /profiles was removed or is not enforced."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "It concerns user ID authorization checks, but R9 specifically says user_id should no longer come from token validation rather than requiring PUT/DELETE validation against the authenticated user."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "Both state that protein should be excluded from the /profileDishes calculation."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This requirement about POST /profiles nutritional fields does not correspond to any listed reference requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 892,
+    "prompt_tokens": 649,
+    "completion_tokens": 243
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of password encryption/hashing, matching R1's removal of bcrypt encryption."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O2 captures part of R2 (the Owner special case with name and password constraints) but does not mention the 'privileged=True' aspect of the Owner special case."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 concerns error message content for failed registration/login, which does not correspond to any of the three reference requirements about removed features."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concerns content type validation and 415 status codes, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 concerns validation of non-empty strings for name and password fields, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 concerns 400 Bad Request responses for missing fields, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O7 concerns 401 Unauthorized responses for invalid login credentials, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O8 concerns token format validation in /validate, which does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "O9 partially captures R2 by noting that the 'privileged' field logic related to the Owner special case is not correctly enforced, though it focuses on the token/validate endpoint rather than the registration special case."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O10 concerns the response format of /validate endpoint, which does not correspond to any of the three reference requirements about removed features."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1804,
+    "prompt_tokens": 1073,
+    "completion_tokens": 731
+  }
+}

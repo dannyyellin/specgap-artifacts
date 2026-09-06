@@ -1,0 +1,14 @@
+{
+  "req_id": 35,
+  "requirement_vague": "Ensure registering a user with an existing email gets rejected.",
+  "requirement_precise": "Attempt to register a user using the existing superuser email 'admin@example.com' with a random password and random full name by calling the user registration operation. Verify the response status is 400. Verify the response body field 'detail' equals 'The user with this email already exists in the system'.",
+  "verdict": "SPEC_LEAKED",
+  "spec_evidence": "- \"Register a new normal user and obtain an access token. Register a second user with a different random email. Using the access token for the first (authenticated) user, attempt to update the authenticated user's email to the email of the already-registered second user. Verify the response status is 409. Verify the response body contains a JSON field \\\"detail\\\" with the value \\\"User with this email already exists\\\".\"\n- \"Authenticate as the superuser (username 'admin@example.com', password 'password123') to obtain an access token. Using the superuser access token, create a new user via the create-user API with a generated email and password. Then, using the same superuser access token, attempt to create another user with the same email and password via the create-user API. Assertions: Verify the response status for the duplicate-creation attempt is 400.\"\n- \"Register two distinct users via the public signup operation, each with a different email and password. Authenticate as the superuser (admin@example.com / password123) to obtain an access token. Using the superuser access token, attempt to update the first registered user's email (update by id) so that it becomes the second user's email. Verify the response status is 409. Verify the response body contains a \\\"detail\\\" field equal to \\\"User with this email already exists\\\".\"",
+  "reasoning": "The reduced spec explicitly establishes the underlying constraint that email addresses must be unique across users: duplicate emails are rejected on user creation and on email updates. Since the superuser is an existing user with email 'admin@example.com', a reader can directly infer that signing up with that same email must also be rejected.",
+  "parse_error": false,
+  "usage": {
+    "total_tokens": 5541,
+    "prompt_tokens": 5174,
+    "completion_tokens": 367
+  }
+}

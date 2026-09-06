@@ -1,0 +1,23 @@
+{
+  "req_id": 12,
+  "requirement_vague": "Confirm login works and returns a valid access token for admin@example.com / password123",
+  "requirement_precise": "Authenticate using superuser credentials (admin@example.com / password123) to obtain an access token. Verify the response status code is 200 OK, the 'token_type' field equals 'bearer' and the 'access_token' field is not empty. Then call the protected GET /api/v1/users/me endpoint with the token to verify it works and returns the user's email.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": [
+      "POST /api/v1/login/access-token",
+      "GET /api/v1/users/me",
+      "init_superuser",
+      "on_startup"
+    ],
+    "code_reference": "FIRST_SUPERUSER = \"admin@example.com\"\nFIRST_SUPERUSER_PASSWORD = \"password123\"\n...\n@api_router.post(\"/login/access-token\", response_model=Token)\ndef login_access_token(...):\n    user = authenticate(session, form_data.username, form_data.password)\n    ...\n    return Token(access_token=access_token, token_type=\"bearer\")\n...\n@api_router.get(\"/users/me\", response_model=UserRead)\ndef read_user_me(current_user: User = Depends(get_current_active_user)):\n    return current_user",
+    "reasoning": "The app seeds a superuser with email admin@example.com and password password123 at startup, the login endpoint authenticates those credentials and returns a Token model containing a non-empty access_token and token_type set to bearer with default 200 OK, and the protected GET /api/v1/users/me endpoint uses that bearer token to resolve the current user and returns the user's email in the UserRead response."
+  },
+  "usage": {
+    "total_tokens": 6025,
+    "prompt_tokens": 5778,
+    "completion_tokens": 247
+  },
+  "parse_error": false
+}

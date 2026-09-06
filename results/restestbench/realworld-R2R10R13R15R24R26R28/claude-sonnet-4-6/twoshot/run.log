@@ -1,0 +1,24 @@
+Timestamp: 2026-06-02 09:17:45
+Detector:  claude-sonnet-4-6
+Service:   nestjs-realworld  Round: 2  Removals: [2, 10, 13, 15, 24, 26, 28]
+Method:    twoshot
+
+Tokens: prompt=13806, completion=3282, total=17088
+Additions: 7
+Omissions: 7
+
+  A A1: article_dict includes both 'created'/'updated' AND 'createdAt'/'updatedAt' timestamp fields simultaneously
+  A A2: user_dict includes an 'id' field in the user response
+  A A3: PUT /api/articles/{slug} enforces ownership and returns 403 when a non-owner tries to update
+  A A4: DELETE /api/articles/{slug} enforces ownership and returns 403 when a non-owner tries to delete
+  A A5: DELETE /api/articles/{slug}/comments/{id} allows the article owner (not just comment author) to delete comments
+  A A6: GET /api/tags endpoint is implemented
+  A A7: article_dict includes 'favorited' and 'favoritesCount' fields
+
+  O O1: POST /api/profiles/{username}/follow does not return HTTP status 201
+  O O2: POST /api/profiles/{username}/follow does not return 400 when a user tries to follow themselves
+  O O3: DELETE /api/profiles/{username}/follow does not return 400 when a user tries to unfollow themselves
+  O O4: GET /api/articles sorts by article id rather than by created_at timestamp descending
+  O O5: GET /api/articles/feed sorts by article id rather than by created_at timestamp
+  O O6: GET /api/articles/feed route is registered after GET /api/articles/{slug}, causing 'feed' to be matched as a slug value
+  O O7: POST /api/articles/{slug}/comments returns the full article object with embedded comments instead of the created comment object

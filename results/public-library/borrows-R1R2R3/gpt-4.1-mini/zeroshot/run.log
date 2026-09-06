@@ -1,0 +1,20 @@
+Timestamp: 2026-06-01 20:52:32
+Detector:  gpt-4.1-mini
+App/Variant/Service: public-library/borrows-R1R2R3/borrows
+Method:    zeroshot
+
+Tokens: prompt=5176, completion=1077, total=6253
+Additions: 5
+Omissions: 5
+
+  A A1: The code implements a GET /borrows endpoint that supports filtering by 'loanDate', 'returnDate', and 'id' fields, which is not specified in the specification.
+  A A2: The code validates that 'returnDate' is not earlier than 'loanDate' in POST and PUT requests.
+  A A3: The code allows updating the 'returnDate' field via PUT /borrows/{id}, which is not specified in the specification.
+  A A4: The code returns JSON error messages with an 'error' field for error responses.
+  A A5: The code supports filtering GET /borrows by 'startDate' and 'endDate' query parameters to return borrows with 'loanDate' in the range, which is required, but also returns 400 if only one of these parameters is provided or if 'startDate' > 'endDate'.
+
+  O O1: The code does not enforce the business rule that a book can only be borrowed by a cardholder who does not have 2 or more books overdue; it does not check the number of overdue books before allowing a POST borrow.
+  O O2: The code does not compute the 'returnDate' as 'loanDate' + 30 days (LOAN_PERIOD) in POST requests; it accepts 'returnDate' from the client or defaults to empty string.
+  O O3: The code does not return status code 400 if the POST request payload is missing required fields or has invalid types beyond basic string checks.
+  O O4: The code does not return status code 405 (Method Not Allowed) for unsupported HTTP methods on /borrows and /borrows/{id} endpoints.
+  O O5: The code does not handle the case where the Borrows service should inform the Logs service each time a book is checked out by creating a new log record with guaranteed success or failure handling.

@@ -1,0 +1,18 @@
+{
+  "req_id": 40,
+  "requirement_vague": "Verify a superuser cannot delete their own account.",
+  "requirement_precise": "Authenticate as the superuser (use credentials admin@example.com / password123 to obtain an access token). Using the superuser access token, attempt to delete the authenticated user's own account (delete current user). Verify the response status is 403. Verify the response body JSON has a 'detail' field equal to 'Super users are not allowed to delete themselves'.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": "POST /api/v1/login/access-token and DELETE /api/v1/users/me (also mirrored in DELETE /api/v1/users/{user_id} for self-delete by id)",
+    "code_reference": "@api_router.delete(\"/users/me\", response_model=Message)\ndef delete_user_me(session: Session = Depends(get_session), current_user: User = Depends(get_current_active_user)):\n    if current_user.is_superuser:\n        raise HTTPException(status_code=403, detail=\"Super users are not allowed to delete themselves\")",
+    "reasoning": "The seeded superuser credentials are admin@example.com / password123 via FIRST_SUPERUSER and FIRST_SUPERUSER_PASSWORD, and the login endpoint issues an access token for authenticated users. When the authenticated user calls DELETE /api/v1/users/me, the handler explicitly blocks superusers with HTTP 403 and the exact JSON detail message required."
+  },
+  "usage": {
+    "total_tokens": 5959,
+    "prompt_tokens": 5766,
+    "completion_tokens": 193
+  },
+  "parse_error": false
+}

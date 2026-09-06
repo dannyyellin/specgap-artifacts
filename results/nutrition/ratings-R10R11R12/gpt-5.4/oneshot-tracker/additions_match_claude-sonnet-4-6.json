@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R12",
+        "label": "PARTIAL",
+        "reasoning": "R12 removes the requirement that user_id comes from token validation, and A1 describes multiple token header formats being accepted, which relates to token handling but focuses on header format rather than user_id extraction."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the three spec requirements (R10, R11, R12) concern verifying dish existence via an external microservice call."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the three spec requirements (R10, R11, R12) relate to internal numeric ID fields or counter collections for rating documents."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 902,
+    "prompt_tokens": 656,
+    "completion_tokens": 246
+  }
+}

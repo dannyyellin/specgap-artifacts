@@ -1,0 +1,54 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "R2 explicitly requires that attempting to follow yourself via POST /api/profiles/follower1/follow returns 400 with a message containing 'cannot be equal'."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "R10 explicitly requires that a user cannot unfollow themselves and that the self-unfollow attempt should return 400."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "R2 explicitly requires status 201 for a successful POST /api/profiles/followee1/follow response."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R28",
+        "label": "MATCH",
+        "reasoning": "R28 explicitly tests that a non-owner can update another user's article and receive the updated article, documenting that vulnerability as required behavior."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R28",
+        "label": "MATCH",
+        "reasoning": "R28 explicitly requires that a non-owner can delete another user's article and that subsequent GET returns 200 with an empty object."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R24",
+        "label": "MATCH",
+        "reasoning": "R24 explicitly requires GET /api/articles to be ordered by created timestamp descending, so sorting by descending id instead is a direct mismatch to that requirement."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the provided reference requirements concern deleting users with existing articles or foreign-key constraint failures."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2250,
+    "prompt_tokens": 1802,
+    "completion_tokens": 448
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the failure mode for R9: duplicate username/email registration returns 422 instead of the required 400 with 'Username and email must be unique'."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R25",
+        "label": "MATCH",
+        "reasoning": "O2 directly describes the failure mode for R25: the JWT payload does not contain the required id, username, and email claims."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R12",
+        "label": "MATCH",
+        "reasoning": "O3 directly describes the missing tag filtering on GET /api/articles, which is the core behavior tested in R12."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R12",
+        "label": "PARTIAL",
+        "reasoning": "O4 partially overlaps with R12 regarding tag filtering on the general article listing, but conflates it with feed semantics and does not cleanly match any single reference requirement."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O5 identifies the missing /api/articles/feed endpoint, which is the core requirement tested in R6."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R27",
+        "label": "MATCH",
+        "reasoning": "O5 also covers R27, which requires the /api/articles/feed endpoint to return empty results when the user follows nobody."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R23",
+        "label": "MATCH",
+        "reasoning": "O5 also covers R23, which requires the /api/articles/feed endpoint with pagination support."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R23",
+        "label": "MATCH",
+        "reasoning": "O6 specifically describes the missing feed pagination behavior (limit/offset with total articlesCount) tested in R23."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "O7 references the DELETE /api/articles/{slug} and subsequent GET returning {} behavior from R5, but concludes no omission exists, making it only a partial acknowledgment of the requirement."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": "R29",
+        "label": "MATCH",
+        "reasoning": "O8 directly describes the missing DELETE /api/users/{email} endpoint that R29 explicitly tests."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement tests article field validation or empty title/description/body handling."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement tests comment body validation."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement tests uniqueness enforcement during user profile updates."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "O12 partially relates to R5 in that R5 explicitly requires GET on a deleted article to return 200 with {}, but O12 broadens this to general missing-resource cases not covered by any reference requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 3662,
+    "prompt_tokens": 2666,
+    "completion_tokens": 996
+  }
+}

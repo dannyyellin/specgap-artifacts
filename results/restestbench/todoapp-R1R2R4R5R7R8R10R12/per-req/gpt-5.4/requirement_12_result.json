@@ -1,0 +1,18 @@
+{
+  "req_id": 12,
+  "requirement_vague": "Users cannot update another user's todo",
+  "requirement_precise": "Register two users (userA and userB) and login with each. UserA creates a todo with title 'UserA Todo' and notes the ID. UserB calls PUT /todos/{id} with userA's todo ID, attempting to change the title to 'Hacked'. Verify the response status is 404 Not Found. Then userA verifies the title is still 'UserA Todo' by calling GET /todos/{id}.",
+  "removed": true,
+  "omissions": [],
+  "implementation": {
+    "location": "update_todo route (`PUT /todos/{id}`), with verification also enforced by `get_todo` (`GET /todos/{id}`)",
+    "code_reference": "todo = session.exec(\n    select(Todo).where(Todo.id == id, Todo.user_id == current_user.id)\n).first()\nif not todo:\n    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=\"Todo not found\")",
+    "reasoning": "The update endpoint scopes the lookup by both the requested todo ID and the authenticated user's ID, so another user cannot update someone else's todo and receives 404 when no matching owned todo is found. The GET endpoint uses the same ownership filter, so the owner can later retrieve their todo unchanged."
+  },
+  "usage": {
+    "total_tokens": 2617,
+    "prompt_tokens": 2453,
+    "completion_tokens": 164
+  },
+  "parse_error": false
+}

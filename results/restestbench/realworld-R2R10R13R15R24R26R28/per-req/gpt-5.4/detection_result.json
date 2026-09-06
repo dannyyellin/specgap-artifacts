@@ -1,0 +1,70 @@
+{
+  "result": {
+    "omissions": [
+      {
+        "id": "R2-O1",
+        "description": "POST /api/profiles/{username}/follow does not return the required 201 status after a successful follow.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The route `@app.post(\"/api/profiles/{username}/follow\")` has no `status_code=201`, so FastAPI will return 200 by default, not the required 201."
+      },
+      {
+        "id": "R2-O2",
+        "description": "Self-following is not prevented with the required 400 response and message containing 'cannot be equal'.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "In `follow_user`, when `current_user.id == target.id`, the code simply skips creating the follow link and returns the profile response. It does not reject the request, does not return status 400, and does not include any error message containing 'cannot be equal'."
+      },
+      {
+        "id": "R10-O1",
+        "description": "The service does not prevent a user from unfollowing themselves with a 400 response.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The requirement states that user1 cannot unfollow themselves and the API should return 400. In `unfollow_user`, the code looks up the target user, deletes any follow link if present, and always returns the profile response. There is no check for `current_user.id == target.id`, so self-unfollow is allowed and returns 200 instead of 400."
+      },
+      {
+        "id": "R11-O1",
+        "description": "The requirement specifically calls for argon2 password verification logic, but the service is configured to hash and verify passwords using bcrypt instead.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "Password hashing/verification is implemented via `CryptContext(schemes=[\"bcrypt\"], deprecated=\"auto\")`, and both registration and login use that context through `hash_password` and `verify_password`. While correct-password login returns 201 and wrong-password login returns 401, the required argon2 verification behavior is not implemented."
+      },
+      {
+        "id": "R15-O1",
+        "description": "Article listing order does not preserve creation order expected by the pagination scenario, so offset-based pagination will not return the expected subsets.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The requirement's scenario creates articles 'Article 1' through 'Article 5' in order and verifies pagination across that ordered set. In `list_articles`, articles are sorted with `reverse=True` by id, which returns newest-first (`Article 5`, `Article 4`, ...) rather than creation order (`Article 1`, `Article 2`, ...). Although `limit`, `offset`, and `articlesCount` are implemented, the paginated pages will not match the scenario's expected ordering."
+      },
+      {
+        "id": "R18-O1",
+        "description": "Article tagList is not stored and persisted as a simple-array column; it is implemented via a many-to-many Tag/ArticleTagLink relationship instead.",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The requirement explicitly tests simple-array column handling for tagList persistence. In the code, Article has no tagList/simple-array field; tags are persisted through the Tag model and ArticleTagLink join table, so the specified storage mechanism is absent."
+      },
+      {
+        "id": "R24-O1",
+        "description": "GET /api/articles does not order articles by created timestamp descending; it sorts by article id descending instead.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The requirement specifically tests newest-first ordering by created date (equivalent to ORDER BY article.created DESC). In list_articles, the code loads all articles and applies `sorted(articles, key=lambda a: a.id or 0, reverse=True)`, which uses id rather than `created_at`. This does not implement the required created-date ordering."
+      },
+      {
+        "id": "R28-O1",
+        "description": "Authenticated non-owners cannot update any article via PUT /api/articles/{slug}; the code enforces owner-only authorization instead of allowing any authenticated user to update.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "In update_article, after loading the article, the code checks `if article.author_id != current_user.id: raise HTTPException(status_code=403, detail=\"Forbidden\")`. This prevents user2 from updating user1's article, contrary to the requirement to demonstrate the vulnerability that any authenticated user can update any article."
+      },
+      {
+        "id": "R28-O2",
+        "description": "Authenticated non-owners cannot delete any article via DELETE /api/articles/{slug}; the code enforces owner-only authorization instead of allowing any authenticated user to delete.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "In delete_article, the code checks `if article.author_id != current_user.id: raise HTTPException(status_code=403, detail=\"Forbidden\")`. This blocks user2 from deleting user1's article, so the required vulnerable behavior is absent."
+      },
+      {
+        "id": "R28-O3",
+        "description": "DELETE /api/articles/{slug} does not return status 200 for a non-owner delete attempt as required by the scenario; it returns 403 Forbidden.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "Because delete_article raises `HTTPException(status_code=403, detail=\"Forbidden\")` for non-owners, the scenario expectation that user2's delete succeeds with HTTP 200 is not met."
+      }
+    ],
+    "additions": []
+  },
+  "usage": {
+    "total_tokens": 159172
+  }
+}

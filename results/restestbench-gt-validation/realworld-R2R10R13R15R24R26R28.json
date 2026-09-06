@@ -1,0 +1,93 @@
+{
+  "variant": "realworld-R2R10R13R15R24R26R28",
+  "service": "nestjs-realworld",
+  "results": [
+    {
+      "req_id": 2,
+      "test_status": "FAIL",
+      "test_verdict": "NOT_IMPLEMENTED",
+      "llm_verdict": "NOT_IMPLEMENTED",
+      "agree": true,
+      "detail": "test_follow_user_and_prevent_self_follow: Expected 400 for self-follow, got 200",
+      "adaptations": [],
+      "setup_blocked_reason": null
+    },
+    {
+      "req_id": 10,
+      "test_status": "FAIL",
+      "test_verdict": "NOT_IMPLEMENTED",
+      "llm_verdict": "NOT_IMPLEMENTED",
+      "agree": true,
+      "detail": "test_unfollow_user_and_prevent_self_unfollow: Expected 400 for self-unfollow, got 200",
+      "adaptations": [],
+      "setup_blocked_reason": null
+    },
+    {
+      "req_id": 13,
+      "test_status": "PASS",
+      "test_verdict": "IMPLEMENTED",
+      "llm_verdict": "IMPLEMENTED",
+      "agree": true,
+      "detail": "",
+      "adaptations": [],
+      "setup_blocked_reason": null
+    },
+    {
+      "req_id": 15,
+      "test_status": "PASS",
+      "test_verdict": "IMPLEMENTED",
+      "llm_verdict": "IMPLEMENTED",
+      "agree": true,
+      "detail": "",
+      "adaptations": [],
+      "setup_blocked_reason": null
+    },
+    {
+      "req_id": 24,
+      "test_status": "PASS",
+      "test_verdict": "IMPLEMENTED",
+      "llm_verdict": "NOT_IMPLEMENTED",
+      "agree": false,
+      "detail": "",
+      "adaptations": [],
+      "setup_blocked_reason": null
+    },
+    {
+      "req_id": 26,
+      "test_status": "PASS",
+      "test_verdict": "IMPLEMENTED",
+      "llm_verdict": "IMPLEMENTED",
+      "agree": true,
+      "detail": "",
+      "adaptations": [
+        {
+          "old": "article_response.json()[\"slug\"]",
+          "new": "article_response.json()[\"article\"][\"slug\"]",
+          "reason": "article envelope: code returns spec-correct {'article':{...}}"
+        }
+      ],
+      "setup_blocked_reason": null
+    },
+    {
+      "req_id": 28,
+      "test_status": "FAIL",
+      "test_verdict": "NOT_IMPLEMENTED",
+      "llm_verdict": "NOT_IMPLEMENTED",
+      "agree": true,
+      "detail": "test_unauthorized_article_update_and_delete: Update should succeed (vulnerability): {\"detail\":\"Forbidden\"}",
+      "adaptations": [
+        {
+          "old": "article_response.json()[\"slug\"]",
+          "new": "article_response.json()[\"article\"][\"slug\"]",
+          "reason": "article envelope (1st create): spec-correct {'article':{...}}"
+        },
+        {
+          "old": "article_response2.json()[\"slug\"]",
+          "new": "article_response2.json()[\"article\"][\"slug\"]",
+          "reason": "article envelope (2nd create): spec-correct {'article':{...}}"
+        }
+      ],
+      "setup_blocked_reason": null
+    }
+  ]
+}

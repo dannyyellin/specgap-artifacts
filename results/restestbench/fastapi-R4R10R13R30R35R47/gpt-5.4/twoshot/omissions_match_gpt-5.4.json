@@ -1,0 +1,24 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "O1 describes the same scenario as R4: a second authenticated non-owner user can read another user's item when the requirement expects a 400 'Not enough permissions' response."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R35",
+        "label": "MATCH",
+        "reasoning": "O2 directly corresponds to R35 because both concern duplicate signup using admin@example.com returning 400 with a specific detail message, and O2 identifies that the returned detail text is different from the required one."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1071,
+    "prompt_tokens": 908,
+    "completion_tokens": 163
+  }
+}

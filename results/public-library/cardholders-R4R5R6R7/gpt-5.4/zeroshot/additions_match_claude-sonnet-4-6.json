@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "R4 removed the string type declaration for id, meaning any string should be valid, but the code instead enforces a stricter MongoDB ObjectId format, which is related to the id field type but describes an added restriction rather than a removal."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements R4-R7 describe or relate to validating that a body id matches a path parameter in PUT requests."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements R4-R7 address filtering behavior on GET /cardholders or the restriction of query fields."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 934,
+    "prompt_tokens": 683,
+    "completion_tokens": 251
+  }
+}

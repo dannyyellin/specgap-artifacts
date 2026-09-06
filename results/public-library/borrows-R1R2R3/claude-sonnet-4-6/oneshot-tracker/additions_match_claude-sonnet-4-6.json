@@ -1,0 +1,48 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "A1 describes an existence check for cardholders which is related to the overdue borrow constraint domain (R2), but the specific behavior of validating existence is distinct from the overdue constraint that was removed."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Validating book existence by ISBN has no correspondence to any of the three removed spec requirements."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Existence checks on PUT requests do not correspond to any of the three removed spec requirements."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R1",
+        "label": "PARTIAL",
+        "reasoning": "The returnDate < loanDate validation is related to the returnDate computation domain (R1), but the specific behavior described is a validation constraint rather than the removal of the computed returnDate formula."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "A5 directly describes accepting returnDate in the POST body, which contradicts R1's removal of the computed returnDate (loanDate + 30 days), indicating the code allows client-supplied returnDate instead of computing it."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rejecting unknown query parameters has no correspondence to any of the three removed spec requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1319,
+    "prompt_tokens": 858,
+    "completion_tokens": 461
+  }
+}

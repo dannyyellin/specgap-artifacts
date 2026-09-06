@@ -1,0 +1,19 @@
+Timestamp: 2026-06-02 09:37:10
+Detector:  claude-sonnet-4-6
+App/Variant/Service: public-library/cardholders-R4R5R6R7/cardholders
+Method:    oneshot-tracker
+
+Tokens: prompt=6302, completion=1197, total=7499
+Additions: 4
+Omissions: 5
+
+  A A1: GET /cardholders filters query parameters against an allowed set (name, email only), silently ignoring any other query fields
+  A A2: PUT /cardholders/{id} rejects the request with 400 if no updatable fields are provided and 'id' is also absent
+  A A3: PUT /cardholders/{id} rejects the request with 400 if the 'id' field in the payload does not match the URL cardholder_id
+  A A4: POST /cardholders validates that 'name' and 'email' are present and are strings, returning 400 if not
+
+  O O1: GET /cardholders does not support filtering by the 'id' field via query string
+  O O2: Fine calculation does not compute days overdue and multiply by FINE_PER_DAY ($0.50); instead it adds 1 per overdue book
+  O O3: Fine calculation does not use loanDate from borrow records; it only checks returnDate for overdue status without computing actual days overdue from today
+  O O4: The service does not return 415 (Unsupported Media Type) when the Content-Type is not application/json on POST and PUT requests
+  O O5: GET /cardholders/fines/{id} does not filter borrow records to only those that are actually overdue relative to today when computing fines — it does not account for books that have been returned (no distinction between active loans and returned loans)

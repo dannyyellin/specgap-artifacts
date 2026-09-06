@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "Both describe reading an item with a second non-owner user's token and expecting denial due to insufficient permissions."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R35",
+        "label": "MATCH",
+        "reasoning": "Both concern signing up with the existing superuser email and verifying the exact duplicate-email error response."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "It concerns password recovery for a non-existent user, which is not covered by any listed reference requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1196,
+    "prompt_tokens": 1015,
+    "completion_tokens": 181
+  }
+}

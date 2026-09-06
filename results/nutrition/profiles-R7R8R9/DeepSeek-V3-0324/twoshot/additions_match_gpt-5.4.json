@@ -1,0 +1,24 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Generating user IDs with a counter in the profile service does not correspond to removing protein exclusion, removing owner-only restriction on GET /profiles, or changing the source of user_id."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Supporting token retrieval from multiple locations concerns how tokens are read, not the removal of protein exclusion, the GET /profiles access restriction, or the rule about user_id no longer coming from token validation."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 643,
+    "prompt_tokens": 486,
+    "completion_tokens": 157
+  }
+}

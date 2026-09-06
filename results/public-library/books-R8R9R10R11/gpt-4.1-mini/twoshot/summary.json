@@ -1,0 +1,16 @@
+{
+  "app": "public-library",
+  "variant": "books-R8R9R10R11",
+  "service": "books",
+  "method": "twoshot",
+  "detector_model": "gpt-4.1-mini",
+  "gen_model": "gpt-5.4",
+  "gen_usage": null,
+  "n_additions": 0,
+  "n_omissions": 3,
+  "usage": {
+    "total_tokens": 6747,
+    "prompt_tokens": 6385,
+    "completion_tokens": 362
+  }
+}

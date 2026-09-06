@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "A1 notes that user_id is correctly taken from token validation (consistent with R9 which says user_id should come from token, not request body), but focuses on the unused counter function rather than directly describing the removal of the request-body sourcing."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R8",
+        "label": "PARTIAL",
+        "reasoning": "A2 describes behavior of the GET /profiles endpoint (related to R8's removal of owner-only restriction), but focuses on equality matching logic rather than the owner-only restriction removal, so it only partially relates to R8."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "A3 directly describes that protein is included in the profileDishes calculation, which contradicts R7's requirement that protein exclusion be removed from the profileDishes calculation."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1029,
+    "prompt_tokens": 741,
+    "completion_tokens": 288
+  }
+}

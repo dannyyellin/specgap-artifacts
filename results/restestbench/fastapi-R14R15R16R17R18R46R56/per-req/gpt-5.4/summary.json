@@ -1,0 +1,44 @@
+{
+  "service": "fastapi",
+  "round": 2,
+  "variant": "fastapi-R14R15R16R17R18R46R56",
+  "model": "gpt-5.4",
+  "timestamp": "2026-06-22 18:24:26",
+  "total_requirements": 63,
+  "removed_requirements": [
+    14,
+    15,
+    16,
+    17,
+    18,
+    46,
+    56
+  ],
+  "n_removed": 7,
+  "n_implemented": 52,
+  "n_not_implemented": 11,
+  "n_parse_errors": 0,
+  "total_omissions_reported": 17,
+  "total_tokens": 307417,
+  "removed_not_implemented": [
+    14,
+    15,
+    16,
+    17,
+    18,
+    56
+  ],
+  "removed_implemented": [
+    46
+  ],
+  "kept_not_implemented": [
+    19,
+    25,
+    31,
+    55,
+    62
+  ],
+  "om_recall": 0.8571,
+  "ad_recall": 0.1429,
+  "fp_rate_on_kept": 0.0893
+}

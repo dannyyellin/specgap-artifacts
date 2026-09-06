@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 describes storing a 'store' field unconditionally, which does not correspond to any of the three spec requirements about removed pet selection, removed DELETE step, or removed purchase-id uniqueness."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A2 describes storing a 'pet-name' field unconditionally, which does not correspond to any of the three spec requirements listed."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A3 describes generating a separate numeric transaction 'id' field, which does not correspond to any of the three spec requirements listed."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A4 describes returning 401 for non-owner users on /transactions endpoints, which does not correspond to any of the three spec requirements about removed pet selection, removed DELETE step, or removed purchase-id uniqueness."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A5 describes returning an empty array for invalid query parameters on /transactions, which does not correspond to any of the three spec requirements listed."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1205,
+    "prompt_tokens": 804,
+    "completion_tokens": 401
+  }
+}

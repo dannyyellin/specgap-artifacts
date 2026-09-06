@@ -1,0 +1,48 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R11",
+        "label": "MATCH",
+        "reasoning": "It describes removal of the one-rating-per-user-per-dish constraint by noting duplicate ratings are allowed."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "It states that the rating value is not validated as an integer between 1 and 5, which is exactly the removed rating range/type constraint."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "It states that POST /ratings does not enforce rating to be an integer between 1 and 5, matching the removed rating constraint."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R11",
+        "label": "MATCH",
+        "reasoning": "It describes failure to reject a second rating by the same user for the same dish, which is the removed one-rating-per-user-per-dish constraint."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns ownership verification on delete, which is different from any of the listed removed constraints."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This discusses GET /ratings filtering behavior, which does not correspond to any reference requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1101,
+    "prompt_tokens": 729,
+    "completion_tokens": 372
+  }
+}

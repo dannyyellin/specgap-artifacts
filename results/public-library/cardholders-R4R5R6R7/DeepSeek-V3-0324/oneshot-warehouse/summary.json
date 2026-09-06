@@ -1,0 +1,16 @@
+{
+  "app": "public-library",
+  "variant": "cardholders-R4R5R6R7",
+  "service": "cardholders",
+  "method": "oneshot-warehouse",
+  "detector_model": "DeepSeek-V3-0324",
+  "gen_model": "gpt-5.4",
+  "gen_usage": null,
+  "n_additions": 2,
+  "n_omissions": 4,
+  "usage": {
+    "total_tokens": 6594,
+    "prompt_tokens": 6022,
+    "completion_tokens": 572
+  }
+}

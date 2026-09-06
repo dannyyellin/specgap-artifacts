@@ -1,0 +1,96 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about MongoDB host configuration, which does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about docker-compose service naming, which does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O3 describes that DELETE /pet-types/{id} allows deletion even when pets exist, which directly corresponds to R5's removal of the 'cannot delete pet-type if it has pets' constraint."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O4 describes that DELETE /pet-types/{id} does not return 400 when pets exist, which is the same behavior as R5's removal of the constraint preventing deletion when pets exist."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about POST /pet-types/{id}/pets returning 404 for non-existent pet-type, which does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "O6 describes that GET /pet-types/{id}/pets does not support birthdateGT and birthdateLT query parameters, which directly matches R7's removal of birthdate query filtering."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "O7 describes that strict birthdate filtering for birthdateGT and birthdateLT is not implemented, which directly matches R7's removal of birthdate query filtering."
+      },
+      {
+        "detection_id": "O8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about handling malformed query strings returning empty arrays, which does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O9",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "O9 describes that attributes are not derived from 'temperament'/'group_behavior' with the required precedence, which directly matches R4's removal of temperament/group_behavior to attributes extraction rules."
+      },
+      {
+        "detection_id": "O10",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "O10 describes incorrect splitting of attribute text, which is related to R4's removal of temperament/group_behavior extraction rules, but focuses on the splitting mechanism rather than the field selection."
+      },
+      {
+        "detection_id": "O11",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "O11 describes missing lifespan defaulting to 0 instead of null, which is related to R6's removal of lifespan range handling, but focuses on the missing value default rather than range/extraction logic."
+      },
+      {
+        "detection_id": "O12",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "O12 describes lifespan being exposed as 0 instead of null when missing, which is related to R6's removal of lifespan range handling, but focuses on serialization of missing values rather than range extraction."
+      },
+      {
+        "detection_id": "O13",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "O13 partially overlaps with R4 in that it describes incorrect extraction of temperament/group_behavior from the Ninja API, but also covers family, genus, and lifespan fields beyond R4's scope."
+      },
+      {
+        "detection_id": "O13",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "O13 partially overlaps with R6 in that it describes incorrect lifespan extraction from the Ninja API response structure, but covers more fields than just lifespan."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2623,
+    "prompt_tokens": 1481,
+    "completion_tokens": 1142
+  }
+}

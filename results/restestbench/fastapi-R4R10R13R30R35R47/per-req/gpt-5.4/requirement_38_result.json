@@ -1,0 +1,18 @@
+{
+  "req_id": 38,
+  "requirement_vague": "Verify an admin cannot change a user's email to an email already used by another user. Admin credentials: (admin@example.com / password123)",
+  "requirement_precise": "Register two distinct users via the public signup operation, each with a different email and password. Authenticate as the superuser (admin@example.com / password123) to obtain an access token. Using the superuser access token, attempt to update the first registered user's email (update by id) so that it becomes the second user's email. Verify the response status is 409. Verify the response body contains a \"detail\" field equal to \"User with this email already exists\".",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": "POST /api/v1/users/signup, POST /api/v1/login/access-token, PATCH /api/v1/users/{user_id} in update_user_by_id, plus startup init_superuser",
+    "code_reference": "FIRST_SUPERUSER = \"admin@example.com\"\nFIRST_SUPERUSER_PASSWORD = \"password123\"\n...\nif user_in.email and user_in.email != user.email:\n    existing = session.exec(select(User).where(User.email == user_in.email)).first()\n    if existing:\n        raise HTTPException(status_code=409, detail=\"User with this email already exists\")",
+    "reasoning": "The code seeds the superuser with the required credentials at startup, provides login to obtain an access token, and the admin-only PATCH /api/v1/users/{user_id} endpoint explicitly checks whether the requested new email already belongs to any existing user. If so, it returns HTTP 409 with detail exactly equal to \"User with this email already exists\"."
+  },
+  "usage": {
+    "total_tokens": 6018,
+    "prompt_tokens": 5807,
+    "completion_tokens": 211
+  },
+  "parse_error": false
+}

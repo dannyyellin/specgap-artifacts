@@ -1,0 +1,85 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "DELETE /api/articles/{slug}/comments/{id} returns {\"status\": \"ok\"} instead of a simple success response",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification only states the response status should be 200. The code returns {\"status\": \"ok\"} which is an implementation detail not required by the specification."
+      },
+      {
+        "id": "A2",
+        "description": "POST /api/articles/{slug}/comments returns the full article object with comments array rather than just the comment",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification says 'Verify the response article has comments array with length >= 1', which implies the response wraps the article. However, the standard RealWorld spec returns a single comment object wrapped in {\"comment\": {...}}. The code returns the full article with embedded comments, which is an unusual implementation choice not clearly required."
+      },
+      {
+        "id": "A3",
+        "description": "register endpoint returns 422 with separate error messages for duplicate email vs duplicate username, rather than a combined 'Username and email must be unique' message",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification states the response should contain 'Username and email must be unique' for both duplicate username and duplicate email cases, but the code returns separate field-specific error messages ('has already been taken') with status 422 instead of 400."
+      },
+      {
+        "id": "A4",
+        "description": "The code checks for duplicate email before duplicate username in the registration endpoint",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification does not prescribe the order of uniqueness checks, this is an implementation detail, but the error response format differs from what the spec requires."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "POST /api/users returns 422 with field-specific errors instead of 400 with 'Username and email must be unique' for duplicate username/email",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The specification states: 'Verify the response status is 400. Verify the response contains \"Username and email must be unique\"' for both duplicate username and duplicate email cases. The code returns 422 with separate field-specific messages."
+      },
+      {
+        "id": "O2",
+        "description": "GET /api/articles does not support filtering by 'tag' query parameter",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification requires GET /api/articles?tag=javascript to filter articles by tag, returning only articles with that tag. The code's list_articles function only supports 'author', 'limit', and 'offset' query parameters, with no 'tag' filtering."
+      },
+      {
+        "id": "O3",
+        "description": "GET /api/articles/feed endpoint is not implemented",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification requires GET /api/articles/feed to return articles from followed authors, with support for limit and offset pagination. No such endpoint exists in the code."
+      },
+      {
+        "id": "O4",
+        "description": "DELETE /api/users/{email} endpoint is not implemented",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification references DELETE /api/users/orphanauthor1@test.com and expects a 500 response due to FK constraint. No user deletion endpoint exists in the code."
+      },
+      {
+        "id": "O5",
+        "description": "JWT token payload does not include 'id', 'username', and 'email' fields",
+        "category": "COMPUTED_VALUES",
+        "reasoning": "The specification states: 'Verify the payload contains: id matching the user's id, username equal to \"jwtuser1\", email equal to \"jwtuser1@test.com\"'. The code's create_token function only includes 'sub' (user id as string) and 'exp', omitting 'username' and 'email' from the payload."
+      },
+      {
+        "id": "O6",
+        "description": "GET /api/articles/feed is missing, so feed pagination (limit/offset) is not implemented",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification requires the feed endpoint to support limit and offset query parameters and return only articles from followed authors, with correct articlesCount. This entire feature is absent."
+      },
+      {
+        "id": "O7",
+        "description": "list_articles does not filter by tag even though the spec requires GET /api/articles?tag=<tagname> to work",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification explicitly tests GET /api/articles?tag=javascript, GET /api/articles?tag=testing, and GET /api/articles?tag=nonexistent. The code does not accept or process a 'tag' query parameter."
+      },
+      {
+        "id": "O8",
+        "description": "The 'tag' query parameter is not declared in the list_articles function signature",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "Since the tag filtering feature is entirely absent, the query parameter is never declared or validated, meaning requests with ?tag= are silently ignored."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 13946,
+    "prompt_tokens": 12635,
+    "completion_tokens": 1311
+  }
+}

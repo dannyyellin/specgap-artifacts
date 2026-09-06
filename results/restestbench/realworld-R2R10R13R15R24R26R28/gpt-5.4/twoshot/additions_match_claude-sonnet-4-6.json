@@ -1,0 +1,48 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements mention or test Bearer token format; they only use Token format implicitly."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The spec requirements do not prohibit extra fields in article responses; they only verify specific fields, so returning extra fields is not a mismatch with any requirement."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed spec requirements address the presence or absence of an 'id' field in user response bodies."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed spec requirements mention a GET /api/tags endpoint."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed spec requirements mention a root GET / endpoint."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed spec requirements test or describe the behavior of article authors deleting comments they did not author."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2388,
+    "prompt_tokens": 1996,
+    "completion_tokens": 392
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "A1 describes the code accepting client-supplied 'publisher' and 'publishedDate' instead of fetching them from the Google Books API, which directly contradicts R10's removal of Google Books API integration for those fields."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "A2 describes the PUT endpoint allowing direct client updates of 'publisher' and 'publishedDate' rather than sourcing them from the Google Books API, which is the behavior change described in R10."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements R8\u2013R11 address validation of an 'id' field in the PUT request body matching the path parameter."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 986,
+    "prompt_tokens": 716,
+    "completion_tokens": 270
+  }
+}

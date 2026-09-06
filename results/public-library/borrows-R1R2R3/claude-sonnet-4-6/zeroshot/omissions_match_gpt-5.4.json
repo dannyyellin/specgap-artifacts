@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O1 describes the overdue-books checkout blocking rule with 400 response, which is exactly the behavior removed in R2."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O2 describes accepting a client-supplied returnDate instead of computing loanDate + 30 days, which is the same return-date computation removed in R1."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R1",
+        "label": "MATCH",
+        "reasoning": "O3 states that the service does not compute returnDate as loanDate + 30 days, matching the behavior removed in R1."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 865,
+    "prompt_tokens": 657,
+    "completion_tokens": 208
+  }
+}

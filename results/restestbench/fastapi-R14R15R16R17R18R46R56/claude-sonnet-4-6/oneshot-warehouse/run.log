@@ -1,0 +1,17 @@
+Timestamp: 2026-06-02 09:34:10
+Detector:  claude-sonnet-4-6
+Service:   fastapi  Round: 2  Removals: [14, 15, 16, 17, 18, 46, 56]
+Method:    oneshot-warehouse
+
+Tokens: prompt=13479, completion=2159, total=15638
+Additions: 0
+Omissions: 8
+
+  O O1: No POST /api/v1/password-recovery/{email} endpoint is implemented
+  O O2: No POST /api/v1/reset-password/ endpoint is implemented
+  O O3: No GET /api/v1/login/test-token (or equivalent test token) endpoint is implemented
+  O O4: Password recovery does not send an actual email to the user
+  O O5: No validation or 404 response for password recovery of a non-existent user email
+  O O6: No invalid-token handling returning HTTP 400 with detail 'Invalid token' on reset-password
+  O O7: No new_password length validation (min 8 chars) on the reset-password endpoint returning 422
+  O O8: No mechanism for superuser to retrieve password-recovery HTML/token content for a given user's email

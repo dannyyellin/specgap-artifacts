@@ -1,0 +1,12 @@
+Timestamp: 2026-06-01 20:54:35
+Detector:  gpt-4.1-mini
+App/Variant/Service: public-library/books-R8R9R10R11/books
+Method:    twoshot
+
+Tokens: prompt=6385, completion=362, total=6747
+Additions: 0
+Omissions: 3
+
+  O O1: POST /books does not invoke the Google Books API to obtain 'publisher' and 'publishedDate' fields based on the ISBN number
+  O O2: POST /books does not set 'publisher' and 'publishedDate' to empty string if Google Books API does not contain an entry for these fields
+  O O3: GET /books supports filtering by any book field, including 'publisher' and 'publishedDate', but the specification only requires filtering by 'field=value' without specifying these fields explicitly

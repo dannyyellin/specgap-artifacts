@@ -1,0 +1,22 @@
+{
+  "req_id": 43,
+  "requirement_vague": "Verify a superuser (username 'admin@example.com' and password 'password123') cannot delete their own account by their own id.",
+  "requirement_precise": "Authenticate as the existing superuser (username 'admin@example.com' and password 'password123') to obtain an access token. Use that access token to retrieve the current authenticated user's details and obtain the user's id. Using the same superuser access token, attempt to delete the user by id. Verify the response status is 403. Verify the response JSON 'detail' field equals 'Super users are not allowed to delete themselves'.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": [
+      "POST /api/v1/login/access-token",
+      "GET /api/v1/users/me",
+      "DELETE /api/v1/users/{user_id}"
+    ],
+    "code_reference": "FIRST_SUPERUSER = \"admin@example.com\"\nFIRST_SUPERUSER_PASSWORD = \"password123\"\n...\nif current_user.is_superuser:\n    if current_user.id == user_id:\n        raise HTTPException(status_code=403, detail=\"Super users are not allowed to delete themselves\")",
+    "reasoning": "The startup initialization creates the existing superuser with username admin@example.com and password password123. After authenticating via the access-token endpoint and retrieving the current user's id from /users/me, deleting that same id through DELETE /users/{user_id} returns HTTP 403 with detail exactly 'Super users are not allowed to delete themselves'."
+  },
+  "usage": {
+    "total_tokens": 5976,
+    "prompt_tokens": 5797,
+    "completion_tokens": 179
+  },
+  "parse_error": false
+}

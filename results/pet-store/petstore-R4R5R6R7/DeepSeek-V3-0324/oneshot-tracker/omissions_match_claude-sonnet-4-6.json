@@ -1,0 +1,48 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of the 'cannot delete pet-type if it has pets' constraint, matching R5 exactly."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "O2 describes the absence of birthdateGT/birthdateLT query parameter filtering, which matches R7's removal of birthdate query filtering."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 concerns a missing PUT /pet-types/{id} route handler returning 405, which does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O4 directly describes the missing logic for handling lifespan ranges by choosing the minimum value, which matches R6's removal of lifespan range handling."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 concerns null handling for the lifespan field when not returned by the Ninja API, which is not covered by any of the reference requirements."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "O6 describes incorrect attribute extraction (splitting on commas, not removing punctuation) instead of splitting on whitespace and removing punctuation, which matches R4's removal of temperament/group_behavior attribute extraction rules."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1294,
+    "prompt_tokens": 820,
+    "completion_tokens": 474
+  }
+}

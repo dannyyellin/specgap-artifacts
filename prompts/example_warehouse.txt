@@ -1,0 +1,126 @@
+Below is a partial specification for a "warehouse" microservice in a supply-chain
+application, followed by a code excerpt, and the expected gap analysis.
+
+SPECIFICATION EXCERPT:
+  The warehouse service manages inventory items. Each item has fields: id, sku,
+  name, quantity_on_hand, reorder_point, supplier_id, and last_restocked.
+
+  POST /items creates an inventory item. Required fields: sku, name,
+  quantity_on_hand, supplier_id, reorder_point. The last_restocked field is
+  initially set to null.
+
+  GET /items returns all items. Supports query parameter "supplier_id" to filter.
+
+  PUT /items/{id}/receive records a received shipment. The request body includes
+  "quantity". The quantity_on_hand is increased by the given amount and
+  last_restocked is set to today's date.
+
+  PUT /items/{id}/dispatch records outgoing stock. The request body includes
+  "quantity". The quantity_on_hand is decreased. The dispatch must be rejected
+  if the requested quantity exceeds quantity_on_hand.
+
+  The purchasing service should be notified whenever an item's quantity_on_hand
+  falls below its reorder_point, so it can initiate a restock order.
+
+  The supplier-directory service manages supplier records. Warehouse should
+  verify that supplier_id refers to an active supplier before creating an item.
+
+CODE EXCERPT:
+  @app.route('/items', methods=['POST'])
+  def create_item():
+      data = request.get_json()
+      item = {
+          'sku': data.get('sku'),
+          'name': data.get('name'),
+          'quantity_on_hand': data.get('quantity_on_hand'),
+          'reorder_point': data.get('reorder_point'),
+          'supplier_id': data.get('supplier_id'),
+          'last_restocked': None,
+          'unit_price': data.get('unit_price', 0)
+      }
+      result = db.items.insert_one(item)
+      item['id'] = str(result.inserted_id)
+      return jsonify(item), 201
+
+  @app.route('/items', methods=['GET'])
+  def list_items():
+      category = request.args.get('category')
+      query = {}
+      if category:
+          query['category'] = category
+      items = list(db.items.find(query))
+      for item in items:
+          item['id'] = str(item.pop('_id'))
+      return jsonify(items), 200
+
+  @app.route('/items/<id>/receive', methods=['PUT'])
+  def receive_shipment(id):
+      data = request.get_json()
+      quantity = data['quantity']
+      db.items.update_one({'_id': ObjectId(id)}, {'$inc': {'quantity_on_hand': quantity}})
+      item = db.items.find_one({'_id': ObjectId(id)})
+      return jsonify(item), 200
+
+  @app.route('/items/<id>/dispatch', methods=['PUT'])
+  def dispatch_stock(id):
+      data = request.get_json()
+      quantity = data['quantity']
+      db.items.update_one({'_id': ObjectId(id)}, {'$inc': {'quantity_on_hand': -quantity}})
+      item = db.items.find_one({'_id': ObjectId(id)})
+      return jsonify(item), 200
+
+EXPECTED ANALYSIS:
+{
+  "additions": [
+    {
+      "id": "A1",
+      "description": "Stores a 'unit_price' field with default 0 on item creation",
+      "category": "DATA_PERSISTENCE",
+      "reasoning": "The specification defines item fields as id, sku, name, quantity_on_hand, reorder_point, supplier_id, and last_restocked. The 'unit_price' field is not mentioned in the specification."
+    },
+    {
+      "id": "A2",
+      "description": "GET /items supports filtering by 'category' query parameter",
+      "category": "REQUEST_VALIDATION",
+      "reasoning": "The specification requires filtering by 'supplier_id', not 'category'. The code implements a filter parameter that is not in the specification."
+    }
+  ],
+  "omissions": [
+    {
+      "id": "O1",
+      "description": "POST /items does not validate that required fields (sku, name, quantity_on_hand, supplier_id, reorder_point) are present in the request body",
+      "category": "REQUEST_VALIDATION",
+      "reasoning": "The specification states these as required fields but the code uses data.get() with no presence check, silently storing None for missing fields."
+    },
+    {
+      "id": "O2",
+      "description": "GET /items does not support filtering by 'supplier_id' query parameter",
+      "category": "REQUEST_VALIDATION",
+      "reasoning": "The specification states GET /items 'supports query parameter supplier_id to filter' but the code only filters by 'category', which is not in the specification."
+    },
+    {
+      "id": "O3",
+      "description": "PUT /items/{id}/receive does not set last_restocked to today's date",
+      "category": "DATA_PERSISTENCE",
+      "reasoning": "The specification states 'last_restocked is set to today's date' when receiving a shipment, but the code only increments quantity_on_hand."
+    },
+    {
+      "id": "O4",
+      "description": "PUT /items/{id}/dispatch does not reject requests where quantity exceeds quantity_on_hand",
+      "category": "BUSINESS_LOGIC",
+      "reasoning": "The specification states 'The dispatch must be rejected if the requested quantity exceeds quantity_on_hand' but the code decrements unconditionally."
+    },
+    {
+      "id": "O5",
+      "description": "Does not notify the purchasing service when quantity_on_hand falls below reorder_point after a dispatch",
+      "category": "EXTERNAL_INTERACTIONS",
+      "reasoning": "The specification states 'The purchasing service should be notified whenever an item's quantity_on_hand falls below its reorder_point' but the code sends no notification."
+    },
+    {
+      "id": "O6",
+      "description": "Does not verify supplier_id against the supplier-directory service before creating an item",
+      "category": "EXTERNAL_INTERACTIONS",
+      "reasoning": "The specification states 'Warehouse should verify that supplier_id refers to an active supplier before creating an item' but the code makes no outbound call."
+    }
+  ]
+}

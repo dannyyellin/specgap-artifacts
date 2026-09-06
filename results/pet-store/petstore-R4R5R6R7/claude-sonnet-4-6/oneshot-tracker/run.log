@@ -1,0 +1,26 @@
+Timestamp: 2026-06-02 09:51:05
+Detector:  claude-sonnet-4-6
+App/Variant/Service: pet-store/petstore-R4R5R6R7/pet-store
+Method:    oneshot-tracker
+
+Tokens: prompt=12215, completion=2271, total=14486
+Additions: 4
+Omissions: 12
+
+  A A1: POST /pet-types rejects payloads that contain any fields other than 'type' (enforces exact key set {'type'})
+  A A2: fetch_pet_type_from_ninja builds 'attributes' from multiple Ninja API fields (slogan, group, color, skin_type, top_speed, diet, main_prey) beyond what the spec requires
+  A A3: PUT /pet-types/{id}/pets/{name} accepts a 'picture' field directly in the payload to update the picture filename
+  A A4: lifespan defaults to 0 when not returned by the Ninja API instead of null
+
+  O O1: DELETE /pet-types/{id} does not check whether there are pets of that type before deleting; it should return 400 if pets exist
+  O O2: DELETE /pet-types/{id} does not require owner authentication — it is missing the 403 response for authenticated non-owners
+  O O3: GET /pet-types/{id}/pets does not return 404 when the pet-type id does not exist; it returns 404 only based on the document lookup but the list_pets function checks doc existence correctly — however the birthdate query filtering is not implemented
+  O O4: attributes field is built by splitting on commas rather than whitespace, and punctuation (other than hyphens) is not stripped
+  O O5: The code reads 'temperament' and 'group_behavior' from characteristics but gives 'temperament' priority over 'group_behavior' incorrectly — it uses both instead of one
+  O O6: MongoDB connection URI uses 'mongo' as the hostname instead of 'mongoPetSt'
+  O O7: POST /pet-types/{id}/pets does not return 404 when the pet-type id does not exist before checking for duplicate pet names — the order is wrong (duplicate name check happens before existence check)
+  O O8: GET /pet-types/{id}/pets/{name} does not return 404 when the pet-type id does not exist (only returns 404 for missing pet name within an existing type)
+  O O9: POST /pet-types/{id}/pets does not check for duplicate pet names returning a specific error — it returns 400 with no message, which may be acceptable, but the spec does not list 409 for duplicate pet names
+  O O10: The /verify endpoint call in verify_owner does not handle the case where the registry returns 503 (service unavailable), mapping it to an appropriate error
+  O O11: PUT /pet-types/{id} is not explicitly returning 405 — the route is not defined, relying on Flask's default 405 handler
+  O O12: lifespan field in serialize_pet_type defaults to 0 instead of null when not present

@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rejecting extra fields in POST /pet-types payloads is unrelated to removing temperament/group_behavior extraction, delete constraints, lifespan parsing, or birthdate query filtering."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Picture-name path-separator validation does not correspond to any of the removed behaviors about attributes extraction, pet-type deletion constraints, lifespan handling, or birthdate filters."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Allowing a raw 'picture' field on pet update is a different input-handling behavior and does not match any listed removed requirement."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Using embedded pet storage inside pet-type documents is a persistence-model choice and does not describe any of the removed specification behaviors."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 947,
+    "prompt_tokens": 679,
+    "completion_tokens": 268
+  }
+}

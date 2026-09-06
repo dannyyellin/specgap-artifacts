@@ -1,0 +1,19 @@
+{
+  "app": "pet-store",
+  "variant": "petstore-R4R5R6R7",
+  "service": "pet-store",
+  "req_id": "R6",
+  "requirement": "When the animals API returns a lifespan range, the minimum value (the first integer appearing in the range string) is used as the lifespan.",
+  "source_headline": "Removed lifespan range handling (\"choose minimum\", \"extract first integer\")",
+  "model": "claude-sonnet-4-6",
+  "pass": 1,
+  "label": "INFERRED",
+  "evidence": "fetch_pet_type_from_ninja function: `nums = re.findall(r\"\\d+\", lifespan_raw)` followed by `if nums: lifespan = int(nums[0])`",
+  "reasoning": "The code uses re.findall to extract all integers from the lifespan string and then takes the first one (nums[0]) as the lifespan value. This directly implements the requirement that the minimum value (first integer appearing in the range string) is used. A test providing a range string like '10-15 years' would yield lifespan=10, which matches the requirement.",
+  "usage": {
+    "total_tokens": 5126,
+    "prompt_tokens": 4964,
+    "completion_tokens": 162
+  },
+  "timestamp": "2026-07-16 15:01:47"
+}

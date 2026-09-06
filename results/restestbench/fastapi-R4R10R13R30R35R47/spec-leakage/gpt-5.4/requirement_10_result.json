@@ -1,0 +1,14 @@
+{
+  "req_id": 10,
+  "requirement_vague": "Delete a none existing item and confirm the API reports 'Item not found'. Admin credentials: (admin@example.com / password123)",
+  "requirement_precise": "Attempt to delete an item using superuser authentication (use superuser credentials admin@example.com / password123) with a non-existent item ID. Verify that the response status code is 404 and the response body contains a 'detail' field with the value 'Item not found'.",
+  "verdict": "SPEC_LEAKED",
+  "spec_evidence": "- \"Authenticate as a superuser (admin@example.com / password123). Attempt to update an item with a non-existent item ID. Verify that the API responds with HTTP status code 404 and the response body contains a 'detail' field with the value 'Item not found'.\"\n- \"Attempt to read an item using a non-existent item ID while authenticated as a superuser (admin@example.com / password123). Verify that the response status code is 404 and the response body contains a 'detail' field with the value 'Item not found'.\"",
+  "reasoning": "The spec explicitly states that when an item ID does not exist, item operations return 404 with detail 'Item not found' in multiple item-operation contexts. From this text alone, a reader could directly infer the same not-found constraint for deleting a non-existent item.",
+  "parse_error": false,
+  "usage": {
+    "total_tokens": 5372,
+    "prompt_tokens": 5184,
+    "completion_tokens": 188
+  }
+}

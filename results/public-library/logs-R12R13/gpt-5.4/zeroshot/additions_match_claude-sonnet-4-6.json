@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Neither R12 nor R13 concern media type validation for POST requests."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Neither R12 nor R13 concern runtime type validation of POST fields."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Neither R12 nor R13 concern filtering behavior on GET /logs query parameters."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Neither R12 nor R13 concern the structure of JSON error response bodies."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Neither R12 nor R13 concern the ID generation scheme for log records."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1079,
+    "prompt_tokens": 770,
+    "completion_tokens": 309
+  }
+}

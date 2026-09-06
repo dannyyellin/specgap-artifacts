@@ -1,0 +1,19 @@
+{
+  "app": "pet-store",
+  "variant": "petstore-R4R5R6R7",
+  "service": "pet-store",
+  "req_id": "R5",
+  "requirement": "A pet-type cannot be deleted while it still has pets; such a DELETE request is rejected.",
+  "source_headline": "Removed \"cannot delete pet-type if it has pets\" constraint",
+  "model": "gpt-5.4",
+  "pass": 2,
+  "label": "PARTIAL",
+  "evidence": "The DELETE route exists at `@app.route(\"/pet-types/<int:pet_id>\", methods=[\"DELETE\"])` in `delete_pet_type()`, but it directly executes `pet_types_collection.delete_one({\"id\": pet_id})` and returns `204` on success, with no check of the document's `pets` array before deletion.",
+  "reasoning": "There is code addressing deletion of pet-types, so this is not GAP. However, the requirement specifically says a pet-type cannot be deleted while it still has pets and such a request must be rejected; this handler deletes unconditionally whenever the pet-type exists. A test creating a pet under a pet-type and then deleting that pet-type would fail the requirement, so the implementation is only partial.",
+  "usage": {
+    "total_tokens": 4205,
+    "prompt_tokens": 4027,
+    "completion_tokens": 178
+  },
+  "timestamp": "2026-07-16 15:01:25"
+}

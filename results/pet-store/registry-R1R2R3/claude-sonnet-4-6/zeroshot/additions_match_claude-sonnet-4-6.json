@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 describes bcrypt cost factor usage, which does not correspond to any of the three spec requirements about password validation rules, anti-enumeration, or owner pre-registration."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R3",
+        "label": "PARTIAL",
+        "reasoning": "A2 relates to owner privilege management during password changes, which is tangentially related to R3's removal of owner pre-registration on initialization, but the specific behavior (revoking privileges on password change) does not directly describe the same behavior as removing owner pre-registration."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R3",
+        "label": "PARTIAL",
+        "reasoning": "A3 describes a mechanism where POST /users can create a privileged owner user by matching hardcoded credentials, which partially relates to R3's removal of owner pre-registration on initialization, but the behavior is about registration-time privilege granting rather than initialization seeding."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R3",
+        "label": "PARTIAL",
+        "reasoning": "A4 describes init_db resetting the owner's password on restart, which is related to owner pre-registration on initialization (R3), but the specific behavior of preventing persistent password changes is not exactly the same as simply removing owner pre-registration."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1225,
+    "prompt_tokens": 832,
+    "completion_tokens": 393
+  }
+}

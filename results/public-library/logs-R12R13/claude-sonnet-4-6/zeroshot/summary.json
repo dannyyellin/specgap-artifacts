@@ -1,0 +1,16 @@
+{
+  "app": "public-library",
+  "variant": "logs-R12R13",
+  "service": "logs",
+  "method": "zeroshot",
+  "detector_model": "claude-sonnet-4-6",
+  "gen_model": "gpt-5.4",
+  "gen_usage": null,
+  "n_additions": 2,
+  "n_omissions": 3,
+  "usage": {
+    "total_tokens": 4910,
+    "prompt_tokens": 4168,
+    "completion_tokens": 742
+  }
+}

@@ -1,0 +1,16 @@
+Timestamp: 2026-06-02 09:45:57
+Detector:  claude-sonnet-4-6
+App/Variant/Service: nutrition/ratings-R10R11R12/ratings
+Method:    oneshot-tracker
+
+Tokens: prompt=7611, completion=1773, total=9384
+Additions: 2
+Omissions: 4
+
+  A A1: Verifies that the dish exists by calling the dishes microservice (GET /dishes/{id}) before creating or updating a rating
+  A A2: Stores 'rating' as a float (rounded to 2 decimal places) rather than as an integer
+
+  O O1: POST /ratings does not validate that 'rating' is an integer between 1 and 5
+  O O2: PUT /ratings/{id} does not validate that 'rating' is an integer between 1 and 5
+  O O3: POST /ratings does not return a clear, specific error when a user attempts to rate the same dish twice; the duplicate is caught by a generic PyMongoError handler returning 400
+  O O4: POST /ratings response body is not specified by the spec as avg_rating; the spec does not define what POST returns beyond creating the resource, and the code returns avg_rating format rather than the created rating document

@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns deleting article comments, while none of the listed requirements cover comment deletion behavior."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns the response shape for creating article comments, which is not addressed by any listed requirement."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R25",
+        "label": "PARTIAL",
+        "reasoning": "It targets the same JWT payload verification behavior as R25, but describes an implementation that omits required fields rather than matching the specified payload."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "It addresses the same duplicate-user registration validation as R9, but with different status code and error message details than required."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2038,
+    "prompt_tokens": 1791,
+    "completion_tokens": 247
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "It directly concerns removal of 415 Unsupported Media Type as an error code, even though it cites a specific endpoint."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "It also directly concerns use of 415 Unsupported Media Type, matching the requirement that 415 was removed from general error codes."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about query filtering support and does not correspond to any reference requirement."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "It explicitly describes the removed fine computation formula of $0.50 per day times days overdue."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "It directly addresses the removed float type declaration for fineAmount."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1068,
+    "prompt_tokens": 778,
+    "completion_tokens": 290
+  }
+}

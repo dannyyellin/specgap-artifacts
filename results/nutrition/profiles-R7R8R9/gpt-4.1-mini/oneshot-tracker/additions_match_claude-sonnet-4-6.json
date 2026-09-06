@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R8",
+        "label": "PARTIAL",
+        "reasoning": "A1 relates to filtering profiles by user_id on GET /profiles, which is adjacent to R8's removal of owner-only restriction, but A1 specifically describes a query parameter addition not directly described by R8."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "A2 describes multiple token locations including request body, which partially relates to R9's removal of the requirement that user_id comes from token validation rather than request body, but A2 is about token location flexibility rather than user_id sourcing."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The error response JSON structure with an 'error' field does not correspond to any of the three spec requirements listed."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rounding floating point nutritional values to two decimal places does not correspond to any of the three spec requirements listed."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1021,
+    "prompt_tokens": 686,
+    "completion_tokens": 335
+  }
+}

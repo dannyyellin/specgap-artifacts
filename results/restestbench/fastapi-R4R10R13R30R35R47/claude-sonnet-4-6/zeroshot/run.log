@@ -1,0 +1,13 @@
+Timestamp: 2026-06-02 09:29:28
+Detector:  claude-sonnet-4-6
+Service:   fastapi  Round: 1  Removals: [4, 10, 13, 30, 35, 47]
+Method:    zeroshot
+
+Tokens: prompt=13166, completion=1505, total=14671
+Additions: 1
+Omissions: 2
+
+  A A1: The GET /items/ endpoint is accessible to any authenticated active user, not just superusers. The specification only describes superusers retrieving the item list.
+
+  O O1: The GET /items/{item_id} endpoint does not check ownership permissions. A non-superuser can read items they do not own, but the spec requires HTTP 400 with detail 'Not enough permissions' in that case.
+  O O2: The POST /api/v1/users/signup endpoint returns error detail 'User with this email already exists' for duplicate emails, but the specification requires 'The user with this email already exists in the system'.

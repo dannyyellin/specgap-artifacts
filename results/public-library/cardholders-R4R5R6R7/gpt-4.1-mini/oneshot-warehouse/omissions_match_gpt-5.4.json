@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O1 explicitly discusses the fine computation formula using days overdue times $0.50, which is the same behavior referenced in R6."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O2 also centers on the removed fine computation formula, stating the fine should be based on days overdue times 0.50 rather than merely counting overdue books."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 concerns validation of returnDate fields from the Borrows service, which is not described by any reference requirement."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 is about whether PUT allows changing the id field, which does not correspond to any listed reference requirement."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 concerns filtering cardholders by id query parameter, unrelated to the removed field declarations, error code, fine formula, or cross-service call."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1173,
+    "prompt_tokens": 848,
+    "completion_tokens": 325
+  }
+}

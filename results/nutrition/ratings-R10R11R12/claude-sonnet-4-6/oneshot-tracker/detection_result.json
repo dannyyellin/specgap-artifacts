@@ -1,0 +1,49 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "Verifies that the dish exists by calling the dishes microservice (GET /dishes/{id}) before creating or updating a rating",
+        "category": "EXTERNAL_INTERACTIONS",
+        "reasoning": "The specification does not require the ratings service to validate dish existence against the dishes microservice before POST or PUT operations. The spec only describes the rating fields and constraints but does not mandate a cross-service existence check."
+      },
+      {
+        "id": "A2",
+        "description": "Stores 'rating' as a float (rounded to 2 decimal places) rather than as an integer",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The specification defines 'rating' as 'an integer between 1 and 5'. The code converts it via round2() to a float before storing."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "POST /ratings does not validate that 'rating' is an integer between 1 and 5",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states the rating must be 'an integer between 1 and 5'. The code converts the value to a float and does not check that it falls within the range [1, 5] or that it is a whole number."
+      },
+      {
+        "id": "O2",
+        "description": "PUT /ratings/{id} does not validate that 'rating' is an integer between 1 and 5",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The specification states the rating field in a PUT request must be 'an integer between 1 and 5'. The code converts to float and does not enforce the valid range or integer constraint."
+      },
+      {
+        "id": "O3",
+        "description": "POST /ratings does not return a clear, specific error when a user attempts to rate the same dish twice; the duplicate is caught by a generic PyMongoError handler returning 400",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The specification explicitly states 'The POST /ratings request is only allowed once for a given user for a given dish'. While the unique index prevents the duplicate, the error handling conflates this business rule violation with other database errors under a generic 400 response, making the enforcement implicit and fragile."
+      },
+      {
+        "id": "O4",
+        "description": "POST /ratings response body is not specified by the spec as avg_rating; the spec does not define what POST returns beyond creating the resource, and the code returns avg_rating format rather than the created rating document",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The general guidelines state POST returns 201 with the created resource. The spec for POST /ratings says it 'creates a new rating for the dish'. The code returns a {dish_id, avg_rating} structure (the GET format) rather than the newly created rating record."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 9384,
+    "prompt_tokens": 7611,
+    "completion_tokens": 1773
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O1 discusses authentication/401 behavior which does not correspond to R8, R9, or R10."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 discusses 403 authorization behavior which does not correspond to R8, R9, or R10."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 discusses 400 error for no available pet which does not correspond to R8, R9, or R10."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "O4 directly describes the omission of the DELETE pet from store after purchase step, matching R9 exactly."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 discusses GET /transactions query parameter conjunction filtering which does not correspond to R8, R9, or R10."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 discusses GET /transactions/{id} 400 error behavior which does not correspond to R8, R9, or R10."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O7 discusses 405 method not allowed behavior which does not correspond to R8, R9, or R10."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1403,
+    "prompt_tokens": 913,
+    "completion_tokens": 490
+  }
+}

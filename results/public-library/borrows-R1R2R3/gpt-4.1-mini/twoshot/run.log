@@ -1,0 +1,19 @@
+Timestamp: 2026-06-01 20:53:15
+Detector:  gpt-4.1-mini
+App/Variant/Service: public-library/borrows-R1R2R3/borrows
+Method:    twoshot
+
+Tokens: prompt=7454, completion=850, total=8304
+Additions: 4
+Omissions: 5
+
+  A A1: Supports filtering borrows by 'loanDate', 'returnDate', and 'id' query parameters in GET /borrows
+  A A2: Validates that 'returnDate' is not earlier than 'loanDate' on POST and PUT requests
+  A A3: Validates that no unknown fields are present in the JSON payload on POST and PUT
+  A A4: Checks that the remote cardholder and book resources exist by making GET requests to Cardholders and Books microservices
+
+  O O1: Does not compute 'returnDate' as loanDate + 30 days on POST /borrows
+  O O2: Does not reject POST /borrows if the cardholder has 2 or more overdue books
+  O O3: Does not return 405 Method Not Allowed for unsupported HTTP methods on endpoints
+  O O4: Does not validate that 'cardholderId', 'ISBN', and 'loanDate' are present and of correct type in PUT requests
+  O O5: Does not handle or validate the 'id' field in POST requests as per specification

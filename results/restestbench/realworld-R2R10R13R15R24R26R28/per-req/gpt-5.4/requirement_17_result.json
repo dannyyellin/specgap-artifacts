@@ -1,0 +1,22 @@
+{
+  "req_id": 17,
+  "requirement_vague": "Verify article creation correctly associates the article with its author",
+  "requirement_precise": "Create user1 (username: 'articleauthor1', email: 'articleauthor1@test.com', password: 'pass123') and user2 (username: 'articleauthor2', email: 'articleauthor2@test.com', password: 'pass123'). User1 creates article 'User1 Article'. User2 creates article 'User2 Article'. GET /api/articles?author=articleauthor1. Verify articlesCount is 1 and contains only 'User1 Article'. GET /api/articles?author=articleauthor2. Verify articlesCount is 1 and contains only 'User2 Article'. This tests the author-article relationship established during article creation.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": [
+      "POST /api/articles (create_article)",
+      "GET /api/articles (list_articles)",
+      "article_dict"
+    ],
+    "code_reference": "article = Article(..., author_id=current_user.id)\n...\nif author:\n    author_user = session.exec(select(User).where(User.username == author)).first()\n    if author_user:\n        articles = [a for a in articles if a.author_id == author_user.id]",
+    "reasoning": "Article creation stores the authenticated user's id in Article.author_id, establishing the author-article relationship. Listing articles by author resolves the username to a user record and filters articles by matching author_id, while article_dict returns the associated author's username, so each user's query returns only that user's articles."
+  },
+  "usage": {
+    "total_tokens": 5487,
+    "prompt_tokens": 5327,
+    "completion_tokens": 160
+  },
+  "parse_error": false
+}

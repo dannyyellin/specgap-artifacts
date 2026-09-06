@@ -1,0 +1,72 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No listed requirement concerns forbidding superusers from deleting their own account."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No listed requirement covers changing one's own password to the same value via PATCH /api/v1/users/me/password."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R17",
+        "label": "PARTIAL",
+        "reasoning": "R17 expects a successful password reset response with message 'Password updated successfully', but A3 refers to a different endpoint for changing the current user's password."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the listed requirements mention POST /api/v1/users/ requiring superuser authentication."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No listed requirement is about listing users with 'data' and 'count' fields."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No listed requirement is about listing items with 'data' and 'count' fields."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": "R56",
+        "label": "MATCH",
+        "reasoning": "R56 specifically depends on password length validation causing a 422 error when new_password has only 7 characters, which A7 describes."
+      },
+      {
+        "detection_id": "A8",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Although several requirements use email inputs, none explicitly test email format validation behavior."
+      },
+      {
+        "detection_id": "A9",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No listed requirement concerns title length validation for items."
+      },
+      {
+        "detection_id": "A10",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No listed requirement concerns maximum length validation for item descriptions or user full_name."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2031,
+    "prompt_tokens": 1478,
+    "completion_tokens": 553
+  }
+}

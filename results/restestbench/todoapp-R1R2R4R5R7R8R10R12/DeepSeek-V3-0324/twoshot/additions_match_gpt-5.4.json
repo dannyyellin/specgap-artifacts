@@ -1,0 +1,18 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "R10 concerns rejecting a PUT when the body id differs from the route id, while A1 only notes that the update model has an optional id field and does not describe the required 400 mismatch behavior."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 972,
+    "prompt_tokens": 880,
+    "completion_tokens": 92
+  }
+}

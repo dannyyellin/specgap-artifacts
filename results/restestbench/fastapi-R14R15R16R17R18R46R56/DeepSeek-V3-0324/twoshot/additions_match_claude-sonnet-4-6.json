@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements mention or relate to a 'full_name' field in user models."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements mention a PATCH /api/v1/users/me/password endpoint for direct password updates by authenticated users."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R46",
+        "label": "PARTIAL",
+        "reasoning": "R46 tests that after deleting a user, their item returns 404, which is consistent with cascade delete behavior, but R46 doesn't explicitly specify cascade deletion as a requirement\u2014it only verifies the item is not found after user deletion."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1425,
+    "prompt_tokens": 1178,
+    "completion_tokens": 247
+  }
+}

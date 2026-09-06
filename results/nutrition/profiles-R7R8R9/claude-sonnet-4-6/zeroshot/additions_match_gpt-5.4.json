@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "A1 says the code takes user_id from the validated token, while R9 requires removing that behavior in favor of not sourcing user_id from token validation."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A2 discusses GET /profiles query filtering semantics, which does not correspond to removing the owner-only restriction on GET /profiles or the other listed requirements."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R7",
+        "label": "PARTIAL",
+        "reasoning": "A3 concerns whether protein is included in profileDishes calculation, but it describes the opposite behavior of R7, which requires protein exclusion to be removed."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 897,
+    "prompt_tokens": 681,
+    "completion_tokens": 216
+  }
+}

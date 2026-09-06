@@ -1,0 +1,14 @@
+{
+  "req_id": 46,
+  "requirement_vague": "When a user deletes their own account, all their items should also be deleted. Admin credentials: admin@example.com / password123",
+  "requirement_precise": "Register a new user via signup and authenticate to get a token. Create an item using that token. Store the item ID from the response. Delete the user's own account via DELETE /api/v1/users/me. Verify 200 status with message 'User deleted successfully'. Login as superuser (admin@example.com / password123) and attempt to GET the item by ID. Verify it returns 404 with detail 'Item not found'.",
+  "verdict": "SPEC_LEAKED",
+  "spec_evidence": "- \"Register a new user via signup and authenticate to get a token. Create an item using that token. Store the item ID from the response. As superuser (admin@example.com / password123), delete the user by ID. Verify 200 status with message 'User deleted successfully'. Using the superuser token, attempt to GET the item by ID. Verify it returns 404 with detail 'Item not found'.\"\n- \"Register a new user via the public signup endpoint using a random email and password. Authenticate by obtaining an access token using the login access-token endpoint with that user's credentials. Use the returned access token to delete the currently authenticated user via the authenticated delete user me endpoint. Verify the delete response status is 200. Verify the response body JSON contains a field \\\"message\\\" equal to \\\"User deleted successfully\\\". Then verify that login with the deleted user's credentials fails.\"",
+  "reasoning": "The spec explicitly states that deleting a user by ID causes that user's item to become unreadable with 'Item not found', which directly conveys deletion of the user's items upon user deletion. Since the spec also separately defines self-deletion of the current user account, a reader can directly infer the same deletion effect should apply when the user deletes their own account.",
+  "parse_error": false,
+  "usage": {
+    "total_tokens": 5372,
+    "prompt_tokens": 5097,
+    "completion_tokens": 275
+  }
+}

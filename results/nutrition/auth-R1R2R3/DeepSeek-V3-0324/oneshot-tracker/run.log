@@ -1,0 +1,18 @@
+Timestamp: 2026-06-02 06:06:01
+Detector:  DeepSeek-V3-0324
+App/Variant/Service: nutrition/auth-R1R2R3/authentication
+Method:    oneshot-tracker
+
+Tokens: prompt=6421, completion=586, total=7007
+Additions: 5
+Omissions: 3
+
+  A A1: Implements a 'round_float' function that is not required by the specification
+  A A2: Implements a 'user_to_response' function that is not required by the specification
+  A A3: Implements a 'get_next_sequence' function for ID generation that is not required by the specification
+  A A4: Implements a 'ensure_indexes' function that is not required by the specification
+  A A5: Implements a 'ensure_owner_user' function that is not required by the specification
+
+  O O1: Does not encrypt passwords as specified in the user document fields description
+  O O2: Does not validate that the owner password is exactly 'owner#pw' as specified
+  O O3: Does not return the exact error message 'successful' for successful registration as specified

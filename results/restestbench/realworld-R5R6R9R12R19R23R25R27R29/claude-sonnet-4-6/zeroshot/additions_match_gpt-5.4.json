@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R9",
+        "label": "PARTIAL",
+        "reasoning": "Both concern duplicate user registration uniqueness validation, but the code behavior uses status 422 and a different error format instead of the spec's required 400 with message 'Username and email must be unique'."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This describes comment deletion behavior, while none of the listed requirements concern deleting comments."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R12",
+        "label": "PARTIAL",
+        "reasoning": "R12 requires filtering articles by the tag query parameter, and this code behavior notes that tag filtering is missing even though the rest of the property discusses unrelated sorting details."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R25",
+        "label": "PARTIAL",
+        "reasoning": "Both address JWT payload contents, but the code only includes 'sub' and 'exp' rather than the spec-required 'id', 'username', and 'email' fields."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2099,
+    "prompt_tokens": 1813,
+    "completion_tokens": 286
+  }
+}

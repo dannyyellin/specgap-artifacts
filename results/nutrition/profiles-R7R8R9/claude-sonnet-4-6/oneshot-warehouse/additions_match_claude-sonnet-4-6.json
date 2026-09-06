@@ -1,0 +1,36 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 describes adding user_id as a filterable query parameter, which does not correspond to any of the three spec requirements about protein exclusion, owner-only restriction removal, or token-based user_id."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A2 describes returning 400 for unrecognized query parameters, which does not correspond to any of the three spec requirements listed."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A3 describes rejecting duplicate profile creation with 400, which does not correspond to any of the three spec requirements listed."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "A4 directly describes the code including protein in the profileDishes query to the dishes service, which contradicts R7's requirement that protein exclusion be removed from the profileDishes calculation."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1042,
+    "prompt_tokens": 716,
+    "completion_tokens": 326
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O1 describes the deleted constraint that prevented deleting a pet-type when pets of that type exist."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O2 directly refers to the removed lifespan range handling rule of choosing the minimum value from a range."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R5",
+        "label": "PARTIAL",
+        "reasoning": "O3 is about the same deleted pet-type-with-pets deletion constraint but adds a specific 400 response detail not stated in the reference."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concerns picture-url validation, which is unrelated to any reference requirement."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 concerns missing lifespan defaulting to null, which is different from the removed lifespan range/first-integer handling in the reference."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R7",
+        "label": "MATCH",
+        "reasoning": "O6 directly describes the removed birthdateGT/birthdateLT query filtering behavior."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1153,
+    "prompt_tokens": 795,
+    "completion_tokens": 358
+  }
+}

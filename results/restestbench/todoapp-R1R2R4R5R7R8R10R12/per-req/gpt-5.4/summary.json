@@ -1,0 +1,40 @@
+{
+  "service": "todoapp",
+  "round": 1,
+  "variant": "todoapp-R1R2R4R5R7R8R10R12",
+  "model": "gpt-5.4",
+  "timestamp": "2026-06-22 18:12:56",
+  "total_requirements": 14,
+  "removed_requirements": [
+    1,
+    2,
+    4,
+    5,
+    7,
+    8,
+    10,
+    12
+  ],
+  "n_removed": 8,
+  "n_implemented": 12,
+  "n_not_implemented": 2,
+  "n_parse_errors": 0,
+  "total_omissions_reported": 2,
+  "total_tokens": 35976,
+  "removed_not_implemented": [
+    2,
+    10
+  ],
+  "removed_implemented": [
+    1,
+    4,
+    5,
+    7,
+    8,
+    12
+  ],
+  "kept_not_implemented": [],
+  "om_recall": 0.25,
+  "ad_recall": 0.75,
+  "fp_rate_on_kept": 0.0
+}

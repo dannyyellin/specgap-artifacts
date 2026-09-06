@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Returning a UserResponse from registration is not described by any listed requirement, which all focus on todo validation, ownership, and not-found behaviors."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R2",
+        "label": "PARTIAL",
+        "reasoning": "This concerns POST /todos creation fields and overlaps with the title-validation requirement, but it describes support for an extra isComplete field rather than the required 400 error for missing title."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A delete response message body is not required by any listed spec item, which only checks delete status codes and resource existence outcomes."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1209,
+    "prompt_tokens": 999,
+    "completion_tokens": 210
+  }
+}

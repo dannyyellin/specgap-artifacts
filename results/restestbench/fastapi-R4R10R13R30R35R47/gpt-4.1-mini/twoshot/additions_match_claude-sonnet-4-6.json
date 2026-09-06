@@ -1,0 +1,24 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements describe listing all items without filtering or access control; the closest requirement (R4) is about reading a specific item with insufficient permissions, not listing all items."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "None of the spec requirements describe a GET /users/ endpoint or retrieving all users, so this code behavior has no matching spec requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1175,
+    "prompt_tokens": 1008,
+    "completion_tokens": 167
+  }
+}

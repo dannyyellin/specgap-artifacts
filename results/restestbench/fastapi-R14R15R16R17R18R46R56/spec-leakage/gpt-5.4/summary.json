@@ -1,0 +1,122 @@
+{
+  "variant": "fastapi-R14R15R16R17R18R46R56",
+  "model": "gpt-5.4",
+  "timestamp": "2026-06-28 19:16:19",
+  "n_removed": 7,
+  "n_spec_leaked": 3,
+  "n_not_leaked": 4,
+  "n_uncertain": 0,
+  "n_parse_errors": 0,
+  "spec_leaked_ids": [
+    14,
+    46,
+    56
+  ],
+  "not_leaked_ids": [
+    15,
+    16,
+    17,
+    18
+  ],
+  "uncertain_ids": [],
+  "per_requirement": [
+    {
+      "req_id": 14,
+      "requirement_vague": "Verify the test token endpoint works and its response includes the user's email.",
+      "requirement_precise": "Authenticate as a superuser using existing credentials (admin@example.com / password123) to obtain an access token, then use this access token to call the test token endpoint. Verify the response status code is 200 and that the response JSON contains the field 'email' with value 'admin@example.com'.",
+      "verdict": "SPEC_LEAKED",
+      "spec_evidence": "- \"Authenticate using superuser credentials (admin@example.com / password123) to obtain an access token. Verify the response status code is 200 OK, the 'token_type' field equals 'bearer' and the 'access_token' field is not empty. Then call the protected GET /api/v1/users/me endpoint with the token to verify it works and returns the user's email.\"\n- \"Authenticate as a superuser with username 'admin@example.com' and password 'password123' to obtain an access token, then retrieve the currently authenticated user's profile (the \\\"me\\\" resource). Verify the response body is present (non-empty). Verify the response JSON 'is_active' is True. Verify the response JSON 'is_superuser' is True. Verify the response JSON 'email' equals the configured first superuser.\"",
+      "reasoning": "The removed requirement is that a valid superuser access token can be used on a token-checking protected endpoint and that the response includes the authenticated user's email. The reduced spec already explicitly requires that using the superuser token on a protected endpoint identifying the current user succeeds and returns email 'admin@example.com', which conveys the same underlying constraint in a different endpoint context.",
+      "parse_error": false,
+      "usage": {
+        "total_tokens": 5322,
+        "prompt_tokens": 5059,
+        "completion_tokens": 263
+      }
+    },
+    {
+      "req_id": 15,
+      "requirement_vague": "Ensure requesting password recovery works and an email is actually sent to the correct recipient (verify via mailcatcher at localhost:1080).",
+      "requirement_precise": "Register a normal user with email test15@example.com via POST /api/v1/users/signup. Then request a password recovery email via POST /api/v1/password-recovery/{email}. Verify that the API responds with HTTP status code 200, a JSON message 'Password recovery email sent', and that an email was actually sent to the correct recipient via the mailcatcher service (verify via GET http://localhost:1080/messages).",
+      "verdict": "NOT_LEAKED",
+      "spec_evidence": null,
+      "reasoning": "The reduced specification contains no mention of any password recovery endpoint, recovery workflow, email delivery, or mailcatcher verification. A reader could not deduce from the remaining text alone that requesting password recovery must send an email to the specified recipient.",
+      "parse_error": false,
+      "usage": {
+        "total_tokens": 5170,
+        "prompt_tokens": 5099,
+        "completion_tokens": 71
+      }
+    },
+    {
+      "req_id": 16,
+      "requirement_vague": "Recovering a password for a non existing user gets rejected.",
+      "requirement_precise": "Attempt to recover the password for a non-existent user with the email 'jVgQr@example.com'. Verify that the password recovery request returns an HTTP 404 status code indicating the user does not exist.",
+      "verdict": "NOT_LEAKED",
+      "spec_evidence": null,
+      "reasoning": "The reduced specification contains no password recovery endpoint or behavior at all, so it does not state or directly entail what should happen when recovering a password for a non-existent user. Although other endpoints return 404 for non-existent resources, extending that pattern to password recovery would require inference beyond the text.",
+      "parse_error": false,
+      "usage": {
+        "total_tokens": 5119,
+        "prompt_tokens": 5038,
+        "completion_tokens": 81
+      }
+    },
+    {
+      "req_id": 17,
+      "requirement_vague": "Test the password recovery flow of a new user. Superuser credentials: (admin@example.com / password123)",
+      "requirement_precise": "Create a new user with a generated email and initial password. Authenticate as the superuser (admin@example.com / password123). Using the superuser access token, request the password-recovery HTML content for the created user's email. Then submit the password reset request using the extracted reset token and a new password. Verify the password reset response has HTTP 200 and the response JSON is exactly {\"message\": \"Password updated successfully\"}. Finally, verify that login with the new password succeeds (returns 200).",
+      "verdict": "NOT_LEAKED",
+      "spec_evidence": "- \"Authenticate using the existing superuser credentials (admin@example.com / password123) to obtain an access token. Using that superuser access token, update the superuser's own password by supplying the current password and a newly generated password. Verify the response status is 200 and the response body contains a field 'message' equal to 'Password updated successfully'. Then verify that login with the NEW password succeeds.\"",
+      "reasoning": "The spec does mention successful password changes and that login with the new password should work, but only for the authenticated user's own password update flow using the current password. It never states any password recovery/reset flow, recovery HTML, reset token, or superuser-initiated reset for another user, so the removed requirement is not directly implied.",
+      "parse_error": false,
+      "usage": {
+        "total_tokens": 5278,
+        "prompt_tokens": 5107,
+        "completion_tokens": 171
+      }
+    },
+    {
+      "req_id": 18,
+      "requirement_vague": "Reset a password with an invalid reset token and confirm the reset is rejected.",
+      "requirement_precise": "Authenticate as the superuser (admin@example.com / password123) to obtain an access token, then attempt to reset a password using an invalid token. Using the superuser's access token in the Authorization header, call the reset-password operation with JSON body {\"new_password\": \"changethis\", \"token\": \"invalid\"}. Verify the response has HTTP status 400, the JSON body contains a \"detail\" field, and the value of \"detail\" is exactly \"Invalid token\".",
+      "verdict": "NOT_LEAKED",
+      "spec_evidence": null,
+      "reasoning": "The reduced specification contains no mention of any reset-password operation, reset tokens, or token validation behavior for password resets. Inferring that an invalid reset token must yield HTTP 400 with detail 'Invalid token' would require assumptions not stated in the spec.",
+      "parse_error": false,
+      "usage": {
+        "total_tokens": 5171,
+        "prompt_tokens": 5098,
+        "completion_tokens": 73
+      }
+    },
+    {
+      "req_id": 46,
+      "requirement_vague": "When a user deletes their own account, all their items should also be deleted. Admin credentials: admin@example.com / password123",
+      "requirement_precise": "Register a new user via signup and authenticate to get a token. Create an item using that token. Store the item ID from the response. Delete the user's own account via DELETE /api/v1/users/me. Verify 200 status with message 'User deleted successfully'. Login as superuser (admin@example.com / password123) and attempt to GET the item by ID. Verify it returns 404 with detail 'Item not found'.",
+      "verdict": "SPEC_LEAKED",
+      "spec_evidence": "- \"Register a new user via signup and authenticate to get a token. Create an item using that token. Store the item ID from the response. As superuser (admin@example.com / password123), delete the user by ID. Verify 200 status with message 'User deleted successfully'. Using the superuser token, attempt to GET the item by ID. Verify it returns 404 with detail 'Item not found'.\"\n- \"Register a new user via the public signup endpoint using a random email and password. Authenticate by obtaining an access token using the login access-token endpoint with that user's credentials. Use the returned access token to delete the currently authenticated user via the authenticated delete user me endpoint. Verify the delete response status is 200. Verify the response body JSON contains a field \\\"message\\\" equal to \\\"User deleted successfully\\\". Then verify that login with the deleted user's credentials fails.\"",
+      "reasoning": "The spec explicitly states that deleting a user by ID causes that user's item to become unreadable with 'Item not found', which directly conveys deletion of the user's items upon user deletion. Since the spec also separately defines self-deletion of the current user account, a reader can directly infer the same deletion effect should apply when the user deletes their own account.",
+      "parse_error": false,
+      "usage": {
+        "total_tokens": 5372,
+        "prompt_tokens": 5097,
+        "completion_tokens": 275
+      }
+    },
+    {
+      "req_id": 56,
+      "requirement_vague": "Password reset should reject new_password with 7 characters with a 422 validation error.",
+      "requirement_precise": "Attempt to reset password via POST /api/v1/reset-password/ with token 'fake-token' and new_password of exactly 7 characters ('1234567'). Verify the response status is 422 (validation error). Note: The token validation happens after field validation, so 422 should be returned for invalid password length.",
+      "verdict": "SPEC_LEAKED",
+      "spec_evidence": "- \"Attempt to register a new user via POST /api/v1/users/signup with email 'test47@example.com', password of exactly 7 characters ('1234567'), and full_name 'Test User'. Verify the response status is 422 (validation error).\"\n- \"Register a new user via POST /api/v1/users/signup with email 'test50@example.com' and password 'oldpass123'. Login to get token. Attempt to update password via PATCH /api/v1/users/me/password with current_password 'oldpass123' and new_password of exactly 7 characters ('1234567'). Verify the response status is 422 (validation error).\"",
+      "reasoning": "The spec explicitly establishes a password-length validation rule that rejects 7-character passwords both at signup and when setting a new password in the password-update flow. From that text alone, a reader could directly infer that another endpoint that accepts a new_password field for resetting a password should apply the same validation and return 422 before token handling.",
+      "parse_error": false,
+      "usage": {
+        "total_tokens": 5289,
+        "prompt_tokens": 5066,
+        "completion_tokens": 223
+      }
+    }
+  ]
+}

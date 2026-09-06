@@ -1,0 +1,21 @@
+{
+  "req_id": 25,
+  "requirement_vague": "Verify JWT token contains correct user ID and username in payload",
+  "requirement_precise": "Create user1 (username: 'jwtuser1', email: 'jwtuser1@test.com', password: 'pass123'). Extract the JWT token from the response. Decode the JWT token payload (base64 decode the middle segment). Verify the payload contains: id matching the user's id, username equal to 'jwtuser1', email equal to 'jwtuser1@test.com'. Use the token to GET /api/user and verify the returned user matches. This tests the JWT payload generation in generateJWT method.",
+  "removed": true,
+  "omissions": [
+    {
+      "id": "R25-O1",
+      "description": "JWT payload does not contain the user's id, username, and email as required.",
+      "category": "RESPONSE_FORMAT",
+      "reasoning": "The token is generated in create_token(user_id), which only encodes {\"sub\": str(user_id), \"exp\": ...}. There are no username or email claims in the JWT payload, and the user id is stored under \"sub\" rather than an \"id\" field as required by the scenario."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 5299,
+    "prompt_tokens": 5190,
+    "completion_tokens": 109
+  },
+  "parse_error": false
+}

@@ -1,0 +1,18 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R7",
+        "label": "PARTIAL",
+        "reasoning": "It involves a cross-service call to the borrows microservice for fine-related behavior, but it describes added error handling rather than the removal of that call."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 558,
+    "prompt_tokens": 476,
+    "completion_tokens": 82
+  }
+}

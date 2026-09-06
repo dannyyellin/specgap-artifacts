@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R12",
+        "label": "PARTIAL",
+        "reasoning": "A1 relates to token validation header handling, which is adjacent to R12 (removing user_id from token validation), but A1 describes adding support for an additional header format rather than removing the user_id derivation from token validation."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The 'privileged' field handling does not correspond to any of the three spec requirements about rating range, per-user-per-dish constraint, or user_id from token."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rounding floating point numbers to two decimal places does not correspond to any of the three spec requirements listed."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 859,
+    "prompt_tokens": 603,
+    "completion_tokens": 256
+  }
+}

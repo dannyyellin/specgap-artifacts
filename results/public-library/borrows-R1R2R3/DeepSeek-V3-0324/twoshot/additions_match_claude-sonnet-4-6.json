@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R1",
+        "label": "PARTIAL",
+        "reasoning": "A1 relates to returnDate being stored/provided in POST, which touches R1's removal of returnDate computation, but A1 describes storing a provided returnDate rather than the spec requirement of removing the computed returnDate logic entirely."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R1",
+        "label": "PARTIAL",
+        "reasoning": "A2 describes updating returnDate via PUT which is related to the returnDate field removed in R1, but R1 specifically addresses removal of returnDate computation on checkout, not PUT update functionality."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "The validation that returnDate is not before loanDate does not correspond to any of the three spec requirements (returnDate computation removal, overdue constraint removal, or Logs notification removal)."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 920,
+    "prompt_tokens": 644,
+    "completion_tokens": 276
+  }
+}

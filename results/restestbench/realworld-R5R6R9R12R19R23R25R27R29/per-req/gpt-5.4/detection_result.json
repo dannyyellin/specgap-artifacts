@@ -1,0 +1,94 @@
+{
+  "result": {
+    "omissions": [
+      {
+        "id": "R4-O1",
+        "description": "Article update does not enforce ownership, so any authenticated user can update an article regardless of author.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The requirement scenario updates the created article as its author. In `update_article`, the code fetches the article by slug and applies updates, but never checks `article.author_id == current_user.id`. This means the expected author-only update rule is missing/incomplete for article updates."
+      },
+      {
+        "id": "R5-O1",
+        "description": "DELETE /api/articles/{slug} does not return the required 200 response in the expected format for article deletion; it returns an empty object {} instead.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The requirement explicitly verifies that deleting the article via DELETE /api/articles/{slug} returns status 200. While FastAPI will default to 200 here, the handler body returns {}. This matches neither a deleted article payload nor any explicit deletion response beyond an empty object, so the deletion response format is incomplete relative to the scenario's expected successful deletion behavior."
+      },
+      {
+        "id": "R6-O1",
+        "description": "Missing GET /api/articles/feed endpoint to return a personalized feed of articles from followed users.",
+        "category": "ENDPOINTS",
+        "reasoning": "The code defines routes for /api/articles and /api/articles/{slug}, but there is no route handler for GET /api/articles/feed at all. Because the required endpoint does not exist, the scenario of returning 0 articles before following and only followed authors' articles after following cannot be implemented."
+      },
+      {
+        "id": "R9-O1",
+        "description": "User creation does not return the required 400 status and unified message when a duplicate username or duplicate email is submitted.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "In POST /api/users, duplicate email raises HTTPException(status_code=422, detail={\"errors\": {\"email\": [\"has already been taken\"]}}) and duplicate username raises HTTPException(status_code=422, detail={\"errors\": {\"username\": [\"has already been taken\"]}}). The requirement expects status 400 and a response containing 'Username and email must be unique' for both cases."
+      },
+      {
+        "id": "R11-O1",
+        "description": "The requirement specifically tests argon2 password verification logic, but the service uses bcrypt for hashing and verification instead of argon2.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "Password hashing/verification is configured with `CryptContext(schemes=[\"bcrypt\"], deprecated=\"auto\")`, and both registration and login use that context via `hash_password` and `verify_password`. So login works with password verification, but not with the required argon2 verification logic."
+      },
+      {
+        "id": "R12-O1",
+        "description": "GET /api/articles does not implement filtering by the tag query parameter.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The requirement is to return only articles matching the provided tag and to report the corresponding articlesCount. In list_articles, the endpoint accepts only author, limit, and offset query parameters and applies filtering only by author. There is no tag query parameter and no query/join against ArticleTagLink or Tag to restrict results by tag, so requests like /api/articles?tag=javascript, /api/articles?tag=testing, and /api/articles?tag=nonexistent will not produce the required filtered results."
+      },
+      {
+        "id": "R18-O1",
+        "description": "Article tagList is not stored and persisted as a simple-array column on the Article model.",
+        "category": "DATA_PERSISTENCE",
+        "reasoning": "The requirement specifically checks simple-array column handling for tagList persistence. In the code, the Article model has no tagList/simple-array field; instead it defines `tags: List[Tag] = Relationship(..., link_model=ArticleTagLink)`, which persists tags through separate `Tag` and `ArticleTagLink` tables."
+      },
+      {
+        "id": "R23-O1",
+        "description": "The feed endpoint with pagination support (`GET /api/articles/feed` accepting `limit` and `offset`) is missing.",
+        "category": "ENDPOINTS",
+        "reasoning": "The code defines `GET /api/articles` with `limit` and `offset` query parameters, but there is no route for `GET /api/articles/feed`. Since the requirement specifically verifies pagination on the feed endpoint, the required endpoint is absent."
+      },
+      {
+        "id": "R23-O2",
+        "description": "Feed business logic to return only articles from followed authors is missing.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The requirement describes a personalized feed where user1 follows user2 and then retrieves user2's articles via `/api/articles/feed`. The code has follow/unfollow support, but no implementation that queries articles authored by followed users for a feed response."
+      },
+      {
+        "id": "R25-O1",
+        "description": "JWT payload does not contain the user's id, username, and email as required.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The token is generated in create_token(user_id), which only encodes {\"sub\": str(user_id), \"exp\": ...}. There are no username or email claims in the JWT payload, and the user id is stored under \"sub\" rather than an \"id\" field as required by the scenario."
+      },
+      {
+        "id": "R27-O1",
+        "description": "Missing authenticated GET /api/articles/feed endpoint that returns the feed based on followed users.",
+        "category": "ENDPOINTS",
+        "reasoning": "The code defines routes for /api/articles and /api/articles/{slug}, but there is no route handler for GET /api/articles/feed at all. Therefore the scenario where user1 requests /api/articles/feed cannot be executed."
+      },
+      {
+        "id": "R27-O2",
+        "description": "Missing logic to return an empty feed when the current user follows nobody, with articlesCount = 0 and articles = [].",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "Because there is no /api/articles/feed implementation, there is also no feed-specific logic that checks the current user's follow relationships and returns an empty result when none exist."
+      },
+      {
+        "id": "R27-O3",
+        "description": "Missing feed response payload with articlesCount and articles fields for the no-follows case on GET /api/articles/feed.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The required response for the scenario is a feed response containing articlesCount equal to 0 and an empty articles array. No /api/articles/feed handler exists to produce this response."
+      },
+      {
+        "id": "R29-O1",
+        "description": "The service does not implement a DELETE /api/users/{email} endpoint to attempt deleting a user by email.",
+        "category": "ENDPOINTS",
+        "reasoning": "The requirement explicitly tests DELETE /api/users/orphanauthor1@test.com. In the code, /api/users exists only for POST registration, and there is no DELETE route under /api/users/{email} or any other user-deletion endpoint."
+      }
+    ],
+    "additions": []
+  },
+  "usage": {
+    "total_tokens": 156079
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes that 415 Unsupported Media Type is not returned, which is the same behavior captured by removing 415 from the general error codes."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 concerns query filtering support on GET /cardholders, which is unrelated to any of R4\u2013R7."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O3 explicitly discusses the removed fine computation formula based on days overdue times $0.50, matching R6."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R7",
+        "label": "PARTIAL",
+        "reasoning": "O3 is about the fine computation logic itself and implies borrow-based calculation, but it does not specifically mention the removed cross-service call to Borrows."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "O4 directly addresses the removed type declaration for fineAmount being float, which is part of R4."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1022,
+    "prompt_tokens": 697,
+    "completion_tokens": 325
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement describes verifying cascade deletion of items when a user is deleted."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "O2 describes the same scenario as R4 (second user reading another user's item returning 'Not enough permissions') but notes the code returns 403 instead of the required 400, indicating a partial match on behavior with wrong status code."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement describes email verification via mailcatcher service for password recovery."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement describes validation of an empty title field when creating an item."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement describes returning 422 for invalid UUID format in GET /api/v1/users/{user_id}."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement describes returning 422 for invalid UUID format in GET /api/v1/items/{item_id}."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1642,
+    "prompt_tokens": 1222,
+    "completion_tokens": 420
+  }
+}

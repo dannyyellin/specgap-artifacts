@@ -1,0 +1,85 @@
+{
+  "result": {
+    "additions": [
+      {
+        "id": "A1",
+        "description": "The article response includes both 'created'/'updated' alias fields alongside the standard 'createdAt'/'updatedAt' fields. The spec only references one set of timestamp field names per context.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The code's article_dict returns four timestamp fields: 'createdAt', 'updatedAt', 'created', and 'updated'. The spec references 'created' and 'updated' in one test and implicitly 'createdAt'/'updatedAt' in others, but does not require all four simultaneously."
+      },
+      {
+        "id": "A2",
+        "description": "The user response object includes an 'id' field. The spec does not require the user object to expose an 'id' field in responses.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The spec describes user responses as containing 'username', 'email', 'token', 'bio', and 'image'. The code additionally returns 'id' in user_dict, which has no basis in the specification."
+      },
+      {
+        "id": "A3",
+        "description": "The PUT /api/articles/{slug} endpoint returns 403 Forbidden when the requesting user is not the article author. The spec explicitly requires that any authenticated user can update any article.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The spec states: 'User2 (NOT the owner) PUTs /api/articles/{slug} with title \"Hacked By User2\". Verify PUT response shows updated title... This demonstrates the security vulnerability that any user can update/delete any article.' The code raises 403 for non-owners, contradicting this requirement."
+      },
+      {
+        "id": "A4",
+        "description": "The DELETE /api/articles/{slug} endpoint returns 403 Forbidden when the requesting user is not the article author. The spec explicitly requires that any authenticated user can delete any article.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The spec states: 'User2 (NOT the owner) DELETEs /api/articles/{slug}. Verify DELETE succeeds with status 200.' The code raises 403 for non-owners, contradicting this requirement."
+      },
+      {
+        "id": "A5",
+        "description": "A GET /api/tags endpoint is implemented but is not described anywhere in the specification.",
+        "category": "ENDPOINTS",
+        "reasoning": "The specification makes no mention of a tags listing endpoint. The code implements GET /api/tags without any basis in the spec."
+      },
+      {
+        "id": "A6",
+        "description": "The delete_comment endpoint allows the article author (not just the comment author) to delete any comment on their article.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The spec only describes the comment's own author deleting their comment. The code additionally permits the article author to delete any comment, which has no basis in the specification."
+      },
+      {
+        "id": "A7",
+        "description": "The Authorization header parsing accepts both 'Bearer <token>' and 'Token <token>' formats. The spec only specifies the 'Token <jwt>' format.",
+        "category": "REQUEST_VALIDATION",
+        "reasoning": "The spec states: 'Authentication uses JWT tokens passed via the Authorization header (\"Token <jwt>\").' The code also accepts 'Bearer' prefix, which is not required by the spec."
+      }
+    ],
+    "omissions": [
+      {
+        "id": "O1",
+        "description": "The POST /api/profiles/{username}/follow endpoint returns HTTP 200 (default) instead of the required 201.",
+        "category": "RESPONSE_FORMAT",
+        "reasoning": "The spec explicitly states: 'follow user2 by POST to /api/profiles/followee1/follow. Verify the response status is 201.' The code does not set status_code=201 on this endpoint."
+      },
+      {
+        "id": "O2",
+        "description": "The follow endpoint does not return 400 with a message containing 'cannot be equal' when a user attempts to follow themselves \u2014 it silently ignores the request.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The spec states: 'attempt to follow themselves by POST to /api/profiles/follower1/follow. Verify this returns status 400 with message containing \"cannot be equal\".' The code checks current_user.id != target.id but simply skips the follow without raising an error."
+      },
+      {
+        "id": "O3",
+        "description": "The unfollow endpoint does not return 400 when a user attempts to unfollow themselves.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The spec states: 'Verify user1 cannot unfollow themselves (should return 400).' The code has no self-unfollow check and would silently return success."
+      },
+      {
+        "id": "O4",
+        "description": "The GET /api/articles endpoint sorts articles by id descending instead of by created_at timestamp descending.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "The spec states: 'Verify the articles array is ordered by created timestamp in descending order (newest first). This tests the ORDER BY article.created DESC clause.' The code uses `key=lambda a: a.id or 0` instead of sorting by created_at."
+      },
+      {
+        "id": "O5",
+        "description": "The GET /api/articles/feed endpoint sorts articles by id descending instead of by created_at timestamp descending.",
+        "category": "BUSINESS_LOGIC",
+        "reasoning": "Consistent with the ordering requirement for the articles list, the feed endpoint should also order by created timestamp. The code uses id-based sorting for the feed as well."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 14697,
+    "prompt_tokens": 11096,
+    "completion_tokens": 3601
+  }
+}

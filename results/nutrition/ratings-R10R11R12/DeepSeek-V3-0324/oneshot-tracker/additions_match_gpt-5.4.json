@@ -1,0 +1,24 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Storing a privileged field from token validation does not describe removing the rating range constraint, removing the one-rating-per-user-per-dish constraint, or removing that user_id comes from token validation."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rounding numbers to two decimal places is unrelated to any of the listed removals in the specification."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 608,
+    "prompt_tokens": 467,
+    "completion_tokens": 141
+  }
+}

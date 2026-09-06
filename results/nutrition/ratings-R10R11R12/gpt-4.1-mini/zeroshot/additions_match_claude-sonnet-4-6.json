@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Accepting tokens from multiple header formats is unrelated to any of the three removed constraints (rating range, one-rating-per-user, or user_id from token)."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Using a MongoDB counters collection for sequential IDs is an implementation detail unrelated to the removed constraints listed in R10-R12."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "R10 removes the integer 1-5 constraint on ratings, and the code storing ratings as floats rounded to two decimal places partially reflects this removal, but the spec requirement is about removing the range/integer constraint rather than specifically introducing float storage."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Returning 415 for non-JSON content types is unrelated to the three removed constraints in R10-R12."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Accepting tokens without the 'Bearer' prefix is unrelated to the removed constraints regarding rating range, one-rating-per-user, or user_id from token validation."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1106,
+    "prompt_tokens": 699,
+    "completion_tokens": 407
+  }
+}

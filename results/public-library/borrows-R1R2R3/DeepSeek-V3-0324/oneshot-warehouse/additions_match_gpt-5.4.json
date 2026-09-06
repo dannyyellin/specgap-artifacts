@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Allowing PUT updates to cardholderId and ISBN does not correspond to removing return date computation, removing overdue checkout blocking, or removing checkout notifications to Logs."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Validating that returnDate cannot be before loanDate is unrelated to the removed returnDate computation, removed overdue borrow constraint, and removed Borrows-to-Logs notification behavior."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Implementing detailed JSON error messages does not describe any of the specified removals in Borrows or Logs behavior."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 743,
+    "prompt_tokens": 538,
+    "completion_tokens": 205
+  }
+}

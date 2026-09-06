@@ -1,0 +1,54 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A1 describes server-side rejection of extra fields in POST /pet-types, which does not correspond to any of the four spec requirements listed."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "R4 states that temperament/group_behavior fields were removed from attributes extraction rules, and A2 confirms the code uses entirely different fields (slogan, group, color, etc.) rather than temperament/group_behavior."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "A3 describes deduplication of attributes, which is tangentially related to R4's removal of temperament/group_behavior extraction rules, but deduplication is a separate behavior not directly described by R4."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "R6 removed lifespan range handling, and A4 describes incorrect lifespan defaulting (0 instead of null), which relates to lifespan handling but is about a missing-value default rather than range/minimum extraction logic."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "R6 removed lifespan range handling, and A5 describes incorrect lifespan defaulting in serialization (0 instead of null), which relates to lifespan handling but is about a missing-value default rather than range/minimum extraction logic."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A6 describes an undocumented 'picture' field in the PUT endpoint payload, which does not correspond to any of the four listed spec requirements."
+      },
+      {
+        "detection_id": "A7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A7 describes an incorrect MongoDB hostname in the URI, which does not correspond to any of the four listed spec requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1727,
+    "prompt_tokens": 1124,
+    "completion_tokens": 603
+  }
+}

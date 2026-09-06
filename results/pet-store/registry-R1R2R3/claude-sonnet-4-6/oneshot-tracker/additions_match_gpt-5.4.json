@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": "R3",
+        "label": "MATCH",
+        "reasoning": "A1 directly reflects removal of owner pre-registration by allowing the owner identity to be created during normal registration instead of existing from initialization."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A2 concerns password-change side effects on privileged status, which does not correspond to removed password complexity rules, removed /verify anti-enumeration behavior, or removed owner pre-registration."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R3",
+        "label": "PARTIAL",
+        "reasoning": "A3 is about initialization logic for the owner account and password persistence, which is related to owner pre-registration on initialization but not the same behavior exactly."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 854,
+    "prompt_tokens": 639,
+    "completion_tokens": 215
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R12",
+        "label": "MATCH",
+        "reasoning": "O1 describes missing tag filtering on GET /api/articles?tag=..., which is exactly what R12 tests."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O2 describes missing feed endpoint showing articles from followed users, which matches R6's feed functionality test."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R23",
+        "label": "MATCH",
+        "reasoning": "O2 also covers the feed pagination functionality tested in R23."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R27",
+        "label": "MATCH",
+        "reasoning": "O2 also covers the empty feed scenario tested in R27."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R5",
+        "label": "MATCH",
+        "reasoning": "O3 directly describes the behavior in R5 where deleted articles should return 200 with empty object {} instead of 404."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "No reference requirement covers self-follow validation."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R9",
+        "label": "MATCH",
+        "reasoning": "O5 describes the unique username/email validation with specific error message 'Username and email must be unique', which is exactly what R9 tests."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": "R19",
+        "label": "MATCH",
+        "reasoning": "O6 describes missing timestamp update functionality on article modification, which is exactly what R19 tests."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": "R23",
+        "label": "PARTIAL",
+        "reasoning": "O7 mentions pagination not fully implemented, which partially relates to R23's feed pagination test, but O7 is broader and less specific."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 2671,
+    "prompt_tokens": 2069,
+    "completion_tokens": 602
+  }
+}

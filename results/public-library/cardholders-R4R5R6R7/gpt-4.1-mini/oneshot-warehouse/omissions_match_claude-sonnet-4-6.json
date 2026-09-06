@@ -1,0 +1,48 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "O1 identifies incorrect fine computation (not using days-overdue * 0.50), which relates to R6's removal of the fine computation formula, but O1 describes a code bug rather than a specification removal."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "O2 identifies that the fine computation does not sum days-overdue * 0.50 per book, which relates to R6's removal of the fine computation formula, but again describes a code behavior rather than a specification omission."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R7",
+        "label": "PARTIAL",
+        "reasoning": "O2 touches on the aggregation of fines across all borrowed books, which partially relates to R7's removal of the cross-service call to Borrows for fine computation, but does not directly address the cross-service call aspect."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 describes handling of missing/invalid returnDate fields from the Borrows microservice, which does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 discusses updating the 'id' field in PUT /cardholders/{id}, which does not correspond to any of the reference requirements."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": "R4",
+        "label": "PARTIAL",
+        "reasoning": "O5 notes that filtering by 'id' is not supported, which is loosely related to R4's removal of field type declarations including id, but R4 is about type declarations not filtering support, so this is only a very weak partial match."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1501,
+    "prompt_tokens": 964,
+    "completion_tokens": 537
+  }
+}

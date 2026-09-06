@@ -1,0 +1,42 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O1 directly states that the rating is not enforced to be an integer between 1 and 5, which is the same removed constraint described by R10."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "O2 overlaps with R10 because it says ratings are stored as floats rather than constrained integers, but it does not clearly cover the full removed 1-to-5 range constraint."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 concerns cross-microservice data retrieval behavior, which is unrelated to any of R10, R11, or R12."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 is about verifying dish existence on DELETE and does not correspond to the removed rating range, one-rating-per-user, or token-derived user_id constraints."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 discusses identifier uniqueness and endpoint/resource id semantics, which do not match any reference requirement."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1122,
+    "prompt_tokens": 784,
+    "completion_tokens": 338
+  }
+}

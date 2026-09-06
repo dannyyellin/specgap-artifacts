@@ -1,0 +1,30 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R6",
+        "label": "MATCH",
+        "reasoning": "O1 directly discusses the fine computation formula involving days overdue and $0.50 per day, which is the same behavior referenced in R6."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 concerns validation of date formats from the borrows service, which is not described by any reference requirement."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "O3 refers to validating fineAmount as a float, which is the same field type declaration behavior mentioned in R4."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 754,
+    "prompt_tokens": 557,
+    "completion_tokens": 197
+  }
+}

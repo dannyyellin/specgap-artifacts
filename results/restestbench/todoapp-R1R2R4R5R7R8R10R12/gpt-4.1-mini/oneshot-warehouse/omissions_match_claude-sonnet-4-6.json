@@ -1,0 +1,54 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R2",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the missing validation for the title field in POST /todos, which is exactly what R2 requires (400 Bad Request with 'The Title field is required' error)."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O2 describes the missing check in PUT /todos/{id} where the request body id differs from the URL id, which is exactly what R10 requires (400 Bad Request in that case)."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 concludes there is no omission (the behavior is correctly implemented), so it does not correspond to any reference requirement describing a missing or incorrect behavior."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concludes there is no omission for login with invalid credentials, and none of the reference requirements cover this specific behavior."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 concludes there is no omission for duplicate email registration, and none of the reference requirements cover this specific behavior."
+      },
+      {
+        "detection_id": "O6",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O6 concludes there is no omission for cross-user access control, stating the code correctly returns 404, so it does not describe a missing behavior matching any reference requirement."
+      },
+      {
+        "detection_id": "O7",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O7 concludes there is no omission for post-delete GET returning 404, and none of the reference requirements specifically cover verifying 404 after deletion."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1945,
+    "prompt_tokens": 1390,
+    "completion_tokens": 555
+  }
+}

@@ -1,0 +1,22 @@
+Timestamp: 2026-06-01 20:56:37
+Detector:  gpt-4.1-mini
+App/Variant/Service: nutrition/dishes-R4R5R6/dishes
+Method:    oneshot-warehouse
+
+Tokens: prompt=7380, completion=1032, total=8412
+Additions: 5
+Omissions: 7
+
+  A A1: Supports filtering dishes by 'id', 'name', and 'ingredients' query parameters in GET /dishes
+  A A2: Accepts 'ingredients' query parameter to filter dishes containing that ingredient in GET /dishes
+  A A3: Returns error 415 Unsupported Media Type if request content type is not JSON for POST and PUT requests
+  A A4: Rounds all floating point nutritional values to two decimal places in responses
+  A A5: Supports CORS via flask-cors package
+
+  O O1: POST, PUT, and DELETE requests are not restricted to the restaurant Owner user
+  O O2: GET /dishes does not support filtering by 'ingredient' query parameter as specified (uses 'ingredients' instead)
+  O O3: Does not handle 401 Unauthorized when token is missing or invalid for requests other than POST /register and /login
+  O O4: Does not return 400 Bad Request if required fields 'name' or 'ingredients' are missing or invalid in POST and PUT requests
+  O O5: Does not handle 404 Not Found for invalid dish id in PUT and DELETE requests explicitly
+  O O6: Does not handle 405 Method Not Allowed for unsupported HTTP methods on /dishes and /dishes/{id}
+  O O7: Does not handle 500 Internal Server Error if external Ninja API fails to respond or returns invalid data

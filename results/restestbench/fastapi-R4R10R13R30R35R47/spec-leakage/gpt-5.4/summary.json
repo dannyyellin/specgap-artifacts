@@ -1,0 +1,107 @@
+{
+  "variant": "fastapi-R4R10R13R30R35R47",
+  "model": "gpt-5.4",
+  "timestamp": "2026-06-28 19:16:04",
+  "n_removed": 6,
+  "n_spec_leaked": 5,
+  "n_not_leaked": 1,
+  "n_uncertain": 0,
+  "n_parse_errors": 0,
+  "spec_leaked_ids": [
+    4,
+    10,
+    30,
+    35,
+    47
+  ],
+  "not_leaked_ids": [
+    13
+  ],
+  "uncertain_ids": [],
+  "per_requirement": [
+    {
+      "req_id": 4,
+      "requirement_vague": "Verify that a second user cannot read another user's item. Confirm access is denied.",
+      "requirement_precise": "Register a new user and obtain an access token via the authentication endpoint. Create an item in the system with that user. Register a second user and get its access token. Attempt to read the created item using the access token of the second user. Verify that the response status code is 400 and the response body contains a detail field with the value \"Not enough permissions\" indicating the user does not have sufficient permissions to read the item.",
+      "verdict": "SPEC_LEAKED",
+      "spec_evidence": "- \"Register a first normal user and obtain an access token by registering and logging in. Using this first user's token, create an item via the API. Then register a second normal user and obtain their access token. Attempt to update the first user's item using the second user's access token. Verify that the update operation fails with HTTP status code 400 and the value 'Not enough permissions' in the detail field of the body.\"\n- \"Register a first user and obtain an access token via the authentication endpoint. Using this first user, create an item. Then register a second normal user and obtain an access token for this second user. Attempt to delete the item created by the first user using the access token of the second normal user who does not have sufficient permissions to delete the item. Verify that the response status code is 400 and the response body contains a 'detail' field with the value 'Not enough permissions'.\"",
+      "reasoning": "The spec explicitly states that a second normal user lacks permission to access another user's item for update and delete operations, using the same item-ownership constraint and exact error message. From this text alone, a reader could directly infer the same underlying rule applies to reading another user's item as an ownership-based permission check.",
+      "parse_error": false,
+      "usage": {
+        "total_tokens": 5475,
+        "prompt_tokens": 5206,
+        "completion_tokens": 269
+      }
+    },
+    {
+      "req_id": 10,
+      "requirement_vague": "Delete a none existing item and confirm the API reports 'Item not found'. Admin credentials: (admin@example.com / password123)",
+      "requirement_precise": "Attempt to delete an item using superuser authentication (use superuser credentials admin@example.com / password123) with a non-existent item ID. Verify that the response status code is 404 and the response body contains a 'detail' field with the value 'Item not found'.",
+      "verdict": "SPEC_LEAKED",
+      "spec_evidence": "- \"Authenticate as a superuser (admin@example.com / password123). Attempt to update an item with a non-existent item ID. Verify that the API responds with HTTP status code 404 and the response body contains a 'detail' field with the value 'Item not found'.\"\n- \"Attempt to read an item using a non-existent item ID while authenticated as a superuser (admin@example.com / password123). Verify that the response status code is 404 and the response body contains a 'detail' field with the value 'Item not found'.\"",
+      "reasoning": "The spec explicitly states that when an item ID does not exist, item operations return 404 with detail 'Item not found' in multiple item-operation contexts. From this text alone, a reader could directly infer the same not-found constraint for deleting a non-existent item.",
+      "parse_error": false,
+      "usage": {
+        "total_tokens": 5372,
+        "prompt_tokens": 5184,
+        "completion_tokens": 188
+      }
+    },
+    {
+      "req_id": 13,
+      "requirement_vague": "Check that log in rejects a wrong password.",
+      "requirement_precise": "Register a new user, then attempt to obtain an access token by logging in with the registered user's email but an incorrect password. Verify that the response status code is 400 and the detail message is 'Incorrect email or password'.",
+      "verdict": "NOT_LEAKED",
+      "spec_evidence": "- \"Sign in using the built-in admin account (username 'admin@example.com', password 'password123') to obtain an access token. Using that token, attempt to change the currently authenticated user's password by submitting a payload where both the current password and the new password are the same random string that does not match the real password. Verify the response status is 400. Verify the response body contains a detail message equal to 'Incorrect password'.\"\n- \"Register a new user via signup and authenticate to get a token. Create an item using that token. Store the item ID from the response. Delete the user's own account via DELETE /api/v1/users/me. Verify 200 status with message 'User deleted successfully'. Login as superuser (admin@example.com / password123) and attempt to GET the item by ID. Verify it returns 404 with detail 'Item not found'.\"\n- \"Register a new user via the public signup endpoint using a random email and password. Authenticate by obtaining an access token using the login access-token endpoint with that user's credentials. Use the returned access token to delete the currently authenticated user via the authenticated delete user me endpoint. Verify the delete response status is 200. Verify the response body JSON contains a field \\\"message\\\" equal to \\\"User deleted successfully\\\". Then verify that login with the deleted user's credentials fails.\"",
+      "reasoning": "The spec shows successful login with correct credentials and some other failure cases, but it never explicitly states that login with an existing email and wrong password must return 400 with detail 'Incorrect email or password'. Inferring that behavior would require outside knowledge about authentication semantics rather than direct entailment from the text.",
+      "parse_error": false,
+      "usage": {
+        "total_tokens": 5516,
+        "prompt_tokens": 5157,
+        "completion_tokens": 359
+      }
+    },
+    {
+      "req_id": 30,
+      "requirement_vague": "Verify the superuser (admin@example.com / password123) can change their own password and change it back.",
+      "requirement_precise": "Authenticate using the existing superuser credentials (admin@example.com / password123) to obtain an access token. Using that superuser access token, update the superuser's own password by supplying the current password and a newly generated password. Verify the response status is 200 and the response body contains a field 'message' equal to 'Password updated successfully'. Then verify that login with the NEW password succeeds. Finally, revert the password back to the original by supplying the new password as current and the original password as new. Verify the response status is 200 and verify that login with the ORIGINAL password succeeds again.",
+      "verdict": "SPEC_LEAKED",
+      "spec_evidence": "- \"Create a new user with a generated email and initial password. Authenticate as the superuser (admin@example.com / password123). Using the superuser access token, request the password-recovery HTML content for the created user's email. Then submit the password reset request using the extracted reset token and a new password. Verify the password reset response has HTTP 200 and the response JSON is exactly {\\\"message\\\": \\\"Password updated successfully\\\"}. Finally, verify that login with the new password succeeds (returns 200).\"\n- \"Authenticate as the superuser (use superuser credentials admin@example.com / password123) to obtain an access token. Using that access token, invoke the update own password operation for the authenticated user with a payload where 'current_password' and 'new_password' are both set to the configured first superuser password. Verify the response status is 400. Verify the response JSON body contains a 'detail' field equal to 'New password cannot be the same as the current one'.\"\n- \"Sign in using the built-in admin account (username 'admin@example.com', password 'password123') to obtain an access token. Using that token, attempt to change the currently authenticated user's password by submitting a payload where both the current password and the new password are the same random string that does not match the real password. Verify the response status is 400. Verify the response body contains a detail message equal to 'Incorrect password'.\"",
+      "reasoning": "The spec explicitly defines an 'update own password' operation for the authenticated user and tests its failure conditions for the superuser, which directly entails that the operation applies to the superuser as well. Combined with the separate password-change success flow showing that a successful password update enables login with the new password, a reader can infer the missing successful superuser own-password-change scenario.",
+      "parse_error": false,
+      "usage": {
+        "total_tokens": 5639,
+        "prompt_tokens": 5246,
+        "completion_tokens": 393
+      }
+    },
+    {
+      "req_id": 35,
+      "requirement_vague": "Ensure registering a user with an existing email gets rejected.",
+      "requirement_precise": "Attempt to register a user using the existing superuser email 'admin@example.com' with a random password and random full name by calling the user registration operation. Verify the response status is 400. Verify the response body field 'detail' equals 'The user with this email already exists in the system'.",
+      "verdict": "SPEC_LEAKED",
+      "spec_evidence": "- \"Register a new normal user and obtain an access token. Register a second user with a different random email. Using the access token for the first (authenticated) user, attempt to update the authenticated user's email to the email of the already-registered second user. Verify the response status is 409. Verify the response body contains a JSON field \\\"detail\\\" with the value \\\"User with this email already exists\\\".\"\n- \"Authenticate as the superuser (username 'admin@example.com', password 'password123') to obtain an access token. Using the superuser access token, create a new user via the create-user API with a generated email and password. Then, using the same superuser access token, attempt to create another user with the same email and password via the create-user API. Assertions: Verify the response status for the duplicate-creation attempt is 400.\"\n- \"Register two distinct users via the public signup operation, each with a different email and password. Authenticate as the superuser (admin@example.com / password123) to obtain an access token. Using the superuser access token, attempt to update the first registered user's email (update by id) so that it becomes the second user's email. Verify the response status is 409. Verify the response body contains a \\\"detail\\\" field equal to \\\"User with this email already exists\\\".\"",
+      "reasoning": "The reduced spec explicitly establishes the underlying constraint that email addresses must be unique across users: duplicate emails are rejected on user creation and on email updates. Since the superuser is an existing user with email 'admin@example.com', a reader can directly infer that signing up with that same email must also be rejected.",
+      "parse_error": false,
+      "usage": {
+        "total_tokens": 5541,
+        "prompt_tokens": 5174,
+        "completion_tokens": 367
+      }
+    },
+    {
+      "req_id": 47,
+      "requirement_vague": "User registration should reject passwords with 7 characters.",
+      "requirement_precise": "Attempt to register a new user via POST /api/v1/users/signup with email 'test47@example.com', password of exactly 7 characters ('1234567'), and full_name 'Test User'. Verify the response status is 422 (validation error).",
+      "verdict": "SPEC_LEAKED",
+      "spec_evidence": "- \"Register a new user via POST /api/v1/users/signup with email 'test50@example.com' and password 'oldpass123'. Login to get token. Attempt to update password via PATCH /api/v1/users/me/password with current_password 'oldpass123' and new_password of exactly 7 characters ('1234567'). Verify the response status is 422 (validation error).\"\n- \"Attempt to reset password via POST /api/v1/reset-password/ with token 'fake-token' and new_password of exactly 7 characters ('1234567'). Verify the response status is 422 (validation error). Note: The token validation happens after field validation, so 422 should be returned for invalid password length.\"",
+      "reasoning": "The spec explicitly states that a password of exactly 7 characters is an invalid password length in two password-setting contexts. A reader could directly infer that the same password validation constraint applies to user registration passwords as well.",
+      "parse_error": false,
+      "usage": {
+        "total_tokens": 5375,
+        "prompt_tokens": 5164,
+        "completion_tokens": 211
+      }
+    }
+  ]
+}

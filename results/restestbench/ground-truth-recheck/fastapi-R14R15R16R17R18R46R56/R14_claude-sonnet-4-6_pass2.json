@@ -1,0 +1,23 @@
+{
+  "variant": "fastapi-R14R15R16R17R18R46R56",
+  "req_id": 14,
+  "model": "claude-sonnet-4-6",
+  "pass": 2,
+  "verdict": "NOT_IMPLEMENTED",
+  "requirement_vague": "Verify the test token endpoint works and its response includes the user's email.",
+  "omissions": [
+    {
+      "id": "O1",
+      "description": "There is no 'test token' endpoint (e.g., POST /api/v1/login/test-token) in the code. The requirement calls for an endpoint that accepts a bearer token and returns a response with status 200 and a JSON body containing the field 'email' with the authenticated user's email address.",
+      "category": "ENDPOINTS",
+      "reasoning": "The code defines POST /api/v1/login/access-token for obtaining tokens and GET /api/v1/users/me for user info, but there is no dedicated test-token endpoint. The requirement explicitly describes calling a 'test token endpoint' after obtaining an access token, which is a separate route not present in the codebase."
+    }
+  ],
+  "implementation": null,
+  "usage": {
+    "total_tokens": 6538,
+    "prompt_tokens": 6102,
+    "completion_tokens": 436
+  },
+  "timestamp": "2026-07-12 10:37:14"
+}

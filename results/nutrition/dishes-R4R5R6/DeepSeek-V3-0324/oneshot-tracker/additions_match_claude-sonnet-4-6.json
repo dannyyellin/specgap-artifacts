@@ -1,0 +1,30 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Formatting numeric fields to two decimal places is not related to any of the three spec requirements about API field name mapping, owner-only restrictions, or query string filtering semantics."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "A helper function for rounding numbers to two decimal places does not correspond to any of the spec requirements about field name mapping, access restrictions, or query filtering semantics."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": "R6",
+        "label": "PARTIAL",
+        "reasoning": "The 'build_query_from_args' function handles query parameters including filtering logic, which partially relates to R6's removal of specific query string filtering semantics (lte for nutrients, contains), but the code property describes implementation detail rather than confirming the removal of those specific semantics."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 868,
+    "prompt_tokens": 592,
+    "completion_tokens": 276
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "matcher_model": "claude-sonnet-4-6",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R10",
+        "label": "MATCH",
+        "reasoning": "O1 directly describes the removal of the rating range constraint (integer between 1 and 5), which is exactly what R10 states."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O2 discusses ownership restrictions on PUT /ratings/{id} but ultimately concludes the behavior is consistent with the spec; it does not clearly match R11 (one-rating-per-user-per-dish) or R12 (user_id from token)."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 discusses a 404 behavior ambiguity for GET /ratings/{id} that does not correspond to any of the three reference requirements."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": "R10",
+        "label": "PARTIAL",
+        "reasoning": "O4 partially captures R10 by noting that non-integer float values are accepted for rating, but it also conflates this with dish_id type validation, making it only a partial match to the removed integer-between-1-and-5 constraint."
+      },
+      {
+        "detection_id": "O5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O5 discusses token delivery mechanisms and media type handling, which does not correspond to any of the three reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1410,
+    "prompt_tokens": 982,
+    "completion_tokens": 428
+  }
+}

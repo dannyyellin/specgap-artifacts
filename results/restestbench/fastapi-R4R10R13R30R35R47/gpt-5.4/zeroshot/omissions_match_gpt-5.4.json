@@ -1,0 +1,36 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "O1",
+        "requirement_id": "R4",
+        "label": "MATCH",
+        "reasoning": "O1 describes the same permission check behavior as R4: a non-owner non-superuser should be blocked from reading another user's item, and it notes the implementation fails to enforce that requirement."
+      },
+      {
+        "detection_id": "O2",
+        "requirement_id": "R35",
+        "label": "MATCH",
+        "reasoning": "O2 directly corresponds to R35 because both concern signup with existing email admin@example.com returning 400 with a specific duplicate-email detail message."
+      },
+      {
+        "detection_id": "O3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O3 discusses a private create-user duplicate-email response and absence of an '_id' field, which is not covered by any listed reference requirement."
+      },
+      {
+        "detection_id": "O4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "O4 concerns password recovery email delivery and Mailcatcher interaction, which does not correspond to any of the provided reference requirements."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1378,
+    "prompt_tokens": 1101,
+    "completion_tokens": 277
+  }
+}

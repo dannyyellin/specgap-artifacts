@@ -1,0 +1,48 @@
+{
+  "matcher_model": "gpt-5.4",
+  "result": {
+    "matches": [
+      {
+        "detection_id": "A1",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about validating cardholder existence on POST, which is unrelated to removing return-date computation, removing the overdue constraint, or removing checkout notifications to Logs."
+      },
+      {
+        "detection_id": "A2",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This is about validating book existence on POST and does not correspond to any of the three removed behaviors in the spec."
+      },
+      {
+        "detection_id": "A3",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "This concerns external validation on PUT updates, not return-date computation, overdue-borrow blocking, or Logs notification removal."
+      },
+      {
+        "detection_id": "A4",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Rejecting unknown GET query parameters is unrelated to any of the specified removals in the Borrows and Logs specs."
+      },
+      {
+        "detection_id": "A5",
+        "requirement_id": null,
+        "label": "NONE",
+        "reasoning": "Validating that returnDate is not earlier than loanDate on PUT is a different constraint from removing automatic return-date computation on borrow creation."
+      },
+      {
+        "detection_id": "A6",
+        "requirement_id": "R1",
+        "label": "PARTIAL",
+        "reasoning": "Accepting client-supplied returnDate on POST overlaps with the removal of service-side returnDate computation, but it does not explicitly state that the computation was removed."
+      }
+    ]
+  },
+  "usage": {
+    "total_tokens": 1117,
+    "prompt_tokens": 731,
+    "completion_tokens": 386
+  }
+}

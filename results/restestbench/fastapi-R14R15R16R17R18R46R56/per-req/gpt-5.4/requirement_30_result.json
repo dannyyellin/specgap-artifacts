@@ -1,0 +1,22 @@
+{
+  "req_id": 30,
+  "requirement_vague": "Verify the superuser (admin@example.com / password123) can change their own password and change it back.",
+  "requirement_precise": "Authenticate using the existing superuser credentials (admin@example.com / password123) to obtain an access token. Using that superuser access token, update the superuser's own password by supplying the current password and a newly generated password. Verify the response status is 200 and the response body contains a field 'message' equal to 'Password updated successfully'. Then verify that login with the NEW password succeeds. Finally, revert the password back to the original by supplying the new password as current and the original password as new. Verify the response status is 200 and verify that login with the ORIGINAL password succeeds again.",
+  "removed": false,
+  "omissions": [],
+  "implementation": {
+    "location": [
+      "POST /api/v1/login/access-token",
+      "PATCH /api/v1/users/me/password",
+      "init_db()"
+    ],
+    "code_reference": "FIRST_SUPERUSER = \"admin@example.com\"\nFIRST_SUPERUSER_PASSWORD = \"password123\"\n...\n@api_router.patch(\"/users/me/password\", response_model=Message)\ndef update_password_me(...):\n    if not verify_password(body.current_password, current_user.hashed_password):\n        raise HTTPException(status_code=400, detail=\"Incorrect password\")\n    current_user.hashed_password = get_password_hash(body.new_password)\n    ...\n    return Message(message=\"Password updated successfully\")",
+    "reasoning": "The code seeds the superuser with admin@example.com / password123 in init_db(), provides token-based authentication via /api/v1/login/access-token, and allows an authenticated active user\u2014including the superuser\u2014to change their own password through PATCH /api/v1/users/me/password by verifying the current password and returning 200 with message 'Password updated successfully'. Because the password hash is updated in persistent storage and login uses authenticate() against the stored hash, logging in with the new password will succeed, and changing it back to the original password will also succeed."
+  },
+  "usage": {
+    "total_tokens": 5015,
+    "prompt_tokens": 4753,
+    "completion_tokens": 262
+  },
+  "parse_error": false
+}

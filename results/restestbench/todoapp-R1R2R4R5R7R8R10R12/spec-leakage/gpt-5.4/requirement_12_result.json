@@ -1,0 +1,14 @@
+{
+  "req_id": 12,
+  "requirement_vague": "Users cannot update another user's todo",
+  "requirement_precise": "Register two users (userA and userB) and login with each. UserA creates a todo with title 'UserA Todo' and notes the ID. UserB calls PUT /todos/{id} with userA's todo ID, attempting to change the title to 'Hacked'. Verify the response status is 404 Not Found. Then userA verifies the title is still 'UserA Todo' by calling GET /todos/{id}.",
+  "verdict": "NOT_LEAKED",
+  "spec_evidence": "- \"Each user manages their own set of todos via CRUD endpoints.\"\n- \"Call GET /todos without providing any Authorization header or token. Verify the response status is 401 Unauthorized.\"",
+  "reasoning": "The reduced spec states that users have their own todos and that authentication is required, but it never explicitly says that one authenticated user cannot access or update another authenticated user's todo. Concluding that cross-user updates must return 404 would require outside assumptions about ownership enforcement that the spec does not directly state.",
+  "parse_error": false,
+  "usage": {
+    "total_tokens": 1058,
+    "prompt_tokens": 938,
+    "completion_tokens": 120
+  }
+}
